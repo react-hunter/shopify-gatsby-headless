@@ -8,28 +8,28 @@ import "./layout.sass"
 
 const Layout = ({ children }) => {
     
-    return (
-        <Provider>
-            <StaticQuery
-                query={graphql`
-                query SiteTitleQuery {
-                site {
-                    siteMetadata {
-                    title
-                    }
-                }
-                }
-            `}
-                render={data => (
-                    <>
-                        <Header siteTitle={data.site.siteMetadata.title} />
-                        {children}
-                        <Footer />
-                    </>
-                )}
-            />
-        </Provider>
-    );
+	return (
+		<Provider>
+			<StaticQuery
+				query={graphql`
+				query SiteTitleQuery {
+					site {
+						siteMetadata {
+							title
+						}
+					}
+				}
+			`}
+			render={data => (
+				<>
+					<Header siteTitle={data.site.siteMetadata.title} />
+					{children}
+					<Footer />
+				</>
+			)}
+			/>
+		</Provider>
+	);
 };
 
 export default Layout;

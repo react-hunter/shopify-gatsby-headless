@@ -73,10 +73,9 @@ const productPage = ({ data }) => {
                                     <ProductInfo product={product} />
                                     <div className="columns">
                                         {
-                                            product.options.map(options => (
-                                                <div className="column">
+                                            product.options.map((options, optionIndex) => (
+                                                <div className="column" key={optionIndex}>
                                                     <VariantSelectors
-                                                        key={options.id.toString()}
                                                         onChange={handleOptionChange}
                                                         options={options}
                                                     />
@@ -119,41 +118,41 @@ export default productPage
 
 export const query = graphql`
   query($id: String!){
-                shopifyProduct(handle: {eq: $id}) {
-                handle
-            id
-            title
-            handle
-            productType
-            descriptionHtml
-            shopifyId
-            options {
-              id
-              name
-              values
-            }
-            variants {
-                id
-                title
-                price
-                availableForSale
-                shopifyId
-                selectedOptions {
-                  name
-                  value
-                }
-              }
-              images {
-                originalSrc
-                id
-                localFile {
-                  childImageSharp {
-                    fluid(maxWidth: 910) {
-                      ...GatsbyImageSharpFluid_withWebp_noBase64
-                    }
-                  }
-                }
-              }
-        } 
-      }
-    `
+		shopifyProduct(handle: {eq: $id}) {
+			handle
+			id
+			title
+			handle
+			productType
+			descriptionHtml
+			shopifyId
+			options {
+				id
+				name
+				values
+			}
+			variants {
+				id
+				title
+				price
+				availableForSale
+				shopifyId
+				selectedOptions {
+					name
+					value
+				}
+			}
+			images {
+				originalSrc
+				id
+				localFile {
+					childImageSharp {
+						fluid(maxWidth: 910) {
+							...GatsbyImageSharpFluid_withWebp_noBase64
+						}
+					}
+				}
+			}
+		}
+	}
+`

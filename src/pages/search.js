@@ -62,34 +62,34 @@ export const query = graphql`
     allShopifyProduct {
       edges {
         node {
-          id
-          title
-          handle
-          createdAt(fromNow: true)
-          publishedAt
-          productType
-          vendor
-          priceRange {
-            maxVariantPrice {
-              amount
-            }
-          }
-          images {
-            originalSrc
             id
-            localFile {
-              childImageSharp {
-                fluid(maxWidth: 910) {
-                  ...GatsbyImageSharpFluid_withWebp_noBase64
+            title
+            handle
+            createdAt(fromNow: true)
+            publishedAt
+            productType
+            vendor
+            priceRange {
+              maxVariantPrice {
+                amount
+              }
+            }
+            images {
+              originalSrc
+              id
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 910) {
+                    ...GatsbyImageSharpFluid_withWebp_noBase64
+                  }
                 }
               }
             }
-          }
-          variants {
-            id
-            title
-            price
-          }
+            variants {
+              id
+              title
+              price
+            }
         }
       }
     }

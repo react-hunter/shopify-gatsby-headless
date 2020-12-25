@@ -9,9 +9,9 @@ const Footer = () => {
                         <div className="level-item">
                             <p>© 2020 - Gatsby x Shopify by <a className="has-text-danger-dark" href="https://www.alexislepresle.com" target="_blank" rel="noopener noreferrer">Alexis Lepresle</a></p>
                         </div>
-                        <p className="level-item">
-                            <p>(Fake store with <a className="has-text-danger-dark" target="_blank" rel="noopener noreferrer" href="https://www.shop.dev.to">Dev.to</a> products)</p>
-                        </p>
+                        <div className="level-item">
+                            <span>(Fake store with <a className="has-text-danger-dark" target="_blank" rel="noopener noreferrer" href="https://www.shop.dev.to">Dev.to</a> products)</span>
+                        </div>
                     </div>
                     <div className="level-right">
                         <div className="level-item">
