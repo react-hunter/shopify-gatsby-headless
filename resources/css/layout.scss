@@ -1,0 +1,142 @@
+@import "~bulma";
+
+@font-face {
+  font-family: 'Pacifico';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Pacifico Regular'), local('Pacifico-Regular'), url(https://fonts.gstatic.com/s/pacifico/v12/FwZY7-Qmy14u9lezJ-6H6MmBp0u-.woff2) format('woff2');
+  font-display: swap;
+}
+.link-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+.link-button:hover, .link-button:focus {
+    text-decoration: none;
+}
+
+.img-shop {
+    padding: 5px;
+}
+.img-shop :hover{
+    padding: 0px;
+}
+
+.shopping-bag-quantity{
+    position: absolute;
+    top: 8px;
+    right: 2px;
+    width: 15px;
+    box-sizing: content-box;
+    height: 15px;
+    text-align: center;
+    color: white;
+    font-size: 10px;
+    line-height: 15px;
+    background-color: red;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+    border-image: initial;
+    border-radius: 20px;
+}
+.img-hover-zoom--zoom-n-rotate .imgProduct {
+  transition: transform 2s;
+  transform: scale(0.7);
+  transition-timing-function: ease-in;
+}
+/* The Transformation */
+.img-hover-zoom--zoom-n-rotate:hover .imgProduct {
+  transform: scale(0.9);
+}
+.imgProduct {
+    animation-name: zoomIn;
+    animation-duration: 2s;
+}
+@keyframes zoomIn {
+    from {
+        opacity: 0.7;
+        transform: scale3d(0.6, 0.6, 0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale3d(0.7, 0.7, 0);
+    }
+}
+.productBox {
+    animation-duration: 1s;
+    animation-name: bounceOut;
+}
+.productBox :hover {
+    animation-duration: 2s;
+    animation-timing-function: ease;
+    animation-name: hoverProduct;
+    animation-direction: alternate;
+}
+@keyframes hoverProduct {
+    from {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+@keyframes bounceOut {
+   0% {
+        opacity: 0;
+        transform: translate3d(0, 10%, 0);
+   }
+
+   100% {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+   }
+}
+.fromleft {
+    animation-name: FromLeft;
+    animation-duration: 2.5s;
+}
+
+@keyframes FromLeft  {
+    from {
+        opacity: 0.7;
+        transform: translate3d(100%, 0, 0);
+    }
+    50% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.allpictures {
+    animation-name: zoomIn;
+    animation-duration: 2.5s;
+    flex-direction: row;
+}
+
+@media only screen and (max-width:770px) {
+    .allpictures {
+        flex-direction: column;
+        width: 1;
+    }
+    .box {
+        padding: 0;
+        box-shadow: none;
+    }
+    .productBox {
+        padding: 30px;
+    }
+    .hero-body {
+        padding: 3rem 0.5rem;
+    }
+}

@@ -3,7 +3,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import Header from "../components/header"
 import Footer from "../components/footer"
 import Provider from "../context/provider"
-import "./layout.sass"
+import "../../resources/css/layout.scss"
 
 
 const Layout = ({ children }) => {

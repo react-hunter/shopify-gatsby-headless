@@ -81,14 +81,18 @@ const Gallery = ({ product }) => {
                 order={[1, null, 2]}
                 className="img-hover-zoom--zoom-n-rotate img-hover-zoom"
             >
-                <Img
-                    fluid={currentImage.localFile.childImageSharp.fluid}
-                    key={currentImage.localFile.id}
-                    alt={product.title}
-                    fadeIn={false} 
-                    loading="eager"
-                    className="imgProduct"
-                />
+                {currentImage ? 
+                (
+                    <Img
+                        fluid={currentImage.localFile.childImageSharp.fluid}
+                        key={currentImage.localFile.id}
+                        alt={product.title}
+                        fadeIn={false} 
+                        loading="eager"
+                        className="imgProduct"
+                    />
+                ) : ''}
+                
             </Box>
         </>
     );
