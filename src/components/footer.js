@@ -1,6 +1,6 @@
 import React from 'react';
 import SocialIcon from './common/socialIcon';
-import { homepageData } from '../data/homepage';
+import { commonData } from '../data/common';
 
 const Footer = () => {
     return (
@@ -30,9 +30,9 @@ const Footer = () => {
                 </div>
                 <div className="newsletter-nav-mobile" key="newsletter-nav-mobile">
                     <ul className="footer-links">
-                        { homepageData.footerMenu.map((menuItem, menuIndex) => 
+                        { commonData.footerMenu.map((menuItem, menuIndex) => 
                             <li className="newsletter_nav_link" key={menuIndex}>
-                                <a href="" >{ menuItem.title }</a>
+                                <a href={menuItem.handle} >{ menuItem.title }</a>
                             </li>
                         )}
                     </ul>
