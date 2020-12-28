@@ -45,6 +45,7 @@
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
     "react-notifications-component": "^2.3.0",
+    "react-svg": "^11.2.1",
     "rebass": "^4.0.7",
     "shopify-buy": "^2.9.0",
     "styled-components": "^4.4.1"

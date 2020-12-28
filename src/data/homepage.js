@@ -1,5 +1,5 @@
-const homepageData = {
-    footerMenu = [
+export const homepageData = {
+    footerMenu: [
         {
             title: 'Careers',
             handle: '/pages/careers'
@@ -30,5 +30,3 @@ const homepageData = {
         }
     ]
 }
-
-export default homepageData;
