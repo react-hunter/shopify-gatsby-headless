@@ -1,5 +1,6 @@
 import React from 'react';
 import SocialIcon from './common/socialIcon';
+import homepageData from '../data/homepage';
 
 const Footer = () => {
     return (
@@ -28,7 +29,13 @@ const Footer = () => {
                     </div> 
                 </div>
                 <div className="newsletter-nav-mobile">
-
+                    <ul className="footer-links">
+                        { homepageData.footerMenu.map(menuItem => 
+                            <li className="newsletter_nav_link">
+                                <a href="{{menuItem.handle}}" >{{menuItem.title.toUpperCase()}}</a>
+                            </li>
+                        )}
+                    </ul>
                 </div>
                 <div className="footer-content_wrapper">
 
