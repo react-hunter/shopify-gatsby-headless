@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className="footer" style={{padding: "3rem 1.5rem 2rem"}}>
+        <footer className="footer1" style={{padding: "3rem 1.5rem 2rem"}}>
             <div className="content has-text-centered">
                 <div className="level">
                     <div className="level-left">
