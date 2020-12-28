@@ -23,8 +23,10 @@ const Layout = ({ children }) => {
 			render={data => (
 				<>
 					<Header siteTitle={data.site.siteMetadata.title} />
-					{children}
-					<Footer />
+					<div className="page-container drawer-page-content" id="PageContainer">
+						{children}
+						<Footer />
+					</div>
 				</>
 			)}
 			/>
