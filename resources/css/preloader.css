@@ -1,0 +1,18 @@
+.preloader{
+  -webkit-transition: opacity .6s ease-in-out;
+  opacity: 1;
+  transition: opacity .6s ease-in-out;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top:0;
+  background: #ffffff;
+  z-index: 9999;
+  align-items: center;
+  display: flex;
+}
+
+.preloader .load-more_loader{
+  display:block; 
+  margin: 0 auto;
+}

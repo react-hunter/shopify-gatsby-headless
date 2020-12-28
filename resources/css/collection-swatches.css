@@ -1,0 +1,93 @@
+.selected-swatch {
+  border: 2px solid black !important;
+}
+
+.color-swatch[data-color="Red"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_red_on9UbDVgPZ.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Black"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_black_8bHqDMfkjc.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Pink"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_pink_Th1Lcw3y69.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="White"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_white_m5v74AKJVC.png );
+  background-size: cover;
+}
+
+.color-swatch[data-color="Dark Red"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_dark_red_KTGKhggduX.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Deep Purple"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_deep_purple_NNGiYl3fbp.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Green"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_green_vCCS45cvhD.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Lavender"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_lavender_pPE3BUw2hX.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Magenta"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_magenta_WYZY_XisKS.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Orange"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_orange_eA7B3aLEe.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Royal Blue"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_royal_blue_3yjdklJq7Y.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Sky Blue"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_sky_blue_Yym6f24gC1.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Turqoise Blue"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_turquoise_ke9pDJZGg1.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Yellow"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_yellow_TfBjWYiRMm.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Coral"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_coral_fpl-jWYsc.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Neon Yellow"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_neon_yellow_VeF2_Y1wua.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Light Tie Dye"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/TOPDOWN_LightTieDye_QwFHAq9JDSqjq.png);
+  background-size: cover;
+}
+
+.color-swatch[data-color="Dark Tie Dye"] {
+  background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/TOPDOWN_TieDye_zSTYD_SdxU7JG.png);
+  background-size: cover;
+}
