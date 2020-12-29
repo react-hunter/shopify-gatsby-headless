@@ -179,11 +179,14 @@ export const commonData = {
       fontSize: '12px'
     }
   ],
+  instagramSettings: {
+    title: 'FIND THE PERFECT GIFT ON OUR GRAM'
+  },
   newsletterSettings: {
     title: 'Subscribe',
     subTitle: 'Be the first to know about the latest news, secret sales, promotions, and more!',
     desktopBackground: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/2020_new_footer_desktop_1_x1100.jpg',
-    mobileBackground: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/2020_new_footer_mobile_1_x800.jpg'
+    mobileBackground: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/2020_new_footer_mobile_1_x800.jpg',
   },
   footerMenu: [
     {
