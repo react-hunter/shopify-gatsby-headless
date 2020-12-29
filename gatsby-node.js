@@ -11,15 +11,32 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
+      allShopifyArticle {
+        edges {
+          node {
+            handle
+          }
+        }
+      }
     }
   `).then(result => {
     result.data.allShopifyProduct.edges.forEach(({ node }) => {
-        const id = node.handle
+      const id = node.handle
       createPage({
         path: `/product/${id}/`,
         component: path.resolve(`./src/templates/productPage.js`),
         context: {
-            id,
+          id,
+        },
+      })
+    })
+    result.data.allShopifyArticle.edges.forEach(({ node }) => {
+      const articleId = node.handle
+      createPage({
+        path: `/article/${articleId}/`,
+        component: path.resolve(`./src/templates/articlePage.js`),
+        context: {
+          id: articleId,
         },
       })
     })

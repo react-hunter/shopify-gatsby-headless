@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
 						{children}
 						<div className="shopify-section index-section index-section--flush">
 							<Instagram />
-							<Subscribe />
+							{/* <Subscribe /> */}
 						</div>
 						<Footer />
 					</div>

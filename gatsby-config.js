@@ -63,5 +63,12 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`,
       },
     },
+    {
+      resolve: `gatsby-source-instagram`,
+      options: {
+        username: `10179203510`,
+        maxPosts: 10,
+      },
+    }
   ],
 }

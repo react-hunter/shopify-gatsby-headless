@@ -16,7 +16,7 @@ const Instagram = () => {
     }
     return (
         <div className="instagram-section">
-            <div class="insta_header" style={ instaHeaderStyle }>
+            <div className="insta_header" style={ instaHeaderStyle }>
                 <h1 style={ InstaH1Style }>{ commonData.instagramSettings.title }</h1>
                 <script defer src="//foursixty.com/media/scripts/fs.embed.v2.5.js" 
                         data-feed-id="dose-of-roses" 

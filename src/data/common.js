@@ -211,16 +211,20 @@ export const commonData = {
       url: '/collections/gifts-under-500'
     }
   ],
-  announceBarSettings: [
-    {
-      description: 'Have a question or custom order? Call us: (323)-792-1201',
-      fontSize: '12px'
-    },
-    {
-      description: '🎁 GIFT NOW. PAY LATER WITH QUADPAY!',
-      fontSize: '12px'
-    }
-  ],
+  announceBarSettings: {
+    textList: [
+      {
+        description: 'Have a question or custom order? Call us: (323)-792-1201',
+        fontSize: '12px'
+      },
+      {
+        description: '🎁 GIFT NOW. PAY LATER WITH QUADPAY!',
+        fontSize: '12px'
+      }
+    ],
+    backgroundColor: '#000',
+    textColor: '#FFF'
+  },
   instagramSettings: {
     title: 'FIND THE PERFECT GIFT ON OUR GRAM'
   },
