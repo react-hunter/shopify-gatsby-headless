@@ -1,6 +1,7 @@
-import React, { useContext, useState, useEffect } from 'react' /* eslint-disable */
+import React from 'react' /* eslint-disable */
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
+import ArticleSmallBox from "../components/articles/articleSmallBox"
 
 const articlePage = ({ data }) => {
     
@@ -8,6 +9,11 @@ const articlePage = ({ data }) => {
     <>
       <SEO title={data.shopifyArticle.title} />
       { data.shopifyArticle.contentHtml }
+      {
+        data.allShopifyArticle.edges.map((articleNode, articleIndex) => {
+          <ArticleSmallBox article={articleNode} key={articleIndex} />
+        })
+      }
     </>
   )
 }
@@ -37,6 +43,7 @@ export const query = graphql`
           id
           handle
           title
+          excerpt
           content
           image {
             id
