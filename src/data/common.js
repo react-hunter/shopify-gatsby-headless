@@ -2,19 +2,23 @@ export const commonData = {
   desktopHeaderMenu: [
     {
       title: 'Design Your Own',
-      link: '/pages/create'
+      link: '/pages/create',
+      id: 'DesignYourOwn-nav'
     },
     {
       title: 'Best Sellers',
-      link: '/collections/best-sellers'
+      link: '/collections/best-sellers',
+      id: 'BestSellers-nav'
     },
     {
       title: 'New',
-      link: '/collections/new'
+      link: '/collections/new',
+      id: 'New-nav'
     },
     {
       title: 'Collections',
-      link: '/pages/collections'
+      link: '/pages/collections',
+      id: 'Collections-nav'
     }
   ],
   mobileHeaderCards: [
