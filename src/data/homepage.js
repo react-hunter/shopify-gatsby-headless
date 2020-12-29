@@ -42,6 +42,6 @@ export const homepageData = {
         }
     ],
     blogSection: [
-        
+        // 3 latest blogs
     ]
 }

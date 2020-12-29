@@ -1,172 +1,214 @@
 export const commonData = {
+  desktopHeaderMenu: [
+    {
+      title: 'Design Your Own',
+      link: '/pages/create'
+    },
+    {
+      title: 'Best Sellers',
+      link: '/collections/best-sellers'
+    },
+    {
+      title: 'New',
+      link: '/collections/new'
+    },
+    {
+      title: 'Collections',
+      link: '/pages/collections'
+    }
+  ],
+  mobileHeaderCards: [
+    {
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/download-app-section_770x.gif',
+      link: 'https://apps.apple.com/us/app/dose-of-roses/id1536845287'
+    },
+    {
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/promo_770x.jpg',
+      link: '/collections/best-sellers'
+    }
+  ],
   mobileHeaderMenu: [
     {
-      navbar_title: 'DESIGN YOUR ROSE BOX',
-      navbar_parent_title: '',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/pages/create'
+      title: 'DESIGN YOUR ROSE BOX',
+      parent: '',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/FCC663D1-B946-45DB-B660-5B6691393487_500x.jpg',
+      url: '/pages/create'
     },
     {
-      navbar_title: 'BEST SELLERS',
-      navbar_parent_title: '',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/best-sellers'
+      title: 'BEST SELLERS',
+      parent: '',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/CD60CD8D-2524-481A-B357-BFFF7F4F52FD_500x.png',
+      url: '/collections/best-sellers'
     },
     {
-      navbar_title: 'GALAXY COLLECTION',
-      navbar_parent_title: '',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/galaxy'
+      title: 'GALAXY COLLECTION',
+      parent: '',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Galaxy_Rose_Collection_500x.png',
+      url: '/collections/galaxy'
     },
     {
-      navbar_title: 'ROSE BEAR',
-      navbar_parent_title: '',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/rose-bear'
+      title: 'ROSE BEAR',
+      parent: '',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/F4CE446E-0E6E-4C57-94F5-1F13CE43E9C1_500x.png',
+      url: '/collections/rose-bear'
     },
     {
-      navbar_title: '24K GOLD DIPPED ROSE',
-      navbar_parent_title: '',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/24k-gold-dipped-roses'
+      title: '24K GOLD DIPPED ROSE',
+      parent: '',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/24K_Gold_Dipped_Rose_500x.png',
+      url: '/collections/24k-gold-dipped-roses'
     },
     {
-      navbar_title: 'SUEDE COLLECTION',
-      navbar_parent_title: '',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/persuede'
+      title: 'SUEDE COLLECTION',
+      parent: '',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/4A016659-7C58-4DDF-ACD9-B00FBDE27B95_500x.png',
+      url: '/collections/persuede'
     },
     {
-      navbar_title: 'LEATHER COLLECTION',
-      navbar_parent_title: '',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/leather'
+      title: 'LEATHER COLLECTION',
+      parent: '',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/AECBB131-DD24-47D7-BD3A-80C5AB86DB78_500x.png',
+      url: '/collections/leather'
     },
     {
-      navbar_title: 'MARBLE COLLECTION',
-      navbar_parent_title: '',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/marbleous'
+      title: 'MARBLE COLLECTION',
+      parent: '',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/075BDA61-26E3-4794-8468-D9ED07025627_500x.png',
+      url: '/collections/marbleous'
     },
     {
-      navbar_title: 'THE BLOOM BOX',
-      navbar_parent_title: '',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/bloom-box'
+      title: 'THE BLOOM BOX',
+      parent: '',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Bloom_Box_46aed06d-5177-401e-a783-64e98528fcf1_500x.png',
+      url: '/collections/bloom-box'
     },
     {
-      navbar_title: 'THE FORBIDDEN ROSE',
-      navbar_parent_title: '',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/the-forbidden-rose'
+      title: 'THE FORBIDDEN ROSE',
+      parent: '',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/The_Forbidden_Rose_500x.jpg?v=1602021363',
+      url: '/collections/the-forbidden-rose'
     },
     {
-      navbar_title: 'ANNIVERSARY',
-      navbar_parent_title: 'SHOP BY OCCASION',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/anniversary'
+      title: 'THE ROSE MAKEUP BOX',
+      parent: '',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/The_Rose_Makeup_Box_500x.jpg',
+      url: '/collections/the-makeup-box'
     },
     {
-      navbar_title: 'BIRTHDAY',
-      navbar_parent_title: 'SHOP BY OCCASION',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/birthday'
+      title: 'ANNIVERSARY',
+      parent: 'SHOP BY OCCASION',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/7888444C-D3CE-411E-8551-086F15EEFD71_500x.jpg',
+      url: '/collections/anniversary'
     },
     {
-      navbar_title: 'CONGRATULATIONS',
-      navbar_parent_title: 'SHOP BY OCCASION',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/congratulations'
+      title: 'BIRTHDAY',
+      parent: 'SHOP BY OCCASION',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/9430F88F-CC88-4613-9C2B-DC2D8BE97B60_500x.jpg',
+      url: '/collections/birthday'
     },
     {
-      navbar_title: 'GRADUATION',
-      navbar_parent_title: 'SHOP BY OCCASION',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/graduation'
+      title: 'CONGRATULATIONS',
+      parent: 'SHOP BY OCCASION',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/IMG_3169_500x.JPG',
+      url: '/collections/congratulations'
     },
     {
-      navbar_title: 'GENDER REVEAL',
-      navbar_parent_title: 'SHOP BY OCCASION',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/gender-reveal'
+      title: 'GRADUATION',
+      parent: 'SHOP BY OCCASION',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/IMG_3178_500x.JPG',
+      url: '/collections/graduation'
     },
     {
-      navbar_title: 'SPECIAL EVENT',
-      navbar_parent_title: 'SHOP BY OCCASION',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/special-occasion'
+      title: 'GENDER REVEAL',
+      parent: 'SHOP BY OCCASION',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/07D35A02-BC62-4896-8E17-A1E256FA6ABF_500x.JPG',
+      url: '/collections/gender-reveal'
     },
     {
-      navbar_title: 'SHOP BY OCCASION',
-      navbar_parent_title: '',
-      has_submenu_children: true,
-      imageUrl: '',
-      navbar_link: ''
+      title: 'SPECIAL EVENT',
+      parent: 'SHOP BY OCCASION',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/FCC663D1-B946-45DB-B660-5B6691393487_500x.jpg',
+      url: '/collections/special-occasion'
     },
     {
-      navbar_title: 'GIFTS FOR HER',
-      navbar_parent_title: '',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/gifts-for-her'
+      title: 'WEDDING',
+      parent: 'SHOP BY OCCASION',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/F2E40911-B1F1-4CF3-8751-A9C2C5053F8D_500x.jpg',
+      url: '/collections/wedding'
     },
     {
-      navbar_title: 'GIFTS FOR HIM',
-      navbar_parent_title: '',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/gifts-for-him'
+      title: 'SHOP BY OCCASION',
+      parent: '',
+      hasChildren: true,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/fullsizeoutput_129_500x.jpeg',
+      url: ''
     },
     {
-      navbar_title: 'SHOP BY PRICE',
-      navbar_parent_title: '',
-      has_submenu_children: true,
-      imageUrl: '',
-      navbar_link: ''
+      title: 'GIFTS FOR HER',
+      parent: '',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/For_Her_500x.jpg',
+      url: '/collections/gifts-for-her'
     },
     {
-      navbar_title: 'GIFTS UNDER $50',
-      navbar_parent_title: 'SHOP BY PRICE',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/gifts-under-50'
+      title: 'GIFTS FOR HIM',
+      parent: '',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/For_Him_500x.jpg',
+      url: '/collections/gifts-for-him'
     },
     {
-      navbar_title: 'GIFTS UNDER $100',
-      navbar_parent_title: 'SHOP BY PRICE',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/gifts-under-100'
+      title: 'SHOP BY PRICE',
+      parent: '',
+      hasChildren: true,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Categories_image_500x500_leather_500x.png',
+      url: ''
     },
     {
-      navbar_title: 'GIFTS UNDER $350',
-      navbar_parent_title: 'SHOP BY PRICE',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/gifts-under-350'
+      title: 'GIFTS UNDER $50',
+      parent: 'SHOP BY PRICE',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Suede_Black_Single_Red_ba38b5c9-d679-4511-a3d5-b5762a5f313b_500x.png',
+      url: '/collections/gifts-under-50'
     },
     {
-      navbar_title: 'GIFTS UNDER $500',
-      navbar_parent_title: 'SHOP BY PRICE',
-      has_submenu_children: false,
-      imageUrl: '',
-      navbar_link: '/collections/gifts-under-500'
+      title: 'GIFTS UNDER $100',
+      parent: 'SHOP BY PRICE',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Medium_Round_Flat_500x.png',
+      url: '/collections/gifts-under-100'
+    },
+    {
+      title: 'GIFTS UNDER $350',
+      parent: 'SHOP BY PRICE',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Large_Round_Flat_500x.png',
+      url: '/collections/gifts-under-350'
+    },
+    {
+      title: 'GIFTS UNDER $500',
+      parent: 'SHOP BY PRICE',
+      hasChildren: false,
+      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Medium_Round_500x.png',
+      url: '/collections/gifts-under-500'
     }
   ],
   announceBarSettings: [

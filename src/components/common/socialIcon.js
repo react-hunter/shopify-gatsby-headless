@@ -1,5 +1,6 @@
 import React from 'react';
-import { ReactSVG } from 'react-svg'
+import PropTypes from "prop-types";
+import { ReactSVG } from 'react-svg';
 import FacebookIcon from '../../images/icon-facebook.svg';
 import InstagramIcon from '../../images/icon-instagram.svg';
 import TwitterIcon from '../../images/icon-twitter.svg';
@@ -14,6 +15,14 @@ const SocialIcon = ({ icon }) => {
       { icon === 'youtube' ? <ReactSVG src={YoutubeIcon} /> : '' }
     </>
   );
+}
+
+SocialIcon.propTypes = {
+  icon: PropTypes.string,
+}
+
+SocialIcon.defaultProps = {
+  icon: `facebook`,
 }
 
 export default SocialIcon;

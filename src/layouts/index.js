@@ -24,8 +24,8 @@ const Layout = ({ children }) => {
 				}
 			`}
 			render={data => (
-				<>
-					<Header siteTitle={data.site.siteMetadata.title} />
+				<div className="scrollPreventer">
+					<Header />
 					<div className="page-container drawer-page-content" id="PageContainer">
 						{children}
 						<div className="shopify-section index-section index-section--flush">
@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
 						</div>
 						<Footer />
 					</div>
-				</>
+				</div>
 			)}
 			/>
 		</Provider>

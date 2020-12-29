@@ -4,6 +4,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import StoreContext from '../context/store'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingBag, faUser, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { commonData } from '../data/common';
 
 const countQuantity = lineItems => {
   let quantity = 0
@@ -15,12 +16,17 @@ const countQuantity = lineItems => {
 }
 
 
-const Header = ({ siteTitle }) => {
+const Header = () => {
   const context = useContext(StoreContext)
   const { checkout } = context.store
   const [quantity, setQuantity] = useState(countQuantity(checkout ? checkout.lineItems : []))
   const [modal, setModal] = useState(false)
   const [search, setSearch] = useState("")
+
+  const logoImageStyle = {
+    maxWidth: `250px`,
+  }
+  
 
 
   useEffect(() => {
@@ -39,7 +45,7 @@ const Header = ({ siteTitle }) => {
       <nav className="navbar" role="navigation" aria-label="main navigation" style={{ display: "flex" }}>
         <div className="navbar-start" style={{ marginLeft: "30px", width: "100%", alignItems: "center", display: "flex" }}>
           <h1 className="subtitle">
-            <Link aria-label="search" className="has-text-black has-text-weight-bold" to="/">{siteTitle}</Link>
+            {/* <Link aria-label="search" className="has-text-black has-text-weight-bold" to="/">{siteTitle}</Link> */}
           </h1>
         </div>
         <div className="navbar-end" style={{ marginRight: "30px", display: "flex" }}>
@@ -87,14 +93,6 @@ const Header = ({ siteTitle }) => {
       </div>
     </>
   )
-}
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
 }
 
 export default Header
