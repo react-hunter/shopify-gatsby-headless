@@ -2,19 +2,21 @@ import React from 'react';
 
 const ArticleSmallBox = props => {
     const article = props.article
+    
     return (
-        <div className="box articleBox" key={article.title}>
-            <a href={`/article/${article.handle}`} >
-							{ article.image ? 
-								(<img
-                    key={article.image.id}
-                    alt={article.title}
-                />) : ""
-							}
-              <p>{article.title}</p>
-              <p>{article.excerpt}</p>
-            </a>
-        </div>
+      <div key={article.title}>
+          <a href={`/article/${article.handle}`} >
+            { article.image ? 
+              (<img
+                  key={article.image.id}
+                  src={article.image.src}
+                  alt={article.title}
+              />) : ""
+            }
+            <p>{article.title}</p>
+            <p>{article.excerpt}</p>
+          </a>
+      </div>
     );
 };
 

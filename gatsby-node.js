@@ -18,6 +18,13 @@ exports.createPages = ({ graphql, actions }) => {
           }
         }
       }
+      allShopifyCollection {
+        edges {
+          node {
+            handle
+          }
+        }
+      }
     }
   `).then(result => {
     result.data.allShopifyProduct.edges.forEach(({ node }) => {
@@ -37,6 +44,16 @@ exports.createPages = ({ graphql, actions }) => {
         component: path.resolve(`./src/templates/articlePage.js`),
         context: {
           id: articleId,
+        },
+      })
+    })
+    result.data.allShopifyCollection.edges.forEach(({ node }) => {
+      const collectionId = node.handle
+      createPage({
+        path: `/collection/${collectionId}/`,
+        component: path.resolve(`./src/templates/collectionPage.js`),
+        context: {
+          id: collectionId,
         },
       })
     })

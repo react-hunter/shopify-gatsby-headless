@@ -12,9 +12,9 @@ const ArticleSection = ({ data }) => {
             {
               articles
                 .map((a, i) => {
-                  let article = a
+                  let article = a.node
                   return (
-                    <div className="column is-3" style={{ marginBottom: "40px" }} key={i}>
+                    <div className="column is-4" style={{ marginBottom: "40px" }} key={i}>
                       <ArticleBox article={article} />
                     </div>
                   )
