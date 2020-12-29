@@ -1,0 +1,33 @@
+.site-header__logo-image {
+    max-width: 250px;
+}
+    
+.announcement-bar {
+    background-color: #000000;
+}
+    
+/*
+.text_image_banner-container_outer {
+    margin-top: 110px !important;
+}
+
+@media (max-width: 768px) {
+    .text_image_banner-container_outer {
+        margin-top: 115px !important;
+    }
+}
+*/
+
+@media (max-width: 768px) {
+    .sidenav-modal {
+        padding-top: 90px !important;
+    }
+}
+
+.announcement-bar__link:hover {
+    background-color: #292929;        
+}
+
+.announcement-bar__message {
+    color: #ffffff;
+}
