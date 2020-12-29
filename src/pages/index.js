@@ -4,12 +4,17 @@ import { graphql } from "gatsby"
 // import ProductList from '../components/productList';
 import ProjectIdea from "../components/projectIdea"
 
+import HeroSection from "../components/heroSection"
+import ImageSection from "../components/imageSections"
+
 const IndexPage = ({ data }) => {
   return (
     <>
       <SEO title="Home" />
-      {/* <ProductList data={data} /> */}
-      <ProjectIdea img={data.projectIdea.childImageSharp.fluid}/>
+      <HeroSection />
+      {/* <ProductList data={data} />
+      <ProjectIdea img={data.projectIdea.childImageSharp.fluid}/> */}
+      <ImageSection />
     </>
   )
 }

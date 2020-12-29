@@ -3,7 +3,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import Header from "../components/header"
 import Footer from "../components/footer"
 import Instagram from "../components/instagram"
-import Subscribe from "../components/subscribe"
+import SubscribeSection from "../components/subscribeSection"
 import Provider from "../context/provider"
 import "../../resources/css/layout.scss"
 import "../../resources/css/base.scss"
@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
 						{children}
 						<div className="shopify-section index-section index-section--flush">
 							<Instagram />
-							<Subscribe />
+							<SubscribeSection />
 						</div>
 						<Footer />
 					</div>
