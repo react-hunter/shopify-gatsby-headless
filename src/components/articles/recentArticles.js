@@ -6,7 +6,11 @@ const RecentArticles = props => {
     
     return (
       <>
-        <h2>Recent Posts</h2>
+        <h3 className="article_sidebar-section-title" 
+          data-acsb-original-letter-spacing-value="normal" 
+          style={{ letterSpacing: '2px' }}>
+          RECENT POSTS
+        </h3>
         {
           articles.map((articleNode, articleIndex) => {
             return <ArticleSmallBox article={articleNode.node} key={articleIndex} />

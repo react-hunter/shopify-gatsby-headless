@@ -5795,7 +5795,8 @@ h3.article__title,
 }
 
 .article__grid-excerpt {
-  margin-bottom: 17.5px
+  margin-bottom: 17.5px;
+  color: #ffffff;
 }
 
 .article-image-wrapper.article__grid-image-wrapper {
@@ -14772,7 +14773,6 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 
 #collectionDescription {
   width: 100%;
-  max-height: 50px;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-top: -25px;

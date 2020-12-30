@@ -22,7 +22,7 @@ const ArticleSection = ({ data }) => {
             })}
         </ul>
 
-        <div class="blog-view-all text-center">
+        <div className="blog-view-all text-center">
           <a href="/blogs/dose" 
             className="btn blog-btn view-all" 
             aria-label="View all blogs" 

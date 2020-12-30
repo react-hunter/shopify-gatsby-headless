@@ -107,7 +107,7 @@ const LoginForm = () => {
               <div className="columns is-centered">
                 <div className="column is-4 is-centered">
                   {messsageInfo &&
-                    <div class="notification is-success">
+                    <div className="notification is-success">
                       {messsageInfo}
                     </div>
                   }
