@@ -26,6 +26,11 @@ const SubscribeSection = () => {
         letterSpacing: '8px'
     }
 
+    const onSubmit = (e) => {
+        console.log('submit arrive');
+        e.preventDefault();
+    }
+
     return (
         <div className="newsletter_section
             newsletter-bg
@@ -47,9 +52,9 @@ const SubscribeSection = () => {
 
                     <div className="newsletter">
                         <span className="message"></span>
-                        <form id="smsForm" className="sms-form" onsubmit="return false">
+                        <form id="smsForm" className="sms-form" onSubmit={onSubmit}>
                             <input type="tel" id="smsFooterNumber" pattern="^[0-9-+.\s()]*$" 
-                                minlength="10" maxlength="10" placeholder="Mobile Phone Number" required />
+                                minLength="10" maxLength="10" placeholder="Mobile Phone Number" required />
                             <button type="submit">SUBSCRIBE</button>
                         </form>
                         <div id="thanksMessage" className="thank-you-message">
