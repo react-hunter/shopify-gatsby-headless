@@ -9,10 +9,12 @@ import Buttons from "../components/ProductPage/Buttons"
 import Gallery from "../components/ProductPage/Gallery"
 import { Flex, Box } from 'rebass';
 
+import RelatedProductList from "../components/relatedProductList";
 
 const productPage = ({ data }) => {
     const context = useContext(StoreContext);
     const product = data.shopifyProduct;
+    const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 7) : [];
     const [quantity, setQuantity] = useState(1);
     const [variant, setVariant] = useState(product.variants[0]);
     const productVariant = context.store.client.product.helpers.variantForOptions(product, variant) || variant;
@@ -105,6 +107,7 @@ const productPage = ({ data }) => {
                             </Box>
                         </Flex>
                     </div>
+                    <RelatedProductList products={relatedProducts} />
                     <div className="container has-text-centered">
                         <a className="is-medium button" href="/"> ← Back to the Store</a>
                     </div>
@@ -153,6 +156,21 @@ export const query = graphql`
 					}
 				}
 			}
-		}
+        }
+        shopifyCollection(handle: {eq: "best-sellers"}) {
+            products {
+                id
+                handle
+                title
+                images {
+                    originalSrc
+                }
+                variants {
+                    id
+                    availableForSale
+                    price
+                }
+            }
+        }
 	}
 `

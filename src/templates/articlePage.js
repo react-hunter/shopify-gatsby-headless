@@ -29,7 +29,10 @@ const articlePage = ({ data }) => {
                     data-acsb-original-letter-spacing-value="normal" 
                     style={{ letterSpacing: '2px' }}>{data.shopifyArticle.publishedAt}</span>
 
-                  {/* <ShareIcons /> */}
+                  <ShareIcons 
+                    articleUrl={data.shopifyArticle.url}
+                    articleMedia={data.shopifyArticle.image.src}
+                  />
 
                   <div className="article-img">
                     <img src={data.shopifyArticle.image.src} alt="" />

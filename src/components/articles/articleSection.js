@@ -17,7 +17,7 @@ const ArticleSection = ({ data }) => {
             .map((a, i) => {
               let article = a.node
               return (
-                <ArticleBox article={article} />
+                <ArticleBox article={article} key={i} />
               )
             })}
         </ul>

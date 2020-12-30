@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ProductBox = props => {
+const ProductItem = props => {
     const product = props.product;
 
     const prevImage = (e) => {
@@ -9,11 +9,6 @@ const ProductBox = props => {
     }
 
     const nextImage = (e) => {
-        console.log('submit arrive');
-        e.preventDefault();
-    }
-
-    const OpenCollectionModal = (e) => {
         console.log('submit arrive');
         e.preventDefault();
     }
@@ -84,14 +79,9 @@ const ProductBox = props => {
                 <div className="collection-product-color-swatch">
 
                 </div>
-
-                <button className="openVariantModal" 
-                    onClick={OpenCollectionModal} 
-                    data-acsb-original-letter-spacing-value="normal" 
-                    style={{ letterSpacing: '2px' }}>ADD TO BAG</button>
             </div>
         </li>
     );
 };
 
-export default ProductBox;
+export default ProductItem;
