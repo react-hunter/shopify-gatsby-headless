@@ -19,6 +19,7 @@ const collectionPage = ({ data }) => {
     console.log('submit arrive');
     e.preventDefault();
   }
+
   return (
     <>
       <div id="shopify-section-collection-template" className="shopify-section">
@@ -66,7 +67,6 @@ const collectionPage = ({ data }) => {
             className="products-on-page grid grid--uniform grid--view-items">
               {
                 data.shopifyCollection.products.map((productItem, productIndex) => {
-                  console.log(productItem);
                   return <ProductBox product={productItem} key={productIndex} />
                 })
               }

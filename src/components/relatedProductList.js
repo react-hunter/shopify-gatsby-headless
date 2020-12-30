@@ -1,25 +1,35 @@
 import React from 'react';
 import ProductItem from "./ProductList/productItem"
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import "../styles/relatedProductList.scss";
 
 const RelatedProductList = ({ products }) => {
-  console.log('products', products);
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1
+  };
 
   return (
     <section className="hero">
       <div className="hero-body">
         <div className="container">
-          <div className="columns is-multiline" style={{ margin: "0" }}>
+          <Slider {...settings}>
             {
               products
                 .map((p, i) => {
                   let product = p
                   return (
-                    <div className="column is-3" style={{ marginBottom: "40px" }} key={i}>
+                    <div key={i}>
                       <ProductItem product={product} />
                     </div>
                   )
                 })}
-          </div>
+          </Slider>
         </div>
       </div>
     </section>

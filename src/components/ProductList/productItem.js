@@ -3,19 +3,6 @@ import React from 'react';
 const ProductItem = props => {
     const product = props.product;
 
-    const prevImage = (e) => {
-        console.log('submit arrive');
-        e.preventDefault();
-    }
-
-    const nextImage = (e) => {
-        console.log('submit arrive');
-        e.preventDefault();
-    }
-
-    const handleKeyDown =(e) => {
-        e.preventDefault();
-    }
     return (
         <li className="grid__item grid__item--collection-template " key={product.title}>
             <div className="grid-view-item product-card">
@@ -25,7 +12,7 @@ const ProductItem = props => {
 
                 <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
                     <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
-                        <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/Best_Seller_stickers-01_150x.png?v=1605546945" className="badge" alt="" />
+                        {/* <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/Best_Seller_stickers-01_150x.png?v=1605546945" className="badge" alt="" /> */}
                         <div className="collection-product_image_container">
                             { product.images[0] ? 
                                 (<img 
@@ -43,16 +30,6 @@ const ProductItem = props => {
                                 />) : ""
                             }
                         </div>
-                        <div className="collection-product-arrows_container" data-glide-el="controls">
-                            <div className="collection-product-arrow_wrapper" onClick={prevImage} onKeyDown={handleKeyDown} id="prevButton" key="_prev" role="button" tabIndex="0">
-                                <img className="collection-product-arrow" 
-                                    src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/220/assets/leftArrow_small.png?v=2356608260688330502" alt="" />
-                            </div>
-                            <div className="collection-product-arrow_wrapper" onClick={nextImage} onKeyDown={handleKeyDown} id="nextButton" key="_next" role="button" tabIndex="0">
-                                <img className="collection-product-arrow" 
-                                    src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/220/assets/rightArrow_small.png?v=11564592839193317450" alt="" />
-                            </div>
-                        </div>
                     </div>
                 </div>
 
@@ -69,7 +46,7 @@ const ProductItem = props => {
                     <div className="price__sale">
                         <span className="price-item price-item--sale" 
                             data-acsb-original-letter-spacing-value="normal" 
-                            style={{ letterSpacing: '2px' }}>{product.variants[0].price}</span>
+                            style={{ letterSpacing: '2px' }}>${product.variants[0].price}</span>
                     </div>
                     <div className="price__compare">
 

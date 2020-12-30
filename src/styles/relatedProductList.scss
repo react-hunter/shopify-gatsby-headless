@@ -1,0 +1,35 @@
+.slick-prev, .slick-prev:hover {
+  background-image: url("../images/leftArrow_small.png");
+  background-size: contain;
+  left: -35px;
+  &:hover {
+    background-image: url("../images/leftArrow_small.png");
+    background-size: contain;
+  }
+  &.slick-disabled {
+    opacity: 0.3;
+    &:hover, &:focus {
+      background-image: url("../images/leftArrow_small.png");
+      background-size: contain;
+    }
+  }
+}
+.slick-next, .slick-next:hover {
+  background-image: url("../images/rightArrow_small.png");
+  background-size: contain;
+  right: -35px;
+  &:hover {
+    background-image: url("../images/rightArrow_small.png");
+    background-size: contain;
+  }
+  &.slick-disabled {
+    opacity: 0.3;
+    &:hover, &:focus {
+      background-image: url("../images/rightArrow_small.png");
+      background-size: contain;
+    }
+  }
+}
+.slick-next:before, .slick-prev:before {
+  content: none;
+}
