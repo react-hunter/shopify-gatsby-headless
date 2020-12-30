@@ -9,7 +9,7 @@ import "../../resources/css/layout.scss"
 import "../../resources/css/base.scss"
 
 
-const Layout = ({ children }) => {
+const Layout = ({ path, children }) => {
     
 	return (
 		<Provider>

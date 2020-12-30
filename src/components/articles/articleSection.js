@@ -5,24 +5,34 @@ const ArticleSection = ({ data }) => {
   const articles = data
   
   return (
-    <section className="article-list">
-      <div className="hero-body">
-        <div className="container">
-          <div className="columns is-multiline" style={{ margin: "0" }}>
-            {
-              articles
-                .map((a, i) => {
-                  let article = a.node
-                  return (
-                    <div className="column is-4" style={{ marginBottom: "40px" }} key={i}>
-                      <ArticleBox article={article} />
-                    </div>
-                  )
-                })}
-          </div>
+    <div className="shopify-section index-section">
+      <div className="blog-container">
+        <header className="blog-header section-header text-center">
+          <h2 data-acsb-original-letter-spacing-value="2px" 
+            style={{ letterSpacing: "4px" }}>Blog</h2>
+        </header>
+
+        <ul className="grid grid--uniform grid--blog">
+          { articles
+            .map((a, i) => {
+              let article = a.node
+              return (
+                <ArticleBox article={article} />
+              )
+            })}
+        </ul>
+
+        <div class="blog-view-all text-center">
+          <a href="/blogs/dose" 
+            className="btn blog-btn view-all" 
+            aria-label="View all blogs" 
+            data-acsb-original-letter-spacing-value="1.12px"
+            style={{ letterSpacing: '3.12px' }}>
+            View all
+          </a>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
