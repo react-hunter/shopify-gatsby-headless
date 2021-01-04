@@ -36,7 +36,7 @@
     "gatsby-source-instagram": "^0.9.0",
     "gatsby-source-shopify": "^3.2.19",
     "gatsby-transformer-sharp": "^2.3.14",
-    "graphql": "^14.6.0",
+    "graphql": "^14.7.0",
     "graphql-tag": "^2.10.3",
     "isomorphic-fetch": "^2.2.1",
     "local-storage": "^2.0.0",
