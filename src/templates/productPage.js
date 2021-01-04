@@ -7,22 +7,27 @@ import RelatedProductList from "../components/relatedProductList";
 
 import './productPage.scss';
 
-const productPage = ({ data }) => {
+const productPage = ({ data, pageContext }) => {
     const product = data.shopifyProduct;
+    const {id, productReviews} = pageContext;
     const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 2) : [];
+    
+    const productReview = productReviews.filter(pr => pr.handle === id)
+    console.log('proper review: ', productReview)
 
     return (
         <>
-            <SEO title={product.title} />         
+            <SEO title={product.title} />
 
             <div id="ProductSection-product-template" className="product-template__container">
                 <div className="grid product-single product-single--medium-media">
                     <ProductGallery product={product} />
-                    <ProductDescription product={product} data={data} />
+                    <ProductDescription product={product} data={data} review={productReview[0]} />
                 </div>
             </div>
 
             <RelatedProductList products={relatedProducts} />
+            <div key="reviews" dangerouslySetInnerHTML={{ __html: productReview[0].reviews }} />
         </>
     )
 }

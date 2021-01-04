@@ -6,7 +6,7 @@ import QuantityButton from "./QuantityButton"
 import Buttons from "./Buttons"
 import { Flex, Box } from 'rebass';
 
-const ProductDescription = ({ product }) => {
+const ProductDescription = ({ product, review }) => {
 
     const context = useContext(StoreContext);
     const [quantity, setQuantity] = useState(1);
@@ -50,7 +50,7 @@ const ProductDescription = ({ product }) => {
         <div className="product_description-container">
             <div className="grid__item medium-up--one-half rightSideProductContainer">
                 <div className="product-single__meta">
-                    <ProductInfo product={product} />
+                    <ProductInfo product={product} review={review} />
                 </div>
                 <div className="product-single__description rte">
 

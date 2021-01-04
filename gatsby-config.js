@@ -36,6 +36,23 @@ module.exports = {
         includeCollections: ["shop", "content"]
       }
     },
+    // {
+    //   resolve: 'gatsby-source-shopify-admin',
+    //   options: {
+    //     storeName: process.env.SHOP_NAME,
+    //     apiKey: process.env.SHOPIFY_ADMIN_API_KEY,
+    //     storefrontApiKey: null,
+    //     onlyPublished: false, // only show products that are currently published on the 'publication' aka the private app
+    //     pollInterval: 1000 * 10,
+    //     imagesMetafields: {
+    //       product: null,
+    //       collection: null
+    //     },
+    //     relatedCollectionMetafields: null,
+    //     verbose: false,
+    //     restrictQueries: false, // Adds "(first: 1)" to collections query (then ONLY creates nodes for that collections product). Probably avoid using 'onlyPublished' at the same time, incase the 'first' collection returned isn't published on your sales channel (private app). This setting aims to help when builds are slow due to lots of images but you are happy to development with limited data; be warned this may create issues with data parity to Shopify (i.e. relatedCollectionMetafields would not have data if the selected collection isn't the 1 collection we have queried)
+    //   },
+    // },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
