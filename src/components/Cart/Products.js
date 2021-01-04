@@ -1,5 +1,4 @@
 import React from 'react';
-import Product from './Product.js'
 import { cartpageData } from '../../data/cart' 
 
 const Products = ({checkout}) => {
