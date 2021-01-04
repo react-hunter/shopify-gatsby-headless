@@ -10652,9 +10652,9 @@ node-object-hash@^2.0.0:
   integrity sha512-VZR0zroAusy1ETZMZiGeLkdu50LGjG5U1KHZqTruqtTyQ2wfWhHG2Ow4nsUbfTFGlaREgNHcCWoM/OzEm6p+NQ==
 
 node-releases@^1.1.67:
-  version "1.1.67"
-  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.67.tgz#28ebfcccd0baa6aad8e8d4d8fe4cbc49ae239c12"
-  integrity sha512-V5QF9noGFl3EymEwUYzO+3NTDpGfQB4ve6Qfnzf3UNydMhjQRVPR1DZTuvWiLzaFJYw2fmDwAfnRNEVb64hSIg==
+  version "1.1.68"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.68.tgz#06046ae7ceb33d96e8cd1e8b83bb62fdf2f5e9c5"
+  integrity sha512-7R8W00OWB5mjUpVFIN6lybhHwsAJVoipjo8MaFtIGRhZ2KeE01VD5ap4RVjLtYEnPKeX0PH14p1OhQVOFTikDQ==
 
 node-sass@^4.14.1:
   version "4.14.1"
