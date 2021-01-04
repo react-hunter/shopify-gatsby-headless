@@ -53,66 +53,82 @@ const productPage = ({ data }) => {
 
     return (
         <>
-            <SEO title={product.title} />
-            <section className="hero is-fullheight-with-navbar">
-                <div className="hero-body" style={{ display: "block" }}>
-                    <div className="container">
-                        <Flex
-                            flexDirection={['column', null, 'row']}
-                            pt={3}
-                            px={4}
-                        >
-                            <Gallery product={product} />
+            <SEO title={product.title} />         
 
-                            <Box
-                                flexDirection="column"
-                                width={[1, null, 2.5 / 5]}
-                                px={2}
-                                data-product-info
-                                order={3}
-                            >
-                                <div>
-                                    <ProductInfo product={product} />
-                                    <div className="columns">
-                                        {
-                                            product.options.map((options, optionIndex) => (
-                                                <div className="column" key={optionIndex}>
-                                                    <VariantSelectors
-                                                        onChange={handleOptionChange}
-                                                        options={options}
-                                                    />
-                                                </div>
-                                            ))
-                                        }
-                                        <div className="column is-3">
-                                            <QuantityButton quantity={quantity} setQuantity={setQuantity} />
-                                        </div>
-                                    </div>
-                                    <br/>
- 
-                                    <Buttons 
-                                        context={context} 
-                                        available={available} 
-                                        quantity={quantity} 
-                                        productVariant={productVariant}
-                                    />
-                                    <hr />
-                                    <div
-                                        key={`body`}
-                                        id="content"
-                                        className="content"
-                                        dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-                                    />
-                                </div>
-                            </Box>
-                        </Flex>
+            <div className="product-template__container">
+                <div className="grid product-single product-single--medium-media">
+                    <div className="product_image-container">
+
                     </div>
-                    <RelatedProductList products={relatedProducts} />
-                    <div className="container has-text-centered">
-                        <a className="is-medium button" href="/"> ← Back to the Store</a>
+                    <div className="product_description-container">
+                        <div className="grid__item medium-up--one-half rightSideProductContainer">
+                            <div className="product-single__meta">
+                                <h1 className="product-single__title">
+                                    {product.title}
+                                </h1>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
+
+            <div className="hero-body" style={{ display: "block" }}>
+                <div className="container">
+                    <Flex
+                        flexDirection={['column', null, 'row']}
+                        pt={3}
+                        px={4}
+                    >
+                        <Gallery product={product} />
+
+                        <Box
+                            flexDirection="column"
+                            width={[1, null, 2.5 / 5]}
+                            px={2}
+                            data-product-info
+                            order={3}
+                        >
+                            <div>
+                                <ProductInfo product={product} />
+                                <div className="columns">
+                                    {
+                                        product.options.map((options, optionIndex) => (
+                                            <div className="column" key={optionIndex}>
+                                                <VariantSelectors
+                                                    onChange={handleOptionChange}
+                                                    options={options}
+                                                />
+                                            </div>
+                                        ))
+                                    }
+                                    <div className="column is-3">
+                                        <QuantityButton quantity={quantity} setQuantity={setQuantity} />
+                                    </div>
+                                </div>
+                                <br/>
+
+                                <Buttons 
+                                    context={context} 
+                                    available={available} 
+                                    quantity={quantity} 
+                                    productVariant={productVariant}
+                                />
+                                <hr />
+                                <div
+                                    key={`body`}
+                                    id="content"
+                                    className="content"
+                                    dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+                                />
+                            </div>
+                        </Box>
+                    </Flex>
+                </div>
+                <RelatedProductList products={relatedProducts} />
+                <div className="container has-text-centered">
+                    <a className="is-medium button" href="/"> ← Back to the Store</a>
+                </div>
+            </div>
         </>
     )
 }

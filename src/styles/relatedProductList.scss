@@ -33,3 +33,9 @@
 .slick-next:before, .slick-prev:before {
   content: none;
 }
+
+.slick-slider {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
