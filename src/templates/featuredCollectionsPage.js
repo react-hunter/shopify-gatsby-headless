@@ -1,16 +1,29 @@
 import React from 'react';
 import { graphql } from "gatsby";
 import CollectionSlider from "../components/collectionSlider";
+import './featuredCollectionsPage.css';
 
 const featuredCollectionsPage = ({ data }) => {
   return (
     <>
-      <h1>FEATURED COLLECTIONS</h1>
-      {
-        data.allShopifyCollection.edges.map((collection, collectionIndex) => {
-          return <CollectionSlider key={collectionIndex} products={collection.node.products} title={collection.node.title} />
-        })
-      }
+      <div className="collection-collections-spacing">
+        <div id="shopify-section-collection-collections" className="shopify-section">
+         <div className="collections-collection-section">
+           <div className="you-may-like_header_wrapper">
+             <span className="you-may-like_header">FEATURED COLLECTIONS</span>
+             <span className="you-may-like_header_underline"></span>
+           </div>
+
+           {
+            data.allShopifyCollection.edges.map((collection, collectionIndex) => {
+              return <CollectionSlider key={collectionIndex} products={collection.node.products} title={collection.node.title} handle={collection.node.handle} />
+            })
+           }
+         </div>
+        </div>
+      </div>
+      
+      
     </>
   )
 }

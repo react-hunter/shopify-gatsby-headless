@@ -39,3 +39,19 @@
   table-layout: fixed;
   width: 100%;
 }
+
+.you-may-like_header {
+  font-family: "vinterlight";
+  font-size: 1em;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+.you-may-like_header_underline {
+  width: 14%;
+  height: 3px;
+  background-color: #c50000;
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}

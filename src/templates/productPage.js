@@ -8,6 +8,7 @@ import QuantityButton from "../components/ProductPage/QuantityButton"
 import Buttons from "../components/ProductPage/Buttons"
 import Gallery from "../components/ProductPage/Gallery"
 import { Flex, Box } from 'rebass';
+import ProductGallery from "../components/ProductPage/ProductGallery"
 
 import RelatedProductList from "../components/relatedProductList";
 
@@ -55,17 +56,18 @@ const productPage = ({ data }) => {
         <>
             <SEO title={product.title} />         
 
-            <div className="product-template__container">
+            <div id="ProductSection-product-template" className="product-template__container">
                 <div className="grid product-single product-single--medium-media">
                     <div className="product_image-container">
-
+                        <ProductGallery />
                     </div>
                     <div className="product_description-container">
                         <div className="grid__item medium-up--one-half rightSideProductContainer">
                             <div className="product-single__meta">
-                                <h1 className="product-single__title">
-                                    {product.title}
-                                </h1>
+
+                            </div>
+                            <div className="product-single__description rte">
+
                             </div>
                         </div>
                     </div>
@@ -125,9 +127,6 @@ const productPage = ({ data }) => {
                     </Flex>
                 </div>
                 <RelatedProductList products={relatedProducts} />
-                <div className="container has-text-centered">
-                    <a className="is-medium button" href="/"> ← Back to the Store</a>
-                </div>
             </div>
         </>
     )
