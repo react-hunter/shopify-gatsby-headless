@@ -22,8 +22,6 @@ const featuredCollectionsPage = ({ data }) => {
          </div>
         </div>
       </div>
-      
-      
     </>
   )
 }

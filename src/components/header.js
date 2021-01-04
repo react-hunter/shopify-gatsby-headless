@@ -176,7 +176,7 @@ const Header = ({ path }) => {
                       <span className="icon__fallback-text" data-acsb-original-letter-spacing-value="normal" style={letterSpacing2Style}>Log in</span>
                     </a>
 
-                    <a href="/fakeUrl" 
+                    <a href="/cart" 
                       className="site-header__icon site-header__cart nav-cart_icon js-ajax-cart-drawer-trigger" 
                       aria-describedby="a11y-external-message"
                     >

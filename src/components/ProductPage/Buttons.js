@@ -10,7 +10,7 @@ const Buttons = ({ context, available, productVariant,  quantity}) => {
     }
 
     return (
-        <div className="columns">
+        <div className="buttons">
             <div className="column">
                 <button
                     className="button is-medium is-fullwidth"
