@@ -1,4 +1,5 @@
 const path = require(`path`)
+const featuredCollectionHandles = ["new", "third-collection"];
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
@@ -56,6 +57,13 @@ exports.createPages = ({ graphql, actions }) => {
           id: collectionId,
         },
       })
+    })
+    createPage({
+      path: `/collections`,
+      component: path.resolve(`./src/templates/featuredCollectionsPage.js`),
+      context: {
+        collections: featuredCollectionHandles,
+      },
     })
   })
 }

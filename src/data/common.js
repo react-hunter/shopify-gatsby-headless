@@ -17,7 +17,7 @@ export const commonData = {
     },
     {
       title: 'Collections',
-      link: '/pages/collections',
+      link: '/collections',
       id: 'Collections-nav'
     }
   ],
