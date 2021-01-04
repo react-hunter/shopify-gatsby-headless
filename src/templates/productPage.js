@@ -13,8 +13,7 @@ const productPage = ({ data, pageContext }) => {
     const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 2) : [];
     
     const productReview = productReviews.filter(pr => pr.handle === id)
-    console.log('proper review: ', productReview)
-
+    
     return (
         <>
             <SEO title={product.title} />
