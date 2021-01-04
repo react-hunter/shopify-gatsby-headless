@@ -1,7 +1,7 @@
 import React from 'react' /* eslint-disable */
 import { graphql } from "gatsby"
 import ProductBox from "../components/ProductList/productBox"
-import './collectionPage.css';
+import './collectionPage.scss';
 
 const collectionPage = ({ data }) => {
     

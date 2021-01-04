@@ -5645,6 +5645,10 @@ h3.article__title,
   font-weight: 500
 }
 
+.article__title:hover {
+  text-decoration: underline;
+}
+
 @media only screen and (max-width: 749px) {
   .article__title--has-image {
     padding-left: 22px
@@ -5722,6 +5726,10 @@ h3.article__title,
     position: relative;
     height: 550px
   }
+}
+
+article .article__meta-buttons {
+  display: none;
 }
 
 .article__meta-buttons {
@@ -13198,6 +13206,11 @@ body.modal-open {
   }
 }
 
+.you-may-like_header_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 .you-may-like_section .you-may-like_header_wrapper {
   display: flex;
   justify-content: center;
@@ -13237,6 +13250,10 @@ body.modal-open {
 .Best-Sellers-Carousel {
   width: 100%;
   margin: 0 auto
+}
+
+.Best-Sellers-Carousel {
+  margin-top: 35px;
 }
 
 .Best-Sellers-Carousel-Cell {
@@ -15170,6 +15187,12 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 
 .collections-collection-section {
   display: block
+}
+
+.grid__item--collection-template {
+  .price {
+    align-items: center !important;
+  }
 }
 
 .carousel-header_wrapper {

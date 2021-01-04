@@ -1,0 +1,31 @@
+#shopify-section-collection-template {
+    
+    @media (max-width: 750px) {
+        .grid {
+            margin-left: -8px;
+        }
+        .page-width {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        .section-header {
+            margin-bottom: 24px;
+        }
+    }
+
+    .section-header {
+        font-family: "Big Caslon" !important;
+    }
+
+    .price__badges {
+        display: none !important;
+    }
+    
+    .collection-page_underline {
+        display: block;
+        height: 3px;
+        width: 90px;
+        background-color: #c50000;
+        margin-top: 10px;
+    }
+}
