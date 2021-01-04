@@ -1,4 +1,5 @@
 import React from 'react';
+import { productPageData } from '../../data/product';
 
 const ProductInfo = ({ product, review }) => {
     return (
@@ -59,6 +60,20 @@ const ProductInfo = ({ product, review }) => {
                         </dd>
                     </div>
                 </dl>
+            </div>
+            <div className="product-features">
+                { productPageData.productFeatures.map((Item, Index) => 
+                    <p className="item" key={Index}>
+                        <i key={Index} className="fa fa-check male" style={{ color: '#93c47d'}}></i>
+                        <strong>
+                            <span style={{ color: 'rgb(0,0,0)' }}>{ Item.text }</span>
+                        </strong>
+                    </p>
+                )}
+            </div>
+            <div className="shipping-tout">
+                <i className="fas fa-truck" aria-hidden="true"></i>
+                <p>FAST SHIPPING FROM CALIFORNIA</p>
             </div>
         </>
     );
