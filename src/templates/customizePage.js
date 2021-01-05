@@ -1,4 +1,5 @@
 import React from 'react';
+import { customizePageData } from '../data/customizePage' 
 
 const CustomizePage = ({ data }) => {
     const revert = (e) => {
@@ -97,58 +98,15 @@ const CustomizePage = ({ data }) => {
                   <span id="arrangementSelector_title">CHOOSE BOX</span>
               </div>
               <div id="col-right">
+
                 <div id="arrangementSelector-0" style={{display: 'none'}}>
-                  <div className="arr-type-box" onClick={selectArrangement} data-productid="4507343290414" id="Large-Square" style={{ backgroundColor: 'rgb(0,0,0)!important' }}>
-                    <span style={{ color: 'rgb(255,255,255)!important' }}>Large Square</span>
+                  {customizePageData.arrangementSelector0.items.map((item, index) => 
+                  <div className="arr-type-box" onClick={selectArrangement} 
+                    data-productid={item.dataId} id={item.id} 
+                    style={{ backgroundColor: item.divBackgroundColor }}>
+                    <span style={{ color: item.spanColor }}>{item.title}</span>
                   </div>
-              
-                  <div className="arr-type-box" onClick={selectArrangement} data-productid="4574507663406" id="Large-Round Flat" style={{ backgroundColor: 'rgb(255,255,255)!important' }}>
-                    <span style={{ color: 'rgb(0,0,0)!important' }}>Large Round Flat</span>
-                  </div>
-                  
-                  <div className="arr-type-box" onClick={selectArrangement} data-productid="4580170760238" id="Medium-Square" style={{ backgroundColor: 'rgb(255,255,255)!important' }}>
-                    <span style={{ color: 'rgb(0,0,0)!important' }}>Medium Square</span>
-                  </div>
-                  
-                  <div className="arr-type-box" onClick={selectArrangement} data-productid="4580196450350" id="Medium-Round Flat" style={{ backgroundColor: 'rgb(255,255,255)!important' }}>
-                    <span style={{ color: 'rgb(0,0,0)!important' }}>Medium Round Flat</span>
-                  </div>
-                  
-                  <div className="arr-type-box" onClick={selectArrangement} data-productid="4580165353518" id="Single-Round" style={{ backgroundColor: 'rgb(255,255,255)!important' }}>
-                    <span style={{ color: 'rgb(0,0,0)!important' }}>Single Round</span>
-                  </div>
-                  
-                  <div className="arr-type-box" onClick={selectArrangement} data-productid="4581968085038" id="Acrylic-Large Heart" style={{ backgroundColor: 'rgb(255,255,255)!important' }}>
-                    <span style={{ color: 'rgb(0,0,0)!important' }}>Acrylic Large Heart</span>
-                  </div>
-                  
-                  <div className="arr-type-box" onClick={selectArrangement} data-productid="4627537330222" id="Suede-Large Heart" style={{ backgroundColor: 'rgb(255,255,255)!important' }}>
-                    <span style={{ color: 'rgb(0,0,0)!important' }}>Suede Large Heart</span>                   
-                  </div>
-                  
-                  <div className="arr-type-box" onClick={selectArrangement} data-productid="4582183698478" id="Large-Round Dome" style={{ backgroundColor: 'rgb(255,255,255)!important' }}>
-                    <span style={{ color: 'rgb(0,0,0)!important' }} >Large Round Dome</span>
-                  </div>
-                  
-                  <div className="arr-type-box" onClick={selectArrangement} data-productid="1" id="Medium-Round Dome" style={{ backgroundColor: 'rgb(255,255,255)!important' }}>
-                    <span style={{ color: 'rgb(0,0,0)!important' }} >Medium Round Dome</span>
-                  </div>
-                  
-                  <div className="arr-type-box" onClick={selectArrangement} data-productid="4626620284974" id="Single-Square Acrylic" style={{ backgroundColor: 'rgb(255,255,255)' }}>
-                    <span style={{ color: 'rgb(0,0,0)!important' }} >Single Square Acrylic</span>
-                  </div>
-                  
-                  <div className="arr-type-box" onClick={selectArrangement} data-productid="4630506962990" id="Acrylic-Small Square" style={{ backgroundColor: 'rgb(255,255,255)' }}>
-                    <span style={{ color: 'rgb(0,0,0)!important' }} >Acrylic Small Square</span>
-                  </div>
-                  
-                  <div className="arr-type-box" onClick={selectArrangement} data-productid="4630507520046" id="Acrylic-Medium Square" style={{ backgroundColor: 'rgb(255,255,255)' }}>
-                    <span style={{ color: 'rgb(0,0,0)!important' }} >Acrylic Medium Square</span>
-                  </div>
-                  
-                  <div className="arr-type-box" onClick={selectArrangement} data-productid="4641888796718" id="Acrylic-Large Square" style={{ backgroundColor: 'rgb(255,255,255)' }}>
-                    <span style={{ color: 'rgb(0,0,0)!important' }} >Acrylic Large Square</span>
-                  </div>
+                  )}
                 </div>
 
                 <div id="arrangementSelector-Letters" className="arrangement-container" style={{ marginTop: '10px', display: 'none' }}> 
