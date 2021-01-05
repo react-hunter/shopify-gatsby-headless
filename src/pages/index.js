@@ -1,15 +1,17 @@
 import React from 'react'
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
-// import ProductList from '../components/productList';
-import ProjectIdea from "../components/projectIdea"
+import HeroSection from "../components/homepage/heroSection"
+import ImageSection from "../components/homepage/imageSections"
+import ArticleSection from "../components/articles/articleSection"
 
 const IndexPage = ({ data }) => {
   return (
     <>
       <SEO title="Home" />
-      {/* <ProductList data={data} /> */}
-      <ProjectIdea img={data.projectIdea.childImageSharp.fluid}/>
+      <HeroSection />
+      <ImageSection />
+      <ArticleSection data={data.allShopifyArticle.edges} />
     </>
   )
 }
@@ -55,6 +57,21 @@ export const query = graphql`
             id
             title
             price
+          }
+        }
+      }
+    }
+    allShopifyArticle(limit: 3) {
+      edges {
+        node {
+          id
+          handle
+          title
+          excerpt
+          content
+          image {
+            id
+            src
           }
         }
       }

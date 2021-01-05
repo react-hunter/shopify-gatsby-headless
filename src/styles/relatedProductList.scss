@@ -1,0 +1,57 @@
+.slick-prev, .slick-prev:hover {
+  background-image: url("../images/leftArrow_small.png");
+  background-size: contain;
+  left: -35px;
+  &:hover {
+    background-image: url("../images/leftArrow_small.png");
+    background-size: contain;
+  }
+  &.slick-disabled {
+    opacity: 0.3;
+    &:hover, &:focus {
+      background-image: url("../images/leftArrow_small.png");
+      background-size: contain;
+    }
+  }
+}
+.slick-next, .slick-next:hover {
+  background-image: url("../images/rightArrow_small.png");
+  background-size: contain;
+  right: -35px;
+  &:hover {
+    background-image: url("../images/rightArrow_small.png");
+    background-size: contain;
+  }
+  &.slick-disabled {
+    opacity: 0.3;
+    &:hover, &:focus {
+      background-image: url("../images/rightArrow_small.png");
+      background-size: contain;
+    }
+  }
+}
+.slick-next:before, .slick-prev:before {
+  content: none;
+}
+
+.slick-slider {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.you-may-like_header {
+  font-family: "vinterlight";
+  font-size: 1em;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+
+.you-may-like_header_underline {
+  width: 14%;
+  height: 3px;
+  background-color: #c50000;
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+}

@@ -2,9 +2,13 @@ import React from 'react';
 
 const Empty = () => {
     return (
-        <div className="has-text-centered">
-            <p className="is-size-3">Your cart is currently empty</p>
-            <a className="button is-medium is-dark" style={{ marginTop: "50px" }} href="/">Continue shopping → </a>
+        <div className="empty-page-content text-center" data-empty-page-content>
+            <h1>Your cart</h1>
+            <p className="cart--empty-message">Your cart is currently empty.</p>
+            <div className="cookie-message">
+                <p>Enable cookies to use the shopping cart</p>
+            </div>
+            <a href="/" className="btn btn--has-icon-after cart__continue-btn">Continue shopping → </a>
         </div>
     );
 };

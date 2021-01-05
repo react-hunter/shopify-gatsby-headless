@@ -1,26 +1,97 @@
 import React from 'react';
-import Img from "gatsby-image"
 
 const ProductBox = props => {
-    const product = props.product
+    const product = props.product;
+    const review = props.review;
+
+    const prevImage = (e) => {
+        console.log('submit arrive');
+        e.preventDefault();
+    }
+
+    const nextImage = (e) => {
+        console.log('submit arrive');
+        e.preventDefault();
+    }
+
+    const OpenCollectionModal = (e) => {
+        console.log('submit arrive');
+        e.preventDefault();
+    }
+
+    const handleKeyDown =(e) => {
+        e.preventDefault();
+    }
     return (
-        <div className="box productBox" key={product.node.title}>
-            <a href={`/product/${product.node.handle}`} >
-							{ product.node.images[0] ? 
-								(<Img
-                    fluid={product.node.images[0].localFile.childImageSharp.fluid}
-                    key={product.node.images[0].localFile.id}
-                    fadeIn={false} 
-                    loading="eager"
-                    alt={product.node.title}
-                />) : ""
-							}
-                <p className="has-text-weight-semibold has-text-black">{product.node.title}</p>
-                <p className="has-text-weight-light has-text-grey-dark">
-                    ${product.node.variants[0].price}
-                </p>
-            </a>
-        </div>
+        <li className="grid__item grid__item--collection-template " key={product.title}>
+            <div className="grid-view-item product-card">
+                <span className="visually-hidden product-card-title" 
+                    data-acsb-original-letter-spacing-value="1px" 
+                    style={{ letterSpacing: '3px' }}>{product.title}</span>
+
+                <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
+                    <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
+                        <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/Best_Seller_stickers-01_150x.png?v=1605546945" className="badge" alt="" />
+                        <div className="collection-product_image_container">
+                            { product.images[0] ? 
+                                (<img 
+                                    className="enableScrollOnMobile disableSaveImageIOS product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc lazyloaded"
+                                    src={product.images[0].originalSrc}
+                                    alt={product.title}
+                                />) : ""
+                            }
+                            { product.images[1] ? 
+                                (<img 
+                                    className="enableScrollOnMobile product-tile__image product-collection_image_alternate"
+                                    src={product.images[1].originalSrc}
+                                    alt={product.title}
+                                    style={{ cursor: 'pointer' }}
+                                />) : ""
+                            }
+                        </div>
+                        <div className="collection-product-arrows_container" data-glide-el="controls">
+                            <div className="collection-product-arrow_wrapper" onClick={prevImage} onKeyDown={handleKeyDown} id="prevButton" key="_prev" role="button" tabIndex="0">
+                                <img className="collection-product-arrow" 
+                                    src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/220/assets/leftArrow_small.png?v=2356608260688330502" alt="" />
+                            </div>
+                            <div className="collection-product-arrow_wrapper" onClick={nextImage} onKeyDown={handleKeyDown} id="nextButton" key="_next" role="button" tabIndex="0">
+                                <img className="collection-product-arrow" 
+                                    src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/220/assets/rightArrow_small.png?v=11564592839193317450" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
+                    <a href={`/product/${product.handle}`}
+                        data-acsb-original-letter-spacing-value="1px" 
+                        style={{ letterSpacing: '3px' }}>{product.title}</a>
+                </div>
+
+                <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: review.badge }} />
+                
+                <div className="price price--listing price--on-sale">
+                    <div className="price__regular"></div>
+                    <div className="price__sale">
+                        <span className="price-item price-item--sale" 
+                            data-acsb-original-letter-spacing-value="normal" 
+                            style={{ letterSpacing: '2px' }}>{product.variants[0].price}</span>
+                    </div>
+                    <div className="price__compare">
+
+                    </div>
+                </div>
+
+                <div className="collection-product-color-swatch">
+
+                </div>
+
+                <button className="openVariantModal" 
+                    onClick={OpenCollectionModal} 
+                    data-acsb-original-letter-spacing-value="normal" 
+                    style={{ letterSpacing: '2px' }}>ADD TO BAG</button>
+            </div>
+        </li>
     );
 };
 

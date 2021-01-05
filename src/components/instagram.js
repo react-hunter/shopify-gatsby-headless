@@ -1,5 +1,6 @@
 import React from 'react';
 import { commonData } from '../data/common';
+import './instagram.css'
 
 const Instagram = () => {
     const instaHeaderStyle = {
@@ -16,13 +17,9 @@ const Instagram = () => {
     }
     return (
         <div className="instagram-section">
-            <div class="insta_header" style={ instaHeaderStyle }>
+            <div className="insta_header" style={ instaHeaderStyle }>
                 <h1 style={ InstaH1Style }>{ commonData.instagramSettings.title }</h1>
-                <script defer src="//foursixty.com/media/scripts/fs.embed.v2.5.js" 
-                        data-feed-id="dose-of-roses" 
-                        data-open-links-in-same-page="false" 
-                        data-theme="showcase_v2_5" data-page-size="10">
-                </script>
+                <script src="//foursixty.com/media/scripts/fs.embed.v2.5.js" data-feed-id="dose-of-roses" data-theme="showcase_v2_5" data-open-links-in-same-page="true" data-page-size="10"></script>
             </div>
         </div>
     );
