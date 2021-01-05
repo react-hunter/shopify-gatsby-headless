@@ -6,6 +6,11 @@ const createArrangements = () => {
         console.log('show sidenav');
         e.preventDefault();
     }
+    
+    const handleKeyDown = (e) => {
+        console.log('key down');
+        e.preventDefault();
+    }
 
     const triggerImg = (e) => {
         console.log('show sidenav');
@@ -39,10 +44,10 @@ const createArrangements = () => {
                             <div className="create_arrange-swatch">
                             <div className="create-landing_swatches">
                                 {createPageData.createArrangements.variantType.map((va_type_item, va_type_index) => 
-                                    <img onClick={triggerImg} src={va_type_item.buttonImage} alt="" key={va_type_index} />
+                                    <img onClick={triggerImg} src={va_type_item.buttonImage} alt="" key={va_type_index} onKeyDown={handleKeyDown} role="presentation" />
                                 )}
                             </div>
-                            <span onClick={onClickSpan} style={{ cursor:'pointer' }} >+  More</span>
+                            <span onClick={onClickSpan} style={{ cursor:'pointer' }}  onKeyDown={handleKeyDown} role="presentation">+  More</span>
                             </div>
                             <div className="create_arrange-price">{item.fromPrice}</div>
                             <a className="create_arrange-button" href={item.url}>CUSTOMIZE NOW</a>

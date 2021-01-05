@@ -1,5 +1,4 @@
 import React from 'react';
-import { createPageData } from '../../data/createPage' 
 
 const createExpert = () => {
     return (

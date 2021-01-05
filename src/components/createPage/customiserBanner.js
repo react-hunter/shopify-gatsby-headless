@@ -3,8 +3,8 @@ import { createPageData } from '../../data/createPage'
 
 const customiserBanner = () => {
     const scrollToOptions = (e) => {
-        console.log('show sidenav');
         e.preventDefault();
+        console.log('show sidenav');
     }
 
     return (
@@ -15,7 +15,7 @@ const customiserBanner = () => {
                     <div className="customiser_banner-text_container">
                         <div className="customiser_banner-text_header">{createPageData.customiserBanner.title}</div>
                         <div className="customiser_banner-text_subheader">{createPageData.customiserBanner.contents}</div>
-                        <a onClick={scrollToOptions} className="customiser_banner-text_link">{createPageData.customiserBanner.buttonText}</a>
+                        <a href="/fakeUrl" onClick={scrollToOptions} className="customiser_banner-text_link">{createPageData.customiserBanner.buttonText}</a>
                     </div>
                     <div className="customiser_banner-image_grid_container">
                         <div className="customiser_banner-image_grid">
