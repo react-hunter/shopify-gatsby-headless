@@ -1,17 +1,17 @@
 import PropTypes from "prop-types"
 import React, { useContext, useState, useEffect } from 'react'
 import { Link } from 'gatsby'
-import StoreContext from '../context/store'
+import StoreContext from '../../context/store'
 import { ReactSVG } from 'react-svg';
-import LogoIcon from '../images/icon-logo.svg';
-import HamburgerIcon from '../images/icon-hamburger.svg';
-import CloseIcon from '../images/icon-close.svg';
-import SearchIcon from '../images/icon-search.svg';
-import SearchHeaderIcon from '../images/icon-search-header.svg';
-import LoginHeaderIcon from '../images/icon-login-header.svg';
-import MessageIcon from '../images/icon-message.svg';
-import CartHeaderIcon from '../images/icon-cart-header.svg';
-import { commonData } from '../data/common';
+import LogoIcon from '../../images/icon-logo.svg';
+import HamburgerIcon from '../../images/icon-hamburger.svg';
+import CloseIcon from '../../images/icon-close.svg';
+import SearchIcon from '../../images/icon-search.svg';
+import SearchHeaderIcon from '../../images/icon-search-header.svg';
+import LoginHeaderIcon from '../../images/icon-login-header.svg';
+import MessageIcon from '../../images/icon-message.svg';
+import CartHeaderIcon from '../../images/icon-cart-header.svg';
+import { commonData } from '../../data/common';
 import './header.css';
 
 const countQuantity = lineItems => {

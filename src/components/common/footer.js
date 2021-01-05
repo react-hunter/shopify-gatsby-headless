@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import SocialIcon from './common/socialIcon';
-import { commonData } from '../data/common';
+import SocialIcon from './socialIcon';
+import { commonData } from '../../data/common';
 
 const Footer = () => {
     return (
