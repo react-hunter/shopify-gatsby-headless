@@ -1559,7 +1559,7 @@ textarea {
   transition: none
 }
 
-.box {
+.boxs {
   background: no-repeat;
   background-color: #f7f7f7;
   background-size: contain
@@ -11980,7 +11980,7 @@ body.modal-open {
 }
 
 .arr-type-box>span {
-  color: #000000 !important;
+  color: #000000;
   margin: 0 auto;
   text-align: center !important;
   font-size: 0.75rem;
@@ -12191,7 +12191,7 @@ body.modal-open {
   font-family: 'Kepler', sans-serif
 }
 
-.box {
+.boxs {
   width: 50px;
   cursor: pointer;
   transition: 0.25s all ease-in-out;
@@ -12199,7 +12199,7 @@ body.modal-open {
   margin-bottom: 5px
 }
 
-.box:hover {
+.boxs:hover {
   transition: 0.25s all ease-in-out;
   -webkit-box-shadow: 0px 0px 0px 2px #000;
   -moz-box-shadow: 0px 0px 0px 2px #000;
