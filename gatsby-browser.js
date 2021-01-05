@@ -22,6 +22,13 @@ const addScript = url => {
   document.body.appendChild(script)
 }
 
+export const onClientEntry = () => {
+  window.onload = () => {
+    addScript("https://cdn-stamped-io.azureedge.net/files/widget.min.js")
+    // addScript("https://fast.wistia.com/assets/external/E-v1.js")
+  }
+}
+
 export const onPreRouteUpdate = () => {
   const currentUrl = window.location.href;
   if(currentUrl.includes('/product/')) {

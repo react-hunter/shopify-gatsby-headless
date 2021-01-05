@@ -1,27 +1,29 @@
-import React from 'react' /* eslint-disable */
+import React, { useState } from 'react' /* eslint-disable */
 import { graphql } from "gatsby"
 import ProductBox from "../components/ProductList/productBox"
 import './collectionPage.scss';
 
 const collectionPage = ({ data, pageContext }) => {
-    
+  const { productReviews } = pageContext;
+  const [ displayProductCount, setDisplayProductCount ] = useState(2);
+
   const collectionShowMore = (e) => {
-    console.log('submit arrive');
     e.preventDefault();
+    console.log('submit arrive');
   }
 
   const collectionShowLess = (e) => {
-    console.log('submit arrive');
     e.preventDefault();
+    console.log('submit arrive');
   }
 
   const loadMoreProducts = (e) => {
-    console.log('submit arrive');
     e.preventDefault();
+    console.log('Load More');
+    setDisplayProductCount(displayProductCount + 2);
   }
 
-  const { productReviews } = pageContext;
-
+  const displayedProducts = data.shopifyCollection.products.slice(0, displayProductCount)
   return (
     <>
       <div id="shopify-section-collection-template" className="shopify-section">
@@ -68,7 +70,7 @@ const collectionPage = ({ data, pageContext }) => {
           <ul id="shop-all-content" 
             className="products-on-page grid grid--uniform grid--view-items">
               {
-                data.shopifyCollection.products.map((productItem, productIndex) => {
+                displayedProducts.map((productItem, productIndex) => {
                   const productReview = productReviews.filter(pr => pr.handle === productItem.handle)
                   return <ProductBox product={productItem} key={productIndex} review={productReview[0]} />
                 })
@@ -76,13 +78,17 @@ const collectionPage = ({ data, pageContext }) => {
           </ul>
           
         </div>
-
-        <div className="load-more">
-          <a className="load-more_btn" onClick={loadMoreProducts} 
-            data-acsb-original-letter-spacing-value="normal" 
-            style={{ letterSpacing: '2px' }}>LOAD MORE</a>
-          <div className="load-more_loader"></div>
-        </div>
+        
+        {
+          displayProductCount < data.shopifyCollection.products.length ? (
+            <div className="load-more">
+              <a className="load-more_btn" onClick={loadMoreProducts} 
+                data-acsb-original-letter-spacing-value="normal" 
+                style={{ letterSpacing: '2px' }}>LOAD MORE</a>
+              <div className="load-more_loader"></div>
+            </div>
+          ) : null
+        }
       </div>
       
     </>
