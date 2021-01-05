@@ -5,7 +5,7 @@ import './instagram.css'
 const Instagram = () => {
     const instaHeaderStyle = {
         paddingTop: '30px',
-        paddingBottom: '10px',
+        paddingBottom: '0px',
     }
     const InstaH1Style = {
         color: '#fff',
@@ -13,7 +13,9 @@ const Instagram = () => {
         fontFamily: 'Big Caslon',
         fontWeight: '600',
         fontSize: '14px',
-        letterSpacing: '1px'
+        letterSpacing: '1px',
+        marginBottom: '0',
+        paddingBottom: '17.5px'
     }
     return (
         <div className="instagram-section">
