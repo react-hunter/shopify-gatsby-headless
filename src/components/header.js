@@ -262,11 +262,21 @@ const Header = ({ path }) => {
 
                       { commonData.mobileHeaderCards.map((menuItem, menuIndex) => 
                       <div className="card-item" key={menuIndex}>
-                        <Link to={menuItem.link} aria-describedby="a11y-external-message">
-                          <div style={{ width: "100%" }}>
-                            <img src={menuItem.image} alt="" />
-                          </div>
-                        </Link>
+                        {
+                          (menuItem.link.includes('http://') || menuItem.link.includes('https://')) ? (
+                            <a href={menuItem.link} aria-describedby="a11y-external-message">
+                              <div style={{ width: "100%" }}>
+                                <img src={menuItem.image} alt="" />
+                              </div>
+                            </a>
+                          ) : (
+                            <Link to={menuItem.link} aria-describedby="a11y-external-message">
+                              <div style={{ width: "100%" }}>
+                                <img src={menuItem.image} alt="" />
+                              </div>
+                            </Link>
+                          )
+                        }
                       </div>
                       )}
 
