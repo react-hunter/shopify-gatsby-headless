@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby'
 
 const Empty = () => {
     return (
@@ -8,7 +9,7 @@ const Empty = () => {
             <div className="cookie-message">
                 <p>Enable cookies to use the shopping cart</p>
             </div>
-            <a href="/" className="btn btn--has-icon-after cart__continue-btn">Continue shopping → </a>
+            <Link to="/" className="btn btn--has-icon-after cart__continue-btn">Continue shopping → </Link>
         </div>
     );
 };

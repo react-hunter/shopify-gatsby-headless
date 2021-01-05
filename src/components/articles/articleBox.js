@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby'
 
 const ArticleBox = props => {
     const article = props.article
@@ -8,7 +9,7 @@ const ArticleBox = props => {
             <article className="blog-article" href={`/article/${article.handle}`} >
 				
             <header>
-              <a href={`/article/${article.handle}`} 
+              <Link to={`/article/${article.handle}`} 
                 className="article__link">   
                 <div className="article__grid-image-wrapper js">
                     <div className="article__grid-image-container">
@@ -21,13 +22,13 @@ const ArticleBox = props => {
 						}
                     </div>
                 </div>      
-              </a>
+              </Link>
 
-              <a href={`/article/${article.handle}`} className="article__link">
+              <Link to={`/article/${article.handle}`} className="article__link">
                 <h3 className="article__title" data-acsb-original-letter-spacing-value="normal" style={{ letterSpacing: '2px' }}>
                     {article.title}
                 </h3>
-              </a>
+              </Link>
             </header>
 
               <div className="article__grid-meta">
@@ -39,10 +40,10 @@ const ArticleBox = props => {
 
               <ul className="list--inline article__meta-buttons">
                 <li>
-                    <a href={`/article/${article.handle}`}
+                    <Link to={`/article/${article.handle}`}
                         className="btn btn--small blog-btn" data-acsb-original-letter-spacing-value="0.96px" style={{ letterSpacing: '2.96px' }}>
                         Read More
-                    </a>
+                    </Link>
                 </li>
               </ul>
             </article>

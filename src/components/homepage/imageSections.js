@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby'
 import { homepageData } from '../../data/homepage';
 import "./imageSections.css";
 
@@ -25,9 +26,9 @@ const ImageSections = () => {
                                 <div className="fifty_fifty-subtitle">
                                     {menuItem.description}
                                 </div>
-                                <a href={menuItem.shopLink} className="fifty_fifty-button">
+                                <Link to={menuItem.shopLink} className="fifty_fifty-button">
                                     SHOP NOW
-                                </a>
+                                </Link>
                             </div>
                         </div>
 

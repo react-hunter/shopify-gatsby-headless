@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby'
 import ArticleBox from "./articleBox";
 
 const ArticleSection = ({ data }) => {
@@ -23,13 +24,13 @@ const ArticleSection = ({ data }) => {
         </ul>
 
         <div className="blog-view-all text-center">
-          <a href="/blogs/dose" 
+          <Link to="/blogs/dose" 
             className="btn blog-btn view-all" 
             aria-label="View all blogs" 
             data-acsb-original-letter-spacing-value="1.12px"
             style={{ letterSpacing: '3.12px' }}>
             View all
-          </a>
+          </Link>
         </div>
       </div>
     </div>

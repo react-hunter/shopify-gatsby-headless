@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
 import React, { useContext, useState, useEffect } from 'react'
+import { Link } from 'gatsby'
 import StoreContext from '../context/store'
 import { ReactSVG } from 'react-svg';
 import LogoIcon from '../images/icon-logo.svg';
@@ -119,11 +120,11 @@ const Header = ({ path }) => {
                 <ul className="site-nav list--inline site-nav--centered" id="SiteNav">  
                   { commonData.desktopHeaderMenu.map((menuItem, menuIndex) => 
                     <li key={menuIndex}>
-                      <a id={menuItem.id} href={menuItem.link} className="site-nav__link site-nav__link--main">
+                      <Link id={menuItem.id} to={menuItem.link} className="site-nav__link site-nav__link--main">
                         <span className="site-nav__label" 
                           data-acsb-original-letter-spacing-value="1px" 
                           style={letterSpacing3Style}>{menuItem.title}</span>
-                      </a>
+                      </Link>
                     </li>
                   )}
                 </ul>
@@ -149,9 +150,9 @@ const Header = ({ path }) => {
 
               <div className="header_logo-container">
                 <h1 className="h2 site-header__logo">
-                  <a href="/" className="site-header__logo-image site-header__logo-image--centered">
+                  <Link to="/" className="site-header__logo-image site-header__logo-image--centered">
                     <ReactSVG src={LogoIcon} />
-                  </a>
+                  </Link>
                 </h1>
               </div>
             
@@ -166,17 +167,17 @@ const Header = ({ path }) => {
                         style={letterSpacing2Style}>Search</span>
                     </a>
 
-                    <a href="/account/login" className="site-header__icon site-header__account">
+                    <Link to="/account/login" className="site-header__icon site-header__account">
                       <ReactSVG src={LoginHeaderIcon} />
                       <span className="icon__fallback-text" data-acsb-original-letter-spacing-value="normal" style={letterSpacing2Style}>Log in</span>
-                    </a>
+                    </Link>
               
-                    <a href="/pages/contact-us" className="site-header__icon site-header__account nav-message_icon">
+                    <Link to="/pages/contact-us" className="site-header__icon site-header__account nav-message_icon">
                       <ReactSVG src={MessageIcon} />
                       <span className="icon__fallback-text" data-acsb-original-letter-spacing-value="normal" style={letterSpacing2Style}>Log in</span>
-                    </a>
+                    </Link>
 
-                    <a href="/cart" 
+                    <Link to="/cart" 
                       className="site-header__icon site-header__cart nav-cart_icon js-ajax-cart-drawer-trigger" 
                       aria-describedby="a11y-external-message"
                     >
@@ -187,7 +188,7 @@ const Header = ({ path }) => {
                         <span data-cart-count="" data-count={quantity} data-acsb-original-letter-spacing-value="normal" style={letterSpacing2Style}>{quantity}</span>
                         <span className="icon__fallback-text medium-up--hide" data-acsb-original-letter-spacing-value="normal" style={letterSpacing2Style}>items</span>
                       </div>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -261,11 +262,11 @@ const Header = ({ path }) => {
 
                       { commonData.mobileHeaderCards.map((menuItem, menuIndex) => 
                       <div className="card-item" key={menuIndex}>
-                        <a href={menuItem.link} aria-describedby="a11y-external-message">
+                        <Link to={menuItem.link} aria-describedby="a11y-external-message">
                           <div style={{ width: "100%" }}>
                             <img src={menuItem.image} alt="" />
                           </div>
-                        </a>
+                        </Link>
                       </div>
                       )}
 
@@ -274,7 +275,7 @@ const Header = ({ path }) => {
                 </div>
 
                 { commonData.mobileHeaderMenu.map((menuItem, menuIndex) => 
-                  <a href={menuItem.url} 
+                  <Link to={menuItem.url} 
                     className="sidenav-item_inner" key={menuIndex}>
                     <div className="sidenav-item_name">
                       <div className="sidenav-item_name-inner" 
@@ -286,7 +287,7 @@ const Header = ({ path }) => {
                     <div className="sidenav-item_img">
                       <img src={menuItem.image} alt="" />
                     </div>
-                  </a>
+                  </Link>
                 )}
         
               </div>

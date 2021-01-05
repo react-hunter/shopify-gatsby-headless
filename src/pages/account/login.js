@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Link } from 'gatsby'
 import SEO from "../../components/seo"
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo'
@@ -156,9 +157,9 @@ const LoginForm = () => {
                           </div>
                           <div className="field">
                             <div className="control has-text-centered">
-                              <a href="/../account/register">
+                              <Link to="/../account/register">
                                 <p className="has-text-white">Create account</p>
-                              </a>
+                              </Link>
                             </div>
                           </div>
                         </>
