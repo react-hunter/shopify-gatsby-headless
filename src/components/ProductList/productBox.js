@@ -2,6 +2,7 @@ import React from 'react';
 
 const ProductBox = props => {
     const product = props.product;
+    const review = props.review;
 
     const prevImage = (e) => {
         console.log('submit arrive');
@@ -67,7 +68,7 @@ const ProductBox = props => {
                         style={{ letterSpacing: '3px' }}>{product.title}</a>
                 </div>
 
-                <div className="collection-product-reviews_wrapper"></div>
+                <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: review.badge }} />
                 
                 <div className="price price--listing price--on-sale">
                     <div className="price__regular"></div>

@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/relatedProductList.scss";
 
-const RelatedProductList = ({ products }) => {
+const RelatedProductList = ({ products, reviewList }) => {
   const settings = {
     dots: false,
     infinite: false,
@@ -49,9 +49,10 @@ const RelatedProductList = ({ products }) => {
               products
                 .map((p, i) => {
                   let product = p
+                  const productReview = reviewList.filter(re => re.handle === product.handle)
                   return (
                     <div key={i}>
-                      <ProductItem product={product} />
+                      <ProductItem product={product} review={productReview[0]} />
                     </div>
                   )
             })}

@@ -25,7 +25,7 @@ const productPage = ({ data, pageContext }) => {
                 </div>
             </div>
 
-            <RelatedProductList products={relatedProducts} />
+            <RelatedProductList products={relatedProducts} reviewList={productReviews} />
             <div key="reviews" dangerouslySetInnerHTML={{ __html: productReview[0].reviews }} />
         </>
     )

@@ -15,7 +15,11 @@ const addScript = url => {
 
 export const onClientEntry = () => {
   window.onload = () => {
-    // addScript("//foursixty.com/media/scripts/fs.embed.v2.5.js")
-    addScript("//foursixty.com/media/scripts/fs.slider.v2.5.js")
+    const currentUrl = window.location.href;
+    if(currentUrl.includes('/product/')) {
+      addScript("//foursixty.com/media/scripts/fs.slider.v2.5.js")
+    } else {
+      addScript("//foursixty.com/media/scripts/fs.embed.v2.5.js")
+    }
   }
 }

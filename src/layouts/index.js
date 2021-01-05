@@ -7,6 +7,7 @@ import SubscribeSection from "../components/subscribeSection"
 import Provider from "../context/provider"
 import "../../resources/css/layout.scss"
 import "../../resources/css/base.scss"
+import "../../resources/css/stampedio.css"
 
 
 const Layout = ({ path, children }) => {

@@ -4,7 +4,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const CollectionSlider = ({products, title, handle}) => {
+const CollectionSlider = ({products, title, handle, reviewList}) => {
   const settings = {
     dots: false,
     infinite: false,
@@ -46,9 +46,10 @@ const CollectionSlider = ({products, title, handle}) => {
             products
               .map((p, i) => {
                 let product = p
+                let productReview = reviewList.filter(re => re.handle === product.handle)
                 return (
                   <div key={i}>
-                    <ProductItem product={product} />
+                    <ProductItem product={product} review={productReview[0]} />
                   </div>
                 )
           })}

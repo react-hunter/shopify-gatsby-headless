@@ -2,6 +2,7 @@ import React from 'react';
 
 const ProductItem = props => {
     const product = props.product;
+    const review = props.review;
 
     return (
         <li className="grid__item grid__item--collection-template " key={product.title}>
@@ -39,7 +40,7 @@ const ProductItem = props => {
                         style={{ letterSpacing: '3px' }}>{product.title}</a>
                 </div>
 
-                <div className="collection-product-reviews_wrapper"></div>
+                <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: review.badge }} />
                 
                 <div className="price price--listing price--on-sale">
                     <div className="price__regular"></div>

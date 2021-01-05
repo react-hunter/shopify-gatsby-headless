@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import ProductBox from "../components/ProductList/productBox"
 import './collectionPage.scss';
 
-const collectionPage = ({ data }) => {
+const collectionPage = ({ data, pageContext }) => {
     
   const collectionShowMore = (e) => {
     console.log('submit arrive');
@@ -19,6 +19,8 @@ const collectionPage = ({ data }) => {
     console.log('submit arrive');
     e.preventDefault();
   }
+
+  const { productReviews } = pageContext;
 
   return (
     <>
@@ -61,13 +63,14 @@ const collectionPage = ({ data }) => {
             </div>
           </header>
         </div>
-
+        <div style={{display: 'none'}} dangerouslySetInnerHTML={{ __html: productReviews[0].reviews }} />
         <div className="" id="Collection">
           <ul id="shop-all-content" 
             className="products-on-page grid grid--uniform grid--view-items">
               {
                 data.shopifyCollection.products.map((productItem, productIndex) => {
-                  return <ProductBox product={productItem} key={productIndex} />
+                  const productReview = productReviews.filter(pr => pr.handle === productItem.handle)
+                  return <ProductBox product={productItem} key={productIndex} review={productReview[0]} />
                 })
               }
           </ul>
