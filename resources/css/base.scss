@@ -11014,7 +11014,8 @@ article .article__meta-buttons {
   font-size: 2em;
   width: 45px;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  color: white;
 }
 
 #hideSideNav {
@@ -11051,6 +11052,10 @@ article .article__meta-buttons {
   font-size: .8em;
   font-weight: 600;
   font-family: Verdana, sans-serif
+}
+
+.variants-selector .select.is-fullwidth select {
+  width: 100%;
 }
 
 .buttons {

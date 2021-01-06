@@ -4,18 +4,18 @@ import { createPageData } from '../../data/createPage'
 
 const createArrangements = () => {
     const onClickSpan = (e) => {
-        console.log('show sidenav');
         e.preventDefault();
+        console.log('show sidenav');
     }
     
     const handleKeyDown = (e) => {
-        console.log('key down');
         e.preventDefault();
+        console.log('key down');
     }
 
     const triggerImg = (e) => {
-        console.log('show sidenav');
         e.preventDefault();
+        console.log('show sidenav');
     }
 
     return (

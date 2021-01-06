@@ -1,6 +1,6 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby'
-import Header from "../components/common/header"
+import Header from "../components/common/header/header"
 import Footer from "../components/common/footer"
 import Instagram from "../components/instagram"
 import SubscribeSection from "../components/subscribeSection"

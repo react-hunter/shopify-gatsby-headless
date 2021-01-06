@@ -3,49 +3,49 @@ import { customizePageData } from '../data/customizePage'
 
 const CustomizePage = ({ data }) => {
     const revert = (e) => {
-      console.log('show sidenav');
       e.preventDefault();
+      console.log('show sidenav');
     }
     const handleKeyDown = (e) => {
-      console.log('key down');
       e.preventDefault();
+      console.log('key down');
     }
     const selectArrangement = (e) => {
-      console.log('show sidenav');
       e.preventDefault();
+      console.log('show sidenav');
     }
     const hideLetters = (e) => {
-      console.log('show sidenav');
       e.preventDefault();
+      console.log('show sidenav');
     }
 
     const previous = (e) => {
-      console.log('show sidenav');
       e.preventDefault();
+      console.log('show sidenav');
     }
     const next = (e) => {
-      console.log('show sidenav');
       e.preventDefault();
+      console.log('show sidenav');
     }
     const AddToBag = (e) => {
-      console.log('show sidenav');
       e.preventDefault();
+      console.log('show sidenav');
     }
     const setNumberStyle = (e) => {
-      console.log('show sidenav');
       e.preventDefault();
+      console.log('show sidenav');
     }
     const setBox = (e) => {
-      console.log('show sidenav');
       e.preventDefault();
+      console.log('show sidenav');
     }
     const hideNumbers = (e) => {
-      console.log('show sidenav');
       e.preventDefault();
+      console.log('show sidenav');
     }
     const setLetterStyle = (e) => {
-      console.log('show sidenav');
       e.preventDefault();
+      console.log('show sidenav');
     }
     return (
       <>
