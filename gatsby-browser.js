@@ -22,9 +22,20 @@ const addScript = url => {
   document.body.appendChild(script)
 }
 
+const addScriptHead = url => {
+  var head = document.getElementsByTagName('head')[0];
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = url;
+  script.async = true;
+  script.id = "stamped-script-widget";
+  script.setAttribute("data-api-key", "pubkey-76rP6Zq8e371uFqgk0DjXju08d2ACm");
+  head.appendChild(script);
+}
+
 export const onClientEntry = () => {
   window.onload = () => {
-    addScript("https://cdn-stamped-io.azureedge.net/files/widget.min.js")
+    addScriptHead("https://cdn-stamped-io.azureedge.net/files/widget.js")
     // addScript("https://fast.wistia.com/assets/external/E-v1.js")
   }
 }

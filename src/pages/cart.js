@@ -8,6 +8,7 @@ const Cart = () => {
 
     const context = useContext(StoreContext)
     const { checkout } = context.store
+    console.log('line items: ', checkout.lineItems)
     return (
         <>
             <SEO title="cart" />
@@ -15,7 +16,7 @@ const Cart = () => {
             <div id="shopify-section-cart-template" className="shopify-section">
                 <div className="page-width">
                     {
-                        checkout.lineItems.length == 0 ?
+                        checkout.lineItems.length !== 0 ?
                         <Products checkout={checkout}/>
                         :
                         <Empty/>
