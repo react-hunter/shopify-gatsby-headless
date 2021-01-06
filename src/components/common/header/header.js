@@ -90,13 +90,13 @@ const Header = ({ path }) => {
   }
 
 
-  const hideSearch = (e) => {
-    e.preventDefault();
-    console.log('hide search');
-  }
+  // const hideSearch = (e) => {
+  //   e.preventDefault();
+  //   console.log('hide search');
+  // }
 
   function initiateBannerSlider() {
-    if (runBannerAnimation == false) {
+    if (runBannerAnimation === false) {
       runBannerAnimation = true;
     
       slides = document.getElementsByClassName("card-item");
@@ -117,8 +117,8 @@ const Header = ({ path }) => {
     }
     
     let needShowItems = document.querySelectorAll(`[data-parent-id='${id}']`);
-    for (var i=0; i<needShowItems.length; i++) {
-      needShowItems[i].style.display = 'flex';
+    for (var j=0; j<needShowItems.length; j++) {
+      needShowItems[j].style.display = 'flex';
     }
     
     showBackArrowButton();
@@ -136,7 +136,7 @@ const Header = ({ path }) => {
   }
 
   function showBackArrowButton() {
-    let modal = document.getElementById('sidenav');
+    // let modal = document.getElementById('sidenav');
     let openIcon = document.getElementById('mobile-nav--open');
     let closeIcon = document.getElementById('hideSideNav');
     let backIcon = document.getElementById('goBackNavMenu')
@@ -160,8 +160,8 @@ const Header = ({ path }) => {
     }
 
     let needShowItems = document.getElementsByClassName("first-level-item_inner");
-    for (var i=0; i<needShowItems.length; i++) {
-      needShowItems[i].style.display = 'flex';
+    for (var j=0; j<needShowItems.length; j++) {
+      needShowItems[j].style.display = 'flex';
     }
 
     console.log('function showDefaultMenuItems');

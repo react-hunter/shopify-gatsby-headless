@@ -233,7 +233,7 @@ export const commonData = {
     backgroundColor: '#000',
     textColor: '#FFF'
   },
-  cartSlider: [
+  cardSlider: [
     {
       href: 'https://apps.apple.com/us/app/dose-of-roses/id1536845287',
       imageUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Dose_of_Roses_App_92728958-f1d0-4f7c-95ab-8ccf4332c4d2_770x.jpg?v=1609308744'
