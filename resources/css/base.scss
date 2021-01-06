@@ -13589,7 +13589,8 @@ body.modal-open {
   background-color: black !important;
   color: white !important;
   text-transform: uppercase;
-  font-family: 'Proxima Condensed Extra Bold Alt', sans-serif
+  font-family: 'Proxima Condensed Extra Bold Alt', sans-serif;
+  margin-bottom: 19.44444px;
 }
 
 .register-subheader {
@@ -14705,6 +14706,10 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 
 .contact_us-page {
   margin-top: 60px
+}
+
+.contact-form_wrapper {
+  padding-top: 100px;
 }
 
 #ContactForm {

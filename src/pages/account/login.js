@@ -155,7 +155,7 @@ const LoginForm = () => {
                 <p className="login-register-account_content_message">
                   Enjoy added benefits and richer experience by creating a personal account.
                 </p>
-                <Link to="/../account/register" id="customer_register_link">Create account</Link>
+                <Link to="/account/register" id="customer_register_link">Create account</Link>
               </div>
 
             </div>
