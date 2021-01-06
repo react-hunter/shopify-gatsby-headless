@@ -5,18 +5,18 @@ const ProductBox = props => {
     const review = props.review;
 
     const prevImage = (e) => {
-        console.log('submit arrive');
         e.preventDefault();
+        console.log('submit arrive');
     }
 
     const nextImage = (e) => {
-        console.log('submit arrive');
         e.preventDefault();
+        console.log('submit arrive');
     }
 
     const OpenCollectionModal = (e) => {
-        console.log('submit arrive');
         e.preventDefault();
+        console.log('submit arrive');
     }
 
     const handleKeyDown =(e) => {

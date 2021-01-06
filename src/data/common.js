@@ -110,60 +110,62 @@ export const commonData = {
       url: '/collection/the-makeup-box'
     },
     {
-      title: 'ANNIVERSARY',
-      parent: 'SHOP BY OCCASION',
-      hasChildren: false,
-      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/7888444C-D3CE-411E-8551-086F15EEFD71_500x.jpg',
-      url: '/collection/anniversary'
-    },
-    {
-      title: 'BIRTHDAY',
-      parent: 'SHOP BY OCCASION',
-      hasChildren: false,
-      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/9430F88F-CC88-4613-9C2B-DC2D8BE97B60_500x.jpg',
-      url: '/collection/birthday'
-    },
-    {
-      title: 'CONGRATULATIONS',
-      parent: 'SHOP BY OCCASION',
-      hasChildren: false,
-      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/IMG_3169_500x.JPG',
-      url: '/collection/congratulations'
-    },
-    {
-      title: 'GRADUATION',
-      parent: 'SHOP BY OCCASION',
-      hasChildren: false,
-      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/IMG_3178_500x.JPG',
-      url: '/collection/graduation'
-    },
-    {
-      title: 'GENDER REVEAL',
-      parent: 'SHOP BY OCCASION',
-      hasChildren: false,
-      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/07D35A02-BC62-4896-8E17-A1E256FA6ABF_500x.JPG',
-      url: '/collection/gender-reveal'
-    },
-    {
-      title: 'SPECIAL EVENT',
-      parent: 'SHOP BY OCCASION',
-      hasChildren: false,
-      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/FCC663D1-B946-45DB-B660-5B6691393487_500x.jpg',
-      url: '/collection/special-occasion'
-    },
-    {
-      title: 'WEDDING',
-      parent: 'SHOP BY OCCASION',
-      hasChildren: false,
-      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/F2E40911-B1F1-4CF3-8751-A9C2C5053F8D_500x.jpg',
-      url: '/collection/wedding'
-    },
-    {
       title: 'SHOP BY OCCASION',
       parent: '',
       hasChildren: true,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/fullsizeoutput_129_500x.jpeg',
-      url: ''
+      url: '',
+      childs: [
+        {
+          title: 'ANNIVERSARY',
+          parent: 'SHOP BY OCCASION',
+          hasChildren: false,
+          image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/7888444C-D3CE-411E-8551-086F15EEFD71_500x.jpg',
+          url: '/collection/anniversary'
+        },
+        {
+          title: 'BIRTHDAY',
+          parent: 'SHOP BY OCCASION',
+          hasChildren: false,
+          image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/9430F88F-CC88-4613-9C2B-DC2D8BE97B60_500x.jpg',
+          url: '/collection/birthday'
+        },
+        {
+          title: 'CONGRATULATIONS',
+          parent: 'SHOP BY OCCASION',
+          hasChildren: false,
+          image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/IMG_3169_500x.JPG',
+          url: '/collection/congratulations'
+        },
+        {
+          title: 'GRADUATION',
+          parent: 'SHOP BY OCCASION',
+          hasChildren: false,
+          image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/IMG_3178_500x.JPG',
+          url: '/collection/graduation'
+        },
+        {
+          title: 'GENDER REVEAL',
+          parent: 'SHOP BY OCCASION',
+          hasChildren: false,
+          image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/07D35A02-BC62-4896-8E17-A1E256FA6ABF_500x.JPG',
+          url: '/collection/gender-reveal'
+        },
+        {
+          title: 'SPECIAL EVENT',
+          parent: 'SHOP BY OCCASION',
+          hasChildren: false,
+          image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/FCC663D1-B946-45DB-B660-5B6691393487_500x.jpg',
+          url: '/collection/special-occasion'
+        },
+        {
+          title: 'WEDDING',
+          parent: 'SHOP BY OCCASION',
+          hasChildren: false,
+          image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/F2E40911-B1F1-4CF3-8751-A9C2C5053F8D_500x.jpg',
+          url: '/collection/wedding'
+        },
+      ]
     },
     {
       title: 'GIFTS FOR HER',
@@ -184,35 +186,37 @@ export const commonData = {
       parent: '',
       hasChildren: true,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Categories_image_500x500_leather_500x.png',
-      url: ''
-    },
-    {
-      title: 'GIFTS UNDER $50',
-      parent: 'SHOP BY PRICE',
-      hasChildren: false,
-      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Suede_Black_Single_Red_ba38b5c9-d679-4511-a3d5-b5762a5f313b_500x.png',
-      url: '/collection/gifts-under-50'
-    },
-    {
-      title: 'GIFTS UNDER $100',
-      parent: 'SHOP BY PRICE',
-      hasChildren: false,
-      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Medium_Round_Flat_500x.png',
-      url: '/collection/gifts-under-100'
-    },
-    {
-      title: 'GIFTS UNDER $350',
-      parent: 'SHOP BY PRICE',
-      hasChildren: false,
-      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Large_Round_Flat_500x.png',
-      url: '/collection/gifts-under-350'
-    },
-    {
-      title: 'GIFTS UNDER $500',
-      parent: 'SHOP BY PRICE',
-      hasChildren: false,
-      image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Medium_Round_500x.png',
-      url: '/collection/gifts-under-500'
+      url: '',
+      childs: [
+        {
+          title: 'GIFTS UNDER $50',
+          parent: 'SHOP BY PRICE',
+          hasChildren: false,
+          image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Suede_Black_Single_Red_ba38b5c9-d679-4511-a3d5-b5762a5f313b_500x.png',
+          url: '/collection/gifts-under-50'
+        },
+        {
+          title: 'GIFTS UNDER $100',
+          parent: 'SHOP BY PRICE',
+          hasChildren: false,
+          image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Medium_Round_Flat_500x.png',
+          url: '/collection/gifts-under-100'
+        },
+        {
+          title: 'GIFTS UNDER $350',
+          parent: 'SHOP BY PRICE',
+          hasChildren: false,
+          image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Large_Round_Flat_500x.png',
+          url: '/collection/gifts-under-350'
+        },
+        {
+          title: 'GIFTS UNDER $500',
+          parent: 'SHOP BY PRICE',
+          hasChildren: false,
+          image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Medium_Round_500x.png',
+          url: '/collection/gifts-under-500'
+        }
+      ]
     }
   ],
   announceBarSettings: {
@@ -229,6 +233,16 @@ export const commonData = {
     backgroundColor: '#000',
     textColor: '#FFF'
   },
+  cartSlider: [
+    {
+      href: 'https://apps.apple.com/us/app/dose-of-roses/id1536845287',
+      imageUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Dose_of_Roses_App_92728958-f1d0-4f7c-95ab-8ccf4332c4d2_770x.jpg?v=1609308744'
+    },
+    {
+      href: '/collections/best-sellers',
+      imageUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/QuadPay_770x.jpg?v=1609308760'
+    }
+  ],
   instagramSettings: {
     title: 'FIND THE PERFECT GIFT ON OUR GRAM'
   },

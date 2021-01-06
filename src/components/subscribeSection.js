@@ -28,8 +28,8 @@ const SubscribeSection = () => {
     }
 
     const onSubmit = (e) => {
-        console.log('submit arrive');
         e.preventDefault();
+        console.log('submit arrive');
     }
 
     return (
