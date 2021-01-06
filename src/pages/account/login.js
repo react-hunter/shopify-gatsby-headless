@@ -51,115 +51,96 @@ const LoginForm = () => {
 
   return (
     <>
-      {passwordForgot ?
-        <section className="hero is-dark is-fullheight-with-navbar">
-          <div className="hero-body">
-            <div className="container">
-              <div className="columns is-centered">
-                <div className="column is-4 is-centered">
-                  <h2 className=" title has-text-centered">RESET YOUR PASSWORD</h2>
-                  <p>We will send you an email to reset your password.</p>
+      <div className="page-width">
+        <div className="grid">
+          <div className="grid__item medium-up--one-half medium-up--push-one-quarter login-secton_wrapper">
+            <div className="form-vertical" id="CustomerLoginForm">
+              <div className="identificationHeading_wrapper">
+                <span id="LoginIDHeading">IDENTIFICATION</span>
+              </div>
+
+              {passwordForgot ?
+                <div className="forgot-password_section">
+                  <span className="register-subheader">CHANGE YOUR PASSWORD</span>
+                  <p className="forgot-password_description">In order to reset your password, please provide us your email. We will send you an email momentarily.</p>
+                  
                   <Mutation mutation={CUSTOMER_PASSWORD_RESET}>
                     {(customerRecover) => {
                       return (
                         <>
-                          <div className="field">
-                            <label className="label has-text-white" htmlFor="loginEmail">Email</label>
-                            <div className="control">
-                              <input className="input" type="email" id="loginEmail" onChange={(e) => setEmailReset(e.target.value)} />
-                            </div>
-                          </div>
-                          <div className="field">
-                            <div className="control has-text-centered">
-                              <button
-                                className="button"
-                                onClick={() => {
-                                  customerRecover({
-                                    variables: {
-                                      "email": emailReset,
-                                    }
-                                  }).then(() => {
-                                    setMessageInfo("We've sent you an email with a link to update your password.")
-                                    setPasswordForgot(false)
-                                  })
-                                }}
-                              >SUBMIT</button>
-                            </div>
-                            <div className="field">
-                              <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => () => setPasswordForgot(!passwordForgot)}>
-                                <p>Cancel</p>
-                              </div>
-                            </div>
-                          </div>
+                          <label className="forgot-password_email_field" htmlFor="loginEmail">Login*</label>
+                          <input className="input" type="email" id="loginEmail" onChange={(e) => setEmailReset(e.target.value)} />
 
+                          <div className="forgot-password_button_wrapper">
+                            <div className="forgot-password_cancel_btn" role="button" tabIndex="0" 
+                              onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => () => setPasswordForgot(!passwordForgot)}>
+                              Cancel
+                            </div>
+
+                            <button
+                              className="forgot-password_send_btn"
+                              onClick={() => {
+                                customerRecover({
+                                  variables: {
+                                    "email": emailReset,
+                                  }
+                                }).then(() => {
+                                  setMessageInfo("We've sent you an email with a link to update your password.")
+                                  setPasswordForgot(false)
+                                })
+                              }}>Send</button>
+                          </div>
                         </>
                       )
                     }}
                   </Mutation>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        :
-        <section className="hero is-dark is-fullheight-with-navbar">
-          <div className="hero-body">
-            <div className="container">
-              <div className="columns is-centered">
-                <div className="column is-4 is-centered">
+                :
+                <div>
                   {messsageInfo &&
-                    <div className="notification is-success">
+                    <div className="form-message form-message--success hide" id="ResetSuccess" tabindex="-1">
                       {messsageInfo}
                     </div>
                   }
-                  <h2 className=" title has-text-centered">Login</h2>
+
                   <Mutation mutation={CUSTOMER_LOGIN}>
                     {(customerLogin) => {
                       return (
                         <>
-                          <div className="field">
-                            <label className="label has-text-white" htmlFor="loginEmail">Email</label>
-                            <div className="control">
+                          <div className="login-main_container">
+                            <span id="LoginHeading" className="text-center">MEMBERS PLEASE SIGN IN</span>
+
+                            <div id="customer_login">
+                              <label className="input-type_header" htmlFor="loginEmail">Login*</label>
                               <input className="input" type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
-                            </div>
-                          </div>
-                          <div className="field">
-                            <label className="label has-text-white" htmlFor="loginPassword">Password</label>
-                            <div className="control">
+
+                              <label className="input-type_header" htmlFor="loginPassword">Password*</label>
                               <input className="input" type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
-                            </div>
-                          </div>
-                          <div className="field">
-                            <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => setPasswordForgot(!passwordForgot)}>
-                              <p>Forgot your password? </p>
-                            </div>
-                          </div>
-                          <div className="field">
-                            <div className="control has-text-centered">
-                              <button
-                                className="button"
-                                onClick={() => {
-                                  customerLogin({
-                                    variables: {
-                                      "input": {
-                                        "email": email,
-                                        "password": password,
-                                      }
-                                    }
-                                  }).then((result) => {
-                                    handleCustomerAccessToken(result.data.customerAccessTokenCreate.customerAccessToken)
-                                  }).catch((err) => {
-                                    alert(err)
-                                  })
-                                }}
-                              >SIGN IN</button>
-                            </div>
-                          </div>
-                          <div className="field">
-                            <div className="control has-text-centered">
-                              <Link to="/../account/register">
-                                <p className="has-text-white">Create account</p>
-                              </Link>
+
+                              <div className="control has-text-centered" role="button" tabIndex="0" onClick={() => setPasswordForgot(!passwordForgot)} onKeyDown={() => setPasswordForgot(!passwordForgot)}>
+                                <p id="RecoverPassword">Forgot your password? </p>
+                              </div>
+
+                              <div className="login-button_wrapper">
+                                  <button
+                                    className="btn"
+                                    onClick={() => {
+                                      customerLogin({
+                                        variables: {
+                                          "input": {
+                                            "email": email,
+                                            "password": password,
+                                          }
+                                        }
+                                      }).then((result) => {
+                                        handleCustomerAccessToken(result.data.customerAccessTokenCreate.customerAccessToken)
+                                      }).catch((err) => {
+                                        alert(err)
+                                      })
+                                    }}
+                                  >SIGN IN</button>
+                              </div>
+
                             </div>
                           </div>
                         </>
@@ -167,11 +148,20 @@ const LoginForm = () => {
                     }}
                   </Mutation>
                 </div>
+              }
+
+              <div className="login-register-account_section">
+                <span className="login-register-account_header">DON'T HAVE AN ACCOUNT</span>
+                <p className="login-register-account_content_message">
+                  Enjoy added benefits and richer experience by creating a personal account.
+                </p>
+                <Link to="/../account/register" id="customer_register_link">Create account</Link>
               </div>
+
             </div>
           </div>
-        </section>
-      }
+        </div>        
+      </div>
     </>
   );
 };

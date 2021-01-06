@@ -13420,6 +13420,11 @@ body.modal-open {
   }
 }
 
+.login-secton_wrapper {
+  padding-top: 175px;
+  position: relative;
+}
+
 #LoginHeading {
   font-family: 'Big Caslon';
   letter-spacing: 1px;
@@ -13451,7 +13456,7 @@ body.modal-open {
   justify-content: center
 }
 
-.login-button_wrapper input {
+.login-button_wrapper .btn {
   width: 100% !important;
   color: white !important;
   background-color: black !important;
@@ -13487,7 +13492,9 @@ body.modal-open {
   color: black !important;
   text-transform: uppercase;
   font-family: 'Proxima Condensed Extra Bold Alt', sans-serif;
-  padding: 8px 0
+  padding: 8px 0;
+  text-align: center;
+  cursor: pointer;
 }
 
 .forgot-password_send_btn {
@@ -13504,7 +13511,9 @@ body.modal-open {
 
 #RecoverPassword {
   font-size: 0.75rem;
-  text-decoration: underline
+  text-decoration: underline;
+  margin-bottom: 15px;
+  cursor: pointer;
 }
 
 .input-type_header {
