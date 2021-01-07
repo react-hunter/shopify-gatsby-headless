@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import ProductGallery from "../components/ProductPage/ProductGallery"
@@ -7,15 +7,18 @@ import RelatedProductList from "../components/relatedProductList";
 
 import './productPage.scss';
 
-const productPage = ({ data, pageContext }) => {
+const ProductPage = ({ data, pageContext }) => {
     const product = data.shopifyProduct;
     const {id, productReviews} = pageContext;
     const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 2) : [];
     
     const productReview = productReviews.filter(pr => pr.handle === id)
     
+    useEffect(() => {
+        setPDPHeaderPadding();
+    }, [])
+
     function setPDPHeaderPadding() {
-      
         const headerElement = document.querySelector(".stickyHeader");
         const headerHeight = headerElement.offsetHeight;
       
@@ -81,7 +84,7 @@ const productPage = ({ data, pageContext }) => {
     )
 }
 
-export default productPage
+export default ProductPage
 
 export const query = graphql`
     query($id: String!){

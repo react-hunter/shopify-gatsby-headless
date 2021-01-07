@@ -17,21 +17,21 @@ const contactusPage = ({ data }) => {
                     <input type="hidden" name="utf8" value="✓" />
                     <div className="grid grid--half-gutters">
                       <div className="grid__item medium-up--one-half">
-                        <label for="ContactForm-name" >Name</label>
+                        <label htmlFor="ContactForm-name" >Name</label>
                         <input type="text" id="ContactForm-name" name="contact[Name]" value="" />
                       </div>
                       
                       <div className="grid__item medium-up--one-half">
-                        <label for="ContactForm-email" >Email <span aria-hidden="true">*</span></label>
+                        <label htmlFor="ContactForm-email" >Email <span aria-hidden="true">*</span></label>
                         <input type="email" id="ContactForm-email" name="contact[email]" autocorrect="off" autocapitalize="off" 
                             value="" aria-required="true" />
                       </div>
                     </div>
 
-                    <label for="ContactForm-phone" >Phone Number</label>
+                    <label htmlFor="ContactForm-phone" >Phone Number</label>
                     <input type="tel" id="ContactForm-phone" name="contact[Phone Number]" pattern="[0-9\-]*" value="" />
 
-                    <label for="ContactForm-message" >Message</label>
+                    <label htmlFor="ContactForm-message" >Message</label>
                     <textarea rows="10" id="ContactForm-message" name="contact[Message]"></textarea>
 
                     <input type="submit" className="btn contact-submit_button" value="Send" />
