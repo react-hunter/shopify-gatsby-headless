@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby'
 const ProductBox = props => {
     const product = props.product;
-    const review = props.review ? props.review : '';
+    const reviewBadge = props.review ? props.review.badge : '';
 
     const prevImage = (e) => {
         e.preventDefault();
@@ -68,7 +68,7 @@ const ProductBox = props => {
                         style={{ letterSpacing: '3px' }}>{product.title}</Link>
                 </div>
 
-                <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: review.badge ? review.badge : '' }} />
+                <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: reviewBadge }} />
                 
                 <div className="price price--listing price--on-sale">
                     <div className="price__regular"></div>
