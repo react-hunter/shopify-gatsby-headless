@@ -34,7 +34,7 @@ const SearchPage = ({ data }) => {
                         <h1 className="is-size-5 has-text-medium">RESULTS FOR "{search.toUpperCase()}" :</h1>
                     </div>
                     <div className="container">
-                        <div className="columns is-multiline ">
+                        {/* <div className="columns is-multiline ">
                             {products.filter(p =>
                                 p.node.title.toUpperCase().includes(search.toUpperCase()) ||
                                 p.node.productType.toUpperCase().includes(search.toUpperCase()) ||
@@ -47,7 +47,7 @@ const SearchPage = ({ data }) => {
                                         <ProductBox product={p} />
                                     </div>
                             ))}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </section>
