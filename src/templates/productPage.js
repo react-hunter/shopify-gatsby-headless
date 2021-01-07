@@ -2,7 +2,7 @@ import React from 'react';
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import ProductGallery from "../components/ProductPage/ProductGallery"
-import ProductDescription from "../components/ProductPage/ProductDescription"
+import ProductDescription from "../components/ProductPage/productDescription"
 import RelatedProductList from "../components/relatedProductList";
 
 import './productPage.scss';
