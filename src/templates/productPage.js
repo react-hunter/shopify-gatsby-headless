@@ -15,7 +15,7 @@ const ProductPage = ({ data, pageContext }) => {
     const productReview = productReviews.filter(pr => pr.handle === id)
     
     useEffect(() => {
-        setPDPHeaderPadding();
+        setTimeout(setPDPHeaderPadding, 300);
     }, [])
 
     function setPDPHeaderPadding() {
