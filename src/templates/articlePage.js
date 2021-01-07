@@ -17,17 +17,14 @@ const articlePage = ({ data }) => {
               <span className="prev-prod desktop-1 mobile-hide"> 
               </span>
               <div className="goals-sectiont-title">
-                <h1 data-acsb-original-letter-spacing-value="normal" 
-                  style={{ letterSpacing: '2px' }}>{data.shopifyArticle.title}</h1>
+                <h1>{data.shopifyArticle.title}</h1>
               </div>
               <span className="next-prod desktop-1 mobile-hide"></span>
             </div>
             <div id="page" className="desktop-12 tablet-6 mobile-3">
               <div id="blog-article" className="desktop-12 tablet-12 mobile-12">
                 <div id="article-body">
-                  <span className="posted" 
-                    data-acsb-original-letter-spacing-value="normal" 
-                    style={{ letterSpacing: '2px' }}>{data.shopifyArticle.publishedAt}</span>
+                  <span className="posted">{data.shopifyArticle.publishedAt}</span>
 
                   <ShareIcons 
                     articleUrl={data.shopifyArticle.url}

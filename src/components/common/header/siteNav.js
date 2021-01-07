@@ -10,7 +10,7 @@ const siteNav = ({ path }) => {
                 { commonData.desktopHeaderMenu.map((menuItem, menuIndex) => 
                 <li key={menuIndex}>
                     <Link id={menuItem.id} to={menuItem.link} className="site-nav__link site-nav__link--main">
-                        <span className="site-nav__label" data-acsb-original-letter-spacing-value="1px">
+                        <span className="site-nav__label">
                             {menuItem.title}
                         </span>
                     </Link>
