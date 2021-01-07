@@ -68,7 +68,7 @@ const ProductBox = props => {
                         style={{ letterSpacing: '3px' }}>{product.title}</Link>
                 </div>
 
-                <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: review.badge }} />
+                <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: review.badge ? review.badge : '' }} />
                 
                 <div className="price price--listing price--on-sale">
                     <div className="price__regular"></div>
