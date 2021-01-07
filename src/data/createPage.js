@@ -68,7 +68,7 @@ export const createPageData = {
     createArrangements: {
         title: 'SELECT A STYLE TO GET STARTED',
         subTitle: 'Choose your box color, material and rose colors. Personalize it with letters, numbers or symbols.',
-        variantType: [
+        options: [
             {
                 color: 'Red',
                 buttonImage: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Roses_Red_100x.jpg' 
