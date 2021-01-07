@@ -285,10 +285,6 @@ const Header = ({ path }) => {
     }
   }
   
-  document.addEventListener('DOMContentLoaded', function(event) {
-    console.log('DOMContentLoaded in render:', document.getElementById('app').textContent);
-  });
-
   return (
     <>
       <div id="shopify-section-header" className="shopify-section">
