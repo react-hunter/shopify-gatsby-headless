@@ -40,7 +40,7 @@ const Products = ({checkout}) => {
                             <div className="cart__shipping rte">Taxes and <Link to="/policies/shipping-policy">shipping</Link> calculated at checkout</div>
                             <div className="cart__buttons-container">
                                 <div className="cart__submit-controls" >
-                                    <a href={checkout.webUrl} target="_blank" className="cart__submit btn btn--small-wide">Check out</a>
+                                    <a href={checkout.webUrl} target="_blank" rel="noreferrer" className="cart__submit btn btn--small-wide">Check out</a>
                                 </div>
                             </div>
                         </div>

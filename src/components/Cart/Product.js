@@ -5,6 +5,7 @@ import StoreContext from "../../context/store"
 const Product = ({ line_item }) => {
 
     const context = useContext(StoreContext)
+    // console.log('context checkout: ', context.store.checkout)
 
     const imageItem = line_item.variant.image && (
         <img

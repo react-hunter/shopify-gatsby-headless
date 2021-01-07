@@ -58,7 +58,7 @@ const ProductPage = ({ data, pageContext }) => {
           for (let i = 0; i < optionSlides.length; i++) {
             let optionSlide = optionSlides[i];
             let optionText = optionSlide.querySelector(".valueVariant");
-            if (optionText.innerHTML == selectedSwatch) {
+            if (optionText.innerHTML === selectedSwatch) {
               optionSlide.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
               optionSlide.click();
               break;
