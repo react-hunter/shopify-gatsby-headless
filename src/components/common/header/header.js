@@ -31,6 +31,8 @@ let bannerContainer = null;
 var xDown = null;
 var yDown = null;
 
+
+
 const countQuantity = lineItems => {
   let quantity = 0
 
@@ -259,6 +261,34 @@ const Header = ({ path }) => {
     yDown = null;
   };
   
+
+  function initializeHeader() {
+
+    //Set Header attributes and sticky
+    let header = document.querySelector(".stickyHeader");
+    let prevScrollpos = window.pageYOffset;
+  
+    window.onscroll = function () {
+      let currentScrollpos = window.pageYOffset;
+  
+      if (prevScrollpos < currentScrollpos) {
+  
+        if (currentScrollpos >= 5) {
+          //Hide
+          header.style.top = "-200px";
+        }
+      } else {
+        //Show
+        header.style.top = "0";
+      }
+      prevScrollpos = currentScrollpos;
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', function(event) {
+    console.log('DOMContentLoaded in render:', document.getElementById('app').textContent);
+  });
+
   return (
     <>
       <div id="shopify-section-header" className="shopify-section">
