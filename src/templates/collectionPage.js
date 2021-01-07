@@ -104,13 +104,9 @@ const collectionPage = ({ data, pageContext }) => {
             <div className="page-width">
               <div className="section-header text-center">
                 <h1>
-                  <span className="visually-hidden" 
-                    data-acsb-original-letter-spacing-value="normal" 
-                    style={{ letterSpacing: '2px' }}>Collection: </span>
+                  <span className="visually-hidden">Collection: </span>
 
-                  <span className="goals-section-text" 
-                    data-acsb-original-letter-spacing-value="normal" 
-                    style={{ letterSpacing: '2px' }}>{data.shopifyCollection.title}</span>
+                  <span className="goals-section-text">{data.shopifyCollection.title}</span>
                   
                   <span style={{ display: "flex", justifyContent: "center" }}>
                     <span className="collection-page_underline"></span>
@@ -119,21 +115,12 @@ const collectionPage = ({ data, pageContext }) => {
               </div>
 
               <div className="rte">
-                <div id="collectionDescription"
-                  data-acsb-original-letter-spacing-value="normal" 
-                  style={{ letterSpacing: '2px' }}>
-
+                <div id="collectionDescription">
                   <div dangerouslySetInnerHTML={{__html: data.shopifyCollection.descriptionHtml}} />
-                  <div id="collectionReadMore" 
-                    onClick={collectionShowMore} 
-                    data-acsb-original-letter-spacing-value="normal" 
-                    style={{ letterSpacing: '2px', display: 'block' }}>Read More</div>
-                  <div id="collectionShowLess" 
-                    onClick={collectionShowLess} 
-                    data-acsb-original-letter-spacing-value="normal" 
-                    style={{ letterSpacing: '2px', display: 'none' }}>Show Less</div>
                 </div>
               </div>
+
+              <span className="filters-toolbar__product-count" ></span>
             </div>
           </header>
         </div>
@@ -154,9 +141,7 @@ const collectionPage = ({ data, pageContext }) => {
         {
           displayProductCount < data.shopifyCollection.products.length ? (
             <div className="load-more">
-              <a className="load-more_btn" onClick={loadMoreProducts} 
-                data-acsb-original-letter-spacing-value="normal" 
-                style={{ letterSpacing: '2px' }}>LOAD MORE</a>
+              <a className="load-more_btn" onClick={loadMoreProducts}>LOAD MORE</a>
               <div className="load-more_loader"></div>
             </div>
           ) : null

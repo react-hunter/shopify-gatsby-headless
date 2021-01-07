@@ -9,8 +9,7 @@ const ShareIcons = (props) => {
     }
     return (
         <div className="share-icons">
-            <span data-acsb-original-letter-spacing-value="normal"
-                style={{ letterSpacing: '2px' }}>Share:</span>
+            <span>Share:</span>
   
             <a title="Print" className="print" href="/fakeUrl" onClick={printWindow}>
                 <i className="fas fa-print" aria-hidden="true"></i>
@@ -24,9 +23,7 @@ const ShareIcons = (props) => {
                 href="//www.facebook.com/sharer.php?u={props.articleUrl}"
                 className="facebook" target="_blank"
                 aria-describedby="a11y-new-window-external-message"
-                rel="noreferrer"
-                data-acsb-original-letter-spacing-value="normal"
-                style={{ letterSpacing: '2px' }}>
+                rel="noreferrer">
                     <i className="fa fa-facebook" aria-hidden="true"></i>
             </a>
   
@@ -35,9 +32,7 @@ const ShareIcons = (props) => {
                 target="_blank"
                 className="twitter"
                 aria-describedby="a11y-new-window-external-message"
-                rel="noreferrer"
-                data-acsb-original-letter-spacing-value="normal"
-                style={{ letterSpacing: '2px' }}>
+                rel="noreferrer">
                     <i className="fa fa-twitter" aria-hidden="true"></i>
             </a>
   
@@ -45,9 +40,7 @@ const ShareIcons = (props) => {
                 target="blank"
                 href="//pinterest.com/pin/create/button/?url={props.articleUrl}&amp;media={props.articleMedia}"
                 className="pinterest"
-                aria-describedby="a11y-external-message"
-                data-acsb-original-letter-spacing-value="normal"
-                style={{ letterSpacing: '2px' }}>
+                aria-describedby="a11y-external-message">
                     <i className="fa fa-pinterest" aria-hidden="true"></i>
             </a>
         </div>

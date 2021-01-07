@@ -25,9 +25,7 @@ const ProductBox = props => {
     return (
         <li className="grid__item grid__item--collection-template " key={product.title}>
             <div className="grid-view-item product-card">
-                <span className="visually-hidden product-card-title" 
-                    data-acsb-original-letter-spacing-value="1px" 
-                    style={{ letterSpacing: '3px' }}>{product.title}</span>
+                <span className="visually-hidden product-card-title">{product.title}</span>
 
                 <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
                     <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
@@ -63,9 +61,7 @@ const ProductBox = props => {
                 </div>
 
                 <div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
-                    <Link to={`/product/${product.handle}`}
-                        data-acsb-original-letter-spacing-value="1px" 
-                        style={{ letterSpacing: '3px' }}>{product.title}</Link>
+                    <Link to={`/product/${product.handle}`}>{product.title}</Link>
                 </div>
 
                 <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: reviewBadge }} />
@@ -73,9 +69,7 @@ const ProductBox = props => {
                 <div className="price price--listing price--on-sale">
                     <div className="price__regular"></div>
                     <div className="price__sale">
-                        <span className="price-item price-item--sale" 
-                            data-acsb-original-letter-spacing-value="normal" 
-                            style={{ letterSpacing: '2px' }}>{product.variants[0].price}</span>
+                        <span className="price-item price-item--sale">{product.variants[0].price}</span>
                     </div>
                     <div className="price__compare">
 
@@ -87,9 +81,7 @@ const ProductBox = props => {
                 </div>
 
                 <button className="openVariantModal" 
-                    onClick={OpenCollectionModal} 
-                    data-acsb-original-letter-spacing-value="normal" 
-                    style={{ letterSpacing: '2px' }}>ADD TO BAG</button>
+                    onClick={OpenCollectionModal}>ADD TO BAG</button>
             </div>
         </li>
     );

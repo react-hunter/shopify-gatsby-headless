@@ -9,8 +9,7 @@ const ArticleSection = ({ data }) => {
     <div className="shopify-section index-section">
       <div className="blog-container">
         <header className="blog-header section-header text-center">
-          <h2 data-acsb-original-letter-spacing-value="2px" 
-            style={{ letterSpacing: "4px" }}>Blog</h2>
+          <h2>Blog</h2>
         </header>
 
         <ul className="grid grid--uniform grid--blog">
@@ -26,9 +25,7 @@ const ArticleSection = ({ data }) => {
         <div className="blog-view-all text-center">
           <Link to="/blogs/dose" 
             className="btn blog-btn view-all" 
-            aria-label="View all blogs" 
-            data-acsb-original-letter-spacing-value="1.12px"
-            style={{ letterSpacing: '3.12px' }}>
+            aria-label="View all blogs">
             View all
           </Link>
         </div>

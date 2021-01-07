@@ -21,21 +21,15 @@ const ArticleSmallBox = props => {
           <div className="article_sidebar-text">
             <div className="article_sidebar-title">
               <Link to={`/article/${article.handle}`} >
-                <h4 data-acsb-original-letter-spacing-value="normal" 
-                  style={{ letterSpacing: '2px' }}>{article.title}</h4>
+                <h4>{article.title}</h4>
               </Link>
             </div>
             <div className="article_sidebar-description">
-              <span data-acsb-original-letter-spacing-value="normal" 
-                style={{ letterSpacing: '2px' }}>
-                  {article.excerpt}
-              </span>
+              <span>{article.excerpt}</span>
             </div>
             <div className="article_sidebar-button">
               <Link to={`/article/${article.handle}`}
-                className="article_sidebar-btn btn--primary" 
-                data-acsb-original-letter-spacing-value="normal" 
-                style={{ letterSpacing: '2px' }}>
+                className="article_sidebar-btn btn--primary">
                   READ MORE
               </Link>
             </div>

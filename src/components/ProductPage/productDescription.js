@@ -19,12 +19,29 @@ const ProductDescription = ({ product, review }) => {
         product.options.forEach(selector => {
             defaultOptionValues[selector.name] = selector.values[0]
         })
-        setVariant(defaultOptionValues)
+        setVariant(defaultOptionValues);
+
+        document.querySelectorAll('.accordion_button').forEach(button => {
+            const accordionButton = button;
+            accordionButton.innerHTML = accordionButton.innerHTML + '<i className="fas fa-angle-down"></i>';
+            button.addEventListener('click', () => {
+                button.classList.toggle('accordion_button--active');
+            });
+        });
     }, [])
 
     useEffect(() => {
         checkAvailability(product.shopifyId)
     }, [productVariant])
+
+
+    function rotateButton(identifier){
+        if(document.getElementsByClassName(identifier)[0].firstElementChild.style.transform == "rotate(0deg)"){
+          document.getElementsByClassName(identifier)[0].firstElementChild.style.transform = "rotate(180deg)"
+        }else{
+          document.getElementsByClassName(identifier)[0].firstElementChild.style.transform = "rotate(0deg)"
+        }
+    }
 
     const checkAvailability = productId => {
         context.store.client.product.fetch(productId).then((product) => {

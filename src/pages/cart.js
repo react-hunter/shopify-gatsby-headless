@@ -8,7 +8,7 @@ const Cart = () => {
 
     const context = useContext(StoreContext)
     const { checkout } = context.store
-    console.log('line items: ', checkout.lineItems)
+    console.log('line items: ', checkout)
     return (
         <>
             <SEO title="cart" />

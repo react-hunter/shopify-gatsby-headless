@@ -25,15 +25,14 @@ const ArticleBox = props => {
               </Link>
 
               <Link to={`/article/${article.handle}`} className="article__link">
-                <h3 className="article__title" data-acsb-original-letter-spacing-value="normal" style={{ letterSpacing: '2px' }}>
+                <h3 className="article__title">
                     {article.title}
                 </h3>
               </Link>
             </header>
 
               <div className="article__grid-meta">
-                <div className="rte article__grid-excerpt" 
-                    data-acsb-original-letter-spacing-value="2px" style={{ letterSpacing: '4px' }}>                
+                <div className="rte article__grid-excerpt">                
                     {article.excerpt}    
                 </div>
               </div>
@@ -41,7 +40,7 @@ const ArticleBox = props => {
               <ul className="list--inline article__meta-buttons">
                 <li>
                     <Link to={`/article/${article.handle}`}
-                        className="btn btn--small blog-btn" data-acsb-original-letter-spacing-value="0.96px" style={{ letterSpacing: '2.96px' }}>
+                        className="btn btn--small blog-btn">
                         Read More
                     </Link>
                 </li>

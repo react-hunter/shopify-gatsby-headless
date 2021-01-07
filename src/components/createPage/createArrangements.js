@@ -3,19 +3,26 @@ import { Link } from 'gatsby'
 import { createPageData } from '../../data/createPage' 
 
 const createArrangements = () => {
-    const onClickSpan = (e) => {
-        e.preventDefault();
-        console.log('show sidenav');
-    }
     
     const handleKeyDown = (e) => {
         e.preventDefault();
         console.log('key down');
     }
 
-    const triggerImg = (e) => {
+    const triggerImg = (e, productName, optionIndex) => {
         e.preventDefault();
-        console.log('show sidenav');
+
+        let productItem = document.querySelectorAll(`[data-product-name='${productName}']`)[0];
+        let productImageTag = productItem.getElementsByClassName('product-image')[0];
+        let imageUrlArray = productImageTag.getAttribute('data-imgs').split(",");
+
+        productImageTag.src = imageUrlArray[optionIndex];
+    }
+
+
+    const getProductImages = (item) => {
+        const imgList = item.variants.map(va => va.imgUrl)
+        return imgList.join(',')
     }
 
     return (
@@ -33,22 +40,21 @@ const createArrangements = () => {
                     <div className="create_arrange-content_inner">
  
                         { createPageData.createArrangements.products.map((item, index) => 
-                        <div className="create_arrange-block" key={index}>
+                        <div className="create_arrange-block" key={index} data-product-name={item.name}>
                             <Link to={item.url}>
-                                <img src={item.image} alt="" />
-
-                                {item.variants.map((va_item, va_index) =>
-                                    <img className="hide" src={va_item.imgUrl} alt="" key={va_index} />  /* data-src= images*/
-                                )}
+                                <img className="product-image" 
+                                    src={item.image} data-imgs={getProductImages(item)} alt="" />
                             </Link>
                             <div className="create_arrange-title">{item.name}</div>
                             <div className="create_arrange-swatch">
                             <div className="create-landing_swatches">
-                                {createPageData.createArrangements.variantType.map((va_type_item, va_type_index) => 
-                                    <img onClick={triggerImg} src={va_type_item.buttonImage} alt="" key={va_type_index} onKeyDown={handleKeyDown} role="presentation" />
+                                {createPageData.createArrangements.options.map((option_item, option_index) => 
+                                    <img src={option_item.buttonImage}
+                                        onClick={e => triggerImg(e, item.name, option_index)}
+                                        key={option_index} onKeyDown={handleKeyDown} role="presentation" alt="" />
                                 )}
                             </div>
-                            <span onClick={onClickSpan} style={{ cursor:'pointer' }}  onKeyDown={handleKeyDown} role="presentation">+  More</span>
+                            <Link to={item.url}>+  More</Link>
                             </div>
                             <div className="create_arrange-price">{item.fromPrice}</div>
                             <Link className="create_arrange-button" to={item.url}>CUSTOMIZE NOW</Link>

@@ -19,14 +19,6 @@ const SubscribeSection = () => {
         letterSpacing: `4px`
     }
 
-    const letterSpacing2Style = {
-        letterSpacing: '2px'
-    }
-
-    const letterSpacing8Style = {
-        letterSpacing: '8px'
-    }
-
     const onSubmit = (e) => {
         e.preventDefault();
         console.log('submit arrive');
@@ -41,14 +33,12 @@ const SubscribeSection = () => {
             lazyloaded" 
             style={newsletterBackgroundStyle}>
 
-            <h2 className="newsletter-header" 
-                data-acsb-original-letter-spacing-value="6px"
-                style={ letterSpacing8Style }>{ commonData.newsletterSettings.title }</h2>
+            <h2 className="newsletter-header">{ commonData.newsletterSettings.title }</h2>
             
             <div className="container" style={containerStyle}>
                 <div className="ten section_form">
                     <div className="newsletter-text">
-                        <p data-acsb-original-letter-spacing-value="normal" style={ letterSpacing2Style }>{ commonData.newsletterSettings.subTitle }</p>
+                        <p>{ commonData.newsletterSettings.subTitle }</p>
                     </div>
 
                     <div className="newsletter">
@@ -62,7 +52,7 @@ const SubscribeSection = () => {
                             <p className="thank-you-text"><strong>Thanks for subscribing!</strong></p>
                         </div>
                         <div className="newsletter-agreement">
-                            <p data-acsb-original-letter-spacing-value="normal" style={ letterSpacing2Style }>By submitting this form, you agree to receive recurring automated promotional and personalized marketing text messages (e.g. cart reminders) from Dose of Roses at the cell number used when signing up. Consent is not a condition of any purchase. Reply HELP for help and STOP to cancel. Msg frequency varies. Msg & data rates may apply. View 
+                            <p>By submitting this form, you agree to receive recurring automated promotional and personalized marketing text messages (e.g. cart reminders) from Dose of Roses at the cell number used when signing up. Consent is not a condition of any purchase. Reply HELP for help and STOP to cancel. Msg frequency varies. Msg & data rates may apply. View 
                                 <a style={LinkStyle} href="http://attn.tv/doseofroses/terms.html">Terms</a> & <a style={LinkStyle} href="https://attnl.tv/p/EHa">Privacy</a>.
                             </p>
                         </div>
@@ -75,9 +65,7 @@ const SubscribeSection = () => {
                 <ul className="footer-links">
                     { commonData.footerMenu.map((menuItem, menuIndex) => 
                         <li className="newsletter_nav_link" key={menuIndex}>
-                            <Link data-acsb-original-letter-spacing-value="normal" 
-                                to={menuItem.handle} 
-                                style={ letterSpacing2Style }>{ menuItem.title }</Link>
+                            <Link to={menuItem.handle}>{ menuItem.title }</Link>
                         </li>
                     )}
                 </ul>

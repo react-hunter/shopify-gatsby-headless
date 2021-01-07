@@ -6,9 +6,7 @@ const RecentArticles = props => {
     
     return (
       <>
-        <h3 className="article_sidebar-section-title" 
-          data-acsb-original-letter-spacing-value="normal" 
-          style={{ letterSpacing: '2px' }}>
+        <h3 className="article_sidebar-section-title">
           RECENT POSTS
         </h3>
         {

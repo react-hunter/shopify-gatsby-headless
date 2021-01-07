@@ -1,10 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createPageData } from '../../data/createPage' 
 
-const customiserBanner = () => {
+const CustomiserBanner = () => {
     const scrollToOptions = (e) => {
         e.preventDefault();
-        console.log('show sidenav');
+
+        document.querySelector('#shopify-section-create-arrangements').scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+
+    useEffect(() => {
+        console.log("useEffect");
+
+        setTimeout(function(){
+            smoothLoadBanner();
+        }, 500)
+
+        const element_position = document.getElementsByClassName("create_steps-outer")[0].offsetTop;
+
+        window.addEventListener('scroll', function() {     
+            let y_scroll_pos = window.pageYOffset;
+            let scroll_pos_test = element_position;
+
+            if(y_scroll_pos > scroll_pos_test - 600) {
+                //do stuff
+                document.querySelector('.fadeOpacity_wrapper').style.opacity = "0";
+            }else {
+                document.querySelector('.fadeOpacity_wrapper').style.opacity = "1";
+            }
+        });
+
+        // window.on('scroll', function() {
+       
+        // });
+    })
+   
+    function smoothLoadBanner() {
+        console.log('smoothLoadBanner')
+        let imageColumns = document.querySelectorAll('.customiser_banner-image_column');
+
+        for (let i = 0; i < imageColumns.length; i++) {
+            setTimeout(() => {
+                imageColumns[i].style.bottom = "0px";
+                imageColumns[i].style.opacity = "1";
+            }, 250 * i);
+        }
     }
 
     return (
@@ -49,9 +90,12 @@ const customiserBanner = () => {
                     </div>
                 </div>
             </div>
+            <div className="fadeOpacity_wrapper">
+              <div className="fadeOpacity"></div>
+            </div>
         </div>
       </>
     )
 }
   
-export default customiserBanner
+export default CustomiserBanner

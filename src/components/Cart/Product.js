@@ -1,54 +1,70 @@
 import React, { useContext } from 'react';
+import { Link } from 'gatsby'
 import StoreContext from "../../context/store"
 
-const Product = ({ key, line_item }) => {
+const Product = ({ line_item }) => {
 
     const context = useContext(StoreContext)
+    // console.log('context checkout: ', context.store.checkout)
 
     const imageItem = line_item.variant.image && (
-        <figure className="image is-96x96" style={{margin: "auto"}}>
-            <img
-                src={line_item.variant.image.src}
-                alt={line_item.variant.image.altText}
-            />
-        </figure>
+        <img
+            className="cart__image"
+            src={line_item.variant.image.src}
+            alt={line_item.variant.image.altText}
+        />
     )
 
-    const removeItem = () => {
-        context.removeLineItem(context.client, context.checkout.id, line_item.id)
+    const removeItem = (e) => {
+        e.preventDefault();
+        context.removeLineItem(context.store.client, context.store.checkout.id, line_item.id)
     }
     return (
         <>
-            <tr className="is-hidden-touch">
-                <th>
-                    {imageItem}
-                </th>
-                <th style={{verticalAlign: "inherit"}}>
-                    <p className="has-text-weight-semibold is-size-5 has-text-black">{line_item.title} ({line_item.variant.title}) </p>
-                    <button className="has-text-weight-normal has-text-danger link-button" type="button" onClick={removeItem}>Remove</button>
-                </th>
-                <th style={{verticalAlign: "inherit"}}>
-                    ${line_item.variant.price}
-                </th>
-                <th style={{verticalAlign: "inherit"}}>
-                    {line_item.quantity}
-                </th>
-                <th style={{verticalAlign: "inherit"}}>
-                    {`$${(line_item.quantity * line_item.variant.price).toFixed(2)}`}
-                </th>
+            <tr className="cart__row">
+                <td className="cart__meta small--text-left">
+                    <div className="cart__product-information">
+                        <div className="cart__image-wrapper">
+                            {imageItem}
+                        </div>
+                        <div>                                    
+                            <div className="list-view-item__title">
+                                <Link to={ `/product/${line_item.variant.product.handle}` } className="cart__product-title">{ line_item.title }</Link>
+                            </div>
+                            <ul className="product-details">
+                                {line_item.variant.selectedOptions.map((op, op_index) => 
+                                    <li className="product-details__item product-details__item--variant-option" key={op_index}>
+                                        {op.name}: {op.value}
+                                    </li>
+                                )}
+                                {line_item.customAttributes.map((attr, attr_index) => 
+                                    <li className="product-details__item product-details__item--property" key={attr_index}>
+                                        <span className="product-details__item-label" >{attr.key}</span>
+                                        <span>{attr.value}</span>
+                                    </li> 
+                                )}
+                            </ul>
+
+                            <p className="cart__remove">
+                                <a href="/fakeUrl" className="text-link text-link--accent" onClick={removeItem}>Remove</a>
+                            </p>
+                        </div>
+                    </div>
+                </td>
+                <td className="cart__price text-right">
+                    <div data-cart-item-price>${line_item.variant.price}</div>
+                </td>
+                <td className="cart__quantity-td text-right small--hide">
+                    <div className="cart__qty">
+                        <input className="cart__qty-input" defaultValue={line_item.quantity} />
+                    </div>
+                </td>
+                <td className="cart__final-price text-right small--hide">
+                    <div data-cart-item-regular-price-group="">
+                        <span>{`$${(line_item.quantity * line_item.variant.price).toFixed(2)}`}</span>
+                    </div>
+                </td>
             </tr>
-            <div className="is-hidden-desktop">
-                <div className="columns is-mobile is-vcentered">
-                    <div className="column">
-                        {imageItem}
-                    </div>
-                    <div className="column">
-                        <p className="has-text-weight-semibold is-size-5 has-text-black">{line_item.title}</p>
-                        <p className="has-text-weight-normal has-text-black">{line_item.variant.title}</p>
-                        <button className="has-text-weight-normal has-text-danger link-button" type="button" onClick={removeItem}>Remove</button>
-                    </div>
-                </div>
-            </div>
         </>
     );
 };
