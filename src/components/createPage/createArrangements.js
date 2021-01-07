@@ -41,7 +41,7 @@ const createArrangements = () => {
                                     <img className="hide" src={va_item.imgUrl} alt="" key={va_index} />  /* data-src= images*/
                                 )}
                             </Link>
-                            <div className="create_arrange-title">{item.title}</div>
+                            <div className="create_arrange-title">{item.name}</div>
                             <div className="create_arrange-swatch">
                             <div className="create-landing_swatches">
                                 {createPageData.createArrangements.variantType.map((va_type_item, va_type_index) => 
