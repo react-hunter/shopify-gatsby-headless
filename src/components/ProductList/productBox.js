@@ -1,22 +1,22 @@
 import React from 'react';
-
+import { Link } from 'gatsby'
 const ProductBox = props => {
     const product = props.product;
     const review = props.review;
 
     const prevImage = (e) => {
-        console.log('submit arrive');
         e.preventDefault();
+        console.log('submit arrive');
     }
 
     const nextImage = (e) => {
-        console.log('submit arrive');
         e.preventDefault();
+        console.log('submit arrive');
     }
 
     const OpenCollectionModal = (e) => {
-        console.log('submit arrive');
         e.preventDefault();
+        console.log('submit arrive');
     }
 
     const handleKeyDown =(e) => {
@@ -63,9 +63,9 @@ const ProductBox = props => {
                 </div>
 
                 <div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
-                    <a href={`/product/${product.handle}`}
+                    <Link to={`/product/${product.handle}`}
                         data-acsb-original-letter-spacing-value="1px" 
-                        style={{ letterSpacing: '3px' }}>{product.title}</a>
+                        style={{ letterSpacing: '3px' }}>{product.title}</Link>
                 </div>
 
                 <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: review.badge }} />

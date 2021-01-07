@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby'
 import { commonData } from '../data/common';
 
 const SubscribeSection = () => {
@@ -27,8 +28,8 @@ const SubscribeSection = () => {
     }
 
     const onSubmit = (e) => {
-        console.log('submit arrive');
         e.preventDefault();
+        console.log('submit arrive');
     }
 
     return (
@@ -74,9 +75,9 @@ const SubscribeSection = () => {
                 <ul className="footer-links">
                     { commonData.footerMenu.map((menuItem, menuIndex) => 
                         <li className="newsletter_nav_link" key={menuIndex}>
-                            <a data-acsb-original-letter-spacing-value="normal" 
-                                href={menuItem.handle} 
-                                style={ letterSpacing2Style }>{ menuItem.title }</a>
+                            <Link data-acsb-original-letter-spacing-value="normal" 
+                                to={menuItem.handle} 
+                                style={ letterSpacing2Style }>{ menuItem.title }</Link>
                         </li>
                     )}
                 </ul>

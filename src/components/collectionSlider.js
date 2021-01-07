@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby'
 import ProductItem from "./ProductList/productItem"
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -56,7 +57,7 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
         </Slider>
       </div>
       <div className="collection-carousel-button_wrapper">
-        <a className="collection-carousel-button" href={`/collections/${handle}`}>Shop {title}</a>
+        <Link className="collection-carousel-button" to={`/collections/${handle}`}>Shop {title}</Link>
       </div>
     </div>
   );

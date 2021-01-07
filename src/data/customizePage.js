@@ -94,9 +94,192 @@ export const customizePageData = {
             }
         ]
     },
+    arrangementSelectorNumbers: {
+        items: [
+            {
+                divId: 'Number-0',
+                spanId: 'StyleText-Number 0',
+                title: '0'
+            },
+            {
+                divId: 'Number-1',
+                spanId: 'StyleText-Number 1',
+                title: '1'
+            },
+            {
+                divId: 'Number-2',
+                spanId: 'StyleText-Number 2',
+                title: '2'
+            },
+            {
+                divId: 'Number-3',
+                spanId: 'StyleText-Number 3',
+                title: '3'
+            },
+            {
+                divId: 'Number-4',
+                spanId: 'StyleText-Number 4',
+                title: '4'
+            },
+            {
+                divId: 'Number-5',
+                spanId: 'StyleText-Number 5',
+                title: '5'
+            },
+            {
+                divId: 'Number-6',
+                spanId: 'StyleText-Number 6',
+                title: '6'
+            },
+            {
+                divId: 'Number-7',
+                spanId: 'StyleText-Number 7',
+                title: '7'
+            },
+            {
+                divId: 'Number-8',
+                spanId: 'StyleText-Number 8',
+                title: '8'
+            },
+            {
+                divId: 'Number-9',
+                spanId: 'StyleText-Number 9',
+                title: '9'
+            }
+        ]
+    },
     arrangementSelectorLetters: {
         items: [
-
+            {
+                divId: 'Letter-A',
+                spanId: 'StyleText-Letter A',
+                title: 'A'
+            },
+            {
+                divId: 'Letter-B',
+                spanId: 'StyleText-Letter B',
+                title: 'B'
+            },
+            {
+                divId: 'Letter-C',
+                spanId: 'StyleText-Letter C',
+                title: 'C'
+            },
+            {
+                divId: 'Letter-D',
+                spanId: 'StyleText-Letter D',
+                title: 'D'
+            },
+            {
+                divId: 'Letter-E',
+                spanId: 'StyleText-Letter E',
+                title: 'E'
+            },
+            {
+                divId: 'Letter-F',
+                spanId: 'StyleText-Letter F',
+                title: 'F'
+            },
+            {
+                divId: 'Letter-G',
+                spanId: 'StyleText-Letter G',
+                title: 'G'
+            },
+            {
+                divId: 'Letter-H',
+                spanId: 'StyleText-Letter H',
+                title: 'H'
+            },
+            {
+                divId: 'Letter-I',
+                spanId: 'StyleText-Letter I',
+                title: 'I'
+            },
+            {
+                divId: 'Letter-J',
+                spanId: 'StyleText-Letter J',
+                title: 'J'
+            },
+            {
+                divId: 'Letter-K',
+                spanId: 'StyleText-Letter K',
+                title: 'K'
+            },
+            {
+                divId: 'Letter-L',
+                spanId: 'StyleText-Letter L',
+                title: 'L'
+            },
+            {
+                divId: 'Letter-M',
+                spanId: 'StyleText-Letter M',
+                title: 'M'
+            },
+            {
+                divId: 'Letter-N',
+                spanId: 'StyleText-Letter N',
+                title: 'N'
+            },
+            {
+                divId: 'Letter-O',
+                spanId: 'StyleText-Letter O',
+                title: 'O'
+            },
+            {
+                divId: 'Letter-P',
+                spanId: 'StyleText-Letter P',
+                title: 'P'
+            },
+            {
+                divId: 'Letter-Q',
+                spanId: 'StyleText-Letter Q',
+                title: 'Q'
+            },
+            {
+                divId: 'Letter-R',
+                spanId: 'StyleText-Letter R',
+                title: 'R'
+            },
+            {
+                divId: 'Letter-S',
+                spanId: 'StyleText-Letter S',
+                title: 'S'
+            },
+            {
+                divId: 'Letter-T',
+                spanId: 'StyleText-Letter T',
+                title: 'T'
+            },
+            {
+                divId: 'Letter-U',
+                spanId: 'StyleText-Letter U',
+                title: 'U'
+            },
+            {
+                divId: 'Letter-V',
+                spanId: 'StyleText-Letter V',
+                title: 'V'
+            },
+            {
+                divId: 'Letter-W',
+                spanId: 'StyleText-Letter W',
+                title: 'W'
+            },
+            {
+                divId: 'Letter-X',
+                spanId: 'StyleText-Letter X',
+                title: 'X'
+            },
+            {
+                divId: 'Letter-Y',
+                spanId: 'StyleText-Letter Y',
+                title: 'Y'
+            },
+            {
+                divId: 'Letter-Z',
+                spanId: 'StyleText-Letter Z',
+                title: 'Z'
+            }
         ]
     }
 }

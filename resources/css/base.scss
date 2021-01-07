@@ -4017,7 +4017,7 @@ hr {
 }
 
 .product-form__controls-group--submit {
-  margin-top: 0px
+  margin-top: 15px
 }
 
 .product-form__controls-group~.product-form__controls-group--submit {
@@ -5785,7 +5785,7 @@ article .article__meta-buttons {
 }
 
 .grid--blog {
-  overflow: auto
+  // overflow: auto
 }
 
 .article__grid-tag {
@@ -11014,7 +11014,8 @@ article .article__meta-buttons {
   font-size: 2em;
   width: 45px;
   align-items: center;
-  justify-content: center
+  justify-content: center;
+  color: white;
 }
 
 #hideSideNav {
@@ -11051,6 +11052,10 @@ article .article__meta-buttons {
   font-size: .8em;
   font-weight: 600;
   font-family: Verdana, sans-serif
+}
+
+.variants-selector .select.is-fullwidth select {
+  width: 100%;
 }
 
 .buttons {
@@ -13415,6 +13420,11 @@ body.modal-open {
   }
 }
 
+.login-secton_wrapper {
+  padding-top: 175px;
+  position: relative;
+}
+
 #LoginHeading {
   font-family: 'Big Caslon';
   letter-spacing: 1px;
@@ -13446,7 +13456,7 @@ body.modal-open {
   justify-content: center
 }
 
-.login-button_wrapper input {
+.login-button_wrapper .btn {
   width: 100% !important;
   color: white !important;
   background-color: black !important;
@@ -13482,7 +13492,9 @@ body.modal-open {
   color: black !important;
   text-transform: uppercase;
   font-family: 'Proxima Condensed Extra Bold Alt', sans-serif;
-  padding: 8px 0
+  padding: 8px 0;
+  text-align: center;
+  cursor: pointer;
 }
 
 .forgot-password_send_btn {
@@ -13499,7 +13511,9 @@ body.modal-open {
 
 #RecoverPassword {
   font-size: 0.75rem;
-  text-decoration: underline
+  text-decoration: underline;
+  margin-bottom: 15px;
+  cursor: pointer;
 }
 
 .input-type_header {
@@ -13575,7 +13589,8 @@ body.modal-open {
   background-color: black !important;
   color: white !important;
   text-transform: uppercase;
-  font-family: 'Proxima Condensed Extra Bold Alt', sans-serif
+  font-family: 'Proxima Condensed Extra Bold Alt', sans-serif;
+  margin-bottom: 19.44444px;
 }
 
 .register-subheader {
@@ -14693,6 +14708,10 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   margin-top: 60px
 }
 
+.contact-form_wrapper {
+  padding-top: 100px;
+}
+
 #ContactForm {
   margin-bottom: 40px
 }
@@ -15769,7 +15788,7 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 }
 
 .product-template__container {
-  // margin-top: 115px
+  margin-top: 115px
 }
 
 .payment-icons {

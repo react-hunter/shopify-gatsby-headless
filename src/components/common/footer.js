@@ -1,6 +1,7 @@
 import React from 'react';
-import SocialIcon from './common/socialIcon';
-import { commonData } from '../data/common';
+import { Link } from 'gatsby';
+import SocialIcon from './socialIcon';
+import { commonData } from '../../data/common';
 
 const Footer = () => {
     return (
@@ -32,7 +33,7 @@ const Footer = () => {
                     <ul className="footer-links">
                         { commonData.footerMenu.map((menuItem, menuIndex) => 
                             <li className="newsletter_nav_link" key={menuIndex}>
-                                <a href={menuItem.handle} >{ menuItem.title }</a>
+                                <Link to={menuItem.handle} >{ menuItem.title }</Link>
                             </li>
                         )}
                     </ul>

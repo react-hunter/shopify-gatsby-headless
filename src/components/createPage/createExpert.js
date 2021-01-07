@@ -1,5 +1,5 @@
 import React from 'react';
-import { createPageData } from '../../data/createPage' 
+import { Link } from 'gatsby'
 
 const createExpert = () => {
     return (
@@ -26,7 +26,7 @@ const createExpert = () => {
                             <div className="types">
                                 <span>Letters • Numbers • Hearts • Stripes • Checkered</span>
                             </div>
-                            <a href="/pages/contact-us" >Contact us</a>
+                            <Link to="/pages/contact-us" >Contact us</Link>
                         </div>
                     </div>
                 </div>

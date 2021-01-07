@@ -1,7 +1,7 @@
 .slick-prev, .slick-prev:hover {
   background-image: url("../images/leftArrow_small.png");
   background-size: contain;
-  left: -35px;
+  left: 0px;
   &:hover {
     background-image: url("../images/leftArrow_small.png");
     background-size: contain;
@@ -13,11 +13,15 @@
       background-size: contain;
     }
   }
+
+  .announcement-bar & {
+
+  }
 }
 .slick-next, .slick-next:hover {
   background-image: url("../images/rightArrow_small.png");
   background-size: contain;
-  right: -35px;
+  right: 0px;
   &:hover {
     background-image: url("../images/rightArrow_small.png");
     background-size: contain;
@@ -28,6 +32,10 @@
       background-image: url("../images/rightArrow_small.png");
       background-size: contain;
     }
+  }
+  
+  .announcement-bar & {
+    
   }
 }
 .slick-next:before, .slick-prev:before {

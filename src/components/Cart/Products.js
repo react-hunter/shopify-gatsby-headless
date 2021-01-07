@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby'
 import { cartpageData } from '../../data/cart' 
 
 const Products = ({checkout}) => {
@@ -7,9 +8,9 @@ const Products = ({checkout}) => {
         <div data-cart-wrapper="">
             <div className="cart-header">
                 <h1 className="cart-header__title">Your cart</h1>
-                <a href="/collections/all" className="text-link text-link--accent">
+                <Link to="/collections/all" className="text-link text-link--accent">
                     Continue shopping
-                </a>
+                </Link>
             </div>
 
             <form action="/cart" method="post" noValidate="" className="cart">
@@ -33,7 +34,7 @@ const Products = ({checkout}) => {
                                     </div>
                                     <div>                                    
                                         <div className="list-view-item__title">
-                                            <a href={ item.url } className="cart__product-title">{ item.title }</a>
+                                            <Link to={ item.url } className="cart__product-title">{ item.title }</Link>
                                         </div>
                                         <ul className="product-details">
                                             {item.variants.map((va_item, va_index) => 
@@ -50,7 +51,7 @@ const Products = ({checkout}) => {
                                         </ul>
 
                                         <p className="cart__remove">
-                                            <a href="/cart/change?line=1&amp;quantity=0" className="text-link text-link--accent">Remove</a>
+                                            <Link to="/cart/change?line=1&amp;quantity=0" className="text-link text-link--accent">Remove</Link>
                                         </p>
                                     </div>
                                 </div>
@@ -79,7 +80,7 @@ const Products = ({checkout}) => {
                                 <span className="cart-subtotal__title">Subtotal</span>
                                 <span className="cart-subtotal__price">$999.99</span>
                             </div>
-                            <div className="cart__shipping rte">Taxes and <a href="/policies/shipping-policy">shipping</a> calculated at checkout</div>
+                            <div className="cart__shipping rte">Taxes and <Link to="/policies/shipping-policy">shipping</Link> calculated at checkout</div>
                             <div className="cart__buttons-container">
                                 <div className="cart__submit-controls" >
                                     <input type="submit" name="checkout" className="cart__submit btn btn--small-wide" value="Check out" />

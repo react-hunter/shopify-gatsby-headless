@@ -26,56 +26,62 @@ const RegisterForm = () => {
   const [password, setPassword] = useState(null);
 
   return (
-    <section className="hero is-dark is-fullheight-with-navbar">
-      <div className="hero-body">
-        <div className="container">
-          <div className="columns is-centered">
-            <div className="column is-4 is-centered">
-              <h2 className=" title has-text-centered">Create</h2>
-              <Mutation mutation={CUSTOMER_REGISTER}>
-                {(customerLogin) => {
-                  return (
-                    <>
-                      <div className="field">
-                        <label className="label has-text-white" htmlFor="loginEmail">Email</label>
-                        <div className="control">
-                          <input className="input" type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
-                        </div>
-                      </div>
-                      <div className="field">
-                        <label className="label has-text-white" htmlFor="loginPassword">Password</label>
-                        <div className="control">
-                          <input className="input" type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
-                        </div>
-                      </div>
-                      <div className="field">
-                        <div className="control has-text-centered">
-                          <button
-                            className="button"
-                            onClick={() => {
-                              customerLogin({
-                                variables: {
-                                  "input": {
-                                    "email": email,
-                                    "password": password,
-                                  }
-                                }
-                              }).then((result) => {
-                                navigate(`/account/login`)
-                              })
-                            }}
-                          >CREATE</button>
-                        </div>
-                      </div>
-                    </>
-                  )
-                }}
-              </Mutation>
+    <div className="page-width">
+      <div className="grid">
+        <div className="grid__item medium-up--one-half medium-up--push-one-quarter login-secton_wrapper">
+          <div className="form-vertical" id="CustomerLoginForm">
+            <div className="identificationHeading_wrapper">
+              <span id="LoginIDHeading">CREATE NEW ACCOUNT</span>
             </div>
+
+            <span className="register-subheader">LOGIN INFORMATION</span>
+
+            <Mutation mutation={CUSTOMER_REGISTER}>
+              {(customerLogin) => {
+                return (
+                  <>
+                    <div id="RegisterForm">
+                      <label className="label has-text-white" htmlFor="loginEmail">Email</label>
+                      <input className="input" type="email" id="loginEmail" onChange={(e) => setEmail(e.target.value)} />
+
+                      <label className="label has-text-white" htmlFor="loginPassword">Password</label>
+                      <input className="input" type="password" id="loginPassword" onChange={(e) => (setPassword(e.target.value))} />
+
+                      <span className="register-subheader">PERSONAL DETAILS</span>
+
+                      <br></br>
+                      <br></br>
+                      
+                      <label className="label has-text-white" htmlFor="loginEmail">First Name</label>
+                      <input className="input" type="email" id="loginEmail" onChange />
+
+                      <label className="label has-text-white" htmlFor="loginPassword">Last Name</label>
+                      <input className="input" type="password" id="loginPassword" onChange />
+ 
+                      <button
+                        className="register-account_btn btn"
+                        onClick={() => {
+                          customerLogin({
+                            variables: {
+                              "input": {
+                                "email": email,
+                                "password": password,
+                              }
+                            }
+                          }).then((result) => {
+                            navigate(`/account/login`)
+                          })
+                        }}
+                      >CREATE</button>
+                    </div>
+                  </>
+                )
+              }}
+            </Mutation>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

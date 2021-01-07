@@ -1,11 +1,11 @@
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby'
-import Header from "../components/header"
-import Footer from "../components/footer"
+import Header from "../components/common/header/header"
+import Footer from "../components/common/footer"
 import Instagram from "../components/instagram"
 import SubscribeSection from "../components/subscribeSection"
 import Provider from "../context/provider"
-import "../../resources/css/layout.scss"
+// import "../../resources/css/layout.scss"
 import "../../resources/css/base.scss"
 import "../../resources/css/stampedio.css"
 
@@ -29,11 +29,15 @@ const Layout = ({ path, children }) => {
 					<div className="page-container drawer-page-content" id="PageContainer">
 						{children}
 						<div className="shopify-section index-section index-section--flush">
-							{ path.includes('/product/') ? 
+							{ path.includes('/product/') || path.includes('/cart') ? 
 									null : 
 									<Instagram />
 							}
-							<SubscribeSection />
+							{
+								path.includes('/cart') ? 
+									null :
+									<SubscribeSection />
+							}
 						</div>
 						<Footer />
 					</div>

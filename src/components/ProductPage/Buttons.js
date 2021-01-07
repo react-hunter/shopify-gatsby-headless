@@ -2,6 +2,8 @@ import React from 'react';
 
 const Buttons = ({ context, available, productVariant,  quantity}) => {
     const handleAddToCart = () => {
+        console.log('add to cart');
+        console.log('variant id: ', productVariant.shopifyId)
         context.addVariantToCart(productVariant.shopifyId, quantity)
     }
 
@@ -10,24 +12,18 @@ const Buttons = ({ context, available, productVariant,  quantity}) => {
     }
 
     return (
-        <div className="buttons">
-            <div className="column">
-                <button
-                    className="button is-medium is-fullwidth"
+        <div className="product-form__controls-group product-form__controls-group--submit">
+            <div className="product-form__item product-form__item--submit mobile-in-view_trigger product-form__item--payment-button">
+                <button id="AddToCart"
+                    className="btn product-form__cart-submit btn--secondary-accent js-ajax-add-to-cart"
                     disabled={!available}
-                    onClick={handleAddToCart}
-                >
-                    Add to Cart
-                </button>
-            </div>
-            <div className="column">
-                <button
-                    className="button is-dark is-medium is-fullwidth"
-                    disabled={!available}
-                    onClick={handleAddToCart_BuyNow}
-                >
-                    Buy It Now
-                </button>
+                    onClick={handleAddToCart}>Add to Cart</button>
+                <div className="shopify-payment-button">
+                    <button
+                        className="shopify-payment-button__button shopify-payment-button__button--unbranded"
+                        disabled={!available}
+                        onClick={handleAddToCart_BuyNow}>Buy It Now</button>
+                </div>
             </div>
         </div>
     );
