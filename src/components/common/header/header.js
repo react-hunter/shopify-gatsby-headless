@@ -49,6 +49,10 @@ const Header = ({ path }) => {
   // const [modal, setModal] = useState(false)
   
   useEffect(() => {
+    initializeHeader();
+  }, []);
+
+  useEffect(() => {
     setQuantity(countQuantity(checkout ? checkout.lineItems : []));
   }, [checkout]);
 
@@ -296,7 +300,7 @@ const Header = ({ path }) => {
             <div className="main-header site-header__mobile-nav">
               <SiteNav />
               
-              <a href="/fakeUrl" onClick={hideSideNav} id="hideSideNav">
+              <a href="/fakeUrl" onClick={hideSideNav} id="hideSideNav" key="hidesidenav">
                 <ReactSVG src={CloseIcon} />
               </a>
 
@@ -309,11 +313,11 @@ const Header = ({ path }) => {
 
               <a href="/fakeUrl" id="goBackNavMenu" 
                 style={{ fontFamily: "monospace", cursor: "pointer" }} 
-                onClick={showDefaultMenuItems}>
+                onClick={showDefaultMenuItems} key="gobacknavmenu">
                 &lt;
               </a>
 
-              <div className="header_logo-container">
+              <div className="header_logo-container" key="logocontainer">
                 <h1 className="h2 site-header__logo">
                   <Link to="/" className="site-header__logo-image site-header__logo-image--centered">
                     <ReactSVG src={LogoIcon} />
@@ -321,7 +325,7 @@ const Header = ({ path }) => {
                 </h1>
               </div>
             
-              <div className="header_icons-wrapper">
+              <div className="header_icons-wrapper" key="headericons">
                 <div className="text-right site-header__icons site-header__icons--plus">
                   <div className="site-header__icons-wrapper">
                     <a href="/fakeUrl" onClick={showSearchBar} type="button" 
@@ -331,26 +335,26 @@ const Header = ({ path }) => {
                       <span className="icon__fallback-text">Search</span>
                     </a>
 
-                    <Link to="/account/login" className="site-header__icon site-header__account">
+                    <Link to="/account/login" className="site-header__icon site-header__account" key="login">
                       <ReactSVG src={LoginHeaderIcon} />
                       <span className="icon__fallback-text">Log in</span>
                     </Link>
               
-                    <Link to="/pages/contact-us" className="site-header__icon site-header__account nav-message_icon">
+                    <Link to="/pages/contact-us" className="site-header__icon site-header__account nav-message_icon" key="contactus">
                       <ReactSVG src={MessageIcon} />
                       <span className="icon__fallback-text">Contact Us</span>
                     </Link>
 
                     <Link to="/cart" 
                       className="site-header__icon site-header__cart nav-cart_icon js-ajax-cart-drawer-trigger" 
-                      aria-describedby="a11y-external-message"
+                      aria-describedby="a11y-external-message"  key="cart"
                     >
                       <ReactSVG src={CartHeaderIcon} />
                       <span className="icon__fallback-text">Cart</span>
 
                       <div id="CartCount" className="site-header__cart-count">
-                        <span data-cart-count="" data-count={quantity}>{quantity}</span>
-                        <span className="icon__fallback-text medium-up--hide">items</span>
+                        <span data-cart-count="" data-count={quantity} key="cartcount">{quantity}</span>
+                        <span className="icon__fallback-text medium-up--hide" key="items">items</span>
                       </div>
                     </Link>
                   </div>
@@ -379,12 +383,12 @@ const Header = ({ path }) => {
                         // onClick={e => menuItem.hasChildren ? showChildCollection(e, menuItem.title) : hideSideNav }
                         onClick={e => menuClickHandler(e, menuItem.hasChildren, menuItem.title)}
                         className={`${menuItem.hasChildren ? 'hasChild' : ''} sidenav-item_inner first-level-item_inner`} key={menuIndex}>
-                        <div className="sidenav-item_name">
+                        <div className="sidenav-item_name" key={`itemname-${menuIndex}`}>
                           <div className="sidenav-item_name-inner">
                             {menuItem.title}
                           </div>
                         </div>
-                        <div className="sidenav-item_img">
+                        <div className="sidenav-item_img" key={`itemimg-${menuIndex}`}>
                           <img src={menuItem.image} alt="" />
                         </div>
                       </Link>
@@ -395,15 +399,15 @@ const Header = ({ path }) => {
                           return (
                             <Link to={child_item.url} style={{ display: 'none' }} 
                               data-parent-id={child_item.parent}
-                              data-title={child_item.title} key={child_index}
+                              data-title={child_item.title} key={`child-${menuIndex}-${child_index}`}
                               onClick={hideSideNav}
                               className="sidenav-item_inner child-item" >
-                              <div className="sidenav-item_name">
+                              <div className="sidenav-item_name" key="childitemname">
                                 <div className="sidenav-item_name-inner">
                                   {child_item.title}
                                 </div>
                               </div>
-                              <div className="sidenav-item_img">
+                              <div className="sidenav-item_img" key="childitemimg">
                                 <img src={child_item.image} alt="" />
                               </div>
                             </Link>
