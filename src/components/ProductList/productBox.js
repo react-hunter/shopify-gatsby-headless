@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby'
 const ProductBox = props => {
     const product = props.product;
-    const review = props.review;
+    const review = props.review ? props.review : '';
 
     const prevImage = (e) => {
         e.preventDefault();
