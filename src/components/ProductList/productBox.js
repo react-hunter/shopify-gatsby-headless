@@ -61,7 +61,7 @@ const ProductBox = props => {
                 </div>
 
                 <div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
-                    <Link to={`/product/${product.handle}`}>{product.title}</Link>
+                    <Link to={`/products/${product.handle}`}>{product.title}</Link>
                 </div>
 
                 <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: reviewBadge }} />

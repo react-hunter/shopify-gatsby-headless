@@ -7,17 +7,17 @@ export const commonData = {
     },
     {
       title: 'Best Sellers',
-      link: '/collection/best-sellers',
+      link: '/collections/best-sellers',
       id: 'BestSellers-nav'
     },
     {
       title: 'New',
-      link: '/collection/new',
+      link: '/collections/new',
       id: 'New-nav'
     },
     {
       title: 'Collections',
-      link: '/collections',
+      link: '/pages/collections',
       id: 'Collections-nav'
     }
   ],

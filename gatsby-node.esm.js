@@ -63,7 +63,7 @@ exports.createPages = async ({ graphql, actions }) => {
     result.data.allShopifyProduct.edges.forEach(({ node }) => {
       const id = node.handle
       createPage({
-        path: `/product/${id}/`,
+        path: `/products/${id}/`,
         component: path.resolve(`./src/templates/productPage.js`),
         context: {
           id,
@@ -84,7 +84,7 @@ exports.createPages = async ({ graphql, actions }) => {
     result.data.allShopifyCollection.edges.forEach(({ node }) => {
       const collectionId = node.handle
       createPage({
-        path: `/collection/${collectionId}/`,
+        path: `/collections/${collectionId}/`,
         component: path.resolve(`./src/templates/collectionPage.js`),
         context: {
           id: collectionId,
@@ -93,7 +93,7 @@ exports.createPages = async ({ graphql, actions }) => {
       })
     })
     createPage({
-      path: `/collections`,
+      path: `/pages/collections`,
       component: path.resolve(`./src/templates/featuredCollectionsPage.js`),
       context: {
         collections: featuredCollectionHandles,

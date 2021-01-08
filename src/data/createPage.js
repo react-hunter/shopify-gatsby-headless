@@ -256,7 +256,7 @@ export const createPageData = {
                 name: 'Single Round',
                 image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Suede_Black_Single_Red_1100x.png?v=1602815785',
                 fromPrice: 'from $39',
-                url: '/product/suede-one',
+                url: '/products/suede-one',
                 variants: [
                     {
                         imgUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Leather_White_Single_Red_500x.png?v=1605070665' 
@@ -279,7 +279,7 @@ export const createPageData = {
                 name: 'Suede Large Heart',
                 image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Suede_Black_Heart_Red_1100x.png?v=1602815532',
                 fromPrice: 'from $449',
-                url: '/product/suede-heart',
+                url: '/products/suede-heart',
                 variants: [
                     {
                         imgUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Suede_Black_Heart_Red_965777fb-e899-4598-a9d7-bc4ec6cbe3bb_500x.png?v=1605068617' 
@@ -325,7 +325,7 @@ export const createPageData = {
                 name: 'Acrylic Single Square',
                 image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Acrylic_Square_Clear_SingleRose_Red_Closed_1100x.jpg?v=1602816259',
                 fromPrice: 'from $49',
-                url: '/product/square-one',
+                url: '/products/square-one',
                 variants: [
                     {
                         imgUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Acrylic_Square_Clear_SingleRose_Red_Closed_e1930010-297f-4f6c-b2af-0956bbc5778f_500x.jpg?v=1605046426' 
@@ -348,7 +348,7 @@ export const createPageData = {
                 name: 'Acrylic Small Square',
                 image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Arylic_Small_Square_1100x.jpg?v=1599270242',
                 fromPrice: 'from $149',
-                url: '/product/five',
+                url: '/products/five',
                 variants: [
                     {
                         imgUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/ACRYLIC_Square_Small5Roses_Red_4c9f2d1b-3105-433a-b711-6ed182dafe27_500x.jpg?v=1605046476' 
@@ -371,7 +371,7 @@ export const createPageData = {
                 name: 'Acrylic Medium Square',
                 image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Acrylic_Medium_Square_1100x.jpg?v=1599273988',
                 fromPrice: 'from $299',
-                url: '/product/nine',
+                url: '/products/nine',
                 variants: [
                     {
                         imgUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/ACRYLIC_Square_Medium9Roses_Red_b1a758bf-bb05-49cc-9c6f-7b4b1ba8f818_500x.jpg?v=1605046532' 
@@ -394,7 +394,7 @@ export const createPageData = {
                 name: 'Acrylic Large Square',
                 image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/ACRYLIC_Square_Large9Roses_Red_1100x.jpg?v=1599689773',
                 fromPrice: 'from $499',
-                url: '/product/twenty-five',
+                url: '/products/twenty-five',
                 variants: [
                     {
                         imgUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/ACRYLIC_Square_Large9Roses_Red_d3dded87-19dc-4150-a5e3-693421abcbb8_500x.jpg?v=1605046588' 

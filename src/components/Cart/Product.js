@@ -29,7 +29,7 @@ const Product = ({ line_item }) => {
                         </div>
                         <div>                                    
                             <div className="list-view-item__title">
-                                <Link to={ `/product/${line_item.variant.product.handle}` } className="cart__product-title">{ line_item.title }</Link>
+                                <Link to={ `/products/${line_item.variant.product.handle}` } className="cart__product-title">{ line_item.title }</Link>
                             </div>
                             <ul className="product-details">
                                 {line_item.variant.selectedOptions.map((op, op_index) => 
