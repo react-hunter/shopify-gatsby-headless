@@ -19,6 +19,7 @@ const addScript = url => {
   const script = document.createElement("script")
   script.src = url
   script.async = true
+  script.setAttribute("data-for-url", true);
   document.body.appendChild(script)
 }
 

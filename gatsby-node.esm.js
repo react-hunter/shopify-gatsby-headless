@@ -16,12 +16,22 @@ exports.createPages = async ({ graphql, actions }) => {
   const products = await shopify.product.list();
   productReviews = await Promise.all(products.map(async pr => {
     const metafields = await shopify.metafield.list({metafield: {owner_resource: 'product', owner_id: pr.id}});
-    return {
-      handle: pr.handle,
-      reviews: metafields[0].value,
-      badge: metafields[1].value,
-      reviews_count: parseInt(metafields[2].value),
-      reviews_average: parseFloat(metafields[3].value)
+    if (metafields[0]) {
+      return {
+        handle: pr.handle,
+        reviews: metafields[0].value,
+        badge: metafields[1].value,
+        reviews_count: parseInt(metafields[2].value),
+        reviews_average: parseFloat(metafields[3].value)
+      }
+    } else {
+      return {
+        handle: pr.handle,
+        reviews: '',
+        badge: '',
+        reviews_count: 0,
+        reviews_average: 0
+      }
     }
   }))
 

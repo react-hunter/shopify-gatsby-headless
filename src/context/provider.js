@@ -67,7 +67,7 @@ const Provider = ({ children }) => {
                     return client.checkout
                         .addLineItems(checkoutId, lineItemsToUpdate)
                         .then(checkout => {
-                            // console.log('updated checkout: ', checkout)
+                            console.log('updated checkout: ', checkout)
                             updateStore(state => {
                                 return { ...state, checkout, adding: true }
                             })
