@@ -3,7 +3,6 @@ import { navigate } from "@reach/router"
 import StoreContext, { defaultStoreContext } from '../context/store'
 const isBrowser = typeof window !== 'undefined'
 
-
 const Provider = ({ children }) => {
     const [store, updateStore] = useState(defaultStoreContext)
     const getlocalStorage = (value) => {
@@ -25,11 +24,24 @@ const Provider = ({ children }) => {
                 }
 
                 updateStore(state => {
-                    return { ...state, checkout }
+                    return { ...state, checkout, adding: true }
                 })
             }
 
-            const createNewCheckout = () => store.client.checkout.create()
+            const localLineItems = JSON.parse(localStorage.getItem('checkout_lineitems'));
+            const createNewCheckout = async () => {
+                const newCheckout = await store.client.checkout.create()
+                if(localLineItems.length > 0) {
+                    const lineItemsToUpdate = localLineItems.map(LI => {
+                        return { variantId: LI.variant.id, quantity: parseInt(LI.quantity, 10) }
+                    })
+                    await store.client.checkout.addLineItems(newCheckout.id, lineItemsToUpdate)
+                    const initialCheckout = await fetchCheckout(newCheckout.id)
+                    return initialCheckout
+                } else {
+                    return newCheckout
+                }
+            }
             const fetchCheckout = id => store.client.checkout.fetch(id)
 
             if (existingCheckoutID) {
@@ -64,10 +76,12 @@ const Provider = ({ children }) => {
                     const lineItemsToUpdate = [
                         { variantId, quantity: parseInt(quantity, 10) },
                     ]
+                    
                     return client.checkout
                         .addLineItems(checkoutId, lineItemsToUpdate)
                         .then(checkout => {
-                            console.log('updated checkout: ', checkout)
+                            const lineItems = JSON.stringify(checkout.lineItems)
+                            localStorage.setItem('checkout_lineitems', lineItems)
                             updateStore(state => {
                                 return { ...state, checkout, adding: true }
                             })
@@ -84,19 +98,20 @@ const Provider = ({ children }) => {
                     ]
                     return client.checkout
                         .addLineItems(checkoutId, lineItemsToUpdate)
-                        .then(checkout => {
+                        .then(checkoutData => {
                             updateStore(state => {
-                                return { ...state, checkout, adding: false }
+                                return { ...state, checkoutData, adding: false }
                             })
-                            navigate(checkout.webUrl)
+                            navigate(checkoutData.webUrl)
                         })
                 },
                 removeLineItem: (client, checkoutID, lineItemID) => {
                     return client.checkout
                         .removeLineItems(checkoutID, [lineItemID])
-                        .then(resultat => {
+                        .then(checkoutData => {
+                            localStorage.setItem('checkout_lineitems', JSON.stringify(checkoutData.lineItems))
                             updateStore(state => {
-                                return { ...state, checkout: resultat }
+                                return { ...state, checkout: checkoutData }
                             })
                         })
                 },
@@ -106,9 +121,10 @@ const Provider = ({ children }) => {
                     ]
                     return client.checkout
                         .updateLineItems(checkoutID, lineItemsToUpdate)
-                        .then(resultat => {
+                        .then(checkoutData => {
+                            localStorage.setItem('checkout_lineitems', JSON.stringify(checkoutData.lineItems))
                             updateStore(state => {
-                                return { ...state, checkout: resultat }
+                                return { ...state, checkout: checkoutData }
                             })
                         })
                 },
