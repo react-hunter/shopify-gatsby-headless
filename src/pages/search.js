@@ -3,11 +3,12 @@ import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
 
-const SearchPage = ({ data }) => {
-    const [search, setSearch] = useState('')
+const SearchPage = ( props ) => {
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     setSearch(typeof document !== undefined ? document.location.search.substring(7).split('=')[0]: '')
+    console.log('params: ', props.location.search)
   }, [])
 
     return (

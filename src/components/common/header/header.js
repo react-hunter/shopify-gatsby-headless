@@ -47,6 +47,7 @@ const Header = ({ path }) => {
   const { checkout } = context.store
   const [quantity, setQuantity] = useState(countQuantity(checkout ? checkout.lineItems : []))
   // const [modal, setModal] = useState(false)
+  const [ searchShow, setSearchShow ] = useState(false)
   
   useEffect(() => {
     initializeHeader();
@@ -92,14 +93,13 @@ const Header = ({ path }) => {
 
   const showSearchBar = (e) => {
     e.preventDefault();
-    console.log('show search bar');
+    setSearchShow(true)
   }
 
 
-  // const hideSearch = (e) => {
-  //   e.preventDefault();
-  //   console.log('hide search');
-  // }
+  const hideSearch = () => {
+    setSearchShow(false)
+  }
 
   function initiateBannerSlider() {
     if (runBannerAnimation === false) {
@@ -300,7 +300,12 @@ const Header = ({ path }) => {
 
           <header className="site-header logo--center" role="banner">
             
-            <SearchDrawer />
+            {
+              searchShow ? 
+                (
+                  <SearchDrawer hideSearch={hideSearch} />
+                ) : null
+            }
             <div className="main-header site-header__mobile-nav">
               <SiteNav />
               

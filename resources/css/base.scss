@@ -3254,7 +3254,7 @@ hr {
 }
 
 .drawer {
-  display: none;
+  display: block;
   position: fixed;
   -webkit-overflow-scrolling: touch;
   z-index: 9
@@ -10690,7 +10690,7 @@ article .article__meta-buttons {
 }
 
 #SearchDrawer {
-  display: none;
+  display: block;
   background-color: black !important;
   padding-top: 20px;
   padding-bottom: 10px
