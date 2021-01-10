@@ -18,22 +18,19 @@ const CustomiserBanner = () => {
         }, 500)
 
         const element_position = document.getElementsByClassName("create_steps-outer")[0].offsetTop;
-
+        
         window.addEventListener('scroll', function() {     
             let y_scroll_pos = window.pageYOffset;
             let scroll_pos_test = element_position;
 
-            if(y_scroll_pos > scroll_pos_test - 600) {
-                //do stuff
-                document.querySelector('.fadeOpacity_wrapper').style.opacity = "0";
-            }else {
-                document.querySelector('.fadeOpacity_wrapper').style.opacity = "1";
+            if (y_scroll_pos > scroll_pos_test - 600) {
+                if (document.getElementById('fadeOpacity_wrapper') != null)
+                    document.getElementById('fadeOpacity_wrapper').style.opacity = "0";
+            } else {
+                if (document.getElementById('fadeOpacity_wrapper') != null)
+                    document.getElementById('fadeOpacity_wrapper').style.opacity = "1";
             }
         });
-
-        // window.on('scroll', function() {
-       
-        // });
     })
    
     function smoothLoadBanner() {
@@ -90,7 +87,7 @@ const CustomiserBanner = () => {
                     </div>
                 </div>
             </div>
-            <div className="fadeOpacity_wrapper">
+            <div id="fadeOpacity_wrapper" className="fadeOpacity_wrapper">
               <div className="fadeOpacity"></div>
             </div>
         </div>

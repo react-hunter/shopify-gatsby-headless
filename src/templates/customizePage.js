@@ -37,10 +37,10 @@ const CustomizePage = ({ data }) => {
         selectArrangement(this.getAttribute('data-productid'));
       });
     }
-
+    
     isShareLink();
     mobileRearrange()
-    window.onscroll = function () { stickyFunction() };
+    // window.onscroll = function () { stickyFunction() };
     window.onresize = function () { mobileRearrange() }
   })
 
@@ -1604,13 +1604,6 @@ const CustomizePage = ({ data }) => {
                 )}
               </div>
             </div>
-
-            <form id="AddToCartForm" className="product_form AddToCartFormСustom" method="post" action="#" style={{display:'none'}} >
-              <input className="update" type="text" value="324748289" name="id" size="8" /> 
-              <input type="text" value="1" name="quantity" size="3" />
-              <div id="pro">
-              </div>
-            </form>
 
             <div className="step-container">
               <div className="step-wrapper">
