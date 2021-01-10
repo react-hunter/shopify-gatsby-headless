@@ -31,7 +31,7 @@ const Provider = ({ children }) => {
             const localLineItems = JSON.parse(localStorage.getItem('checkout_lineitems'));
             const createNewCheckout = async () => {
                 const newCheckout = await store.client.checkout.create()
-                if(localLineItems.length > 0) {
+                if(localLineItems && localLineItems.length > 0) {
                     const lineItemsToUpdate = localLineItems.map(LI => {
                         return { variantId: LI.variant.id, quantity: parseInt(LI.quantity, 10) }
                     })
