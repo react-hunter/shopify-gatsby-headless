@@ -272,9 +272,13 @@ const Header = ({ path }) => {
     let header = document.querySelector(".stickyHeader");
     let prevScrollpos = window.pageYOffset;
   
+    console.log("prevScrollpos = ", prevScrollpos);
+
     window.onscroll = function () {
       let currentScrollpos = window.pageYOffset;
   
+      console.log("currentScrollpos = ", currentScrollpos);
+
       if (prevScrollpos < currentScrollpos) {
   
         if (currentScrollpos >= 5) {
@@ -292,7 +296,7 @@ const Header = ({ path }) => {
   return (
     <>
       <div id="shopify-section-header" className="shopify-section">
-        <div className="stickyHeader">
+        <div id="stickyHeader" className="stickyHeader">
 
           <header className="site-header logo--center" role="banner">
             
