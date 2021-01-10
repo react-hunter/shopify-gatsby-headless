@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo'
 import StoreContext from '../../context/store'
 import ConnexionLayout from "../../components/account/ConnexionLayout"
+import Preloader from "../../components/common/preloader"
 
 const CUSTOMER_LOGIN = gql`
 mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
@@ -51,6 +52,7 @@ const LoginForm = () => {
 
   return (
     <>
+      <Preloader />
       <div className="page-width">
         <div className="grid">
           <div className="grid__item medium-up--one-half medium-up--push-one-quarter login-secton_wrapper">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
+import Preloader from "../components/common/preloader"
 
 const SearchPage = ({ data }) => {
     const [search, setSearch] = useState('')
@@ -11,6 +12,7 @@ const SearchPage = ({ data }) => {
 
     return (
         <>
+            <Preloader />
             <SEO title="Home" />
             <section className="hero is-dark">
                 <div className="hero-body">

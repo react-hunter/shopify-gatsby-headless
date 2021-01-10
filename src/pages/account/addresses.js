@@ -3,6 +3,7 @@ import { Link } from "gatsby"
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import StoreContext from '../../context/store'
+import Preloader from "../../components/common/preloader"
 import Layout from "../../components/account/Layout"
 import AddAddressForm from "../../components/account/adresses/addAddressForm"
 import DeleteAddress from "../../components/account/adresses/deleteAddress"
@@ -39,6 +40,7 @@ const Addresses = () => {
 
     return (
         <Layout>
+            <Preloader />
             <Query
                 query={CUSTOMER_ADDRESS}
                 variables={{

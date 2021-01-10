@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby'
 import { homepageData } from '../../data/homepage';
-import "./imageSections.css";
+import "../../styles/imageSections.css";
 
 const ImageSections = () => {
     return (

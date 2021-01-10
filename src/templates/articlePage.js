@@ -1,6 +1,7 @@
 import React from 'react' /* eslint-disable */
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
+import Preloader from "../components/common/preloader"
 import RecentArticles from "../components/articles/recentArticles"
 import ShareIcons from "../components/shareIcons"
 
@@ -8,6 +9,7 @@ const articlePage = ({ data }) => {
     
   return (
     <>
+      <Preloader />
       <SEO title={data.shopifyArticle.title} />
 
       <div id="article-page">

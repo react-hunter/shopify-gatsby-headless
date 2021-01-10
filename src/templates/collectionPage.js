@@ -1,7 +1,8 @@
 import React, { useState } from 'react' /* eslint-disable */
 import { graphql } from "gatsby"
+import Preloader from "../components/common/preloader"
 import ProductBox from "../components/ProductList/productBox"
-import './collectionPage.scss';
+import '../styles/collectionPage.scss';
 
 const collectionPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
@@ -98,6 +99,7 @@ const collectionPage = ({ data, pageContext }) => {
   const displayedProducts = data.shopifyCollection.products.slice(0, displayProductCount)
   return (
     <>
+      <Preloader />
       <div id="shopify-section-collection-template" className="shopify-section">
         <div data-section-id="collection-template" data-section-type="collection-template">
           <header className="collection-header">

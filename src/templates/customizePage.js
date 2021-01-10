@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { customizePageData } from '../data/customizePage' 
+import Preloader from "../components/common/preloader"
 
 const CustomizePage = ({ data }) => {
 
@@ -13,11 +14,6 @@ const CustomizePage = ({ data }) => {
   let selectedProductBoxStock;
 
   var isShare = false;
-
-  function abc(){
-    console.log('abc');
-  }
-
 
   useEffect(() => {
     setAllProduct();
@@ -36,8 +32,8 @@ const CustomizePage = ({ data }) => {
     }
 
     let needShowItems = document.querySelectorAll('#arrangementSelector-0 .arr-type-box');
-    for (var i=0; i<needShowItems.length; i++ ) {
-      needShowItems[i].addEventListener("click", function(e){
+    for (var j=0; j<needShowItems.length; j++ ) {
+      needShowItems[j].addEventListener("click", function(e){
         selectArrangement(this.getAttribute('data-productid'));
       });
     }
@@ -53,36 +49,36 @@ const CustomizePage = ({ data }) => {
 
     for (var i = 0; i < allProducts.length; i++) {
       var product = allProducts[i];
-      if (product.productId == id) {
+      if (product.productId === id) {
         setSelectedProduct(product);
-        if (document.getElementById("arr-Type") == undefined) {
+        if (document.getElementById("arr-Type") === undefined) {
           addArrangementBlock("ARRANGEMENT", "arr-Type", product.Arrangement, product.subtext, "0")
         } else {
           document.getElementById("arr-Type").innerText = product.Arrangement;
           document.getElementById("sub-text").innerText = product.subtext;
         }
   
-        if (document.getElementById(`${product.Arrangement}-product`) != undefined) {
+        if (document.getElementById(`${product.Arrangement}-product`) !== undefined) {
           console.log(`${product.Arrangement}-product -------------------------------- `);
 
-          var product = JSON.parse(document.getElementById(`${product.Arrangement}-product`).dataset.json)
+          product = JSON.parse(document.getElementById(`${product.Arrangement}-product`).dataset.json)
           selectedProductBoxStock = product;
-          if (product.featured_image != undefined) {
+          if (product.featured_image !== undefined) {
             document.getElementById("mainIMG").src = product.featured_image;
           }
         }
   
         let needShowItems = document.querySelectorAll('#arrangementSelector-0 .arr-type-box');
         
-        for (var i=0; i<needShowItems.length; i++ ) {
-          var innerDivId = needShowItems[i].getAttribute('data-productid');
+        for (var k=0; k<needShowItems.length; k++ ) {
+          var innerDivId = needShowItems[k].getAttribute('data-productid');
 
-          if (id == innerDivId) {
-            needShowItems[i].style.backgroundColor = "#000000";
-            needShowItems[i].children[0].style.color = '#ffffff';
+          if (id === innerDivId) {
+            needShowItems[k].style.backgroundColor = "#000000";
+            needShowItems[k].children[0].style.color = '#ffffff';
           } else {
-            needShowItems[i].children[0].style.color = '#000000';
-            needShowItems[i].style.backgroundColor =  "#ffffff ";
+            needShowItems[k].children[0].style.color = '#000000';
+            needShowItems[k].style.backgroundColor =  "#ffffff ";
           }
         }
         break;
@@ -90,9 +86,9 @@ const CustomizePage = ({ data }) => {
     }
   }
 
-  function scanJSONForSoldOut(json) {
+  // function scanJSONForSoldOut(json) {
 
-  }
+  // }
 
   function setAllProduct() {
     allProducts = customizePageData.products;
@@ -114,15 +110,16 @@ const CustomizePage = ({ data }) => {
       var args = point.split("&");
       for (var i = 0; i < args.length; i++) {
         var arg = args[i].split("-").join(" ");
+        var testarg = '';
         if (arg.indexOf(" ") > 0) {
-          var testarg = setCharAt(arg, arg.indexOf(" "), '-')
+          testarg = setCharAt(arg, arg.indexOf(" "), '-')
           if (testarg.includes("Letter-")) {
             eventFire(document.getElementById("Letters"), 'click')
           } else if (testarg.includes("Number-")) {
             eventFire(document.getElementById("Numbers"), 'click')
           }
         } else {
-          var testarg = arg
+          testarg = arg
         }
   
         if (testarg.includes("+")) {
@@ -130,23 +127,23 @@ const CustomizePage = ({ data }) => {
           var rose1 = document.getElementById(roses[0].replace("-", " ") + "-0");
           var rose2 = document.getElementById(roses[1].replace("-", " ") + "-1");
   
-          if (rose1 != undefined) {
+          if (rose1 !== undefined) {
             eventFire(rose1, 'click')
             eventFire(rose1, 'click')  
           }
   
-          if (rose2 != undefined) {
+          if (rose2 !== undefined) {
   
             eventFire(rose2, 'click')
             eventFire(rose2, 'click')
           }
-        } else if (document.getElementById(testarg) != undefined) {
+        } else if (document.getElementById(testarg) !== undefined) {
           eventFire(document.getElementById(testarg), 'click')
           if (currentStep < selectedProduct.maxOptions) {
             eventFire(document.getElementById(`step-next`), 'click')
           }
         } else {
-          if (document.getElementById(testarg + "-0") != undefined && !testarg.includes("+")) {
+          if (document.getElementById(testarg + "-0") !== undefined && !testarg.includes("+")) {
             isShare = false;
             eventFire(document.getElementById(testarg.replace("-", " ") + "-0"), 'click')
             eventFire(document.getElementById(testarg.replace("-", " ") + "-0"), 'click')
@@ -154,7 +151,7 @@ const CustomizePage = ({ data }) => {
         }
       }
       isShare = false;
-      if (rose1 != undefined && rose2 != undefined) {
+      if (rose1 !== undefined && rose2 !== undefined) {
         eventFire(rose2, 'click')
       }
     } else if (window.location.href.includes("?") && !window.location.href.includes("&")) {
@@ -178,14 +175,11 @@ const CustomizePage = ({ data }) => {
   function stickyFunction(){
 
   }
-  function mobileRearrange() {
-
-  }
   
   function nextStep() {
     currentStep = currentStep + 1;
   
-    if (document.getElementById(`arrangementSelector-${currentStep}`) != undefined) {
+    if (document.getElementById(`arrangementSelector-${currentStep}`) !== undefined) {
       document.getElementById(`arrangementSelector-${currentStep}`).style.display = "block"
     }
   }
@@ -195,7 +189,7 @@ const CustomizePage = ({ data }) => {
     var statusBlock = document.createElement("div");
     statusBlock.setAttribute("class", `statusBox`)
     statusBlock.setAttribute("id", `statbox-${currentStep}`)
-    if (subtype == "price-Type") {
+    if (subtype === "price-Type") {
       statusBlock.innerHTML = `<h5 style="font-weight: bold;">${heading}:</h5> <h5 style="font-size: 1rem; text-transform: capitalize;" id="${subtype}">${subheading}</h5> <span id="sub-text">${tagline}</span>`;
   
     } else {
@@ -223,10 +217,11 @@ const CustomizePage = ({ data }) => {
 
     setStep(step);
     var step2 = selectedProduct.options[currentStep - 1];
-    if (step2 == undefined) {
-      var title = "Choose Arrangement";
+    var title = '';
+    if (step2 === undefined) {
+      title = "Choose Arrangement";
     } else {
-      var title = step2.option;
+      title = step2.option;
     }
   
     document.getElementById("arrangementSelector_title").innerHTML = title
@@ -246,7 +241,7 @@ const CustomizePage = ({ data }) => {
   
     document.getElementById("mainIMG").src = src;
   
-    if (document.getElementById("BOX-Type") == undefined) {
+    if (document.getElementById("BOX-Type") === undefined) {
       addArrangementBlock("BOX", "BOX-Type", title, "", `${currentStep}`)
     } else {
       document.getElementById("BOX-Type").innerHTML = title;
@@ -259,7 +254,7 @@ const CustomizePage = ({ data }) => {
   
   function setStyle(title, style) {
   
-    if (document.getElementById("Style-Type") == undefined) {
+    if (document.getElementById("Style-Type") === undefined) {
       addArrangementBlock("Style", "Style-Type", title, "", `${currentStep}`)
     } else {
       document.getElementById("Style-Type").innerHTML = title;
@@ -270,7 +265,7 @@ const CustomizePage = ({ data }) => {
     var styles = document.getElementById(`arrangementSelector-${currentStep}`).children;
   
     for (var i = 0; i < styles.length; i++) {
-      if (styles[i].id != `${title}`) {
+      if (styles[i].id !== `${title}`) {
         styles[i].style.background = "#ffffff"
         styles[i].firstElementChild.style.color = "#000000"
       } else {
@@ -279,13 +274,13 @@ const CustomizePage = ({ data }) => {
       }
     }
   
-    if (title == "Letters") {
+    if (title === "Letters") {
       document.getElementById(`arrangementSelector-${currentStep}`).style.display = "none";
       document.getElementById(`arrangementSelector-Letters`).style.display = "block";
       eventFire(document.getElementById("Letter-A"), 'click')
     }
   
-    if (title == "Numbers") {
+    if (title === "Numbers") {
       document.getElementById(`arrangementSelector-${currentStep}`).style.display = "none";
       document.getElementById(`arrangementSelector-Numbers`).style.display = "block";
       eventFire(document.getElementById("Number-0"), 'click')
@@ -304,8 +299,8 @@ const CustomizePage = ({ data }) => {
     var json = JSON.parse(document.getElementById(`${selectedProduct.Arrangement}`).dataset.json)
   
     for (var i = 0; i < json.length; i++) {
-      if (json[i].title == `${selections[1]} / Box`) {
-        if (document.getElementById("price-Type") == undefined) {
+      if (json[i].title === `${selections[1]} / Box`) {
+        if (document.getElementById("price-Type") === undefined) {
           addArrangementBlock("Price", "price-Type", `$${json[i].price / 100}`, "", currentStep)
         } else {
           document.getElementById("price-Type").innerText = `$${json[i].price / 100}`;
@@ -323,11 +318,11 @@ const CustomizePage = ({ data }) => {
       choice.push(selections[i])
     }
   
-    for (var i = 0; i < json.length; i++) {
-      var element = json[i];
-      if (choice.join(",") == element.title.replace(" \/ ", ",")) {
+    for (var j = 0; j < json.length; j++) {
+      var element = json[j];
+      if (choice.join(",") === element.title.replace(" \/ ", ",")) {
   
-        if (document.getElementById("price-Type") == undefined) {
+        if (document.getElementById("price-Type") === undefined) {
           addArrangementBlock("Price", "price-Type", `$${element.price / 100}`, "", currentStep)
         } else {
           document.getElementById("price-Type").innerText = `$${element.price / 100}`;
@@ -354,7 +349,7 @@ const CustomizePage = ({ data }) => {
   }
 
   function getMainImage() {
-    if (document.getElementById("Style-Type").innerText != "Letters" || document.getElementById("Style-Type").innerText != "Numbers") {
+    if (document.getElementById("Style-Type").innerText !== "Letters" || document.getElementById("Style-Type").innerText !== "Numbers") {
       resetNumbersAndLetter();
       var xhr = new XMLHttpRequest();
   
@@ -365,9 +360,9 @@ const CustomizePage = ({ data }) => {
       });
   
       var style;
-      if (document.getElementById("Style-Type").innerText == "Letters") {
+      if (document.getElementById("Style-Type").innerText === "Letters") {
         style = "Letter-A"
-      } else if (document.getElementById("Style-Type").innerText == "Numbers") {
+      } else if (document.getElementById("Style-Type").innerText === "Numbers") {
         style = "Number-0"
       } else {
         style = document.getElementById("Style-Type").innerText;
@@ -376,9 +371,9 @@ const CustomizePage = ({ data }) => {
       var backup1 = ["Red"]
       var backup2 = ["Red", "Light Pink"]
   
-      if (selectedRoses == 0) {
+      if (selectedRoses === 0) {
   
-        if (style == "Solid") {
+        if (style === "Solid") {
           selectedRoses = backup1;
           collection = backup1.join(",")
         } else {
@@ -388,14 +383,14 @@ const CustomizePage = ({ data }) => {
         }
       } else {
   
-        if (style == "Solid") {
+        if (style === "Solid") {
           if (selectedRoses.length > 1) {
             collection.push(selectedRoses[0]);
           } else {
             collection = selectedRoses.join(",")
           }
         } else {
-          if (selectedRoses.length == 1) {
+          if (selectedRoses.length === 1) {
             selectedRoses.push(backup2[1]);
             collection = selectedRoses.join(",")
           } else {
@@ -421,9 +416,9 @@ const CustomizePage = ({ data }) => {
   
     var Letterstyles = document.getElementsByClassName("letterChoice");
   
-    for (var i = 0; i < Letterstyles.length; i++) {
-      Letterstyles[i].style.background = "#ffffff"
-      Letterstyles[i].firstElementChild.style.color = "#000000"
+    for (var j = 0; j < Letterstyles.length; j++) {
+      Letterstyles[j].style.background = "#ffffff"
+      Letterstyles[j].firstElementChild.style.color = "#000000"
     }
   }
 
@@ -440,7 +435,7 @@ const CustomizePage = ({ data }) => {
   }
 
   function movePrice() {
-    if (document.getElementById("price-Type") != undefined) {
+    if (document.getElementById("price-Type") !== undefined) {
       var price = document.getElementById("price-Type").parentElement;
       document.getElementById("col-left").appendChild(price);
     }
@@ -458,13 +453,14 @@ const CustomizePage = ({ data }) => {
   
     var boxes = selectedProduct["boxes"];
     for (var i = 0; i < boxes.length; i++) {
-      let result = selectedProductBoxStock.variants.filter(variant => variant.option1 == boxes[i].title)[0];
+      const boxTitle = boxes[i].title;
+      let result = selectedProductBoxStock.variants.filter(variant => variant.option1 === boxTitle)[0];
       var box = document.createElement("img");
   
       box.src = boxes[i].src;
       box.setAttribute('title', `${boxes[i].title}`)
       box.setAttribute('id', `${boxes[i].title.replace(" ", "-")}`)
-      if (result.available != false) {
+      if (result.available !== false) {
         box.addEventListener("click", function(e){
           setBox(this.getAttribute('title'), this.getAttribute('src') ,this);
         });
@@ -481,14 +477,14 @@ const CustomizePage = ({ data }) => {
   
     container.appendChild(subDiv);
   
-    if (document.getElementById(`arrangementSelector-${currentStep}`) == undefined) {
+    if (document.getElementById(`arrangementSelector-${currentStep}`) === undefined) {
       document.getElementById("col-right").appendChild(container)
     } else {
       document.getElementById(`arrangementSelector-${currentStep}`).remove()
       document.getElementById("col-right").appendChild(container)
     }
   
-    if (subDiv != undefined) {
+    if (subDiv !== undefined) {
       let firstAvailable = subDiv.querySelectorAll(".box")[0];
       eventFire(firstAvailable, 'click')
       firstAvailable.style.boxShadow = "#000000 0px 0px 0px 4px"
@@ -522,18 +518,18 @@ const CustomizePage = ({ data }) => {
       }
     }
   
-    if (document.getElementById(`arrangementSelector-${currentStep}`) == undefined) {
+    if (document.getElementById(`arrangementSelector-${currentStep}`) === undefined) {
       document.getElementById("col-right").appendChild(container)
     } else {
       document.getElementById(`arrangementSelector-${currentStep}`).remove()
       document.getElementById("col-right").appendChild(container)
     }
   
-    if (document.getElementsByClassName("style-container")[0].children.length == 1) {
+    if (document.getElementsByClassName("style-container")[0].children.length === 1) {
       eventFire(document.getElementsByClassName("style-container")[0].firstElementChild, 'click')
       eventFire(document.getElementById(`step-next`), 'click')
     } else {
-      if (selectedStyle != undefined) {
+      if (selectedStyle !== undefined) {
         if (hasStyle(selectedStyle.style)) {
           if (selectedStyle.style.includes("Letter")) {
             eventFire(document.getElementById("Letters"), 'click')
@@ -551,7 +547,7 @@ const CustomizePage = ({ data }) => {
   }
 
   function generateRosesSelector() {
-    if (document.getElementById("arrangementSelector-" + currentStep) != undefined) {
+    if (document.getElementById("arrangementSelector-" + currentStep) !== undefined) {
       document.getElementById("arrangementSelector-" + currentStep).remove();
       // resetRoseSelections()
     }
@@ -567,9 +563,9 @@ const CustomizePage = ({ data }) => {
     var roses = selectedProduct["roses"];
     var styles = selectedProduct["styles"];
   
-    for (var i = 0; i < styles.length; i++) {
-      if (document.getElementById("Style-Type").innerText == styles[i].style) {
-        setSelectedStyle(styles[i])
+    for (var k = 0; k < styles.length; k++) {
+      if (document.getElementById("Style-Type").innerText === styles[k].style) {
+        setSelectedStyle(styles[k])
       }
     }
   
@@ -595,8 +591,8 @@ const CustomizePage = ({ data }) => {
             setRose(this.getAttribute('title'), this, parseInt(this.getAttribute('index')));
           });
           
-          if (roses[j].rose == "Galaxy") {
-            if (selectedStyle.style == "Solid") {
+          if (roses[j].rose === "Galaxy") {
+            if (selectedStyle.style === "Solid") {
               roseblock.appendChild(rose)
             }
           } else {
@@ -608,7 +604,7 @@ const CustomizePage = ({ data }) => {
     }
     container.appendChild(subDiv);
   
-    if (document.getElementById(`arrangementSelector-${currentStep}`) == undefined) {
+    if (document.getElementById(`arrangementSelector-${currentStep}`) === undefined) {
       document.getElementById("col-right").appendChild(container)
     } else {
       document.getElementById(`arrangementSelector-${currentStep}`).remove()
@@ -622,13 +618,13 @@ const CustomizePage = ({ data }) => {
     }
   
     if (!isShare) {
-      for (var i = 0; i < 100; i++) {
-        if (document.getElementById("roseblock-" + i) != undefined) {
-          if (count == selectedRoses.length) {
-            eventFire(document.getElementById(selectedRoses[i] + "-" + i), 'click')
+      for (var ii = 0; ii < 100; ii++) {
+        if (document.getElementById("roseblock-" + ii) !== undefined) {
+          if (count === selectedRoses.length) {
+            eventFire(document.getElementById(selectedRoses[ii] + "-" + ii), 'click')
           } else {
-            eventFire(document.getElementById("roseblock-" + i).firstElementChild, 'click')
-            document.getElementById("roseblock-" + i).firstElementChild.style.boxShadow = "#000000 0px 0px 0px 4px"
+            eventFire(document.getElementById("roseblock-" + ii).firstElementChild, 'click')
+            document.getElementById("roseblock-" + ii).firstElementChild.style.boxShadow = "#000000 0px 0px 0px 4px"
           }
   
         } else {
@@ -647,7 +643,7 @@ const CustomizePage = ({ data }) => {
   }
 
   function isProductNotUsingStencil(productId) {
-    if (document.querySelector("#excluded_products") != null) {
+    if (document.querySelector("#excluded_products") !== null) {
       let excludedProducts = JSON.parse(document.querySelector("#excluded_products").dataset.ids);
       for (let i = 0; i < excludedProducts.length; i++) {
         if (excludedProducts[i] === productId) {
@@ -677,7 +673,7 @@ const CustomizePage = ({ data }) => {
     console.log(document.getElementById(`rose-mobile-${newLayer}`));
     document.getElementById(`rose-mobile-${newLayer}`).innerText = type;
     
-    if (selectedStyle.roseTypes == selectedRoses.length) {
+    if (selectedStyle.roseTypes === selectedRoses.length) {
   
       var choices = selectedRoses.join(",");
   
@@ -686,7 +682,7 @@ const CustomizePage = ({ data }) => {
       let usingStencil = isProductNotUsingStencil(productId);
       console.log(document.getElementById("arr-Type").innerHTML, ' - Using Images: ',usingStencil);
   
-      if(usingStencil == true){
+      if(usingStencil === true){
         let arrangement_selected = document.getElementById("arr-Type").innerHTML.replaceAll(' ', "_");
         let box_selected = document.getElementById('BOX-Type').innerHTML.replaceAll(' ', "_");
         let style_selected = document.getElementById('Style-Type').innerHTML.replaceAll(' ', "_");
@@ -707,7 +703,7 @@ const CustomizePage = ({ data }) => {
         }
       }
   
-      if (document.getElementById("Rose-Type") == undefined) {
+      if (document.getElementById("Rose-Type") === undefined) {
         addArrangementBlock("Rose Colors", "Rose-Type", selectedRoses.join(" + "), "", `${currentStep}`)
       } else {
         document.getElementById("Rose-Type").innerHTML = selectedRoses.join(" + ");
@@ -716,7 +712,7 @@ const CustomizePage = ({ data }) => {
       movePrice();
   
       var selectString = selections.join("&")
-      if (isShare == false) {
+      if (isShare === false) {
         ChangeUrl("Arrangement", window.location.origin + "/pages/customize?" + selectString.split(" ").join("-"))
       }  
     }
@@ -737,13 +733,13 @@ const CustomizePage = ({ data }) => {
     var contains = false;
     for (var i = 0; i < styles.length; i++) {
       var style = styles[i];
-      if (style.style == StyleName) {
+      if (style.style === StyleName) {
         contains = true;
         break;
       }
     }
   
-    if (contains == true) {
+    if (contains === true) {
       return true;
     } else {
       return false;
@@ -765,18 +761,18 @@ const CustomizePage = ({ data }) => {
     selections = [];
     var i = 1;
     do {
-      if (document.getElementById(`statbox-${i}`) != undefined) {
+      if (document.getElementById(`statbox-${i}`) !== undefined) {
         document.getElementById(`statbox-${i}`).remove();
       }
       i++;
-    } while (document.getElementById(`statbox-${i}`) != undefined);
+    } while (document.getElementById(`statbox-${i}`) !== undefined);
   }
 
   const previous = () => {
     console.log("previous");
 
-    if (currentStep - 1 != -1) {
-      if (currentStep - 1 == selectedProduct.maxOptions) {
+    if (currentStep - 1 !== -1) {
+      if (currentStep - 1 === selectedProduct.maxOptions) {
         document.getElementById("addToBAG").style.display = "none"
         document.getElementsByClassName("step-next")[0].style.display = "block"
       }
@@ -787,17 +783,17 @@ const CustomizePage = ({ data }) => {
   const next = () => {
     console.log("next");
     
-    if (selections[0] != undefined) {
+    if (selections[0] !== undefined) {
       if (!selections[0].includes(selectedProduct.Arrangement)) {
         resetSelections();
       }
   
     }
-    if (currentStep == 0) {
+    if (currentStep === 0) {
       addSelection(currentStep, selectedProduct.Arrangement)
     }
   
-    if (selections.length == currentStep + 1 || selections.length > currentStep + 1) {
+    if (selections.length === currentStep + 1 || selections.length > currentStep + 1) {
   
       let colRightItems = document.getElementById("col-right").children;
       for (var i =0; i< colRightItems.length; i++) {
@@ -806,7 +802,7 @@ const CustomizePage = ({ data }) => {
 
       var options = selectedProduct.options;
   
-      if (currentStep + 1 == selectedProduct.maxOptions) {
+      if (currentStep + 1 === selectedProduct.maxOptions) {
         nextStep();
         document.getElementById("addToBAG").style.display = "block"
         document.getElementsByClassName("step-next")[0].style.display = "none"
@@ -814,7 +810,7 @@ const CustomizePage = ({ data }) => {
         nextStep();
       }
   
-      if (currentStep - 1 == selectedProduct.maxOptions) {
+      if (currentStep - 1 === selectedProduct.maxOptions) {
         // document.getElementById("addToBAG").style.display = "block"
         // document.getElementsByClassName("step-next")[0].style.display = "none"
       } else {
@@ -832,7 +828,7 @@ const CustomizePage = ({ data }) => {
         }
       }
   
-      let title = currentStep == 0 ? "Choose Arrangement" : step.option;
+      let title = currentStep === 0 ? "Choose Arrangement" : step.option;
   
       document.getElementById("arrangementSelector_title").innerHTML = title
       if (currentStep > 1) {
@@ -840,8 +836,8 @@ const CustomizePage = ({ data }) => {
         document.getElementById("mobile-panel").classList.remove("sticky-hide");
       }
   
-      if (selectedStyle != undefined) {
-        if (selectedStyle.roseTypes != 2) {
+      if (selectedStyle !== undefined) {
+        if (selectedStyle.roseTypes !== 2) {
           document.getElementById("rose-mobile-2").parentElement.style.display = "none";
         } else {
           document.getElementById("rose-mobile-2").parentElement.style.display = "block ";
@@ -856,7 +852,7 @@ const CustomizePage = ({ data }) => {
     movePrice();
   
     var selectString = selections.join("&")
-    if (isShare == false) {
+    if (isShare === false) {
       ChangeUrl("Arrangement", window.location.origin + "/pages/customize?" + selectString.split(" ").join("-"))
     }
   }
@@ -877,7 +873,7 @@ const CustomizePage = ({ data }) => {
   const setLetterStyle = (e, title) => {
     e.preventDefault();
 
-    if (document.getElementById("Style-Type") == undefined) {
+    if (document.getElementById("Style-Type") === undefined) {
       addArrangementBlock("Style", "Style-Type", title, "", `${currentStep}`)
     } else {
       document.getElementById("Style-Type").innerHTML = title;
@@ -903,7 +899,7 @@ const CustomizePage = ({ data }) => {
   const setNumberStyle = (e, title) => {
     e.preventDefault();
 
-    if (document.getElementById("Style-Type") == undefined) {
+    if (document.getElementById("Style-Type") === undefined) {
       addArrangementBlock("Style", "Style-Type", title, "", `${currentStep}`)
     } else {
       document.getElementById("Style-Type").innerHTML = title;
@@ -930,34 +926,39 @@ const CustomizePage = ({ data }) => {
 
   return (
     <>
+      <Preloader />
       <div className="container">
       
       <h2 style={{ display: 'none' }} 
-          className="4581501468718-product" 
-          id="Medium Round Flat-product" 
-          data-json='
-{"id":4581501468718,"title":"Medium Round Flat","handle":"medium-round-flat","description":"","published_at":"2020-06-05T13:48:28-07:00","created_at":"2020-06-05T13:58:31-07:00","vendor":"Dose of Roses","type":"","tags":["Assembly"],"price":19900,"price_min":19900,"price_max":19900,"available":true,"price_varies":false,"compare_at_price":null,"compare_at_price_min":0,"compare_at_price_max":0,"compare_at_price_varies":false,"variants":[
-{"id":32334777581614,"title":"Black Suede \/ Solid","option1":"Black Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Black_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Black Suede \/ Solid","public_title":"Black Suede \/ Solid","options":["Black Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459135"},
-{"id":32334777647150,"title":"Green Suede \/ Solid","option1":"Green Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Green_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Green Suede \/ Solid","public_title":"Green Suede \/ Solid","options":["Green Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276457026"},
-{"id":32334777679918,"title":"Pink Suede \/ Solid","option1":"Pink Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Pink_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Pink Suede \/ Solid","public_title":"Pink Suede \/ Solid","options":["Pink Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459130"},
-{"id":32334777712686,"title":"Red Suede \/ Solid","option1":"Red Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Red_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Red Suede \/ Solid","public_title":"Red Suede \/ Solid","options":["Red Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456051"},
-{"id":32334777745454,"title":"White Suede \/ Solid","option1":"White Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_White_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - White Suede \/ Solid","public_title":"White Suede \/ Solid","options":["White Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276457057"},
-{"id":32334777778222,"title":"Blue Suede \/ Solid","option1":"Blue Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Blue_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Blue Suede \/ Solid","public_title":"Blue Suede \/ Solid","options":["Blue Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456084"},
-{"id":32334777810990,"title":"Black Marble \/ Solid","option1":"Black Marble","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Black_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Black Marble \/ Solid","public_title":"Black Marble \/ Solid","options":["Black Marble","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456088"},
-{"id":32334777843758,"title":"White Marble \/ Solid","option1":"White Marble","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_White_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - White Marble \/ Solid","public_title":"White Marble \/ Solid","options":["White Marble","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459132"}],"images":["\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRoundFlat.png?v=1605088784"],"featured_image":"\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRoundFlat.png?v=1605088784","options":["Box","Style"],"media":[{"alt":"Medium Round Flat","id":7594435248174,"position":1,"preview_image":{"aspect_ratio":1.0,"height":1000,"width":1000,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRoundFlat.png?v=1605088780"},"aspect_ratio":1.0,"height":1000,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRoundFlat.png?v=1605088780","width":1000}],"content":""}'></h2>
+        className="4581501468718-product" 
+        id="Medium Round Flat-product" 
+        data-json='
+          {"id":4581501468718,"title":"Medium Round Flat","handle":"medium-round-flat","description":"","published_at":"2020-06-05T13:48:28-07:00","created_at":"2020-06-05T13:58:31-07:00","vendor":"Dose of Roses","type":"","tags":["Assembly"],"price":19900,"price_min":19900,"price_max":19900,"available":true,"price_varies":false,"compare_at_price":null,"compare_at_price_min":0,"compare_at_price_max":0,"compare_at_price_varies":false,"variants":[
+          {"id":32334777581614,"title":"Black Suede \/ Solid","option1":"Black Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Black_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Black Suede \/ Solid","public_title":"Black Suede \/ Solid","options":["Black Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459135"},
+          {"id":32334777647150,"title":"Green Suede \/ Solid","option1":"Green Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Green_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Green Suede \/ Solid","public_title":"Green Suede \/ Solid","options":["Green Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276457026"},
+          {"id":32334777679918,"title":"Pink Suede \/ Solid","option1":"Pink Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Pink_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Pink Suede \/ Solid","public_title":"Pink Suede \/ Solid","options":["Pink Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459130"},
+          {"id":32334777712686,"title":"Red Suede \/ Solid","option1":"Red Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Red_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Red Suede \/ Solid","public_title":"Red Suede \/ Solid","options":["Red Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456051"},
+          {"id":32334777745454,"title":"White Suede \/ Solid","option1":"White Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_White_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - White Suede \/ Solid","public_title":"White Suede \/ Solid","options":["White Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276457057"},
+          {"id":32334777778222,"title":"Blue Suede \/ Solid","option1":"Blue Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Blue_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Blue Suede \/ Solid","public_title":"Blue Suede \/ Solid","options":["Blue Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456084"},
+          {"id":32334777810990,"title":"Black Marble \/ Solid","option1":"Black Marble","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Black_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Black Marble \/ Solid","public_title":"Black Marble \/ Solid","options":["Black Marble","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456088"},
+          {"id":32334777843758,"title":"White Marble \/ Solid","option1":"White Marble","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_White_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - White Marble \/ Solid","public_title":"White Marble \/ Solid","options":["White Marble","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459132"}],"images":["\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRoundFlat.png?v=1605088784"],"featured_image":"\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRoundFlat.png?v=1605088784","options":["Box","Style"],"media":[{"alt":"Medium Round Flat","id":7594435248174,"position":1,"preview_image":{"aspect_ratio":1.0,"height":1000,"width":1000,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRoundFlat.png?v=1605088780"},"aspect_ratio":1.0,"height":1000,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRoundFlat.png?v=1605088780","width":1000}],"content":""}'>
+      
+      </h2>
         
-        <h2 style={{ display: 'none' }}  
-          className="4581501468718-product" 
-          id="Medium Round Flat" 
-          data-json='[
-{"id":32334777581614,"title":"Black Suede \/ Solid","option1":"Black Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Black_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Black Suede \/ Solid","public_title":"Black Suede \/ Solid","options":["Black Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459135"},
-{"id":32334777647150,"title":"Green Suede \/ Solid","option1":"Green Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Green_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Green Suede \/ Solid","public_title":"Green Suede \/ Solid","options":["Green Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276457026"},
-{"id":32334777679918,"title":"Pink Suede \/ Solid","option1":"Pink Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Pink_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Pink Suede \/ Solid","public_title":"Pink Suede \/ Solid","options":["Pink Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459130"},
-{"id":32334777712686,"title":"Red Suede \/ Solid","option1":"Red Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Red_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Red Suede \/ Solid","public_title":"Red Suede \/ Solid","options":["Red Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456051"},
-{"id":32334777745454,"title":"White Suede \/ Solid","option1":"White Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_White_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - White Suede \/ Solid","public_title":"White Suede \/ Solid","options":["White Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276457057"},
-{"id":32334777778222,"title":"Blue Suede \/ Solid","option1":"Blue Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Blue_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Blue Suede \/ Solid","public_title":"Blue Suede \/ Solid","options":["Blue Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456084"},
-{"id":32334777810990,"title":"Black Marble \/ Solid","option1":"Black Marble","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Black_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Black Marble \/ Solid","public_title":"Black Marble \/ Solid","options":["Black Marble","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456088"},
-{"id":32334777843758,"title":"White Marble \/ Solid","option1":"White Marble","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_White_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - White Marble \/ Solid","public_title":"White Marble \/ Solid","options":["White Marble","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459132"}]'></h2>
+      <h2 style={{ display: 'none' }}  
+        className="4581501468718-product" 
+        id="Medium Round Flat" 
+        data-json='[
+          {"id":32334777581614,"title":"Black Suede \/ Solid","option1":"Black Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Black_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Black Suede \/ Solid","public_title":"Black Suede \/ Solid","options":["Black Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459135"},
+          {"id":32334777647150,"title":"Green Suede \/ Solid","option1":"Green Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Green_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Green Suede \/ Solid","public_title":"Green Suede \/ Solid","options":["Green Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276457026"},
+          {"id":32334777679918,"title":"Pink Suede \/ Solid","option1":"Pink Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Pink_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Pink Suede \/ Solid","public_title":"Pink Suede \/ Solid","options":["Pink Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459130"},
+          {"id":32334777712686,"title":"Red Suede \/ Solid","option1":"Red Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Red_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Red Suede \/ Solid","public_title":"Red Suede \/ Solid","options":["Red Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456051"},
+          {"id":32334777745454,"title":"White Suede \/ Solid","option1":"White Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_White_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - White Suede \/ Solid","public_title":"White Suede \/ Solid","options":["White Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276457057"},
+          {"id":32334777778222,"title":"Blue Suede \/ Solid","option1":"Blue Suede","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Blue_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Blue Suede \/ Solid","public_title":"Blue Suede \/ Solid","options":["Blue Suede","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456084"},
+          {"id":32334777810990,"title":"Black Marble \/ Solid","option1":"Black Marble","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_Black_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - Black Marble \/ Solid","public_title":"Black Marble \/ Solid","options":["Black Marble","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456088"},
+          {"id":32334777843758,"title":"White Marble \/ Solid","option1":"White Marble","option2":"Solid","option3":null,"sku":"Customiser_MediumFlat_Round_White_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Flat - White Marble \/ Solid","public_title":"White Marble \/ Solid","options":["White Marble","Solid"],"price":19900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459132"}]'>
+      
+      </h2>
 
 <h2 style={{ display: 'none' }}  className="4507343290414-product" id="Large Square-product" data-json='
 {"id":4507343290414,"title":"Large Square","handle":"large-square","description":"","published_at":"2020-05-06T11:23:00-07:00","created_at":"2020-04-22T12:25:06-07:00","vendor":"Dose of Roses","type":"","tags":["Assembly"],"price":39900,"price_min":39900,"price_max":39900,"available":true,"price_varies":false,"compare_at_price":null,"compare_at_price_min":0,"compare_at_price_max":0,"compare_at_price_varies":false,"variants":[
@@ -990,7 +991,9 @@ const CustomizePage = ({ data }) => {
 {"id":32334789836846,"title":"Blue Suede \/ V-Stripes","option1":"Blue Suede","option2":"V-Stripes","option3":null,"sku":"Customiser_Large_Square_Blue_Suede_VStripes","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Square - Blue Suede \/ V-Stripes","public_title":"Blue Suede \/ V-Stripes","options":["Blue Suede","V-Stripes"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"273720025"},
 {"id":32334789869614,"title":"Blue Suede \/ H-Stripes","option1":"Blue Suede","option2":"H-Stripes","option3":null,"sku":"Customiser_Large_Square_Blue_Suede_HStripes","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Square - Blue Suede \/ H-Stripes","public_title":"Blue Suede \/ H-Stripes","options":["Blue Suede","H-Stripes"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"273718050"},
 {"id":32334789902382,"title":"Blue Suede \/ Letters","option1":"Blue Suede","option2":"Letters","option3":null,"sku":"Customiser_Large_Square_Blue_Suede_Letters","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Square - Blue Suede \/ Letters","public_title":"Blue Suede \/ Letters","options":["Blue Suede","Letters"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276463070"},
-{"id":32334789935150,"title":"Blue Suede \/ Numbers","option1":"Blue Suede","option2":"Numbers","option3":null,"sku":"Customiser_Large_Square_Blue_Suede_Numbers","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Square - Blue Suede \/ Numbers","public_title":"Blue Suede \/ Numbers","options":["Blue Suede","Numbers"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"273716529"}],"images":["\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/KevinHartLargeSquare.jpg?v=1605089063","\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/white_persuede.jpg?v=1605089063"],"featured_image":"\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/KevinHartLargeSquare.jpg?v=1605089063","options":["Box","Style"],"media":[{"alt":null,"id":7594442227758,"position":1,"preview_image":{"aspect_ratio":0.75,"height":4032,"width":3024,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/KevinHartLargeSquare.jpg?v=1605089063"},"aspect_ratio":0.75,"height":4032,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/KevinHartLargeSquare.jpg?v=1605089063","width":3024},{"alt":null,"id":6822580551726,"position":2,"preview_image":{"aspect_ratio":1.0,"height":590,"width":590,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/white_persuede.jpg?v=1591827947"},"aspect_ratio":1.0,"height":590,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/white_persuede.jpg?v=1591827947","width":590}],"content":""}'></h2>
+{"id":32334789935150,"title":"Blue Suede \/ Numbers","option1":"Blue Suede","option2":"Numbers","option3":null,"sku":"Customiser_Large_Square_Blue_Suede_Numbers","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Square - Blue Suede \/ Numbers","public_title":"Blue Suede \/ Numbers","options":["Blue Suede","Numbers"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"273716529"}],"images":["\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/KevinHartLargeSquare.jpg?v=1605089063","\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/white_persuede.jpg?v=1605089063"],"featured_image":"\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/KevinHartLargeSquare.jpg?v=1605089063","options":["Box","Style"],"media":[{"alt":null,"id":7594442227758,"position":1,"preview_image":{"aspect_ratio":0.75,"height":4032,"width":3024,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/KevinHartLargeSquare.jpg?v=1605089063"},"aspect_ratio":0.75,"height":4032,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/KevinHartLargeSquare.jpg?v=1605089063","width":3024},{"alt":null,"id":6822580551726,"position":2,"preview_image":{"aspect_ratio":1.0,"height":590,"width":590,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/white_persuede.jpg?v=1591827947"},"aspect_ratio":1.0,"height":590,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/white_persuede.jpg?v=1591827947","width":590}],"content":""}'>
+
+</h2>
         
         <h2 style={{ display: 'none' }}  
         className="4507343290414-product" 
@@ -1025,7 +1028,9 @@ const CustomizePage = ({ data }) => {
 {"id":32334789836846,"title":"Blue Suede \/ V-Stripes","option1":"Blue Suede","option2":"V-Stripes","option3":null,"sku":"Customiser_Large_Square_Blue_Suede_VStripes","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Square - Blue Suede \/ V-Stripes","public_title":"Blue Suede \/ V-Stripes","options":["Blue Suede","V-Stripes"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"273720025"},
 {"id":32334789869614,"title":"Blue Suede \/ H-Stripes","option1":"Blue Suede","option2":"H-Stripes","option3":null,"sku":"Customiser_Large_Square_Blue_Suede_HStripes","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Square - Blue Suede \/ H-Stripes","public_title":"Blue Suede \/ H-Stripes","options":["Blue Suede","H-Stripes"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"273718050"},
 {"id":32334789902382,"title":"Blue Suede \/ Letters","option1":"Blue Suede","option2":"Letters","option3":null,"sku":"Customiser_Large_Square_Blue_Suede_Letters","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Square - Blue Suede \/ Letters","public_title":"Blue Suede \/ Letters","options":["Blue Suede","Letters"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276463070"},
-{"id":32334789935150,"title":"Blue Suede \/ Numbers","option1":"Blue Suede","option2":"Numbers","option3":null,"sku":"Customiser_Large_Square_Blue_Suede_Numbers","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Square - Blue Suede \/ Numbers","public_title":"Blue Suede \/ Numbers","options":["Blue Suede","Numbers"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"273716529"}]'></h2>
+{"id":32334789935150,"title":"Blue Suede \/ Numbers","option1":"Blue Suede","option2":"Numbers","option3":null,"sku":"Customiser_Large_Square_Blue_Suede_Numbers","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Square - Blue Suede \/ Numbers","public_title":"Blue Suede \/ Numbers","options":["Blue Suede","Numbers"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"273716529"}]'>
+
+</h2>
 
 <h2 style={{ display: 'none' }}  className="4581503369262-product" id="Single Round-product" data-json='
 {"id":4581503369262,"title":"Single Round","handle":"single-round","description":"","published_at":"2020-06-05T13:59:42-07:00","created_at":"2020-06-05T14:01:17-07:00","vendor":"Dose of Roses","type":"","tags":["Assembly"],"price":3900,"price_min":3900,"price_max":3900,"available":true,"price_varies":false,"compare_at_price":null,"compare_at_price_min":0,"compare_at_price_max":0,"compare_at_price_varies":false,"variants":[
@@ -1036,7 +1041,9 @@ const CustomizePage = ({ data }) => {
 {"id":32334783610926,"title":"White Suede \/ Solid","option1":"White Suede","option2":"Solid","option3":null,"sku":"Customiser_Small_Round_White_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Single Round - White Suede \/ Solid","public_title":"White Suede \/ Solid","options":["White Suede","Solid"],"price":3900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276460460"},
 {"id":32334783643694,"title":"Blue Suede \/ Solid","option1":"Blue Suede","option2":"Solid","option3":null,"sku":"Customiser_Small_Round_Blue_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Single Round - Blue Suede \/ Solid","public_title":"Blue Suede \/ Solid","options":["Blue Suede","Solid"],"price":3900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276462939"},
 {"id":32334783676462,"title":"Black Marble \/ Solid","option1":"Black Marble","option2":"Solid","option3":null,"sku":"Customiser_Small_Round_Black_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Single Round - Black Marble \/ Solid","public_title":"Black Marble \/ Solid","options":["Black Marble","Solid"],"price":3900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276462883"},
-{"id":32334783709230,"title":"White Marble \/ Solid","option1":"White Marble","option2":"Solid","option3":null,"sku":"Customiser_Small_Round_White_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Single Round - White Marble \/ Solid","public_title":"White Marble \/ Solid","options":["White Marble","Solid"],"price":3900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276457065"}],"images":["\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/SingleRound_1.png?v=1605087348"],"featured_image":"\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/SingleRound_1.png?v=1605087348","options":["Box","Style"],"media":[{"alt":null,"id":7594392584238,"position":1,"preview_image":{"aspect_ratio":1.0,"height":1000,"width":1000,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/SingleRound_1.png?v=1605087348"},"aspect_ratio":1.0,"height":1000,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/SingleRound_1.png?v=1605087348","width":1000}],"content":""}'></h2>
+{"id":32334783709230,"title":"White Marble \/ Solid","option1":"White Marble","option2":"Solid","option3":null,"sku":"Customiser_Small_Round_White_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Single Round - White Marble \/ Solid","public_title":"White Marble \/ Solid","options":["White Marble","Solid"],"price":3900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276457065"}],"images":["\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/SingleRound_1.png?v=1605087348"],"featured_image":"\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/SingleRound_1.png?v=1605087348","options":["Box","Style"],"media":[{"alt":null,"id":7594392584238,"position":1,"preview_image":{"aspect_ratio":1.0,"height":1000,"width":1000,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/SingleRound_1.png?v=1605087348"},"aspect_ratio":1.0,"height":1000,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/SingleRound_1.png?v=1605087348","width":1000}],"content":""}'>
+
+</h2>
         
         <h2 style={{ display: 'none' }}  
         className="4581503369262-product" 
@@ -1048,7 +1055,9 @@ const CustomizePage = ({ data }) => {
 {"id":32334783610926,"title":"White Suede \/ Solid","option1":"White Suede","option2":"Solid","option3":null,"sku":"Customiser_Small_Round_White_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Single Round - White Suede \/ Solid","public_title":"White Suede \/ Solid","options":["White Suede","Solid"],"price":3900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276460460"},
 {"id":32334783643694,"title":"Blue Suede \/ Solid","option1":"Blue Suede","option2":"Solid","option3":null,"sku":"Customiser_Small_Round_Blue_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Single Round - Blue Suede \/ Solid","public_title":"Blue Suede \/ Solid","options":["Blue Suede","Solid"],"price":3900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276462939"},
 {"id":32334783676462,"title":"Black Marble \/ Solid","option1":"Black Marble","option2":"Solid","option3":null,"sku":"Customiser_Small_Round_Black_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Single Round - Black Marble \/ Solid","public_title":"Black Marble \/ Solid","options":["Black Marble","Solid"],"price":3900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276462883"},
-{"id":32334783709230,"title":"White Marble \/ Solid","option1":"White Marble","option2":"Solid","option3":null,"sku":"Customiser_Small_Round_White_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Single Round - White Marble \/ Solid","public_title":"White Marble \/ Solid","options":["White Marble","Solid"],"price":3900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276457065"}]'></h2>
+{"id":32334783709230,"title":"White Marble \/ Solid","option1":"White Marble","option2":"Solid","option3":null,"sku":"Customiser_Small_Round_White_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Single Round - White Marble \/ Solid","public_title":"White Marble \/ Solid","options":["White Marble","Solid"],"price":3900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276457065"}]'>
+
+</h2>
 
 <h2 style={{ display: 'none' }}  className="4581498060846-product" id="Medium Square-product" data-json='
 {"id":4581498060846,"title":"Medium Square","handle":"medium-square","description":"","published_at":"2020-06-05T13:48:28-07:00","created_at":"2020-06-05T13:51:41-07:00","vendor":"Dose of Roses","type":"","tags":["Assembly"],"price":29900,"price_min":29900,"price_max":29900,"available":true,"price_varies":false,"compare_at_price":null,"compare_at_price_min":0,"compare_at_price_max":0,"compare_at_price_varies":false,"variants":[
@@ -1071,7 +1080,9 @@ const CustomizePage = ({ data }) => {
 {"id":32334760902702,"title":"Blue Suede \/ Solid","option1":"Blue Suede","option2":"Solid","option3":null,"sku":"Customiser_Medium_Square_Blue_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Square - Blue Suede \/ Solid","public_title":"Blue Suede \/ Solid","options":["Blue Suede","Solid"],"price":29900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456044"},
 {"id":32334760935470,"title":"Blue Suede \/ Checkered","option1":"Blue Suede","option2":"Checkered","option3":null,"sku":"Customiser_Medium_Square_Blue_Suede_Checkered","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Square - Blue Suede \/ Checkered","public_title":"Blue Suede \/ Checkered","options":["Blue Suede","Checkered"],"price":29900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459129"},
 {"id":32334760968238,"title":"Blue Suede \/ V-Stripes","option1":"Blue Suede","option2":"V-Stripes","option3":null,"sku":"Customiser_Medium_Square_Blue_Suede_Vstripes","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Square - Blue Suede \/ V-Stripes","public_title":"Blue Suede \/ V-Stripes","options":["Blue Suede","V-Stripes"],"price":29900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459114"},
-{"id":32334761001006,"title":"Blue Suede \/ H-Stripes","option1":"Blue Suede","option2":"H-Stripes","option3":null,"sku":"Customiser_Medium_Square_Blue_Suede_Hstripes","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Square - Blue Suede \/ H-Stripes","public_title":"Blue Suede \/ H-Stripes","options":["Blue Suede","H-Stripes"],"price":29900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456071"}],"images":["\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/medium-square-feature.jpg?v=1591640993"],"featured_image":"\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/medium-square-feature.jpg?v=1591640993","options":["Box","Style"],"media":[{"alt":null,"id":6808474877998,"position":1,"preview_image":{"aspect_ratio":0.82,"height":915,"width":750,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/medium-square-feature.jpg?v=1591640993"},"aspect_ratio":0.82,"height":915,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/medium-square-feature.jpg?v=1591640993","width":750}],"content":""}'></h2>
+{"id":32334761001006,"title":"Blue Suede \/ H-Stripes","option1":"Blue Suede","option2":"H-Stripes","option3":null,"sku":"Customiser_Medium_Square_Blue_Suede_Hstripes","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Square - Blue Suede \/ H-Stripes","public_title":"Blue Suede \/ H-Stripes","options":["Blue Suede","H-Stripes"],"price":29900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456071"}],"images":["\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/medium-square-feature.jpg?v=1591640993"],"featured_image":"\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/medium-square-feature.jpg?v=1591640993","options":["Box","Style"],"media":[{"alt":null,"id":6808474877998,"position":1,"preview_image":{"aspect_ratio":0.82,"height":915,"width":750,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/medium-square-feature.jpg?v=1591640993"},"aspect_ratio":0.82,"height":915,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/medium-square-feature.jpg?v=1591640993","width":750}],"content":""}'>
+
+</h2>
         
         <h2 style={{ display: 'none' }}  
         className="4581498060846-product" 
@@ -1096,7 +1107,9 @@ const CustomizePage = ({ data }) => {
 {"id":32334760902702,"title":"Blue Suede \/ Solid","option1":"Blue Suede","option2":"Solid","option3":null,"sku":"Customiser_Medium_Square_Blue_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Square - Blue Suede \/ Solid","public_title":"Blue Suede \/ Solid","options":["Blue Suede","Solid"],"price":29900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456044"},
 {"id":32334760935470,"title":"Blue Suede \/ Checkered","option1":"Blue Suede","option2":"Checkered","option3":null,"sku":"Customiser_Medium_Square_Blue_Suede_Checkered","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Square - Blue Suede \/ Checkered","public_title":"Blue Suede \/ Checkered","options":["Blue Suede","Checkered"],"price":29900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459129"},
 {"id":32334760968238,"title":"Blue Suede \/ V-Stripes","option1":"Blue Suede","option2":"V-Stripes","option3":null,"sku":"Customiser_Medium_Square_Blue_Suede_Vstripes","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Square - Blue Suede \/ V-Stripes","public_title":"Blue Suede \/ V-Stripes","options":["Blue Suede","V-Stripes"],"price":29900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276459114"},
-{"id":32334761001006,"title":"Blue Suede \/ H-Stripes","option1":"Blue Suede","option2":"H-Stripes","option3":null,"sku":"Customiser_Medium_Square_Blue_Suede_Hstripes","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Square - Blue Suede \/ H-Stripes","public_title":"Blue Suede \/ H-Stripes","options":["Blue Suede","H-Stripes"],"price":29900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456071"}]'></h2>
+{"id":32334761001006,"title":"Blue Suede \/ H-Stripes","option1":"Blue Suede","option2":"H-Stripes","option3":null,"sku":"Customiser_Medium_Square_Blue_Suede_Hstripes","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Square - Blue Suede \/ H-Stripes","public_title":"Blue Suede \/ H-Stripes","options":["Blue Suede","H-Stripes"],"price":29900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276456071"}]'>
+
+</h2>
 
         <h2 style={{ display: 'none' }}  className="4582615547950-product" id="Medium Round Dome-product" data-json='
         {"id":4582615547950,"title":"Medium Round Dome","handle":"medium-round-dome","description":"","published_at":"2020-06-07T13:43:29-07:00","created_at":"2020-06-07T13:46:15-07:00","vendor":"Dose of Roses","type":"","tags":["Assembly"],"price":49900,"price_min":49900,"price_max":49900,"available":true,"price_varies":false,"compare_at_price":null,"compare_at_price_min":0,"compare_at_price_max":0,"compare_at_price_varies":false,"variants":[
@@ -1107,7 +1120,9 @@ const CustomizePage = ({ data }) => {
         {"id":32341385281582,"title":"White Suede \/ Solid","option1":"White Suede","option2":"Solid","option3":null,"sku":"Customiser_Medium_Round_White_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Dome - White Suede \/ Solid","public_title":"White Suede \/ Solid","options":["White Suede","Solid"],"price":49900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276702017"},
         {"id":32341385347118,"title":"Blue Suede \/ Solid","option1":"Blue Suede","option2":"Solid","option3":null,"sku":"Customiser_Medium_Round_Blue_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Dome - Blue Suede \/ Solid","public_title":"Blue Suede \/ Solid","options":["Blue Suede","Solid"],"price":49900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276698862"},
         {"id":32341385379886,"title":"Black Marble \/ Solid","option1":"Black Marble","option2":"Solid","option3":null,"sku":"Customiser_Medium_Round_Black_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Dome - Black Marble \/ Solid","public_title":"Black Marble \/ Solid","options":["Black Marble","Solid"],"price":49900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276702809"},
-        {"id":32341385445422,"title":"White Marble \/ Solid","option1":"White Marble","option2":"Solid","option3":null,"sku":"Customiser_Medium_Round_White_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Dome - White Marble \/ Solid","public_title":"White Marble \/ Solid","options":["White Marble","Solid"],"price":49900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276699984"}],"images":["\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRound.png?v=1605088431"],"featured_image":"\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRound.png?v=1605088431","options":["Box","Style"],"media":[{"alt":"Medium Round Dome","id":7594424238126,"position":2,"preview_image":{"aspect_ratio":1.0,"height":1000,"width":1000,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRound.png?v=1605088427"},"aspect_ratio":1.0,"height":1000,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRound.png?v=1605088427","width":1000}],"content":""}'></h2>
+        {"id":32341385445422,"title":"White Marble \/ Solid","option1":"White Marble","option2":"Solid","option3":null,"sku":"Customiser_Medium_Round_White_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Dome - White Marble \/ Solid","public_title":"White Marble \/ Solid","options":["White Marble","Solid"],"price":49900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276699984"}],"images":["\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRound.png?v=1605088431"],"featured_image":"\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRound.png?v=1605088431","options":["Box","Style"],"media":[{"alt":"Medium Round Dome","id":7594424238126,"position":2,"preview_image":{"aspect_ratio":1.0,"height":1000,"width":1000,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRound.png?v=1605088427"},"aspect_ratio":1.0,"height":1000,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/MediumRound.png?v=1605088427","width":1000}],"content":""}'>
+
+        </h2>
                 
         <h2 style={{ display: 'none' }}  
           className="4582615547950-product" 
@@ -1121,6 +1136,7 @@ const CustomizePage = ({ data }) => {
           {"id":32341385347118,"title":"Blue Suede \/ Solid","option1":"Blue Suede","option2":"Solid","option3":null,"sku":"Customiser_Medium_Round_Blue_Suede_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Dome - Blue Suede \/ Solid","public_title":"Blue Suede \/ Solid","options":["Blue Suede","Solid"],"price":49900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276698862"},
           {"id":32341385379886,"title":"Black Marble \/ Solid","option1":"Black Marble","option2":"Solid","option3":null,"sku":"Customiser_Medium_Round_Black_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Dome - Black Marble \/ Solid","public_title":"Black Marble \/ Solid","options":["Black Marble","Solid"],"price":49900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276702809"},
           {"id":32341385445422,"title":"White Marble \/ Solid","option1":"White Marble","option2":"Solid","option3":null,"sku":"Customiser_Medium_Round_White_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Medium Round Dome - White Marble \/ Solid","public_title":"White Marble \/ Solid","options":["White Marble","Solid"],"price":49900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276699984"}]'>
+        
         </h2>
 
         <h2 style={{ display: 'none' }} 
@@ -1137,7 +1153,8 @@ const CustomizePage = ({ data }) => {
           {"id":32338490556462,"title":"White Leather \/ Solid","option1":"White Leather","option2":"Solid","option3":null,"sku":"Customiser_Large_Round_White_Leather_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Dome - White Leather \/ Solid","public_title":"White Leather \/ Solid","options":["White Leather","Solid"],"price":69900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276590832"},
           {"id":32338490589230,"title":"Black Marble \/ Solid","option1":"Black Marble","option2":"Solid","option3":null,"sku":"Customiser_Large_Round_Black_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Dome - Black Marble \/ Solid","public_title":"Black Marble \/ Solid","options":["Black Marble","Solid"],"price":69900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276590877"},
           {"id":32338490621998,"title":"White Marble \/ Solid","option1":"White Marble","option2":"Solid","option3":null,"sku":"Customiser_Large_Round_White_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Dome - White Marble \/ Solid","public_title":"White Marble \/ Solid","options":["White Marble","Solid"],"price":69900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276590838"}],"images":["\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/LargeRound.png?v=1605088398"],"featured_image":"\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/LargeRound.png?v=1605088398","options":["Box","Style"],"media":[{"alt":"Large Round Dome","id":7594412376110,"position":1,"preview_image":{"aspect_ratio":1.0,"height":1000,"width":1000,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/LargeRound.png?v=1605088009"},"aspect_ratio":1.0,"height":1000,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/LargeRound.png?v=1605088009","width":1000}],"content":""}'>
-          </h2>
+          
+        </h2>
         
         <h2 style={{ display: 'none' }}  
         className="4582183698478-product" 
@@ -1152,6 +1169,7 @@ const CustomizePage = ({ data }) => {
           {"id":32338490556462,"title":"White Leather \/ Solid","option1":"White Leather","option2":"Solid","option3":null,"sku":"Customiser_Large_Round_White_Leather_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Dome - White Leather \/ Solid","public_title":"White Leather \/ Solid","options":["White Leather","Solid"],"price":69900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276590832"},
           {"id":32338490589230,"title":"Black Marble \/ Solid","option1":"Black Marble","option2":"Solid","option3":null,"sku":"Customiser_Large_Round_Black_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Dome - Black Marble \/ Solid","public_title":"Black Marble \/ Solid","options":["Black Marble","Solid"],"price":69900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276590877"},
           {"id":32338490621998,"title":"White Marble \/ Solid","option1":"White Marble","option2":"Solid","option3":null,"sku":"Customiser_Large_Round_White_Marble_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Dome - White Marble \/ Solid","public_title":"White Marble \/ Solid","options":["White Marble","Solid"],"price":69900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276590838"}]'>
+        
         </h2>
   
         <h2 style={{ display: 'none' }}  
@@ -1160,13 +1178,16 @@ const CustomizePage = ({ data }) => {
         data-json='
         {"id":4626620284974,"title":"Single Square Acrylic","handle":"single-square-acrylic","description":"","published_at":"2020-08-03T17:28:13-07:00","created_at":"2020-08-03T17:28:12-07:00","vendor":"Dose of Roses","type":"","tags":["Assembly"],"price":4900,"price_min":4900,"price_max":4900,"available":true,"price_varies":false,"compare_at_price":null,"compare_at_price_min":0,"compare_at_price_max":0,"compare_at_price_varies":false,"variants":[
         {"id":32724260487214,"title":"Acrylic \/ Solid","option1":"Acrylic","option2":"Solid","option3":null,"sku":"Customiser_Single_Square_Clear_Acrylic_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Single Square Acrylic - Acrylic \/ Solid","public_title":"Acrylic \/ Solid","options":["Acrylic","Solid"],"price":4900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"286064433"}],"images":["\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/Acrylic_Square_Clear_SingleRose_Red_Closed_1925935c-2970-4a1f-9022-bf037929656d.jpg?v=1605085953"],"featured_image":"\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/Acrylic_Square_Clear_SingleRose_Red_Closed_1925935c-2970-4a1f-9022-bf037929656d.jpg?v=1605085953","options":["Box","Style"],"media":[{"alt":null,"id":7594348871726,"position":1,"preview_image":{"aspect_ratio":1.0,"height":2000,"width":2000,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/Acrylic_Square_Clear_SingleRose_Red_Closed_1925935c-2970-4a1f-9022-bf037929656d.jpg?v=1605085953"},"aspect_ratio":1.0,"height":2000,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/Acrylic_Square_Clear_SingleRose_Red_Closed_1925935c-2970-4a1f-9022-bf037929656d.jpg?v=1605085953","width":2000}],"content":""}'>
+        
         </h2>
                 
         <h2 style={{ display: 'none' }}  
         className="4626620284974-product" 
         id="Single Square Acrylic" 
         data-json='[
-        {"id":32724260487214,"title":"Acrylic \/ Solid","option1":"Acrylic","option2":"Solid","option3":null,"sku":"Customiser_Single_Square_Clear_Acrylic_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Single Square Acrylic - Acrylic \/ Solid","public_title":"Acrylic \/ Solid","options":["Acrylic","Solid"],"price":4900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"286064433"}]'></h2>
+        {"id":32724260487214,"title":"Acrylic \/ Solid","option1":"Acrylic","option2":"Solid","option3":null,"sku":"Customiser_Single_Square_Clear_Acrylic_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Single Square Acrylic - Acrylic \/ Solid","public_title":"Acrylic \/ Solid","options":["Acrylic","Solid"],"price":4900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"286064433"}]'>
+
+        </h2>
         
         <h2 style={{ display: 'none' }} 
         className="4581968085038-product" 
@@ -1183,7 +1204,9 @@ const CustomizePage = ({ data }) => {
         id="Acrylic Large Heart" 
         data-json='[
           {"id":32337243766830,"title":"Acrylic \/ Solid","option1":"Acrylic","option2":"Solid","option3":null,"sku":"Customiser_Large_Heart_Clear_Acrylic_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Acrylic Large Heart - Acrylic \/ Solid","public_title":"Acrylic \/ Solid","options":["Acrylic","Solid"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276571805"},
-          {"id":32337243799598,"title":"Marble \/ Solid","option1":"Marble","option2":"Solid","option3":null,"sku":"Customiser_Large_Heart_Marble_Acrylic_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":false,"name":"Acrylic Large Heart - Marble \/ Solid","public_title":"Marble \/ Solid","options":["Marble","Solid"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276567495"}]'></h2>
+          {"id":32337243799598,"title":"Marble \/ Solid","option1":"Marble","option2":"Solid","option3":null,"sku":"Customiser_Large_Heart_Marble_Acrylic_Solid","requires_shipping":true,"taxable":true,"featured_image":null,"available":false,"name":"Acrylic Large Heart - Marble \/ Solid","public_title":"Marble \/ Solid","options":["Marble","Solid"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"276567495"}]'>
+
+          </h2>
           
         <h2 style={{ display: 'none' }} 
           className="4574507663406-product" 
@@ -1244,6 +1267,7 @@ const CustomizePage = ({ data }) => {
           {"id":32301186220078,"title":"White Leather \/ Numbers","option1":"White Leather","option2":"Numbers","option3":null,"sku":"Customiser_LargeFlat_White_Leather_Numbers","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Flat - White Leather \/ Numbers","public_title":"White Leather \/ Numbers","options":["White Leather","Numbers"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"275701086"},
           {"id":32301186973742,"title":"Black Marble \/ Numbers","option1":"Black Marble","option2":"Numbers","option3":null,"sku":"Customiser_LargeFlat_Black_Marble_Numbers","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Flat - Black Marble \/ Numbers","public_title":"Black Marble \/ Numbers","options":["Black Marble","Numbers"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"275709875"},
           {"id":32301188022318,"title":"White Marble \/ Numbers","option1":"White Marble","option2":"Numbers","option3":null,"sku":"Customiser_LargeFlat_White_Marble_Numbers","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Flat - White Marble \/ Numbers","public_title":"White Marble \/ Numbers","options":["White Marble","Numbers"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"275701104"}],"images":["\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/LargeRoundFlat.png?v=1605089738"],"featured_image":"\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/LargeRoundFlat.png?v=1605089738","options":["Box","Style"],"media":[{"alt":"Large Round Flat","id":7594464051246,"position":1,"preview_image":{"aspect_ratio":1.0,"height":1000,"width":1000,"src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/LargeRoundFlat.png?v=1605089733"},"aspect_ratio":1.0,"height":1000,"media_type":"image","src":"https:\/\/cdn.shopify.com\/s\/files\/1\/0157\/4420\/4900\/products\/LargeRoundFlat.png?v=1605089733","width":1000}],"content":""}'>
+          
           </h2>
         
         <h2 style={{ display: 'none' }}  
@@ -1303,7 +1327,9 @@ const CustomizePage = ({ data }) => {
           {"id":32301185466414,"title":"Black Leather \/ Numbers","option1":"Black Leather","option2":"Numbers","option3":null,"sku":"Customiser_LargeFlat_Black_Leather_Numbers","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Flat - Black Leather \/ Numbers","public_title":"Black Leather \/ Numbers","options":["Black Leather","Numbers"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"275709869"},
           {"id":32301186220078,"title":"White Leather \/ Numbers","option1":"White Leather","option2":"Numbers","option3":null,"sku":"Customiser_LargeFlat_White_Leather_Numbers","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Flat - White Leather \/ Numbers","public_title":"White Leather \/ Numbers","options":["White Leather","Numbers"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"275701086"},
           {"id":32301186973742,"title":"Black Marble \/ Numbers","option1":"Black Marble","option2":"Numbers","option3":null,"sku":"Customiser_LargeFlat_Black_Marble_Numbers","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Flat - Black Marble \/ Numbers","public_title":"Black Marble \/ Numbers","options":["Black Marble","Numbers"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"275709875"},
-          {"id":32301188022318,"title":"White Marble \/ Numbers","option1":"White Marble","option2":"Numbers","option3":null,"sku":"Customiser_LargeFlat_White_Marble_Numbers","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Flat - White Marble \/ Numbers","public_title":"White Marble \/ Numbers","options":["White Marble","Numbers"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"275701104"}]'></h2>
+          {"id":32301188022318,"title":"White Marble \/ Numbers","option1":"White Marble","option2":"Numbers","option3":null,"sku":"Customiser_LargeFlat_White_Marble_Numbers","requires_shipping":true,"taxable":true,"featured_image":null,"available":true,"name":"Large Round Flat - White Marble \/ Numbers","public_title":"White Marble \/ Numbers","options":["White Marble","Numbers"],"price":39900,"weight":0,"compare_at_price":null,"inventory_management":"shopify","barcode":"275701104"}]'>
+
+          </h2>
           
         <h2 style={{ display: 'none' }}  
           className="4630506962990-product" 

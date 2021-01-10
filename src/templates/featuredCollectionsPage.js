@@ -1,12 +1,14 @@
 import React from 'react';
 import { graphql } from "gatsby";
+import Preloader from "../components/common/preloader"
 import CollectionSlider from "../components/collectionSlider";
-import './featuredCollectionsPage.scss';
+import '../styles/featuredCollectionsPage.scss';
 
 const featuredCollectionsPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
   return (
     <>
+      <Preloader />
       <div className="collection-collections-spacing">
         <div id="shopify-section-collection-collections" className="shopify-section">
           <div className="collections-collection-section">
