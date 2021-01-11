@@ -277,8 +277,6 @@ const Header = ({ path }) => {
     window.onscroll = function () {
       let currentScrollpos = window.pageYOffset;
   
-      console.log("currentScrollpos = ", currentScrollpos);
-
       if (prevScrollpos < currentScrollpos) {
   
         if (currentScrollpos >= 5) {
@@ -292,7 +290,24 @@ const Header = ({ path }) => {
       prevScrollpos = currentScrollpos;
     }
   }
+
+  const openSlideCart = (e) => {
+    e.preventDefault();
+    //fetchCart();w
+    openCartDrawer();
+    openCartOverlay();
+  };
+
+  function openCartDrawer() {
+    document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
+    document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
+  }
   
+  function openCartOverlay() {
+    document.querySelector(".js-ajax-cart-overlay").classList.add('is-open');
+    document.documentElement.classList.add('is-locked');
+  }
+
   return (
     <>
       
@@ -354,6 +369,7 @@ const Header = ({ path }) => {
                     </Link>
 
                     <Link to="/cart" 
+                      onClick={openSlideCart}
                       className="site-header__icon site-header__cart nav-cart_icon js-ajax-cart-drawer-trigger" 
                       aria-describedby="a11y-external-message"  key="cart"
                     >
