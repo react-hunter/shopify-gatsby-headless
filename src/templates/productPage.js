@@ -14,18 +14,50 @@ const ProductPage = ({ data, pageContext }) => {
     const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 2) : [];
     
     const productReview = productReviews.filter(pr => pr.handle === id)
-    
+    const addToCartButtonSticky = document.querySelector(".atcSticky");
+ 
     useEffect(() => {
-        isInViewport();
         setKlaviyoEvents();
-        selectVariantSelectorOptionFromSwatch();
-        setTimeout(setPDPHeaderPadding, 300);
+//        selectVariantSelectorOptionFromSwatch();
+        setTimeout(setPDPHeaderPadding, 800);
+
+        if (addToCartButtonSticky){
+            for (var i=0;i<addToCartButtonSticky.length;i++) {
+                addToCartButtonSticky[i].style.display = "none";
+            }
+        } 
+
+        let showing = false;
+      
     }, [])
+
+    /*
+    function stickyFunction(){
+        const addToCartButton = document.querySelector(".mobile-in-view_trigger");
+
+        if (isInViewport(addToCartButton)) {
+          
+          if (!showing) {
+            showing = true;
+            addToCartButtonSticky.slideUp();
+          }
+  
+        } else {
+          
+          if (showing) {
+            showing = false;
+            addToCartButtonSticky.slideDown();
+          }
+        }
+    } */
 
     function setPDPHeaderPadding() {
         const headerElement = document.querySelector(".stickyHeader");
         const headerHeight = headerElement.offsetHeight;
       
+        console.log("headerElement = ", headerElement);
+        console.log("headerHeight = ", headerHeight);
+
         let mainProductSection = document.querySelector(".product-template__container");
         mainProductSection.style.marginTop = `${headerHeight}px`;
     }
@@ -40,18 +72,9 @@ const ProductPage = ({ data, pageContext }) => {
         );
     }
 
-    function setKlaviyoEvents() {
-        document.getElementByClass("klav-popup-trigger").addEventListener("click", function () {
-            document.getElementByClass("klav-popup").fadeIn();
-            return false
-        });
-
-        document.getElementByClass("close-klav-popup").addEventListener("click", function () {
-            document.getElementByClass("klav-popup").fadeOut();
-            return false
-        });      
+    function setKlaviyoEvents() { 
     }
-
+/*
     function selectVariantSelectorOptionFromSwatch(overlay) {
 
         let productSwatches = overlay.parentElement.querySelector(".collection-product-color-swatch");
@@ -70,7 +93,7 @@ const ProductPage = ({ data, pageContext }) => {
           }
         }
       }
-      
+*/      
     return (
         <>
             <Preloader />
