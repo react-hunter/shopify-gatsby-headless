@@ -24,6 +24,7 @@ const AjaxCartCustom = () => {
     const htmlSelector = document.documentElement;
     const context = useContext(StoreContext);
     const [lineItems, setLineItems] = useState(context.store.checkout.lineItems);
+    const [messageShow, setMessageShow] = useState(false);
     
     useEffect(() => {
         // const atcUpsellButtons = document.querySelectorAll('.upsell-add_button');
@@ -60,9 +61,6 @@ const AjaxCartCustom = () => {
         context.removeLineItem(context.store.client, context.store.checkout.id, itemId)
     }
     
-    function resetOnClickEvents() {
-    }
-
     const cartDrawerClose = (e) => {
         e.preventDefault();
 
@@ -87,9 +85,9 @@ const AjaxCartCustom = () => {
         console.log("addNoteToCart");
     };
     
-    const handleCheckboxClick = (e) => {
-        e.preventDefault();
+    const handleCheckboxClick = () => {
         console.log("handleCheckboxClick");
+        setMessageShow(!messageShow)
     };
 
     const rushProcessing = (e) => {
@@ -143,13 +141,15 @@ const AjaxCartCustom = () => {
                                 </span>
                             </div>
 
-                            <div className="giftmsg-container">
-                                <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/DOR_Logo_Shop_Slim_XL_600x_600x_e8d2362f-25d0-4cc7-af87-ea45200dc5ea_300x.png?v=1565004065" 
-                                    alt=""
-                                    itemProp="logo" />
-                                <textarea data-limit-rows="false" rows="5" cols="25" data-cols="25"  data-rows="5" maxLength="120" placeholder="Enter your message..."  id="gift-message-text" ></textarea>
-                                <button className="addNote" onClick={addNoteToCart}>ADD GIFT MESSAGE</button>
-                            </div>
+                            {messageShow && (
+                                <div className="giftmsg-container">
+                                    <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/DOR_Logo_Shop_Slim_XL_600x_600x_e8d2362f-25d0-4cc7-af87-ea45200dc5ea_300x.png?v=1565004065" 
+                                        alt=""
+                                        itemProp="logo" />
+                                    <textarea data-limit-rows="false" rows="5" cols="25" data-cols="25"  data-rows="5" maxLength="120" placeholder="Enter your message..."  id="gift-message-text" ></textarea>
+                                    <button className="addNote" onClick={addNoteToCart}>ADD GIFT MESSAGE</button>
+                                </div>
+                            )}
 
                             <div className="cart-item" style={{ borderBottom: '1px solid #e5e5e5' }}>
                                 <span>
@@ -210,7 +210,7 @@ const AjaxCartCustom = () => {
                                                             <span aria-hidden="true">−</span>
                                                         </button>
                                                         <input type="text" className="js-qty__num ajax-cart-item__quantity" 
-                                                            value="1" min="1" 
+                                                            min="1" 
                                                             data-id={item.id}
                                                             aria-label="quantity" pattern="[0-9]*" 
                                                             id={`updates_${item.id}`} value={item.quantity} readOnly />
