@@ -400,7 +400,7 @@ const Header = ({ path }) => {
                 <CardSlider key="card-slider" />
                 { commonData.mobileHeaderMenu.map((menuItem, menuIndex) => {                 
                   return (
-                    <div key={menuIndex}>                 
+                    <>               
                       <Link key={`menuItem-${menuIndex}`} to={`${menuItem.hasChildren ? '/fakeUrl' : menuItem.url}`} data-id={menuItem.title}
                         onClick={e => menuClickHandler(e, menuItem.hasChildren, menuItem.title)} data-url={menuItem.url}
                         className={`${menuItem.hasChildren ? 'hasChild' : ''} sidenav-item_inner first-level-item_inner`}>
@@ -435,7 +435,7 @@ const Header = ({ path }) => {
                           )
                         })
                       ) : '' }
-                    </div>                    
+                    </>                    
                   )
                 })}
               </div>

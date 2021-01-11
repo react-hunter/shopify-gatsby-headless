@@ -27,39 +27,21 @@ const SearchPage = ( { data, pageContext, location } ) => {
     <>
       <Preloader />
       <SEO title="Home" />
-      <section className="hero is-dark">
-        <div className="hero-body">
-          <div className="container">
-            <div className="field">
-              <p className="control has-icons-right">
-                <input className="input is-large" name="value" type="text" value={searchText} onChange={e => setSearchText(e.target.value)} placeholder="Search" />
-                <span className="icon is-right">
-                  <i className="fas fa-search"></i>
-                </span>
-              </p>
-            </div>
-          </div>
+
+      <div className="main-content js-focus-hidden"  id="searchContent">
+        <hr aria-hidden="true" />
+        <div class="search-results-header_wrapper">
+          <h2 class="">Search results</h2>
         </div>
-      </section>
-      <section className="hero is-dark">
-        <div className="hero-body">
-          <div className="hero-body">
-              <h1 className="is-size-5 has-text-medium">RESULTS FOR "{searchText.toUpperCase()}" :</h1>
-          </div>
-          <div className="container">
-            <div className="columns is-multiline ">
-              {filteredProducts.map((p, i) => (
-                !p ?
-                  <p>Nothings with : {searchText} </p>
-                  :
-                  <div className="column is-3" style={{ marginBottom: "40px" }} key={i}>
-                    <ProductBox product={p} review={findReview(p.handle)} />
-                  </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+        <ul class="grid" id="shop-all-content">
+          {filteredProducts.map((p, i) => (
+            !p ?
+              <p>Nothings with : {searchText} </p>
+              :
+              <ProductBox product={p} review={findReview(p.handle)} key={i} />
+          ))}
+        </ul>
+      </div>
     </>
   );
 };

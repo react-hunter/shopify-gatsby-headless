@@ -179,7 +179,7 @@ const CustomizePage = ({ data }) => {
     if (window.innerWidth <= 700) {
       document.getElementById("col-left").insertAfter(document.getElementById("col-right"), null);
     } else {
-      document.getElementById("col-left").insertBefore(document.querySelector(".arrangement-center"), null);
+//      document.getElementById("col-left").insertBefore(document.querySelector(".arrangement-center"), null);
     }
   }
 

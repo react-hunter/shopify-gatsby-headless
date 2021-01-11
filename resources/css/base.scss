@@ -17517,3 +17517,17 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
     font-size: 15px
   }
 }
+
+
+#searchContent {
+  margin-top: 120px;
+
+  #shop-all-content {
+    margin: 0 10%;
+
+    @media (max-width: 750px) {
+      justify-content: space-between;
+      margin: 0 1%;
+    }
+  }
+}
