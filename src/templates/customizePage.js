@@ -57,19 +57,19 @@ const CustomizePage = ({ data }) => {
         setSelectedProduct(product);
         console.log('document.getElementById("arr-Type") = ', document.getElementById("arr-Type"));
         
-        if (document.getElementById("arr-Type") === null) {
+        if (!document.getElementById("arr-Type")) {
           addArrangementBlock("ARRANGEMENT", "arr-Type", product.Arrangement, product.subtext, "0")
         } else {
           document.getElementById("arr-Type").innerText = product.Arrangement;
           document.getElementById("sub-text").innerText = product.subtext;
         }
   
-        if (document.getElementById(`${product.Arrangement}-product`) !== null) {
+        if (document.getElementById(`${product.Arrangement}-product`)) {
           console.log(`${product.Arrangement}-product -------------------------------- `);
 
           product = JSON.parse(document.getElementById(`${product.Arrangement}-product`).dataset.json)
           selectedProductBoxStock = product;
-          if (product.featured_image !== null) {
+          if (product.featured_image) {
             document.getElementById("mainIMG").src = product.featured_image;
           }
         }
@@ -133,23 +133,26 @@ const CustomizePage = ({ data }) => {
           var rose1 = document.getElementById(roses[0].replace("-", " ") + "-0");
           var rose2 = document.getElementById(roses[1].replace("-", " ") + "-1");
   
-          if (rose1 !== null) {
+          console.log("rose1 = ", rose1);
+          console.log("rose2 = ", rose2);
+
+          if (rose1) {
             eventFire(rose1, 'click')
             eventFire(rose1, 'click')  
           }
   
-          if (rose2 !== null) {
+          if (rose2) {
   
             eventFire(rose2, 'click')
             eventFire(rose2, 'click')
           }
-        } else if (document.getElementById(testarg) !== null) {
+        } else if (document.getElementById(testarg)) {
           eventFire(document.getElementById(testarg), 'click')
           if (currentStep < selectedProduct.maxOptions) {
             eventFire(document.getElementById(`step-next`), 'click')
           }
         } else {
-          if (document.getElementById(testarg + "-0") !== null && !testarg.includes("+")) {
+          if (document.getElementById(testarg + "-0") && !testarg.includes("+")) {
             isShare = false;
             eventFire(document.getElementById(testarg.replace("-", " ") + "-0"), 'click')
             eventFire(document.getElementById(testarg.replace("-", " ") + "-0"), 'click')
@@ -157,7 +160,9 @@ const CustomizePage = ({ data }) => {
         }
       }
       isShare = false;
-      if (rose1 !== null && rose2 !== null) {
+      if (rose1 && rose2) {
+        console.log("rose1 = ", rose1);
+        console.log("rose2 = ", rose2);
         eventFire(rose2, 'click')
       }
     } else if (window.location.href.includes("?") && !window.location.href.includes("&")) {
@@ -185,7 +190,7 @@ const CustomizePage = ({ data }) => {
   function nextStep() {
     currentStep = currentStep + 1;
   
-    if (document.getElementById(`arrangementSelector-${currentStep}`) !== null) {
+    if (document.getElementById(`arrangementSelector-${currentStep}`)) {
       document.getElementById(`arrangementSelector-${currentStep}`).style.display = "block"
     }
   }
@@ -226,7 +231,7 @@ const CustomizePage = ({ data }) => {
     var title = '';
 
     console.log("step2 = ", step2);
-    if (step2 === undefined) {
+    if (!step2) {
       title = "Choose Arrangement";
     } else {
       title = step2.option;
@@ -249,7 +254,7 @@ const CustomizePage = ({ data }) => {
   
     document.getElementById("mainIMG").src = src;
   
-    if (document.getElementById("BOX-Type") === null) {
+    if (!document.getElementById("BOX-Type")) {
       addArrangementBlock("BOX", "BOX-Type", title, "", `${currentStep}`)
     } else {
       document.getElementById("BOX-Type").innerHTML = title;
@@ -262,7 +267,7 @@ const CustomizePage = ({ data }) => {
   
   function setStyle(title, style) {
   
-    if (document.getElementById("Style-Type") === null) {
+    if (!document.getElementById("Style-Type")) {
       addArrangementBlock("Style", "Style-Type", title, "", `${currentStep}`)
     } else {
       document.getElementById("Style-Type").innerHTML = title;
@@ -308,7 +313,7 @@ const CustomizePage = ({ data }) => {
   
     for (var i = 0; i < json.length; i++) {
       if (json[i].title === `${selections[1]} / Box`) {
-        if (document.getElementById("price-Type") === null) {
+        if (!document.getElementById("price-Type")) {
           addArrangementBlock("Price", "price-Type", `$${json[i].price / 100}`, "", currentStep)
         } else {
           document.getElementById("price-Type").innerText = `$${json[i].price / 100}`;
@@ -330,7 +335,7 @@ const CustomizePage = ({ data }) => {
       var element = json[j];
       if (choice.join(",") === element.title.replace(" \/ ", ",")) {
   
-        if (document.getElementById("price-Type") === null) {
+        if (!document.getElementById("price-Type")) {
           addArrangementBlock("Price", "price-Type", `$${element.price / 100}`, "", currentStep)
         } else {
           document.getElementById("price-Type").innerText = `$${element.price / 100}`;
@@ -443,7 +448,7 @@ const CustomizePage = ({ data }) => {
   }
 
   function movePrice() {
-    if (document.getElementById("price-Type") !== null) {
+    if (document.getElementById("price-Type")) {
       var price = document.getElementById("price-Type").parentElement;
       document.getElementById("col-left").appendChild(price);
     }
@@ -484,14 +489,14 @@ const CustomizePage = ({ data }) => {
   
     container.appendChild(subDiv);
   
-    if (document.getElementById(`arrangementSelector-${currentStep}`) === null) {
+    if (!document.getElementById(`arrangementSelector-${currentStep}`)) {
       document.getElementById("col-right").appendChild(container)
     } else {
       document.getElementById(`arrangementSelector-${currentStep}`).remove()
       document.getElementById("col-right").appendChild(container)
     }
   
-    if (subDiv !== null) {
+    if (subDiv) {
       let firstAvailable = subDiv.querySelectorAll(".box")[0];
       eventFire(firstAvailable, 'click')
       firstAvailable.style.boxShadow = "#000000 0px 0px 0px 4px"
@@ -525,7 +530,7 @@ const CustomizePage = ({ data }) => {
       }
     }
   
-    if (document.getElementById(`arrangementSelector-${currentStep}`) === null) {
+    if (!document.getElementById(`arrangementSelector-${currentStep}`)) {
       document.getElementById("col-right").appendChild(container)
     } else {
       document.getElementById(`arrangementSelector-${currentStep}`).remove()
@@ -536,7 +541,7 @@ const CustomizePage = ({ data }) => {
       eventFire(document.getElementsByClassName("style-container")[0].firstElementChild, 'click')
       eventFire(document.getElementById(`step-next`), 'click')
     } else {
-      if (selectedStyle !== undefined) {
+      if (selectedStyle) {
         if (hasStyle(selectedStyle.style)) {
           if (selectedStyle.style.includes("Letter")) {
             eventFire(document.getElementById("Letters"), 'click')
@@ -554,7 +559,7 @@ const CustomizePage = ({ data }) => {
   }
 
   function generateRosesSelector() {
-    if (document.getElementById("arrangementSelector-" + currentStep) !== null) {
+    if (document.getElementById("arrangementSelector-" + currentStep)) {
       document.getElementById("arrangementSelector-" + currentStep).remove();
       // resetRoseSelections()
     }
@@ -611,7 +616,7 @@ const CustomizePage = ({ data }) => {
     }
     container.appendChild(subDiv);
   
-    if (document.getElementById(`arrangementSelector-${currentStep}`) === null) {
+    if (!document.getElementById(`arrangementSelector-${currentStep}`)) {
       document.getElementById("col-right").appendChild(container)
     } else {
       document.getElementById(`arrangementSelector-${currentStep}`).remove()
@@ -626,7 +631,8 @@ const CustomizePage = ({ data }) => {
   
     if (!isShare) {
       for (var ii = 0; ii < 100; ii++) {
-        if (document.getElementById("roseblock-" + ii) !== null) {
+        console.log(document.getElementById("roseblock-" + ii));
+        if (document.getElementById("roseblock-" + ii)) {
           if (count === selectedRoses.length) {
             eventFire(document.getElementById(selectedRoses[ii] + "-" + ii), 'click')
           } else {
@@ -650,7 +656,7 @@ const CustomizePage = ({ data }) => {
   }
 
   function isProductNotUsingStencil(productId) {
-    if (document.querySelector("#excluded_products") !== null) {
+    if (document.querySelector("#excluded_products")) {
       let excludedProducts = JSON.parse(document.querySelector("#excluded_products").dataset.ids);
       for (let i = 0; i < excludedProducts.length; i++) {
         if (excludedProducts[i] === productId) {
@@ -710,7 +716,7 @@ const CustomizePage = ({ data }) => {
         }
       }
   
-      if (document.getElementById("Rose-Type") === null) {
+      if (!document.getElementById("Rose-Type")) {
         addArrangementBlock("Rose Colors", "Rose-Type", selectedRoses.join(" + "), "", `${currentStep}`)
       } else {
         document.getElementById("Rose-Type").innerHTML = selectedRoses.join(" + ");
@@ -770,11 +776,11 @@ const CustomizePage = ({ data }) => {
     selections = [];
     var i = 1;
     do {
-      if (document.getElementById(`statbox-${i}`) !== null) {
+      if (document.getElementById(`statbox-${i}`)) {
         document.getElementById(`statbox-${i}`).remove();
       }
       i++;
-    } while (document.getElementById(`statbox-${i}`) !== null);
+    } while (document.getElementById(`statbox-${i}`));
   }
 
   const previous = () => {
@@ -793,7 +799,7 @@ const CustomizePage = ({ data }) => {
     console.log("next");
     
     console.log(selections[0]);
-    if (selections[0] !== undefined) {
+    if (selections[0]) {
       if (!selections[0].includes(selectedProduct.Arrangement)) {
         resetSelections();
       }
@@ -846,7 +852,7 @@ const CustomizePage = ({ data }) => {
         document.getElementById("mobile-panel").classList.remove("sticky-hide");
       }
   
-      if (selectedStyle !== undefined) {
+      if (selectedStyle) {
         if (selectedStyle.roseTypes !== 2) {
           document.getElementById("rose-mobile-2").parentElement.style.display = "none";
         } else {
@@ -883,7 +889,7 @@ const CustomizePage = ({ data }) => {
   const setLetterStyle = (e, title) => {
     e.preventDefault();
 
-    if (document.getElementById("Style-Type") === null) {
+    if (!document.getElementById("Style-Type")) {
       addArrangementBlock("Style", "Style-Type", title, "", `${currentStep}`)
     } else {
       document.getElementById("Style-Type").innerHTML = title;
@@ -909,7 +915,7 @@ const CustomizePage = ({ data }) => {
   const setNumberStyle = (e, title) => {
     e.preventDefault();
 
-    if (document.getElementById("Style-Type") === null) {
+    if (!document.getElementById("Style-Type")) {
       addArrangementBlock("Style", "Style-Type", title, "", `${currentStep}`)
     } else {
       document.getElementById("Style-Type").innerHTML = title;
