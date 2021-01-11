@@ -5,58 +5,57 @@ import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
 
 const SearchPage = ( props ) => {
-  const [search, setSearch] = useState('')
+  const [searchText, setSearchText] = useState('')
 
   useEffect(() => {
-    setSearch(typeof document !== undefined ? document.location.search.substring(7).split('=')[0]: '')
-    console.log('params: ', props.location)
     const { searchText } = props.location.search ? queryString.parse(props.location.search) : { searchText: ''}
     console.log('params: ', searchText)
+    setSearchText(searchText);
   }, [])
 
-    return (
-        <>
-            <Preloader />
-            <SEO title="Home" />
-            <section className="hero is-dark">
-                <div className="hero-body">
-                    <div className="container">
-                        <div className="field">
-                            <p className="control has-icons-right">
-                                <input className="input is-large" name="value" type="text" value={search} onChange={e => setSearch(e.target.value)} placeholder="Search" />
-                                <span className="icon is-right">
-                                    <i className="fas fa-search"></i>
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="hero is-dark">
-                <div className="hero-body">
-                    <div className="hero-body">
-                        {/* <h1 className="is-size-5 has-text-medium">RESULTS FOR "{searchText.toUpperCase()}" :</h1> */}
-                    </div>
-                    <div className="container">
-                        {/* <div className="columns is-multiline ">
-                            {products.filter(p =>
-                                p.node.title.toUpperCase().includes(search.toUpperCase()) ||
-                                p.node.productType.toUpperCase().includes(search.toUpperCase()) ||
-                                (p.node.title.toUpperCase().includes(search.toUpperCase()) && p.node.productType.toUpperCase().includes(search.toUpperCase()))
-                            ).map((p, i) => (
-                                !p ?
-                                    <p>Nothings with : {search} </p>
-                                    :
-                                    <div className="column is-3" style={{ marginBottom: "40px" }} key={i}>
-                                        <ProductBox product={p} />
-                                    </div>
-                            ))}
-                        </div> */}
-                    </div>
-                </div>
-            </section>
-        </>
-    );
+  return (
+    <>
+      <Preloader />
+      <SEO title="Home" />
+      <section className="hero is-dark">
+        <div className="hero-body">
+          <div className="container">
+            <div className="field">
+              <p className="control has-icons-right">
+                <input className="input is-large" name="value" type="text" value={searchText} onChange={e => setSearchText(e.target.value)} placeholder="Search" />
+                <span className="icon is-right">
+                  <i className="fas fa-search"></i>
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="hero is-dark">
+        <div className="hero-body">
+          <div className="hero-body">
+              <h1 className="is-size-5 has-text-medium">RESULTS FOR "{searchText.toUpperCase()}" :</h1>
+          </div>
+          <div className="container">
+            {/* <div className="columns is-multiline ">
+              {products.filter(p =>
+                p.node.title.toUpperCase().includes(searchText.toUpperCase()) ||
+                p.node.productType.toUpperCase().includes(searchText.toUpperCase()) ||
+                (p.node.title.toUpperCase().includes(searchText.toUpperCase()) && p.node.productType.toUpperCase().includes(searchText.toUpperCase()))
+              ).map((p, i) => (
+                !p ?
+                  <p>Nothings with : {searchText} </p>
+                  :
+                  <div className="column is-3" style={{ marginBottom: "40px" }} key={i}>
+                    <ProductBox product={p} />
+                  </div>
+              ))}
+            </div> */}
+          </div>
+        </div>
+      </section>
+    </>
+  );
 };
 
 export default SearchPage

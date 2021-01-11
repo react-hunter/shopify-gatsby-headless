@@ -23,7 +23,7 @@ module.exports = {
       resolve: 'gatsby-plugin-purgecss',
       options: {
         develop: true,
-        purgeOnly: ['resources/css/', 'src/styles/'],
+        purgeOnly: ['resources/css/'],
       },
     },
     {
