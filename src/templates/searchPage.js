@@ -3,15 +3,25 @@ import queryString from 'query-string'
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
+import ProductBox from "../components/ProductList/productBox"
 
-const SearchPage = ( props ) => {
-  const [searchText, setSearchText] = useState('')
-
+const SearchPage = ( { data, pageContext, location } ) => {
+  const { searchText: initialSearchText} = location.search ? queryString.parse(location.search) : { searchText: ''}
+  const [ searchText, setSearchText ] = useState(initialSearchText)
+  const [ filteredProducts, setFilteredProducts ] = useState([])
+  const { productReviews } = pageContext;
+  
   useEffect(() => {
-    const { searchText } = props.location.search ? queryString.parse(props.location.search) : { searchText: ''}
-    console.log('params: ', searchText)
-    setSearchText(searchText);
-  }, [])
+    const allProducts = data.allShopifyProduct.edges.map(pr => pr.node)
+    const filteredProductList = allProducts.filter(pr => pr.title.toUpperCase().includes(searchText.toUpperCase()) || 
+                                                        pr.productType.toUpperCase().includes(searchText.toUpperCase()));
+    setFilteredProducts(filteredProductList)
+  }, [data.allShopifyProduct.edges, searchText]);
+
+  const findReview = (pHandle) => {
+    const review = productReviews.filter(pr => pr.handle === pHandle)
+    return review[0]
+  }
 
   return (
     <>
@@ -37,20 +47,16 @@ const SearchPage = ( props ) => {
               <h1 className="is-size-5 has-text-medium">RESULTS FOR "{searchText.toUpperCase()}" :</h1>
           </div>
           <div className="container">
-            {/* <div className="columns is-multiline ">
-              {products.filter(p =>
-                p.node.title.toUpperCase().includes(searchText.toUpperCase()) ||
-                p.node.productType.toUpperCase().includes(searchText.toUpperCase()) ||
-                (p.node.title.toUpperCase().includes(searchText.toUpperCase()) && p.node.productType.toUpperCase().includes(searchText.toUpperCase()))
-              ).map((p, i) => (
+            <div className="columns is-multiline ">
+              {filteredProducts.map((p, i) => (
                 !p ?
                   <p>Nothings with : {searchText} </p>
                   :
                   <div className="column is-3" style={{ marginBottom: "40px" }} key={i}>
-                    <ProductBox product={p} />
+                    <ProductBox product={p} review={findReview(p.handle)} />
                   </div>
               ))}
-            </div> */}
+            </div>
           </div>
         </div>
       </section>

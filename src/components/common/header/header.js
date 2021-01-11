@@ -277,8 +277,6 @@ const Header = ({ path }) => {
     window.onscroll = function () {
       let currentScrollpos = window.pageYOffset;
   
-      console.log("currentScrollpos = ", currentScrollpos);
-
       if (prevScrollpos < currentScrollpos) {
   
         if (currentScrollpos >= 5) {
