@@ -70,9 +70,7 @@ const ProductDescription = ({ product, review }) => {
     const closeModal = () => {
         setModalClass('');
     }
-    console.log('selected options: ', variant)
-    console.log('selected variant: ', productVariant)
-console.log('product variants: ', product.variants)
+    
     return (
         <>
         <div className="product_description-container">
