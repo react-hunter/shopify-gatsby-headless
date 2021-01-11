@@ -224,7 +224,9 @@ const CustomizePage = ({ data }) => {
     setStep(step);
     var step2 = selectedProduct.options[currentStep - 1];
     var title = '';
-    if (step2 === null) {
+
+    console.log("step2 = ", step2);
+    if (step2 === undefined) {
       title = "Choose Arrangement";
     } else {
       title = step2.option;
@@ -456,6 +458,7 @@ const CustomizePage = ({ data }) => {
 
     var subDiv = document.createElement("div");
     subDiv.setAttribute("class", "box-contents");
+    subDiv.setAttribute("style", "margin-top: 10px;")
   
     var boxes = selectedProduct["boxes"];
     for (var i = 0; i < boxes.length; i++) {
@@ -477,9 +480,7 @@ const CustomizePage = ({ data }) => {
       }
   
       subDiv.appendChild(box)
-  
     }
-  
   
     container.appendChild(subDiv);
   
@@ -535,7 +536,7 @@ const CustomizePage = ({ data }) => {
       eventFire(document.getElementsByClassName("style-container")[0].firstElementChild, 'click')
       eventFire(document.getElementById(`step-next`), 'click')
     } else {
-      if (selectedStyle !== null) {
+      if (selectedStyle !== undefined) {
         if (hasStyle(selectedStyle.style)) {
           if (selectedStyle.style.includes("Letter")) {
             eventFire(document.getElementById("Letters"), 'click')
@@ -754,13 +755,15 @@ const CustomizePage = ({ data }) => {
 
   function ChangeUrl(title, url) {
     console.log("changeUrl");
-    /*
-    if (typeof (history.pushState) != "undefined") {
+    console.log("title = ", title);
+    console.log("url = ", url);
+
+    if (typeof (window.history.pushState) != "undefined") {
       var obj = { Title: title, Url: url };
-      history.pushState(obj, obj.Title, obj.Url);
+      window.history.pushState(obj, obj.Title, obj.Url);
     } else {
       alert("Browser does not support HTML5.");
-    } */
+    }
   }
 
   function resetSelections() {

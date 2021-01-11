@@ -295,11 +295,10 @@ const Header = ({ path }) => {
   
   return (
     <>
+      
       <div id="shopify-section-header" className="shopify-section">
         <div id="stickyHeader" className="stickyHeader">
-
           <header className="site-header logo--center" role="banner">
-            
             {
               searchShow ? 
                 (
@@ -375,23 +374,20 @@ const Header = ({ path }) => {
             <AnnoucmentBar />
 
           </header>
-        
           <div id="sidenav" className="sidenav-outer">
             <div className="sidenav-modal">
-              <div className="sidenav_search">
+              <div className="sidenav_search" key="sidenav_search">
                 <SearchDrawer />
               </div>
 
-              <div className="sidenav-item_outer">
-                <CardSlider />
-
+              <div className="sidenav-item_outer" key="sidenav-item_outer">
+                <CardSlider key="card-slider" />
                 { commonData.mobileHeaderMenu.map((menuItem, menuIndex) => {                 
                   return (
-                    <>
-                      <Link to={`${menuItem.hasChildren ? '/fakeUrl' : menuItem.url}`} data-id={menuItem.title} data-url={menuItem.url}
-                        // onClick={e => menuItem.hasChildren ? showChildCollection(e, menuItem.title) : hideSideNav }
-                        onClick={e => menuClickHandler(e, menuItem.hasChildren, menuItem.title)}
-                        className={`${menuItem.hasChildren ? 'hasChild' : ''} sidenav-item_inner first-level-item_inner`} key={menuIndex}>
+                    <div key={menuIndex}>                 
+                      <Link key={`menuItem-${menuIndex}`} to={`${menuItem.hasChildren ? '/fakeUrl' : menuItem.url}`} data-id={menuItem.title}
+                        onClick={e => menuClickHandler(e, menuItem.hasChildren, menuItem.title)} data-url={menuItem.url}
+                        className={`${menuItem.hasChildren ? 'hasChild' : ''} sidenav-item_inner first-level-item_inner`}>
                         <div className="sidenav-item_name" key={`itemname-${menuIndex}`}>
                           <div className="sidenav-item_name-inner">
                             {menuItem.title}
@@ -411,22 +407,21 @@ const Header = ({ path }) => {
                               data-title={child_item.title} key={`child-${menuIndex}-${child_index}`}
                               onClick={hideSideNav}
                               className="sidenav-item_inner child-item" >
-                              <div className="sidenav-item_name" key="childitemname">
+                              <div className="sidenav-item_name" key={`childitemname-${menuIndex}-${child_index}`}>
                                 <div className="sidenav-item_name-inner">
                                   {child_item.title}
                                 </div>
                               </div>
-                              <div className="sidenav-item_img" key="childitemimg">
+                              <div className="sidenav-item_img" key={`childitemimg-${menuIndex}-${child_index}`}>
                                 <img src={child_item.image} alt="" />
                               </div>
                             </Link>
                           )
                         })
                       ) : '' }
-                    </>                    
+                    </div>                    
                   )
                 })}
-        
               </div>
             </div>
           </div>
