@@ -17,8 +17,6 @@ const ProductPage = ({ data, pageContext }) => {
     const addToCartButtonSticky = document.querySelector(".atcSticky");
  
     useEffect(() => {
-        setKlaviyoEvents();
-//        selectVariantSelectorOptionFromSwatch();
         setTimeout(setPDPHeaderPadding, 800);
 
         if (addToCartButtonSticky){
@@ -31,26 +29,6 @@ const ProductPage = ({ data, pageContext }) => {
       
     }, [])
 
-    /*
-    function stickyFunction(){
-        const addToCartButton = document.querySelector(".mobile-in-view_trigger");
-
-        if (isInViewport(addToCartButton)) {
-          
-          if (!showing) {
-            showing = true;
-            addToCartButtonSticky.slideUp();
-          }
-  
-        } else {
-          
-          if (showing) {
-            showing = false;
-            addToCartButtonSticky.slideDown();
-          }
-        }
-    } */
-
     function setPDPHeaderPadding() {
         const headerElement = document.querySelector(".stickyHeader");
         const headerHeight = headerElement.offsetHeight;
@@ -61,39 +39,7 @@ const ProductPage = ({ data, pageContext }) => {
         let mainProductSection = document.querySelector(".product-template__container");
         mainProductSection.style.marginTop = `${headerHeight}px`;
     }
-      
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-          rect.top >= 0 &&
-          rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-
-    function setKlaviyoEvents() { 
-    }
-/*
-    function selectVariantSelectorOptionFromSwatch(overlay) {
-
-        let productSwatches = overlay.parentElement.querySelector(".collection-product-color-swatch");
-        if (productSwatches.querySelector(".selected-swatch") != null) {
-          let selectedSwatch = productSwatches.querySelector(".selected-swatch").dataset.color;
-          let optionSlides = overlay.querySelectorAll(".variantSelector-option_content");
-      
-          for (let i = 0; i < optionSlides.length; i++) {
-            let optionSlide = optionSlides[i];
-            let optionText = optionSlide.querySelector(".valueVariant");
-            if (optionText.innerHTML === selectedSwatch) {
-              optionSlide.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
-              optionSlide.click();
-              break;
-            }
-          }
-        }
-      }
-*/      
+         
     return (
         <>
             <Preloader />
