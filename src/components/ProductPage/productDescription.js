@@ -1,10 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react' /* eslint-disable */
 import ProductInfo from "./ProductInfo"
 import StoreContext from '../../context/store'
-import VariantSelectors from "./VariantSelectors"
-import QuantityButton from "./QuantityButton"
+import VariantSelectorsForModal from "./VariantSelectorsForModal"
 import Buttons from "./Buttons"
-import { Flex, Box } from 'rebass';
 
 const ProductDescription = ({ product, review }) => {
 
@@ -13,12 +11,15 @@ const ProductDescription = ({ product, review }) => {
     const [variant, setVariant] = useState(product.variants[0]);
     const productVariant = context.store.client.product.helpers.variantForOptions(product, variant) || variant;
     const [available, setAvailable] = useState(productVariant.availableForSale)
+    const [modalOptions, setOptions] = useState(product.options[0])
+    const [modalClass, setModalClass] = useState('');
 
     useEffect(() => {
         let defaultOptionValues = {}
         product.options.forEach(selector => {
             defaultOptionValues[selector.name] = selector.values[0]
         })
+
         setVariant(defaultOptionValues);
 
         document.querySelectorAll('.accordion_button').forEach(button => {
@@ -53,15 +54,25 @@ const ProductDescription = ({ product, review }) => {
         })
     }
 
-    const handleOptionChange = event => {
-        const { target } = event
+    const handleOptionChange = (name, value) => {
         setVariant(prevState => ({
             ...prevState,
-            [target.name]: target.value,
-            ...console.log(variant)
+            [name]: value
         }))
     }
 
+    const openVariantAndFill = (optionName) => {
+        const selectedOption = product.options.filter(po => po.name === optionName)[0];
+        setOptions(selectedOption);
+        setModalClass('top0');
+    }
+
+    const closeModal = () => {
+        setModalClass('');
+    }
+    console.log('selected options: ', variant)
+    console.log('selected variant: ', productVariant)
+console.log('product variants: ', product.variants)
     return (
         <>
         <div className="product_description-container">
@@ -69,20 +80,19 @@ const ProductDescription = ({ product, review }) => {
                 <div className="product-single__meta">
                     <ProductInfo product={product} review={review} />
 
-                    <div className="variants-selector">
-                        {
-                            product.options.map((options, optionIndex) => (
-                                <div className="" key={optionIndex}>
-                                    <VariantSelectors
-                                        onChange={handleOptionChange}
-                                        options={options}
-                                    />
-                                </div>
-                            ))
-                        }
-                        <div className="column is-3" style={{ display: 'none' }}>
-                            <QuantityButton quantity={quantity} setQuantity={setQuantity} />
-                        </div>
+                    <div className="variants-selector-buttons">
+                    { 
+                        product.options.map((options, optionIndex) => (
+                            <div id={`variantModal-${options.name}-button`} data-type={options.name} 
+                                className="optionBtn optionDefault" onClick={() => openVariantAndFill(options.name)} key={optionIndex}>
+
+                                <span id={options.name} >{options.name}</span>
+                                <span style={{ float: 'right', letterSpacing: '2px' }}> &gt; </span>
+                                <span style={{ float:'right', marginRight: '20px' , letterSpacing: '2px'}} id="choice" 
+                                    className="choice-Box Color variantChoice">{variant[options.name]}</span>
+                            </div>
+                        ))
+                    }
                     </div>
 
                     <Buttons 
@@ -91,6 +101,19 @@ const ProductDescription = ({ product, review }) => {
                         quantity={quantity} 
                         productVariant={productVariant}
                     />
+
+                    <div className="variant-selector-sideNav">
+                        <VariantSelectorsForModal
+                            changeOption={handleOptionChange}
+                            options={modalOptions}
+                            closeModal={closeModal}
+                            modalClass={modalClass}
+                            variantList={product.variants}
+                            variant={variant}
+                            productVariant={productVariant}
+                        />
+                    </div>
+                   
                 </div>
                 
                 <div className="product-single__description rte">

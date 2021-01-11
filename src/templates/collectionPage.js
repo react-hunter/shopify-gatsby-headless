@@ -8,16 +8,6 @@ const collectionPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
   const [ displayProductCount, setDisplayProductCount ] = useState(2);
 
-  const collectionShowMore = (e) => {
-    e.preventDefault();
-    console.log('submit arrive');
-  }
-
-  const collectionShowLess = (e) => {
-    e.preventDefault();
-    console.log('submit arrive');
-  }
-
   const loadMoreProducts = (e) => {
     e.preventDefault();
     console.log('Load More');

@@ -73,8 +73,8 @@ const RegisterForm = () => {
                                 "input": {
                                   "email": email,
                                   "password": password,
-                                  "first name": first_name,
-                                  "last_name": last_name,
+                                  "firstName": first_name,
+                                  "lastName": last_name,
                                 }
                               }
                             }).then((result) => {

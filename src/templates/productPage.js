@@ -14,63 +14,32 @@ const ProductPage = ({ data, pageContext }) => {
     const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 2) : [];
     
     const productReview = productReviews.filter(pr => pr.handle === id)
-    
+    const addToCartButtonSticky = document.querySelector(".atcSticky");
+ 
     useEffect(() => {
-        isInViewport();
-        setKlaviyoEvents();
-        selectVariantSelectorOptionFromSwatch();
-        setTimeout(setPDPHeaderPadding, 300);
+        setTimeout(setPDPHeaderPadding, 800);
+
+        if (addToCartButtonSticky){
+            for (var i=0;i<addToCartButtonSticky.length;i++) {
+                addToCartButtonSticky[i].style.display = "none";
+            }
+        } 
+
+        let showing = false;
+      
     }, [])
 
     function setPDPHeaderPadding() {
         const headerElement = document.querySelector(".stickyHeader");
         const headerHeight = headerElement.offsetHeight;
       
+        console.log("headerElement = ", headerElement);
+        console.log("headerHeight = ", headerHeight);
+
         let mainProductSection = document.querySelector(".product-template__container");
         mainProductSection.style.marginTop = `${headerHeight}px`;
     }
-      
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
-        return (
-          rect.top >= 0 &&
-          rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-
-    function setKlaviyoEvents() {
-        document.getElementByClass("klav-popup-trigger").addEventListener("click", function () {
-            document.getElementByClass("klav-popup").fadeIn();
-            return false
-        });
-
-        document.getElementByClass("close-klav-popup").addEventListener("click", function () {
-            document.getElementByClass("klav-popup").fadeOut();
-            return false
-        });      
-    }
-
-    function selectVariantSelectorOptionFromSwatch(overlay) {
-
-        let productSwatches = overlay.parentElement.querySelector(".collection-product-color-swatch");
-        if (productSwatches.querySelector(".selected-swatch") != null) {
-          let selectedSwatch = productSwatches.querySelector(".selected-swatch").dataset.color;
-          let optionSlides = overlay.querySelectorAll(".variantSelector-option_content");
-      
-          for (let i = 0; i < optionSlides.length; i++) {
-            let optionSlide = optionSlides[i];
-            let optionText = optionSlide.querySelector(".valueVariant");
-            if (optionText.innerHTML === selectedSwatch) {
-              optionSlide.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
-              optionSlide.click();
-              break;
-            }
-          }
-        }
-      }
-      
+         
     return (
         <>
             <Preloader />
@@ -111,7 +80,10 @@ export const query = graphql`
 				title
 				price
 				availableForSale
-				shopifyId
+                shopifyId
+                image {
+                    originalSrc
+                }
 				selectedOptions {
 					name
 					value

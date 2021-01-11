@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { commonData } from '../../data/common';
 import AjaxCartFooter from './ajaxCartFooter';
+import StoreContext from '../../context/store'
+import { Link } from 'gatsby'
 
 const AjaxCartCustom = () => {
       
@@ -20,27 +22,45 @@ const AjaxCartCustom = () => {
     const cartDrawer = document.querySelector(defaults.cartDrawer);
     const cartOverlay = document.querySelector(defaults.cartOverlay);
     const htmlSelector = document.documentElement;
-
+    const context = useContext(StoreContext);
+    const [lineItems, setLineItems] = useState(context.store.checkout.lineItems);
+    const [messageShow, setMessageShow] = useState(false);
+    
     useEffect(() => {
-        const atcUpsellButtons = document.querySelectorAll('.upsell-add_button');
-        for (let i = 0; i < atcUpsellButtons.length; i++) {
+        // const atcUpsellButtons = document.querySelectorAll('.upsell-add_button');
+        // for (let i = 0; i < atcUpsellButtons.length; i++) {
 
-            if (atcUpsellButtons[i].firstElementChild.classList.contains('upsell-single-variant_form')) {
-                atcUpsellButtons[i].onClick = function () {
-                    window.tempUpsellProducts.push(atcUpsellButtons[i].parentElement.parentElement);
-                    console.log("index: ", i )
-                    window.upsellCarousel.removeItem(i);
+        //     if (atcUpsellButtons[i].firstElementChild.classList.contains('upsell-single-variant_form')) {
+        //         atcUpsellButtons[i].onClick = function () {
+        //             window.tempUpsellProducts.push(atcUpsellButtons[i].parentElement.parentElement);
+        //             console.log("index: ", i )
+        //             window.upsellCarousel.removeItem(i);
 
-                    resetOnClickEvents();
-                }
-            }
-        }
+        //             resetOnClickEvents();
+        //         }
+        //     }
+        // }
 
-    }, []);
+        setLineItems(context.store.checkout.lineItems)
 
-    function resetOnClickEvents() {
+    }, [context.store.checkout]);
+
+    const increaseItem = (itemId, itemQuantity) => {
+        context.updateLineItem(context.store.client, context.store.checkout.id, itemId, itemQuantity + 1)
     }
 
+    const decreaseItem = (itemId, itemQuantity) => {
+        if (itemQuantity === 1) {
+            removeItem(itemId)
+        } else {
+            context.updateLineItem(context.store.client, context.store.checkout.id, itemId, itemQuantity - 1)
+        }
+    }
+
+    const removeItem = (itemId) => {
+        context.removeLineItem(context.store.client, context.store.checkout.id, itemId)
+    }
+    
     const cartDrawerClose = (e) => {
         e.preventDefault();
 
@@ -65,9 +85,9 @@ const AjaxCartCustom = () => {
         console.log("addNoteToCart");
     };
     
-    const handleCheckboxClick = (e) => {
-        e.preventDefault();
+    const handleCheckboxClick = () => {
         console.log("handleCheckboxClick");
+        setMessageShow(!messageShow)
     };
 
     const rushProcessing = (e) => {
@@ -121,13 +141,15 @@ const AjaxCartCustom = () => {
                                 </span>
                             </div>
 
-                            <div className="giftmsg-container">
-                                <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/DOR_Logo_Shop_Slim_XL_600x_600x_e8d2362f-25d0-4cc7-af87-ea45200dc5ea_300x.png?v=1565004065" 
-                                    alt=""
-                                    itemProp="logo" />
-                                <textarea data-limit-rows="false" rows="5" cols="25" data-cols="25"  data-rows="5" maxLength="120" placeholder="Enter your message..."  id="gift-message-text" ></textarea>
-                                <button className="addNote" onClick={addNoteToCart}>ADD GIFT MESSAGE</button>
-                            </div>
+                            {messageShow && (
+                                <div className="giftmsg-container">
+                                    <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/DOR_Logo_Shop_Slim_XL_600x_600x_e8d2362f-25d0-4cc7-af87-ea45200dc5ea_300x.png?v=1565004065" 
+                                        alt=""
+                                        itemProp="logo" />
+                                    <textarea data-limit-rows="false" rows="5" cols="25" data-cols="25"  data-rows="5" maxLength="120" placeholder="Enter your message..."  id="gift-message-text" ></textarea>
+                                    <button className="addNote" onClick={addNoteToCart}>ADD GIFT MESSAGE</button>
+                                </div>
+                            )}
 
                             <div className="cart-item" style={{ borderBottom: '1px solid #e5e5e5' }}>
                                 <span>
@@ -142,7 +164,7 @@ const AjaxCartCustom = () => {
                 
                             <div className="cart-subtotal-container">
                                 <span className="subtotal-heading">Subtotal:</span>
-                                <span className="subtotal-amount"></span>
+                                <span className="subtotal-amount">${context.store.checkout.subtotalPrice}</span>
                             </div>
                 
                             <div style={{ margin: '0 0 10px 0', minHeight: '20px',textAlign: 'center'}}>
@@ -152,7 +174,7 @@ const AjaxCartCustom = () => {
                             <span style={{ fontFamily: "'Avenir' sans-serif", marginBottom: '10px' }}>Shipping will be calculated at checkout.</span>
                         </div>
 
-                        <a href="/checkout/" 
+                        <a href={context.store.checkout.webUrl} 
                             className="c-btn--primary button button--black button--full-width js-button js-ajax-checkout-button" 
                             style={{ background: '#000000'}}>
                             <span>Checkout</span>
@@ -162,50 +184,52 @@ const AjaxCartCustom = () => {
                     </div>
 
                     <div className="ajax-cart-drawer__content js-ajax-cart-drawer-content">
-                        { commonData.cartSlide.products.map((item, index) => 
-                        <div className={`ajax-cart-item ${item.title}`} key={index} data-line={index}>
-                          <div className="price-and-remove-item-wrapper">
-                            <div className="ajax-cart-item-remove js-ajax-remove-from-cart">✖</div>
-                          </div>
-                          <div className="ajax-cart-item-content">
-                            <div className="ajax-cart-item-image-container">
-                                <a href={item.url}>
-                                <img className="ajax-cart-item__image" alt={item.title} src={item.image} />
-                                </a>
-                            </div>
-                            <div className="ajax-cart-item-middle-part">
-                                <div className="ajax-cart-item__title">
-                                <a href={item.url}>{item.title}</a>
-                                </div>
-                                <div className="ajax-cart-item-properties"> </div>
-                                <div className="ajax-cart-item-quantity-container">
-                                <div className="cart-item__qty">
-                                    <div className="js-qty">
-                                        <button type="button" 
-                                            className="js-qty__adjust js-qty__adjust--minus icon-fallback-text" 
-                                            data-id={item.id}>
-                                            <span aria-hidden="true">−</span>
-                                        </button>
-                                        <input type="text" className="js-qty__num ajax-cart-item__quantity" 
-                                            value="1" min="1" 
-                                            data-id={item.id}
-                                            aria-label="quantity" pattern="[0-9]*" 
-                                            id={`updates_${item.id}`} readOnly />
+                        { lineItems.map((item, index) => {
+                            return (
+                                <div className={`ajax-cart-item ${item.variant.title}`} key={index} data-line={index}>
+                                    <div className="price-and-remove-item-wrapper">
+                                        <div className="ajax-cart-item-remove js-ajax-remove-from-cart" onClick={() => removeItem(item.id)}>✖</div>
+                                    </div>
+                                    <div className="ajax-cart-item-content">
+                                        <div className="ajax-cart-item-image-container">
+                                            <Link to={`/products/${item.variant.product.handle}`}>
+                                                <img className="ajax-cart-item__image" alt={item.variant.title} src={item.variant.image.src} />
+                                            </Link>
+                                        </div>
+                                        <div className="ajax-cart-item-middle-part">
+                                            <div className="ajax-cart-item__title">
+                                                <Link to={`/products/${item.variant.product.handle}`}>{item.variant.title}</Link>
+                                            </div>
+                                            <div className="ajax-cart-item-properties"> </div>
+                                            <div className="ajax-cart-item-quantity-container">
+                                                <div className="cart-item__qty">
+                                                    <div className="js-qty">
+                                                        <button type="button" 
+                                                            className="js-qty__adjust js-qty__adjust--minus icon-fallback-text" 
+                                                            data-id={item.id} onClick={() => decreaseItem(item.id, item.quantity)}>
+                                                            <span aria-hidden="true">−</span>
+                                                        </button>
+                                                        <input type="text" className="js-qty__num ajax-cart-item__quantity" 
+                                                            min="1" 
+                                                            data-id={item.id}
+                                                            aria-label="quantity" pattern="[0-9]*" 
+                                                            id={`updates_${item.id}`} value={item.quantity} readOnly />
 
-                                        <button type="button" 
-                                            className="js-qty__adjust js-qty__adjust--plus" 
-                                            data-id={item.id}>
-                                            <span aria-hidden="true">+</span>
-                                        </button>
-                                    </div>
-                                    <div className="ajax-cart-item__price">
-                                        <span>{item.price}</span>
+                                                        <button type="button" 
+                                                            className="js-qty__adjust js-qty__adjust--plus" 
+                                                            data-id={item.id} onClick={() => increaseItem(item.id, item.quantity)}>
+                                                            <span aria-hidden="true">+</span>
+                                                        </button>
+                                                    </div>
+                                                    <div className="ajax-cart-item__price">
+                                                        <span>${item.variant.price} USD</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
+                            )}
                         )}                  
                     </div>
                 </div>

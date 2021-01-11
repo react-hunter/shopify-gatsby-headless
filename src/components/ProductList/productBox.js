@@ -1,27 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'gatsby'
+import CollectionVariantSelector from './collectionVariantSelector'
+
 const ProductBox = props => {
     const product = props.product;
     const reviewBadge = props.review ? props.review.badge : '';
 
     const prevImage = (e) => {
         e.preventDefault();
-        console.log('submit arrive');
+        console.log('prevImage');
     }
 
     const nextImage = (e) => {
         e.preventDefault();
-        console.log('submit arrive');
+        console.log('nextImage');
     }
 
     const OpenCollectionModal = (e) => {
         e.preventDefault();
-        console.log('submit arrive');
+        console.log('OpenCollectionModal');
+        setVaraintModalShow(true);
     }
 
     const handleKeyDown =(e) => {
         e.preventDefault();
     }
+
+    const [varaintModalShow, setVaraintModalShow] = useState(false);
+
     return (
         <li className="grid__item grid__item--collection-template " key={product.title}>
             <div className="grid-view-item product-card">
@@ -82,6 +88,8 @@ const ProductBox = props => {
 
                 <button className="openVariantModal" 
                     onClick={OpenCollectionModal}>ADD TO BAG</button>
+
+                {varaintModalShow && ( <CollectionVariantSelector /> )}
             </div>
         </li>
     );
