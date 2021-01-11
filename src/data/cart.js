@@ -2,7 +2,7 @@ export const cartpageData = {
     items: [
         {
             title: 'ROSE BEAR',
-            url: '/product/rose_bear',
+            url: '/products/rose_bear',
             imageUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/products/Medium_Pink_Rose_Bear_x190.jpg?v=1602470960',
             variants: [
                 {
@@ -17,7 +17,7 @@ export const cartpageData = {
         },
         {
             title: 'Medium Round Flat',
-            url: '/product/medium_round_flat',
+            url: '/products/medium_round_flat',
             imageUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/products/MediumRoundFlat_x190.png?v=1605088780',
             variants: [
                 {
@@ -53,7 +53,7 @@ export const cartpageData = {
         },
         {
             title: 'Large Round Flat',
-            url: '/product/large_round_flat',
+            url: '/products/large_round_flat',
             imageUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/products/LargeRoundFlat_x190.png?v=1605089733',
             variants: [
                 {
@@ -89,7 +89,7 @@ export const cartpageData = {
         },
         {
             title: '24K Gold Dipped Rose – Red',
-            url: '/product/24k_gold_dipped_rose_red',
+            url: '/products/24k_gold_dipped_rose_red',
             imageUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/products/24KRoseRed_x190.png?v=1607709471',
             variants: [],
             properties: [],

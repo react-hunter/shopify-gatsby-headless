@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import './productGallery.css';
+import '../../styles/productGallery.css';
 
 const ProductGallery = ({ product }) => {
     const settings = {
@@ -30,7 +30,7 @@ const ProductGallery = ({ product }) => {
                 </Slider>
                 <h2 className="ig-title" style={{float:'none', clear: 'both', marginTop:'20px' }}><a href="https://www.instagram.com/doseofroses/"> As Seen on @DOSEOFROSES</a></h2>
                     
-                <script src="//foursixty.com/media/scripts/fs.slider.v2.5.js" data-feed-id="dose-of-roses" data-theme="slider_v2_5" data-open-links-in-same-page="true" data-connector-filter="30963" data-cell-size="20%"></script>
+                <script src="//foursixty.com/media/scripts/fs.slider.v2.5.js" data-feed-id="dose-of-roses" data-for-url="true" data-theme="slider_v2_5" data-open-links-in-same-page="true" data-connector-filter="30963" data-cell-size="20%"></script>
             </div>
         </div>
         </>

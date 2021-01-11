@@ -12,7 +12,6 @@ import LoginHeaderIcon from '../../../images/icon-login-header.svg';
 import MessageIcon from '../../../images/icon-message.svg';
 import CartHeaderIcon from '../../../images/icon-cart-header.svg';
 import { commonData } from '../../../data/common';
-import './header.css';
 
 import SearchDrawer from './searchDrawer';
 import SiteNav from './siteNav';
@@ -47,6 +46,7 @@ const Header = ({ path }) => {
   const { checkout } = context.store
   const [quantity, setQuantity] = useState(countQuantity(checkout ? checkout.lineItems : []))
   // const [modal, setModal] = useState(false)
+  const [ searchShow, setSearchShow ] = useState(false)
   
   useEffect(() => {
     initializeHeader();
@@ -92,14 +92,13 @@ const Header = ({ path }) => {
 
   const showSearchBar = (e) => {
     e.preventDefault();
-    console.log('show search bar');
+    setSearchShow(true)
   }
 
 
-  // const hideSearch = (e) => {
-  //   e.preventDefault();
-  //   console.log('hide search');
-  // }
+  const hideSearch = () => {
+    setSearchShow(false)
+  }
 
   function initiateBannerSlider() {
     if (runBannerAnimation === false) {
@@ -272,6 +271,8 @@ const Header = ({ path }) => {
     let header = document.querySelector(".stickyHeader");
     let prevScrollpos = window.pageYOffset;
   
+    console.log("prevScrollpos = ", prevScrollpos);
+
     window.onscroll = function () {
       let currentScrollpos = window.pageYOffset;
   
@@ -288,15 +289,36 @@ const Header = ({ path }) => {
       prevScrollpos = currentScrollpos;
     }
   }
+
+  const openSlideCart = (e) => {
+    e.preventDefault();
+    //fetchCart();w
+    openCartDrawer();
+    openCartOverlay();
+  };
+
+  function openCartDrawer() {
+    document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
+    document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
+  }
   
+  function openCartOverlay() {
+    document.querySelector(".js-ajax-cart-overlay").classList.add('is-open');
+    document.documentElement.classList.add('is-locked');
+  }
+
   return (
     <>
+      
       <div id="shopify-section-header" className="shopify-section">
-        <div className="stickyHeader">
-
+        <div id="stickyHeader" className="stickyHeader">
           <header className="site-header logo--center" role="banner">
-            
-            <SearchDrawer />
+            {
+              searchShow ? 
+                (
+                  <SearchDrawer hideSearch={hideSearch} />
+                ) : null
+            }
             <div className="main-header site-header__mobile-nav">
               <SiteNav />
               
@@ -346,6 +368,7 @@ const Header = ({ path }) => {
                     </Link>
 
                     <Link to="/cart" 
+                      onClick={openSlideCart}
                       className="site-header__icon site-header__cart nav-cart_icon js-ajax-cart-drawer-trigger" 
                       aria-describedby="a11y-external-message"  key="cart"
                     >
@@ -366,23 +389,20 @@ const Header = ({ path }) => {
             <AnnoucmentBar />
 
           </header>
-        
           <div id="sidenav" className="sidenav-outer">
             <div className="sidenav-modal">
-              <div className="sidenav_search">
+              <div className="sidenav_search" key="sidenav_search">
                 <SearchDrawer />
               </div>
 
-              <div className="sidenav-item_outer">
-                <CardSlider />
-
+              <div className="sidenav-item_outer" key="sidenav-item_outer">
+                <CardSlider key="card-slider" />
                 { commonData.mobileHeaderMenu.map((menuItem, menuIndex) => {                 
                   return (
-                    <>
-                      <Link to={`${menuItem.hasChildren ? '/fakeUrl' : menuItem.url}`} data-id={menuItem.title} data-url={menuItem.url}
-                        // onClick={e => menuItem.hasChildren ? showChildCollection(e, menuItem.title) : hideSideNav }
-                        onClick={e => menuClickHandler(e, menuItem.hasChildren, menuItem.title)}
-                        className={`${menuItem.hasChildren ? 'hasChild' : ''} sidenav-item_inner first-level-item_inner`} key={menuIndex}>
+                    <>               
+                      <Link key={`menuItem-${menuIndex}`} to={`${menuItem.hasChildren ? '/fakeUrl' : menuItem.url}`} data-id={menuItem.title}
+                        onClick={e => menuClickHandler(e, menuItem.hasChildren, menuItem.title)} data-url={menuItem.url}
+                        className={`${menuItem.hasChildren ? 'hasChild' : ''} sidenav-item_inner first-level-item_inner`}>
                         <div className="sidenav-item_name" key={`itemname-${menuIndex}`}>
                           <div className="sidenav-item_name-inner">
                             {menuItem.title}
@@ -402,12 +422,12 @@ const Header = ({ path }) => {
                               data-title={child_item.title} key={`child-${menuIndex}-${child_index}`}
                               onClick={hideSideNav}
                               className="sidenav-item_inner child-item" >
-                              <div className="sidenav-item_name" key="childitemname">
+                              <div className="sidenav-item_name" key={`childitemname-${menuIndex}-${child_index}`}>
                                 <div className="sidenav-item_name-inner">
                                   {child_item.title}
                                 </div>
                               </div>
-                              <div className="sidenav-item_img" key="childitemimg">
+                              <div className="sidenav-item_img" key={`childitemimg-${menuIndex}-${child_index}`}>
                                 <img src={child_item.image} alt="" />
                               </div>
                             </Link>
@@ -417,7 +437,6 @@ const Header = ({ path }) => {
                     </>                    
                   )
                 })}
-        
               </div>
             </div>
           </div>

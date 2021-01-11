@@ -19,6 +19,7 @@ const addScript = url => {
   const script = document.createElement("script")
   script.src = url
   script.async = true
+  script.setAttribute("data-for-url", true);
   document.body.appendChild(script)
 }
 
@@ -42,7 +43,7 @@ export const onClientEntry = () => {
 
 export const onPreRouteUpdate = () => {
   const currentUrl = window.location.href;
-  if(currentUrl.includes('/product/')) {
+  if(currentUrl.includes('/products/')) {
     removejscssfile("//foursixty.com/media/scripts/fs.slider.v2.5.js", "js")
     addScript("//foursixty.com/media/scripts/fs.slider.v2.5.js")
   } else {

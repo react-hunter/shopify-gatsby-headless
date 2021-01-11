@@ -1,6 +1,7 @@
 import React from 'react'
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
+import Preloader from "../components/common/preloader"
 import HeroSection from "../components/homepage/heroSection"
 import ImageSection from "../components/homepage/imageSections"
 import ArticleSection from "../components/articles/articleSection"
@@ -8,6 +9,7 @@ import ArticleSection from "../components/articles/articleSection"
 const IndexPage = ({ data }) => {
   return (
     <>
+      <Preloader />
       <SEO title="Home" />
       <HeroSection />
       <ImageSection />
@@ -20,13 +22,6 @@ export default IndexPage
 
 export const query = graphql`
   query {
-    projectIdea: file(relativePath: {eq: "undraw_web_shopping_dd4l.png"}) {
-         childImageSharp {
-            fluid(maxWidth: 1000) {
-               ...GatsbyImageSharpFluid
-            }
-         }
-    }
     allShopifyProduct {
       edges {
         node {

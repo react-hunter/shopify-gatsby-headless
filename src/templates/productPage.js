@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
+import Preloader from "../components/common/preloader"
 import ProductGallery from "../components/ProductPage/ProductGallery"
 import ProductDescription from "../components/ProductPage/productDescription"
 import RelatedProductList from "../components/relatedProductList";
 
-import './productPage.scss';
+import '../styles/productPage.scss';
 
 const ProductPage = ({ data, pageContext }) => {
     const product = data.shopifyProduct;
@@ -15,6 +16,9 @@ const ProductPage = ({ data, pageContext }) => {
     const productReview = productReviews.filter(pr => pr.handle === id)
     
     useEffect(() => {
+        isInViewport();
+        setKlaviyoEvents();
+        selectVariantSelectorOptionFromSwatch();
         setTimeout(setPDPHeaderPadding, 300);
     }, [])
 
@@ -69,6 +73,7 @@ const ProductPage = ({ data, pageContext }) => {
       
     return (
         <>
+            <Preloader />
             <SEO title={product.title} />
 
             <div id="ProductSection-product-template" className="product-template__container">

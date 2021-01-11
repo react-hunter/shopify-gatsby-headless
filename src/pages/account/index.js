@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import StoreContext from '../../context/store'
+import Preloader from "../../components/common/preloader"
 import Layout from "../../components/account/Layout"
 import Logout from "./logout"
 import OrdersList from "../../components/account/ordersList"
@@ -71,6 +72,7 @@ const Index = () => {
     const { customerAccessToken } = useContext(StoreContext);
     return (
         <Layout>
+            <Preloader />
             <Query
                 query={CUSTOMER_INFO}
                 variables={{
