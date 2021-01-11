@@ -14,10 +14,10 @@ const ProductPage = ({ data, pageContext }) => {
     const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 2) : [];
     
     const productReview = productReviews.filter(pr => pr.handle === id)
-    const addToCartButtonSticky = document.querySelector(".atcSticky");
- 
+    
     useEffect(() => {
         setTimeout(setPDPHeaderPadding, 800);
+        const addToCartButtonSticky = document.querySelector(".atcSticky");
 
         if (addToCartButtonSticky){
             for (var i=0;i<addToCartButtonSticky.length;i++) {
