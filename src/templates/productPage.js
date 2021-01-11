@@ -80,7 +80,10 @@ export const query = graphql`
 				title
 				price
 				availableForSale
-				shopifyId
+                shopifyId
+                image {
+                    originalSrc
+                }
 				selectedOptions {
 					name
 					value

@@ -1,11 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react' /* eslint-disable */
 import ProductInfo from "./ProductInfo"
 import StoreContext from '../../context/store'
-import VariantSelectors from "./VariantSelectors"
 import VariantSelectorsForModal from "./VariantSelectorsForModal"
-import QuantityButton from "./QuantityButton"
 import Buttons from "./Buttons"
-import { Flex, Box } from 'rebass';
 
 const ProductDescription = ({ product, review }) => {
 
@@ -73,7 +70,9 @@ const ProductDescription = ({ product, review }) => {
     const closeModal = () => {
         setModalClass('');
     }
-
+    console.log('selected options: ', variant)
+    console.log('selected variant: ', productVariant)
+console.log('product variants: ', product.variants)
     return (
         <>
         <div className="product_description-container">
@@ -109,6 +108,9 @@ const ProductDescription = ({ product, review }) => {
                             options={modalOptions}
                             closeModal={closeModal}
                             modalClass={modalClass}
+                            variantList={product.variants}
+                            variant={variant}
+                            productVariant={productVariant}
                         />
                     </div>
                    
