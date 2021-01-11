@@ -25,6 +25,8 @@ const RegisterForm = () => {
 
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
+  const [first_name, setFirstName] = useState(null);
+  const [last_name, setLastName] = useState(null);
 
   return (
     <>
@@ -55,11 +57,11 @@ const RegisterForm = () => {
                         <br></br>
                         <br></br>
                         
-                        <label className="label has-text-white" htmlFor="loginEmail">First Name</label>
-                        <input className="input" type="email" id="loginEmail" onChange />
+                        <label className="label has-text-white" htmlFor="first_name">First Name</label>
+                        <input className="input" type="first_name" id="first_name" onChange={(e) => (setFirstName(e.target.value))} />
 
-                        <label className="label has-text-white" htmlFor="loginPassword">Last Name</label>
-                        <input className="input" type="password" id="loginPassword" onChange />
+                        <label className="label has-text-white" htmlFor="last_name">Last Name</label>
+                        <input className="input" type="last_name" id="last_name" onChange={(e) => (setLastName(e.target.value))} />
   
                         <button
                           className="register-account_btn btn"
