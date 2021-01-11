@@ -1,23 +1,23 @@
-import React from 'react'; /* eslint-disable */
+import React, { useState } from 'react'; /* eslint-disable */
 
-const VariantSelectorForModal = ({key, onChange, options}) => {
-    const clickSelect = (e) => {
-        e.preventDefault();
-        console.log('clickSelect');
+const VariantSelectorForModal = ({changeOption, options, closeModal, modalClass}) => {
+    const clickSelect = (optionName, optionValue) => {
+        changeOption(optionName, optionValue)
+        closeModal()
     }
 
     const closeNav = (e) => {
         e.preventDefault();
-        console.log('closeNav');
+        closeModal()
     }
 
     return (
-            <div id={`variantModal-${options.name}`} className="sidenav variantModal" key={key}>
+            <div id={`variantModal-${options.name}`} className={`sidenav variantModal ${modalClass}`}>
                 <div className="gridR">
                     <h3 className="varTitle">{options.name}</h3>
                     {
                         options.values.map((value, optionIndex) => (
-                            <div className="gridC" onClick={clickSelect} key={optionIndex}>
+                            <div className="gridC" onClick={() => clickSelect(options.name, value)} key={optionIndex}>
                                 <img id={`img-${value}`} 
                                     src="https://cdn.shopify.com/s/files/1/0157/4420/4900/products/Suede_Black_Single_Galaxy.png?v=1609647961"
                                     alt="" />
