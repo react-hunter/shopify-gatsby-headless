@@ -99,7 +99,9 @@ const AjaxCartCustom = () => {
                         <div className="items-in-cart">{ commonData.cartSlide.title }</div>
                         <div className="ajax-cart-drawer__close js-ajax-cart-drawer-close" 
                             onKeyDown={handleKeyDown}
-                            onClick={cartDrawerClose}>
+                            onClick={cartDrawerClose}
+                            role="button"
+                            tabIndex="0">
                             <i className="icon icon--close" style={{ width: '3.125em' }} aria-hidden="true"></i>
                             <span className="icon-fallback__text">&#10006;</span>
                         </div>
@@ -112,7 +114,7 @@ const AjaxCartCustom = () => {
                                 <span>
                                     <input onClick={handleCheckboxClick} 
                                         id="personalizedMessageCheckbox" 
-                                        type="checkbox" id="" name="" value="" props="" />
+                                        type="checkbox" name="" value="" props="" />
                                 </span>
                                 <span>
                                     <strong style={{ fontFamily: "'Avenir', sans-serif" }}>Personalised Gift Message:</strong> <span className="gift-message">Add a Card for $9.99</span>
@@ -188,7 +190,7 @@ const AjaxCartCustom = () => {
                                             value="1" min="1" 
                                             data-id={item.id}
                                             aria-label="quantity" pattern="[0-9]*" 
-                                            id={`updates_${item.id}`} />
+                                            id={`updates_${item.id}`} readOnly />
 
                                         <button type="button" 
                                             className="js-qty__adjust js-qty__adjust--plus" 

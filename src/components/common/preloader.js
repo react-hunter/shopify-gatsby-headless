@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-const Preloader = () => {
+const Preloader = (props) => {
   const [ loadMore, setLoadMore ] = useState(true)
   
   useEffect(() => {
     setTimeout(() => {
       setLoadMore(false)
+      props.allHide ? props.allHide(false) : console.log('hide');
     }, 500);
   }, []);
 

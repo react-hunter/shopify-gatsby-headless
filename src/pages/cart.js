@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'; /* eslint-disable */
 import SEO from "../components/seo"
 import StoreContext from "../context/store"
-import Preloader from "../components/common/preloader"
 import Products from "../components/Cart/Products"
 import Empty from "../components/Cart/Empty"
 
@@ -12,7 +11,6 @@ const Cart = () => {
     console.log('line items: ', checkout)
     return (
         <>
-            <Preloader />
             <SEO title="cart" />
 
             <div id="shopify-section-cart-template" className="shopify-section">
