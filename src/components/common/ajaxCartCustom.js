@@ -19,9 +19,6 @@ const AjaxCartCustom = () => {
         checkoutButton: '.js-ajax-checkout-button',
     };
 
-    const cartDrawer = document.querySelector(defaults.cartDrawer);
-    const cartOverlay = document.querySelector(defaults.cartOverlay);
-    const htmlSelector = document.documentElement;
     const context = useContext(StoreContext);
     const [lineItems, setLineItems] = useState(context.store.checkout.lineItems);
     const [messageShow, setMessageShow] = useState(false);
@@ -66,17 +63,17 @@ const AjaxCartCustom = () => {
 
         closeCartDrawer();
         closeCartOverlay();
-        htmlSelector.classList.remove("scrollPrevent")
+        document.documentElement.classList.remove("scrollPrevent")
     };
 
     function closeCartOverlay() {
-        cartOverlay.classList.remove('is-open');
-        htmlSelector.classList.remove('is-locked');
-        htmlSelector.classList.remove("scrollPrevent")
+        document.querySelector(defaults.cartOverlay).classList.remove('is-open');
+        document.documentElement.classList.remove('is-locked');
+        document.documentElement.classList.remove("scrollPrevent")
     }
 
     function closeCartDrawer () {
-        cartDrawer.classList.remove('is-open');
+        document.querySelector(defaults.cartDrawer).classList.remove('is-open');
         document.getElementsByTagName("html")[0].classList.remove('cart-drawer-open');
     };
     
