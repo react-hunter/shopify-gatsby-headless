@@ -1,6 +1,6 @@
-import React, { useState } from 'react'; /* eslint-disable */
+import React from 'react'; /* eslint-disable */
 
-const VariantSelectorForModal = ({changeOption, options, closeModal, modalClass}) => {
+const VariantSelectorForModal = ({productVariant, variantList, variant, changeOption, options, closeModal, modalClass}) => {
     const clickSelect = (optionName, optionValue) => {
         changeOption(optionName, optionValue)
         closeModal()
@@ -11,6 +11,24 @@ const VariantSelectorForModal = ({changeOption, options, closeModal, modalClass}
         closeModal()
     }
 
+    const findImage = (optionName, optionValue) => {
+        var imgUrl = ''
+        const otherOptionKeys = Object.keys(variant).filter(optionKey => optionKey !== optionName)
+
+        variantList.map(va => {
+            var matched = true;
+            otherOptionKeys.map(ook => {
+                if(!va.title.split(' / ').includes(variant[ook])) {
+                    matched = false
+                }
+            })
+            if(matched === true && va.title.split(' / ').includes(optionValue)) {
+                imgUrl = va.image.originalSrc;
+            }
+        })
+        return imgUrl
+    }
+
     return (
             <div id={`variantModal-${options.name}`} className={`sidenav variantModal ${modalClass}`}>
                 <div className="gridR">
@@ -18,14 +36,10 @@ const VariantSelectorForModal = ({changeOption, options, closeModal, modalClass}
                     {
                         options.values.map((value, optionIndex) => (
                             <div className="gridC" onClick={() => clickSelect(options.name, value)} key={optionIndex}>
-                                <img id={`img-${value}`} 
-                                    src="https://cdn.shopify.com/s/files/1/0157/4420/4900/products/Suede_Black_Single_Galaxy.png?v=1609647961"
-                                    alt="" />
+                                <img src={findImage(options.name, value)} alt="" />
                                 <h3>{ value }</h3>
-                                <span id={`price-${value}`} className="sidePrice">$39</span>
-                                <a href="/fakeUrl" 
-                                    className="closebtn" 
-                                    onClick={closeNav}>×</a>
+                                <span className="sidePrice">${productVariant.price}</span>
+                                <a href="/fakeUrl" className="closebtn" onClick={closeNav}>×</a>
                             </div> 
                         ))
                     }
