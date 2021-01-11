@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'gatsby'
 import SEO from "../../components/seo"
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo'
-import StoreContext from '../../context/store'
+import { defaultStoreContext } from '../../context/store'
 import ConnexionLayout from "../../components/account/ConnexionLayout"
 import Preloader from "../../components/common/preloader"
 
@@ -36,7 +36,7 @@ mutation customerRecover($email: String!) {
 `
 
 const LoginForm = () => {
-  const { setValue } = useContext(StoreContext);
+  const [store, updateStore] = useState(defaultStoreContext)
   const [passwordForgot, setPasswordForgot] = useState(false);
 
   const [email, setEmail] = useState("");
@@ -47,7 +47,12 @@ const LoginForm = () => {
 
   const [password, setPassword] = useState(null);
   const handleCustomerAccessToken = (value) => {
-    setValue(value)
+    const isBrowser = typeof window !== 'undefined'
+    isBrowser && localStorage.setItem('customerAccessToken', JSON.stringify(value))
+    updateStore(state => {
+        return { ...state, customerAccessToken: value }
+    })
+    console.log('store: ', store)
   }
 
   return (

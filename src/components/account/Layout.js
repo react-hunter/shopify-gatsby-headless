@@ -4,8 +4,9 @@ import StoreContext from "../../context/store"
 
 const Layout = (props) => {
     const { customerAccessToken } = useContext(StoreContext);
+    console.log('customerAccessToken: ', customerAccessToken);
     let isAuthenticated = false
-    customerAccessToken != null &&
+    customerAccessToken !== null &&
         (isAuthenticated = customerAccessToken && customerAccessToken.expiresAt && customerAccessToken.expiresAt > new Date().toISOString() && true )
 
     return (
