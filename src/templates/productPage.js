@@ -16,6 +16,9 @@ const ProductPage = ({ data, pageContext }) => {
     const productReview = productReviews.filter(pr => pr.handle === id)
     
     useEffect(() => {
+        isInViewport();
+        setKlaviyoEvents();
+        selectVariantSelectorOptionFromSwatch();
         setTimeout(setPDPHeaderPadding, 300);
     }, [])
 

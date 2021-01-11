@@ -10,6 +10,7 @@ import Footer from "../components/common/footer"
 import Instagram from "../components/instagram"
 import SubscribeSection from "../components/subscribeSection"
 import Provider from "../context/provider"
+import AjaxCartCustom from "../components/common/ajaxCartCustom"
 
 const Layout = ({ path, children }) => {
 	return (
@@ -26,6 +27,7 @@ const Layout = ({ path, children }) => {
 			`}
 			render={data => (
 				<div className="scrollPreventer">
+					<AjaxCartCustom />
 					<Header path={path} />
 					<div className="page-container drawer-page-content" id="PageContainer">
 						{children}
