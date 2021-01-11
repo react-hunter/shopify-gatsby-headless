@@ -6,8 +6,7 @@ import Preloader from "../components/common/preloader"
 import ProductBox from "../components/ProductList/productBox"
 
 const SearchPage = ( { data, pageContext, location } ) => {
-  const { searchText: initialSearchText} = location.search ? queryString.parse(location.search) : { searchText: ''}
-  const [ searchText, setSearchText ] = useState(initialSearchText)
+  const { searchText } = location.search ? queryString.parse(location.search) : { searchText: ''}
   const [ filteredProducts, setFilteredProducts ] = useState([])
   const { productReviews } = pageContext;
   
@@ -30,10 +29,10 @@ const SearchPage = ( { data, pageContext, location } ) => {
 
       <div className="main-content js-focus-hidden"  id="searchContent">
         <hr aria-hidden="true" />
-        <div class="search-results-header_wrapper">
-          <h2 class="">Search results</h2>
+        <div className="search-results-header_wrapper">
+          <h2>Search results</h2>
         </div>
-        <ul class="grid" id="shop-all-content">
+        <ul className="grid" id="shop-all-content">
           {filteredProducts.map((p, i) => (
             !p ?
               <p>Nothings with : {searchText} </p>

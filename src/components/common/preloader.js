@@ -8,7 +8,7 @@ const Preloader = (props) => {
       setLoadMore(false)
       props.allHide ? props.allHide(false) : console.log('hide');
     }, 500);
-  }, []);
+  });
 
   return (
     <>
