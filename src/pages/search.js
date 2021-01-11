@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import queryString from 'query-string'
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
@@ -8,7 +9,9 @@ const SearchPage = ( props ) => {
 
   useEffect(() => {
     setSearch(typeof document !== undefined ? document.location.search.substring(7).split('=')[0]: '')
-    console.log('params: ', props.location.search)
+    console.log('params: ', props.location)
+    const { searchText } = props.location.search ? queryString.parse(props.location.search) : { searchText: ''}
+    console.log('params: ', searchText)
   }, [])
 
     return (
@@ -32,7 +35,7 @@ const SearchPage = ( props ) => {
             <section className="hero is-dark">
                 <div className="hero-body">
                     <div className="hero-body">
-                        <h1 className="is-size-5 has-text-medium">RESULTS FOR "{search.toUpperCase()}" :</h1>
+                        {/* <h1 className="is-size-5 has-text-medium">RESULTS FOR "{searchText.toUpperCase()}" :</h1> */}
                     </div>
                     <div className="container">
                         {/* <div className="columns is-multiline ">

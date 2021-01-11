@@ -16,7 +16,7 @@ const SearchDrawer = ( props ) => {
               <div className="search-form__container" data-search-form-container="">
                 <form className="search-form search-bar__form" action="/search" method="get" role="search">
                   <div className="search-form__input-wrapper">
-                    <input type="text" name="q" placeholder="Search"
+                    <input type="text" name="searchText" placeholder="Search"
                       aria-label="Search"
                       className="search-form__input search-bar__input" />
                   </div>

@@ -1,7 +1,7 @@
 import "../../resources/css/base.scss"
 import "../../resources/css/stampedio.css"
 import "../../resources/css/preloader.css"
-// import "../../resources/css/layout.scss"
+import "../styles/instagram.css"
 
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby'
@@ -10,7 +10,6 @@ import Footer from "../components/common/footer"
 import Instagram from "../components/instagram"
 import SubscribeSection from "../components/subscribeSection"
 import Provider from "../context/provider"
-
 
 const Layout = ({ path, children }) => {
 	return (
