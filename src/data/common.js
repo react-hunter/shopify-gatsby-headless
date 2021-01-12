@@ -2,7 +2,7 @@ export const commonData = {
   desktopHeaderMenu: [
     {
       title: 'Design Your Own',
-      link: '/pages/create',
+      link: '/create',
       id: 'DesignYourOwn-nav'
     },
     {
@@ -37,7 +37,7 @@ export const commonData = {
       parent: '',
       hasChildren: false,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/FCC663D1-B946-45DB-B660-5B6691393487_500x.jpg',
-      url: '/pages/create'
+      url: '/create'
     },
     {
       title: 'BEST SELLERS',
@@ -255,35 +255,35 @@ export const commonData = {
   footerMenu: [
     {
       title: 'Careers',
-      handle: '/pages/careers'
+      handle: '/careers'
     },
     {
       title: 'Contact Us',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     },
     {
       title: 'FAQs',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     },
     {
       title: 'Shipping',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     },
     {
       title: 'Returns & Exchanges',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     },
     {
       title: 'Privacy Policy',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     },
     {
       title: 'Terms & Conditions',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     },
     {
       title: 'COVID-19',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     }
   ]
 }

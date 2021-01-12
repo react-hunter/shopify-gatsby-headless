@@ -5,7 +5,7 @@ import CustomiserSteps from '../components/createPage/createSteps';
 import CreateArrangements from '../components/createPage/createArrangements';
 import CreateExpert from '../components/createPage/createExpert';
 
-const CreatePage = ({ data }) => {
+const Create = ({ data }) => {
     return (
       <>
         <Preloader />
@@ -17,4 +17,4 @@ const CreatePage = ({ data }) => {
     )
 }
   
-export default CreatePage
+export default Create

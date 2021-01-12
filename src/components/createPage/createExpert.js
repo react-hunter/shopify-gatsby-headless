@@ -26,7 +26,7 @@ const createExpert = () => {
                             <div className="types">
                                 <span>Letters • Numbers • Hearts • Stripes • Checkered</span>
                             </div>
-                            <Link to="/pages/contact-us" >Contact us</Link>
+                            <Link to="/contactus" >Contact us</Link>
                         </div>
                     </div>
                 </div>

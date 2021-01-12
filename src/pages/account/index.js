@@ -84,26 +84,21 @@ const Index = () => {
                     if (error) return <div>Error</div>
                     const { defaultAddress, orders, addresses } = data.customer
                     return (
-                        <>
-                            <h1 className="title has-text-centered">My Account</h1>
-                            <Logout />
-                            <section className="hero is-medium">
-                                <div className="hero-body">
-                                    <div className="container">
-                                        <div className="container">
-                                            <div className="columns is-centered">
-                                                <OrdersList orders={orders} />
-                                                <DefaultAddress 
-                                                    defaultAddress={defaultAddress} 
-                                                    addressesSize={addresses.edges.length}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div className="login-secton_wrapper">
+                            <div className="page-width">
+                                <div class="section-header text-center">
+                                    <h1>My Account</h1>
+                                    <Logout />
                                 </div>
-                            </section>
-
-                        </>
+                                <div className="grid myaccount">
+                                    <OrdersList orders={orders} />
+                                    <DefaultAddress 
+                                        defaultAddress={defaultAddress} 
+                                        addressesSize={addresses.edges.length}
+                                    />
+                                </div>
+                            </div>
+                        </div>
                     )
                 }}
             </Query>

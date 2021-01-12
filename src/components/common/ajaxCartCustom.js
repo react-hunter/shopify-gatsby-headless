@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import AjaxCartFooter from './ajaxCartFooter';
 import GiftMessage from './giftMessage'
+import AjaxCartEmpty from './ajaxCartEmpty';
 import StoreContext from '../../context/store'
 import { Link } from 'gatsby'
 
@@ -36,6 +37,11 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
             setRushLineId(rushLineItem[0].id)
         }
         setLineItems(lineItemList)
+        document.querySelector(defaults.cartOverlay).addEventListener('click', function() {
+            closeAddModal();
+            closeCartDrawer();
+            closeCartOverlay();
+        });
         // const atcUpsellButtons = document.querySelectorAll('.upsell-add_button');
         // for (let i = 0; i < atcUpsellButtons.length; i++) {
 
@@ -81,9 +87,14 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
         document.documentElement.classList.remove("scrollPrevent")
     }
 
+    function closeAddModal() {
+        document.querySelector(defaults.cartModal).classList.remove('is-open');
+    }
+
     function closeCartDrawer () {
         document.querySelector(defaults.cartDrawer).classList.remove('is-open');
         document.getElementsByTagName("html")[0].classList.remove('cart-drawer-open');
+        document.getElementsByTagName("html")[0].style.overflow = "";
     };
     
     const addNoteToCart = (messageContent) => {
@@ -139,54 +150,55 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                         </div>
                     </div>
                     <div className="free-shipping-heading empty"></div>   
+                    { lineItems.length > 0 ?
+                        (<div className="ajax-cart-drawer__button-and-subtotal">
+                            <div className="cart-item-container">
+                                <div className="cart-item">
+                                    <span>
+                                        <input onClick={handleCheckboxClick} id="personalizedMessageCheckbox" 
+                                            type="checkbox" checked={giftLineId !== '' || messageShow} readOnly />
+                                    </span>
+                                    <span>
+                                        <strong style={{ fontFamily: "'Avenir', sans-serif" }}>Personalised Gift Message:</strong> <span className="gift-message">Add a Card for $9.99</span>
+                                    </span>
+                                </div>
 
-                    <div className="ajax-cart-drawer__button-and-subtotal">
-                        <div className="cart-item-container">
-                            <div className="cart-item">
-                                <span>
-                                    <input onClick={handleCheckboxClick} id="personalizedMessageCheckbox" 
-                                        type="checkbox" checked={giftLineId !== '' || messageShow} readOnly />
-                                </span>
-                                <span>
-                                    <strong style={{ fontFamily: "'Avenir', sans-serif" }}>Personalised Gift Message:</strong> <span className="gift-message">Add a Card for $9.99</span>
-                                </span>
+                                { messageShow && <GiftMessage addNoteToCart={addNoteToCart} /> }
+
+                                <div className="cart-item" style={{ borderBottom: '1px solid #e5e5e5' }}>
+                                    <span>
+                                        <input type="checkbox" id="rush-processing" 
+                                            checked={rushLineId !== ''} onClick={rushProcessing} readOnly />
+                                    </span>
+                                    <span>
+                                        <strong style={{ fontFamily: "'Avenir', sans-serif" }}>Rush Processing:</strong> <span className="gift-message">Ship within 24 hours for $8.95</span> 
+                                    </span>
+                                </div>
+                    
+                                <div className="cart-subtotal-container">
+                                    <span className="subtotal-heading">Subtotal:</span>
+                                    <span className="subtotal-amount">${context.store.checkout.subtotalPrice}</span>
+                                </div>
+                    
+                                <div style={{ margin: '0 0 10px 0', minHeight: '20px',textAlign: 'center'}}>
+                                    <span className="quadpay-cart">or 4 interest-free payments of <span id="quad-amount"> </span> by <img className="quadpay-img" src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/229/assets/quadpay_200x.png?v=14478482058500416670" alt="" /></span>
+
+                                </div>
+
+                                <a href={context.store.checkout.webUrl} 
+                                    className="c-btn--primary button button--black button--full-width js-button js-ajax-checkout-button" 
+                                    style={{ background: '#000000'}}>
+                                    <span>Checkout</span>
+                                </a>       
+
+                                <AjaxCartFooter />
                             </div>
-
-                            { messageShow && <GiftMessage addNoteToCart={addNoteToCart} /> }
-
-                            <div className="cart-item" style={{ borderBottom: '1px solid #e5e5e5' }}>
-                                <span>
-                                    <input type="checkbox" id="rush-processing" 
-                                        checked={rushLineId !== ''} onClick={rushProcessing} readOnly />
-                                </span>
-                                <span>
-                                    <strong style={{ fontFamily: "'Avenir', sans-serif" }}>Rush Processing:</strong> <span className="gift-message">Ship within 24 hours for $8.95</span> 
-                                </span>
-                            </div>
-                
-                            <div className="cart-subtotal-container">
-                                <span className="subtotal-heading">Subtotal:</span>
-                                <span className="subtotal-amount">${context.store.checkout.subtotalPrice}</span>
-                            </div>
-                
-                            <div style={{ margin: '0 0 10px 0', minHeight: '20px',textAlign: 'center'}}>
-                                <span className="quadpay-cart">or 4 interest-free payments of <span id="quad-amount"> </span> by <img className="quadpay-img" src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/229/assets/quadpay_200x.png?v=14478482058500416670" alt="" /></span>
-                            </div>
-                
-                            <span style={{ fontFamily: "'Avenir' sans-serif", marginBottom: '10px' }}>Shipping will be calculated at checkout.</span>
-                        </div>
-
-                        <a href={context.store.checkout.webUrl} 
-                            className="c-btn--primary button button--black button--full-width js-button js-ajax-checkout-button" 
-                            style={{ background: '#000000'}}>
-                            <span>Checkout</span>
-                        </a>       
-
-                        <AjaxCartFooter />
-                    </div>
+                        </div>) : ""
+                    }
 
                     <div className="ajax-cart-drawer__content js-ajax-cart-drawer-content">
-                        { lineItems.map((item, index) => {
+                        { lineItems.length > 0 ?
+                            (lineItems.map((item, index) => {
                             return (
                                 <div className={`ajax-cart-item ${item.variant.title}`} key={index} data-line={index}>
                                     <div className="price-and-remove-item-wrapper">
@@ -226,14 +238,17 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                                                     </div>
                                                     <div className="ajax-cart-item__price">
                                                         <span>${item.variant.price * item.quantity} USD</span>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            )}
-                        )}                  
+                                </div>)}
+                            )) : (
+                                <AjaxCartEmpty />
+                            )
+                        }
                     </div>
                 </div>
             </div>

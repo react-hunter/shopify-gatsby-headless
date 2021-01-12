@@ -9940,10 +9940,12 @@ article .article__meta-buttons {
   height: 35px
 }
 
-.footer-social_cell svg {
+.footer-social_cell svg, .footer-social_cell img {
+  margin: 0 auto;
   width: 28px;
   height: 28px;
-  fill: #fff
+  fill: #fff;
+  object-fit: cover;
 }
 
 .newsletter-nav {
@@ -13479,6 +13481,7 @@ body.modal-open {
 
 .login-secton_wrapper {
   padding-top: 175px;
+  padding-bottom: 30px;
   position: relative;
 }
 
@@ -15850,11 +15853,11 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 
 .payment-icons {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 0px 0 20px 0px;
-  margin-top: 10px
+  margin-top: 10px;
+  flex-wrap: wrap;
 }
 
 .fadeOpacity_wrapper {
@@ -17816,5 +17819,17 @@ body.modal-opened {
     width: 100px;
     margin: 0 auto;
     }
+  }
+}
+
+.top-spacing {
+  margin-top: 160px;
+}
+
+.page-template {
+  .rte {
+    font-family: Verdana,sans-serif;
+    padding-bottom: 75px;
+    padding-top: 100px;
   }
 }

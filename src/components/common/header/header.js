@@ -300,6 +300,7 @@ const Header = ({ path }) => {
   function openCartDrawer() {
     document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
     document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
+    document.getElementsByTagName("html")[0].style.overflow = "hidden";
   }
   
   function openCartOverlay() {
@@ -362,7 +363,7 @@ const Header = ({ path }) => {
                       <span className="icon__fallback-text">Log in</span>
                     </Link>
               
-                    <Link to="/pages/contact-us" className="site-header__icon site-header__account nav-message_icon" key="contactus">
+                    <Link to="/contactus" className="site-header__icon site-header__account nav-message_icon" key="contactus">
                       <ReactSVG src={MessageIcon} />
                       <span className="icon__fallback-text">Contact Us</span>
                     </Link>
