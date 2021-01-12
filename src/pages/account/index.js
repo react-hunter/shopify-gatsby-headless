@@ -86,7 +86,7 @@ const Index = () => {
                     return (
                         <div className="login-secton_wrapper">
                             <div className="page-width">
-                                <div class="section-header text-center">
+                                <div className="section-header text-center">
                                     <h1>My Account</h1>
                                     <Logout />
                                 </div>
