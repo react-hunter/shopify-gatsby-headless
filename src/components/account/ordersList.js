@@ -7,8 +7,8 @@ const OrdersList = ({ orders }) => {
 
     return (
         <>
-            <div className="column has-text-centered is-9">
-                <h3 className="subtitle has-text-centered has-text-weight-semibold">ORDER HISTORY</h3>
+            <div className="grid__item myaccount__order-history">
+                <h2 className="">ORDER HISTORY</h2>
                 {
                     orders.edges.length === 0 ? (
                         <p className="has-text-grey">You haven't placed any orders yet.</p>

@@ -119,12 +119,6 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
       },
     })
-    createPage({
-      path: `/pages/contact-us`,
-      component: path.resolve(`./src/templates/contactusPage.js`),
-      context: {
-      },
-    })
   })
 }
 

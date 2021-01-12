@@ -259,31 +259,31 @@ export const commonData = {
     },
     {
       title: 'Contact Us',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     },
     {
       title: 'FAQs',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     },
     {
       title: 'Shipping',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     },
     {
       title: 'Returns & Exchanges',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     },
     {
       title: 'Privacy Policy',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     },
     {
       title: 'Terms & Conditions',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     },
     {
       title: 'COVID-19',
-      handle: '/pages/contact-us'
+      handle: '/contactus'
     }
   ],
   cartSlide: {
