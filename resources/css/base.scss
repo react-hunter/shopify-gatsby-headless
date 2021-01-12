@@ -17833,3 +17833,283 @@ body.modal-opened {
     padding-top: 100px;
   }
 }
+
+/*=======================================
+    FAQ PAGE REDESIGN
+=======================================*/
+.faq_page{
+  width: 100%;
+  margin-top: 115px;
+}
+
+// FAQ TOP BANNER
+.faq_banner-container{
+  width: 100%;
+}
+
+.faq_banner-wrapper{
+  width: 100%;
+  height: max-content;
+  position: relative;
+
+  img{
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.faq_desktop-banner{
+  display: block;
+
+  @media(max-width: 900px){
+    display: none;
+  }
+}
+
+.faq_mobile-banner{
+  display: none;
+
+  @media(max-width: 900px){
+    display: block;
+  }
+}
+
+.faq_banner-text_container,
+.faq_customiser_banner-text_container,
+.faq_customiser_banner-overlay{
+  position: absolute;
+  top: 50%;
+  lefT: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.faq_banner-text_container{
+  max-width: 700px;
+  width: calc(100% - 20px);
+}
+
+.faq_banner-title{
+  margin: 0 auto;
+  font-size: 52px;
+  font-weight: 900;
+  font-family: "Big Caslon";
+  text-align: center;
+  color: #ffffff;
+
+  @media(max-width: 900px){
+    font-size: 7vw;
+  }
+}
+
+.faq_banner-title_underline{
+  margin: 0 auto;
+  width: 130px;
+  height: 4px;
+  background-color: #e9e9e9;
+  margin-bottom: 20px;
+
+  @media(max-width: 900px){
+    margin-bottom: 3vw;
+  }
+}
+
+.faq_banner-subtitle{
+  margin: 0 auto;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 500;
+  font-family: "Big Caslon";
+  color: #ffffff;
+
+  @media(max-width: 900px){
+    font-size: 4.5vw;
+  }
+}
+
+
+// FAQ ACCORDIONS
+.faq_content-container{
+  width: 100%;
+  background-color: #000000;
+}
+
+.faq_content-wrapper{
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.faq_content-accordion_button{
+  position: relative;
+  width: 100%;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  text-align: left;
+  padding: 20px 0;
+  border-bottom: 1px solid #ffffff;
+  display: flex;
+  align-items: center;
+  
+
+  @media(max-width: 900px){
+    font-size: 4.5vw;
+    padding-left: 10px;
+  }
+
+  img{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    left: auto;
+    transform: rotate(-90deg);
+  }
+}
+
+
+.faq_content-accordion_button--active{
+  img{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    left: auto;
+    top: 50%;
+    transform: rotate(0deg);
+  }
+}
+
+.faq_content-accordion_button--active + .faq_content-accordion_content{
+  display: block;
+}
+
+.faq_content-accordion_content{
+  display: none;
+  width: 100%;
+  background-color: #000000;
+  color: #ffffff !important;
+  text-align: left;
+  padding: 10px 0;
+
+  @media(max-width: 900px){
+    font-size: 3.25vw;
+    padding-left: 10px;
+
+  }
+
+  p{
+    color: #ffffff !important;
+  }
+
+  a{
+    color: #ffffff !important;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  a:hover{
+    color: #ffffff !important;
+
+  }
+}
+
+
+// FAQ CUSTOMISER BANNER
+.faq_customiser_banner-overlay{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+}
+.faq_customiser_banner-text_container{
+  max-width: 800px;
+  width: calc(100% - 20px);
+}
+
+.faq_customiser_banner-title{
+  margin: 0 auto;
+  font-size: 52px;
+  font-weight: 900;
+  font-family: "Big Caslon";
+  text-align: center;
+  color: #ffffff;
+
+  @media(max-width: 900px){
+    font-size: 7vw;
+  }
+}
+
+.faq_customiser_banner-subtitle{
+  margin: 30px auto;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: "Big Caslon";
+  text-align: center;
+  color: #ffffff;
+
+  @media(max-width: 900px){
+    margin: 4vw auto;
+    font-size: 5vw;
+  }
+}
+
+.faq_customiser_banner-text{
+  margin: 0 auto;
+  font-size: 24px;
+  font-weight: 500;
+  font-family: "Big Caslon";
+  text-align: center;
+  color: #ffffff;
+
+  @media(max-width: 900px){
+    font-size: 3.5vw;
+  }
+}
+
+.faq_customiser_banner-button{
+  margin: 0 auto;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 450px;
+  height: 70px;
+  border: 1px solid #ffffff;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: "Big Caslon";
+  text-align: center;
+  color: #ffffff;
+
+  @media(max-width: 900px){
+    margin-top: 5vw;
+    font-size: 4.5vw;
+    width: 80%;
+    height: 10vw;
+  }
+}
+
+.faq_customiser_banner-button:hover{
+  background-color: #000000 !important;
+  border: none !important;
+  color: #ffffff !important;
+}
+
+.carousel-scrollbar {
+  background-color: lightgrey;
+  height: 2px;
+  width: 85%;
+  margin: 0 7.5%;
+}
+
+.carousel-scrollbar_bar {
+  height: 100%;
+  background-color: black;
+  width: 33.3333%;
+  transition: transform .3s cubic-bezier(.39,.575,.565,1)
+} 
+
+.pdp-carousel-main {
+    z-index: 10;
+}

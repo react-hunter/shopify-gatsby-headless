@@ -29,13 +29,13 @@ const Footer = () => {
                         </a>
                     </div> 
                     <div className="footer-social_cell">
-                        <a href="https://www.tiktok.com/@doseofroses" target="_blank" rel="noopener">
-                            <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/tiktok_200x.png?v=8989676507694972742" />
+                        <a href="https://www.tiktok.com/@doseofroses" target="_blank" rel="noreferrer">
+                            <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/tiktok_200x.png?v=8989676507694972742" alt="" />
                         </a>
                     </div>
                     <div className="footer-social_cell">
-                        <a href="https://www.pinterest.com/DoseofRoses" target="_blank" rel="noopener">
-                            <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/pinterest_200x.png?v=17995078981329144006" />
+                        <a href="https://www.pinterest.com/DoseofRoses" target="_blank" rel="noreferrer">
+                            <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/pinterest_200x.png?v=17995078981329144006" alt="" />
                         </a>
                     </div> 
                 </div>

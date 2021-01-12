@@ -1,5 +1,5 @@
 import React from 'react';
-import Preloader from "../components/common/preloader"
+import Preloader from "../../components/common/preloader"
 
 const WareHouseAssociateJob = ({ data }) => {
     return (

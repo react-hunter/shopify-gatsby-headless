@@ -37,7 +37,7 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
             setRushLineId(rushLineItem[0].id)
         }
         setLineItems(lineItemList)
-        document.querySelector(defaults.cartOverlay).addEventListener('click', function() {
+        document.querySelector('.js-ajax-cart-overlay').addEventListener('click', function() {
             closeAddModal();
             closeCartDrawer();
             closeCartOverlay();

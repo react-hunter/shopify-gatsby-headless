@@ -1,5 +1,5 @@
 import React from 'react';
-import Preloader from "../components/common/preloader"
+import Preloader from "../../components/common/preloader"
 
 const Careers = ({ data }) => {
     return (
@@ -13,10 +13,10 @@ const Careers = ({ data }) => {
                         <p className="p1">Our HQ is located in downtown Los Angeles. If you’re a passionate and motivated individual looking for an amazing opportunity in Ecommerce, Social Media, and Marketing please apply to your matching position below.</p>
                         <ul>
                             <li>
-                                <a href="/customer-service-job" title="Customer Service">Customer Service Representative</a>
+                                <a href="/pages/customer-service-job" title="Customer Service">Customer Service Representative</a>
                             </li>
                             <li>
-                                <a href="/warehouse-associate-job" title="Warehouse Associate">Warehouse Associate</a>
+                                <a href="/pages/warehouse-associate-job" title="Warehouse Associate">Warehouse Associate</a>
                             </li>
                             <li>
                                 <a href="/pages/floral-designer" title="Floral Designer">Floral Designer</a>
