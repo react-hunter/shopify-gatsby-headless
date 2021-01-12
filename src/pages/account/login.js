@@ -53,6 +53,7 @@ const LoginForm = () => {
         return { ...state, customerAccessToken: value }
     })
     navigate(`/account/login`);
+    console.log(store)
   }
 
   return (

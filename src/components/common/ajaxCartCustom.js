@@ -6,18 +6,18 @@ import StoreContext from '../../context/store'
 import { Link } from 'gatsby'
 
 const AjaxCartCustom = ({giftVariant, rushVariant}) => {
-    const defaults = {
-        cartModal: '.js-ajax-cart-modal', // classname
-        cartModalContent: '.js-ajax-cart-modal-content', // classname
-        cartModalClose: '.js-ajax-cart-modal-close', // classname
-        cartDrawer: '.js-ajax-cart-drawer', // classname
-        cartDrawerContent: '.js-ajax-cart-drawer-content', // classname
-        cartDrawerTrigger: '.js-ajax-cart-drawer-trigger', // classname
-        cartOverlay: '.js-ajax-cart-overlay', // classname
-        cartCounter: '.cartCount', // classname
-        addToCart: '.js-ajax-add-to-cart', // classname
-        checkoutButton: '.js-ajax-checkout-button',
-    };
+    // const defaults = {
+    //     cartModal: '.js-ajax-cart-modal', // classname
+    //     cartModalContent: '.js-ajax-cart-modal-content', // classname
+    //     cartModalClose: '.js-ajax-cart-modal-close', // classname
+    //     cartDrawer: '.js-ajax-cart-drawer', // classname
+    //     cartDrawerContent: '.js-ajax-cart-drawer-content', // classname
+    //     cartDrawerTrigger: '.js-ajax-cart-drawer-trigger', // classname
+    //     cartOverlay: '.js-ajax-cart-overlay', // classname
+    //     cartCounter: '.cartCount', // classname
+    //     addToCart: '.js-ajax-add-to-cart', // classname
+    //     checkoutButton: '.js-ajax-checkout-button',
+    // };
 
     const context = useContext(StoreContext);
     const [lineItems, setLineItems] = useState([]);
@@ -82,17 +82,17 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
     };
 
     function closeCartOverlay() {
-        document.querySelector(defaults.cartOverlay).classList.remove('is-open');
+        document.querySelector('.js-ajax-cart-overlay').classList.remove('is-open');
         document.documentElement.classList.remove('is-locked');
         document.documentElement.classList.remove("scrollPrevent")
     }
 
     function closeAddModal() {
-        document.querySelector(defaults.cartModal).classList.remove('is-open');
+        document.querySelector('.js-ajax-cart-modal').classList.remove('is-open');
     }
 
     function closeCartDrawer () {
-        document.querySelector(defaults.cartDrawer).classList.remove('is-open');
+        document.querySelector('.js-ajax-cart-drawer').classList.remove('is-open');
         document.getElementsByTagName("html")[0].classList.remove('cart-drawer-open');
         document.getElementsByTagName("html")[0].style.overflow = "";
     };

@@ -79,38 +79,63 @@ const CollectionVariantSelector = props => {
                             <div className="swatch-wrapper select-effect">
                                 <div className="color-swatch selected-swatch" 
                                     data-box_color="Black" data-swatch_type="Box Color" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}></div>
-                                <div></div>
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>
+
+                                </div>
+                                <div>
+
+                                </div>
                             </div>
                             <div className="swatch-wrapper ">
                                 <div className="color-swatch" 
                                     data-box_color="White" data-swatch_type="Box Color" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}></div>
-                                <div></div>
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>
+
+                                </div>
+
+                                <div>
+
+                                </div>
                             </div>
                             <div className="swatch-wrapper ">
                                 <div className="color-swatch" 
                                     data-box_color="Pink"  data-swatch_type="Box Color" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}></div>
-                                <div></div>
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>
+
+                                </div>
+                                <div>
+
+                                </div>
                             </div>
                             <div className="swatch-wrapper ">
                                 <div className="color-swatch sold-out-swatch" 
                                     data-box_color="Sapphire" data-swatch_type="Box Color" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}></div>
-                                <div></div>
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>
+                                
+                                </div>
+                                <div>
+
+                                </div>
                             </div>
                             <div className="swatch-wrapper ">
                                 <div className="color-swatch sold-out-swatch" 
                                     data-box_color="Burgundy"  data-swatch_type="Box Color" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}></div>
-                                <div></div>
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>
+
+                                </div>
+                                <div>
+
+                                </div>
                             </div>
                             <div className="swatch-wrapper ">
                                 <div className="color-swatch sold-out-swatch" 
                                     data-box_color="Emerald"  data-swatch_type="Box Color" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}></div>
-                                <div></div>
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>
+
+                                </div>
+                                <div>
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
