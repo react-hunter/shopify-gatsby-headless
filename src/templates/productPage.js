@@ -23,10 +23,7 @@ const ProductPage = ({ data, pageContext }) => {
             for (var i=0;i<addToCartButtonSticky.length;i++) {
                 addToCartButtonSticky[i].style.display = "none";
             }
-        } 
-
-        let showing = false;
-      
+        }      
     }, [])
 
     function setPDPHeaderPadding() {

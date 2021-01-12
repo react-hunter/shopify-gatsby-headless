@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link } from 'gatsby'
-
 
 const CollectionVariantSelector = props => {
     const handleKeyDown =(e) => {
@@ -31,10 +29,11 @@ const CollectionVariantSelector = props => {
                 <div className="closeVariantSelector">
                     <div className="closeVariantSelector_content">
                         <span className="variantSelector_close_message" 
-                            style={{ float: 'left', cursor: 'pointer', marginLeft: '10px' }} 
-                            onClick={changeUrl}>Need more options? Customize now</span>
-                        <span onClick={closeVariantSelector} 
-                            className="variantSelector_close" style={{ float: 'right'}}>×</span>
+                            onClick={changeUrl} onKeyDown={handleKeyDown} role="button" tabIndex="0"
+                            style={{ float: 'left', cursor: 'pointer', marginLeft: '10px' }}>Need more options? Customize now</span>
+                        <span className="variantSelector_close"  
+                            onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0"
+                            style={{ float: 'right'}}>×</span>
                     </div>
                     <div className="closeVariantSelector-mobile_swipe"></div>
                 </div>
@@ -49,20 +48,23 @@ const CollectionVariantSelector = props => {
                             <span className="option-header">Quantity: 1</span>
                             <div className="option_options_wrapper">
                                 <div className="swatch-wrapper select-effect">
-                                    <div className="color-swatch selected-swatch" data-quantity="1"
-                                        onClick={selectVariantOption} data-swatch_type="Quantity">1</div>
+                                    <div className="color-swatch selected-swatch"
+                                        onClick={selectVariantOption} onKeyDown={handleKeyDown} role="button" tabIndex="0"
+                                        data-quantity="1" data-swatch_type="Quantity">1</div>
                                     <div></div>
                                 </div>
                                 <div className="swatch-wrapper">
-                                    <div className="color-swatch" data-quantity="6" onClick={selectVariantOption} 
-                                        data-swatch_type="Quantity">6</div>
+                                    <div className="color-swatch" 
+                                        onClick={selectVariantOption} onKeyDown={handleKeyDown} role="button" tabIndex="0"
+                                        data-quantity="6" data-swatch_type="Quantity">6</div>
                                     <div></div>
                                 </div>
                                 <div className="swatch-wrapper">
-                                    <div className="color-swatch" data-quantity="12" onClick={selectVariantOption} 
-                                        data-swatch_type="Quantity">12</div>
+                                    <div className="color-swatch" 
+                                        onClick={selectVariantOption} onKeyDown={handleKeyDown} role="button" tabIndex="0"
+                                        data-swatch_type="Quantity" data-quantity="12">12</div>
                                     <div></div>
-                                </div>
+                                </div> 
                             </div>
                         </div>
                     </div>

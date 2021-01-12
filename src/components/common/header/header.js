@@ -300,6 +300,7 @@ const Header = ({ path }) => {
   function openCartDrawer() {
     document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
     document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
+    document.getElementsByTagName("html")[0].style.overflow = "hidden";
   }
   
   function openCartOverlay() {

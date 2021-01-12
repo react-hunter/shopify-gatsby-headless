@@ -24,22 +24,14 @@ const AjaxCartCustom = () => {
     const [messageShow, setMessageShow] = useState(false);
     
     useEffect(() => {
-        // const atcUpsellButtons = document.querySelectorAll('.upsell-add_button');
-        // for (let i = 0; i < atcUpsellButtons.length; i++) {
-
-        //     if (atcUpsellButtons[i].firstElementChild.classList.contains('upsell-single-variant_form')) {
-        //         atcUpsellButtons[i].onClick = function () {
-        //             window.tempUpsellProducts.push(atcUpsellButtons[i].parentElement.parentElement);
-        //             console.log("index: ", i )
-        //             window.upsellCarousel.removeItem(i);
-
-        //             resetOnClickEvents();
-        //         }
-        //     }
-        // }
-
         setLineItems(context.store.checkout.lineItems)
 
+        document.querySelector(defaults.cartOverlay).addEventListener('click', function() {
+            closeAddModal();
+            closeCartDrawer();
+            closeCartOverlay();
+        });
+        
     }, [context.store.checkout]);
 
     const increaseItem = (itemId, itemQuantity) => {
@@ -72,9 +64,14 @@ const AjaxCartCustom = () => {
         document.documentElement.classList.remove("scrollPrevent")
     }
 
+    function closeAddModal() {
+        document.querySelector(defaults.cartModal).classList.remove('is-open');
+    }
+
     function closeCartDrawer () {
         document.querySelector(defaults.cartDrawer).classList.remove('is-open');
         document.getElementsByTagName("html")[0].classList.remove('cart-drawer-open');
+        document.getElementsByTagName("html")[0].style.overflow = "";
     };
     
     const addNoteToCart = (e) => {
@@ -91,7 +88,6 @@ const AjaxCartCustom = () => {
         e.preventDefault();
         console.log("rushProcessing");
     };
-
     
     const handleKeyDown = (e) => {
         e.preventDefault();
@@ -185,7 +181,8 @@ const AjaxCartCustom = () => {
                             return (
                                 <div className={`ajax-cart-item ${item.variant.title}`} key={index} data-line={index}>
                                     <div className="price-and-remove-item-wrapper">
-                                        <div className="ajax-cart-item-remove js-ajax-remove-from-cart" onClick={() => removeItem(item.id)}>✖</div>
+                                        <div className="ajax-cart-item-remove js-ajax-remove-from-cart" 
+                                            onClick={() => removeItem(item.id)} onKeyDown={handleKeyDown} role="button" tabIndex="0">✖</div>
                                     </div>
                                     <div className="ajax-cart-item-content">
                                         <div className="ajax-cart-item-image-container">
