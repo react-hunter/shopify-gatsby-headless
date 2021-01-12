@@ -285,34 +285,5 @@ export const commonData = {
       title: 'COVID-19',
       handle: '/pages/contact-us'
     }
-  ],
-  cartSlide: {
-    title: 'MY BAG',
-    products: [
-      {
-        image: "https://cdn.shopify.com/s/files/1/0157/4420/4900/products/Medium_White_Rose_Bear.jpg?v=1579117446",
-        title: "White Rose Bear - Medium (14 Inch)",
-        quantity: "1",
-        price: "$79.95 USD",
-        url: "/products/white-rose-bear?variant=32728597037102",
-        id: "32728597037102:19120a5501452126150699b25f7da236"
-      },
-      {
-        image: "https://cdn.shopify.com/s/files/1/0157/4420/4900/products/Medium_Blue_Rose_Bear.jpg?v=1579216686",
-        title: "Blue Rose Bear - Medium (14 inch)",
-        quantity: "1",
-        price: "$79.95 USD",
-        url: "/products/blue-rose-bear?variant=19511246192740",
-        id: "19511246192740:044b53bc30c1584c1a6e40f9c258563e"
-      },
-      {
-        image: "https://cdn.shopify.com/s/files/1/0157/4420/4900/products/79871607_585503648952362_8618381474883311171_n.jpg?v=1579048549",
-        title: "Galaxy Enchanted Rose - Bright",
-        quantity: "1",
-        price: "$49.95 USD" ,
-        url: "/products/enchanted-led-rose-galaxy?variant=32751577202734",
-        id: "32751577202734:16f3011f758a9755b7f7526ba5034883"
-      }
-    ]
-  }
+  ]
 }

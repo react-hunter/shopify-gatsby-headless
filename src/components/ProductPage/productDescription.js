@@ -50,7 +50,7 @@ const ProductDescription = ({ product, review }) => {
             const result = product.variants.filter(
                 variant => variant.id === productVariant.shopifyId
             )
-            setAvailable(result[0].available)
+            setAvailable(result[0] ? result[0].available : false)
         })
     }
 

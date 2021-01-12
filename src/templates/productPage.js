@@ -24,9 +24,7 @@ const ProductPage = ({ data, pageContext }) => {
                 addToCartButtonSticky[i].style.display = "none";
             }
         } 
-
-        let showing = false;
-      
+        // let showing = false;
     }, [])
 
     function setPDPHeaderPadding() {
@@ -63,7 +61,6 @@ export default ProductPage
 export const query = graphql`
     query($id: String!){
 		shopifyProduct(handle: {eq: $id}) {
-			handle
 			id
 			title
 			handle
