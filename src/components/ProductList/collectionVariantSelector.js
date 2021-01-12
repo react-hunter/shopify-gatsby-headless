@@ -85,7 +85,7 @@ const CollectionVariantSelector = props => {
                     <a id="notify" href="/products/galaxy-rose" 
                         style={{ position: 'static', display: 'none' }} 
                         className="add klav-popup-trigger add-to-cart-custom button">Notify Me</a>
-                    <a href="/pages/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZER NOW</a>
+                    <a href="/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZER NOW</a>
                 </div>
             </div>
         </div>

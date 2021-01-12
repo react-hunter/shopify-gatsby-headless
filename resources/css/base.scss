@@ -9940,10 +9940,12 @@ article .article__meta-buttons {
   height: 35px
 }
 
-.footer-social_cell svg {
+.footer-social_cell svg, .footer-social_cell img {
+  margin: 0 auto;
   width: 28px;
   height: 28px;
-  fill: #fff
+  fill: #fff;
+  object-fit: cover;
 }
 
 .newsletter-nav {
@@ -17817,5 +17819,17 @@ body.modal-opened {
     width: 100px;
     margin: 0 auto;
     }
+  }
+}
+
+.top-spacing {
+  margin-top: 160px;
+}
+
+.page-template {
+  .rte {
+    font-family: Verdana,sans-serif;
+    padding-bottom: 75px;
+    padding-top: 100px;
   }
 }
