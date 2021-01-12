@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Preloader from "../../components/common/preloader"
 import { faqPageData } from '../../data/faq' 
 
-const Faqs = ({ data }) => {
+const Faqs = ({ data }) => {      
+    useEffect(() => {
+        /*
+        document.querySelectorAll('.faq_content-accordion_button').toArray.forEach(button => {
+            const accordionButton = button;
+            button.addEventListener('click', () => {
+                button.classList.toggle('faq_content-accordion_button--active');
+            });
+        });
+        */
+    })
+      
     return (
       <>
         <Preloader />

@@ -362,6 +362,7 @@ const CustomizePage = ({ data }) => {
   }
 
   function getMainImage() {
+    console.log("getMainImage -------------------------- ");
     if (document.getElementById("Style-Type").innerText !== "Letters" || document.getElementById("Style-Type").innerText !== "Numbers") {
       resetNumbersAndLetter();
       var xhr = new XMLHttpRequest();

@@ -73,6 +73,72 @@ const CollectionVariantSelector = props => {
                         <div className="variantSelector_line_break"></div>
                     </div>
     
+                    <div className="sub-option_wrapper variantSelector-option_wrapper">
+                        <span className="option-header">Box Color: Black</span>
+                        <div className="option_options_wrapper">
+                            <div className="swatch-wrapper select-effect">
+                                <div className="color-swatch selected-swatch" 
+                                    data-box_color="Black" data-swatch_type="Box Color" role="button" tabIndex="0"
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}></div>
+                                <div></div>
+                            </div>
+                            <div className="swatch-wrapper ">
+                                <div className="color-swatch" 
+                                    data-box_color="White" data-swatch_type="Box Color" role="button" tabIndex="0"
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}></div>
+                                <div></div>
+                            </div>
+                            <div className="swatch-wrapper ">
+                                <div className="color-swatch" 
+                                    data-box_color="Pink"  data-swatch_type="Box Color" role="button" tabIndex="0"
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}></div>
+                                <div></div>
+                            </div>
+                            <div className="swatch-wrapper ">
+                                <div className="color-swatch sold-out-swatch" 
+                                    data-box_color="Sapphire" data-swatch_type="Box Color" role="button" tabIndex="0"
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}></div>
+                                <div></div>
+                            </div>
+                            <div className="swatch-wrapper ">
+                                <div className="color-swatch sold-out-swatch" 
+                                    data-box_color="Burgundy"  data-swatch_type="Box Color" role="button" tabIndex="0"
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}></div>
+                                <div></div>
+                            </div>
+                            <div className="swatch-wrapper ">
+                                <div className="color-swatch sold-out-swatch" 
+                                    data-box_color="Emerald"  data-swatch_type="Box Color" role="button" tabIndex="0"
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="sub-option_wrapper variantSelector-option_wrapper">
+                        <span className="option-header">Size: Small (1 Rose)</span>
+                        <div className="option_options_wrapper">
+                            <div className="swatch-wrapper select-effect">
+                                <div className="color-swatch selected-swatch" 
+                                    data-size="Small (1 Rose)" data-swatch_type="Size"   role="button" tabIndex="0"
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>S</div>
+                                <div></div>
+                            </div>
+                            <div className="swatch-wrapper ">
+                                <div className="color-swatch" 
+                                    data-size="Medium (25 Roses)" data-swatch_type="Size" role="button" tabIndex="0"
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>M</div>
+                                <div></div>
+                            </div>
+                            <div className="swatch-wrapper ">
+                                <div className="color-swatch" 
+                                    data-size="Large (35 Roses)" data-swatch_type="Size" role="button" tabIndex="0"
+                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>L</div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="loading-screen" style={{ display: 'none'}}>
                         <div className="loader-collection"></div> 
                     </div>   
