@@ -46,14 +46,6 @@ const ProductBox = props => {
                                     alt={product.title}
                                 />) : ""
                             }
-                            { product.images[1] ? 
-                                (<img 
-                                    className="enableScrollOnMobile product-tile__image product-collection_image_alternate"
-                                    src={product.images[1].originalSrc}
-                                    alt={product.title}
-                                    style={{ cursor: 'pointer' }}
-                                />) : ""
-                            }
                         </div>
                         <div className="collection-product-arrows_container" data-glide-el="controls">
                             <div className="collection-product-arrow_wrapper" onClick={prevImage} onKeyDown={handleKeyDown} id="prevButton" key="_prev" role="button" tabIndex="0">
