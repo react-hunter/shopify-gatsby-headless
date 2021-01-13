@@ -41,7 +41,7 @@ const ProductBox = props => {
         <li className="grid__item grid__item--collection-template " key={product.title}>
             <div className="grid-view-item product-card">
                 <span className="visually-hidden product-card-title">{product.title}</span>
-
+                               
                 <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
                     <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
                         <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/Best_Seller_stickers-01_150x.png?v=1605546945" className="badge" alt="" />
