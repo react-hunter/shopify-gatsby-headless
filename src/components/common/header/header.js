@@ -30,8 +30,6 @@ let bannerContainer = null;
 var xDown = null;
 var yDown = null;
 
-
-
 const countQuantity = lineItems => {
   let quantity = 0
 
@@ -50,6 +48,7 @@ const Header = ({ path }) => {
   
   useEffect(() => {
     initializeHeader();
+    progressAnnouncement();
   }, []);
 
   useEffect(() => {
@@ -111,6 +110,20 @@ const Header = ({ path }) => {
     
       showBanners();
     }
+  }
+
+  function forEach(array, callback, scope) {
+    for (var i = 0; i < array.length; i++) {
+      callback.call(scope, i, array[i]);
+    }
+  }
+
+  function progressAnnouncement() {
+    var max = -219.99078369140625;
+    forEach(document.querySelectorAll('.progress-announcement'), function (index, value) {
+      var percent = value.getAttribute('data-progress');
+      value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - percent) / 100) * max);
+    });
   }
 
   const showChildCollection = (e, id) => {

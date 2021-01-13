@@ -39,19 +39,34 @@ const Faqs = ({ data }) => {
             <div id="shopify-section-faq-content" className="shopify-section">
                 <div className="faq_content-container">
                     <div className="faq_content-wrapper">
-                        { faqPageData.faqContent.map((item, index) => 
-                            <>
-                            <button className="faq_content-accordion_button" key={`btn_${index}`}>
-                                {item.question}
-                                <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/arrow_down_white_200x.png?v=5587476236961067168" alt="" />
-                            </button>
-                            {/* <div className="faq_content-accordion_content" key={`div_${index}`}>
-                                {item.answer.map((answer_item, answer_index) => 
-                                    <p key={`answer_${answer_index}`}>{answer_item}</p> 
-                             )}
-                            </div> */}
-                            </>
-                        )}
+                        { faqPageData.faqContent.map((item, index) => {
+                            return (
+                                <>
+                                <button className="faq_content-accordion_button" key={`btn_${index}`}>
+                                    {item.question}
+                                    <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/arrow_down_white_200x.png?v=5587476236961067168" 
+                                        alt="" />
+                                </button>
+                                <div className="faq_content-accordion_content" key={`answer_${index}`} 
+                                    dangerouslySetInnerHTML={{ __html: item.answer }} />
+                                </>
+                            )
+                        })}
+                    </div>
+                </div>
+            </div>
+            <div id="shopify-section-faq-customiser-banner" className="shopify-section">
+                <div className="faq_banner-container">
+                    <div className="faq_banner-wrapper">
+                        <img className="faq_desktop-banner" src={ faqPageData.customiserBanner.imageDesktop } />
+                        <img className="faq_mobile-banner" src={ faqPageData.customiserBanner.imageMobile } />
+                        <div className="faq_customiser_banner-overlay"></div>
+                        <div className="faq_customiser_banner-text_container">
+                            <div className="faq_customiser_banner-title">{ faqPageData.customiserBanner.title }</div>
+                            <div className="faq_customiser_banner-subtitle">{ faqPageData.customiserBanner.subtitle }</div>
+                            <div className="faq_customiser_banner-text">{ faqPageData.customiserBanner.text }</div>
+                            <a href={ faqPageData.customiserBanner.buttonUrl } className="faq_customiser_banner-button">{ faqPageData.customiserBanner.buttonText }</a>
+                        </div>
                     </div>
                 </div>
             </div>
