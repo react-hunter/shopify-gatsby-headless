@@ -157,6 +157,11 @@ export const query = graphql`
         id
         handle
         title
+        options {
+          id
+          name
+          values
+        }
         images {
           originalSrc
         }
@@ -164,6 +169,14 @@ export const query = graphql`
           id
           availableForSale
           price
+          shopifyId
+          image {
+            originalSrc
+          }
+          selectedOptions {
+            name
+            value
+          }
         }
       }
     }

@@ -1,26 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { navigate, Link } from 'gatsby'
 
 const CollectionVariantSelector = props => {
-    const handleKeyDown =(e) => {
-        e.preventDefault();
-    }
-    const selectVariantOption =(e) => {
-        e.preventDefault();
-        console.log("selectVariantOption");
-    }
-    const closeVariantSelector =(e) => {
-        e.preventDefault();
-        console.log("closeVariantSelector");
+    const product = props.product;
+    const firstVariant = product.variants[0];
+    
+    const [variant, setVariant] = useState(firstVariant)
+    const getSaleClass = (optionName, optionValue) => {
+        return variant.availableForSale ? '' : 'sold-out-swatch';
     }
 
-    function changeUrl(){
-        window.location.href='/pages/creat';
-        console.log("changeUrl");
+    console.log('product: ', product)
+    const mainOption = product.options[0]
+    const otherOptions = product.options.length > 1 ? product.options.slice(1, product.options.length) : []
+    
+    const getValueByName = (optionName) => {
+        const theOption = variant.selectedOptions.filter(so => so.name === optionName)[0]
+        return theOption.value
     }
 
+    useEffect(() => {
+        Array.prototype.slice.call(document.querySelectorAll('.color-swatch')).map(el => {
+            const optionName = String(el.dataset.optionname)
+            const dataAttributeName = optionName.replace(' ', '_').toLowerCase()
+            el.dataset[dataAttributeName] = el.dataset.optionvalue
+        })
+    });
+
+    const selectVariantOption =(optionName, optionValue) => {
+        console.log("selectVariantOption: ", optionName, optionValue);
+    }
     const addToSideCart =(e) => {
         e.preventDefault();
         console.log("addToSideCart");
+    }
+    const changeUrl = () => {
+        navigate('/pages/create')
+    }
+    const closeVariantSelector =() => {
+        props.closeModal()
+    }
+    const handleKeyDown =(e) => {
+        e.preventDefault();
     }
     
     return (
@@ -42,29 +63,23 @@ const CollectionVariantSelector = props => {
                     <div className="preview-main-option_wrapper">
                         <div className="preview_wrapper">
                             <img className="variantSelector-preview_img" alt=""
-                                src="https://cdn.shopify.com/s/files/1/0157/4420/4900/products/Untitled-2.jpg?v=1601324195" />
+                                src={variant.image.originalSrc} />
                         </div>
                         <div className="main-option_wrapper variantSelector-option_wrapper">
-                            <span className="option-header">Quantity: 1</span>
+                            <span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span>
                             <div className="option_options_wrapper">
-                                <div className="swatch-wrapper select-effect">
-                                    <div className="color-swatch selected-swatch"
-                                        onClick={selectVariantOption} onKeyDown={handleKeyDown} role="button" tabIndex="0"
-                                        data-quantity="1" data-swatch_type="Quantity">1</div>
-                                    <div></div>
-                                </div>
-                                <div className="swatch-wrapper">
-                                    <div className="color-swatch" 
-                                        onClick={selectVariantOption} onKeyDown={handleKeyDown} role="button" tabIndex="0"
-                                        data-quantity="6" data-swatch_type="Quantity">6</div>
-                                    <div></div>
-                                </div>
-                                <div className="swatch-wrapper">
-                                    <div className="color-swatch" 
-                                        onClick={selectVariantOption} onKeyDown={handleKeyDown} role="button" tabIndex="0"
-                                        data-swatch_type="Quantity" data-quantity="12">12</div>
-                                    <div></div>
-                                </div> 
+                                {
+                                    mainOption.values.map((mo, moIndex) => {
+                                        const selectEffectClass = getValueByName(mainOption.name) === mo ? 'select-effect' : ''
+                                        return (
+                                            <div className={`swatch-wrapper ${selectEffectClass}`} key={moIndex}>
+                                                <div className="color-swatch sold-out-swatch" onClick={() => selectVariantOption(mainOption.name, mo)} onKeyDown={handleKeyDown}
+                                                    role="button" tabIndex="0" data-swatch_type={mainOption.name} data-optionname={mainOption.name} data-optionvalue={mo}></div>
+                                                <div></div>
+                                            </div>
+                                        )
+                                    })
+                                }
                             </div>
                         </div>
                     </div>
@@ -73,100 +88,36 @@ const CollectionVariantSelector = props => {
                         <div className="variantSelector_line_break"></div>
                     </div>
     
-                    <div className="sub-option_wrapper variantSelector-option_wrapper">
-                        <span className="option-header">Box Color: Black</span>
-                        <div className="option_options_wrapper">
-                            <div className="swatch-wrapper select-effect">
-                                <div className="color-swatch selected-swatch" 
-                                    data-box_color="Black" data-swatch_type="Box Color" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>
-
+                    {
+                        otherOptions.length > 0 && otherOptions.map((otherOption, otherOptionIndex) => {
+                            return (
+                                <div className="sub-option_wrapper variantSelector-option_wrapper" key={otherOptionIndex}>
+                                    <span className="option-header">{otherOption.name}: {getValueByName(otherOption.name)}</span>
+                                    <div className="option_options_wrapper">
+                                        {
+                                            otherOption.values.map((oo, ooIndex) => {
+                                                const selectOtherEffectClass = getValueByName(otherOption.name) === oo ? 'select-effect' : ''
+                                                return (
+                                                    <div className={`swatch-wrapper ${selectOtherEffectClass}`} key={ooIndex}>
+                                                        <div className="color-swatch selected-swatch sold-out-swatch" 
+                                                            data-optionname={otherOption.name} data-optionvalue={oo} data-swatch_type={otherOption.name} role="button" tabIndex="0"
+                                                            onClick={selectVariantOption} onKeyDown={handleKeyDown}>
+                                                            {otherOption.name === 'Size' ? oo.charAt(0) : null}
+                                                        </div>
+                                                        <div></div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </div>
                                 </div>
-                                <div>
+                            )
+                        })
+                    }
 
-                                </div>
-                            </div>
-                            <div className="swatch-wrapper ">
-                                <div className="color-swatch" 
-                                    data-box_color="White" data-swatch_type="Box Color" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>
-
-                                </div>
-
-                                <div>
-
-                                </div>
-                            </div>
-                            <div className="swatch-wrapper ">
-                                <div className="color-swatch" 
-                                    data-box_color="Pink"  data-swatch_type="Box Color" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>
-
-                                </div>
-                                <div>
-
-                                </div>
-                            </div>
-                            <div className="swatch-wrapper ">
-                                <div className="color-swatch sold-out-swatch" 
-                                    data-box_color="Sapphire" data-swatch_type="Box Color" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>
-                                
-                                </div>
-                                <div>
-
-                                </div>
-                            </div>
-                            <div className="swatch-wrapper ">
-                                <div className="color-swatch sold-out-swatch" 
-                                    data-box_color="Burgundy"  data-swatch_type="Box Color" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>
-
-                                </div>
-                                <div>
-
-                                </div>
-                            </div>
-                            <div className="swatch-wrapper ">
-                                <div className="color-swatch sold-out-swatch" 
-                                    data-box_color="Emerald"  data-swatch_type="Box Color" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>
-
-                                </div>
-                                <div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="sub-option_wrapper variantSelector-option_wrapper">
-                        <span className="option-header">Size: Small (1 Rose)</span>
-                        <div className="option_options_wrapper">
-                            <div className="swatch-wrapper select-effect">
-                                <div className="color-swatch selected-swatch" 
-                                    data-size="Small (1 Rose)" data-swatch_type="Size"   role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>S</div>
-                                <div></div>
-                            </div>
-                            <div className="swatch-wrapper ">
-                                <div className="color-swatch" 
-                                    data-size="Medium (25 Roses)" data-swatch_type="Size" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>M</div>
-                                <div></div>
-                            </div>
-                            <div className="swatch-wrapper ">
-                                <div className="color-swatch" 
-                                    data-size="Large (35 Roses)" data-swatch_type="Size" role="button" tabIndex="0"
-                                    onClick={selectVariantOption} onKeyDown={handleKeyDown}>L</div>
-                                <div></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="loading-screen" style={{ display: 'none'}}>
+                    {/* <div className="loading-screen" style={{ display: 'none'}}>
                         <div className="loader-collection"></div> 
-                    </div>   
+                    </div> */}
                 </div>
 
                 <div className="variant-selector_add_to_bag_wrapper">

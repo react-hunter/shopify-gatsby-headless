@@ -1,4 +1,5 @@
 import "../../resources/css/base.scss";
+import "../../resources/css/collection-swatches.css";
 import "../../resources/css/stampedio.css";
 import "../../resources/css/preloader.css";
 import "../styles/instagram.css";

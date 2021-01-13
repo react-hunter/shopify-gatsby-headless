@@ -16,10 +16,12 @@ const ProductBox = props => {
         console.log('nextImage');
     }
 
-    const OpenCollectionModal = (e) => {
-        e.preventDefault();
-        console.log('OpenCollectionModal');
+    const openCollectionModal = () => {
         setVaraintModalShow(true);
+    }
+
+    const closeCollectionModal = () => {
+        setVaraintModalShow(false);
     }
 
     const handleKeyDown =(e) => {
@@ -87,9 +89,9 @@ const ProductBox = props => {
                 </div>
 
                 <button className="openVariantModal" 
-                    onClick={OpenCollectionModal}>ADD TO BAG</button>
+                    onClick={openCollectionModal}>ADD TO BAG</button>
 
-                {varaintModalShow && ( <CollectionVariantSelector /> )}
+                {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} product={product} /> )}
             </div>
         </li>
     );
