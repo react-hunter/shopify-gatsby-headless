@@ -15,6 +15,7 @@ const CollectionVariantSelector = props => {
             const optionName = String(el.dataset.optionname)
             const dataAttributeName = optionName.replace(' ', '_').toLowerCase()
             el.dataset[dataAttributeName] = el.dataset.optionvalue
+            return true
         })
     });
     
@@ -24,6 +25,7 @@ const CollectionVariantSelector = props => {
         let variantOptions = {}
         variant.selectedOptions.map(so => {
             variantOptions[so.name] = so.value
+            return true
         })
         product.variants.map(va => {
             var matched = true;
@@ -31,10 +33,12 @@ const CollectionVariantSelector = props => {
                 if(!va.title.split(' / ').includes(variantOptions[oo.name])) {
                     matched = false
                 }
+                return true
             })
             if(matched === true && va.title.split(' / ').includes(optionValue)) {
                 properVariant = va;
             }
+            return true
         })
         return properVariant
 
@@ -104,7 +108,7 @@ const CollectionVariantSelector = props => {
                                             <div className={`swatch-wrapper ${selectEffectClass}`} key={moIndex}>
                                                 <div className={`color-swatch ${getSaleClass(mainOption.name, mo)}`} onClick={() => selectVariantOption(mainOption.name, mo)} onKeyDown={handleKeyDown}
                                                     role="button" tabIndex="0" data-swatch_type={mainOption.name} data-optionname={mainOption.name} data-optionvalue={mo}>
-                                                    {mainOption.name === 'Size' ? mo.charAt(0) : null}
+                                                    {mainOption.name === 'Size' ? mo.charAt(0) : null}{mainOption.name === 'Quantity' ? mo : null}
                                                 </div>
                                                 <div></div>
                                             </div>
@@ -161,7 +165,7 @@ const CollectionVariantSelector = props => {
                                     style={{ display: 'inline-block' }}>ADD TO BAG - ${variant.price}</button>
                             ) : 
                             (
-                                <a id="notify" href="/products/galaxy-rose" 
+                                <a id="notify" href={`/products/${product.handle}`}
                                     style={{ position: 'static' }} 
                                     className="add klav-popup-trigger add-to-cart-custom button">Notify Me</a>
                             )

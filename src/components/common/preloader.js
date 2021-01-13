@@ -6,7 +6,8 @@ const Preloader = (props) => {
   useEffect(() => {
     setTimeout(() => {
       setLoadMore(false)
-      props.allHide ? props.allHide(false) : console.log('hide');
+      if(props.allHide)
+        props.allHide(false)
     }, 500);
   });
 

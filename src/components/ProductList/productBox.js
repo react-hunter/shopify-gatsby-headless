@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'gatsby'
+import StoreContext from '../../context/store'
 import CollectionVariantSelector from './collectionVariantSelector'
 
 const ProductBox = props => {
+    const context = useContext(StoreContext);
     const product = props.product;
     const reviewBadge = props.review ? props.review.badge : '';
 
@@ -16,8 +18,13 @@ const ProductBox = props => {
         console.log('nextImage');
     }
 
-    const openCollectionModal = () => {
-        setVaraintModalShow(true);
+    const addToBag = () => {
+        if(product.variants.length === 1) {
+            context.addVariantToCart(product.variants[0].shopifyId, 1)
+            setTimeout(document.querySelector('.site-header__cart').click(), 300)
+        } else {
+            setVaraintModalShow(true);
+        }
     }
 
     const closeCollectionModal = () => {
@@ -89,7 +96,7 @@ const ProductBox = props => {
                 </div>
 
                 <button className="openVariantModal" 
-                    onClick={openCollectionModal}>ADD TO BAG</button>
+                    onClick={addToBag}>ADD TO BAG</button>
 
                 {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} product={product} /> )}
             </div>

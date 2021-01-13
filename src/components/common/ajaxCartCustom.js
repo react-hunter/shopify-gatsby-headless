@@ -199,7 +199,7 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                     <div className="ajax-cart-drawer__content js-ajax-cart-drawer-content">
                         { lineItems.length > 0 ?
                             (lineItems.map((item, index) => {
-                            return (
+                                return (
                                 <div className={`ajax-cart-item ${item.variant.title}`} key={index} data-line={index}>
                                     <div className="price-and-remove-item-wrapper">
                                         <div className="ajax-cart-item-remove js-ajax-remove-from-cart" role="button"
@@ -237,7 +237,7 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                                                         </button>
                                                     </div>
                                                     <div className="ajax-cart-item__price">
-                                                        <span>${item.variant.price * item.quantity} USD</span>
+                                                        <span>${parseFloat(item.variant.price * item.quantity).toFixed(2)} USD</span>
 
                                                     </div>
                                                 </div>

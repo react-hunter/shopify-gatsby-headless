@@ -10,7 +10,6 @@ const collectionPage = ({ data, pageContext }) => {
 
   const loadMoreProducts = (e) => {
     e.preventDefault();
-    console.log('Load More');
     setDisplayProductCount(displayProductCount + 2);
   }
 
