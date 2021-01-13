@@ -167,6 +167,7 @@ export const query = graphql`
         }
         variants {
           id
+          title
           availableForSale
           price
           shopifyId
