@@ -267,23 +267,23 @@ export const commonData = {
     },
     {
       title: 'Shipping',
-      handle: '/contactus'
+      handle: '/pages/shipping'
     },
     {
       title: 'Returns & Exchanges',
-      handle: '/contactus'
+      handle: '/pages/returns'
     },
     {
       title: 'Privacy Policy',
-      handle: '/contactus'
+      handle: '/pages/privacy'
     },
     {
       title: 'Terms & Conditions',
-      handle: '/contactus'
+      handle: '/pages/terms'
     },
     {
       title: 'COVID-19',
-      handle: '/contactus'
+      handle: '/pages/covid-19'
     }
   ]
 }
