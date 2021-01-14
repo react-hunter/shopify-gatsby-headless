@@ -27,7 +27,7 @@ const ProductBox = props => {
 
             <Link to={`/products/${product.handle}`} className="carousel-cell_a" key={product.title}>
                 <span className="Best-Sellers-Title">{product.title}</span>
-                <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: review.badge }} />
+                <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: review ? review.badge : '' }} />
                 <span className="Best-Sellers-Price">${product.variants[0].price}</span>
             </Link>
         </div>

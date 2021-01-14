@@ -156,6 +156,7 @@ export const query = graphql`
         id
         handle
         title
+        tags
         options {
           id
           name

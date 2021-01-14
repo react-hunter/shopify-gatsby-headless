@@ -3,7 +3,7 @@ import { customizePageData } from '../data/customizePage'
 import Preloader from "../components/common/preloader"
 
 const CustomizePage = ({ data }) => {
-  console.log('data: ', data)
+
   var allProducts;
   var selectedProduct;
   var currentStep = 0;
@@ -168,13 +168,8 @@ const CustomizePage = ({ data }) => {
     } else if (window.location.href.includes("?") && !window.location.href.includes("&")) {
       var select = window.location.href.split("?")[1].split("-");
       var click = select.join(" ").replace(" ", "-")
-      console.log("click = ", click);
-      if (document.getElementById(click)) {
-        eventFire(document.getElementById(click), 'click');
-
-        if (document.getElementById('step-next'))
-          eventFire(document.getElementById('step-next'), 'click')
-      }
+      eventFire(document.getElementById(click), 'click')
+      eventFire(document.getElementById(`step-next`), 'click')
     } else {
       eventFire(document.getElementById("arrangementSelector-0").firstElementChild, 'click')
     }
@@ -182,7 +177,7 @@ const CustomizePage = ({ data }) => {
 
   function mobileRearrange() {
     if (window.innerWidth <= 700) {
-//      document.getElementById("col-left").insertAfter(document.getElementById("col-right"), null);
+      document.getElementById("col-left").insertAfter(document.getElementById("col-right"), null);
     } else {
 //      document.getElementById("col-left").insertBefore(document.querySelector(".arrangement-center"), null);
     }
@@ -388,7 +383,7 @@ const CustomizePage = ({ data }) => {
       }
       var collection = [];
       var backup1 = ["Red"]
-      var backup2 = ["Red", "Pink"]
+      var backup2 = ["Red", "Light Pink"]
   
       console.log("selectedRoses = " ,selectedRoses);
 
@@ -644,10 +639,7 @@ const CustomizePage = ({ data }) => {
       for (var ii = 0; ii < 100; ii++) {
         console.log(document.getElementById("roseblock-" + ii));
         if (document.getElementById("roseblock-" + ii)) {
-          console.log("count = ", count);
-          console.log("selectedRoses.length = " + selectedRoses.length);
           if (count === selectedRoses.length) {
-            console.log("selected Rose = ", selectedRoses[ii]);
             eventFire(document.getElementById(selectedRoses[ii] + "-" + ii), 'click')
           } else {
             eventFire(document.getElementById("roseblock-" + ii).firstElementChild, 'click')
@@ -700,8 +692,6 @@ const CustomizePage = ({ data }) => {
     console.log(document.getElementById(`rose-mobile-${newLayer}`));
     document.getElementById(`rose-mobile-${newLayer}`).innerText = type;
     
-    console.log("choices = ", choices);
-
     if (selectedStyle.roseTypes === selectedRoses.length) {
   
       var choices = selectedRoses.join(",");
@@ -1653,40 +1643,3 @@ const CustomizePage = ({ data }) => {
 }
   
 export default CustomizePage
-
-export const query = graphql`
-  query{
-		shopifyCollection(handle: {eq: "customizer"}) {
-			id
-      handle
-      products {
-        id
-        handle
-        title
-        options {
-          id
-          name
-          values
-        }
-        images {
-          originalSrc
-        }
-        variants {
-          id
-          shopifyId
-          title
-          availableForSale
-          requiresShipping
-          price
-          image {
-            originalSrc
-          }
-          selectedOptions {
-            name
-            value
-          }
-        }
-      }
-    }
-	}
-`
