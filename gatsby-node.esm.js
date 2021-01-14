@@ -94,7 +94,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
     createPage({
       path: `/pages/collections`,
-      component: path.resolve(`./src/templates/featuredCollectionsPage.js`),
+      component: path.resolve(`./src/templates/collectionsPage.js`),
       context: {
         collections: featuredCollectionHandles,
         productReviews: productReviews

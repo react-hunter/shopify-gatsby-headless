@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import StoreContext from '../../context/store'
 import CollectionVariantSelector from './collectionVariantSelector'
 
-const ProductBox = props => {
+const CollectionProductBox = props => {
     const context = useContext(StoreContext);
     const product = props.product;
     const reviewBadge = props.review ? props.review.badge : '';
@@ -53,6 +53,14 @@ const ProductBox = props => {
                                     alt={product.title}
                                 />) : ""
                             }
+                            { product.images[1] ? 
+                                (<img 
+                                    className="enableScrollOnMobile product-tile__image product-collection_image_alternate"
+                                    src={product.images[1].originalSrc}
+                                    alt={product.title}
+                                    style={{ cursor: 'pointer' }}
+                                />) : ""
+                            }
                         </div>
                         <div className="collection-product-arrows_container" data-glide-el="controls">
                             <div className="collection-product-arrow_wrapper" onClick={prevImage} onKeyDown={handleKeyDown} id="prevButton" key="_prev" role="button" tabIndex="0">
@@ -96,4 +104,4 @@ const ProductBox = props => {
     );
 };
 
-export default ProductBox;
+export default CollectionProductBox;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, navigate } from 'gatsby'
-import SEO from "../../components/seo"
+import SEO from "../../components/common/seo"
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo'
 import { defaultStoreContext } from '../../context/store'

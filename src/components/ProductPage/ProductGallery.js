@@ -13,7 +13,8 @@ const ProductGallery = ({ product }) => {
         slidesToScroll: 1
     }
     return (
-        <div className="product_image-container">
+        <>
+        <div className="product_image-container 1">
             <div className="pdp-carousel-main grid__item product-single__media-group medium-up--one-half glider draggable">
                 <Slider {...settings}>
                     {
@@ -32,6 +33,7 @@ const ProductGallery = ({ product }) => {
                 <script src="//foursixty.com/media/scripts/fs.slider.v2.5.js" data-feed-id="dose-of-roses" data-for-url="true" data-theme="slider_v2_5" data-open-links-in-same-page="true" data-connector-filter="30963" data-cell-size="20%"></script>
             </div>
         </div>
+        </>
     );
 }
 

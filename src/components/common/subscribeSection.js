@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby'
-import { commonData } from '../data/common';
+import { commonData } from '../../data/common';
 
 const SubscribeSection = () => {
     const newsletterBackgroundStyle = {

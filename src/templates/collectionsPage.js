@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from "gatsby";
 import Preloader from "../components/common/preloader"
-import CollectionSlider from "../components/collectionSlider";
+import CollectionSlider from "../components/collectionsPage/collectionSlider";
 import '../styles/featuredCollectionsPage.scss';
 
 const featuredCollectionsPage = ({ data, pageContext }) => {
@@ -16,7 +16,6 @@ const featuredCollectionsPage = ({ data, pageContext }) => {
               <span className="you-may-like_header">FEATURED COLLECTIONS</span>
               <span className="you-may-like_header_underline"></span>
             </div>
-            <div style={{display: 'none'}} dangerouslySetInnerHTML={{ __html: productReviews[0].reviews }} />
            {
             data.allShopifyCollection.edges.map((collection, collectionIndex) => {
               return <CollectionSlider

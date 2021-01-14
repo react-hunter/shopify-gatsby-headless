@@ -1,9 +1,9 @@
 import React from 'react' /* eslint-disable */
-import SEO from "../components/seo"
+import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
 import RecentArticles from "../components/articles/recentArticles"
-import ShareIcons from "../components/shareIcons"
+import ShareIcons from "../components/common/shareIcons"
 
 const articlePage = ({ data }) => {
     
