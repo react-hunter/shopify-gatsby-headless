@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
-import ProductGallery from "../components/ProductPage/ProductGallery"
-import ProductDescription from "../components/ProductPage/ProductDescription"
-import RelatedProductList from "../components/ProductPage/RelatedProductList";
+import ProductGallery from "../components/productPage/ProductGallery"
+import ProductDescription from "../components/productPage/ProductDescription"
+import RelatedProductList from "../components/productPage/RelatedProductList";
 
 
 import '../styles/productPage.scss';
