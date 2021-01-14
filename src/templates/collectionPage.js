@@ -115,7 +115,7 @@ const collectionPage = ({ data, pageContext }) => {
             </div>
           </header>
         </div>
-        <div style={{display: 'none'}} dangerouslySetInnerHTML={{ __html: productReviews[0].reviews }} />
+        <div style={{display: 'none'}} dangerouslySetInnerHTML={{ __html: productReviews[0] ? productReviews[0].reviews : '' }} />
         <div className="" id="Collection">
           <ul id="shop-all-content" 
             className="products-on-page grid grid--uniform grid--view-items">
