@@ -67,7 +67,7 @@ const ProductInfo = ({ product, review }) => {
                 { productPageData.productFeatures.map((Item, Index) => 
                     <span className="item" key={Index}>
                         <br />
-                        <FontAwesomeIcon icon={faCheck} style={{ color: '#93c47d'}} size="1.5px" />
+                        <FontAwesomeIcon icon={faCheck} style={{ color: '#93c47d'}} size="1x" />
                         <strong>
                             <span style={{ color: 'rgb(0,0,0)', marginLeft: '5px' }}>{ Item.text }</span>
                         </strong>
