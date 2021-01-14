@@ -30,11 +30,15 @@ exports.createPages = async ({ graphql, actions }) => {
             productReview.reviews_count = mf.value
         }
       }
+      if(mf.namespace === 'product' && mf.key==='features') {
+        productReview.features = mf.value
+      }
 
     })
     productReview.reviews = productReview.reviews ? productReview.reviews : ''
     productReview.badge = productReview.badge ? productReview.badge : ''
     productReview.reviews_count = productReview.reviews_count ? parseInt(productReview.reviews_count) : 0
+    productReview.features = productReview.features ? productReview.features : ''
     return productReview
   }))
 
