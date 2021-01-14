@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby'
 
-const RelatedProductBox = props => {
+const ProductBox = props => {
     const product = props.product;
     const review = props.review;
 
@@ -57,4 +57,4 @@ const RelatedProductBox = props => {
     );
 };
 
-export default RelatedProductBox;
+export default ProductBox;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby'
-import RelatedProductBox from "../productBox/relatedProductBox"
+import ProductBox from "../common/product/productBox"
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -50,7 +50,7 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
                 let productReview = reviewList.filter(re => re.handle === product.handle)
                 return (
                   <div key={i}>
-                    <RelatedProductBox product={product} review={productReview[0]} />
+                    <ProductBox product={product} review={productReview[0]} />
                   </div>
                 )
           })}

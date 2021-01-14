@@ -1,7 +1,7 @@
 import React from 'react';
 import { graphql } from "gatsby";
 import Preloader from "../components/common/preloader"
-import CollectionSlider from "../components/collectionsPage/collectionSlider";
+import CollectionSlider from "../components/featuredCollectionsPage/collectionSlider";
 import '../styles/featuredCollectionsPage.scss';
 
 const featuredCollectionsPage = ({ data, pageContext }) => {
