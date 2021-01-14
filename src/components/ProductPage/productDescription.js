@@ -5,6 +5,7 @@ import VariantSelectorsForModal from "./VariantSelectorsForModal"
 import Buttons from "./Buttons"
 import { productPageData } from '../../data/product';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee, faAngleDown, faAngleRight } from "@fortawesome/free-solid-svg-icons"
 
 const ProductDescription = ({ product, review }) => {
 
@@ -74,7 +75,6 @@ const ProductDescription = ({ product, review }) => {
     }
     
     return (
-        <>
         <div className="product_description-container">
             <div className="grid__item medium-up--one-half rightSideProductContainer">
                 <div className="product-single__meta">
@@ -130,7 +130,9 @@ const ProductDescription = ({ product, review }) => {
                         <button className={`accordion_button ${item.headerClass}`} key={`btn_${index}`}>
                             { item.header }
                             
-                            <FontAwesomeIcon className="fas fa-coffee" icon={'coffee'} />
+                            <FontAwesomeIcon icon={faCoffee} size="1x" />
+                            <FontAwesomeIcon icon={faAngleDown} size="1x" />
+                            <FontAwesomeIcon icon={faAngleRight} size="3x" />
                             
                         </button>   
                         <div className={`accordion_content ${item.contentClass}`} dangerouslySetInnerHTML={{ __html: item.content }} />
@@ -141,7 +143,6 @@ const ProductDescription = ({ product, review }) => {
                 </div>
             </div>
         </div>
-        </>
     );
 }
 

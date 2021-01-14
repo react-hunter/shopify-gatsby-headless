@@ -58,8 +58,8 @@ const Faqs = ({ data }) => {
             <div id="shopify-section-faq-customiser-banner" className="shopify-section">
                 <div className="faq_banner-container">
                     <div className="faq_banner-wrapper">
-                        <img className="faq_desktop-banner" src={ faqPageData.customiserBanner.imageDesktop } />
-                        <img className="faq_mobile-banner" src={ faqPageData.customiserBanner.imageMobile } />
+                        <img className="faq_desktop-banner" src={ faqPageData.customiserBanner.imageDesktop } alt="" />
+                        <img className="faq_mobile-banner" src={ faqPageData.customiserBanner.imageMobile } alt="" />
                         <div className="faq_customiser_banner-overlay"></div>
                         <div className="faq_customiser_banner-text_container">
                             <div className="faq_customiser_banner-title">{ faqPageData.customiserBanner.title }</div>

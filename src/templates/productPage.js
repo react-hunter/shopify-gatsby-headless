@@ -44,14 +44,14 @@ const ProductPage = ({ data, pageContext }) => {
             <Preloader />
             <SEO title={product.title} />
 
-            <div id="ProductSection-product-template" className="product-template__container">
+            <div key="product-template" id="ProductSection-product-template" className="product-template__container">
                 <div className="grid product-single product-single--medium-media">
-                    <ProductGallery product={product} />
-                    <ProductDescription product={product} data={data} review={productReview[0]} />
+                    <ProductGallery product={product} key="product-gallery" />
+                    <ProductDescription product={product} data={data} review={productReview[0]} key="product-description" />
                 </div>
             </div>
 
-            <RelatedProductList products={relatedProducts} reviewList={productReviews} />
+            <RelatedProductList key="related-list" products={relatedProducts} reviewList={productReviews} />
             <div key="reviews" dangerouslySetInnerHTML={{ __html: productReview[0].reviews }} style={{ display: 'none' }} />
         </>
     )

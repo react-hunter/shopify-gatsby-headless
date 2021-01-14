@@ -49,7 +49,7 @@ const Header = ({ path }) => {
   useEffect(() => {
     initializeHeader();
     progressAnnouncement();
-  }, []);
+  });
 
   useEffect(() => {
     setQuantity(countQuantity(checkout ? checkout.lineItems : []));
