@@ -6,12 +6,9 @@ const createArrangements = () => {
     
     const handleKeyDown = (e) => {
         e.preventDefault();
-        console.log('key down');
     }
 
-    const triggerImg = (e, productName, optionIndex) => {
-        e.preventDefault();
-
+    const triggerImg = (productName, optionIndex) => {
         let productItem = document.querySelectorAll(`[data-product-name='${productName}']`)[0];
         let productImageTag = productItem.getElementsByClassName('product-image')[0];
         let imageUrlArray = productImageTag.getAttribute('data-imgs').split(",");
@@ -50,7 +47,7 @@ const createArrangements = () => {
                             <div className="create-landing_swatches">
                                 {createPageData.createArrangements.options.map((option_item, option_index) => 
                                     <img src={option_item.buttonImage}
-                                        onClick={e => triggerImg(e, item.name, option_index)}
+                                        onClick={() => triggerImg(item.name, option_index)}
                                         key={option_index} onKeyDown={handleKeyDown} role="presentation" alt="" />
                                 )}
                             </div>

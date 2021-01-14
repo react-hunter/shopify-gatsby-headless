@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'gatsby'
+import StoreContext from '../../context/store'
 import CollectionVariantSelector from './collectionVariantSelector'
 
 const ProductBox = props => {
+    const context = useContext(StoreContext);
     const product = props.product;
     const reviewBadge = props.review ? props.review.badge : '';
 
@@ -16,10 +18,17 @@ const ProductBox = props => {
         console.log('nextImage');
     }
 
-    const OpenCollectionModal = (e) => {
-        e.preventDefault();
-        console.log('OpenCollectionModal');
-        setVaraintModalShow(true);
+    const addToBag = () => {
+        if(product.variants.length === 1) {
+            context.addVariantToCart(product.variants[0].shopifyId, 1)
+            setTimeout(document.querySelector('.site-header__cart').click(), 300)
+        } else {
+            setVaraintModalShow(true);
+        }
+    }
+
+    const closeCollectionModal = () => {
+        setVaraintModalShow(false);
     }
 
     const handleKeyDown =(e) => {
@@ -32,7 +41,7 @@ const ProductBox = props => {
         <li className="grid__item grid__item--collection-template " key={product.title}>
             <div className="grid-view-item product-card">
                 <span className="visually-hidden product-card-title">{product.title}</span>
-
+                               
                 <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
                     <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
                         <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/Best_Seller_stickers-01_150x.png?v=1605546945" className="badge" alt="" />
@@ -42,14 +51,6 @@ const ProductBox = props => {
                                     className="enableScrollOnMobile disableSaveImageIOS product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc lazyloaded"
                                     src={product.images[0].originalSrc}
                                     alt={product.title}
-                                />) : ""
-                            }
-                            { product.images[1] ? 
-                                (<img 
-                                    className="enableScrollOnMobile product-tile__image product-collection_image_alternate"
-                                    src={product.images[1].originalSrc}
-                                    alt={product.title}
-                                    style={{ cursor: 'pointer' }}
                                 />) : ""
                             }
                         </div>
@@ -87,9 +88,9 @@ const ProductBox = props => {
                 </div>
 
                 <button className="openVariantModal" 
-                    onClick={OpenCollectionModal}>ADD TO BAG</button>
+                    onClick={addToBag}>ADD TO BAG</button>
 
-                {varaintModalShow && ( <CollectionVariantSelector /> )}
+                {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} product={product} /> )}
             </div>
         </li>
     );

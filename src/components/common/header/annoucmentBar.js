@@ -25,6 +25,13 @@ const annoucmentBar = ({ path }) => {
       <>
         <div className="annoucment-bar-w-controls">
           <div id="wrapper-announcement" className="center" data-state="Playing">
+            <svg className="progress-announcement white noselect" data-progress="65" x="0px" y="0px" viewBox="0 0 80 80">
+              <path className="track" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
+              <path className="fill" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
+              <text className="value" x="50%" y="55%">
+                <i id="carousel-button" className="fas fa-pause pause-btn"></i>
+              </text>
+            </svg>
           </div>
           <div className="announcement-bar">
             <div className="ann_bars">

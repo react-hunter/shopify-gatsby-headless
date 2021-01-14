@@ -11,8 +11,8 @@ const VariantSelectorForModal = ({productVariant, variantList, variant, changeOp
         closeModal()
     }
 
-    const findImage = (optionName, optionValue) => {
-        var imgUrl = ''
+    const findVariant = (optionName, optionValue) => {
+        var properVariant = null
         const otherOptionKeys = Object.keys(variant).filter(optionKey => optionKey !== optionName)
 
         variantList.map(va => {
@@ -23,10 +23,19 @@ const VariantSelectorForModal = ({productVariant, variantList, variant, changeOp
                 }
             })
             if(matched === true && va.title.split(' / ').includes(optionValue)) {
-                imgUrl = va.image.originalSrc;
+                properVariant = va;
             }
         })
-        return imgUrl
+        return properVariant
+    }
+
+    const findImage = (optionName, optionValue) => {
+        const variant = findVariant(optionName, optionValue)
+        return variant ? variant.image.originalSrc : '//cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_300x.png'
+    }
+    const findPrice = (optionName, optionValue) => {
+        const variant = findVariant(optionName, optionValue)
+        return variant ? variant.price : 0
     }
 
     return (
@@ -38,7 +47,7 @@ const VariantSelectorForModal = ({productVariant, variantList, variant, changeOp
                             <div className="gridC" onClick={() => clickSelect(options.name, value)} key={optionIndex}>
                                 <img src={findImage(options.name, value)} alt="" />
                                 <h3>{ value }</h3>
-                                <span className="sidePrice">${productVariant.price}</span>
+                                <span className="sidePrice">${findPrice(options.name, value)}</span>
                                 <a href="/fakeUrl" className="closebtn" onClick={closeNav}>×</a>
                             </div> 
                         ))

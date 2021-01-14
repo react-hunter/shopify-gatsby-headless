@@ -1,7 +1,7 @@
 import React from 'react';
-import Preloader from "../components/common/preloader"
+import Preloader from "../../components/common/preloader"
 
-const contactusPage = ({ data }) => {
+const ContactUs = ({ data }) => {
     return (
       <>
         <Preloader />
@@ -47,4 +47,4 @@ const contactusPage = ({ data }) => {
     )
 }
   
-export default contactusPage
+export default ContactUs

@@ -1,29 +1,47 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { commonData } from '../../data/common';
 import AjaxCartFooter from './ajaxCartFooter';
+import GiftMessage from './giftMessage'
+import AjaxCartEmpty from './ajaxCartEmpty';
 import StoreContext from '../../context/store'
 import { Link } from 'gatsby'
 
-const AjaxCartCustom = () => {
-      
-    const defaults = {
-        cartModal: '.js-ajax-cart-modal', // classname
-        cartModalContent: '.js-ajax-cart-modal-content', // classname
-        cartModalClose: '.js-ajax-cart-modal-close', // classname
-        cartDrawer: '.js-ajax-cart-drawer', // classname
-        cartDrawerContent: '.js-ajax-cart-drawer-content', // classname
-        cartDrawerTrigger: '.js-ajax-cart-drawer-trigger', // classname
-        cartOverlay: '.js-ajax-cart-overlay', // classname
-        cartCounter: '.cartCount', // classname
-        addToCart: '.js-ajax-add-to-cart', // classname
-        checkoutButton: '.js-ajax-checkout-button',
-    };
+const AjaxCartCustom = ({giftVariant, rushVariant}) => {
+    // const defaults = {
+    //     cartModal: '.js-ajax-cart-modal', // classname
+    //     cartModalContent: '.js-ajax-cart-modal-content', // classname
+    //     cartModalClose: '.js-ajax-cart-modal-close', // classname
+    //     cartDrawer: '.js-ajax-cart-drawer', // classname
+    //     cartDrawerContent: '.js-ajax-cart-drawer-content', // classname
+    //     cartDrawerTrigger: '.js-ajax-cart-drawer-trigger', // classname
+    //     cartOverlay: '.js-ajax-cart-overlay', // classname
+    //     cartCounter: '.cartCount', // classname
+    //     addToCart: '.js-ajax-add-to-cart', // classname
+    //     checkoutButton: '.js-ajax-checkout-button',
+    // };
 
     const context = useContext(StoreContext);
-    const [lineItems, setLineItems] = useState(context.store.checkout.lineItems);
+    const [lineItems, setLineItems] = useState([]);
     const [messageShow, setMessageShow] = useState(false);
+    const [giftLineId, setGiftLineId] = useState('')
+    const [rushLineId, setRushLineId] = useState('')
     
     useEffect(() => {
+        const originalLineItemList = context.store.checkout.lineItems
+        const lineItemList = originalLineItemList.filter(li => li.variant.id !== giftVariant.shopifyId && li.variant.id !== rushVariant.shopifyId)
+        const giftLineItem = originalLineItemList.filter(li => li.variant.id === giftVariant.shopifyId)
+        const rushLineItem = originalLineItemList.filter(li => li.variant.id === rushVariant.shopifyId)
+        if (giftLineItem.length > 0) {
+            setGiftLineId(giftLineItem[0].id)
+        }
+        if (rushLineItem.length > 0) {
+            setRushLineId(rushLineItem[0].id)
+        }
+        setLineItems(lineItemList)
+        document.querySelector('.js-ajax-cart-overlay').addEventListener('click', function() {
+            closeAddModal();
+            closeCartDrawer();
+            closeCartOverlay();
+        });
         // const atcUpsellButtons = document.querySelectorAll('.upsell-add_button');
         // for (let i = 0; i < atcUpsellButtons.length; i++) {
 
@@ -37,10 +55,7 @@ const AjaxCartCustom = () => {
         //         }
         //     }
         // }
-
-        setLineItems(context.store.checkout.lineItems)
-
-    }, [context.store.checkout]);
+    }, [context.store.checkout, giftVariant, rushVariant]);
 
     const increaseItem = (itemId, itemQuantity) => {
         context.updateLineItem(context.store.client, context.store.checkout.id, itemId, itemQuantity + 1)
@@ -67,35 +82,46 @@ const AjaxCartCustom = () => {
     };
 
     function closeCartOverlay() {
-        document.querySelector(defaults.cartOverlay).classList.remove('is-open');
+        document.querySelector('.js-ajax-cart-overlay').classList.remove('is-open');
         document.documentElement.classList.remove('is-locked');
         document.documentElement.classList.remove("scrollPrevent")
     }
 
+    function closeAddModal() {
+        document.querySelector('.js-ajax-cart-modal').classList.remove('is-open');
+    }
+
     function closeCartDrawer () {
-        document.querySelector(defaults.cartDrawer).classList.remove('is-open');
+        document.querySelector('.js-ajax-cart-drawer').classList.remove('is-open');
         document.getElementsByTagName("html")[0].classList.remove('cart-drawer-open');
+        document.getElementsByTagName("html")[0].style.overflow = "";
     };
     
-    const addNoteToCart = (e) => {
-        e.preventDefault();
-        console.log("addNoteToCart");
+    const addNoteToCart = (messageContent) => {
+        context.addVariantToCart(giftVariant.shopifyId, 1, [{key: 'Message', value: messageContent}])
+        setMessageShow(false)
     };
     
     const handleCheckboxClick = () => {
-        console.log("handleCheckboxClick");
-        setMessageShow(!messageShow)
-    };
+        if(giftLineId === '') {
+            setMessageShow(!messageShow)
+        } else {
+            context.removeLineItem(context.store.client, context.store.checkout.id, giftLineId)
+            setGiftLineId('')
+        }
+    }
 
     const rushProcessing = (e) => {
         e.preventDefault();
-        console.log("rushProcessing");
-    };
-
-    
+        if (rushLineId === '') {
+            context.addVariantToCart(rushVariant.shopifyId, 1)
+        } else {
+            context.removeLineItem(context.store.client, context.store.checkout.id, rushLineId)
+            setRushLineId('')
+        }
+    }
     const handleKeyDown = (e) => {
         e.preventDefault();
-        console.log('key down');
     }
 
     return (
@@ -113,7 +139,7 @@ const AjaxCartCustom = () => {
             <div className="ajax-cart__drawer js-ajax-cart-drawer">
                 <div className="ajax-cart-drawer">
                     <div className="ajax-cart-top-heading-container">
-                        <div className="items-in-cart">{ commonData.cartSlide.title }</div>
+                        <div className="items-in-cart">MY BAG</div>
                         <div className="ajax-cart-drawer__close js-ajax-cart-drawer-close" 
                             onKeyDown={handleKeyDown}
                             onClick={cartDrawerClose}
@@ -124,68 +150,60 @@ const AjaxCartCustom = () => {
                         </div>
                     </div>
                     <div className="free-shipping-heading empty"></div>   
-
-                    <div className="ajax-cart-drawer__button-and-subtotal">
-                        <div className="cart-item-container">
-                            <div className="cart-item">
-                                <span>
-                                    <input onClick={handleCheckboxClick} 
-                                        id="personalizedMessageCheckbox" 
-                                        type="checkbox" name="" value="" props="" />
-                                </span>
-                                <span>
-                                    <strong style={{ fontFamily: "'Avenir', sans-serif" }}>Personalised Gift Message:</strong> <span className="gift-message">Add a Card for $9.99</span>
-                                </span>
-                            </div>
-
-                            {messageShow && (
-                                <div className="giftmsg-container">
-                                    <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/DOR_Logo_Shop_Slim_XL_600x_600x_e8d2362f-25d0-4cc7-af87-ea45200dc5ea_300x.png?v=1565004065" 
-                                        alt=""
-                                        itemProp="logo" />
-                                    <textarea data-limit-rows="false" rows="5" cols="25" data-cols="25"  data-rows="5" maxLength="120" placeholder="Enter your message..."  id="gift-message-text" ></textarea>
-                                    <button className="addNote" onClick={addNoteToCart}>ADD GIFT MESSAGE</button>
+                    { lineItems.length > 0 ?
+                        (<div className="ajax-cart-drawer__button-and-subtotal">
+                            <div className="cart-item-container">
+                                <div className="cart-item">
+                                    <span>
+                                        <input onClick={handleCheckboxClick} id="personalizedMessageCheckbox" 
+                                            type="checkbox" checked={giftLineId !== '' || messageShow} readOnly />
+                                    </span>
+                                    <span>
+                                        <strong style={{ fontFamily: "'Avenir', sans-serif" }}>Personalised Gift Message:</strong> <span className="gift-message">Add a Card for $9.99</span>
+                                    </span>
                                 </div>
-                            )}
 
-                            <div className="cart-item" style={{ borderBottom: '1px solid #e5e5e5' }}>
-                                <span>
-                                    <input type="checkbox" 
-                                        id="rush-processing" name="" value="" 
-                                        onClick={rushProcessing} />
-                                </span>
-                                <span>
-                                    <strong style={{ fontFamily: "'Avenir', sans-serif" }}>Rush Processing:</strong> <span className="gift-message">Ship within 24 hours for $8.95</span> 
-                                </span>
-                            </div>
-                
-                            <div className="cart-subtotal-container">
-                                <span className="subtotal-heading">Subtotal:</span>
-                                <span className="subtotal-amount">${context.store.checkout.subtotalPrice}</span>
-                            </div>
-                
-                            <div style={{ margin: '0 0 10px 0', minHeight: '20px',textAlign: 'center'}}>
-                                <span className="quadpay-cart">or 4 interest-free payments of <span id="quad-amount"> </span> by <img className="quadpay-img" src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/229/assets/quadpay_200x.png?v=14478482058500416670" alt="" /></span>
-                            </div>
-                
-                            <span style={{ fontFamily: "'Avenir' sans-serif", marginBottom: '10px' }}>Shipping will be calculated at checkout.</span>
-                        </div>
+                                { messageShow && <GiftMessage addNoteToCart={addNoteToCart} /> }
 
-                        <a href={context.store.checkout.webUrl} 
-                            className="c-btn--primary button button--black button--full-width js-button js-ajax-checkout-button" 
-                            style={{ background: '#000000'}}>
-                            <span>Checkout</span>
-                        </a>       
+                                <div className="cart-item" style={{ borderBottom: '1px solid #e5e5e5' }}>
+                                    <span>
+                                        <input type="checkbox" id="rush-processing" 
+                                            checked={rushLineId !== ''} onClick={rushProcessing} readOnly />
+                                    </span>
+                                    <span>
+                                        <strong style={{ fontFamily: "'Avenir', sans-serif" }}>Rush Processing:</strong> <span className="gift-message">Ship within 24 hours for $8.95</span> 
+                                    </span>
+                                </div>
+                    
+                                <div className="cart-subtotal-container">
+                                    <span className="subtotal-heading">Subtotal:</span>
+                                    <span className="subtotal-amount">${context.store.checkout.subtotalPrice}</span>
+                                </div>
+                    
+                                <div style={{ margin: '0 0 10px 0', minHeight: '20px',textAlign: 'center'}}>
+                                    <span className="quadpay-cart">or 4 interest-free payments of <span id="quad-amount">${parseFloat(context.store.checkout.subtotalPrice / 4).toFixed(2)}</span> by <img className="quadpay-img" src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/229/assets/quadpay_200x.png?v=14478482058500416670" alt="" /></span>
 
-                        <AjaxCartFooter />
-                    </div>
+                                </div>
+
+                                <a href={context.store.checkout.webUrl} 
+                                    className="c-btn--primary button button--black button--full-width js-button js-ajax-checkout-button" 
+                                    style={{ background: '#000000'}}>
+                                    <span>Checkout</span>
+                                </a>       
+
+                                <AjaxCartFooter />
+                            </div>
+                        </div>) : ""
+                    }
 
                     <div className="ajax-cart-drawer__content js-ajax-cart-drawer-content">
-                        { lineItems.map((item, index) => {
-                            return (
+                        { lineItems.length > 0 ?
+                            (lineItems.map((item, index) => {
+                                return (
                                 <div className={`ajax-cart-item ${item.variant.title}`} key={index} data-line={index}>
                                     <div className="price-and-remove-item-wrapper">
-                                        <div className="ajax-cart-item-remove js-ajax-remove-from-cart" onClick={() => removeItem(item.id)}>✖</div>
+                                        <div className="ajax-cart-item-remove js-ajax-remove-from-cart" role="button"
+                                            tabIndex="0" onKeyDown={handleKeyDown} onClick={() => removeItem(item.id)}>✖</div>
                                     </div>
                                     <div className="ajax-cart-item-content">
                                         <div className="ajax-cart-item-image-container">
@@ -219,15 +237,18 @@ const AjaxCartCustom = () => {
                                                         </button>
                                                     </div>
                                                     <div className="ajax-cart-item__price">
-                                                        <span>${item.variant.price} USD</span>
+                                                        <span>${parseFloat(item.variant.price * item.quantity).toFixed(2)} USD</span>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            )}
-                        )}                  
+                                </div>)}
+                            )) : (
+                                <AjaxCartEmpty />
+                            )
+                        }
                     </div>
                 </div>
             </div>

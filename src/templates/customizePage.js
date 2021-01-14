@@ -362,6 +362,7 @@ const CustomizePage = ({ data }) => {
   }
 
   function getMainImage() {
+    console.log("getMainImage -------------------------- ");
     if (document.getElementById("Style-Type").innerText !== "Letters" || document.getElementById("Style-Type").innerText !== "Numbers") {
       resetNumbersAndLetter();
       var xhr = new XMLHttpRequest();
@@ -384,18 +385,21 @@ const CustomizePage = ({ data }) => {
       var backup1 = ["Red"]
       var backup2 = ["Red", "Light Pink"]
   
-      if (selectedRoses === 0) {
-  
+      console.log("selectedRoses = " ,selectedRoses);
+
+      console.log("selectedProduct.Arrangement = ", selectedProduct.Arrangement);
+      console.log("style = ", style);
+
+      if (selectedRoses.length === 0) {
         if (style === "Solid") {
           selectedRoses = backup1;
           collection = backup1.join(",")
         } else {
           selectedRoses = backup2;
           collection = backup2.join(",")
-  
         }
-      } else {
-  
+      } 
+      else {
         if (style === "Solid") {
           if (selectedRoses.length > 1) {
             collection.push(selectedRoses[0]);
@@ -410,8 +414,10 @@ const CustomizePage = ({ data }) => {
             collection = selectedRoses.join(",")
           }
         }
-  
       }
+      
+      console.log("collection = ", collection);
+
       if (!isShare) {
         xhr.open("GET", `https://mediacarryapi.com/dor/generator?store=dose-roses.com&product=${selectedProduct.Arrangement}&style=${style}&data=${collection}`);
         xhr.send();

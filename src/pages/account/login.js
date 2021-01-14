@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import SEO from "../../components/seo"
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo'
@@ -52,7 +52,8 @@ const LoginForm = () => {
     updateStore(state => {
         return { ...state, customerAccessToken: value }
     })
-    console.log('store: ', store)
+    navigate(`/account/login`);
+    console.log(store)
   }
 
   return (

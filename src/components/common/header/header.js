@@ -30,8 +30,6 @@ let bannerContainer = null;
 var xDown = null;
 var yDown = null;
 
-
-
 const countQuantity = lineItems => {
   let quantity = 0
 
@@ -50,7 +48,8 @@ const Header = ({ path }) => {
   
   useEffect(() => {
     initializeHeader();
-  }, []);
+    progressAnnouncement();
+  });
 
   useEffect(() => {
     setQuantity(countQuantity(checkout ? checkout.lineItems : []));
@@ -111,6 +110,20 @@ const Header = ({ path }) => {
     
       showBanners();
     }
+  }
+
+  function forEach(array, callback, scope) {
+    for (var i = 0; i < array.length; i++) {
+      callback.call(scope, i, array[i]);
+    }
+  }
+
+  function progressAnnouncement() {
+    var max = -219.99078369140625;
+    forEach(document.querySelectorAll('.progress-announcement'), function (index, value) {
+      var percent = value.getAttribute('data-progress');
+      value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - percent) / 100) * max);
+    });
   }
 
   const showChildCollection = (e, id) => {
@@ -300,6 +313,7 @@ const Header = ({ path }) => {
   function openCartDrawer() {
     document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
     document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
+    document.getElementsByTagName("html")[0].style.overflow = "hidden";
   }
   
   function openCartOverlay() {
@@ -362,7 +376,7 @@ const Header = ({ path }) => {
                       <span className="icon__fallback-text">Log in</span>
                     </Link>
               
-                    <Link to="/pages/contact-us" className="site-header__icon site-header__account nav-message_icon" key="contactus">
+                    <Link to="/pages/contactus" className="site-header__icon site-header__account nav-message_icon" key="contactus">
                       <ReactSVG src={MessageIcon} />
                       <span className="icon__fallback-text">Contact Us</span>
                     </Link>

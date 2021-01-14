@@ -28,7 +28,7 @@ export const commonData = {
     },
     {
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/promo_770x.jpg',
-      link: '/collection/best-sellers'
+      link: '/collections/best-sellers'
     }
   ],
   mobileHeaderMenu: [
@@ -44,70 +44,70 @@ export const commonData = {
       parent: '',
       hasChildren: false,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/CD60CD8D-2524-481A-B357-BFFF7F4F52FD_500x.png',
-      url: '/collection/best-sellers'
+      url: '/collections/best-sellers'
     },
     {
       title: 'GALAXY COLLECTION',
       parent: '',
       hasChildren: false,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Galaxy_Rose_Collection_500x.png',
-      url: '/collection/galaxy'
+      url: '/collections/galaxy'
     },
     {
       title: 'ROSE BEAR',
       parent: '',
       hasChildren: false,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/F4CE446E-0E6E-4C57-94F5-1F13CE43E9C1_500x.png',
-      url: '/collection/rose-bear'
+      url: '/collections/rose-bear'
     },
     {
       title: '24K GOLD DIPPED ROSE',
       parent: '',
       hasChildren: false,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/24K_Gold_Dipped_Rose_500x.png',
-      url: '/collection/24k-gold-dipped-roses'
+      url: '/collections/24k-gold-dipped-roses'
     },
     {
       title: 'SUEDE COLLECTION',
       parent: '',
       hasChildren: false,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/4A016659-7C58-4DDF-ACD9-B00FBDE27B95_500x.png',
-      url: '/collection/persuede'
+      url: '/collections/persuede'
     },
     {
       title: 'LEATHER COLLECTION',
       parent: '',
       hasChildren: false,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/AECBB131-DD24-47D7-BD3A-80C5AB86DB78_500x.png',
-      url: '/collection/leather'
+      url: '/collections/leather'
     },
     {
       title: 'MARBLE COLLECTION',
       parent: '',
       hasChildren: false,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/075BDA61-26E3-4794-8468-D9ED07025627_500x.png',
-      url: '/collection/marbleous'
+      url: '/collections/marbleous'
     },
     {
       title: 'THE BLOOM BOX',
       parent: '',
       hasChildren: false,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Bloom_Box_46aed06d-5177-401e-a783-64e98528fcf1_500x.png',
-      url: '/collection/bloom-box'
+      url: '/collections/bloom-box'
     },
     {
       title: 'THE FORBIDDEN ROSE',
       parent: '',
       hasChildren: false,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/The_Forbidden_Rose_500x.jpg?v=1602021363',
-      url: '/collection/the-forbidden-rose'
+      url: '/collections/the-forbidden-rose'
     },
     {
       title: 'THE ROSE MAKEUP BOX',
       parent: '',
       hasChildren: false,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/The_Rose_Makeup_Box_500x.jpg',
-      url: '/collection/the-makeup-box'
+      url: '/collections/the-makeup-box'
     },
     {
       title: 'SHOP BY OCCASION',
@@ -121,49 +121,49 @@ export const commonData = {
           parent: 'SHOP BY OCCASION',
           hasChildren: false,
           image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/7888444C-D3CE-411E-8551-086F15EEFD71_500x.jpg',
-          url: '/collection/anniversary'
+          url: '/collections/anniversary'
         },
         {
           title: 'BIRTHDAY',
           parent: 'SHOP BY OCCASION',
           hasChildren: false,
           image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/9430F88F-CC88-4613-9C2B-DC2D8BE97B60_500x.jpg',
-          url: '/collection/birthday'
+          url: '/collections/birthday'
         },
         {
           title: 'CONGRATULATIONS',
           parent: 'SHOP BY OCCASION',
           hasChildren: false,
           image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/IMG_3169_500x.JPG',
-          url: '/collection/congratulations'
+          url: '/collections/congratulations'
         },
         {
           title: 'GRADUATION',
           parent: 'SHOP BY OCCASION',
           hasChildren: false,
           image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/IMG_3178_500x.JPG',
-          url: '/collection/graduation'
+          url: '/collections/graduation'
         },
         {
           title: 'GENDER REVEAL',
           parent: 'SHOP BY OCCASION',
           hasChildren: false,
           image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/07D35A02-BC62-4896-8E17-A1E256FA6ABF_500x.JPG',
-          url: '/collection/gender-reveal'
+          url: '/collections/gender-reveal'
         },
         {
           title: 'SPECIAL EVENT',
           parent: 'SHOP BY OCCASION',
           hasChildren: false,
           image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/FCC663D1-B946-45DB-B660-5B6691393487_500x.jpg',
-          url: '/collection/special-occasion'
+          url: '/collections/special-occasion'
         },
         {
           title: 'WEDDING',
           parent: 'SHOP BY OCCASION',
           hasChildren: false,
           image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/F2E40911-B1F1-4CF3-8751-A9C2C5053F8D_500x.jpg',
-          url: '/collection/wedding'
+          url: '/collections/wedding'
         },
       ]
     },
@@ -172,14 +172,14 @@ export const commonData = {
       parent: '',
       hasChildren: false,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/For_Her_500x.jpg',
-      url: '/collection/gifts-for-her'
+      url: '/collections/gifts-for-her'
     },
     {
       title: 'GIFTS FOR HIM',
       parent: '',
       hasChildren: false,
       image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/For_Him_500x.jpg',
-      url: '/collection/gifts-for-him'
+      url: '/collections/gifts-for-him'
     },
     {
       title: 'SHOP BY PRICE',
@@ -193,28 +193,28 @@ export const commonData = {
           parent: 'SHOP BY PRICE',
           hasChildren: false,
           image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Suede_Black_Single_Red_ba38b5c9-d679-4511-a3d5-b5762a5f313b_500x.png',
-          url: '/collection/gifts-under-50'
+          url: '/collections/gifts-under-50'
         },
         {
           title: 'GIFTS UNDER $100',
           parent: 'SHOP BY PRICE',
           hasChildren: false,
           image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Medium_Round_Flat_500x.png',
-          url: '/collection/gifts-under-100'
+          url: '/collections/gifts-under-100'
         },
         {
           title: 'GIFTS UNDER $350',
           parent: 'SHOP BY PRICE',
           hasChildren: false,
           image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Large_Round_Flat_500x.png',
-          url: '/collection/gifts-under-350'
+          url: '/collections/gifts-under-350'
         },
         {
           title: 'GIFTS UNDER $500',
           parent: 'SHOP BY PRICE',
           hasChildren: false,
           image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Medium_Round_500x.png',
-          url: '/collection/gifts-under-500'
+          url: '/collections/gifts-under-500'
         }
       ]
     }
@@ -259,60 +259,31 @@ export const commonData = {
     },
     {
       title: 'Contact Us',
-      handle: '/pages/contact-us'
+      handle: '/pages/contactus'
     },
     {
       title: 'FAQs',
-      handle: '/pages/contact-us'
+      handle: '/pages/faqs'
     },
     {
       title: 'Shipping',
-      handle: '/pages/contact-us'
+      handle: '/pages/shipping'
     },
     {
       title: 'Returns & Exchanges',
-      handle: '/pages/contact-us'
+      handle: '/pages/returns'
     },
     {
       title: 'Privacy Policy',
-      handle: '/pages/contact-us'
+      handle: '/pages/privacy'
     },
     {
       title: 'Terms & Conditions',
-      handle: '/pages/contact-us'
+      handle: '/pages/terms'
     },
     {
       title: 'COVID-19',
-      handle: '/pages/contact-us'
+      handle: '/pages/covid-19'
     }
-  ],
-  cartSlide: {
-    title: 'MY BAG',
-    products: [
-      {
-        image: "https://cdn.shopify.com/s/files/1/0157/4420/4900/products/Medium_White_Rose_Bear.jpg?v=1579117446",
-        title: "White Rose Bear - Medium (14 Inch)",
-        quantity: "1",
-        price: "$79.95 USD",
-        url: "/products/white-rose-bear?variant=32728597037102",
-        id: "32728597037102:19120a5501452126150699b25f7da236"
-      },
-      {
-        image: "https://cdn.shopify.com/s/files/1/0157/4420/4900/products/Medium_Blue_Rose_Bear.jpg?v=1579216686",
-        title: "Blue Rose Bear - Medium (14 inch)",
-        quantity: "1",
-        price: "$79.95 USD",
-        url: "/products/blue-rose-bear?variant=19511246192740",
-        id: "19511246192740:044b53bc30c1584c1a6e40f9c258563e"
-      },
-      {
-        image: "https://cdn.shopify.com/s/files/1/0157/4420/4900/products/79871607_585503648952362_8618381474883311171_n.jpg?v=1579048549",
-        title: "Galaxy Enchanted Rose - Bright",
-        quantity: "1",
-        price: "$49.95 USD" ,
-        url: "/products/enchanted-led-rose-galaxy?variant=32751577202734",
-        id: "32751577202734:16f3011f758a9755b7f7526ba5034883"
-      }
-    ]
-  }
+  ]
 }

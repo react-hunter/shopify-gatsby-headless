@@ -10,7 +10,6 @@ const collectionPage = ({ data, pageContext }) => {
 
   const loadMoreProducts = (e) => {
     e.preventDefault();
-    console.log('Load More');
     setDisplayProductCount(displayProductCount + 2);
   }
 
@@ -157,13 +156,27 @@ export const query = graphql`
         id
         handle
         title
+        options {
+          id
+          name
+          values
+        }
         images {
           originalSrc
         }
         variants {
           id
+          title
           availableForSale
           price
+          shopifyId
+          image {
+            originalSrc
+          }
+          selectedOptions {
+            name
+            value
+          }
         }
       }
     }

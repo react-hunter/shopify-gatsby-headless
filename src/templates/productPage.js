@@ -6,6 +6,7 @@ import ProductGallery from "../components/ProductPage/ProductGallery"
 import ProductDescription from "../components/ProductPage/productDescription"
 import RelatedProductList from "../components/relatedProductList";
 
+
 import '../styles/productPage.scss';
 
 const ProductPage = ({ data, pageContext }) => {
@@ -24,9 +25,7 @@ const ProductPage = ({ data, pageContext }) => {
                 addToCartButtonSticky[i].style.display = "none";
             }
         } 
-
-        let showing = false;
-      
+        // let showing = false;
     }, [])
 
     function setPDPHeaderPadding() {
@@ -45,14 +44,14 @@ const ProductPage = ({ data, pageContext }) => {
             <Preloader />
             <SEO title={product.title} />
 
-            <div id="ProductSection-product-template" className="product-template__container">
+            <div key="product-template" id="ProductSection-product-template" className="product-template__container">
                 <div className="grid product-single product-single--medium-media">
-                    <ProductGallery product={product} />
-                    <ProductDescription product={product} data={data} review={productReview[0]} />
+                    <ProductGallery product={product} key="product-gallery" />
+                    <ProductDescription product={product} data={data} review={productReview[0]} key="product-description" />
                 </div>
             </div>
 
-            <RelatedProductList products={relatedProducts} reviewList={productReviews} />
+            <RelatedProductList key="related-list" products={relatedProducts} reviewList={productReviews} />
             <div key="reviews" dangerouslySetInnerHTML={{ __html: productReview[0].reviews }} style={{ display: 'none' }} />
         </>
     )
@@ -63,7 +62,6 @@ export default ProductPage
 export const query = graphql`
     query($id: String!){
 		shopifyProduct(handle: {eq: $id}) {
-			handle
 			id
 			title
 			handle

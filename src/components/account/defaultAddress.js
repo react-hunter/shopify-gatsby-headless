@@ -3,8 +3,8 @@ import { Link } from "gatsby"
 
 const DefaultAddress = ({defaultAddress, addressesSize}) => {
     return (
-        <div className="column has-text-centered">
-            <h3 className="subtitle has-text-centered has-text-weight-semibold">ACCOUNT DETAILS</h3>
+        <div className="grid__item myaccount__account-details">
+            <h2 className="">ACCOUNT DETAILS</h2>
             {
                 defaultAddress != null && (
                     <div className="has-text-left">
@@ -15,10 +15,9 @@ const DefaultAddress = ({defaultAddress, addressesSize}) => {
                     </div>
                 )
             }
-            <br />
             <Link to="account/addresses">
                 <button
-                    className="button is-dark"
+                    className="btn btn--small"
                 >
                     View Addresses ({addressesSize})
                 </button>
