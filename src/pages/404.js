@@ -1,6 +1,6 @@
 import React from "react"
 
-import SEO from "../components/seo"
+import SEO from "../components/common/seo"
 import Preloader from "../components/common/preloader"
 
 const NotFoundPage = () => (

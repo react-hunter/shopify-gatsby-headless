@@ -1,7 +1,7 @@
 import React, { useState } from 'react' /* eslint-disable */
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
-import ProductBox from "../components/ProductList/productBox"
+import CollectionProductBox from "../components/collectionPage/collectionProductBox"
 import '../styles/collectionPage.scss';
 
 const collectionPage = ({ data, pageContext }) => {
@@ -122,7 +122,7 @@ const collectionPage = ({ data, pageContext }) => {
               {
                 displayedProducts.map((productItem, productIndex) => {
                   const productReview = productReviews.filter(pr => pr.handle === productItem.handle)
-                  return <ProductBox product={productItem} key={productIndex} review={productReview[0]} />
+                  return <CollectionProductBox product={productItem} key={productIndex} review={productReview[0]} />
                 })
               }
           </ul>

@@ -1,9 +1,9 @@
 import React from 'react';
-import ProductItem from "./ProductList/productItem"
+import ProductBox from "../common/product/productBox"
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../styles/relatedProductList.scss";
+import "../../styles/relatedProductList.scss";
 
 const RelatedProductList = ({ products, reviewList }) => {
   const settings = {
@@ -52,7 +52,7 @@ const RelatedProductList = ({ products, reviewList }) => {
                   const productReview = reviewList.filter(re => re.handle === product.handle)
                   return (
                     <div key={i}>
-                      <ProductItem product={product} review={productReview[0]} />
+                      <ProductBox product={product} review={productReview[0]} />
                     </div>
                   )
             })}

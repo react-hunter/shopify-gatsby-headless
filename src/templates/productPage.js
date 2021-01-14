@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import SEO from "../components/seo"
+import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
 import ProductGallery from "../components/ProductPage/ProductGallery"
 import ProductDescription from "../components/ProductPage/productDescription"
-import RelatedProductList from "../components/relatedProductList";
+import RelatedProductList from "../components/productPage/relatedProductList";
 
 
 import '../styles/productPage.scss';

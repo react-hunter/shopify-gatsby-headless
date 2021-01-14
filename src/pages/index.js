@@ -1,5 +1,5 @@
 import React from 'react'
-import SEO from "../components/seo"
+import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
 import HeroSection from "../components/homepage/heroSection"

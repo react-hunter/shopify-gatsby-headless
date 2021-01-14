@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'; /* eslint-disable */
-import SEO from "../components/seo"
+import SEO from "../components/common/seo"
 import StoreContext from "../context/store"
 import Products from "../components/Cart/Products"
 import Empty from "../components/Cart/Empty"

@@ -1,13 +1,15 @@
 .slick-prev, .slick-prev:hover {
   background-image: url("../images/leftArrow_small.png");
   background-size: contain;
-  left: 0px;
+  left: 20px;
+  z-index: 1000;
+
   &:hover {
     background-image: url("../images/leftArrow_small.png");
     background-size: contain;
   }
   &.slick-disabled {
-    opacity: 0.3;
+    opacity: 0.5;
     &:hover, &:focus {
       background-image: url("../images/leftArrow_small.png");
       background-size: contain;
@@ -21,13 +23,15 @@
 .slick-next, .slick-next:hover {
   background-image: url("../images/rightArrow_small.png");
   background-size: contain;
-  right: 0px;
+  right: 20px;
+  z-index: 1000;
+
   &:hover {
     background-image: url("../images/rightArrow_small.png");
     background-size: contain;
   }
   &.slick-disabled {
-    opacity: 0.3;
+    opacity: 0.5;
     &:hover, &:focus {
       background-image: url("../images/rightArrow_small.png");
       background-size: contain;

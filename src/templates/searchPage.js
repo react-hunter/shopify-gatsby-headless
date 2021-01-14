@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import queryString from 'query-string'
-import SEO from "../components/seo"
+import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
-import ProductBox from "../components/ProductList/productBox"
+import CollectionProductBox from "../components/collectionPage/collectionProductBox"
 
 const SearchPage = ( { data, pageContext, location } ) => {
   const { searchText } = location.search ? queryString.parse(location.search) : { searchText: ''}
@@ -37,7 +37,7 @@ const SearchPage = ( { data, pageContext, location } ) => {
             !p ?
               <p>Nothings with : {searchText} </p>
               :
-              <ProductBox product={p} review={findReview(p.handle)} key={i} />
+              <CollectionProductBox product={p} review={findReview(p.handle)} key={i} />
           ))}
         </ul>
       </div>

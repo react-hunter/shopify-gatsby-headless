@@ -15,7 +15,7 @@ const Buttons = ({ context, available, productVariant,  quantity}) => {
                 <button id="AddToCart"
                     className="btn product-form__cart-submit btn--secondary-accent js-ajax-add-to-cart"
                     disabled={!available}
-                    onClick={handleAddToCart}>Add to Cart</button>
+                    onClick={handleAddToCart}>Add to Bag</button>
                 <div className="shopify-payment-button">
                     <button
                         className="shopify-payment-button__button shopify-payment-button__button--unbranded"

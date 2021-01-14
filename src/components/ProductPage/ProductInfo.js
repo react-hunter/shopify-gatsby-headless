@@ -1,5 +1,7 @@
 import React from 'react';
 import { productPageData } from '../../data/product';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTruck, faCheck } from "@fortawesome/free-solid-svg-icons"
 
 const ProductInfo = ({ product, review }) => {
     return (
@@ -61,18 +63,21 @@ const ProductInfo = ({ product, review }) => {
                     </div>
                 </dl>
             </div>
-            <div className="product-features">
+            <p className="product-features">
                 { productPageData.productFeatures.map((Item, Index) => 
-                    <p className="item" key={Index}>
-                        <i key={Index} className="fa fa-check male" style={{ color: '#93c47d'}}></i>
+                    <span className="item" key={Index}>
+                        <br />
+                        <FontAwesomeIcon icon={faCheck} style={{ color: '#93c47d'}} size="1.5px" />
                         <strong>
-                            <span style={{ color: 'rgb(0,0,0)' }}>{ Item.text }</span>
+                            <span style={{ color: 'rgb(0,0,0)', marginLeft: '5px' }}>{ Item.text }</span>
                         </strong>
-                    </p>
+                    </span>
                 )}
-            </div>
+            </p>
             <div className="shipping-tout">
-                <i className="fas fa-truck" aria-hidden="true"></i>
+                
+                <FontAwesomeIcon icon={faTruck} size="1x" />
+
                 <p>FAST SHIPPING FROM CALIFORNIA</p>
             </div>
         </>

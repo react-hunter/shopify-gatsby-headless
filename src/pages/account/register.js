@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SEO from "../../components/seo"
+import SEO from "../../components/common/seo"
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo'
 import ConnexionLayout from "../../components/account/ConnexionLayout"

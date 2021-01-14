@@ -1,5 +1,5 @@
 import React from 'react';
-import { commonData } from '../data/common';
+import { commonData } from '../../data/common';
 
 const Instagram = () => {
     const instaHeaderStyle = {
