@@ -9,6 +9,7 @@ const shopify = new Shopify({
   apiKey: process.env.SHOPIFY_ADMIN_API_KEY,
   password: process.env.SHOPIFY_ADMIN_API_PASSWORD
 });
+
 let productReviews = []
 
 exports.createPages = async ({ graphql, actions }) => {
@@ -16,23 +17,25 @@ exports.createPages = async ({ graphql, actions }) => {
   const products = await shopify.product.list();
   productReviews = await Promise.all(products.map(async pr => {
     const metafields = await shopify.metafield.list({metafield: {owner_resource: 'product', owner_id: pr.id}});
-    if (metafields[0]) {
-      return {
-        handle: pr.handle,
-        reviews: metafields[0].value,
-        badge: metafields[1].value,
-        reviews_count: parseInt(metafields[2].value),
-        reviews_average: parseFloat(metafields[3].value)
+    let productReview = {}
+    metafields.map(mf => {
+      productReview.handle = pr.handle
+      if(mf.namespace === 'stamped') {
+        switch (mf.key) {
+          case 'reviews':
+            productReview.reviews = mf.value
+          case 'badge':
+            productReview.badge = mf.value
+          case 'reviews_count':
+            productReview.reviews_count = mf.value
+        }
       }
-    } else {
-      return {
-        handle: pr.handle,
-        reviews: '',
-        badge: '',
-        reviews_count: 0,
-        reviews_average: 0
-      }
-    }
+
+    })
+    productReview.reviews = productReview.reviews ? productReview.reviews : ''
+    productReview.badge = productReview.badge ? productReview.badge : ''
+    productReview.reviews_count = productReview.reviews_count ? parseInt(productReview.reviews_count) : 0
+    return productReview
   }))
 
   return graphql(`

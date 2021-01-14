@@ -3,7 +3,7 @@ import { customizePageData } from '../data/customizePage'
 import Preloader from "../components/common/preloader"
 
 const CustomizePage = ({ data }) => {
-  console.log('data: ', data)
+
   var allProducts;
   var selectedProduct;
   var currentStep = 0;
@@ -1643,40 +1643,3 @@ const CustomizePage = ({ data }) => {
 }
   
 export default CustomizePage
-
-export const query = graphql`
-  query{
-		shopifyCollection(handle: {eq: "customizer"}) {
-			id
-      handle
-      products {
-        id
-        handle
-        title
-        options {
-          id
-          name
-          values
-        }
-        images {
-          originalSrc
-        }
-        variants {
-          id
-          shopifyId
-          title
-          availableForSale
-          requiresShipping
-          price
-          image {
-            originalSrc
-          }
-          selectedOptions {
-            name
-            value
-          }
-        }
-      }
-    }
-	}
-`
