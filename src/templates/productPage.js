@@ -6,6 +6,7 @@ import ProductGallery from "../components/ProductPage/ProductGallery"
 import ProductDescription from "../components/ProductPage/productDescription"
 import RelatedProductList from "../components/relatedProductList";
 
+
 import '../styles/productPage.scss';
 
 const ProductPage = ({ data, pageContext }) => {

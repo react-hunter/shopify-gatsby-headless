@@ -4,6 +4,7 @@ import StoreContext from '../../context/store'
 import VariantSelectorsForModal from "./VariantSelectorsForModal"
 import Buttons from "./Buttons"
 import { productPageData } from '../../data/product';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ProductDescription = ({ product, review }) => {
 
@@ -127,7 +128,10 @@ const ProductDescription = ({ product, review }) => {
                     { productPageData.productAccordions.map((item, index) => 
                         <>
                         <button className={`accordion_button ${item.headerClass}`} key={`btn_${index}`}>
-                            { item.header }<i className="fas fa-angle-down" style={{ transform: 'rotate(180deg)'}}></i>
+                            { item.header }
+                            
+                            <FontAwesomeIcon className="fas fa-coffee" icon={'coffee'} />
+                            
                         </button>   
                         <div className={`accordion_content ${item.contentClass}`} dangerouslySetInnerHTML={{ __html: item.content }} />
                         </>
