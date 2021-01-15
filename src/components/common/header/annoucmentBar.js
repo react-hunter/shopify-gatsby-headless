@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { commonData } from '../../../data/common';
 
 import Slider from "react-slick";
@@ -13,10 +13,11 @@ const AnnoucmentBar = ({ path }) => {
 
   const settings = {
     dots: false,
-    infinite: false,
+    Infinte: true,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows: false,
     responsive: [
       {
         breakpoint: 760,
@@ -26,6 +27,8 @@ const AnnoucmentBar = ({ path }) => {
       }
     ]
   };
+
+  const slider = useRef(null);
 
   useEffect(() => {
     progressAnnouncement();
@@ -37,21 +40,33 @@ const AnnoucmentBar = ({ path }) => {
     }
   };
 
+  function sliderPause() {
+    slider.current.slickPause();
+  }
+
+  function sliderPrev() {
+    slider.current.slickPrev();
+  }
+
+  function sliderNext(){
+    slider.current.slickNext();
+  }
+
   function progressAnnouncement() {
     document.getElementById("wrapper-announcement").addEventListener("click", function () {
       
-      console.log('slick = ',document.querySelector(".ann_bars .slick-slider"));
+      console.log('document.getElementById("wrapper-announcement").dataset.state ================= ', document.getElementById("wrapper-announcement").dataset.state);
 
-      if (document.getElementById("wrapper-announcement").dataset.state == "Playing") {
+      if (document.getElementById("wrapper-announcement").dataset.state === "Playing") {
         document.getElementById("wrapper-announcement").setAttribute("data-state", "Stopped")
         clearInterval(window.anninterval)
 
-        document.querySelector(".ann_bars .slick-slider").slick('slickPause');
+        sliderPause();
         document.getElementById("carousel-button").setAttribute("class", "fas fa-play pause-btn")
       } else {
         document.getElementById("wrapper-announcement").setAttribute("data-state", "Playing")
         anntimer = 0;
-        document.querySelector(".ann_bars .slick-slider").slick('slickPause');
+        sliderPause();
   
         triggerPlay();
         document.getElementById("carousel-button").setAttribute("class", "fas fa-pause pause-btn")
@@ -61,7 +76,7 @@ const AnnoucmentBar = ({ path }) => {
     if (window.innerWidth > 680) {
       triggerPlay();
     } else {
-      document.querySelector(".ann_bars .slick-slider").slick('slickPause');
+      sliderPause();
     }
   
     setTimeout(() => {
@@ -69,7 +84,7 @@ const AnnoucmentBar = ({ path }) => {
       for (let i = 0; i < buttons.length; i++) {
         let button = buttons[i];
         button.addEventListener('click', function () {
-          document.querySelector(".ann_bars .slick-slider").slick('slickPause');
+          sliderPause();
           anntimer = 0;
           document.getElementById("wrapper-announcement").setAttribute("data-state", "Stopped")
           clearInterval(window.anninterval)
@@ -87,7 +102,7 @@ const AnnoucmentBar = ({ path }) => {
   function triggerPlay() {
     window.anninterval = setInterval(() => {
   
-      if (anntimer == Number("5000")) {
+      if (anntimer === Number("5000")) {
         anntimer = 0;
   
       } else {
@@ -115,11 +130,18 @@ const AnnoucmentBar = ({ path }) => {
         </div>
         <div className="announcement-bar">
           <div className="ann_bars">
-            <Slider {...settings}>
+            <Slider ref={slider} {...settings}>
             { commonData.announceBarSettings.textList.map((item, index) => 
               <p className="announcement-bar__message" key={index} style={{ fontSize: item.fontSize }}>{item.description}</p>
               )}
             </Slider>
+            
+              <svg id="annoucmentBar_prev_button" 
+                onClick={sliderPrev}
+                className="flickity-button-icon prev-button" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" className="arrow"></path></svg>
+              <svg id="annoucmentBar_next_button" 
+                onClick={sliderNext}
+                className="flickity-button-icon next-button" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" className="arrow" transform="translate(100, 100) rotate(180) "></path></svg>
           </div>
         </div>
       </div>
