@@ -733,8 +733,6 @@ const CustomizePage = ({ data }) => {
     console.log(document.getElementById(`rose-mobile-${newLayer}`));
     document.getElementById(`rose-mobile-${newLayer}`).innerText = type;
     
-    console.log("choices = ", choices);
-
     if (selectedStyle.roseTypes === selectedRoses.length) {
   
       var choices = selectedRoses.join(",");
@@ -1012,9 +1010,11 @@ const CustomizePage = ({ data }) => {
             return (
               <React.Fragment key={prodIndex}>
                 <h2 style={{display: 'none'}} className={`${prod.id}-product`} id={`${prod.title}-product`}
-                  data-json={JSON.stringify(prod)} />
+                  data-json={JSON.stringify(prod)} >
+                </h2>
                 <h2 style={{display: 'none'}} className={`${prod.id}-product`} id={`${prod.title}`}
-                  data-json={JSON.stringify(prod.variants)} />
+                  data-json={JSON.stringify(prod.variants)}>
+                </h2>
               </React.Fragment>
             )
           })

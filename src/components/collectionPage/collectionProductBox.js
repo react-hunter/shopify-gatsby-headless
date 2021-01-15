@@ -34,24 +34,26 @@ const CollectionProductBox = props => {
     const isBadgeEnable = () => {
         let isBadgeEnable = false;
 
-        collectionPageData.badgeStyle.map((item, index) => {
+        collectionPageData.badgeStyle.map(item => {
             for (var i=0;i<product.tags.length;i++) {
-                if (product.tags[i] == item.name) {
+                if (product.tags[i] === item.name) {
                     isBadgeEnable = true;
                 }
             }
+            return true
         })
         return isBadgeEnable;
     }
 
     const getBadgeImage = () => {
         let imageUrl = '';
-        collectionPageData.badgeStyle.map((item, index) => {
+        collectionPageData.badgeStyle.map(item => {
             for (var i=0;i<product.tags.length;i++) {
-                if (product.tags[i] == item.name) {
+                if (product.tags[i] === item.name) {
                     imageUrl = item.image;
                 }
             }
+            return true
         })
         return imageUrl;
     }

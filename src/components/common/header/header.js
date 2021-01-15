@@ -120,7 +120,7 @@ const Header = ({ path }) => {
       allMenuItems[i].style.display = 'none';
     }
     let allfirstLevelLinks = document.getElementsByClassName("sidenav-item_inner");
-    for (var i=0; i<allfirstLevelLinks.length; i++) {
+    for (i=0; i<allfirstLevelLinks.length; i++) {
       allfirstLevelLinks[i].style.display = 'none';
     }
     
@@ -173,13 +173,13 @@ const Header = ({ path }) => {
     }
 
     let previousParientItems = document.getElementsByClassName("showChild");
-    for (var i=0; i<previousParientItems.length; i++) {
+    for (i=0; i<previousParientItems.length; i++) {
       previousParientItems[i].classList.remove('showChild');
     }
 
     // ---------- whow
     let allMenuItems = document.getElementsByClassName("menuItem");
-    for (var i=0; i<allMenuItems.length; i++) {
+    for (i=0; i<allMenuItems.length; i++) {
       allMenuItems[i].style.display = 'flex';
     }
 
