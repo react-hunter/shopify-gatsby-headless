@@ -184,15 +184,15 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                                     <span className="quadpay-cart">or 4 interest-free payments of <span id="quad-amount">${parseFloat(context.store.checkout.subtotalPrice / 4).toFixed(2)}</span> by <img className="quadpay-img" src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/229/assets/quadpay_200x.png?v=14478482058500416670" alt="" /></span>
 
                                 </div>
-
-                                <a href={context.store.checkout.webUrl} 
-                                    className="c-btn--primary button button--black button--full-width js-button js-ajax-checkout-button" 
-                                    style={{ background: '#000000'}}>
-                                    <span>Checkout</span>
-                                </a>       
-
-                                <AjaxCartFooter />
                             </div>
+                            
+                            <a href={context.store.checkout.webUrl} 
+                                className="c-btn--primary button button--black button--full-width js-button js-ajax-checkout-button" 
+                                style={{ background: '#000000'}}>
+                                <span>Checkout</span>
+                            </a>       
+
+                            <AjaxCartFooter />
                         </div>) : ""
                     }
 

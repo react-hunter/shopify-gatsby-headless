@@ -125,7 +125,7 @@ const ProductDescription = ({ product, review }) => {
 
                     <div className="product_accordions-container">
                     { productPageData.productAccordions.map((item, index) => 
-                        <>
+                        <div key={index}>
                         <button key={`btn_${index}`} className={`accordion_button ${item.headerClass}`}>
                             { item.header }
                             
@@ -133,7 +133,7 @@ const ProductDescription = ({ product, review }) => {
                             
                         </button>   
                         <div key={`content_${index}`} className={`accordion_content ${item.contentClass}`} dangerouslySetInnerHTML={{ __html: item.content }} />
-                        </>
+                        </div>
                     )}
                     </div>
 

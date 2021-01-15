@@ -25,6 +25,27 @@
         background-color: #c50000;
         margin-top: 10px;
     }
+
+    .product-tile__image {
+        position: unset;
+    }
+
+    .slick-dots {
+        bottom: unset;
+        li {
+            background-color: lightgrey;
+            margin: 0;
+            height: 5px;
+
+            @media (max-width: 960px) {
+                width: calc(100% / 4)!important;
+            }
+
+            &.slick-active {
+                background-color: #000000;                    
+            }
+        }
+    }
 }
 
 .selected-swatch {

@@ -2,7 +2,7 @@
   background-image: url("../images/leftArrow_small.png");
   background-size: contain;
   left: 20px;
-  z-index: 1000;
+  z-index: 2;
 
   &:hover {
     background-image: url("../images/leftArrow_small.png");
@@ -24,7 +24,7 @@
   background-image: url("../images/rightArrow_small.png");
   background-size: contain;
   right: 20px;
-  z-index: 1000;
+  z-index: 2;
 
   &:hover {
     background-image: url("../images/rightArrow_small.png");

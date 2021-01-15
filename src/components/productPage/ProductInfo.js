@@ -4,10 +4,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruck, faCheck } from "@fortawesome/free-solid-svg-icons"
 
 const ProductInfo = ({ product, review }) => {
+    
+    var featuresArray = null;
+
+    const getCorrectProductFeatures = (str) => {
+        console.log("log = ", str)
+        var array = str.split(/\r?\n/);
+        featuresArray = array;
+        for (var i=0;i<array.length;i++) {
+            console.log("featureArray = ", featuresArray[i]);
+        }
+    }
+
     return (
         <>
             <h1 className="product-single__title">{product.title}</h1>
-            <div key="badge" dangerouslySetInnerHTML={{ __html: review.badge }} />
+            <div key="badge" dangerouslySetInnerHTML={{ __html: review? review.badge : '' }} />
 
             <div className="product__price">
                 <dl className="price price--on-sale">
@@ -63,17 +75,20 @@ const ProductInfo = ({ product, review }) => {
                     </div>
                 </dl>
             </div>
+
+            {/* <div dangerouslySetInnerHTML={{ __html: review.features }} /> */}
             <p className="product-features">
-                { productPageData.productFeatures.map((Item, Index) => 
-                    <span className="item" key={Index}>
-                        <br />
+                { getCorrectProductFeatures(productPageData.productFeatures),
+                featuresArray.map((item,index) =>
+                    <span className="item" key={index}>
                         <FontAwesomeIcon icon={faCheck} style={{ color: '#93c47d'}} size="1x" />
                         <strong>
-                            <span style={{ color: 'rgb(0,0,0)', marginLeft: '5px' }}>{ Item.text }</span>
+                            <span style={{ color: 'rgb(0,0,0)', marginLeft: '5px' }}>{item}</span>
                         </strong>
                     </span>
                 )}
             </p>
+
             <div className="shipping-tout">
                 
                 <FontAwesomeIcon icon={faTruck} size="1x" />
