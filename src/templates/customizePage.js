@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import { graphql } from 'gatsby'
 import { customizePageData } from '../data/customizePage' 
 import Preloader from "../components/common/preloader"
 import StoreContext from '../context/store'
@@ -20,7 +21,7 @@ const CustomizePage = ({ data }) => {
       }
     })
     const productImages = pr.images.map(pi => {
-      return pi.originalSrc
+      return pi.originalSrc ? pi.originalSrc : ''
     })
     const productOptionNames = pr.options.map(po => {
       return po.name
@@ -32,7 +33,7 @@ const CustomizePage = ({ data }) => {
       available: pr.availableForSale,
       variants: productVariants,
       images: productImages,
-      featured_image: pr.images[0].originalSrc,
+      featured_image: pr.images[0] ? pr.images[0].originalSrc : '',
       options: productOptionNames
     }
   })
