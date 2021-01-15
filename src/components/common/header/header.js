@@ -48,7 +48,6 @@ const Header = ({ path }) => {
   
   useEffect(() => {
     initializeHeader();
-    progressAnnouncement();
   });
 
   useEffect(() => {
@@ -112,31 +111,27 @@ const Header = ({ path }) => {
     }
   }
 
-  function forEach(array, callback, scope) {
-    for (var i = 0; i < array.length; i++) {
-      callback.call(scope, i, array[i]);
-    }
-  }
-
-  function progressAnnouncement() {
-    var max = -219.99078369140625;
-    forEach(document.querySelectorAll('.progress-announcement'), function (index, value) {
-      var percent = value.getAttribute('data-progress');
-      value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - percent) / 100) * max);
-    });
-  }
-
   const showChildCollection = (e, id) => {
     e.preventDefault();
 
-    let allItems = document.getElementsByClassName("sidenav-item_inner");
-    for (var i=0; i<allItems.length; i++) {
-      allItems[i].style.display = 'none';
+    //------------------- hide
+    let allMenuItems = document.getElementsByClassName("menuItem");
+    for (var i=0; i<allMenuItems.length; i++) {
+      allMenuItems[i].style.display = 'none';
+    }
+    let allfirstLevelLinks = document.getElementsByClassName("sidenav-item_inner");
+    for (i=0; i<allfirstLevelLinks.length; i++) {
+      allfirstLevelLinks[i].style.display = 'none';
     }
     
-    let needShowItems = document.querySelectorAll(`[data-parent-id='${id}']`);
-    for (var j=0; j<needShowItems.length; j++) {
-      needShowItems[j].style.display = 'flex';
+    // -------------------- show
+    let needShowMenuItems = document.querySelectorAll(`[data-show-parent-id='${id}']`);
+    needShowMenuItems[0].style.display = 'flex';
+    needShowMenuItems[0].classList.add("showChild");
+
+    let needChildMenuLink = document.querySelectorAll(`[data-parent-id='${id}']`);
+    for (var j=0; j<needChildMenuLink.length; j++) {
+      needChildMenuLink[j].style.display = 'flex';
     }
     
     showBackArrowButton();
@@ -171,10 +166,21 @@ const Header = ({ path }) => {
     document.querySelector('#hideSideNav').style.display = "flex";
     document.querySelector('#goBackNavMenu').style.display = "none";
 
-
+    // ---------- hide
     let allItems = document.getElementsByClassName("sidenav-item_inner");
     for (var i=0; i<allItems.length; i++) {
       allItems[i].style.display = 'none';
+    }
+
+    let previousParientItems = document.getElementsByClassName("showChild");
+    for (i=0; i<previousParientItems.length; i++) {
+      previousParientItems[i].classList.remove('showChild');
+    }
+
+    // ---------- whow
+    let allMenuItems = document.getElementsByClassName("menuItem");
+    for (i=0; i<allMenuItems.length; i++) {
+      allMenuItems[i].style.display = 'flex';
     }
 
     let needShowItems = document.getElementsByClassName("first-level-item_inner");
@@ -284,8 +290,6 @@ const Header = ({ path }) => {
     let header = document.querySelector(".stickyHeader");
     let prevScrollpos = window.pageYOffset;
   
-    console.log("prevScrollpos = ", prevScrollpos);
-
     window.onscroll = function () {
       let currentScrollpos = window.pageYOffset;
   
@@ -413,7 +417,9 @@ const Header = ({ path }) => {
                 <CardSlider key="card-slider" />
                 { commonData.mobileHeaderMenu.map((menuItem, menuIndex) => {                 
                   return (
-                    <>               
+                    <div className={`menuItem ${menuItem.hasChildren ? 'hasChild' : ''}`} 
+                      data-show-parent-id={menuItem.title} key={menuIndex}>    
+
                       <Link key={`menuItem-${menuIndex}`} to={`${menuItem.hasChildren ? '/fakeUrl' : menuItem.url}`} data-id={menuItem.title}
                         onClick={e => menuClickHandler(e, menuItem.hasChildren, menuItem.title)} data-url={menuItem.url}
                         className={`${menuItem.hasChildren ? 'hasChild' : ''} sidenav-item_inner first-level-item_inner`}>
@@ -448,7 +454,7 @@ const Header = ({ path }) => {
                           )
                         })
                       ) : '' }
-                    </>                    
+                    </div>                    
                   )
                 })}
               </div>

@@ -31,3 +31,57 @@
 .announcement-bar__message {
     color: #ffffff;
 }
+
+.announcement-bar .slick-dots {
+    background-color: #000000;
+}
+
+.announcement-bar .slick-dots li button {
+    background-color: #000000;
+}
+.announcement-bar .slick-dots li button:before {
+    color: #ffffff;
+}
+
+.announcement-bar .slick-dots li.slick-active button:before {
+    color: #ffffff;
+}
+
+#wrapper-announcement {
+    position: absolute;
+}
+
+#wrapper-announcement #carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    width: 0.875em;
+    font-size: 0.875em;
+}
+
+.ann_bars {
+    position: relative;
+}
+
+.ann_bars .flickity-button-icon {
+    position: absolute;
+    fill: white;
+    height: 20px;
+    top: 5px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .ann_bars .flickity-button-icon {
+        display: none;
+    }
+}
+
+#annoucmentBar_prev_button {
+    left: 20px;
+}
+
+#annoucmentBar_next_button {
+    right: 20px;
+}

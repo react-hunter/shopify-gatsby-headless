@@ -78,8 +78,8 @@ const ProductInfo = ({ product, review }) => {
 
             {/* <div dangerouslySetInnerHTML={{ __html: review.features }} /> */}
             <p className="product-features">
-                { getCorrectProductFeatures(productPageData.productFeatures),
-                featuresArray.map((item,index) =>
+                { getCorrectProductFeatures(productPageData.productFeatures)}
+                {featuresArray.map((item,index) =>
                     <span className="item" key={index}>
                         <FontAwesomeIcon icon={faCheck} style={{ color: '#93c47d'}} size="1x" />
                         <strong>

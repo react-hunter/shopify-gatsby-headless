@@ -1,8 +1,11 @@
 export const homepageData = {
     heroImage: {
-        desktopImage: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/New_Year_Sale_desktop_v1_1_1_2200x.jpg?v=1609213722',
-        mobileImage: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/New_Year_Sale_mobile_final_1_2200x.jpg?v=1609213847',
-        imageUrl: '/collections/best-sellers'
+        desktopImage: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Valentine_s_Day_Gilian_2200x.jpg?v=1609786376',
+        mobileImage: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Black_Suede_Large_Round_Red_Roses_439713c7-da09-4925-8baf-aa2d86a5fb4a_2200x.jpg?v=1609786423',
+        imageUrl: '/collections/best-sellers',
+        title: "VALENTINE'S DAY BEST-SELLERS",
+        subTitle: "Due to extremely high demand and COVID-19 delays, schedule your Valentine's Day Gift before it's sold out with scheduled delivery!",
+        buttonText: 'SHOP NOW'
     },
     imageSections: [
         {

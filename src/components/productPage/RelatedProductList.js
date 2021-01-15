@@ -24,7 +24,8 @@ const RelatedProductList = ({ products, reviewList }) => {
         breakpoint: 960,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1
+          slidesToScroll: 1,
+
         }
       },
       {
