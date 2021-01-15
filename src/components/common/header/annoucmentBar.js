@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react'
 import { commonData } from '../../../data/common';
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPause } from "@fortawesome/free-solid-svg-icons"
 
-const annoucmentBar = ({ path }) => {
+const AnnoucmentBar = ({ path }) => {
+  let anntimer = 0;
+  let percent = 0;
+
   const settings = {
     dots: false,
     infinite: false,
@@ -16,35 +21,110 @@ const annoucmentBar = ({ path }) => {
       {
         breakpoint: 760,
         settings: {
+          dots:  true,
         }
       }
     ]
   };
 
-    return (
-      <>
-        <div className="annoucment-bar-w-controls">
-          <div id="wrapper-announcement" className="center" data-state="Playing">
-            <svg className="progress-announcement white noselect" data-progress="65" x="0px" y="0px" viewBox="0 0 80 80">
-              <path className="track" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
-              <path className="fill" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
-              <text className="value" x="50%" y="55%">
-                <i id="carousel-button" className="fas fa-pause pause-btn"></i>
-              </text>
-            </svg>
-          </div>
-          <div className="announcement-bar">
-            <div className="ann_bars">
-              <Slider {...settings}>
-              { commonData.announceBarSettings.textList.map((item, index) => 
-                <p className="announcement-bar__message" key={index} style={{ fontSize: item.fontSize }}>{item.description}</p>
-                )}
-              </Slider>
-            </div>
+  useEffect(() => {
+    progressAnnouncement();
+  });
+
+  var forEach = function (array, callback, scope) {
+    for (var i = 0; i < array.length; i++) {
+      callback.call(scope, i, array[i]);
+    }
+  };
+
+  function progressAnnouncement() {
+    document.getElementById("wrapper-announcement").addEventListener("click", function () {
+      
+      console.log('slick = ',document.querySelector(".ann_bars .slick-slider"));
+
+      if (document.getElementById("wrapper-announcement").dataset.state == "Playing") {
+        document.getElementById("wrapper-announcement").setAttribute("data-state", "Stopped")
+        clearInterval(window.anninterval)
+
+        document.querySelector(".ann_bars .slick-slider").slick('slickPause');
+        document.getElementById("carousel-button").setAttribute("class", "fas fa-play pause-btn")
+      } else {
+        document.getElementById("wrapper-announcement").setAttribute("data-state", "Playing")
+        anntimer = 0;
+        document.querySelector(".ann_bars .slick-slider").slick('slickPause');
+  
+        triggerPlay();
+        document.getElementById("carousel-button").setAttribute("class", "fas fa-pause pause-btn")
+      }
+    });
+
+    if (window.innerWidth > 680) {
+      triggerPlay();
+    } else {
+      document.querySelector(".ann_bars .slick-slider").slick('slickPause');
+    }
+  
+    setTimeout(() => {
+      let buttons = document.getElementsByClassName("flickity-button");
+      for (let i = 0; i < buttons.length; i++) {
+        let button = buttons[i];
+        button.addEventListener('click', function () {
+          document.querySelector(".ann_bars .slick-slider").slick('slickPause');
+          anntimer = 0;
+          document.getElementById("wrapper-announcement").setAttribute("data-state", "Stopped")
+          clearInterval(window.anninterval)
+          document.getElementById("carousel-button").setAttribute("class", "fas fa-play pause-btn")
+          forEach(document.querySelectorAll('.progress-announcement'), function (index, value) {
+            let max = -219.99078369140625;
+            percent = value.getAttribute('data-progress');
+            value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - (Math.round((anntimer / Number("5000")) * 100)).toFixed(2)) / 100) * max);
+          });
+        })
+      }
+    }, 300);
+  }
+
+  function triggerPlay() {
+    window.anninterval = setInterval(() => {
+  
+      if (anntimer == Number("5000")) {
+        anntimer = 0;
+  
+      } else {
+        anntimer = anntimer + 1000;
+      }
+      forEach(document.querySelectorAll('.progress-announcement'), function (index, value) {
+        let max = -219.99078369140625;
+        percent = value.getAttribute('data-progress');
+        value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - (Math.round((anntimer / Number("5000")) * 100)).toFixed(2)) / 100) * max);
+      });
+  
+    }, 830);
+  }
+
+  return (
+    <>
+      <div className="annoucment-bar-w-controls">
+        <div id="wrapper-announcement" className="center" data-state="Playing">
+          <svg className="progress-announcement white noselect" data-progress="65" x="0px" y="0px" viewBox="0 0 80 80">
+            <path className="track" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
+            <path className="fill" d="M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0" />
+          </svg>
+          
+          <FontAwesomeIcon id="carousel-button" className="fa-pause" icon={faPause} size="sm" />
+        </div>
+        <div className="announcement-bar">
+          <div className="ann_bars">
+            <Slider {...settings}>
+            { commonData.announceBarSettings.textList.map((item, index) => 
+              <p className="announcement-bar__message" key={index} style={{ fontSize: item.fontSize }}>{item.description}</p>
+              )}
+            </Slider>
           </div>
         </div>
-      </>
-    )
+      </div>
+    </>
+  )
 }
 
-export default annoucmentBar
+export default AnnoucmentBar

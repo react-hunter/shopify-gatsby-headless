@@ -7,3 +7,15 @@
         margin: 30px auto 0 auto;
     }
 }
+
+.text_image_banner-content_container {
+    top: 46%;
+    left: 27%;
+}
+
+@media (max-width: 1000px) {
+    .text_image_banner-content_container {
+        top: 35%;
+        left: 50%;
+    }
+}
