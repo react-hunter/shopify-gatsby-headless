@@ -123,6 +123,17 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
     const handleKeyDown = (e) => {
         e.preventDefault();
     }
+    const getCustomAttributes = (lineItem) => {
+        console.log('lineItem: ', lineItem)
+        const attributeList = lineItem.customAttributes
+        return (
+            <>
+                <p className="ajax-cart-item-property" key="rose-color">Rose Colors: {attributeList[0].value}</p>
+                <p className="ajax-cart-item-property" key="rose-box">Box: {attributeList[1].value}</p>
+                <p className="ajax-cart-item-property" key="rose-style">Style: {attributeList[2].value}</p>
+            </>
+        )
+    }
 
     return (
         <div id="shopify-section-ajax-cart-custom" className="shopify-section">
@@ -215,7 +226,11 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                                             <div className="ajax-cart-item__title">
                                                 <Link to={`/products/${item.variant.product.handle}`}>{item.variant.title}</Link>
                                             </div>
-                                            <div className="ajax-cart-item-properties"> </div>
+                                            <div className="ajax-cart-item-properties">
+                                                {
+                                                    (item.customAttributes.length > 0) && getCustomAttributes(item)
+                                                }
+                                            </div>
                                             <div className="ajax-cart-item-quantity-container">
                                                 <div className="cart-item__qty">
                                                     <div className="js-qty">

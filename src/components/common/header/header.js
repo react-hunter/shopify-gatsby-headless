@@ -290,8 +290,6 @@ const Header = ({ path }) => {
     let header = document.querySelector(".stickyHeader");
     let prevScrollpos = window.pageYOffset;
   
-    console.log("prevScrollpos = ", prevScrollpos);
-
     window.onscroll = function () {
       let currentScrollpos = window.pageYOffset;
   

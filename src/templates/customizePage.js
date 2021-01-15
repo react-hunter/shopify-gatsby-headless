@@ -82,14 +82,10 @@ const CustomizePage = ({ data }) => {
   })
 
   const selectArrangement = (id) => {
-    console.log('selectArrangement id = ', id);
-
     for (var i = 0; i < allProducts.length; i++) {
       var product = allProducts[i];
       if (product.productId === id) {
         setSelectedProduct(product);
-        console.log('document.getElementById("arr-Type") = ', document.getElementById("arr-Type"));
-        
         if (!document.getElementById("arr-Type")) {
           addArrangementBlock("ARRANGEMENT", "arr-Type", product.Arrangement, product.subtext, "0")
         } else {
@@ -98,8 +94,6 @@ const CustomizePage = ({ data }) => {
         }
   
         if (document.getElementById(`${product.Arrangement}-product`)) {
-          console.log(`${product.Arrangement}-product -------------------------------- `);
-
           product = JSON.parse(document.getElementById(`${product.Arrangement}-product`).dataset.json)
           selectedProductBoxStock = product;
           if (product.featured_image) {
@@ -166,9 +160,6 @@ const CustomizePage = ({ data }) => {
           var rose1 = document.getElementById(roses[0].replace("-", " ") + "-0");
           var rose2 = document.getElementById(roses[1].replace("-", " ") + "-1");
   
-          console.log("rose1 = ", rose1);
-          console.log("rose2 = ", rose2);
-
           if (rose1) {
             eventFire(rose1, 'click')
             eventFire(rose1, 'click')  
@@ -194,8 +185,6 @@ const CustomizePage = ({ data }) => {
       }
       isShare = false;
       if (rose1 && rose2) {
-        console.log("rose1 = ", rose1);
-        console.log("rose2 = ", rose2);
         eventFire(rose2, 'click')
       }
     } else if (window.location.href.includes("?") && !window.location.href.includes("&")) {
@@ -268,7 +257,6 @@ const CustomizePage = ({ data }) => {
     var step2 = selectedProduct.options[currentStep - 1];
     var title = '';
 
-    console.log("step2 = ", step2);
     if (!step2) {
       title = "Choose Arrangement";
     } else {
@@ -280,8 +268,6 @@ const CustomizePage = ({ data }) => {
   }
 
   function setBox(title, src, element) {
-    console.log("setBox", title, src, element);
-
     var images = document.getElementsByClassName("box-contents")[0].getElementsByClassName("box");
   
     for (var i = 0; i < images.length; i++) {
@@ -345,8 +331,6 @@ const CustomizePage = ({ data }) => {
   }
 
   function getFirstVariantBasePrice() {
-    console.log(`${selectedProduct.Arrangement}`);
-
     var json = JSON.parse(document.getElementById(`${selectedProduct.Arrangement}`).dataset.json)
   
     for (var i = 0; i < json.length; i++) {
@@ -400,7 +384,6 @@ const CustomizePage = ({ data }) => {
   }
 
   function getMainImage() {
-    console.log("getMainImage -------------------------- ");
     if (document.getElementById("Style-Type").innerText !== "Letters" || document.getElementById("Style-Type").innerText !== "Numbers") {
       resetNumbersAndLetter();
       var xhr = new XMLHttpRequest();
@@ -423,11 +406,6 @@ const CustomizePage = ({ data }) => {
       var backup1 = ["Red"]
       var backup2 = ["Red", "Pink"]
   
-      console.log("selectedRoses = " ,selectedRoses);
-
-      console.log("selectedProduct.Arrangement = ", selectedProduct.Arrangement);
-      console.log("style = ", style);
-
       if (selectedRoses.length === 0) {
         if (style === "Solid") {
           selectedRoses = backup1;
@@ -454,8 +432,6 @@ const CustomizePage = ({ data }) => {
         }
       }
       
-      console.log("collection = ", collection);
-
       if (!isShare) {
         xhr.open("GET", `https://mediacarryapi.com/dor/generator?store=dose-roses.com&product=${selectedProduct.Arrangement}&style=${style}&data=${collection}`);
         xhr.send();
@@ -499,9 +475,6 @@ const CustomizePage = ({ data }) => {
   }
 
   function generateBoxSelector() {
-    console.log("generateBoxSelector");
-    console.log("currentStep = " + currentStep);
-
     var container = document.createElement("div");
     container.setAttribute("id", `arrangementSelector-${currentStep}`);
 
@@ -729,8 +702,6 @@ const CustomizePage = ({ data }) => {
     var newLayer = layer + 1;
 
 
-    console.log(`rose-mobile-${newLayer}`);
-    console.log(document.getElementById(`rose-mobile-${newLayer}`));
     document.getElementById(`rose-mobile-${newLayer}`).innerText = type;
     
     if (selectedStyle.roseTypes === selectedRoses.length) {
@@ -740,8 +711,7 @@ const CustomizePage = ({ data }) => {
       let productId = Number(document.getElementById(document.getElementById("arr-Type").innerHTML).classList[0].split("-")[0]);
       //Check if product is using drawn stencil
       let usingStencil = isProductNotUsingStencil(productId);
-      console.log(document.getElementById("arr-Type").innerHTML, ' - Using Images: ',usingStencil);
-  
+      
       if(usingStencil === true){
         let arrangement_selected = document.getElementById("arr-Type").innerHTML.replaceAll(' ', "_");
         let box_selected = document.getElementById('BOX-Type').innerHTML.replaceAll(' ', "_");
@@ -807,10 +777,6 @@ const CustomizePage = ({ data }) => {
   }
 
   function ChangeUrl(title, url) {
-    console.log("changeUrl");
-    console.log("title = ", title);
-    console.log("url = ", url);
-
     if (typeof (window.history.pushState) != "undefined") {
       var obj = { Title: title, Url: url };
       window.history.pushState(obj, obj.Title, obj.Url);
@@ -843,9 +809,6 @@ const CustomizePage = ({ data }) => {
   }
 
   const next = () => {
-    console.log("next");
-    
-    console.log(selections[0]);
     if (selections[0]) {
       if (!selections[0].includes(selectedProduct.Arrangement)) {
         resetSelections();
