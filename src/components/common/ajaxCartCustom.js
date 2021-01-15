@@ -124,7 +124,6 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
         e.preventDefault();
     }
     const getCustomAttributes = (lineItem) => {
-        console.log('lineItem: ', lineItem)
         const attributeList = lineItem.customAttributes
         return (
             <>
@@ -133,6 +132,16 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                 <p className="ajax-cart-item-property" key="rose-style">Style: {attributeList[2].value}</p>
             </>
         )
+    }
+    const getLineItemImage = (lineItem) => {
+        const attributeList = lineItem.customAttributes
+        let imgUrl = lineItem.variant.image.src
+        attributeList.map(attr => {
+            if(attr.key === 'linkImage') {
+                imgUrl = attr.value
+            }
+        })
+        return imgUrl
     }
 
     return (
@@ -219,7 +228,8 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                                     <div className="ajax-cart-item-content">
                                         <div className="ajax-cart-item-image-container">
                                             <Link to={`/products/${item.variant.product.handle}`}>
-                                                <img className="ajax-cart-item__image" alt={item.variant.title} src={item.variant.image.src} />
+                                                <img className="ajax-cart-item__image" alt={item.variant.title} 
+                                                    src={getLineItemImage(item)} />
                                             </Link>
                                         </div>
                                         <div className="ajax-cart-item-middle-part">
@@ -228,7 +238,7 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                                             </div>
                                             <div className="ajax-cart-item-properties">
                                                 {
-                                                    (item.customAttributes.length > 0) && getCustomAttributes(item)
+                                                    (item.customAttributes.length > 1) && getCustomAttributes(item)
                                                 }
                                             </div>
                                             <div className="ajax-cart-item-quantity-container">

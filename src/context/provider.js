@@ -33,7 +33,10 @@ const Provider = ({ children }) => {
                 const newCheckout = await store.client.checkout.create()
                 if(localLineItems && localLineItems.length > 0) {
                     const lineItemsToUpdate = localLineItems.map(LI => {
-                        return { variantId: LI.variant.id, quantity: parseInt(LI.quantity, 10) }
+                        const attrList = LI.customAttributes.map(ca => {
+                            return {key: ca.key, value: ca.value}
+                        })
+                        return { variantId: LI.variant.id, quantity: parseInt(LI.quantity, 10), customAttributes: attrList.length > 0 ? attrList : [] }
                     })
                     await store.client.checkout.addLineItems(newCheckout.id, lineItemsToUpdate)
                     const initialCheckout = await fetchCheckout(newCheckout.id)

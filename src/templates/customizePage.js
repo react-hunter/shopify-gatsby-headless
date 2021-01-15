@@ -190,7 +190,7 @@ const CustomizePage = ({ data }) => {
     } else if (window.location.href.includes("?") && !window.location.href.includes("&")) {
       var select = window.location.href.split("?")[1].split("-");
       var click = select.join(" ").replace(" ", "-")
-      console.log("click = ", click);
+      
       if (document.getElementById(click)) {
         eventFire(document.getElementById(click), 'click');
 
@@ -457,7 +457,6 @@ const CustomizePage = ({ data }) => {
 
   const handleKeyDown = (e) => {
     e.preventDefault();
-    console.log('key down');
   }
 
   const hideLetters = (e) => {
@@ -648,12 +647,8 @@ const CustomizePage = ({ data }) => {
   
     if (!isShare) {
       for (var ii = 0; ii < 100; ii++) {
-        console.log(document.getElementById("roseblock-" + ii));
         if (document.getElementById("roseblock-" + ii)) {
-          console.log("count = ", count);
-          console.log("selectedRoses.length = " + selectedRoses.length);
           if (count === selectedRoses.length) {
-            console.log("selected Rose = ", selectedRoses[ii]);
             eventFire(document.getElementById(selectedRoses[ii] + "-" + ii), 'click')
           } else {
             eventFire(document.getElementById("roseblock-" + ii).firstElementChild, 'click')
@@ -797,8 +792,6 @@ const CustomizePage = ({ data }) => {
   }
 
   const previous = () => {
-    console.log("previous");
-
     if (currentStep - 1 !== -1) {
       if (currentStep - 1 === selectedProduct.maxOptions) {
         document.getElementById("addToBAG").style.display = "none"
@@ -897,7 +890,7 @@ const CustomizePage = ({ data }) => {
       {key: 'Rose Color', value: selections[3]},
       {key: 'Box', value: selections[1]},
       {key: 'Style', value: selections[2]},
-      {key: 'linkImage', value: 'https://mediacarryapi.com/customizer/assets/' + selections[0] + '~' + selections[2] + '~' + selections[3].replace('+', ',')}
+      {key: 'linkImage', value: 'https://mediacarryapi.com/customizer/assets/' + selections[0] + '~' + selections[2].toLowerCase() + '~' + selections[3].replace('+', ',') + '.png'}
     ])
   }
 
