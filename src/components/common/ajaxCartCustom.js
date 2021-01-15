@@ -140,6 +140,7 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
             if(attr.key === 'linkImage') {
                 imgUrl = attr.value
             }
+            return true
         })
         return imgUrl
     }
