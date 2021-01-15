@@ -28,8 +28,6 @@ exports.createPages = async ({ graphql, actions }) => {
       productReview.handle = pr.handle
       if(mf.namespace === 'stamped') {
         switch (mf.key) {
-          case 'reviews':
-            productReview.reviews = mf.value
           case 'badge':
             productReview.badge = mf.value
           case 'reviews_count':
@@ -41,7 +39,6 @@ exports.createPages = async ({ graphql, actions }) => {
       }
 
     })
-    productReview.reviews = productReview.reviews ? productReview.reviews : ''
     productReview.badge = productReview.badge ? productReview.badge : ''
     productReview.reviews_count = productReview.reviews_count ? parseInt(productReview.reviews_count) : 0
     productReview.features = productReview.features ? productReview.features : ''
