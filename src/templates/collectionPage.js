@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
 import CollectionProductBox from "../components/collectionPage/collectionProductBox"
 import '../styles/collectionPage.scss';
+import '../styles/widget.min.css';
 
 const collectionPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
@@ -115,7 +116,7 @@ const collectionPage = ({ data, pageContext }) => {
             </div>
           </header>
         </div>
-        <div style={{display: 'none'}} dangerouslySetInnerHTML={{ __html: productReviews[0] ? productReviews[0].reviews : '' }} />
+        
         <div className="" id="Collection">
           <ul id="shop-all-content" 
             className="products-on-page grid grid--uniform grid--view-items">

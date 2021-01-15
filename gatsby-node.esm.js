@@ -7,7 +7,13 @@ const Shopify = require('shopify-api-node')
 const shopify = new Shopify({
   shopName: process.env.SHOP_NAME,
   apiKey: process.env.SHOPIFY_ADMIN_API_KEY,
-  password: process.env.SHOPIFY_ADMIN_API_PASSWORD
+  password: process.env.SHOPIFY_ADMIN_API_PASSWORD,
+  timeout: 50000,
+  autoLimit: {
+      calls: 3,
+      interval: 1000,
+      bucketSize: 35
+  }
 });
 
 let productReviews = []

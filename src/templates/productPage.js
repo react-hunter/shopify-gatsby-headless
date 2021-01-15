@@ -6,8 +6,8 @@ import ProductGallery from "../components/productPage/ProductGallery"
 import ProductDescription from "../components/productPage/ProductDescription"
 import RelatedProductList from "../components/productPage/RelatedProductList";
 
-
 import '../styles/productPage.scss';
+import '../styles/widget.min.css';
 
 const ProductPage = ({ data, pageContext }) => {
     const product = data.shopifyProduct;
@@ -52,7 +52,6 @@ const ProductPage = ({ data, pageContext }) => {
             </div>
 
             <RelatedProductList key="related-list" products={relatedProducts} reviewList={productReviews} />
-            <div key="reviews" dangerouslySetInnerHTML={{ __html: productReview[0] ? productReview[0].reviews : '' }} style={{ display: 'none' }} />
         </>
     )
 }

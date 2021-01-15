@@ -55,6 +55,7 @@ export const query = graphql`
             id
             title
             handle
+            tags
             createdAt(fromNow: true)
             publishedAt
             productType
