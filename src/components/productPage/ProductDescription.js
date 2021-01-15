@@ -125,15 +125,15 @@ const ProductDescription = ({ product, review }) => {
 
                     <div className="product_accordions-container">
                     { productPageData.productAccordions.map((item, index) => 
-                        <>
-                        <button className={`accordion_button ${item.headerClass}`} key={`btn_${index}`}>
+                        <div key={index}>
+                        <button key={`btn_${index}`} className={`accordion_button ${item.headerClass}`}>
                             { item.header }
                             
                             <FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />
                             
                         </button>   
-                        <div className={`accordion_content ${item.contentClass}`} dangerouslySetInnerHTML={{ __html: item.content }} />
-                        </>
+                        <div key={`content_${index}`} className={`accordion_content ${item.contentClass}`} dangerouslySetInnerHTML={{ __html: item.content }} />
+                        </div>
                     )}
                     </div>
 

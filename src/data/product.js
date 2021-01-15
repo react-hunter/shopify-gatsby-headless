@@ -1,15 +1,7 @@
 export const productPageData = {
-    productFeatures : [
-        {
-            text: '2020 Gift of the Year'
-        },
-        {
-            text: 'Handmade with Love'
-        },
-        {
-            text: 'Perfect Gift for Any Occasion'
-        },
-    ],
+    productFeatures : `2020 Gift of the Year
+Handmade with Love
+Perfect Gift for Any Occasion`,
     productAccordions: [
         {
             type: 'care',            

@@ -1,22 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect , useContext } from 'react';
 import { Link } from 'gatsby'
 import StoreContext from '../../context/store'
 import CollectionVariantSelector from './collectionVariantSelector'
+import { collectionPageData } from '../../data/collection'
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import '../../styles/productGallery.css';
 
 const CollectionProductBox = props => {
     const context = useContext(StoreContext);
     const product = props.product;
     const reviewBadge = props.review ? props.review.badge : '';
 
-    const prevImage = (e) => {
-        e.preventDefault();
-        console.log('prevImage');
-    }
-
-    const nextImage = (e) => {
-        e.preventDefault();
-        console.log('nextImage');
-    }
+    useEffect(() => {
+    })
 
     const addToBag = () => {
         if(product.variants.length === 1) {
@@ -31,46 +29,77 @@ const CollectionProductBox = props => {
         setVaraintModalShow(false);
     }
 
-    const handleKeyDown =(e) => {
-        e.preventDefault();
+    const [varaintModalShow, setVaraintModalShow] = useState(false);
+    
+    const isBadgeEnable = () => {
+        let isBadgeEnable = false;
+
+        collectionPageData.badgeStyle.map((item, index) => {
+            for (var i=0;i<product.tags.length;i++) {
+                if (product.tags[i] == item.name) {
+                    isBadgeEnable = true;
+                }
+            }
+        })
+        return isBadgeEnable;
     }
 
-    const [varaintModalShow, setVaraintModalShow] = useState(false);
+    const getBadgeImage = () => {
+        let imageUrl = '';
+        collectionPageData.badgeStyle.map((item, index) => {
+            for (var i=0;i<product.tags.length;i++) {
+                if (product.tags[i] == item.name) {
+                    imageUrl = item.image;
+                }
+            }
+        })
+        return imageUrl;
+    }
 
+    const productBoxSliderSettings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    }
     return (
+        
         <li className="grid__item grid__item--collection-template " key={product.title}>
             <div className="grid-view-item product-card">
                 <span className="visually-hidden product-card-title">{product.title}</span>
                                
                 <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
                     <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
-                        <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/Best_Seller_stickers-01_150x.png?v=1605546945" className="badge" alt="" />
+                        
+                        {isBadgeEnable() ? <img src={getBadgeImage()} className="badge" alt="" /> : ''}
+
                         <div className="collection-product_image_container">
+                            <Slider {...productBoxSliderSettings}>
                             { product.images[0] ? 
                                 (<img 
-                                    className="enableScrollOnMobile disableSaveImageIOS product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc lazyloaded"
+                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[0].originalSrc}
                                     alt={product.title}
                                 />) : ""
                             }
                             { product.images[1] ? 
                                 (<img 
-                                    className="enableScrollOnMobile product-tile__image product-collection_image_alternate"
+                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[1].originalSrc}
                                     alt={product.title}
                                     style={{ cursor: 'pointer' }}
                                 />) : ""
                             }
-                        </div>
-                        <div className="collection-product-arrows_container" data-glide-el="controls">
-                            <div className="collection-product-arrow_wrapper" onClick={prevImage} onKeyDown={handleKeyDown} id="prevButton" key="_prev" role="button" tabIndex="0">
-                                <img className="collection-product-arrow" 
-                                    src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/220/assets/leftArrow_small.png?v=2356608260688330502" alt="" />
-                            </div>
-                            <div className="collection-product-arrow_wrapper" onClick={nextImage} onKeyDown={handleKeyDown} id="nextButton" key="_next" role="button" tabIndex="0">
-                                <img className="collection-product-arrow" 
-                                    src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/220/assets/rightArrow_small.png?v=11564592839193317450" alt="" />
-                            </div>
+                            { product.images[2] ? 
+                                (<img 
+                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
+                                    src={product.images[1].originalSrc}
+                                    alt={product.title}
+                                    style={{ cursor: 'pointer' }}
+                                />) : ""
+                            }
+                            </Slider>
                         </div>
                     </div>
                 </div>
