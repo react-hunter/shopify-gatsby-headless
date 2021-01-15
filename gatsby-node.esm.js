@@ -72,57 +72,81 @@ exports.createPages = async ({ graphql, actions }) => {
   `).then(result => {
     result.data.allShopifyProduct.edges.forEach(({ node }) => {
       const id = node.handle
-      createPage({
-        path: `/products/${id}/`,
-        component: path.resolve(`./src/templates/productPage.js`),
-        context: {
-          id,
-          productReviews: productReviews
-        },
-      })
+      try {
+        createPage({
+          path: `/products/${id}/`,
+          component: path.resolve(`./src/templates/productPage.js`),
+          context: {
+            id,
+            productReviews: productReviews
+          },
+        })
+      } catch (error) {
+        console.log('product create error: ', id)
+      }
     })
     result.data.allShopifyArticle.edges.forEach(({ node }) => {
       const articleId = node.handle
-      createPage({
-        path: `/article/${articleId}/`,
-        component: path.resolve(`./src/templates/articlePage.js`),
-        context: {
-          id: articleId,
-        },
-      })
+      try {
+        createPage({
+          path: `/article/${articleId}/`,
+          component: path.resolve(`./src/templates/articlePage.js`),
+          context: {
+            id: articleId,
+          },
+        })        
+      } catch (error) {
+        console.log('article page create error: ', articleId)
+      }
     })
     result.data.allShopifyCollection.edges.forEach(({ node }) => {
       const collectionId = node.handle
+      try {
+        createPage({
+          path: `/collections/${collectionId}/`,
+          component: path.resolve(`./src/templates/collectionPage.js`),
+          context: {
+            id: collectionId,
+            productReviews: productReviews
+          },
+        })        
+      } catch (error) {
+        console.log('collection create error: ', collectionId)
+      }
+    })
+    try {
       createPage({
-        path: `/collections/${collectionId}/`,
-        component: path.resolve(`./src/templates/collectionPage.js`),
+        path: `/pages/collections`,
+        component: path.resolve(`./src/templates/featuredCollectionsPage.js`),
         context: {
-          id: collectionId,
+          collections: featuredCollectionHandles,
           productReviews: productReviews
         },
-      })
-    })
-    createPage({
-      path: `/pages/collections`,
-      component: path.resolve(`./src/templates/featuredCollectionsPage.js`),
-      context: {
-        collections: featuredCollectionHandles,
-        productReviews: productReviews
-      },
-    })
-    createPage({
-      path: `/search`,
-      component: path.resolve(`./src/templates/searchPage.js`),
-      context: {
-        productReviews: productReviews
-      },
-    })
-    createPage({
-      path: `/pages/customize`,
-      component: path.resolve(`./src/templates/customizePage.js`),
-      context: {
-      },
-    })
+      })      
+    } catch (error) {
+      console.log('collection create error: ', error)
+    }
+    try {
+      createPage({
+        path: `/search`,
+        component: path.resolve(`./src/templates/searchPage.js`),
+        context: {
+          productReviews: productReviews
+        },
+      })      
+    } catch (error) {
+      console.log('search page create error: ', error)
+    }
+    try {
+      createPage({
+        path: `/pages/customize`,
+        component: path.resolve(`./src/templates/customizePage.js`),
+        context: {
+        },
+      })      
+    } catch (error) {
+      console.log('customize page create error: ', error)
+    }
   })
 }
 
