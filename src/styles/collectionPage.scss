@@ -1,4 +1,4 @@
-#shopify-section-collection-template {
+#shopify-section-collection-template, #searchContent {
     
     @media (max-width: 750px) {
         .page-width {
@@ -547,4 +547,19 @@ border-radius: 50%;
 .color-swatch[data-color="Dark Tie Dye"] {
     background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/TOPDOWN_TieDye_zSTYD_SdxU7JG.png);
     background-size: cover;
+}
+
+.collection-product_image_container {
+    .slick-list {
+        height: 18vw !important;
+        @media (max-width: 750px) {
+            height: 50vw !important;
+        }
+    }
+}
+
+@media (max-width: 750px) {
+    #shop-all-content li:nth-child(7n) .slick-list{
+        height: 100vw !important;
+    }
 }

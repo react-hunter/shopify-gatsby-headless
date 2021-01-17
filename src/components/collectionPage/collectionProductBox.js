@@ -2,20 +2,23 @@ import React, { useState, useEffect , useContext } from 'react';
 import { Link } from 'gatsby'
 import StoreContext from '../../context/store'
 import CollectionVariantSelector from './collectionVariantSelector'
+import ProductBoxGallery from './productBoxGallery'
 import { collectionPageData } from '../../data/collection'
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import '../../styles/productGallery.css';
 
 const CollectionProductBox = props => {
     const context = useContext(StoreContext);
     const product = props.product;
     const reviewBadge = props.review ? props.review.badge : '';
-
-    useEffect(() => {
-    })
-
+    const mainOption = getMainOption()
+    const [swatchColor, setSwatchColor] = useState(mainOption === '' ? '' : mainOption.values[0])
+    function getMainOption() {
+        let tempOption = '';
+        const options = product.options.filter(option => option.name === 'Rose Color')
+        if(options.length > 0) {
+            tempOption = options[0]
+        }
+        return tempOption
+    }
     const addToBag = () => {
         if(product.variants.length === 1) {
             context.addVariantToCart(product.variants[0].shopifyId, 1)
@@ -58,15 +61,11 @@ const CollectionProductBox = props => {
         return imageUrl;
     }
 
-    const productBoxSliderSettings = {
-        dots: true,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
+    const selectProductSwatch = (swatchColor) => {
+        setSwatchColor(swatchColor)
     }
 
-    const selectProductSwatch = (e) => {
+    const handleKeyDown =(e) => {
         e.preventDefault();
     }
 
@@ -79,35 +78,11 @@ const CollectionProductBox = props => {
                 <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
                     <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
                         
-                        {isBadgeEnable() ? <img src={getBadgeImage()} className="badge" alt="" /> : ''}
+                        {   
+                            isBadgeEnable() ? <img src={getBadgeImage()} className="badge" alt="" /> : ''
+                        }
 
-                        <div className="collection-product_image_container">
-                            <Slider {...productBoxSliderSettings}>
-                            { product.images[0] ? 
-                                (<img 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={product.images[0].originalSrc}
-                                    alt={product.title}
-                                />) : ""
-                            }
-                            { product.images[1] ? 
-                                (<img 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={product.images[1].originalSrc}
-                                    alt={product.title}
-                                    style={{ cursor: 'pointer' }}
-                                />) : ""
-                            }
-                            { product.images[2] ? 
-                                (<img 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={product.images[1].originalSrc}
-                                    alt={product.title}
-                                    style={{ cursor: 'pointer' }}
-                                />) : ""
-                            }
-                            </Slider>
-                        </div>
+                        <ProductBoxGallery product={product} mainOption={mainOption} swatchColor={swatchColor} />
                     </div>
                 </div>
 
@@ -120,22 +95,29 @@ const CollectionProductBox = props => {
                 <div className="price price--listing price--on-sale">
                     <div className="price__regular"></div>
                     <div className="price__sale">
-                        <span className="price-item price-item--sale">{product.variants[0].price}</span>
-                    </div>
-                    <div className="price__compare">
-
+                        <dd>
+                            <span className="price-item price-item--sale">${product.variants[0].price}</span>
+                        </dd>
+                        <div className="price__compare">
+                            <dd>
+                                <s className="price-item price-item--regular">
+                                {product.variants[0].compareAtPrice > 0 ? '$' + product.variants[0].compareAtPrice : null}</s>
+                            </dd>
+                        </div>
                     </div>
                 </div>
-
                 <div className="collection-product-color-swatch">
-                    {
-                    collectionPageData.productSwitchColor.map((item, index) => {
+                {   
+                    mainOption === '' ? '': 
+                    mainOption.values.slice(0, 5).map((item, index) => {
                         return (
                             <div className="color-swatch" key={index} 
-                                onClick={selectProductSwatch} data-rose_color={item.color}></div>
+                                onClick={() => selectProductSwatch(item)} onKeyDown={handleKeyDown}
+                                role="button" tabIndex="0" data-rose_color={item}>                                        
+                            </div>
                         )
                     })
-                    }
+                } 
                 </div>
 
                 <button className="openVariantModal" 

@@ -106,8 +106,10 @@ const CollectionVariantSelector = props => {
                                         const selectEffectClass = getValueByName(mainOption.name) === mo ? 'select-effect' : ''
                                         return (
                                             <div className={`swatch-wrapper ${selectEffectClass}`} key={moIndex}>
-                                                <div className={`color-swatch ${getSaleClass(mainOption.name, mo)}`} onClick={() => selectVariantOption(mainOption.name, mo)} onKeyDown={handleKeyDown}
-                                                    role="button" tabIndex="0" data-swatch_type={mainOption.name} data-optionname={mainOption.name} data-optionvalue={mo}>
+                                                <div className={`color-swatch ${getSaleClass(mainOption.name, mo)}`} 
+                                                    onClick={() => selectVariantOption(mainOption.name, mo)} onKeyDown={handleKeyDown}
+                                                    role="button" tabIndex="0" data-swatch_type={mainOption.name} 
+                                                    data-optionname={mainOption.name} data-optionvalue={mo}>
                                                     {mainOption.name === 'Size' ? mo.charAt(0) : null}{mainOption.name === 'Quantity' ? mo : null}
                                                 </div>
                                                 <div></div>
