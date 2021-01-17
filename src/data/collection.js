@@ -20,5 +20,22 @@ export const collectionPageData = {
             name: 'Galaxy Rose Arrangement',
             image: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Best_Seller_stickers-01_150x.png?v=1605546945',
         }
+    ],
+    productSwitchColor: [
+        {
+            color: 'Red'
+        },
+        {
+            color: 'White'
+        },
+        {
+            color: 'Pink'
+        },
+        {
+            color: 'Dark Red'
+        },
+        {
+            color: 'Deep Purple'
+        }
     ]
 }

@@ -37,6 +37,10 @@
             margin: 0;
             height: 5px;
 
+            button {
+                height: unset;
+            }
+
             @media (max-width: 960px) {
                 width: calc(100% / 4)!important;
             }

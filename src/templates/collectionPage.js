@@ -7,11 +7,11 @@ import '../styles/widget.min.css';
 
 const collectionPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
-  const [ displayProductCount, setDisplayProductCount ] = useState(2);
+  const [ displayProductCount, setDisplayProductCount ] = useState(16);
 
   const loadMoreProducts = (e) => {
     e.preventDefault();
-    setDisplayProductCount(displayProductCount + 2);
+    setDisplayProductCount(displayProductCount + 16);
   }
 
   function setHoverEffectsForCollection() {

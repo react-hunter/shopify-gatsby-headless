@@ -65,6 +65,11 @@ const CollectionProductBox = props => {
         slidesToShow: 1,
         slidesToScroll: 1
     }
+
+    const selectProductSwatch = (e) => {
+        e.preventDefault();
+    }
+
     return (
         
         <li className="grid__item grid__item--collection-template " key={product.title}>
@@ -123,7 +128,14 @@ const CollectionProductBox = props => {
                 </div>
 
                 <div className="collection-product-color-swatch">
-
+                    {
+                    collectionPageData.productSwitchColor.map((item, index) => {
+                        return (
+                            <div className="color-swatch" key={index} 
+                                onClick={selectProductSwatch} data-rose_color={item.color}></div>
+                        )
+                    })
+                    }
                 </div>
 
                 <button className="openVariantModal" 
