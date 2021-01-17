@@ -18,18 +18,27 @@ const ProductGallery = ({ product }) => {
             <div className="pdp-carousel-main grid__item product-single__media-group medium-up--one-half glider draggable">
                 <Slider {...settings}>
                     {
-                    product.images
-                        .map((p, i) => {
-                        let image = p
-                        return (
-                            <div className="product-single__media-wrapper" key={i}>
-                                <img src={image.originalSrc} alt="" />
-                            </div>
-                        )
-                    })}
+                    product.images.length === 0? 
+                        (<div className="product-single__media-wrapper placefolder">
+                            <img src="https://cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_700x.png" alt="" />
+                        </div>) :
+                        product.images.map((image, imageIndex) => {
+                            return (
+                                image ? (
+                                    <div className="product-single__media-wrapper" key={imageIndex}>
+                                        <img src={image.originalSrc} alt="" />
+                                    </div>
+                                ) : null
+                            )
+                        })
+                    }
                 </Slider>
-                <h2 className="ig-title" style={{float:'none', clear: 'both', marginTop:'20px' }}><a href="https://www.instagram.com/doseofroses/"> As Seen on @DOSEOFROSES</a></h2>
-                    
+
+                {product.images.length === 0? '': 
+                    <h2 className="ig-title" style={{float:'none', clear: 'both', marginTop:'20px' }}>
+                        <a href="https://www.instagram.com/doseofroses/"> As Seen on @DOSEOFROSES</a>
+                    </h2>
+                }
                 <script src="//foursixty.com/media/scripts/fs.slider.v2.5.js" data-feed-id="dose-of-roses" data-for-url="true" data-theme="slider_v2_5" data-open-links-in-same-page="true" data-connector-filter="30963" data-cell-size="20%"></script>
             </div>
         </div>

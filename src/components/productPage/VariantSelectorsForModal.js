@@ -31,7 +31,7 @@ const VariantSelectorForModal = ({productVariant, variantList, variant, changeOp
 
     const findImage = (optionName, optionValue) => {
         const variant = findVariant(optionName, optionValue)
-        return variant ? variant.image.originalSrc : '//cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_300x.png'
+        return (variant && variant.image) ? variant.image.originalSrc : '//cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_300x.png'
     }
     const findPrice = (optionName, optionValue) => {
         const variant = findVariant(optionName, optionValue)

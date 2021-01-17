@@ -171,6 +171,7 @@ export const query = graphql`
           availableForSale
           price
           shopifyId
+          compareAtPrice
           image {
             originalSrc
           }
