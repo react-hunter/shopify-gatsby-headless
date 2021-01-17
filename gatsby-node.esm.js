@@ -20,7 +20,14 @@ let productReviews = []
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
-  const products = await shopify.product.list();
+  let products = new Array(0);
+  let params = { limit: 30, fields: ['id', 'handle'] };
+  do {
+    const productListPiece = await shopify.product.list(params);
+    products.push(...productListPiece)
+    params = productListPiece.nextPageParameters;
+  } while (params !== undefined);
+  
   productReviews = await Promise.all(products.map(async pr => {
     const metafields = await shopify.metafield.list({metafield: {owner_resource: 'product', owner_id: pr.id}});
     let productReview = {}

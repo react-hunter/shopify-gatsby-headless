@@ -22,33 +22,6 @@ export default IndexPage
 
 export const query = graphql`
   query {
-    allShopifyProduct {
-      edges {
-        node {
-          id
-          title
-          handle
-          createdAt(fromNow: true)
-          publishedAt
-          productType
-          vendor
-          priceRange {
-            maxVariantPrice {
-              amount
-            }
-          }
-          images {
-            originalSrc
-            id
-          }
-          variants {
-            id
-            title
-            price
-          }
-        }
-      }
-    }
     allShopifyArticle(limit: 3) {
       edges {
         node {
