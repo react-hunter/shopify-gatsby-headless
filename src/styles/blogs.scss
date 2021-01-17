@@ -1,0 +1,11 @@
+#article-page {
+    .share-icons{
+        svg, img {
+            margin: 0 auto;
+            width: 18px;
+            height: 18px;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+    }
+}
