@@ -71,7 +71,6 @@ const ProductBoxGallery = props => {
     }
 
     const getStyle = () => {
-        console.log('slideIndex = ', slideIndex);
         if (productGalleryCount === 1) {
             return  { width: '100%' };
         } else if (productGalleryCount === 2) {
@@ -85,7 +84,6 @@ const ProductBoxGallery = props => {
                 return { transform: 'translateX(200%)' };
             } else if (slideIndex == 1) {
                 return {transform: 'translateX(100%)' };
-            } else {
             }
         }
     }
@@ -100,46 +98,46 @@ const ProductBoxGallery = props => {
                 { 
                     mainOption === '' ?
                         <Slider {...productBoxSliderSettings}>
-                        { product.images[0] ? 
-                            (<LazyLoadImage 
-                                className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                src={product.images[0].originalSrc}
-                                alt={product.title}
-                                effect="blur"
-                            />) : ""
-                        }
-                        { product.images[1] ? 
-                            (<LazyLoadImage 
-                                className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                src={product.images[1].originalSrc}
-                                alt={product.title}
-                                style={{ cursor: 'pointer' }}
-                                effect="blur"
-                            />) : ""
-                        }
-                        { product.images[2] ? 
-                            (<LazyLoadImage 
-                                className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                src={product.images[2].originalSrc}
-                                alt={product.title}
-                                style={{ cursor: 'pointer' }}
-                                effect="blur"
-                            />) : ""
-                        }
-                    </Slider>
+                            { product.images[0] ? 
+                                (<LazyLoadImage 
+                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
+                                    src={product.images[0].originalSrc}
+                                    alt={product.title}
+                                    effect="blur"
+                                />) : ""
+                            }
+                            { product.images[1] ? 
+                                (<LazyLoadImage 
+                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
+                                    src={product.images[1].originalSrc}
+                                    alt={product.title}
+                                    style={{ cursor: 'pointer' }}
+                                    effect="blur"
+                                />) : ""
+                            }
+                            { product.images[2] ? 
+                                (<LazyLoadImage 
+                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
+                                    src={product.images[2].originalSrc}
+                                    alt={product.title}
+                                    style={{ cursor: 'pointer' }}
+                                    effect="blur"
+                                />) : ""
+                            }
+                        </Slider>
                     : 
-                    swatchImages.map((swatchImage, swatchImageIndex) => {
-                        return (
-                            <LazyLoadImage 
-                                className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                src={swatchImage}
-                                alt=''
-                                style={{ cursor: 'pointer' }}
-                                effect="blur"
-                                key={swatchImageIndex}
-                            />
-                        )
-                    })
+                        swatchImages.map((swatchImage, swatchImageIndex) => {
+                            return (
+                                <LazyLoadImage 
+                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
+                                    src={swatchImage}
+                                    alt=''
+                                    style={{ cursor: 'pointer' }}
+                                    effect="blur"
+                                    key={swatchImageIndex}
+                                />
+                            )
+                        })
                 }
                 </div>
             </div>
