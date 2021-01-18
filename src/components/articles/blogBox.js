@@ -3,49 +3,45 @@ import { Link } from 'gatsby'
 
 const BlogBox = props => {
     const article = props.article
-    
+    let date = changeDateFormat();
+    function changeDateFormat(){
+      let mydate = new Date(article.publishedAt);
+      var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][mydate.getMonth()];
+      var str = month + ' ' + mydate.getDay() + ',' + mydate.getFullYear();
+      console.log("str === ", str);
+      return str;
+    }
+
     return (
-        <li className="grid__item medium-up--one-third" key={article.title}>
-            <article className="blog-article" href={`/article/${article.handle}`} >
-				
-            <header>
-              <Link to={`/article/${article.handle}`} 
-                className="article__link">   
-                <div className="article__grid-image-wrapper js">
-                    <div className="article__grid-image-container">
-                        { article.image ? 
-                            (<img className="article__grid-image ls-is-cached"
-                            src={article.image.src}
-                            alt={article.title}
-                        />) : ""
-						}
-                    </div>
-                </div>      
-              </Link>
+      <div className="single-article" key={article.title}>
+        <div className="article-content">
+          <Link to={`/article/${article.handle}`}>
+            { article.image ? 
+                (<img className="article__grid-image ls-is-cached"
+                src={article.image.src}
+                alt={article.title}
+            />) : "" }
+          </Link>
+        </div>
 
-              <Link to={`/article/${article.handle}`} className="article__link">
-                <h3 className="article__title">
-                    {article.title}
-                </h3>
-              </Link>
-            </header>
+        <div className="article-body">
+          <h3><Link to={`/article/${article.handle}`}>{article.title}</Link></h3>
+          <div className="clear"></div>
+          <div className="rte">
+            <meta charSet="utf-8" />
+            <div dangerouslySetInnerHTML={{ __html: article.excerptHtml }}></div>
+          </div>
+        </div>
 
-              <div className="article__grid-meta">
-                <div className="rte article__grid-excerpt">                
-                    {article.excerpt}    
-                </div>
-              </div>
-
-              <ul className="list--inline article__meta-buttons">
-                <li>
-                    <Link to={`/article/${article.handle}`}
-                        className="btn btn--small blog-btn">
-                        Read More
-                    </Link>
-                </li>
-              </ul>
-            </article>
-        </li>
+        <div className="article-bottom">
+          <div className="article-additional">
+            <span className="posted">{date}</span>
+            <span className="comment-count"><i className="fas fa-comment" aria-hidden="true"></i> 0</span>
+          </div>
+          <Link to={`/article/${article.handle}`} className="article-btn">Read more</Link>
+        </div>
+      </div>
     );
 };
 
