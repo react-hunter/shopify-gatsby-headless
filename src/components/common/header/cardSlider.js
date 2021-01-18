@@ -1,5 +1,6 @@
 import React from 'react';
 import { commonData } from '../../../data/common';
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 /* Banner carousel animation for side menu */
 
@@ -14,7 +15,7 @@ const cardSlider = ({ path }) => {
                         <div className="card-item" key={index}>
                             <a href={item.href}>
                                 <div style={{ width:'100%' }}>
-                                    <img src={item.imageUrl} alt="" />
+                                    <LazyLoadImage effect="blur" loading="eager" src={item.imageUrl} alt="" />
                                 </div>
                             </a>
                         </div>

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Preloader from "../../components/common/preloader"
 import { faqPageData } from '../../data/faq' 
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const Faqs = ({ data }) => {      
     useEffect(() => {
@@ -26,8 +27,8 @@ const Faqs = ({ data }) => {
             <div id="shopify-section-faq-banner-top" className="shopify-section">
                 <div className="faq_banner-container">
                     <div className="faq_banner-wrapper">
-                        <img className="faq_desktop-banner" src={ faqPageData.banner.imageDesktop } alt="" />
-                        <img className="faq_mobile-banner" src={ faqPageData.banner.imageMobile } alt="" />
+                        <LazyLoadImage effect="blur" loading="eager"  className="faq_desktop-banner" src={ faqPageData.banner.imageDesktop } alt="" />
+                        <LazyLoadImage effect="blur" loading="eager"  className="faq_mobile-banner" src={ faqPageData.banner.imageMobile } alt="" />
                         <div className="faq_banner-text_container">
                             <div className="faq_banner-title">{ faqPageData.banner.title }</div>
                             <div className="faq_banner-title_underline"></div>
@@ -41,15 +42,17 @@ const Faqs = ({ data }) => {
                     <div className="faq_content-wrapper">
                         { faqPageData.faqContent.map((item, index) => {
                             return (
-                                <>
-                                <button className="faq_content-accordion_button" key={`btn_${index}`}>
-                                    {item.question}
-                                    <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/arrow_down_white_200x.png?v=5587476236961067168" 
-                                        alt="" />
-                                </button>
-                                <div className="faq_content-accordion_content" key={`answer_${index}`} 
-                                    dangerouslySetInnerHTML={{ __html: item.answer }} />
-                                </>
+                                <div key={index}>
+                                    <button className="faq_content-accordion_button" key={`btn_${index}`}>
+                                        {item.question}
+                                        <LazyLoadImage 
+                                            effect="blur" loading="eager" 
+                                            src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/arrow_down_white_200x.png?v=5587476236961067168" 
+                                            alt="" />
+                                    </button>
+                                    <div className="faq_content-accordion_content" key={`answer_${index}`} 
+                                        dangerouslySetInnerHTML={{ __html: item.answer }} />
+                                </div>
                             )
                         })}
                     </div>
@@ -58,8 +61,8 @@ const Faqs = ({ data }) => {
             <div id="shopify-section-faq-customiser-banner" className="shopify-section">
                 <div className="faq_banner-container">
                     <div className="faq_banner-wrapper">
-                        <img className="faq_desktop-banner" src={ faqPageData.customiserBanner.imageDesktop } alt="" />
-                        <img className="faq_mobile-banner" src={ faqPageData.customiserBanner.imageMobile } alt="" />
+                        <LazyLoadImage effect="blur" loading="eager"  className="faq_desktop-banner" src={ faqPageData.customiserBanner.imageDesktop } alt="" />
+                        <LazyLoadImage effect="blur" loading="eager"  className="faq_mobile-banner" src={ faqPageData.customiserBanner.imageMobile } alt="" />
                         <div className="faq_customiser_banner-overlay"></div>
                         <div className="faq_customiser_banner-text_container">
                             <div className="faq_customiser_banner-title">{ faqPageData.customiserBanner.title }</div>

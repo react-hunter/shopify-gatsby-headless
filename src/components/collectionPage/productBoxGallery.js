@@ -92,7 +92,7 @@ const ProductBoxGallery = props => {
         <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
             <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
                 {   
-                    isBadgeEnable() ? <img src={getBadgeImage()} className="badge" alt="" /> : ''
+                    isBadgeEnable() ? <LazyLoadImage effect="blur" loading="eager"  src={getBadgeImage()} className="badge" alt="" /> : ''
                 }
                 <div className="collection-product_image_container">
                 { 
@@ -103,7 +103,7 @@ const ProductBoxGallery = props => {
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[0].originalSrc}
                                     alt={product.title}
-                                    effect="blur"
+                                    effect="blur" loading="eager" 
                                 />) : ""
                             }
                             { product.images[1] ? 
@@ -112,7 +112,7 @@ const ProductBoxGallery = props => {
                                     src={product.images[1].originalSrc}
                                     alt={product.title}
                                     style={{ cursor: 'pointer' }}
-                                    effect="blur"
+                                    effect="blur" loading="eager" 
                                 />) : ""
                             }
                             { product.images[2] ? 
@@ -121,7 +121,7 @@ const ProductBoxGallery = props => {
                                     src={product.images[2].originalSrc}
                                     alt={product.title}
                                     style={{ cursor: 'pointer' }}
-                                    effect="blur"
+                                    effect="blur" loading="eager" 
                                 />) : ""
                             }
                         </Slider>
@@ -133,7 +133,7 @@ const ProductBoxGallery = props => {
                                     src={swatchImage}
                                     alt=''
                                     style={{ cursor: 'pointer' }}
-                                    effect="blur"
+                                    effect="blur" loading="eager" 
                                     key={swatchImageIndex}
                                 />
                             )

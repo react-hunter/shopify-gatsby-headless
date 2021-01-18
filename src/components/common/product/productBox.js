@@ -10,26 +10,13 @@ const ProductBox = props => {
     return (
         <div className="Best-Sellers-Carousel-Cell double_img">
             <div className="img-bg">
-                {/* { product.images[0] ? 
-                    (<img 
-                        className={`lazy-load-mc ${ product.images[1] ? 'main_img' : ''}`}
-                        src={product.images[0].originalSrc}
-                        alt={product.title}
-                    />) : ""
-                }
-                { product.images[1] ? 
-                    (<img 
-                        className="best-carousel-product-img hover_img"
-                        src={product.images[1].originalSrc}
-                        alt={product.title}
-                        style={{ cursor: 'pointer' }}
-                    />) : ""
-                } */}
                 { product.images[0] ? 
                     (<LazyLoadImage 
                         className={`lazy-load-mc ${ product.images[1] ? 'main_img' : ''}`}
                         src={product.images[0].originalSrc}
                         alt={product.title}
+                        effect="blur"
+                        loading="eager" 
                     />) : ""
                 }
                 { product.images[1] ? 
@@ -38,6 +25,8 @@ const ProductBox = props => {
                         src={product.images[1].originalSrc}
                         alt={product.title}
                         style={{ cursor: 'pointer' }}
+                        effect="blur"
+                        loading="eager" 
                     />) : ""
                 }
             </div>

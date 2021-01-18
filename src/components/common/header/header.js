@@ -6,7 +6,7 @@ import { ReactSVG } from 'react-svg';
 import LogoIcon from '../../../images/icon-logo.svg';
 import HamburgerIcon from '../../../images/icon-hamburger.svg';
 import CloseIcon from '../../../images/icon-close.svg';
-
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import SearchHeaderIcon from '../../../images/icon-search-header.svg';
 import LoginHeaderIcon from '../../../images/icon-login-header.svg';
 import MessageIcon from '../../../images/icon-message.svg';
@@ -15,7 +15,6 @@ import { commonData } from '../../../data/common';
 
 import SearchDrawer from './searchDrawer';
 import SiteNav from './siteNav';
-import MegaMenu from './megaMenu';
 import AnnoucmentBar from './annoucmentBar';
 import CardSlider from './cardSlider';
 
@@ -402,8 +401,7 @@ const Header = ({ path }) => {
                 </div>
               </div>
             </div>
-            
-            <MegaMenu />            
+                     
             <AnnoucmentBar />
 
           </header>
@@ -429,7 +427,7 @@ const Header = ({ path }) => {
                           </div>
                         </div>
                         <div className="sidenav-item_img" key={`itemimg-${menuIndex}`}>
-                          <img src={menuItem.image} alt="" />
+                          <LazyLoadImage effect="blur" loading="eager" src={menuItem.image} alt="" />
                         </div>
                       </Link>
 
@@ -448,7 +446,7 @@ const Header = ({ path }) => {
                                 </div>
                               </div>
                               <div className="sidenav-item_img" key={`childitemimg-${menuIndex}-${child_index}`}>
-                                <img src={child_item.image} alt="" />
+                                <LazyLoadImage effect="blur" loading="eager" src={child_item.image} alt="" />
                               </div>
                             </Link>
                           )

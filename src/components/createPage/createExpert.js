@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const createExpert = () => {
     return (
@@ -8,7 +9,8 @@ const createExpert = () => {
             <div className="fifty-fifty_container">
                 <div className="fifty-fifty_wrapper">
                     <div className="fifty-image">
-                        <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/IMG_1795_1100x.jpeg?v=1602814566" alt=""/>
+                        <LazyLoadImage effect="blur" loading="eager" 
+                            src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/IMG_1795_1100x.jpeg?v=1602814566" alt=""/>
                     </div>
 
                     <div className="fifty-textblock">

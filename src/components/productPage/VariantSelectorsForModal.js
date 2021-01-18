@@ -1,4 +1,5 @@
 import React from 'react'; /* eslint-disable */
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const VariantSelectorForModal = ({productVariant, variantList, variant, changeOption, options, closeModal, modalClass}) => {
     const clickSelect = (optionName, optionValue) => {
@@ -45,7 +46,7 @@ const VariantSelectorForModal = ({productVariant, variantList, variant, changeOp
                     {
                         options.values.map((value, optionIndex) => (
                             <div className="gridC" onClick={() => clickSelect(options.name, value)} key={optionIndex}>
-                                <img src={findImage(options.name, value)} alt="" />
+                                <LazyLoadImage effect="blur" loading="eager" src={findImage(options.name, value)} alt="" />
                                 <h3>{ value }</h3>
                                 <span className="sidePrice">${findPrice(options.name, value)}</span>
                                 <a href="/fakeUrl" className="closebtn" onClick={closeNav}>×</a>
