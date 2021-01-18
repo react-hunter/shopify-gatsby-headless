@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { collectionPageData } from '../../data/collection'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -33,53 +34,89 @@ const ProductBoxGallery = props => {
         }
     }, [mainOption, swatchColor])
 
+    const isBadgeEnable = () => {
+        let isBadgeEnable = false;
+
+        collectionPageData.badgeStyle.map(item => {
+            for (var i=0;i<product.tags.length;i++) {
+                if (product.tags[i] === item.name) {
+                    isBadgeEnable = true;
+                }
+            }
+            return true
+        })
+        return isBadgeEnable;
+    }
+
+    const getBadgeImage = () => {
+        let imageUrl = '';
+        collectionPageData.badgeStyle.map(item => {
+            for (var i=0;i<product.tags.length;i++) {
+                if (product.tags[i] === item.name) {
+                    imageUrl = item.image;
+                }
+            }
+            return true
+        })
+        return imageUrl;
+    }
+
     return (
-        <div>
-            <div className="collection-product_image_container">
+        <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
+            <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
+                {   
+                    isBadgeEnable() ? <img src={getBadgeImage()} className="badge" alt="" /> : ''
+                }
+                <div className="collection-product_image_container">
                 { 
-                mainOption === '' ?
+                    mainOption === '' ?
+                        <Slider {...productBoxSliderSettings}>
+                            { product.images[0] ? 
+                                (<img 
+                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
+                                    src={product.images[0].originalSrc}
+                                    alt={product.title}
+                                />) : ""
+                            }
+                            { product.images[1] ? 
+                                (<img 
+                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
+                                    src={product.images[1].originalSrc}
+                                    alt={product.title}
+                                    style={{ cursor: 'pointer' }}
+                                />) : ""
+                            }
+                            { product.images[2] ? 
+                                (<img 
+                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
+                                    src={product.images[2].originalSrc}
+                                    alt={product.title}
+                                    style={{ cursor: 'pointer' }}
+                                />) : ""
+                            }
+                        </Slider>
+                    : 
                     <Slider {...productBoxSliderSettings}>
-                        { product.images[0] ? 
-                            (<img 
-                                className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                src={product.images[0].originalSrc}
-                                alt={product.title}
-                            />) : ""
-                        }
-                        { product.images[1] ? 
-                            (<img 
-                                className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                src={product.images[1].originalSrc}
-                                alt={product.title}
-                                style={{ cursor: 'pointer' }}
-                            />) : ""
-                        }
-                        { product.images[2] ? 
-                            (<img 
-                                className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                src={product.images[2].originalSrc}
-                                alt={product.title}
-                                style={{ cursor: 'pointer' }}
-                            />) : ""
+                        {
+                            swatchImages.map((swatchImage, swatchImageIndex) => {
+                                return (
+                                    <img 
+                                        className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
+                                        src={swatchImage}
+                                        alt=''
+                                        style={{ cursor: 'pointer' }}
+                                        key={swatchImageIndex}
+                                    />
+                                )
+                            })
                         }
                     </Slider>
-                : 
-                <Slider {...productBoxSliderSettings}>
-                    {
-                        swatchImages.map((swatchImage, swatchImageIndex) => {
-                            return (
-                                <img 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={swatchImage}
-                                    alt=''
-                                    style={{ cursor: 'pointer' }}
-                                    key={swatchImageIndex}
-                                />
-                            )
-                        })
-                    }
-                </Slider>
                 }
+                </div>
+            </div>
+                    
+            <div className="carousel-scrollbar">
+                <div className="carousel-scrollbar_bar"></div>
             </div>
         </div>
     );
