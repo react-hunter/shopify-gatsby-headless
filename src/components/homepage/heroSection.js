@@ -1,18 +1,19 @@
 import React from 'react';
 import { Link } from 'gatsby'
+import Img from 'gatsby-image'
 import { homepageData } from '../../data/homepage';
 import '../../styles/heroSection.css';
 
-const HeroSection = () => {
+const HeroSection = (props) => {
     return (
         <div className="shopify-section">
             <div className="text_image_banner-container_outer">
                 <div className="text_image_banner-container_inner">
                     <Link to={homepageData.heroImage.imageUrl}> 
-                        <img src={homepageData.heroImage.desktopImage}
+                        <Img fluid={props.heroDesktop}
                             className="text_image_banner-img banner_img-desktop lazyload" alt="" />
 
-                        <img src={homepageData.heroImage.mobileImage}
+                        <Img fluid={props.heroMobile}
                             className="text_image_banner-img banner_img-mobile lazyload" alt="" />
                     </Link>
 
