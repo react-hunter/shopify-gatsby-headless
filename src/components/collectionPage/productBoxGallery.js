@@ -11,7 +11,7 @@ const ProductBoxGallery = props => {
     const mainOption = props.mainOption;
     const swatchColor = props.swatchColor
     const productBoxSliderSettings = {
-        dots: true,
+        dots: false,
         infinite: false,
         speed: 500,
         slidesToShow: 1,
@@ -72,48 +72,6 @@ const ProductBoxGallery = props => {
                 { 
                     mainOption === '' ?
                         <Slider {...productBoxSliderSettings}>
-                            { product.images[0] ? 
-                                (<img 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={product.images[0].originalSrc}
-                                    alt={product.title}
-                                />) : ""
-                            }
-                            { product.images[1] ? 
-                                (<img 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={product.images[1].originalSrc}
-                                    alt={product.title}
-                                    style={{ cursor: 'pointer' }}
-                                />) : ""
-                            }
-                            { product.images[2] ? 
-                                (<img 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={product.images[2].originalSrc}
-                                    alt={product.title}
-                                    style={{ cursor: 'pointer' }}
-                                />) : ""
-                            }
-                        </Slider>
-                    : 
-                    <Slider {...productBoxSliderSettings}>
-<<<<<<< HEAD
-                        {
-                            swatchImages.map((swatchImage, swatchImageIndex) => {
-                                return (
-                                    <img 
-                                        className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                        src={swatchImage}
-                                        alt=''
-                                        style={{ cursor: 'pointer' }}
-                                        key={swatchImageIndex}
-                                    />
-                                )
-                            })
-                        }
-                    </Slider>
-=======
                         { product.images[0] ? 
                             (<LazyLoadImage 
                                 className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
@@ -141,24 +99,19 @@ const ProductBoxGallery = props => {
                             />) : ""
                         }
                     </Slider>
-                : 
-                <Slider {...productBoxSliderSettings}>
-                    {
-                        swatchImages.map((swatchImage, swatchImageIndex) => {
-                            return (
-                                <LazyLoadImage 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={swatchImage}
-                                    alt=''
-                                    style={{ cursor: 'pointer' }}
-                                    effect="blur"
-                                    key={swatchImageIndex}
-                                />
-                            )
-                        })
-                    }
-                </Slider>
->>>>>>> 3b19028a822489c3080df25ceb4fc98e08d6eb8e
+                    : 
+                    swatchImages.map((swatchImage, swatchImageIndex) => {
+                        return (
+                            <LazyLoadImage 
+                                className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
+                                src={swatchImage}
+                                alt=''
+                                style={{ cursor: 'pointer' }}
+                                effect="blur"
+                                key={swatchImageIndex}
+                            />
+                        )
+                    })
                 }
                 </div>
             </div>
