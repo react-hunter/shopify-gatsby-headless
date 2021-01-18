@@ -1,4 +1,4 @@
-import React, { useState } from 'react' /* eslint-disable */
+import React, { useEffect, useState } from 'react' /* eslint-disable */
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
 import CollectionProductBox from "../components/collectionPage/collectionProductBox"
@@ -12,6 +12,17 @@ const collectionPage = ({ data, pageContext }) => {
     e.preventDefault();
     setDisplayProductCount(displayProductCount + 16);
   }
+
+  useEffect(() => {
+    const collectionDescription = document.querySelector('#collectionDescription');
+      
+    if (collectionDescription.offsetHeight < 46) {
+      document.querySelector("#collectionReadMoreBtn").style.display = "none";
+      document.querySelector("#collectionReadMoreFade_wrapper").style.display = "none";
+    } else {
+      document.querySelector("#collectionReadMoreBtn").innerHTML = 'Read More';
+    }
+  }, [])
 
   function setHoverEffectsForCollection() {
 
@@ -85,6 +96,29 @@ const collectionPage = ({ data, pageContext }) => {
     }, 550)
   }
   
+  let showAll = false;
+
+  const showAllContent =(e) => {
+    e.preventDefault();
+    
+    if (showAll === false) {
+      document.querySelector('#collectionDescription').style.maxHeight = 'unset';
+      document.querySelector("#collectionReadMoreFade_wrapper").style.display = "none";
+      document.querySelector("#collectionReadMoreBtn").innerHTML = 'Read Less';
+      showAll = true;
+    } else {
+      document.querySelector('#collectionDescription').style.maxHeight = '50px';
+      document.querySelector("#collectionReadMoreFade_wrapper").style.display = "block";
+      document.querySelector("#collectionReadMoreBtn").innerHTML = 'Read More';
+      showAll = false;
+    }
+  }
+
+  const handleKeyDown =(e) => {
+    e.preventDefault();
+  }
+
+
   const displayedProducts = data.shopifyCollection.products.slice(0, displayProductCount)
   return (
     <>
@@ -108,6 +142,13 @@ const collectionPage = ({ data, pageContext }) => {
               <div className="rte">
                 <div id="collectionDescription">
                   <div dangerouslySetInnerHTML={{__html: data.shopifyCollection.descriptionHtml}} />
+                </div>
+                <div id="collectionReadMoreFade_wrapper">
+                  <div id="collectionReadMoreFade">
+                  </div>
+                </div>
+                <div id="collectionReadMoreBtn" style={{ textAlign: 'center', cursor: 'pointer'}}                  
+                  onClick={showAllContent} onKeyDown={handleKeyDown} role="button" tabIndex="0">
                 </div>
               </div>
 
