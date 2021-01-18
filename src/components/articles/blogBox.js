@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby'
+import Img from 'gatsby-image'
 
 const BlogBox = props => {
     const article = props.article
@@ -9,7 +10,6 @@ const BlogBox = props => {
       var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
       "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][mydate.getMonth()];
       var str = month + ' ' + mydate.getDay() + ',' + mydate.getFullYear();
-      console.log("str === ", str);
       return str;
     }
 
@@ -18,8 +18,8 @@ const BlogBox = props => {
         <div className="article-content">
           <Link to={`/article/${article.handle}`}>
             { article.image ? 
-                (<img className="article__grid-image ls-is-cached"
-                src={article.image.src}
+                (<Img className="article__grid-image ls-is-cached"
+                fluid={article.image.localFile.childImageSharp.fluid}
                 alt={article.title}
             />) : "" }
           </Link>

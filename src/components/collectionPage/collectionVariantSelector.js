@@ -17,6 +17,8 @@ const CollectionVariantSelector = props => {
             el.dataset[dataAttributeName] = el.dataset.optionvalue
             return true
         })
+        document.getElementsByTagName("html")[0].classList.add("no-scroll");
+        document.querySelector(".scrollPreventer").style.overflow = "hidden";
     });
     
     const getVariantByOption = (optionName, optionValue) => {
@@ -71,7 +73,7 @@ const CollectionVariantSelector = props => {
         navigate('/pages/create')
     }
     const closeVariantSelector =() => {
-        props.closeModal()
+        props.closeModal();
     }
     const handleKeyDown =(e) => {
         e.preventDefault();
@@ -174,6 +176,10 @@ const CollectionVariantSelector = props => {
                     }
                     <Link to="/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZER NOW</Link>
                 </div>
+            </div>
+            <div className="variantSelector_overlay" 
+                onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0">
+
             </div>
         </div>
     );

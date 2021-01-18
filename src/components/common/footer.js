@@ -48,9 +48,8 @@ const Footer = () => {
                         )}
                     </ul>
                 </div>
-                <div className="footer-content_wrapper" key="footer-content_wrapper">
-
-                </div>
+                {/* <div className="footer-content_wrapper" key="footer-content_wrapper">
+                </div> */}
             </footer>
         </div>
     );

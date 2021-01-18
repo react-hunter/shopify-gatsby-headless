@@ -12,7 +12,7 @@ import '../styles/widget.min.css';
 const ProductPage = ({ data, pageContext }) => {
     const product = data.shopifyProduct;
     const {id, productReviews} = pageContext;
-    const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 2) : [];
+    const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 8) : [];
     
     const productReview = productReviews.filter(pr => pr.handle === id)
     
@@ -85,7 +85,7 @@ export const query = graphql`
 			}
 			images {
 				originalSrc
-				id
+                id
             }
         }
         shopifyCollection(handle: {eq: "best-sellers"}) {
