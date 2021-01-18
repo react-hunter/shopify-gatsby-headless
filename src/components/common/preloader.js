@@ -15,9 +15,9 @@ const Preloader = (props) => {
     <>
       { loadMore ? 
           (
-            <div className="preloader">
-              <div className="spinner"></div>
-              <div className="spinner-2"></div>
+            <div class="preloader">
+              <div class="load-more_loader">
+              </div>
             </div>
           ) :
           null

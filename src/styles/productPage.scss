@@ -1,6 +1,10 @@
 .product-template__container {
   margin-top: 115px;
 
+  .product-single__title {
+    text-transform: uppercase;
+  }
+
   .pdp-carousel-main {
     margin-bottom: 30px !important;
     
@@ -12,6 +16,7 @@
       z-index: 10;
       width: 45px;
       height: 45px;
+      display: unset!important;
       
       &.slick-next {
         background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAQAAAAAYLlVAAAAAmJLR0QA/4ePzL8AAAAJcEhZcwAAAc0AAAHNAZ7y004AAAGjSURBVGjexZm/LkRREMY/IiIeQKIUlUah8SJ2sXqFh9CoFWqFh0BWiMZ7iF7iTydCskQhK+zMnJnvu3KrPTOb3y8395wzZw5GsB8s4RRPuMMBZr3czOOF1/Dw/eMa8x0LfOIffwwIFKzQAu5/DdIVrNDhn8NkBSt0NSFAVbBCxxNDRAUrtIIXvYId3MCbWsELyxX8hJ5WIZIiVYglCRWiaTKFeGJfo9CSKlFoS+7jna3Qmr7JVmj/A1kh89KoCrkPh6iQnTxbLIX8AkJSqCyiFIXaRkJQqG6m21WFekFRVGAUVSUFTmE5yCuwimtL4RLTcgFHYa8DAVPhvBuBnX8VMPAj7Oo/Qgt/hin1NLTwF5hTL0QFPGMpLuHrm1ERX92Oy/haQULAV0oyCj5flJLw2bKchs8dTIj4zNGMim8/nJLxrcdzOr6tQSHAt7RoJPh4k0qEj7bpZPhYo1KIj7RqpXi/WS3Ge+36gRpvX1is4lWNtwVO9Hhb4EaPtwWO9HhbYHHs2laE92bBOp61eH8dGFcY8vGRlXD56/r+FvuYUVzffwBwTnk0pBTeqAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAASdEVYdEVYSUY6T3JpZW50YXRpb24AMYRY7O8AAAAASUVORK5CYII=);

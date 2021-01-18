@@ -9,7 +9,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import Header from "../components/common/header/header"
 import Footer from "../components/common/footer"
 import Instagram from "../components/common/instagram"
-import SubscribeSection from "../components/common/subscribeSection"
+//import SubscribeSection from "../components/common/subscribeSection"
 import Provider from "../context/provider"
 import AjaxCartCustom from "../components/common/ajaxCartCustom"
 import Preloader from "../components/common/preloader"
@@ -55,11 +55,11 @@ const Layout = ({ path, children }) => {
 											null : 
 											<Instagram />
 									}
-									{
+									{/* {
 										path.includes('/cart') ? 
 											null :
 											<SubscribeSection />
-									}
+									} */}
 								</div>
 								<Footer />
 							</div>

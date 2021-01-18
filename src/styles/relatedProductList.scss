@@ -1,4 +1,9 @@
-.slick-prev, .slick-prev:hover {
+
+.Best-Sellers-Carousel {
+ 
+}
+
+.slick-prev {
   background-image: url("../images/leftArrow_small.png");
   background-size: contain;
   left: 20px;
@@ -6,21 +11,18 @@
 
   &:hover {
     background-image: url("../images/leftArrow_small.png");
-    background-size: contain;
+    background-size: 20px 20px;
   }
   &.slick-disabled {
     opacity: 0.5;
-    &:hover, &:focus {
-      background-image: url("../images/leftArrow_small.png");
-      background-size: contain;
-    }
   }
 
-  .announcement-bar & {
-
+  @media (max-width: 900px) {
+    display: none!important;
   }
 }
-.slick-next, .slick-next:hover {
+
+.slick-next {
   background-image: url("../images/rightArrow_small.png");
   background-size: contain;
   right: 20px;
@@ -28,20 +30,17 @@
 
   &:hover {
     background-image: url("../images/rightArrow_small.png");
-    background-size: contain;
+    background-size: 20px 20px;
   }
   &.slick-disabled {
     opacity: 0.5;
-    &:hover, &:focus {
-      background-image: url("../images/rightArrow_small.png");
-      background-size: contain;
-    }
   }
   
-  .announcement-bar & {
-    
+  @media (max-width: 900px) {
+    display: none!important;
   }
 }
+
 .slick-next:before, .slick-prev:before {
   content: none;
 }
