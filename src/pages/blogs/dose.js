@@ -1,4 +1,5 @@
 import React, { useState } from 'react'; /* eslint-disable */
+import { graphql } from 'gatsby'
 import SEO from "../../components/common/seo";
 import BlogBox from "../../components/articles/blogBox";
 import IconArrowLeft from '../../images/icon-arrow-left.svg';
@@ -79,6 +80,13 @@ export const query = graphql`
           image {
             id
             src
+            localFile {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid_withWebp_noBase64
+                }
+              }
+            }
           }
         }
       }
