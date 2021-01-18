@@ -31,9 +31,6 @@ const ProductPage = ({ data, pageContext }) => {
     function setPDPHeaderPadding() {
         const headerElement = document.querySelector(".stickyHeader");
         const headerHeight = headerElement.offsetHeight;
-      
-        console.log("headerElement = ", headerElement);
-        console.log("headerHeight = ", headerHeight);
 
         let mainProductSection = document.querySelector(".product-template__container");
         mainProductSection.style.marginTop = `${headerHeight}px`;
@@ -89,13 +86,6 @@ export const query = graphql`
 			images {
 				originalSrc
 				id
-				localFile {
-					childImageSharp {
-						fluid(maxWidth: 910) {
-							...GatsbyImageSharpFluid_withWebp_noBase64
-						}
-					}
-				}
             }
         }
         shopifyCollection(handle: {eq: "best-sellers"}) {

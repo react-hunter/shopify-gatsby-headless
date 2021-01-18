@@ -4,9 +4,20 @@ import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
 import RecentArticles from "../components/articles/recentArticles"
 import ShareIcons from "../components/common/shareIcons"
+import "../styles/blogs.scss";
+
 
 const articlePage = ({ data }) => {
     
+  let date = changeDateFormat();
+  function changeDateFormat(){
+    let mydate = new Date(data.shopifyArticle.publishedAt);
+    var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][mydate.getMonth()];
+    var str = month + ' ' + mydate.getDay() + ',' + mydate.getFullYear();
+    return str;
+  }
+
   return (
     <>
       <Preloader />
@@ -26,7 +37,7 @@ const articlePage = ({ data }) => {
             <div id="page" className="desktop-12 tablet-6 mobile-3">
               <div id="blog-article" className="desktop-12 tablet-12 mobile-12">
                 <div id="article-body">
-                  <span className="posted">{data.shopifyArticle.publishedAt}</span>
+                  <span className="posted">{date}</span>
 
                   <ShareIcons 
                     articleUrl={data.shopifyArticle.url}

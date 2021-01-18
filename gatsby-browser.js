@@ -36,7 +36,7 @@ const addScriptHead = url => {
 
 export const onClientEntry = () => {
   window.onload = () => {
-    addScriptHead("https://cdn-stamped-io.azureedge.net/files/widget.js")
+    addScriptHead("https://cdn-stamped-io.azureedge.net/files/widget.min.js")
     // addScript("https://fast.wistia.com/assets/external/E-v1.js")
   }
 }

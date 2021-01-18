@@ -23,11 +23,7 @@ const ArticleSection = ({ data }) => {
         </ul>
 
         <div className="blog-view-all text-center">
-          <Link to="/blogs/dose" 
-            className="btn blog-btn view-all" 
-            aria-label="View all blogs">
-            View all
-          </Link>
+          <Link to="/blogs/dose" className="btn blog-btn view-all" aria-label="View all blogs">Read More</Link>
         </div>
       </div>
     </div>

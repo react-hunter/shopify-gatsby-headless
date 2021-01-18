@@ -68,18 +68,20 @@ export const query = graphql`
             images {
               originalSrc
               id
-              localFile {
-                childImageSharp {
-                  fluid(maxWidth: 910) {
-                    ...GatsbyImageSharpFluid_withWebp_noBase64
-                  }
-                }
-              }
             }
             variants {
               id
               title
+              availableForSale
               price
+              shopifyId
+              image {
+                originalSrc
+              }
+              selectedOptions {
+                name
+                value
+              }
             }
         }
       }

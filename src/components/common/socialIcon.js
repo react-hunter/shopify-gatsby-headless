@@ -7,14 +7,18 @@ import TwitterIcon from '../../images/icon-twitter.svg';
 import YoutubeIcon from '../../images/icon-youtube.svg';
 
 const SocialIcon = ({ icon }) => {
-  return (
-    <>
-      { icon === 'facebook' ? <ReactSVG src={FacebookIcon} /> : '' }
-      { icon === 'instagram' ? <ReactSVG src={InstagramIcon} /> : '' }
-      { icon === 'twitter' ? <ReactSVG src={TwitterIcon} /> : '' }
-      { icon === 'youtube' ? <ReactSVG src={YoutubeIcon} /> : '' }
-    </>
-  );
+  switch (icon) {
+    case 'facebook':
+      return <ReactSVG src={FacebookIcon} />
+    case 'instagram':
+      return <ReactSVG src={InstagramIcon} />
+    case 'twitter':
+      return <ReactSVG src={TwitterIcon} />
+    case 'youtube':
+      return <ReactSVG src={YoutubeIcon} />
+    default:
+      break;
+  }
 }
 
 SocialIcon.propTypes = {

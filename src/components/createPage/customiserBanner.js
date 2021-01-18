@@ -11,8 +11,6 @@ const CustomiserBanner = () => {
     }
 
     useEffect(() => {
-        console.log("useEffect");
-
         setTimeout(function(){
             smoothLoadBanner();
         }, 500)

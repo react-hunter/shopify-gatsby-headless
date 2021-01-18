@@ -1,0 +1,28 @@
+#article-page {
+    .share-icons{
+        svg, img {
+            margin: 0 auto;
+            width: 18px;
+            height: 18px;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+        a, span {
+            float: left;
+            margin-left: 5px;
+        }
+    }
+}
+
+#shopify-section-blog-template{
+    margin-top: 130px;
+    margin-bottom: 30px;
+}
+
+.comment-count .fa-comment:before {
+    content: "\F075"!important;
+}
+
+.pagination .icon {
+    width: 45px;
+  }
