@@ -77,6 +77,13 @@ export const query = graphql`
                 shopifyId
                 image {
                     originalSrc
+                    localFile {
+                        childImageSharp {
+                            fluid {
+                                ...GatsbyImageSharpFluid_withWebp_noBase64
+                            }
+                        }
+                    }
                 }
 				selectedOptions {
 					name

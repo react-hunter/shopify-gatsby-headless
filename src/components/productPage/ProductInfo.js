@@ -8,7 +8,6 @@ const ProductInfo = ({ product, review }) => {
     var featuresArray = null;
 
     const getCorrectProductFeatures = (str) => {
-        console.log("log = ", str)
         var array = str.split(/\r?\n/);
         featuresArray = array;
     }
