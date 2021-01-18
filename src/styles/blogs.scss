@@ -7,5 +7,9 @@
             -o-object-fit: cover;
             object-fit: cover;
         }
+        a, span {
+            float: left;
+            margin-left: 5px;
+        }
     }
 }

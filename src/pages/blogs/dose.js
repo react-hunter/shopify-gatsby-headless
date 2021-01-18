@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; /* eslint-disable */
+import React, { useState } from 'react'; /* eslint-disable */
 import SEO from "../../components/common/seo";
 import BlogBox from "../../components/articles/blogBox";
 
