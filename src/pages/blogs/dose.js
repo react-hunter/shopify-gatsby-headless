@@ -7,7 +7,7 @@ import { ReactSVG } from 'react-svg';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const Dose = ({ data }) => {
-    const articlePerPage = 2
+    const articlePerPage = 50
     const articles = data.allShopifyArticle.edges;
     const pageCount = parseInt(data.allShopifyArticle.edges.length / articlePerPage + 1);
     const [ currentPage, setCurrentPage ] = useState(1);

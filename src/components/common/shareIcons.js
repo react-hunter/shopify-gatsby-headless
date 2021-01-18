@@ -18,12 +18,10 @@ const ShareIcons = (props) => {
             <span>Share:</span>
   
             <a title="Print" className="print" href="/fakeUrl" onClick={printWindow}>
-                <i className="fas fa-print" aria-hidden="true"></i>
                 <FontAwesomeIcon icon={faPrint} className="fas fa-print" size="1x" />
             </a>
   
             <a title="Email" className="share-email" href="mailto:support@sweetdrop.com" aria-describedby="a11y-external-message">
-                <i className="far fa-envelope" aria-hidden="true"></i>
                 <FontAwesomeIcon icon={faEnvelope} className="far fa-envelope" size="1x" />
             </a>
   
