@@ -27,7 +27,7 @@ const ProductGallery = ({ product }) => {
                             return (
                                 image ? (
                                     <div className="product-single__media-wrapper" key={imageIndex}>
-                                        <Img fluid={image.localFile.childImageSharp.fluid} alt="" loading="eager" />
+                                        <img src={image.originalSrc} alt="" loading="eager" />
                                     </div>
                                 ) : null
                             )

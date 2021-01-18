@@ -86,13 +86,6 @@ export const query = graphql`
 			images {
 				originalSrc
                 id
-                localFile {
-                    childImageSharp {
-                        fluid {
-                        ...GatsbyImageSharpFluid_withWebp_noBase64
-                        }
-                    }
-                }
             }
         }
         shopifyCollection(handle: {eq: "best-sellers"}) {
