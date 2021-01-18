@@ -51,6 +51,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
+    "react-lazy-load-image-component": "^1.5.1",
     "react-notifications-component": "^2.3.0",
     "react-slick": "^0.27.13",
     "react-svg": "^11.2.1",
