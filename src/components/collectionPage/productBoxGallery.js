@@ -22,7 +22,7 @@ const ProductBoxGallery = props => {
                 let imageUrl = '';
                 variant.selectedOptions.map(selectedOption => {
                     if(selectedOption.name === 'Rose Color' && selectedOption.value === swatchColor) {
-                        imageUrl = variant.image.originalSrc;
+                        imageUrl = variant.image ? variant.image.originalSrc : 'https://cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_500x.png';
                     }
                     return true
                 })
