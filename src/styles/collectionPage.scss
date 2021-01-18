@@ -673,3 +673,17 @@ border-radius: 50%;
     }
 }
   
+
+.carousel-scrollbar {
+    background-color: lightgrey;
+    height: 1px;
+    width: 85%;
+    margin: 0 7.5%;
+}
+  
+.carousel-scrollbar_bar {
+    height: 100%;
+    background-color: black;
+    width: 33.3333%;
+    transition: transform .3s cubic-bezier(.39,.575,.565,1)
+} 

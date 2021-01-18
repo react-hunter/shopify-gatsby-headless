@@ -7,17 +7,25 @@ import "slick-carousel/slick/slick-theme.css";
 import '../../styles/productGallery.css';
 
 const ProductBoxGallery = props => {
+    let productGalleryCount = 0;
     const product = props.product;
     const mainOption = props.mainOption;
     const swatchColor = props.swatchColor
+
+    const [ slideIndex, setSlideIndex] = useState(0);
+
     const productBoxSliderSettings = {
         dots: false,
         infinite: false,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        beforeChange: (current, next) => setSlideIndex(next)
     }
     const [ swatchImages, setSwatchImages ] = useState([]);
+
+    productGalleryCount = mainOption === '' ? Math.min(product.images.length,3) : Math.min(swatchImages.length,3);
+
     useEffect(() => {
         if (mainOption !== '') {
             const selectedImages = product.variants.map(variant => {
@@ -60,6 +68,26 @@ const ProductBoxGallery = props => {
             return true
         })
         return imageUrl;
+    }
+
+    const getStyle = () => {
+        console.log('slideIndex = ', slideIndex);
+        if (productGalleryCount === 1) {
+            return  { width: '100%' };
+        } else if (productGalleryCount === 2) {
+            if (slideIndex == 1) {
+                return { width: '50%',  transform: 'translateX(100%)' };
+            } else {
+                return  { width: '50%' };
+            }
+        } else {
+            if (slideIndex == 2) {
+                return { transform: 'translateX(200%)' };
+            } else if (slideIndex == 1) {
+                return {transform: 'translateX(100%)' };
+            } else {
+            }
+        }
     }
 
     return (
@@ -117,7 +145,7 @@ const ProductBoxGallery = props => {
             </div>
                     
             <div className="carousel-scrollbar">
-                <div className="carousel-scrollbar_bar"></div>
+                <div className="carousel-scrollbar_bar" style={getStyle()}></div>
             </div>
         </div>
     );

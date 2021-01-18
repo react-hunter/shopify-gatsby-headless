@@ -1,6 +1,6 @@
 import React from 'react';
 import Slider from "react-slick";
-import Img from 'gatsby-image'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../styles/productGallery.css';
@@ -21,13 +21,25 @@ const ProductGallery = ({ product }) => {
                     {
                     product.images.length === 0? 
                         (<div className="product-single__media-wrapper placefolder">
-                            <img src="https://cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_700x.png" alt="" />
+                            <LazyLoadImage 
+                                className="lazy-load-mc"
+                                src="https://cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_700x.png"
+                                alt={product.title}
+                                effect="blur"
+                                loading="eager" 
+                            />
                         </div>) :
                         product.images.map((image, imageIndex) => {
                             return (
                                 image ? (
                                     <div className="product-single__media-wrapper" key={imageIndex}>
-                                        <img src={image.originalSrc} alt="" loading="eager" />
+                                        <LazyLoadImage 
+                                            className="lazy-load-mc"
+                                            src={image.originalSrc} 
+                                            alt={product.title}
+                                            effect="blur"
+                                            loading="eager" 
+                                        />
                                     </div>
                                 ) : null
                             )
