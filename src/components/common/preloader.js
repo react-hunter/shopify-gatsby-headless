@@ -15,8 +15,8 @@ const Preloader = (props) => {
     <>
       { loadMore ? 
           (
-            <div class="preloader">
-              <div class="load-more_loader">
+            <div className="preloader">
+              <div className="load-more_loader">
               </div>
             </div>
           ) :

@@ -12,7 +12,7 @@ import '../styles/widget.min.css';
 const ProductPage = ({ data, pageContext }) => {
     const product = data.shopifyProduct;
     const {id, productReviews} = pageContext;
-    const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 2) : [];
+    const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 8) : [];
     
     const productReview = productReviews.filter(pr => pr.handle === id)
     
@@ -77,13 +77,6 @@ export const query = graphql`
                 shopifyId
                 image {
                     originalSrc
-                    localFile {
-                        childImageSharp {
-                            fluid {
-                                ...GatsbyImageSharpFluid_withWebp_noBase64
-                            }
-                        }
-                    }
                 }
 				selectedOptions {
 					name
@@ -92,7 +85,14 @@ export const query = graphql`
 			}
 			images {
 				originalSrc
-				id
+                id
+                localFile {
+                    childImageSharp {
+                        fluid {
+                            ...GatsbyImageSharpFluid_withWebp_noBase64
+                        }
+                    }
+                }
             }
         }
         shopifyCollection(handle: {eq: "best-sellers"}) {
@@ -102,6 +102,13 @@ export const query = graphql`
                 title
                 images {
                     originalSrc
+                    localFile {
+                        childImageSharp {
+                            fluid {
+                                ...GatsbyImageSharpFluid_withWebp_noBase64
+                            }
+                        }
+                    }
                 }
                 variants {
                     id

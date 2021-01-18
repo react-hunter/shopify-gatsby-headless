@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby'
+import Img from 'gatsby-image'
 import '../../../styles/widget.min.css'
 
 const ProductBox = props => {
@@ -10,16 +11,16 @@ const ProductBox = props => {
         <div className="Best-Sellers-Carousel-Cell double_img">
             <div className="img-bg">
                 { product.images[0] ? 
-                    (<img 
+                    (<Img 
                         className={`lazy-load-mc ${ product.images[1] ? 'main_img' : ''}`}
-                        src={product.images[0].originalSrc}
+                        fluid={product.images[0].localFile.childImageSharp.fluid}
                         alt={product.title}
                     />) : ""
                 }
                 { product.images[1] ? 
-                    (<img 
+                    (<Img 
                         className="best-carousel-product-img hover_img"
-                        src={product.images[1].originalSrc}
+                        fluid={product.images[1].localFile.childImageSharp.fluid}
                         alt={product.title}
                         style={{ cursor: 'pointer' }}
                     />) : ""
