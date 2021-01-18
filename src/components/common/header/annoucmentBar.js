@@ -55,8 +55,6 @@ const AnnoucmentBar = ({ path }) => {
   function progressAnnouncement() {
     document.getElementById("wrapper-announcement").addEventListener("click", function () {
       
-      console.log('document.getElementById("wrapper-announcement").dataset.state ================= ', document.getElementById("wrapper-announcement").dataset.state);
-
       if (document.getElementById("wrapper-announcement").dataset.state === "Playing") {
         document.getElementById("wrapper-announcement").setAttribute("data-state", "Stopped")
         clearInterval(window.anninterval)

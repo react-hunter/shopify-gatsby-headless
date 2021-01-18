@@ -15,7 +15,6 @@ const articlePage = ({ data }) => {
     var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][mydate.getMonth()];
     var str = month + ' ' + mydate.getDay() + ',' + mydate.getFullYear();
-    console.log("str === ", str);
     return str;
   }
 

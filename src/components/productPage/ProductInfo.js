@@ -11,9 +11,6 @@ const ProductInfo = ({ product, review }) => {
         console.log("log = ", str)
         var array = str.split(/\r?\n/);
         featuresArray = array;
-        for (var i=0;i<array.length;i++) {
-            console.log("featureArray = ", featuresArray[i]);
-        }
     }
 
     return (

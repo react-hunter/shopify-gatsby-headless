@@ -31,9 +31,6 @@ const ProductPage = ({ data, pageContext }) => {
     function setPDPHeaderPadding() {
         const headerElement = document.querySelector(".stickyHeader");
         const headerHeight = headerElement.offsetHeight;
-      
-        console.log("headerElement = ", headerElement);
-        console.log("headerHeight = ", headerHeight);
 
         let mainProductSection = document.querySelector(".product-template__container");
         mainProductSection.style.marginTop = `${headerHeight}px`;
