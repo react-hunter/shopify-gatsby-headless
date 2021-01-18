@@ -11,16 +11,16 @@ const ProductBox = props => {
         <div className="Best-Sellers-Carousel-Cell double_img">
             <div className="img-bg">
                 { product.images[0] ? 
-                    (<Img 
+                    (<img 
                         className={`lazy-load-mc ${ product.images[1] ? 'main_img' : ''}`}
-                        fluid={product.images[0].localFile.childImageSharp.fluid}
+                        src={product.images[0].originalSrc}
                         alt={product.title}
                     />) : ""
                 }
                 { product.images[1] ? 
-                    (<Img 
+                    (<img 
                         className="best-carousel-product-img hover_img"
-                        fluid={product.images[1].localFile.childImageSharp.fluid}
+                        src={product.images[1].originalSrc}
                         alt={product.title}
                         style={{ cursor: 'pointer' }}
                     />) : ""

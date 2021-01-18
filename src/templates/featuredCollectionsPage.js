@@ -49,13 +49,6 @@ export const query = graphql`
             title
             images {
               originalSrc
-              localFile {
-                childImageSharp {
-                  fluid {
-                    ...GatsbyImageSharpFluid_withWebp_noBase64
-                  }
-                }
-              }
             }
             variants {
               id
