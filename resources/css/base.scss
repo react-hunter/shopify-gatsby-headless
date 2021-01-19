@@ -5604,6 +5604,12 @@ hr {
   background: black;
 }
 
+@media (max-width: 768px) {
+  .blog-container {
+    padding: 0;
+  }
+}
+
 .blog-header h2,
 .blog-header .h2 {
   color: #FFFFFF;
@@ -5639,6 +5645,13 @@ hr {
   margin-bottom: 11px;
   color: #fff;
   font-family: 'Big Caslon'
+}
+
+@media (max-width: 768px) {
+  .article__title {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
 }
 
 h3.article__title,
