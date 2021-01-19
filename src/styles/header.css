@@ -89,3 +89,13 @@
 .lazy-load-image-background {
     display: block!important;
 }
+
+.no-scroll, .cart-drawer-open {
+    overflow: hidden;
+}
+
+@media (min-width: 769px) {
+    /* .no-scroll, .cart-drawer-open {
+        padding-right: 20px;
+    } */
+}

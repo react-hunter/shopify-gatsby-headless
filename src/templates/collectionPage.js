@@ -22,6 +22,8 @@ const collectionPage = ({ data, pageContext }) => {
     } else {
       document.querySelector("#collectionReadMoreBtn").innerHTML = 'Read More';
     }
+    setHoverEffectsForCollection();
+    
   }, [])
 
   function setHoverEffectsForCollection() {
@@ -36,66 +38,6 @@ const collectionPage = ({ data, pageContext }) => {
     }
   }
 
-  let xDownVariant;
-  let yDownVariant;
-
-  function attachCloseMobileVariantSelector() {
-    let mobileTriggers = document.querySelectorAll(".closeVariantSelector");
-
-    for (let i = 0; i < mobileTriggers.length; i++) {
-      let mobileTrigger = mobileTriggers[i];
-      mobileTrigger.addEventListener('touchstart', (evt) => {
-        const firstTouch = getTouches(evt)[0];
-        xDownVariant = firstTouch.clientX;
-        yDownVariant = firstTouch.clientY;
-      }, false);
-
-      mobileTrigger.addEventListener('touchmove', (evt) => {
-        if (!xDownVariant || !yDownVariant) {
-          return;
-        }
-
-        var xUp = evt.touches[0].clientX;
-        var yUp = evt.touches[0].clientY;
-
-        var xDiff = xDownVariant - xUp;
-        var yDiff = yDownVariant - yUp;
-
-        if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
-        } else {
-          if (yDiff > 0) {
-            /* up swipe */
-            // alert("swipe up...")
-          } else {
-            /* down swipe */
-            // alert("swipe down...")
-            swipeDownVariantSelector(mobileTrigger);
-          }
-        }
-        /* reset values */
-        xDownVariant = null;
-        yDownVariant = null;
-      }, false);
-    }
-  }
-  
-  function swipeDownVariantSelector(mobileTriggerElement) {
-    let variantOverlayWrapper = $(mobileTriggerElement).closest('.variantSelector_wrapper')[0];
-    let background = $(mobileTriggerElement).closest('.variantoverlayNew')[0];
-  
-    variantOverlayWrapper.classList.add('animate-top');
-    removeEventListener("click", variantSelectorClick);
-    
-    setTimeout(() => {
-      background.style.display = "none";
-      variantOverlayWrapper.classList.remove('animate-top');
-      document.getElementsByTagName("html")[0].classList.remove("scrollPrevent")
-      document.querySelector('.template-collection').style.overflow = "visible";
-      document.getElementsByTagName("html")[0].classList.remove("no-scroll");
-      document.querySelector(".scrollPreventer").style.overflow = "visible";
-    }, 550)
-  }
-  
   let showAll = false;
 
   const showAllContent =(e) => {

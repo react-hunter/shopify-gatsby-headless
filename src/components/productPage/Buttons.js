@@ -2,13 +2,25 @@ import React from 'react';
 
 const Buttons = ({ context, available, productVariant,  quantity}) => {
     const handleAddToCart = () => {
-        context.addVariantToCart(productVariant.shopifyId, quantity)
+        context.addVariantToCart(productVariant.shopifyId, quantity);
+        openCartDrawer();
+        openCartOverlay();
     }
 
     const handleAddToCart_BuyNow = () => {
         context.addVariantToCartAndBuyNow(productVariant.shopifyId, quantity)
     }
 
+    function openCartDrawer() {
+        document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
+        document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
+    }
+    
+    function openCartOverlay() {
+        document.querySelector(".js-ajax-cart-overlay").classList.add('is-open');
+        document.documentElement.classList.add('is-locked');
+    }
+    
     return (
         <div className="product-form__controls-group product-form__controls-group--submit">
             <div className="product-form__item product-form__item--submit mobile-in-view_trigger product-form__item--payment-button">

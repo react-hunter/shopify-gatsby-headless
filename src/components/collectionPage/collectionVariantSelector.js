@@ -20,6 +20,7 @@ const CollectionVariantSelector = props => {
         })
         document.getElementsByTagName("html")[0].classList.add("no-scroll");
         document.querySelector(".scrollPreventer").style.overflow = "hidden";
+        attachCloseMobileVariantSelector();
     });
     
     const getVariantByOption = (optionName, optionValue) => {
@@ -67,7 +68,7 @@ const CollectionVariantSelector = props => {
     const addToSideCart =() => {
         console.log("addToSideCart: ", variant.shopifyId);
         context.addVariantToCart(variant.shopifyId, 1);
-        props.closeModal()
+//        props.closeModal()
         document.querySelector('.site-header__cart').click()
     }
     const changeUrl = () => {
@@ -79,7 +80,53 @@ const CollectionVariantSelector = props => {
     const handleKeyDown =(e) => {
         e.preventDefault();
     }
-    
+
+    let xDownVariant = null;
+    let yDownVariant = null;
+
+    function attachCloseMobileVariantSelector() {
+        let mobileTriggers = document.querySelectorAll(".closeVariantSelector");
+        let mobileTrigger = null
+        for (let i = 0; i < mobileTriggers.length; i++) {
+            mobileTrigger = mobileTriggers[i];
+            mobileTrigger.addEventListener('touchstart', (evt) => {
+                const firstTouch = getTouches(evt)[0];
+                xDownVariant = firstTouch.clientX;
+                yDownVariant = firstTouch.clientY;
+            }, false);
+
+            mobileTrigger.addEventListener('touchmove', (evt) => {
+                if (!xDownVariant || !yDownVariant) {
+                    return;
+                }
+
+                var xUp = evt.touches[0].clientX;
+                var yUp = evt.touches[0].clientY;
+
+                var xDiff = xDownVariant - xUp;
+                var yDiff = yDownVariant - yUp;
+
+                if (Math.abs(xDiff) > Math.abs(yDiff)) {/*most significant*/
+                } else {
+                    if (yDiff > 0) {
+                        /* up swipe */
+                    } else {
+                        /* down swipe */
+                        // swipeDownVariantSelector(mobileTrigger);
+                        props.closeModal();
+                    }
+                }
+                /* reset values */
+                xDownVariant = null;
+                yDownVariant = null;
+            }, false);
+        }
+    }
+    function getTouches(evt) {
+        return evt.touches ||             // browser API
+        evt.originalEvent.touches; // jQuery
+    }
+  
     return (
         <div className="variantoverlayNew" id="variantOverlay-">
             <div className="variantSelector_wrapper animate-bottom" data-toggle="modal">
