@@ -30,7 +30,7 @@ const Product = ({ line_item }) => {
                         <div className="cart__image-wrapper">
                             {imageItem}
                         </div>
-                        <div>                                    
+                        <div>                                                    
                             <div className="list-view-item__title">
                                 <Link to={ `/products/${line_item.variant.product.handle}` } className="cart__product-title">{ line_item.title }</Link>
                             </div>
