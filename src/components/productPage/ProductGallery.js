@@ -1,33 +1,63 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react'
 import Slider from "react-slick";
-import Img from 'gatsby-image'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../styles/productGallery.css';
 
-const ProductGallery = ({ product }) => {
+const ProductGallery = ({ product, selectedVariant }) => {
+    let selectedImageIndex = 0;
+    let slider = useRef(null);
+
+    product.images.map((image, imageIndex) => {
+        if(image.originalSrc === selectedVariant.image.originalSrc) {
+            selectedImageIndex = imageIndex
+        }
+        return true
+    })
+
+    useEffect(() => {
+        slider.current.slickGoTo(selectedImageIndex);
+    }, [selectedVariant])
+
     const settings = {
         dots: false,
         infinite: false,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        afterChange: (current, next) => {
+            selectedImageIndex = parseInt(current)
+        }
     }
+
     return (
         <>
         <div className="product_image-container 1">
             <div className="pdp-carousel-main grid__item product-single__media-group medium-up--one-half glider draggable">
-                <Slider {...settings}>
+                <Slider ref={slider} {...settings}>
                     {
                     product.images.length === 0? 
                         (<div className="product-single__media-wrapper placefolder">
-                            <img src="https://cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_700x.png" alt="" />
+                            <LazyLoadImage 
+                                className="lazy-load-mc"
+                                src="https://cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_700x.png"
+                                alt={product.title}
+                                effect="blur"
+                                loading="eager" 
+                            />
                         </div>) :
                         product.images.map((image, imageIndex) => {
                             return (
                                 image ? (
                                     <div className="product-single__media-wrapper" key={imageIndex}>
-                                        <img src={image.originalSrc} alt="" loading="eager" />
+                                        <LazyLoadImage 
+                                            className="lazy-load-mc"
+                                            src={image.originalSrc} 
+                                            alt={product.title}
+                                            effect="blur"
+                                            loading="eager" 
+                                        />
                                     </div>
                                 ) : null
                             )

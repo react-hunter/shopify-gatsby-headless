@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'gatsby'
+import Img from 'gatsby-image'
 import { homepageData } from '../../data/homepage';
 import "../../styles/imageSections.css";
 
-const ImageSections = () => {
+const ImageSections = (props) => {
     return (
         <div>
         { homepageData.imageSections.map((menuItem, menuIndex) => 
@@ -13,8 +14,8 @@ const ImageSections = () => {
 
                         { menuItem.imageLeft &&
                             <div className="fifty_fifty-image_container">
-                                <img className="fifty_fifty-img ls-is-cached lazyloaded" 
-                                    src={menuItem.imageUrl} alt="" />
+                                <Img className="fifty_fifty-img ls-is-cached lazyloaded" 
+                                    fluid={props[menuItem.imageHandle]} alt="" />
                             </div>
                         }
                     
@@ -34,8 +35,8 @@ const ImageSections = () => {
 
                         { menuItem.imageLeft === false &&
                             <div className="fifty_fifty-image_container">
-                                <img className="fifty_fifty-img ls-is-cached lazyloaded" 
-                                    src={menuItem.imageUrl} alt="" />
+                                <Img className="fifty_fifty-img ls-is-cached lazyloaded" 
+                                    fluid={props[menuItem.imageHandle]} alt="" />
                             </div>
                         }
                     </div>

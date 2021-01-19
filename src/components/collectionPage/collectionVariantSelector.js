@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { navigate, Link } from 'gatsby'
 import StoreContext from '../../context/store'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const CollectionVariantSelector = props => {
     const context = useContext(StoreContext);
@@ -97,8 +98,9 @@ const CollectionVariantSelector = props => {
                 <div className="variantSelector-section"> 
                     <div className="preview-main-option_wrapper">
                         <div className="preview_wrapper">
-                            <img className="variantSelector-preview_img" alt=""
-                                src={variant.image ? variant.image.originalSrc : ''} />
+                            <LazyLoadImage className="variantSelector-preview_img" alt=""
+                                src={variant.image ? variant.image.originalSrc : ''}
+                                effect="blur" loading="eager"  />
                         </div>
                         <div className="main-option_wrapper variantSelector-option_wrapper">
                             <span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span>

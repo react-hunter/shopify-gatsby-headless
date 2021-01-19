@@ -7,7 +7,7 @@ import { productPageData } from '../../data/product';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 
-const ProductDescription = ({ product, review }) => {
+const ProductDescription = ({ product, review, selectVariant }) => {
 
     const context = useContext(StoreContext);
     const [quantity, setQuantity] = useState(1);
@@ -110,7 +110,8 @@ const ProductDescription = ({ product, review }) => {
                             modalClass={modalClass}
                             variantList={product.variants}
                             variant={variant}
-                            productVariant={productVariant}
+                            // productVariant={productVariant}
+                            selectVariant={selectVariant}
                         />
                     </div>
                    

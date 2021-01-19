@@ -1,5 +1,6 @@
 import React from 'react';
 import { createPageData } from '../../data/createPage' 
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const createSteps = () => {
     return (
@@ -18,7 +19,7 @@ const createSteps = () => {
                     <div className="create_steps-content_inner">
                         { createPageData.createSteps.steps.map((item, index) => 
                         <div className="create_stepsblock" key={index}>
-                            <img src={item.image} alt="" />
+                            <LazyLoadImage effect="blur" loading="eager" src={item.image} alt="" />
                             <span className="step-text">{item.title}</span>
                         </div>
                         )}

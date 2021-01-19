@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby'
-import Img from 'gatsby-image'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 import '../../../styles/widget.min.css'
 
 const ProductBox = props => {
@@ -10,20 +10,33 @@ const ProductBox = props => {
     return (
         <div className="Best-Sellers-Carousel-Cell double_img">
             <div className="img-bg">
-                { product.images[0] ? 
-                    (<img 
-                        className={`lazy-load-mc ${ product.images[1] ? 'main_img' : ''}`}
-                        src={product.images[0].originalSrc}
+                { product.images.length === 0 ? 
+                    <LazyLoadImage 
+                        className="lazy-load-mc"
+                        src="https://cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_700x.png"
                         alt={product.title}
-                    />) : ""
-                }
-                { product.images[1] ? 
-                    (<img 
-                        className="best-carousel-product-img hover_img"
-                        src={product.images[1].originalSrc}
-                        alt={product.title}
-                        style={{ cursor: 'pointer' }}
-                    />) : ""
+                        effect="blur"
+                        loading="eager" 
+                    />
+                    : <>
+                         {product.images[0] ? 
+                            <LazyLoadImage 
+                                className={`lazy-load-mc ${ product.images[1] ? 'main_img' : ''}`}
+                                src={product.images[0].originalSrc}
+                                alt={product.title}
+                                effect="blur"
+                                loading="eager" 
+                            /> : null}
+                         {product.images[1] ? 
+                            <LazyLoadImage 
+                                className="best-carousel-product-img hover_img"
+                                src={product.images[1].originalSrc}
+                                alt={product.title}
+                                style={{ cursor: 'pointer' }}
+                                effect="blur"
+                                loading="eager" 
+                            /> : null}
+                    </>
                 }
             </div>
 

@@ -3,7 +3,6 @@ import { Link } from 'gatsby'
 import StoreContext from '../../context/store'
 import CollectionVariantSelector from './collectionVariantSelector'
 import ProductBoxGallery from './productBoxGallery'
-import { collectionPageData } from '../../data/collection'
 
 const CollectionProductBox = props => {
     const context = useContext(StoreContext);
@@ -42,33 +41,6 @@ const CollectionProductBox = props => {
 
     const [varaintModalShow, setVaraintModalShow] = useState(false);
     
-    const isBadgeEnable = () => {
-        let isBadgeEnable = false;
-
-        collectionPageData.badgeStyle.map(item => {
-            for (var i=0;i<product.tags.length;i++) {
-                if (product.tags[i] === item.name) {
-                    isBadgeEnable = true;
-                }
-            }
-            return true
-        })
-        return isBadgeEnable;
-    }
-
-    const getBadgeImage = () => {
-        let imageUrl = '';
-        collectionPageData.badgeStyle.map(item => {
-            for (var i=0;i<product.tags.length;i++) {
-                if (product.tags[i] === item.name) {
-                    imageUrl = item.image;
-                }
-            }
-            return true
-        })
-        return imageUrl;
-    }
-
     const selectProductSwatch = (swatchColor) => {
         setSwatchColor(swatchColor)
     }
@@ -83,17 +55,8 @@ const CollectionProductBox = props => {
             <div className="grid-view-item product-card">
                 <span className="visually-hidden product-card-title">{product.title}</span>
                                
-                <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
-                    <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
-                        
-                        {   
-                            isBadgeEnable() ? <img src={getBadgeImage()} className="badge" alt="" /> : ''
-                        }
-
-                        <ProductBoxGallery product={product} mainOption={mainOption} swatchColor={swatchColor} />
-                    </div>
-                </div>
-
+                <ProductBoxGallery product={product} mainOption={mainOption} swatchColor={swatchColor} />
+                    
                 <div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
                     <Link to={`/products/${product.handle}`}>{product.title}</Link>
                 </div>

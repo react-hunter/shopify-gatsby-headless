@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'gatsby'
 import StoreContext from "../../context/store"
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const Product = ({ line_item }) => {
 
@@ -8,10 +9,12 @@ const Product = ({ line_item }) => {
     // console.log('context checkout: ', context.store.checkout)
 
     const imageItem = line_item.variant.image && (
-        <img
+        <LazyLoadImage
             className="cart__image"
             src={line_item.variant.image.src}
             alt={line_item.variant.image.altText}
+            effect="blur"
+            loading="eager" 
         />
     )
 
@@ -27,7 +30,7 @@ const Product = ({ line_item }) => {
                         <div className="cart__image-wrapper">
                             {imageItem}
                         </div>
-                        <div>                                    
+                        <div>                                                    
                             <div className="list-view-item__title">
                                 <Link to={ `/products/${line_item.variant.product.handle}` } className="cart__product-title">{ line_item.title }</Link>
                             </div>

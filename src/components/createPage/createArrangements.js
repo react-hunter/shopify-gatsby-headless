@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby'
 import { createPageData } from '../../data/createPage' 
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const createArrangements = () => {
     
@@ -39,14 +40,16 @@ const createArrangements = () => {
                         { createPageData.createArrangements.products.map((item, index) => 
                         <div className="create_arrange-block" key={index} data-product-name={item.name}>
                             <Link to={item.url}>
-                                <img className="product-image" 
+                                <LazyLoadImage effect="blur" loading="eager" 
+                                    className="product-image" 
                                     src={item.image} data-imgs={getProductImages(item)} alt="" />
                             </Link>
                             <div className="create_arrange-title">{item.name}</div>
                             <div className="create_arrange-swatch">
                             <div className="create-landing_swatches">
                                 {createPageData.createArrangements.options.map((option_item, option_index) => 
-                                    <img src={option_item.buttonImage}
+                                    <LazyLoadImage effect="blur" loading="eager" 
+                                        src={option_item.buttonImage}
                                         onClick={() => triggerImg(item.name, option_index)}
                                         key={option_index} onKeyDown={handleKeyDown} role="presentation" alt="" />
                                 )}

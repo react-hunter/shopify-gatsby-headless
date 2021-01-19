@@ -4,6 +4,7 @@ import GiftMessage from './giftMessage'
 import AjaxCartEmpty from './ajaxCartEmpty';
 import StoreContext from '../../context/store'
 import { Link } from 'gatsby'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 const AjaxCartCustom = ({giftVariant, rushVariant}) => {
     // const defaults = {
@@ -202,7 +203,7 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                                 </div>
                     
                                 <div style={{ margin: '0 0 10px 0', minHeight: '20px',textAlign: 'center'}}>
-                                    <span className="quadpay-cart">or 4 interest-free payments of <span id="quad-amount">${parseFloat(context.store.checkout.subtotalPrice / 4).toFixed(2)}</span> by <img className="quadpay-img" src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/229/assets/quadpay_200x.png?v=14478482058500416670" alt="" /></span>
+                                    <span className="quadpay-cart">or 4 interest-free payments of <span id="quad-amount">${parseFloat(context.store.checkout.subtotalPrice / 4).toFixed(2)}</span> by <LazyLoadImage className="quadpay-img" src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/229/assets/quadpay_200x.png?v=14478482058500416670" alt="" /></span>
 
                                 </div>
                             </div>
@@ -229,7 +230,7 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                                     <div className="ajax-cart-item-content">
                                         <div className="ajax-cart-item-image-container">
                                             <Link to={`/products/${item.variant.product.handle}`}>
-                                                <img className="ajax-cart-item__image" alt={item.variant.title} 
+                                                <LazyLoadImage  className="ajax-cart-item__image" alt={item.variant.title} 
                                                     src={getLineItemImage(item)} />
                                             </Link>
                                         </div>

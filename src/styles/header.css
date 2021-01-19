@@ -85,3 +85,7 @@
 #annoucmentBar_next_button {
     right: 20px;
 }
+
+.lazy-load-image-background {
+    display: block!important;
+}
