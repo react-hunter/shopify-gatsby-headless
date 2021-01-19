@@ -30,13 +30,19 @@ const VariantSelectorForModal = ({productVariant, variantList, variant, changeOp
         return properVariant
     }
 
+    const checkVariant = (optionName, optionValue) => {
+        const theVariant = findVariant(optionName, optionValue)
+        console.log(productVariant)
+        return theVariant
+    }
+
     const findImage = (optionName, optionValue) => {
-        const variant = findVariant(optionName, optionValue)
-        return (variant && variant.image) ? variant.image.originalSrc : '//cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_300x.png'
+        const theVariant = findVariant(optionName, optionValue)
+        return (theVariant && theVariant.image) ? theVariant.image.originalSrc : '//cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_300x.png'
     }
     const findPrice = (optionName, optionValue) => {
-        const variant = findVariant(optionName, optionValue)
-        return variant ? variant.price : 0
+        const theVariant = findVariant(optionName, optionValue)
+        return theVariant ? theVariant.price : 0
     }
 
     return (
@@ -45,12 +51,13 @@ const VariantSelectorForModal = ({productVariant, variantList, variant, changeOp
                     <h3 className="varTitle">{options.name}</h3>
                     {
                         options.values.map((value, optionIndex) => (
-                            <div className="gridC" onClick={() => clickSelect(options.name, value)} key={optionIndex}>
-                                <LazyLoadImage effect="blur" loading="eager" src={findImage(options.name, value)} alt="" />
-                                <h3>{ value }</h3>
-                                <span className="sidePrice">${findPrice(options.name, value)}</span>
-                                <a href="/fakeUrl" className="closebtn" onClick={closeNav}>×</a>
-                            </div> 
+                            checkVariant(options.name, value) ? 
+                                (<div className="gridC" onClick={() => clickSelect(options.name, value)} key={optionIndex}>
+                                    <LazyLoadImage effect="blur" loading="eager" src={findImage(options.name, value)} alt="" />
+                                    <h3>{ value }</h3>
+                                    <span className="sidePrice">${findPrice(options.name, value)}</span>
+                                    <a href="/fakeUrl" className="closebtn" onClick={closeNav}>×</a>
+                                </div> ) : null
                         ))
                     }
                 </div>
