@@ -82,6 +82,31 @@
     }
 }
 
+
+@keyframes animatebottom {
+    from {
+      bottom: -300px;
+      opacity: 0
+    }
+  
+    to {
+      bottom: 0;
+      opacity: 1
+    }
+  }
+  
+  @keyframes animatetop {
+    from {
+      bottom: 0;
+      opacity: 1;
+    }
+  
+    to {
+      bottom: -800px;
+      opacity: 1;
+    }
+  }
+
 .selected-swatch {
     /* border: 2px solid black !important;
     border-radius: 50%; */
