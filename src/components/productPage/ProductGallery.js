@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react'
 import Slider from "react-slick";
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import "slick-carousel/slick/slick.css";
@@ -7,25 +7,35 @@ import '../../styles/productGallery.css';
 
 const ProductGallery = ({ product, selectedVariant }) => {
     let selectedImageIndex = 0;
-    const settings = {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    }
+    let slider = useRef(null);
+
     product.images.map((image, imageIndex) => {
         if(image.originalSrc === selectedVariant.image.originalSrc) {
             selectedImageIndex = imageIndex
         }
         return true
     })
-    console.log('selected image index: ', selectedImageIndex)
+
+    useEffect(() => {
+        slider.current.slickGoTo(selectedImageIndex);
+    }, [selectedVariant])
+
+    const settings = {
+        dots: false,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        afterChange: (current, next) => {
+            selectedImageIndex = parseInt(current)
+        }
+    }
+
     return (
         <>
         <div className="product_image-container 1">
             <div className="pdp-carousel-main grid__item product-single__media-group medium-up--one-half glider draggable">
-                <Slider {...settings}>
+                <Slider ref={slider} {...settings}>
                     {
                     product.images.length === 0? 
                         (<div className="product-single__media-wrapper placefolder">

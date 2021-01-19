@@ -33,7 +33,6 @@ const CustomiserBanner = () => {
     })
    
     function smoothLoadBanner() {
-        console.log('smoothLoadBanner')
         let imageColumns = document.querySelectorAll('.customiser_banner-image_column');
 
         for (let i = 0; i < imageColumns.length; i++) {

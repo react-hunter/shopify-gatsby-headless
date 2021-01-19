@@ -55,7 +55,6 @@ const Header = ({ path }) => {
 
   const showSideNav = (e) => {
     e.preventDefault();
-    console.log('show sidenav');
 
     let modal = document.getElementById('sidenav');
     let openIcon = document.getElementById('mobile-nav--open');
@@ -83,8 +82,6 @@ const Header = ({ path }) => {
     modal.style.display = "none";
     document.getElementsByTagName("html")[0].classList.remove("side-menu-scroll")
     openIcon.setAttribute("style", "display: flex !important;")
-
-    console.log('hide sidenav');
   }
 
   const showSearchBar = (e) => {
@@ -134,7 +131,6 @@ const Header = ({ path }) => {
     }
     
     showBackArrowButton();
-    console.log('this', id);
   }
 
   const menuClickHandler = (e, hasChild, title) => {
@@ -186,8 +182,6 @@ const Header = ({ path }) => {
     for (var j=0; j<needShowItems.length; j++) {
       needShowItems[j].style.display = 'flex';
     }
-
-    console.log('function showDefaultMenuItems');
   }
 
   function showBanners() {
