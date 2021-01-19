@@ -40,6 +40,15 @@ const Footer = () => {
                         </a>
                     </div> 
                 </div>
+                <div className="newsletter-nav">
+                    <ul className="footer-links">
+                        { commonData.footerMenu.map((menuItem, menuIndex) => 
+                            <li className="newsletter_nav_link" key={menuIndex}>
+                                <Link to={menuItem.handle}>{ menuItem.title }</Link>
+                            </li>
+                        )}
+                    </ul>
+                </div>
                 <div className="newsletter-nav-mobile" key="newsletter-nav-mobile">
                     <ul className="footer-links">
                         { commonData.footerMenu.map((menuItem, menuIndex) => 

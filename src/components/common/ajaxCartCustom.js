@@ -95,7 +95,7 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
     function closeCartDrawer () {
         document.querySelector('.js-ajax-cart-drawer').classList.remove('is-open');
         document.getElementsByTagName("html")[0].classList.remove('cart-drawer-open');
-        document.getElementsByTagName("html")[0].style.overflow = "";
+        document.getElementsByTagName("html")[0].classList.remove("no-scroll");
     };
     
     const addNoteToCart = (messageContent) => {
