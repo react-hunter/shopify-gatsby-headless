@@ -308,9 +308,9 @@ const Header = ({ path }) => {
   };
 
   function openCartDrawer() {
+    console.log("openCartDrawer");
     document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
-    document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
-    document.getElementsByTagName("html")[0].style.overflow = "hidden";
+    document.getElementsByTagName("html")[0].classList.add("no-scroll");
   }
   
   function openCartOverlay() {

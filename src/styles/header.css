@@ -89,3 +89,13 @@
 .lazy-load-image-background {
     display: block!important;
 }
+
+.no-scroll {
+    overflow: hidden;
+}
+
+@media (min-width: 769px) {
+    .no-scroll {
+        padding-right: 20px;
+    }
+}
