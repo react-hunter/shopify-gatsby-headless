@@ -126,6 +126,8 @@ const ProductBoxGallery = props => {
                             }
                         </Slider>
                     : 
+                    <Slider {...productBoxSliderSettings}>
+                    {
                         swatchImages.map((swatchImage, swatchImageIndex) => {
                             return (
                                 <LazyLoadImage 
@@ -138,6 +140,8 @@ const ProductBoxGallery = props => {
                                 />
                             )
                         })
+                    }
+                    </Slider>
                 }
                 </div>
             </div>
