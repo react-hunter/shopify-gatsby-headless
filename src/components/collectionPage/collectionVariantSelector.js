@@ -68,7 +68,7 @@ const CollectionVariantSelector = props => {
     const addToSideCart =() => {
         console.log("addToSideCart: ", variant.shopifyId);
         context.addVariantToCart(variant.shopifyId, 1);
-        props.closeModal()
+//        props.closeModal()
         document.querySelector('.site-header__cart').click()
     }
     const changeUrl = () => {

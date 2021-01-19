@@ -308,9 +308,8 @@ const Header = ({ path }) => {
   };
 
   function openCartDrawer() {
-    console.log("openCartDrawer");
     document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
-    document.getElementsByTagName("html")[0].classList.add("no-scroll");
+    document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
   }
   
   function openCartOverlay() {

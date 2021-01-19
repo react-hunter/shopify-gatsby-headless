@@ -14,7 +14,6 @@ const Buttons = ({ context, available, productVariant,  quantity}) => {
     function openCartDrawer() {
         document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
         document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
-        document.getElementsByTagName("html")[0].classList.add("no-scroll");
     }
     
     function openCartOverlay() {
