@@ -27,8 +27,8 @@ export const homepageData = {
         {
             title: 'PERSUEDE COLLECTION',
             description: 'Be persuasive with our exquisite suede rose box.',
-            imageUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Suede_White_Round_Large_Red_1100x.png',
-            imageHandle: 'homeRoundRed',
+            imageUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/Suede_White_Round_Large_Red_1100x.png?v=1605813083',
+            imageHandle: 'homeRoundRose',
             shopLink: '/collections/persuede',
             imageLeft: false
         },
@@ -52,7 +52,7 @@ export const homepageData = {
             title: 'THE BLOOM BOX',
             description: 'Featuring a hidden drawer to store jewelry, chocolates or accessories, our Bloom Box collection is made with real roses that last up to 5 years.',
             imageUrl: '//cdn.shopify.com/s/files/1/0157/4420/4900/files/30C131AB-9250-4B7F-9F46-570DF5A25642_1100x.png',
-            imageHandle: 'homeRoundRose',
+            imageHandle: 'homeRoundRed',
             shopLink: '/collections/bloom-box',
             imageLeft: true
         }

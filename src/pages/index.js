@@ -15,7 +15,7 @@ const IndexPage = ({ data }) => {
       <ImageSection 
         homeGoldRose={data.homeGoldRose.childImageSharp.fluid}
         homeLeatherLarge={data.homeLeatherLarge.childImageSharp.fluid}
-        homeMarbleLarge={data.homeMarbleLarge.childImageSharp.fluid}
+        homeMarbleLarge={data.homeMarbleLarge.childImageSharp.fluid} 
         homeRoseBear={data.homeRoseBear.childImageSharp.fluid}
         homeRoundRed={data.homeRoundRed.childImageSharp.fluid}
         homeRoundRose={data.homeRoundRose.childImageSharp.fluid}
