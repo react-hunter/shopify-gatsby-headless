@@ -2,13 +2,7 @@ const path = require(`path`)
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`
 })
-const featuredCollectionHandles = [
-  "new", "third-collection",
-  "galaxy", "persuede",
-  "marbleous", "leather",
-  "bloom-box", "tie-dye",
-  "24k-gold-dipped-roses"
-];
+const featuredCollectionHandles = ["rose-bear", "galaxy", "persuede", "marbleous", "leather", "bloom-box", "tie-dye", "24k-gold-dipped-roses"];
 const Shopify = require('shopify-api-node')
 const shopify = new Shopify({
   shopName: process.env.SHOP_NAME,

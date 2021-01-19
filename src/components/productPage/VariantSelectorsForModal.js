@@ -1,9 +1,10 @@
 import React from 'react'; /* eslint-disable */
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-const VariantSelectorForModal = ({productVariant, variantList, variant, changeOption, options, closeModal, modalClass}) => {
+const VariantSelectorForModal = ({/*productVariant, */variantList, variant, changeOption, options, closeModal, modalClass, selectVariant}) => {
     const clickSelect = (optionName, optionValue) => {
         changeOption(optionName, optionValue)
+        selectVariant(findVariant(optionName, optionValue))
         closeModal()
     }
 
@@ -32,7 +33,6 @@ const VariantSelectorForModal = ({productVariant, variantList, variant, changeOp
 
     const checkVariant = (optionName, optionValue) => {
         const theVariant = findVariant(optionName, optionValue)
-        console.log(productVariant)
         return theVariant
     }
 

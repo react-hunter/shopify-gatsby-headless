@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
@@ -11,6 +11,7 @@ import '../styles/widget.min.css';
 
 const ProductPage = ({ data, pageContext }) => {
     const product = data.shopifyProduct;
+    const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
     const {id, productReviews} = pageContext;
     const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 8) : [];
     
@@ -43,8 +44,8 @@ const ProductPage = ({ data, pageContext }) => {
 
             <div key="product-template" id="ProductSection-product-template" className="product-template__container">
                 <div className="grid product-single product-single--medium-media">
-                    <ProductGallery product={product} key="product-gallery" />
-                    <ProductDescription product={product} data={data} review={productReview[0]} key="product-description" />
+                    <ProductGallery product={product} selectedVariant={selectedVariant} key="product-gallery" />
+                    <ProductDescription product={product} data={data} review={productReview[0]} selectVariant={setSelectedVariant} key="product-description" />
                 </div>
             </div>
 

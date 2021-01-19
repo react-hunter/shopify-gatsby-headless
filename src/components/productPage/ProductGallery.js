@@ -5,7 +5,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../styles/productGallery.css';
 
-const ProductGallery = ({ product }) => {
+const ProductGallery = ({ product, selectedVariant }) => {
+    let selectedImageIndex = 0;
     const settings = {
         dots: false,
         infinite: false,
@@ -13,6 +14,13 @@ const ProductGallery = ({ product }) => {
         slidesToShow: 1,
         slidesToScroll: 1
     }
+    product.images.map((image, imageIndex) => {
+        if(image.originalSrc === selectedVariant.image.originalSrc) {
+            selectedImageIndex = imageIndex
+        }
+        return true
+    })
+    console.log('selected image index: ', selectedImageIndex)
     return (
         <>
         <div className="product_image-container 1">
