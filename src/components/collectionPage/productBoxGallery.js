@@ -41,7 +41,7 @@ const ProductBoxGallery = props => {
             const filteredImages = selectedImages.filter(img => img !== '')
             setSwatchImages(filteredImages.slice(0, 3))
         }
-    }, [mainOption, swatchColor])
+    }, [mainOption, swatchColor, product.variants])
 
     const isBadgeEnable = () => {
         let isBadgeEnable = false;
@@ -74,15 +74,15 @@ const ProductBoxGallery = props => {
         if (productGalleryCount === 1) {
             return  { width: '100%' };
         } else if (productGalleryCount === 2) {
-            if (slideIndex == 1) {
+            if (slideIndex === 1) {
                 return { width: '50%',  transform: 'translateX(100%)' };
             } else {
                 return  { width: '50%' };
             }
         } else {
-            if (slideIndex == 2) {
+            if (slideIndex === 2) {
                 return { transform: 'translateX(200%)' };
-            } else if (slideIndex == 1) {
+            } else if (slideIndex === 1) {
                 return {transform: 'translateX(100%)' };
             }
         }

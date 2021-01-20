@@ -18,7 +18,7 @@ const ProductGallery = ({ product, selectedVariant }) => {
 
     useEffect(() => {
         slider.current.slickGoTo(selectedImageIndex);
-    }, [selectedVariant])
+    }, [selectedVariant, selectedImageIndex])
 
     const settings = {
         dots: false,

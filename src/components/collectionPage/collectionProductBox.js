@@ -6,13 +6,14 @@ import ProductBoxGallery from './productBoxGallery'
 
 const CollectionProductBox = props => {
     const context = useContext(StoreContext);
+    const [varaintModalShow, setVaraintModalShow] = useState(false);
     const product = props.product;
     const reviewBadge = props.review ? props.review.badge : '';
     const mainOption = getMainOption()
     const [swatchColor, setSwatchColor] = useState(mainOption === '' ? '' : mainOption.values[0])
     function getMainOption() {
         let tempOption = '';
-        const options = product.options.filter(option => option.name === 'Rose Color')
+        const options = product.options ? product.options.filter(option => option.name === 'Rose Color') : []
         if(options.length > 0) {
             tempOption = options[0]
         }
@@ -27,6 +28,9 @@ const CollectionProductBox = props => {
         }
     }
 
+    const notifyMe = () => {
+        props.showNotifyModal();
+    }
     const closeCollectionModal = () => {
         document.querySelector(".variantSelector_wrapper").classList.remove('animate-bottom');
         document.querySelector(".variantSelector_wrapper").classList.add('animate-top');
@@ -38,9 +42,6 @@ const CollectionProductBox = props => {
             document.querySelector(".scrollPreventer").style.overflow = "visible";
         }, 550)
     }
-
-    const [varaintModalShow, setVaraintModalShow] = useState(false);
-    
     const selectProductSwatch = (swatchColor) => {
         setSwatchColor(swatchColor)
     }
@@ -91,10 +92,13 @@ const CollectionProductBox = props => {
                 } 
                 </div>
 
-                <button className="openVariantModal" 
-                    onClick={addToBag}>ADD TO BAG</button>
+                {
+                    (product.variants.length === 1 && !product.variants[0].availableForSale) ? 
+                        <button className="openVariantModal" onClick={notifyMe}>NOTIFY ME</button> :
+                        <button className="openVariantModal" onClick={addToBag}>ADD TO BAG</button>
+                }
 
-                {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} product={product} /> )}
+                {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} showNotifyModal={props.showNotifyModal} product={product} /> )}
             </div>
         </li>
     );

@@ -218,9 +218,9 @@ const CollectionVariantSelector = props => {
                                     style={{ display: 'inline-block' }}>ADD TO BAG - ${variant.price}</button>
                             ) : 
                             (
-                                <a id="notify" href={`/products/${product.handle}`}
-                                    style={{ position: 'static' }} 
-                                    className="add klav-popup-trigger add-to-cart-custom button">Notify Me</a>
+                                <button className="variant-selector_add_to_bag" 
+                                    onClick={props.showNotifyModal}
+                                    style={{ display: 'inline-block' }}>NOTIFY ME</button>
                             )
                     }
                     <Link to="/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZER NOW</Link>
