@@ -887,12 +887,26 @@ const CustomizePage = ({ data }) => {
         break
       }
     }
+
+    openCartDrawer();
+    openCartOverlay();
+
     context.addVariantToCart(bagVariant.id, 1, [
       {key: 'Rose Color', value: selections[3]},
       {key: 'Box', value: selections[1]},
       {key: 'Style', value: selections[2]},
       {key: 'linkImage', value: 'https://mediacarryapi.com/customizer/assets/' + selections[0] + '~' + selections[2].toLowerCase() + '~' + selections[3].replace('+', ',') + '.png'}
     ])
+  }
+
+  function openCartDrawer() {
+    document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
+    document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
+  }
+
+  function openCartOverlay() {
+      document.querySelector(".js-ajax-cart-overlay").classList.add('is-open');
+      document.documentElement.classList.add('is-locked');
   }
 
   const hideNumbers = (e) => {
