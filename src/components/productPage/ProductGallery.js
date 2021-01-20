@@ -65,11 +65,6 @@ const ProductGallery = ({ product, selectedVariant }) => {
                     }
                 </Slider>
 
-                {product.images.length === 0? '': 
-                    <h2 className="ig-title" style={{float:'none', clear: 'both', marginTop:'20px' }}>
-                        <a href="https://www.instagram.com/doseofroses/"> As Seen on @DOSEOFROSES</a>
-                    </h2>
-                }
                 <script src="//foursixty.com/media/scripts/fs.slider.v2.5.js" data-feed-id="dose-of-roses" data-for-url="true" data-theme="slider_v2_5" data-open-links-in-same-page="true" data-connector-filter="30963" data-cell-size="20%"></script>
             </div>
         </div>

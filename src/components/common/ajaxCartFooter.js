@@ -33,18 +33,14 @@ const ajaxCartFooter = () => {
             <li>
                 <ReactSVG src={piBitcoin_cash} />
             </li> 
-            <li>
-                <ReactSVG src={piDiners_club} />
-            </li> 
+
             <li>
                 <ReactSVG src={piDiscover} />
             </li> 
             <li>
                 <ReactSVG src={piEthereum} />
             </li> 
-            <li>
-                <ReactSVG src={piJcb} />
-            </li> 
+
             <li>
                 <ReactSVG src={piLitecoin} />
             </li> 
