@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collectionPageData } from '../../data/collection'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
+// import { LazyLoadImage } from 'react-lazy-load-image-component'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -92,36 +92,33 @@ const ProductBoxGallery = props => {
         <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
             <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
                 {   
-                    isBadgeEnable() ? <LazyLoadImage effect="blur" loading="eager"  src={getBadgeImage()} className="badge" alt="" /> : ''
+                    isBadgeEnable() ? <img  src={getBadgeImage()} className="badge" alt="" /> : ''
                 }
                 <div className="collection-product_image_container">
                 { 
                     mainOption === '' ?
                         <Slider {...productBoxSliderSettings}>
                             { product.images[0] ? 
-                                (<LazyLoadImage 
+                                (<img 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[0].originalSrc}
                                     alt={product.title}
-                                    effect="blur" loading="eager" 
                                 />) : ""
                             }
                             { product.images[1] ? 
-                                (<LazyLoadImage 
+                                (<img 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[1].originalSrc}
                                     alt={product.title}
-                                    style={{ cursor: 'pointer' }}
-                                    effect="blur" loading="eager" 
+                                    style={{ cursor: 'pointer' }} 
                                 />) : ""
                             }
                             { product.images[2] ? 
-                                (<LazyLoadImage 
+                                (<img 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[2].originalSrc}
                                     alt={product.title}
-                                    style={{ cursor: 'pointer' }}
-                                    effect="blur" loading="eager" 
+                                    style={{ cursor: 'pointer' }} 
                                 />) : ""
                             }
                         </Slider>
@@ -130,12 +127,11 @@ const ProductBoxGallery = props => {
                     {
                         swatchImages.map((swatchImage, swatchImageIndex) => {
                             return (
-                                <LazyLoadImage 
+                                <img 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={swatchImage}
                                     alt=''
-                                    style={{ cursor: 'pointer' }}
-                                    effect="blur" loading="eager" 
+                                    style={{ cursor: 'pointer' }} 
                                     key={swatchImageIndex}
                                 />
                             )
