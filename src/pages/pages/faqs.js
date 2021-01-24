@@ -33,22 +33,21 @@ const Faqs = ({ data }) => {
                 faqContent: contents.items,
                 faqCustomiserBanner: faqCustomiserBanner
             });
+            document.querySelectorAll('.accordion_button').forEach(button => {
+                const accordionButton = button;
+                accordionButton.innerHTML = accordionButton.innerHTML + '<i className="fas fa-angle-down"></i>';
+                button.addEventListener('click', () => {
+                    button.classList.toggle('accordion_button--active');
+                });
+            });
+    
+            document.querySelectorAll('.faq_content-accordion_button').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('faq_content-accordion_button--active');
+                });
+            });
         }
         getFaqData();
-        
-        document.querySelectorAll('.accordion_button').forEach(button => {
-            const accordionButton = button;
-            accordionButton.innerHTML = accordionButton.innerHTML + '<i className="fas fa-angle-down"></i>';
-            button.addEventListener('click', () => {
-                button.classList.toggle('accordion_button--active');
-            });
-        });
-
-        document.querySelectorAll('.faq_content-accordion_button').forEach(button => {
-            button.addEventListener('click', () => {
-                button.classList.toggle('faq_content-accordion_button--active');
-            });
-        });
         
     }, [])
       

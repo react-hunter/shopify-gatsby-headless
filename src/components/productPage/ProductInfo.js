@@ -1,15 +1,16 @@
 import React from 'react';
-import { productPageData } from '../../data/product';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruck, faCheck } from "@fortawesome/free-solid-svg-icons"
 
 const ProductInfo = ({ product, review }) => {
-    
-    var featuresArray = null;
-
+    let featuresArray = null;
     const getCorrectProductFeatures = (str) => {
-        var array = str.split(/\r?\n/);
-        featuresArray = array;
+        if (str === '') {
+            featuresArray = [];
+        } else {
+            const array = str.split(/\r?\n/);
+            featuresArray = array;
+        }
     }
 
     return (
@@ -74,7 +75,7 @@ const ProductInfo = ({ product, review }) => {
 
             {/* <div dangerouslySetInnerHTML={{ __html: review.features }} /> */}
             <p className="product-features">
-                { getCorrectProductFeatures(productPageData.productFeatures)}
+                { getCorrectProductFeatures(review.features)}
                 {featuresArray.map((item,index) =>
                     <span className="item" key={index}>
                         <FontAwesomeIcon icon={faCheck} style={{ color: '#93c47d'}} size="1x" />
