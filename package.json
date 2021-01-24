@@ -15,6 +15,7 @@
     "apollo-boost": "^0.4.7",
     "axios": "^0.19.2",
     "bulma": "^0.9.0",
+    "contentful": "^8.1.7",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "flickity": "^2.2.1",

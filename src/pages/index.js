@@ -54,35 +54,35 @@ export const query = graphql`
     heroDesktop: file(relativePath: { eq: "hero_desktop.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 1000, quality: 100) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_noBase64
         }
       }
     }
     heroMobile: file(relativePath: { eq: "hero_mobile.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 1000, quality: 100) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_noBase64
         }
       }
     }
     homeGoldRose: file(relativePath: { eq: "home_gold_rose.png" }) {
       childImageSharp {
         fluid(maxWidth: 1000, quality: 100) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_noBase64
         }
       }
     }
     homeLeatherLarge: file(relativePath: { eq: "home_leather_large.png" }) {
       childImageSharp {
         fluid(maxWidth: 1000, quality: 100) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_noBase64
         }
       }
     }
     homeMarbleLarge: file(relativePath: { eq: "home_marble_large.png" }) {
       childImageSharp {
         fluid(maxWidth: 1000, quality: 100) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_noBase64
         }
       }
     }
@@ -96,14 +96,14 @@ export const query = graphql`
     homeRoundRed: file(relativePath: { eq: "home_round_red.png" }) {
       childImageSharp {
         fluid(maxWidth: 1000, quality: 100) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_noBase64
         }
       }
     }
     homeRoundRose: file(relativePath: { eq: "home_round_rose.png" }) {
       childImageSharp {
         fluid(maxWidth: 1000, quality: 100) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp_noBase64
         }
       }
     }
