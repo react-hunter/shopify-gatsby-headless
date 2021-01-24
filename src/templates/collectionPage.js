@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
 import CollectionProductBox from "../components/collectionPage/collectionProductBox"
 import NotifyModal from '../components/collectionPage/notifyModal'
+import { client } from '../contentful'
 import '../styles/collectionPage.scss';
 import '../styles/widget.min.css';
 
@@ -10,14 +11,19 @@ const collectionPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
   const [ displayProductCount, setDisplayProductCount ] = useState(16);
   const [notifyModalShow, setNotifyModalShow] = useState(false);
+  const [badgeStyles, setBadgeStyles] = useState([]);
   const loadMoreProducts = (e) => {
     e.preventDefault();
     setDisplayProductCount(displayProductCount + 16);
   }
 
   useEffect(() => {
+    async function getBadgeData() {
+      const badgeStyleData = await client.getEntries({'content_type': 'collectionBadgeStyleItem'});
+      setBadgeStyles(badgeStyleData.items);
+    }
     const collectionDescription = document.querySelector('#collectionDescription');
-      
+    
     if (collectionDescription.offsetHeight < 46) {
       document.querySelector("#collectionReadMoreBtn").style.display = "none";
       document.querySelector("#collectionReadMoreFade_wrapper").style.display = "none";
@@ -25,7 +31,7 @@ const collectionPage = ({ data, pageContext }) => {
       document.querySelector("#collectionReadMoreBtn").innerHTML = 'Read More';
     }
     setHoverEffectsForCollection();
-    
+    getBadgeData();
   }, [])
 
   function setHoverEffectsForCollection() {
@@ -120,7 +126,7 @@ const collectionPage = ({ data, pageContext }) => {
               {
                 displayedProducts.map((productItem, productIndex) => {
                   const productReview = productReviews.filter(pr => pr.handle === productItem.handle)
-                  return <CollectionProductBox product={productItem} key={productIndex} review={productReview[0]} showNotifyModal={showNotifyModal} />
+                  return <CollectionProductBox product={productItem} key={productIndex} review={productReview[0]} showNotifyModal={showNotifyModal} badgeStyles={badgeStyles} />
                 })
               }
           </ul>

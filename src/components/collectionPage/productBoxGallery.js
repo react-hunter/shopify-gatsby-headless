@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { collectionPageData } from '../../data/collection'
 // import { LazyLoadImage } from 'react-lazy-load-image-component'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -10,10 +9,11 @@ const ProductBoxGallery = props => {
     let productGalleryCount = 0;
     const product = props.product;
     const mainOption = props.mainOption;
-    const swatchColor = props.swatchColor
+    const swatchColor = props.swatchColor;
+    const badgeStyles = props.badgeStyles;
 
     const [ slideIndex, setSlideIndex] = useState(0);
-
+    
     const productBoxSliderSettings = {
         dots: false,
         infinite: false,
@@ -46,9 +46,9 @@ const ProductBoxGallery = props => {
     const isBadgeEnable = () => {
         let isBadgeEnable = false;
 
-        collectionPageData.badgeStyle.map(item => {
+        badgeStyles.map(item => {
             for (var i=0;i<product.tags.length;i++) {
-                if (product.tags[i] === item.name) {
+                if (product.tags[i] === item.fields.name) {
                     isBadgeEnable = true;
                 }
             }
@@ -59,10 +59,10 @@ const ProductBoxGallery = props => {
 
     const getBadgeImage = () => {
         let imageUrl = '';
-        collectionPageData.badgeStyle.map(item => {
+        badgeStyles.map(item => {
             for (var i=0;i<product.tags.length;i++) {
-                if (product.tags[i] === item.name) {
-                    imageUrl = item.image;
+                if (product.tags[i] === item.fields.name) {
+                    imageUrl = item.fields.image.fields.file.url;
                 }
             }
             return true

@@ -4,17 +4,24 @@ import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
 import CollectionProductBox from "../components/collectionPage/collectionProductBox"
+import { client } from '../contentful'
 
 const SearchPage = ( { data, pageContext, location } ) => {
   const { searchText } = location.search ? queryString.parse(location.search) : { searchText: ''}
-  const [ filteredProducts, setFilteredProducts ] = useState([])
+  const [ filteredProducts, setFilteredProducts ] = useState([]);
+  const [badgeStyles, setBadgeStyles] = useState([]);
   const { productReviews } = pageContext;
   
   useEffect(() => {
+    async function getBadgeData() {
+      const badgeStyleData = await client.getEntries({'content_type': 'collectionBadgeStyleItem'});
+      setBadgeStyles(badgeStyleData.items);
+    }
     const allProducts = data.allShopifyProduct.edges.map(pr => pr.node)
     const filteredProductList = allProducts.filter(pr => pr.title.toUpperCase().includes(searchText.toUpperCase()) || 
                                                         pr.productType.toUpperCase().includes(searchText.toUpperCase()));
     setFilteredProducts(filteredProductList)
+    getBadgeData();
   }, [data.allShopifyProduct.edges, searchText]);
 
   const findReview = (pHandle) => {
@@ -37,7 +44,7 @@ const SearchPage = ( { data, pageContext, location } ) => {
             !p ?
               <p>Nothings with : {searchText} </p>
               :
-              <CollectionProductBox product={p} review={findReview(p.handle)} key={i} />
+              <CollectionProductBox product={p} review={findReview(p.handle)} badgeStyles={badgeStyles} key={i} />
           ))}
         </ul>
       </div>
