@@ -1,42 +1,40 @@
 import React from 'react';
 import { Link } from 'gatsby'
-import Img from 'gatsby-image'
-import { homepageData } from '../../data/homepage';
 import "../../styles/imageSections.css";
 
 const ImageSections = (props) => {
     return (
         <div>
-        { homepageData.imageSections.map((menuItem, menuIndex) => 
-            <div className="shopify-section" key={menuIndex}>
+        { props.imageSections.map((imageItem, imageIndex) => 
+            <div className="shopify-section" key={imageIndex}>
                 <div className="fifty_fifty-container">
                     <div className="fifty_fifty-wrapper">
 
-                        { menuItem.imageLeft &&
+                        { imageItem.fields.imageLeft &&
                             <div className="fifty_fifty-image_container">
-                                <Img className="fifty_fifty-img ls-is-cached lazyloaded" 
-                                    fluid={props[menuItem.imageHandle]} alt="" />
+                                <img className="fifty_fifty-img ls-is-cached lazyloaded" 
+                                    src={imageItem.fields.imageUrl.fields.file.url} alt="" />
                             </div>
                         }
                     
                         <div className="fifty_fifty-text_container">
                             <div className="fifty_fifty-text_container_inner">
                                 <div className="fifty_fifty-title">
-                                    {menuItem.title}
+                                    {imageItem.fields.title}
                                 </div>
                                 <div className="fifty_fifty-subtitle">
-                                    {menuItem.description}
+                                    {imageItem.fields.description}
                                 </div>
-                                <Link to={menuItem.shopLink} className="fifty_fifty-button">
+                                <Link to={imageItem.fields.shopLink} className="fifty_fifty-button">
                                     SHOP NOW
                                 </Link>
                             </div>
                         </div>
 
-                        { menuItem.imageLeft === false &&
+                        { imageItem.fields.imageLeft === false &&
                             <div className="fifty_fifty-image_container">
-                                <Img className="fifty_fifty-img ls-is-cached lazyloaded" 
-                                    fluid={props[menuItem.imageHandle]} alt="" />
+                                <img className="fifty_fifty-img ls-is-cached lazyloaded" 
+                                    src={imageItem.fields.imageUrl.fields.file.url} alt="" />
                             </div>
                         }
                     </div>
