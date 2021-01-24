@@ -31,89 +31,87 @@ export const customizePageData = {
          number: '9'
       }
    ],
-    arrangementSelectorLetters: {
-      items: [
-         {
-               letter: 'A'
-         },
-         {
-            letter: 'B'
-         },
-         {
-            letter: 'C'
-         },
-         {
-            letter: 'D'
-         },
-         {
-            letter: 'E'
-         },
-         {
-            letter: 'F'
-         },
-         {
-            letter: 'G'
-         },
-         {
-            letter: 'H'
-         },
-         {
-            letter: 'I'
-         },
-         {
-            letter: 'J'
-         },
-         {
-            letter: 'K'
-         },
-         {
-            letter: 'L'
-         },
-         {
-            letter: 'M'
-         },
-         {
-            letter: 'N'
-         },
-         {
-            letter: 'O'
-         },
-         {
-            letter: 'P'
-         },
-         {
-            letter: 'Q'
-         },
-         {
-            letter: 'R'
-         },
-         {
-            letter: 'S'
-         },
-         {
-            letter: 'T'
-         },
-         {
-            letter: 'U'
-         },
-         {
-            letter: 'V'
-         },
-         {
-            letter: 'W'
-         },
-         {
-            letter: 'X'
-         },
-         {
-            letter: 'Y'
-         },
-         {
-            letter: 'Z'
-         }
-      ]
-    },
-    stepOption: [
+   arrangementSelectorLetters: [
+      {
+         letter: 'A'
+      },
+      {
+         letter: 'B'
+      },
+      {
+         letter: 'C'
+      },
+      {
+         letter: 'D'
+      },
+      {
+         letter: 'E'
+      },
+      {
+         letter: 'F'
+      },
+      {
+         letter: 'G'
+      },
+      {
+         letter: 'H'
+      },
+      {
+         letter: 'I'
+      },
+      {
+         letter: 'J'
+      },
+      {
+         letter: 'K'
+      },
+      {
+         letter: 'L'
+      },
+      {
+         letter: 'M'
+      },
+      {
+         letter: 'N'
+      },
+      {
+         letter: 'O'
+      },
+      {
+         letter: 'P'
+      },
+      {
+         letter: 'Q'
+      },
+      {
+         letter: 'R'
+      },
+      {
+         letter: 'S'
+      },
+      {
+         letter: 'T'
+      },
+      {
+         letter: 'U'
+      },
+      {
+         letter: 'V'
+      },
+      {
+         letter: 'W'
+      },
+      {
+         letter: 'X'
+      },
+      {
+         letter: 'Y'
+      },
+      {
+         letter: 'Z'
+      }
+   ],
+   stepOption: [
       {
          option:"CHOOSE BOX",
          type:"Box"
@@ -126,8 +124,8 @@ export const customizePageData = {
          option:"CHOOSE ROSE COLOR",
          type:"Rose Colors"
       }
-    ],
-    roseColor: [
+   ],
+   roseColor: [
       {
          rose:"Red",
          src:"https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_red_on9UbDVgPZ.png"

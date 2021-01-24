@@ -967,11 +967,15 @@ const CustomizePage = ({ data }) => {
   
     }
   
+    console.log("title = ", title);
+
     const selectedItem = document.querySelector(`#${title}.numberChoice`);
 
-    selectedItem.style.background = "#000000"
-    selectedItem.firstElementChild.style.color = "#ffffff"
-  
+    if (selectedItem) {
+      selectedItem.style.background = "#000000"
+      selectedItem.firstElementChild.style.color = "#ffffff"
+    }
+
     updatePrice()
   }
 
@@ -1048,10 +1052,10 @@ const CustomizePage = ({ data }) => {
                       style={{color:'rgb(255,255,255)'}}>Go Back</span>
                 </div>
 
-                {customizePageData.arrangementSelectorLetters.items.map((item, index) => 
+                {customizePageData.arrangementSelectorLetters.map((item, index) => 
                 <div className="arrangement-pattern letterChoice" id={`Letter-${item.letter}`} 
                   key={index} onKeyDown={handleKeyDown} role="presentation"
-                  onClick={e => setLetterStyle(e, item.divId)} 
+                  onClick={e => setLetterStyle(e, `Letter-${item.letter}`)} 
                   
                   style={{background: 'rgb(255, 255, 255)' }}>
                     <span className="arrangement-pattern_title styleOption" 
@@ -1072,7 +1076,7 @@ const CustomizePage = ({ data }) => {
 
                 {customizePageData.arrangementSelectorNumbers.map((item, index) => 
                 <div className="arrangement-pattern numberChoice" id={`Number-${item.number}`} key={index} 
-                  onClick={e => setNumberStyle(e, item.divId)} 
+                  onClick={e => setNumberStyle(e, `Number-${item.number}`)} 
                   style={{background: 'rgb(255, 255, 255)'}} 
                   onKeyDown={handleKeyDown} role="presentation">
                     <span className="arrangement-pattern_title styleOption" 
