@@ -173,7 +173,7 @@ const CustomizePage = ({ data }) => {
           }
         } else if (document.getElementById(testarg)) {
           eventFire(document.getElementById(testarg), 'click')
-          if (currentStep < selectedProduct.maxOptions) {
+          if (currentStep < maxOptions) {
             eventFire(document.getElementById(`step-next`), 'click')
           }
         } else {
@@ -255,7 +255,7 @@ const CustomizePage = ({ data }) => {
     }
 
     setStep(step);
-    var step2 = selectedProduct.options[currentStep - 1];
+    var step2 = customizePageData.stepOption[currentStep - 1];
     var title = '';
 
     if (!step2) {
@@ -535,8 +535,6 @@ const CustomizePage = ({ data }) => {
         style.setAttribute("class", "arrangement-pattern")
         style.setAttribute("id", `${styles[i].style.replace(" ", "-")}`)
         style.setAttribute("data-style", `${styles[i].style}`)
-        style.setAttribute("data-preview", `${styles[i].preview}`)
-        style.setAttribute("data-roseCounts", `${styles[i].roseTypes}`)
 
         style.addEventListener("click", function(e){
           setStyle(this.getAttribute('data-style'));
@@ -589,7 +587,7 @@ const CustomizePage = ({ data }) => {
     var subDiv = document.createElement("div");
     subDiv.setAttribute("class", "rose-contents");
   
-    var roses = selectedProduct["roses"];
+    var roses =  customizePageData.roseColor;// selectedProduct["roses"];
     var styles = selectedProduct["styles"];
   
     for (var k = 0; k < styles.length; k++) {
@@ -598,7 +596,8 @@ const CustomizePage = ({ data }) => {
       }
     }
   
-    var rosesCount = selectedStyle.roseTypes;
+    var rosesCount = selectedStyle.style === 'Solid' ? 1 : 2;
+
     for (var i = 0; i < rosesCount; i++) {
       var header = document.createElement("div")
       header.setAttribute("class", "rosechoice-header")
@@ -609,7 +608,7 @@ const CustomizePage = ({ data }) => {
       roseblock.setAttribute("id", `roseblock-${i}`)
   
       for (var j = 0; j < roses.length; j++) {
-        if (roses[j].soldOut !== true) {
+//      if (roses[j].soldOut !== true) {  // need to implement
           var rose = document.createElement("img");
           rose.setAttribute("class", "round");
           rose.setAttribute("id", roses[j].rose + "-" + i)
@@ -627,7 +626,7 @@ const CustomizePage = ({ data }) => {
           } else {
             roseblock.appendChild(rose)
           }
-        }
+//      }
       }
       subDiv.appendChild(roseblock)
     }
@@ -700,7 +699,12 @@ const CustomizePage = ({ data }) => {
 
     document.getElementById(`rose-mobile-${newLayer}`).innerText = type;
     
-    if (selectedStyle.roseTypes === selectedRoses.length) {
+    let roseType = 1;
+    if (selectedStyle.style !== 'Solid') {
+      roseType = 2;
+    }
+
+    if (roseType === selectedRoses.length) {
   
       var choices = selectedRoses.join(",");
   
@@ -744,6 +748,7 @@ const CustomizePage = ({ data }) => {
     }
   }
 
+  const maxOptions = 3;
   
   function resetRoseSelections() {
     selectedRosesLine = []
@@ -794,7 +799,7 @@ const CustomizePage = ({ data }) => {
 
   const previous = () => {
     if (currentStep - 1 !== -1) {
-      if (currentStep - 1 === selectedProduct.maxOptions) {
+      if (currentStep - 1 === maxOptions) {
         document.getElementById("addToBAG").style.display = "none"
         document.getElementsByClassName("step-next")[0].style.display = "block"
       }
@@ -820,9 +825,9 @@ const CustomizePage = ({ data }) => {
         colRightItems[i].style.display = 'none';
       }
 
-      var options = selectedProduct.options;
+      var options = customizePageData.stepOption;
   
-      if (currentStep + 1 === selectedProduct.maxOptions) {
+      if (currentStep + 1 === maxOptions) {
         nextStep();
         document.getElementById("addToBAG").style.display = "block"
         document.getElementsByClassName("step-next")[0].style.display = "none"
@@ -830,7 +835,7 @@ const CustomizePage = ({ data }) => {
         nextStep();
       }
   
-      if (currentStep - 1 === selectedProduct.maxOptions) {
+      if (currentStep - 1 === maxOptions) {
         // document.getElementById("addToBAG").style.display = "block"
         // document.getElementsByClassName("step-next")[0].style.display = "none"
       } else {
@@ -857,7 +862,7 @@ const CustomizePage = ({ data }) => {
       }
   
       if (selectedStyle) {
-        if (selectedStyle.roseTypes !== 2) {
+        if (selectedStyle.style === 'Solid') {
           document.getElementById("rose-mobile-2").parentElement.style.display = "none";
         } else {
           document.getElementById("rose-mobile-2").parentElement.style.display = "block ";
@@ -1036,7 +1041,6 @@ const CustomizePage = ({ data }) => {
 
               <div id="arrangementSelector-Letters" className="arrangement-container" style={{ marginTop: '10px', display: 'none' }}> 
                 <div className="arrangement-pattern" id="goBack" 
-                  data-preview="//cdn.shopify.com/s/files/1/0157/4420/4900/t/223/assets/placeholder.png?v=12535657291004423454" 
                   onClick={hideLetters} style={{ background: 'rgb(0, 0, 0)', minWidth:'95%'}} 
                   onKeyDown={handleKeyDown} role="presentation">
                     <span className="arrangement-pattern_title styleOption" 
@@ -1045,21 +1049,20 @@ const CustomizePage = ({ data }) => {
                 </div>
 
                 {customizePageData.arrangementSelectorLetters.items.map((item, index) => 
-                <div className="arrangement-pattern letterChoice" id={item.divId} key={index} onKeyDown={handleKeyDown} role="presentation"
-                  data-preview='//cdn.shopify.com/s/files/1/0157/4420/4900/t/223/assets/placeholder.png?v=12535657291004423454'
+                <div className="arrangement-pattern letterChoice" id={`Letter-${item.letter}`} 
+                  key={index} onKeyDown={handleKeyDown} role="presentation"
                   onClick={e => setLetterStyle(e, item.divId)} 
                   
                   style={{background: 'rgb(255, 255, 255)' }}>
                     <span className="arrangement-pattern_title styleOption" 
-                      id={item.spanId} 
-                      style={{color: 'rgb(0,0,0)' }}>{item.title}</span>
+                      id={`StyleText-Letter ${item.letter}`}
+                      style={{color: 'rgb(0,0,0)' }}>{item.letter}</span>
                 </div>
                 )}
               </div>
 
               <div id="arrangementSelector-Numbers" className="arrangement-container" style={{marginTop: '10px', display:'none'}}> 
                 <div className="arrangement-pattern" id="goBack" 
-                  data-preview="//cdn.shopify.com/s/files/1/0157/4420/4900/t/223/assets/placeholder.png?v=12535657291004423454" 
                   onClick={hideNumbers} style={{background: 'rgb(0, 0, 0)', minWidth:'95%'}} 
                   onKeyDown={handleKeyDown} role="presentation">
                     <span className="arrangement-pattern_title styleOption" 
@@ -1067,14 +1070,13 @@ const CustomizePage = ({ data }) => {
                       style={{color:'rgb(255,255,255)'}} >Go Back</span>
                 </div>
 
-                {customizePageData.arrangementSelectorNumbers.items.map((item, index) => 
-                <div className="arrangement-pattern numberChoice" id={item.divId} key={index} 
-                  data-preview="//cdn.shopify.com/s/files/1/0157/4420/4900/t/223/assets/placeholder.png?v=12535657291004423454" 
+                {customizePageData.arrangementSelectorNumbers.map((item, index) => 
+                <div className="arrangement-pattern numberChoice" id={`Number-${item.number}`} key={index} 
                   onClick={e => setNumberStyle(e, item.divId)} 
                   style={{background: 'rgb(255, 255, 255)'}} 
                   onKeyDown={handleKeyDown} role="presentation">
                     <span className="arrangement-pattern_title styleOption" 
-                      id={item.spanId} style={{color:'rgb(0,0,0)'}} >{item.title}</span>
+                      id={`StyleText-Number ${item.number}`} style={{color:'rgb(0,0,0)'}} >{item.number}</span>
                 </div>
                 )}
               </div>

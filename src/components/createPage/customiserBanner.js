@@ -60,10 +60,10 @@ const CustomiserBanner = () => {
                             <div className="desktop_column" key={index}>
                                 <div className="customiser_banner-image_column">
                                     <div className="customiser_banner-image">
-                                        <LazyLoadImage effect="blur" loading="eager" src={item.image1} alt=""/>
+                                        <img src={item.image1} alt=""/>
                                     </div>
                                     <div className="customiser_banner-image">
-                                        <LazyLoadImage effect="blur" loading="eager" src={item.image2} alt=""/>
+                                        <img src={item.image2} alt=""/>
                                     </div>
                                 </div>
                             </div>
@@ -73,10 +73,10 @@ const CustomiserBanner = () => {
                             <div className="mobile_column" key={index}>
                                 <div className="customiser_banner-image_column">
                                     <div className="customiser_banner-image">
-                                        <LazyLoadImage effect="blur" loading="eager" src={item.image1} alt=""/>
+                                        <img src={item.image1} alt=""/>
                                     </div>
                                     <div className="customiser_banner-image">
-                                        <LazyLoadImage effect="blur" loading="eager" src={item.image2} alt=""/>
+                                        <img src={item.image2} alt=""/>
                                     </div>
                                 </div>
                             </div>
