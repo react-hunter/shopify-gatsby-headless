@@ -11,7 +11,6 @@ import SearchHeaderIcon from '../../../images/icon-search-header.svg';
 import LoginHeaderIcon from '../../../images/icon-login-header.svg';
 import MessageIcon from '../../../images/icon-message.svg';
 import CartHeaderIcon from '../../../images/icon-cart-header.svg';
-import { commonData } from '../../../data/common';
 import { client } from '../../../contentful'
 
 import SearchDrawer from './searchDrawer';
@@ -58,7 +57,6 @@ const Header = ({ path }) => {
           mobileMenuList[i].fields.mobileHeaderMenuItemChild = properMenuChild;
         }
       }
-      console.log('mobileMenuData: ', mobileMenuList)
       setMobileHeaderMenu(mobileMenuList);
       initializeHeader();
     }

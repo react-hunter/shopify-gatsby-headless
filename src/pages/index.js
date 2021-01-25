@@ -22,7 +22,6 @@ const IndexPage = ({ data }) => {
   useEffect(() => {
     async function getHomeData() {
       const homeEntry = await client.getEntries({'content_type': 'homepage'});
-      console.log('hero: ', homeEntry)
       setHomeData({
         heroImage: homeEntry.items[0].fields.heroImage.fields,
         imageSections: homeEntry.items[0].fields.homeImageSectionItem

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react'
-import { commonData } from '../../../data/common';
+import React, { useState, useEffect, useRef } from 'react'
+import { client } from '../../../contentful'
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPause } from "@fortawesome/free-solid-svg-icons"
 
 const AnnoucmentBar = ({ path }) => {
+  const [announceBarSettings, setAnnounceBarSettings] = useState([])
   let anntimer = 0;
   let percent = 0;
 
@@ -31,8 +32,13 @@ const AnnoucmentBar = ({ path }) => {
   const slider = useRef(null);
 
   useEffect(() => {
-    progressAnnouncement();
-  });
+    async function getAnnountmentSettings() {
+      const announcementData = await client.getEntries({'content_type': 'announceBarSettings'});
+      setAnnounceBarSettings(announcementData.items[0].fields.announceTextItem);
+      progressAnnouncement();
+    }
+    getAnnountmentSettings();
+  }, []);
 
   var forEach = function (array, callback, scope) {
     for (var i = 0; i < array.length; i++) {
@@ -129,8 +135,8 @@ const AnnoucmentBar = ({ path }) => {
         <div className="announcement-bar">
           <div className="ann_bars">
             <Slider ref={slider} {...settings}>
-            { commonData.announceBarSettings.textList.map((item, index) => 
-              <p className="announcement-bar__message" key={index} style={{ fontSize: item.fontSize }}>{item.description}</p>
+            { announceBarSettings.map((item, index) => 
+              <p className="announcement-bar__message" key={index} style={{ fontSize: item.fields.fontSize }}>{item.fields.description}</p>
               )}
             </Slider>
             

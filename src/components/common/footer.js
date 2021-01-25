@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import SocialIcon from './socialIcon';
-import { commonData } from '../../data/common';
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { client } from '../../contentful'
 
 const Footer = () => {
+    const [footerMenu, setFooterMenu] = useState([]);
+    useEffect(() => {
+        async function getFooterMenu() {
+            const footerMenuData = await client.getEntries({'content_type': 'footerMenu'});
+            setFooterMenu(footerMenuData.items[0].fields.footerMenuItem);
+        }
+
+        getFooterMenu();
+    }, []);
     return (
         <div className="shopify-section">
             <footer className="footer-section">
@@ -42,18 +51,18 @@ const Footer = () => {
                 </div>
                 <div className="newsletter-nav">
                     <ul className="footer-links">
-                        { commonData.footerMenu.map((menuItem, menuIndex) => 
+                        { footerMenu.map((menuItem, menuIndex) => 
                             <li className="newsletter_nav_link" key={menuIndex}>
-                                <Link to={menuItem.handle}>{ menuItem.title }</Link>
+                                <Link to={menuItem.fields.handle}>{ menuItem.fields.title }</Link>
                             </li>
                         )}
                     </ul>
                 </div>
                 <div className="newsletter-nav-mobile" key="newsletter-nav-mobile">
                     <ul className="footer-links">
-                        { commonData.footerMenu.map((menuItem, menuIndex) => 
+                        { footerMenu.map((mobileMenuItem, menuIndex) => 
                             <li className="newsletter_nav_link" key={menuIndex}>
-                                <Link to={menuItem.handle} >{ menuItem.title }</Link>
+                                <Link to={mobileMenuItem.fields.handle} >{ mobileMenuItem.fields.title }</Link>
                             </li>
                         )}
                     </ul>
