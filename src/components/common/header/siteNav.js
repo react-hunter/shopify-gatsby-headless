@@ -10,7 +10,7 @@ const SiteNav = ({ path }) => {
             setDesktopHeaderMenu(menuData.items[0].fields.desktopHeaderMenuItem);
         }
         getMenuData()
-    })
+    }, [])
     return (
         <>
         <nav className="small--hide border-bottom" id="AccessibleNav" role="navigation">
