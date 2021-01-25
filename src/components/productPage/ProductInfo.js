@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruck, faCheck } from "@fortawesome/free-solid-svg-icons"
 
 const ProductInfo = ({ product, review }) => {
-    let featuresArray = null;
-    const getCorrectProductFeatures = (str) => {
-        if (str === '') {
-            featuresArray = [];
-        } else {
-            const array = str.split(/\r?\n/);
-            featuresArray = array;
+    const [featuresList, setFeaturesList] = useState([]);
+    useEffect(() => {
+        const featuresString = review.features
+        if (featuresString !== '') {
+            const featureList = featuresString.split(/\r?\n/);
+            setFeaturesList(featureList);
         }
-    }
-
+    }, [review]);
+    
     return (
         <>
             <h1 className="product-single__title">{product.title}</h1>
@@ -75,8 +74,7 @@ const ProductInfo = ({ product, review }) => {
 
             {/* <div dangerouslySetInnerHTML={{ __html: review.features }} /> */}
             <p className="product-features">
-                { getCorrectProductFeatures(review.features)}
-                {featuresArray.map((item,index) =>
+                {featuresList.map((item,index) =>
                     <span className="item" key={index}>
                         <FontAwesomeIcon icon={faCheck} style={{ color: '#93c47d'}} size="1x" />
                         <strong>
