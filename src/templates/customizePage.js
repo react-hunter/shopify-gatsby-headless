@@ -936,9 +936,7 @@ const CustomizePage = ({ data }) => {
 
   const AddToBag = () => {
     const bagProduct = collectionProducts.filter(cp => cp.title === selections[0])
-    console.log('collectionProducts: ', collectionProducts)
     console.log('selections: ', selections)
-    console.log('bagProduct: ', bagProduct)
     const bagVariants = bagProduct[0].variants
     let bagVariant = null
     for(var i = 0; i < bagVariants.length; i++) {
@@ -955,7 +953,7 @@ const CustomizePage = ({ data }) => {
       {key: 'Rose Color', value: selections[3]},
       {key: 'Box', value: selections[1]},
       {key: 'Style', value: selections[2]},
-      {key: 'linkImage', value: 'https://mediacarryapi.com/customizer/assets/' + selections[0] + '~' + selections[2].toLowerCase() + '~' + selections[3].replace('+', ',') + '.png'}
+      {key: 'linkImage', value: 'https://mediacarryapi.com/customizer/assets/' + selections[0] + '~' + selections[2] + '~' + selections[3].replace('+', ',') + '.png'}
     ])
   }
 
