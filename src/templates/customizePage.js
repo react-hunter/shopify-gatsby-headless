@@ -1,11 +1,26 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+// import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { graphql } from 'gatsby'
-import { customizePageData } from '../data/customizePage' 
+// import { customizePageData } from '../data/customizePage' 
 import Preloader from "../components/common/preloader"
 import StoreContext from '../context/store'
+import { client } from '../contentful'
 
 const CustomizePage = ({ data }) => {
   const context = useContext(StoreContext);
+  const [customizeData, setCustomizeData] = useState({
+    arrangementSelectorNumbers: [{number: '0'}, {number: '1'}, {number: '2'}, {number: '3'}, {number: '4'},
+                                  {number: '5'}, {number: '6'}, {number: '7'}, {number: '8'},{number: '9'}
+                                ],
+    arrangementSelectorLetters: [{letter: 'A'}, {letter: 'B'}, {letter: 'C'}, {letter: 'D'}, {letter: 'E'}, {letter: 'F'}, {letter: 'G'}, {letter: 'H'},
+                                  {letter: 'I'}, {letter: 'J'}, {letter: 'K'}, {letter: 'L'}, {letter: 'M'}, {letter: 'N'}, {letter: 'O'}, {letter: 'P'},
+                                  {letter: 'Q'}, {letter: 'R'},{letter: 'S'}, {letter: 'T'}, {letter: 'U'}, {letter: 'V'}, {letter: 'W'}, {letter: 'X'},
+                                  {letter: 'Y'}, {letter: 'Z'}
+                               ],
+    stepOption: [{option: "CHOOSE BOX", type: "Box"}, {option: "CHOOSE STYLE", type: "Style"}, {option: "CHOOSE ROSE COLOR", type: "Rose Colors"}],
+    roseColor: [],
+    products: []
+  })
   const collectionProducts = data.shopifyCollection.products.map(pr => {
     const productVariants = pr.variants.map(va => {
       return {
@@ -50,13 +65,49 @@ const CustomizePage = ({ data }) => {
   var isShare = false;
 
   useEffect(() => {
-    setAllProduct();
+    async function getCustomizeData() {
+      const customizeRoseData = await client.getEntries({'content_type': 'roseColor'});
+      const customizeProductsData = await client.getEntries({'content_type': 'products'});
+      const roses = customizeRoseData.items.map(rd => {
+        return {
+          rose: rd.fields.rose,
+          src: rd.fields.src.fields.file.url
+        }
+      })
 
+      const products = customizeProductsData.items.map(pd => {
+        const styles = pd.fields.styles.map(ps => ps.fields);
+        const boxes = pd.fields.boxes.map(pb => {
+          return {
+            title: pb.fields.title,
+            src: pb.fields.src.fields.file.url
+          }
+        })
+        return {
+          Arrangement: pd.fields.arrangement,
+          boxes: boxes,
+          styles: styles,
+          productId: pd.fields.productId,
+          subtext: pd.fields.subtext
+        }
+      })
+
+      setCustomizeData({
+        ...customizeData,
+        roseColor: roses,
+        products: products
+      });
+    }
+    getCustomizeData();
+  }, []);
+
+  useEffect(() => {
+    allProducts = customizeData.products;
     var arrTypes = document.getElementById("arrangementSelector-0");
-
+  
     for (var i = 0; i < allProducts.length; i++) {
       var product = allProducts[i];
-
+  
       var arrangment = document.createElement("div");
       arrangment.setAttribute("class", "arr-type-box")
       arrangment.setAttribute("data-productId", `${product.productId}`)
@@ -64,7 +115,7 @@ const CustomizePage = ({ data }) => {
       arrangment.innerHTML = `<span>${product.Arrangement}</span>`;
       arrTypes.appendChild(arrangment)
     }
-
+  
     let needShowItems = document.querySelectorAll('#arrangementSelector-0 .arr-type-box');
     for (var j=0; j<needShowItems.length; j++ ) {
       needShowItems[j].addEventListener("click", function(e){
@@ -80,7 +131,8 @@ const CustomizePage = ({ data }) => {
     return function cleanup() {
       window.removeEventListener('scroll', stickyFunction);
     }
-  })
+
+  }, [customizeData.products])
 
   const selectArrangement = (id) => {
     for (var i = 0; i < allProducts.length; i++) {
@@ -125,7 +177,7 @@ const CustomizePage = ({ data }) => {
   // }
 
   function setAllProduct() {
-    allProducts = customizePageData.products;
+    allProducts = customizeData.products;
   }
 
   function setSelectedProduct(product) {
@@ -255,7 +307,7 @@ const CustomizePage = ({ data }) => {
     }
 
     setStep(step);
-    var step2 = customizePageData.stepOption[currentStep - 1];
+    var step2 = customizeData.stepOption[currentStep - 1];
     var title = '';
 
     if (!step2) {
@@ -587,7 +639,7 @@ const CustomizePage = ({ data }) => {
     var subDiv = document.createElement("div");
     subDiv.setAttribute("class", "rose-contents");
   
-    var roses =  customizePageData.roseColor;// selectedProduct["roses"];
+    var roses =  customizeData.roseColor;// selectedProduct["roses"];
     var styles = selectedProduct["styles"];
   
     for (var k = 0; k < styles.length; k++) {
@@ -825,7 +877,7 @@ const CustomizePage = ({ data }) => {
         colRightItems[i].style.display = 'none';
       }
 
-      var options = customizePageData.stepOption;
+      var options = customizeData.stepOption;
   
       if (currentStep + 1 === maxOptions) {
         nextStep();
@@ -884,6 +936,9 @@ const CustomizePage = ({ data }) => {
 
   const AddToBag = () => {
     const bagProduct = collectionProducts.filter(cp => cp.title === selections[0])
+    console.log('collectionProducts: ', collectionProducts)
+    console.log('selections: ', selections)
+    console.log('bagProduct: ', bagProduct)
     const bagVariants = bagProduct[0].variants
     let bagVariant = null
     for(var i = 0; i < bagVariants.length; i++) {
@@ -1052,7 +1107,7 @@ const CustomizePage = ({ data }) => {
                       style={{color:'rgb(255,255,255)'}}>Go Back</span>
                 </div>
 
-                {customizePageData.arrangementSelectorLetters.map((item, index) => 
+                {customizeData.arrangementSelectorLetters.map((item, index) => 
                 <div className="arrangement-pattern letterChoice" id={`Letter-${item.letter}`} 
                   key={index} onKeyDown={handleKeyDown} role="presentation"
                   onClick={e => setLetterStyle(e, `Letter-${item.letter}`)} 
@@ -1074,7 +1129,7 @@ const CustomizePage = ({ data }) => {
                       style={{color:'rgb(255,255,255)'}} >Go Back</span>
                 </div>
 
-                {customizePageData.arrangementSelectorNumbers.map((item, index) => 
+                {customizeData.arrangementSelectorNumbers.map((item, index) => 
                 <div className="arrangement-pattern numberChoice" id={`Number-${item.number}`} key={index} 
                   onClick={e => setNumberStyle(e, `Number-${item.number}`)} 
                   style={{background: 'rgb(255, 255, 255)'}} 
