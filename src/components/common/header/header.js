@@ -85,10 +85,15 @@ const Header = ({ path }) => {
   
   const hideSideNav = (e) => {
     e.preventDefault();
+    nextSlide();
+  }
 
+  function nextSlide() {
     let modal = document.getElementById('sidenav');
     let openIcon = document.getElementById('mobile-nav--open');
     let closeIcon = document.getElementById('hideSideNav');
+    let backIcon = document.getElementById('goBackNavMenu');
+
     openIcon.classList.remove("mobile-nav--close");
     openIcon.classList.add("mobile-nav--open");
     closeIcon.style.display = "none";
@@ -96,6 +101,8 @@ const Header = ({ path }) => {
     modal.style.display = "none";
     document.getElementsByTagName("html")[0].classList.remove("side-menu-scroll")
     openIcon.setAttribute("style", "display: flex !important;")
+
+    backIcon.style.display = "none";
   }
 
   const showSearchBar = (e) => {
@@ -445,7 +452,7 @@ const Header = ({ path }) => {
                             <Link to={child_item.fields.url} style={{ display: 'none' }} 
                               data-parent-id={child_item.fields.parent}
                               data-title={child_item.fields.title} key={`child-${menuIndex}-${child_index}`}
-                              onClick={hideSideNav}
+                              onClick={nextSlide}
                               className="sidenav-item_inner child-item" >
                               <div className="sidenav-item_name" key={`childitemname-${menuIndex}-${child_index}`}>
                                 <div className="sidenav-item_name-inner">
