@@ -17825,6 +17825,7 @@ body.modal-opened {
   color: #ffffff !important;
   text-align: left;
   padding: 10px 0;
+  overflow-wrap: anywhere;
 
   @media(max-width: 900px){
     font-size: 3.25vw;
@@ -17833,6 +17834,7 @@ body.modal-opened {
   }
 
   p{
+    overflow-wrap: anywhere;
     color: #ffffff !important;
   }
 
