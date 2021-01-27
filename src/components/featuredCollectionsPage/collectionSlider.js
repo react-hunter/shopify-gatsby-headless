@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'gatsby'
-// import ProductBox from "../common/product/productBox"
+import CollectionVariantSelector from '../collectionPage/collectionVariantSelector'
+import FeaturedProductBox from "../common/product/featuredProductBox"
 import NotifyModal from "../collectionPage/notifyModal"
-import CollectionProductBox from "../collectionPage/collectionProductBox"
 import { client } from "../../contentful"
 import "../../styles/collectionPage.scss"
 import Slider from "react-slick";
@@ -12,6 +12,8 @@ import "slick-carousel/slick/slick-theme.css";
 const CollectionSlider = ({products, title, handle, reviewList}) => {
   const [notifyModalShow, setNotifyModalShow] = useState(false);
   const [badgeStyles, setBadgeStyles] = useState([]);
+  const [varaintModalShow, setVaraintModalShow] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   useEffect(() => {
     async function getBadgeData() {
       const badgeStyleData = await client.getEntries({'content_type': 'collectionBadgeStyleItem'});
@@ -35,6 +37,10 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
   const showNotifyModal = () => {
     setNotifyModalShow(true)
   }
+  const showVariantModal = (p) => {
+    setSelectedProduct(p);
+    setVaraintModalShow(true);
+  }
 
   const closeNotifyModal = () => {
     document.querySelector(".klav-popup").classList.remove("fade-in");
@@ -43,6 +49,17 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
         document.querySelector(".klav-popup").classList.remove("fade-out");
         setNotifyModalShow(false);
     }, 500)
+  }
+  const closeCollectionModal = () => {
+    document.querySelector(".variantSelector_wrapper").classList.remove('animate-bottom');
+    document.querySelector(".variantSelector_wrapper").classList.add('animate-top');
+
+    setTimeout(() => {
+        document.querySelector(".variantSelector_wrapper").classList.remove('animate-top');
+        setVaraintModalShow(false);
+        document.getElementsByTagName("html")[0].classList.remove("no-scroll");
+        document.querySelector(".scrollPreventer").style.overflow = "visible";
+    }, 550)
   }
   const settings = {
     dots: false,
@@ -88,12 +105,14 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
                 let productReview = reviewList.filter(re => re.handle === product.handle)
                 return (
                   <div key={i} className="products-on-page grid grid--uniform grid--view-items">
-                    {/* <ProductBox product={product} review={productReview[0]} /> */}
-                    <CollectionProductBox product={product} review={productReview[0]} showNotifyModal={showNotifyModal} badgeStyles={badgeStyles} />
+                    <FeaturedProductBox product={product} review={productReview[0]} showNotifyModal={showNotifyModal}
+                        badgeStyles={badgeStyles} showVariantModal={showVariantModal} />
                   </div>
                 )
           })}
         </Slider>
+        {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} 
+                                    showNotifyModal={showNotifyModal} product={selectedProduct} /> )}
         <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
       </div>
       <div className="collection-carousel-button_wrapper">
