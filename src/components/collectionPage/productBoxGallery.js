@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import { LazyLoadImage } from 'react-lazy-load-image-component'
+import CustomImage from '../common/image'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -99,14 +100,14 @@ const ProductBoxGallery = props => {
                     mainOption === '' ?
                         <Slider {...productBoxSliderSettings}>
                             { product.images[0] ? 
-                                (<img 
+                                (<CustomImage 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[0].originalSrc}
                                     alt={product.title}
                                 />) : ""
                             }
                             { product.images[1] ? 
-                                (<img 
+                                (<CustomImage 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[1].originalSrc}
                                     alt={product.title}
@@ -114,7 +115,7 @@ const ProductBoxGallery = props => {
                                 />) : ""
                             }
                             { product.images[2] ? 
-                                (<img 
+                                (<CustomImage 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[2].originalSrc}
                                     alt={product.title}
@@ -127,7 +128,7 @@ const ProductBoxGallery = props => {
                     {
                         swatchImages.map((swatchImage, swatchImageIndex) => {
                             return (
-                                <img 
+                                <CustomImage 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={swatchImage}
                                     alt=''

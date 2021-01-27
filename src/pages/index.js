@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { useQuery } from 'react-query'
 import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
@@ -7,8 +8,8 @@ import ImageSection from "../components/homepage/imageSections"
 import ArticleSection from "../components/articles/articleSection"
 import { client } from '../contentful';
 
-const IndexPage = ({ data }) => {
-  const [homeData, setHomeData] = useState({
+const IndexPage = ({ data: {allShopifyArticle}}) => {
+  let homeData = {
     heroImage: {
       desktopImage: null,
       mobileImage: null,
@@ -18,25 +19,31 @@ const IndexPage = ({ data }) => {
       buttonText: 'SHOP NOW'
     },
     imageSections: []
-  });
-  useEffect(() => {
-    async function getHomeData() {
-      const homeEntry = await client.getEntries({'content_type': 'homepage'});
-      setHomeData({
-        heroImage: homeEntry.items[0].fields.heroImage.fields,
-        imageSections: homeEntry.items[0].fields.homeImageSectionItem
-      });
+  };
+  async function getHomeEntry() {
+    return await client.getEntries({'content_type': 'homepage'})
+  }
+  const { isLoading, data } = useQuery('homeQuery', getHomeEntry);
+  if (!isLoading) {
+    console.log('contentful data: ', data);
+    homeData = {
+      ...homeData,
+      heroImage: data.items[0].fields.heroImage.fields,
+      imageSections: data.items[0].fields.homeImageSectionItem
     }
-
-    getHomeData();
-  }, [])
+  }
   return (
     <>
-      <Preloader />
-      <SEO title="Home" />
-      <HeroSection heroImage={homeData.heroImage} />
-      <ImageSection imageSections={homeData.imageSections} />
-      <ArticleSection data={data.allShopifyArticle.edges} />
+      {
+        isLoading ? <Preloader /> : (
+          <>
+            <SEO title="Home" />
+            <HeroSection heroImage={homeData.heroImage} />
+            <ImageSection imageSections={homeData.imageSections} />
+            <ArticleSection data={allShopifyArticle.edges} />
+          </>
+        )
+      }
     </>
   )
 }

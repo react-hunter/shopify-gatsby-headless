@@ -1,7 +1,7 @@
 import React from 'react';
 import Preloader from "../../components/common/preloader"
 
-const ContactUs = ({ data }) => {
+const ContactUs = () => {
     return (
       <>
         <Preloader />

@@ -3,7 +3,7 @@ import Preloader from "../../components/common/preloader"
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import {client} from '../../contentful'
 
-const Faqs = ({ data }) => {      
+const Faqs = () => {      
     const [faq, setFaq] = useState({
         faqBanner: {
             title: '',

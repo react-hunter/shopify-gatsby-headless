@@ -1,7 +1,7 @@
 import React from 'react';
 import Preloader from "../../components/common/preloader"
 
-const Covid19 = ({ data }) => {
+const Covid19 = () => {
     return (
       <>
         <Preloader />
