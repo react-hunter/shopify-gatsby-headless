@@ -256,7 +256,7 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                                         </div>
                                         <div className="ajax-cart-item-middle-part">
                                             <div className="ajax-cart-item__title">
-                                                <Link to={`/products/${item.variant.product.handle}`}>{item.variant.selectedOptions[0].value === 'Default Title' ? item.title : item.variant.title}</Link>
+                                                <Link to={`/products/${item.variant.product.handle}`}>{item.title} - {item.variant.selectedOptions[0].value === 'Default Title' ? item.title : item.variant.title}</Link>
                                             </div>
                                             <div className="ajax-cart-item-properties">
                                                 {

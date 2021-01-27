@@ -1,11 +1,49 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'gatsby'
-import ProductBox from "../common/product/productBox"
+// import ProductBox from "../common/product/productBox"
+import NotifyModal from "../collectionPage/notifyModal"
+import CollectionProductBox from "../collectionPage/collectionProductBox"
+import { client } from "../../contentful"
+import "../../styles/collectionPage.scss"
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const CollectionSlider = ({products, title, handle, reviewList}) => {
+  const [notifyModalShow, setNotifyModalShow] = useState(false);
+  const [badgeStyles, setBadgeStyles] = useState([]);
+  useEffect(() => {
+    async function getBadgeData() {
+      const badgeStyleData = await client.getEntries({'content_type': 'collectionBadgeStyleItem'});
+      setBadgeStyles(badgeStyleData.items);
+    }
+    setHoverEffectsForCollection();
+    getBadgeData();
+  }, [])
+
+  function setHoverEffectsForCollection() {
+
+    const allFirstImageElements = document.querySelectorAll(".disableSaveImageIOS");
+    for (let i = 0; i < allFirstImageElements.length; i++) {
+  
+      allFirstImageElements[i].on('touchstart', function () {  
+        this.toggleClass('hover_effect');
+      });
+  
+    }
+  }
+  const showNotifyModal = () => {
+    setNotifyModalShow(true)
+  }
+
+  const closeNotifyModal = () => {
+    document.querySelector(".klav-popup").classList.remove("fade-in");
+    document.querySelector(".klav-popup").classList.add("fade-out");
+    setTimeout(() => {
+        document.querySelector(".klav-popup").classList.remove("fade-out");
+        setNotifyModalShow(false);
+    }, 500)
+  }
   const settings = {
     dots: false,
     infinite: false,
@@ -49,12 +87,14 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
                 let product = p
                 let productReview = reviewList.filter(re => re.handle === product.handle)
                 return (
-                  <div key={i}>
-                    <ProductBox product={product} review={productReview[0]} />
+                  <div key={i} className="products-on-page grid grid--uniform grid--view-items">
+                    {/* <ProductBox product={product} review={productReview[0]} /> */}
+                    <CollectionProductBox product={product} review={productReview[0]} showNotifyModal={showNotifyModal} badgeStyles={badgeStyles} />
                   </div>
                 )
           })}
         </Slider>
+        <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
       </div>
       <div className="collection-carousel-button_wrapper">
         <Link className="collection-carousel-button" to={`/collections/${handle}`}>Shop {title}</Link>
