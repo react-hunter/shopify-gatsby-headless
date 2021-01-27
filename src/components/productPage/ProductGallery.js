@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import Slider from "react-slick";
+import CustomImage from '../common/image'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -51,7 +52,7 @@ const ProductGallery = ({ product, selectedVariant }) => {
                             return (
                                 image ? (
                                     <div className="product-single__media-wrapper" key={imageIndex}>
-                                        <LazyLoadImage 
+                                        <CustomImage 
                                             className="lazy-load-mc"
                                             src={image.originalSrc} 
                                             alt={product.title}

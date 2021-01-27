@@ -6,14 +6,20 @@
   height: 300px;
   background: transparent;
   z-index: 9999;
+  display: flex;
   align-items: center;
-  position: relative;
+  justify-content: center;
 }
 .imageloader .load-more_loader{
-  display:block; 
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display:block;
+}
+
+.imageloader.small {
+  width: 35px;
+  height: 35px;
+}
+
+.imageloader.small .load-more_loader {
+  width: 35px;
+  height: 35px;
 }

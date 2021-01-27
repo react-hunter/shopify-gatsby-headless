@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import CustomImage from '../common/image'
 import { client } from '../../contentful'
 
 const CustomiserBanner = () => {
@@ -85,10 +86,10 @@ const CustomiserBanner = () => {
                             <div className="desktop_column" key={index}>
                                 <div className="customiser_banner-image_column">
                                     <div className="customiser_banner-image">
-                                        <img src={item.fields.image1.fields.file.url} alt=""/>
+                                        <CustomImage src={item.fields.image1.fields.file.url} alt=""/>
                                     </div>
                                     <div className="customiser_banner-image">
-                                        <img src={item.fields.image2.fields.file.url} alt=""/>
+                                        <CustomImage src={item.fields.image2.fields.file.url} alt=""/>
                                     </div>
                                 </div>
                             </div>
@@ -98,10 +99,10 @@ const CustomiserBanner = () => {
                             <div className="mobile_column" key={index}>
                                 <div className="customiser_banner-image_column">
                                     <div className="customiser_banner-image">
-                                        <img src={item.fields.image1.fields.file.url} alt=""/>
+                                        <CustomImage src={item.fields.image1.fields.file.url} alt=""/>
                                     </div>
                                     <div className="customiser_banner-image">
-                                        <img src={item.fields.image2.fields.file.url} alt=""/>
+                                        <CustomImage src={item.fields.image2.fields.file.url} alt=""/>
                                     </div>
                                 </div>
                             </div>

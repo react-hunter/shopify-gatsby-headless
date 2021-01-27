@@ -21,7 +21,6 @@ const ProductDescription = ({ product, review, selectVariant }) => {
     useEffect(() => {
         async function getAccordionData() {
             const accordionData = await client.getEntries({'content_type': 'productAccordion'});
-            console.log('accordions: ', accordionData)
             setProductAccordions(accordionData.items);
             document.querySelectorAll('.accordion_button').forEach(button => {
                 const accordionButton = button;

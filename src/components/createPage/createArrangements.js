@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby'
 import { client } from '../../contentful'
+import CustomImage from '../common/image'
 
 const CreateArrangements = () => {
     
@@ -58,16 +59,16 @@ const CreateArrangements = () => {
                         { createArrangements.products.map((item, index) => 
                         <div className="create_arrange-block" key={index} data-product-name={item.fields.name}>
                             <Link to={item.fields.url}>
-                                <img className="product-image" 
+                                <CustomImage className="product-image" 
                                     src={item.fields.image.fields.file.url} data-imgs={getProductImages(item.fields)} alt="" />
                             </Link>
                             <div className="create_arrange-title">{item.fields.name}</div>
                             <div className="create_arrange-swatch">
                             <div className="create-landing_swatches">
                                 {createArrangements.options.map((option_item, option_index) => 
-                                    <img src={option_item.fields.buttonImage.fields.file.url}
+                                    <CustomImage src={option_item.fields.buttonImage.fields.file.url}
                                         onClick={() => triggerImg(item.fields.name, option_index)}
-                                        key={option_index} onKeyDown={handleKeyDown} role="presentation" alt="" />
+                                        key={option_index} onKeyDown={handleKeyDown} small="small" role="presentation" alt="" />
                                 )}
                             </div>
                             <Link to={item.fields.url}>+  More</Link>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'gatsby'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
 import CustomImage from '../image'
 import '../../../styles/widget.min.css'
 

@@ -3,9 +3,9 @@ import '../../styles/imageloader.css';
 
 const CustomImage = (props) => {
     const [loading, setLoading] = useState(true);
-    const [image, setImage] = useState(props.src)
+    const { src, className, style, ...other } = props
+    const [image, setImage] = useState(src)
     useEffect(() => {
-      console.log('image: ', props.src)
       setImage(props.src);
     }, [props])
     const imageLoaded = () => {
@@ -16,22 +16,23 @@ const CustomImage = (props) => {
       <>
         {image === '' ? null :
           <>
-            { loading ? <ImageSpin /> : null }
+            { loading ? <ImageSpin small={props.small} /> : null }
             <img 
               src={image}
-              className={`${props.className} ${hideClass}`}
-              style={props.style}
+              className={`${className} ${hideClass}`}
+              style={style}
               onLoad={imageLoaded}
-              alt="" />
+              {...other} />
           </>
         }
       </>
     );
 };
 
-const ImageSpin = () => {
+const ImageSpin = (props) => {
+  const smallClass = props.small === 'small' ? 'small' : ''
   return (
-    <div className="imageloader">
+    <div className={`imageloader ${smallClass}`}>
       <div className="load-more_loader">
       </div>
     </div>
