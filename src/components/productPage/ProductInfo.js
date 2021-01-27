@@ -83,13 +83,6 @@ const ProductInfo = ({ product, review }) => {
                     </span>
                 )}
             </p>
-
-            <div className="shipping-tout">
-                
-                <FontAwesomeIcon icon={faTruck} size="1x" />
-
-                <p>FAST SHIPPING FROM CALIFORNIA</p>
-            </div>
         </>
     );
 };
