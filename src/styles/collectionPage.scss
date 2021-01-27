@@ -793,13 +793,14 @@ border-radius: 50%;
     }
 
     @media only screen and(max-width:500px){
-        height:100vh;
+        height:300px;
         border-radius:0;
         display:-webkit-flex;
         display:flex;
         align-items:center;
         -webkit-align-items:center;
         width:100%;
+        border-radius: 12px;
         .klaviyo-form-Mep6NE{
         min-height:100px;
         }

@@ -25,7 +25,6 @@ const IndexPage = ({ data: {allShopifyArticle}}) => {
   }
   const { isLoading, data } = useQuery('homeQuery', getHomeEntry);
   if (!isLoading) {
-    console.log('contentful data: ', data);
     homeData = {
       ...homeData,
       heroImage: data.items[0].fields.heroImage.fields,
