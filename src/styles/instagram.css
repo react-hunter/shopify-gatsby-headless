@@ -19,4 +19,5 @@ div.fs-entry-title { display:none }
 
 .fs-timeline {
   border: 1px solid #ffffff;
+  line-height: 0;
 }

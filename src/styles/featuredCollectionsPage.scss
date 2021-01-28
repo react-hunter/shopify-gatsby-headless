@@ -121,4 +121,22 @@
     .Best-Sellers-Carousel-Cell:hover .best-sellers-form .button-atc {
         visibility: visible !important;
     }
+
+    @media (max-width: 750px) {
+        .grid-view-item__image-wrapper {
+            height: 43vw;
+        }
+    }
+
+    .carousel-scrollbar {
+        height: 2px;
+    }
+
+    .collection-product_image_container .slick-list {
+        height: unset!important;
+    }
+
+    .grid-view-item__image-wrapper {
+        background: unset;
+    }
 }

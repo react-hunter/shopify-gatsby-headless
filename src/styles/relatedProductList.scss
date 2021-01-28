@@ -115,7 +115,12 @@
   }
 
   .Best-Sellers-Carousel-Cell .Best-Sellers-Title {
+    margin-top: 0;
     margin-bottom: 3px !important;
+  }
+
+  .Best-Sellers-Carousel-Cell img {
+    height: unset;
   }
 
   .Best-Sellers-Carousel {
