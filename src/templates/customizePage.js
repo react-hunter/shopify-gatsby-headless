@@ -1035,7 +1035,7 @@ const CustomizePage = ({ data }) => {
 
   return (
     <>
-      <Preloader />
+      {/* <Preloader /> */}
       <div className="container">
       
         {

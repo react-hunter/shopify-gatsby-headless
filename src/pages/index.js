@@ -33,16 +33,16 @@ const IndexPage = ({ data: {allShopifyArticle}}) => {
   }
   return (
     <>
-      {
+      {/* {
         isLoading ? <Preloader /> : (
-          <>
+          <> */}
             <SEO title="Home" />
             <HeroSection heroImage={homeData.heroImage} />
             <ImageSection imageSections={homeData.imageSections} />
             <ArticleSection data={allShopifyArticle.edges} />
-          </>
+          {/* </>
         )
-      }
+      } */}
     </>
   )
 }

@@ -85,7 +85,7 @@ const collectionPage = ({ data, pageContext }) => {
   const displayedProducts = data.shopifyCollection.products.slice(0, displayProductCount)
   return (
     <>
-      <Preloader />
+      {/* <Preloader /> */}
       <div id="shopify-section-collection-template" className="shopify-section">
         <div data-section-id="collection-template" data-section-type="collection-template">
           <header className="collection-header">

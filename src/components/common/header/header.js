@@ -17,6 +17,7 @@ import SearchDrawer from './searchDrawer';
 import SiteNav from './siteNav';
 import AnnoucmentBar from './annoucmentBar';
 import CardSlider from './cardSlider';
+import CustomImage from '../image'
 
 let runBannerAnimation = false;
 
@@ -441,7 +442,7 @@ const Header = ({ path }) => {
                           </div>
                         </div>
                         <div className="sidenav-item_img" key={`itemimg-${menuIndex}`}>
-                          <LazyLoadImage effect="blur" loading="eager" src={menuItem.fields.image.fields.file.url} alt="" />
+                          <CustomImage effect="blur" loading="eager" src={menuItem.fields.image.fields.file.url} alt="" />
                         </div>
                       </Link>
 
@@ -460,7 +461,7 @@ const Header = ({ path }) => {
                                 </div>
                               </div>
                               <div className="sidenav-item_img" key={`childitemimg-${menuIndex}-${child_index}`}>
-                                <LazyLoadImage effect="blur" loading="eager" src={child_item.fields.image.fields.file.url} alt="" />
+                                <CustomImage effect="blur" loading="eager" src={child_item.fields.image.fields.file.url} alt="" />
                               </div>
                             </Link>
                           )

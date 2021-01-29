@@ -8,7 +8,7 @@ const featuredCollectionsPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
   return (
     <>
-      <Preloader />
+      {/* <Preloader /> */}
       <div className="collection-collections-spacing">
         <div id="shopify-section-collection-collections" className="shopify-section">
           <div className="collections-collection-section">

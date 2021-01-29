@@ -39,7 +39,7 @@ const ProductPage = ({ data, pageContext }) => {
          
     return (
         <>
-            <Preloader />
+            {/* <Preloader /> */}
             <SEO title={product.title} />
 
             <div key="product-template" id="ProductSection-product-template" className="product-template__container">

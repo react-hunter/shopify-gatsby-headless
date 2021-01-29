@@ -17,6 +17,7 @@ const CustomImage = (props) => {
         {image === '' ? null :
           <>
             { loading ? <ImageSpin small={props.small} /> : null }
+            {/* <ImageSpin small={props.small} /> */}
             <img 
               src={image}
               className={`${className} ${hideClass}`}

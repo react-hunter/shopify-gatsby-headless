@@ -21,8 +21,8 @@ import Preloader from "../components/common/preloader"
 const queryClient = new QueryClient()
 
 const Layout = ({ path, children }) => {
-	const [allHidden, setAllHidden] = useState(true)
-	const hideClass = allHidden ? `hide` : ``
+	// const [allHidden, setAllHidden] = useState(true)
+	// const hideClass = allHidden ? `hide` : ``
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Provider>
@@ -51,8 +51,9 @@ const Layout = ({ path, children }) => {
 					`}
 					render={data => (
 						<>
-							<Preloader allHide={setAllHidden} />
-							<div className={`scrollPreventer ${hideClass}`}>
+							{/* <Preloader allHide={setAllHidden} /> */}
+							{/* <div className={`scrollPreventer ${hideClass}`}> */}
+							<div className="scrollPreventer">
 								<AjaxCartCustom giftVariant={data.giftProduct.variants[0]} rushVariant={data.rushProduct.variants[0]} />
 								<Header path={path} />
 								<div className="page-container drawer-page-content" id="PageContainer">

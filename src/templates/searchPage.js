@@ -31,7 +31,7 @@ const SearchPage = ( { data, pageContext, location } ) => {
 
   return (
     <>
-      <Preloader />
+      {/* <Preloader /> */}
       <SEO title="Home" />
 
       <div className="main-content js-focus-hidden"  id="searchContent">
