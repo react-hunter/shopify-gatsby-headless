@@ -92,10 +92,13 @@
 
 .no-scroll, .cart-drawer-open {
     overflow: hidden;
+    position: relative;
+    touch-action: none;
+    height: 100% !important;
 }
 
 @media (min-width: 769px) {
-    /* .no-scroll, .cart-drawer-open {
-        padding-right: 20px;
-    } */
+    .no-scroll, .cart-drawer-open {
+        padding-right: 25px;
+    }
 }

@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react' /* eslint-disable */
 import ProductInfo from "./ProductInfo"
 import StoreContext from '../../context/store'
+import { client } from '../../contentful'
 import VariantSelectorsForModal from "./VariantSelectorsForModal"
 import Buttons from "./Buttons"
-import { productPageData } from '../../data/product';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 
@@ -16,22 +16,27 @@ const ProductDescription = ({ product, review, selectVariant }) => {
     const [available, setAvailable] = useState(productVariant.availableForSale)
     const [modalOptions, setOptions] = useState(product.options[0])
     const [modalClass, setModalClass] = useState('');
+    const [productAccordions, setProductAccordions] = useState([]);
 
     useEffect(() => {
+        async function getAccordionData() {
+            const accordionData = await client.getEntries({'content_type': 'productAccordion'});
+            setProductAccordions(accordionData.items);
+            document.querySelectorAll('.accordion_button').forEach(button => {
+                const accordionButton = button;
+                accordionButton.innerHTML = accordionButton.innerHTML + '<i className="fas fa-angle-down"></i>';
+                button.addEventListener('click', () => {
+                    button.classList.toggle('accordion_button--active');
+                });
+            });
+        }
         let defaultOptionValues = {}
         product.options.forEach(selector => {
             defaultOptionValues[selector.name] = selector.values[0]
         })
 
         setVariant(defaultOptionValues);
-
-        document.querySelectorAll('.accordion_button').forEach(button => {
-            const accordionButton = button;
-            accordionButton.innerHTML = accordionButton.innerHTML + '<i className="fas fa-angle-down"></i>';
-            button.addEventListener('click', () => {
-                button.classList.toggle('accordion_button--active');
-            });
-        });
+        getAccordionData()
     }, [])
 
     useEffect(() => {
@@ -126,15 +131,15 @@ const ProductDescription = ({ product, review, selectVariant }) => {
                     />
 
                     <div className="product_accordions-container">
-                    { productPageData.productAccordions.map((item, index) => 
+                    { productAccordions.map((item, index) => 
                         <div key={index}>
-                        <button key={`btn_${index}`} className={`accordion_button ${item.headerClass}`}>
-                            { item.header }
+                        <button key={`btn_${index}`} className={`accordion_button ${item.fields.headerClass}`}>
+                            { item.fields.header }
                             
                             <FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />
                             
                         </button>   
-                        <div key={`content_${index}`} className={`accordion_content ${item.contentClass}`} dangerouslySetInnerHTML={{ __html: item.content }} />
+                        <div key={`content_${index}`} className={`accordion_content ${item.fields.contentClass}`} dangerouslySetInnerHTML={{ __html: item.fields.content.content[0].content[0].value }} />
                         </div>
                     )}
                     </div>

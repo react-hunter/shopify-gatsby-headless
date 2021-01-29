@@ -5738,7 +5738,6 @@ h3.article__title,
 @media (min-width: 768px) {
   .blog-article {
     position: relative;
-    height: 550px
   }
 }
 
@@ -11242,10 +11241,6 @@ article .article__meta-buttons {
   color: black !important
 }
 
-.no-scroll {
-  overflow: hidden
-}
-
 @media (max-width: 768px) {
   .variantSelector_filler_bg {
     height: 400px;
@@ -15693,10 +15688,6 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   margin: 10px 0
 }
 
-#ProductSection-product-template>div.grid.product-single.product-single--medium-media>div.product_image-container>div.pdp-carousel-main.grid__item.product-single__media-group.medium-up--one-half.glider.draggable {
-  background: #F1F2F1
-}
-
 .payment-icons {
   display: flex;
   align-items: center;
@@ -17834,6 +17825,7 @@ body.modal-opened {
   color: #ffffff !important;
   text-align: left;
   padding: 10px 0;
+  overflow-wrap: anywhere;
 
   @media(max-width: 900px){
     font-size: 3.25vw;
@@ -17842,6 +17834,7 @@ body.modal-opened {
   }
 
   p{
+    overflow-wrap: anywhere;
     color: #ffffff !important;
   }
 

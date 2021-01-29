@@ -98,7 +98,7 @@
       padding: 0 40px;
     }
     @media (max-width: 768px) { 
-      padding: 0 20px
+      padding: 0
     }
   }
 
@@ -115,7 +115,12 @@
   }
 
   .Best-Sellers-Carousel-Cell .Best-Sellers-Title {
+    margin-top: 0;
     margin-bottom: 3px !important;
+  }
+
+  .Best-Sellers-Carousel-Cell img {
+    height: unset;
   }
 
   .Best-Sellers-Carousel {

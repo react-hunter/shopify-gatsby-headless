@@ -126,6 +126,12 @@
 .product-single__description {
   margin-top: 0 !important;
 }
+
+.product-single__description .content p iframe{
+  max-width: 100%;
+  width: 100%;
+}
+
 .social-sharing {
   display: none !important;
 }

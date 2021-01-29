@@ -1,12 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'gatsby'
-import StoreContext from '../../context/store'
-import CollectionVariantSelector from './collectionVariantSelector'
-import ProductBoxGallery from './productBoxGallery'
+import StoreContext from '../../../context/store'
+import ProductBoxGallery from '../../collectionPage/productBoxGallery'
 
-const CollectionProductBox = props => {
+const FeaturedProductBox = props => {
     const context = useContext(StoreContext);
-    const [varaintModalShow, setVaraintModalShow] = useState(false);
     const product = props.product;
     const reviewBadge = props.review ? props.review.badge : '';
     const mainOption = getMainOption()
@@ -24,23 +22,12 @@ const CollectionProductBox = props => {
             context.addVariantToCart(product.variants[0].shopifyId, 1)
             setTimeout(document.querySelector('.site-header__cart').click(), 300)
         } else {
-            setVaraintModalShow(true);
+          props.showVariantModal(product);
         }
     }
 
     const notifyMe = () => {
         props.showNotifyModal();
-    }
-    const closeCollectionModal = () => {
-        document.querySelector(".variantSelector_wrapper").classList.remove('animate-bottom');
-        document.querySelector(".variantSelector_wrapper").classList.add('animate-top');
-
-        setTimeout(() => {
-            document.querySelector(".variantSelector_wrapper").classList.remove('animate-top');
-            setVaraintModalShow(false);
-            document.getElementsByTagName("html")[0].classList.remove("no-scroll");
-            document.querySelector(".scrollPreventer").style.overflow = "visible";
-        }, 550)
     }
     const selectProductSwatch = (swatchColor) => {
         setSwatchColor(swatchColor)
@@ -97,11 +84,9 @@ const CollectionProductBox = props => {
                         <button className="openVariantModal" onClick={notifyMe}>NOTIFY ME</button> :
                         <button className="openVariantModal" onClick={addToBag}>ADD TO BAG</button>
                 }
-
-                {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} showNotifyModal={props.showNotifyModal} product={product} /> )}
             </div>
         </li>
     );
 };
 
-export default CollectionProductBox;
+export default FeaturedProductBox;

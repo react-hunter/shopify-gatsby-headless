@@ -1,0 +1,32 @@
+.imageloader{
+  -webkit-transition: opacity .6s ease-in-out;
+  opacity: 1;
+  transition: opacity .6s ease-in-out;
+  width: 100%;
+  height: 300px;
+  max-height: 100%;
+  background: transparent;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.imageloader .load-more_loader{
+  display:block;
+}
+
+.imageloader.small {
+  width: 35px;
+  height: 35px;
+}
+
+.imageloader.small .load-more_loader {
+  width: 35px;
+  height: 35px;
+}
+
+@media (max-width: 500px) {
+  .imageloader {
+    max-height: 170px;
+  }
+}

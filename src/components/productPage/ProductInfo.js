@@ -1,17 +1,17 @@
-import React from 'react';
-import { productPageData } from '../../data/product';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTruck, faCheck } from "@fortawesome/free-solid-svg-icons"
 
 const ProductInfo = ({ product, review }) => {
+    const [featuresList, setFeaturesList] = useState([]);
+    useEffect(() => {
+        const featuresString = review.features
+        if (featuresString !== '') {
+            const featureList = featuresString.split(/\r?\n/);
+            setFeaturesList(featureList);
+        }
+    }, [review]);
     
-    var featuresArray = null;
-
-    const getCorrectProductFeatures = (str) => {
-        var array = str.split(/\r?\n/);
-        featuresArray = array;
-    }
-
     return (
         <>
             <h1 className="product-single__title">{product.title}</h1>
@@ -74,8 +74,7 @@ const ProductInfo = ({ product, review }) => {
 
             {/* <div dangerouslySetInnerHTML={{ __html: review.features }} /> */}
             <p className="product-features">
-                { getCorrectProductFeatures(productPageData.productFeatures)}
-                {featuresArray.map((item,index) =>
+                {featuresList.map((item,index) =>
                     <span className="item" key={index}>
                         <FontAwesomeIcon icon={faCheck} style={{ color: '#93c47d'}} size="1x" />
                         <strong>
@@ -84,13 +83,6 @@ const ProductInfo = ({ product, review }) => {
                     </span>
                 )}
             </p>
-
-            <div className="shipping-tout">
-                
-                <FontAwesomeIcon icon={faTruck} size="1x" />
-
-                <p>FAST SHIPPING FROM CALIFORNIA</p>
-            </div>
         </>
     );
 };

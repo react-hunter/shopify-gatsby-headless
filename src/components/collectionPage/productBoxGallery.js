@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { collectionPageData } from '../../data/collection'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
+// import { LazyLoadImage } from 'react-lazy-load-image-component'
+import CustomImage from '../common/image'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -10,10 +10,11 @@ const ProductBoxGallery = props => {
     let productGalleryCount = 0;
     const product = props.product;
     const mainOption = props.mainOption;
-    const swatchColor = props.swatchColor
+    const swatchColor = props.swatchColor;
+    const badgeStyles = props.badgeStyles;
 
     const [ slideIndex, setSlideIndex] = useState(0);
-
+    
     const productBoxSliderSettings = {
         dots: false,
         infinite: false,
@@ -41,14 +42,14 @@ const ProductBoxGallery = props => {
             const filteredImages = selectedImages.filter(img => img !== '')
             setSwatchImages(filteredImages.slice(0, 3))
         }
-    }, [mainOption, swatchColor])
+    }, [mainOption, swatchColor, product.variants])
 
     const isBadgeEnable = () => {
         let isBadgeEnable = false;
 
-        collectionPageData.badgeStyle.map(item => {
+        badgeStyles.map(item => {
             for (var i=0;i<product.tags.length;i++) {
-                if (product.tags[i] === item.name) {
+                if (product.tags[i] === item.fields.name) {
                     isBadgeEnable = true;
                 }
             }
@@ -59,10 +60,10 @@ const ProductBoxGallery = props => {
 
     const getBadgeImage = () => {
         let imageUrl = '';
-        collectionPageData.badgeStyle.map(item => {
+        badgeStyles.map(item => {
             for (var i=0;i<product.tags.length;i++) {
-                if (product.tags[i] === item.name) {
-                    imageUrl = item.image;
+                if (product.tags[i] === item.fields.name) {
+                    imageUrl = item.fields.image.fields.file.url;
                 }
             }
             return true
@@ -74,15 +75,15 @@ const ProductBoxGallery = props => {
         if (productGalleryCount === 1) {
             return  { width: '100%' };
         } else if (productGalleryCount === 2) {
-            if (slideIndex == 1) {
+            if (slideIndex === 1) {
                 return { width: '50%',  transform: 'translateX(100%)' };
             } else {
                 return  { width: '50%' };
             }
         } else {
-            if (slideIndex == 2) {
+            if (slideIndex === 2) {
                 return { transform: 'translateX(200%)' };
-            } else if (slideIndex == 1) {
+            } else if (slideIndex === 1) {
                 return {transform: 'translateX(100%)' };
             }
         }
@@ -92,36 +93,33 @@ const ProductBoxGallery = props => {
         <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
             <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
                 {   
-                    isBadgeEnable() ? <LazyLoadImage effect="blur" loading="eager"  src={getBadgeImage()} className="badge" alt="" /> : ''
+                    isBadgeEnable() ? <img  src={getBadgeImage()} className="badge" alt="" /> : ''
                 }
                 <div className="collection-product_image_container">
                 { 
                     mainOption === '' ?
                         <Slider {...productBoxSliderSettings}>
                             { product.images[0] ? 
-                                (<LazyLoadImage 
+                                (<CustomImage 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[0].originalSrc}
                                     alt={product.title}
-                                    effect="blur" loading="eager" 
                                 />) : ""
                             }
                             { product.images[1] ? 
-                                (<LazyLoadImage 
+                                (<CustomImage 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[1].originalSrc}
                                     alt={product.title}
-                                    style={{ cursor: 'pointer' }}
-                                    effect="blur" loading="eager" 
+                                    style={{ cursor: 'pointer' }} 
                                 />) : ""
                             }
                             { product.images[2] ? 
-                                (<LazyLoadImage 
+                                (<CustomImage 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[2].originalSrc}
                                     alt={product.title}
-                                    style={{ cursor: 'pointer' }}
-                                    effect="blur" loading="eager" 
+                                    style={{ cursor: 'pointer' }} 
                                 />) : ""
                             }
                         </Slider>
@@ -130,12 +128,11 @@ const ProductBoxGallery = props => {
                     {
                         swatchImages.map((swatchImage, swatchImageIndex) => {
                             return (
-                                <LazyLoadImage 
+                                <CustomImage 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={swatchImage}
                                     alt=''
-                                    style={{ cursor: 'pointer' }}
-                                    effect="blur" loading="eager" 
+                                    style={{ cursor: 'pointer' }} 
                                     key={swatchImageIndex}
                                 />
                             )

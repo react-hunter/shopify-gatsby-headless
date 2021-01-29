@@ -21,7 +21,7 @@ const articlePage = ({ data }) => {
 
   return (
     <>
-      <Preloader />
+      {/* <Preloader /> */}
       <SEO title={data.shopifyArticle.title} />
 
       <div id="article-page">

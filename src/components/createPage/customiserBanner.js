@@ -1,17 +1,35 @@
-import React, { useEffect } from 'react';
-import { createPageData } from '../../data/createPage' 
+import React, { useState, useEffect } from 'react'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import CustomImage from '../common/image'
+import { client } from '../../contentful'
 
 const CustomiserBanner = () => {
-    const scrollToOptions = (e) => {
-        e.preventDefault();
-
-        document.querySelector('#shopify-section-create-arrangements').scrollIntoView({
-            behavior: 'smooth'
-        });
-    }
+    const [customiserBanner, setCustomiserBanner] = useState({
+        title: 'CUSTOMIZE YOUR DOSE OF ROSES',
+        contents: "Choose arrangement style, box material, rose colors and personalize it with letters, numbers or symbols. All handmade with real roses that last up to five years.",
+        buttonText: 'GET STARTED',
+        desktopImageItems: [],
+        mobileImageItems: []
+    });
 
     useEffect(() => {
+        async function getBannerData() {
+            const bannerData = await client.getEntries({'content_type': 'customiserBanner'});
+            const desktopImageData = await client.getEntries({'content_type': 'desktopImageItems'});
+            const mobileImageData = await client.getEntries({'content_type': 'mobileImageItems'});
+            setCustomiserBanner({
+                title: bannerData.items[0].fields.title,
+                contents: bannerData.items[0].fields.contents,
+                buttonText: bannerData.items[0].fields.buttonText,
+                desktopImageItems: desktopImageData.items[0].fields.customiserImageItem,
+                mobileImageItems: mobileImageData.items[0].fields.customiserImageItem
+            });
+            setUI();
+        }
+        getBannerData();
+    }, []);
+
+    function setUI() {
         setTimeout(function(){
             smoothLoadBanner();
         }, 500)
@@ -30,7 +48,15 @@ const CustomiserBanner = () => {
                     document.getElementById('fadeOpacity_wrapper').style.opacity = "1";
             }
         });
-    })
+    }
+
+    const scrollToOptions = (e) => {
+        e.preventDefault();
+
+        document.querySelector('#shopify-section-create-arrangements').scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
    
     function smoothLoadBanner() {
         let imageColumns = document.querySelectorAll('.customiser_banner-image_column');
@@ -49,34 +75,34 @@ const CustomiserBanner = () => {
             <div className="customiser_banner-outer">
                 <div className="customiser_banner-inner">
                     <div className="customiser_banner-text_container">
-                        <div className="customiser_banner-text_header">{createPageData.customiserBanner.title}</div>
-                        <div className="customiser_banner-text_subheader">{createPageData.customiserBanner.contents}</div>
-                        <a href="/fakeUrl" onClick={scrollToOptions} className="customiser_banner-text_link">{createPageData.customiserBanner.buttonText}</a>
+                        <div className="customiser_banner-text_header">{customiserBanner.title}</div>
+                        <div className="customiser_banner-text_subheader">{customiserBanner.contents}</div>
+                        <a href="/fakeUrl" onClick={scrollToOptions} className="customiser_banner-text_link">{customiserBanner.buttonText}</a>
                     </div>
                     <div className="customiser_banner-image_grid_container">
                         <div className="customiser_banner-image_grid">
 
-                            {createPageData.customiserBanner.desktopImageItems.map((item, index) => 
+                            {customiserBanner.desktopImageItems.map((item, index) => 
                             <div className="desktop_column" key={index}>
                                 <div className="customiser_banner-image_column">
                                     <div className="customiser_banner-image">
-                                        <LazyLoadImage effect="blur" loading="eager" src={item.image1} alt=""/>
+                                        <CustomImage src={item.fields.image1.fields.file.url} alt=""/>
                                     </div>
                                     <div className="customiser_banner-image">
-                                        <LazyLoadImage effect="blur" loading="eager" src={item.image2} alt=""/>
+                                        <CustomImage src={item.fields.image2.fields.file.url} alt=""/>
                                     </div>
                                 </div>
                             </div>
                             )}
 
-                            {createPageData.customiserBanner.mobileImageItems.map((item, index) => 
+                            {customiserBanner.mobileImageItems.map((item, index) => 
                             <div className="mobile_column" key={index}>
                                 <div className="customiser_banner-image_column">
                                     <div className="customiser_banner-image">
-                                        <LazyLoadImage effect="blur" loading="eager" src={item.image1} alt=""/>
+                                        <CustomImage src={item.fields.image1.fields.file.url} alt=""/>
                                     </div>
                                     <div className="customiser_banner-image">
-                                        <LazyLoadImage effect="blur" loading="eager" src={item.image2} alt=""/>
+                                        <CustomImage src={item.fields.image2.fields.file.url} alt=""/>
                                     </div>
                                 </div>
                             </div>

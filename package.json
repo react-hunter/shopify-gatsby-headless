@@ -11,9 +11,11 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.2",
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "@nacelle/react-klaviyo": "^2.10.1",
     "apollo-boost": "^0.4.7",
     "axios": "^0.19.2",
     "bulma": "^0.9.0",
+    "contentful": "^8.1.7",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "flickity": "^2.2.1",
@@ -53,13 +55,15 @@
     "react-helmet": "^5.2.1",
     "react-lazy-load-image-component": "^1.5.1",
     "react-notifications-component": "^2.3.0",
+    "react-query": "^3.6.0",
     "react-slick": "^0.27.13",
     "react-svg": "^11.2.1",
     "rebass": "^4.0.7",
     "shopify-api-node": "^3.6.0",
     "shopify-buy": "^2.9.0",
     "slick-carousel": "^1.8.1",
-    "styled-components": "^4.4.1"
+    "styled-components": "^4.4.1",
+    "use-state-with-callback": "^2.0.3"
   },
   "devDependencies": {
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.10",

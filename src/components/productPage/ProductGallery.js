@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import Slider from "react-slick";
+import CustomImage from '../common/image'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -18,7 +19,7 @@ const ProductGallery = ({ product, selectedVariant }) => {
 
     useEffect(() => {
         slider.current.slickGoTo(selectedImageIndex);
-    }, [selectedVariant])
+    }, [selectedVariant, selectedImageIndex])
 
     const settings = {
         dots: false,
@@ -51,7 +52,7 @@ const ProductGallery = ({ product, selectedVariant }) => {
                             return (
                                 image ? (
                                     <div className="product-single__media-wrapper" key={imageIndex}>
-                                        <LazyLoadImage 
+                                        <CustomImage 
                                             className="lazy-load-mc"
                                             src={image.originalSrc} 
                                             alt={product.title}
@@ -65,11 +66,6 @@ const ProductGallery = ({ product, selectedVariant }) => {
                     }
                 </Slider>
 
-                {product.images.length === 0? '': 
-                    <h2 className="ig-title" style={{float:'none', clear: 'both', marginTop:'20px' }}>
-                        <a href="https://www.instagram.com/doseofroses/"> As Seen on @DOSEOFROSES</a>
-                    </h2>
-                }
                 <script src="//foursixty.com/media/scripts/fs.slider.v2.5.js" data-feed-id="dose-of-roses" data-for-url="true" data-theme="slider_v2_5" data-open-links-in-same-page="true" data-connector-filter="30963" data-cell-size="20%"></script>
             </div>
         </div>

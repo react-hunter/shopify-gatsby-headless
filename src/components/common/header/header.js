@@ -11,12 +11,13 @@ import SearchHeaderIcon from '../../../images/icon-search-header.svg';
 import LoginHeaderIcon from '../../../images/icon-login-header.svg';
 import MessageIcon from '../../../images/icon-message.svg';
 import CartHeaderIcon from '../../../images/icon-cart-header.svg';
-import { commonData } from '../../../data/common';
+import { client } from '../../../contentful'
 
 import SearchDrawer from './searchDrawer';
 import SiteNav from './siteNav';
 import AnnoucmentBar from './annoucmentBar';
 import CardSlider from './cardSlider';
+import CustomImage from '../image'
 
 let runBannerAnimation = false;
 
@@ -43,11 +44,25 @@ const Header = ({ path }) => {
   const { checkout } = context.store
   const [quantity, setQuantity] = useState(countQuantity(checkout ? checkout.lineItems : []))
   // const [modal, setModal] = useState(false)
-  const [ searchShow, setSearchShow ] = useState(false)
+  const [ searchShow, setSearchShow ] = useState(false);
+  const [mobileHeaderMenu, setMobileHeaderMenu] = useState([]);
   
   useEffect(() => {
-    initializeHeader();
-  });
+    async function getMobileMenuData() {
+      const mobileMenuData = await client.getEntries({'content_type': 'mobileHeaderMenu'});
+      const mobileMenuChildData = await client.getEntries({'content_type': 'mobileHeaderMenuItemChild'});
+      let mobileMenuList = mobileMenuData.items[0].fields.mobileHeaderMenuItem
+      for(let i=0; i<mobileMenuList.length; i++) {
+        if(mobileMenuList[i].fields.hasChildren) {
+          const properMenuChild = mobileMenuChildData.items.filter(menuChild => menuChild.fields.parent === mobileMenuList[i].fields.title);
+          mobileMenuList[i].fields.mobileHeaderMenuItemChild = properMenuChild;
+        }
+      }
+      setMobileHeaderMenu(mobileMenuList);
+      initializeHeader();
+    }
+    getMobileMenuData();
+  }, []);
 
   useEffect(() => {
     setQuantity(countQuantity(checkout ? checkout.lineItems : []));
@@ -71,10 +86,15 @@ const Header = ({ path }) => {
   
   const hideSideNav = (e) => {
     e.preventDefault();
+    nextSlide();
+  }
 
+  function nextSlide() {
     let modal = document.getElementById('sidenav');
     let openIcon = document.getElementById('mobile-nav--open');
     let closeIcon = document.getElementById('hideSideNav');
+    let backIcon = document.getElementById('goBackNavMenu');
+
     openIcon.classList.remove("mobile-nav--close");
     openIcon.classList.add("mobile-nav--open");
     closeIcon.style.display = "none";
@@ -82,6 +102,8 @@ const Header = ({ path }) => {
     modal.style.display = "none";
     document.getElementsByTagName("html")[0].classList.remove("side-menu-scroll")
     openIcon.setAttribute("style", "display: flex !important;")
+
+    backIcon.style.display = "none";
   }
 
   const showSearchBar = (e) => {
@@ -406,40 +428,40 @@ const Header = ({ path }) => {
 
               <div className="sidenav-item_outer" key="sidenav-item_outer">
                 <CardSlider key="card-slider" />
-                { commonData.mobileHeaderMenu.map((menuItem, menuIndex) => {                 
+                { mobileHeaderMenu.map((menuItem, menuIndex) => {                 
                   return (
-                    <div className={`menuItem ${menuItem.hasChildren ? 'hasChild' : ''}`} 
-                      data-show-parent-id={menuItem.title} key={menuIndex}>    
+                    <div className={`menuItem ${menuItem.fields.hasChildren ? 'hasChild' : ''}`} 
+                      data-show-parent-id={menuItem.fields.title} key={menuIndex}>    
 
-                      <Link key={`menuItem-${menuIndex}`} to={`${menuItem.hasChildren ? '/fakeUrl' : menuItem.url}`} data-id={menuItem.title}
-                        onClick={e => menuClickHandler(e, menuItem.hasChildren, menuItem.title)} data-url={menuItem.url}
-                        className={`${menuItem.hasChildren ? 'hasChild' : ''} sidenav-item_inner first-level-item_inner`}>
+                      <Link key={`menuItem-${menuIndex}`} to={`${menuItem.fields.hasChildren ? '/fakeUrl' : menuItem.fields.url}`} data-id={menuItem.fields.title}
+                        onClick={e => menuClickHandler(e, menuItem.fields.hasChildren, menuItem.fields.title)} data-url={menuItem.fields.url}
+                        className={`${menuItem.fields.hasChildren ? 'hasChild' : ''} sidenav-item_inner first-level-item_inner`}>
                         <div className="sidenav-item_name" key={`itemname-${menuIndex}`}>
                           <div className="sidenav-item_name-inner">
-                            {menuItem.title}
+                            {menuItem.fields.title}
                           </div>
                         </div>
                         <div className="sidenav-item_img" key={`itemimg-${menuIndex}`}>
-                          <LazyLoadImage effect="blur" loading="eager" src={menuItem.image} alt="" />
+                          <CustomImage effect="blur" loading="eager" src={menuItem.fields.image.fields.file.url} alt="" />
                         </div>
                       </Link>
 
-                      {menuItem.hasChildren ? 
+                      {menuItem.fields.hasChildren ? 
                       (
-                        menuItem.childs.map((child_item, child_index) => {
+                        menuItem.fields.mobileHeaderMenuItemChild.map((child_item, child_index) => {
                           return (
-                            <Link to={child_item.url} style={{ display: 'none' }} 
-                              data-parent-id={child_item.parent}
-                              data-title={child_item.title} key={`child-${menuIndex}-${child_index}`}
-                              onClick={hideSideNav}
+                            <Link to={child_item.fields.url} style={{ display: 'none' }} 
+                              data-parent-id={child_item.fields.parent}
+                              data-title={child_item.fields.title} key={`child-${menuIndex}-${child_index}`}
+                              onClick={nextSlide}
                               className="sidenav-item_inner child-item" >
                               <div className="sidenav-item_name" key={`childitemname-${menuIndex}-${child_index}`}>
                                 <div className="sidenav-item_name-inner">
-                                  {child_item.title}
+                                  {child_item.fields.title}
                                 </div>
                               </div>
                               <div className="sidenav-item_img" key={`childitemimg-${menuIndex}-${child_index}`}>
-                                <LazyLoadImage effect="blur" loading="eager" src={child_item.image} alt="" />
+                                <CustomImage effect="blur" loading="eager" src={child_item.fields.image.fields.file.url} alt="" />
                               </div>
                             </Link>
                           )

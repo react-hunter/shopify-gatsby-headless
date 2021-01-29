@@ -124,14 +124,35 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
         e.preventDefault();
     }
     const getCustomAttributes = (lineItem) => {
-        const attributeList = lineItem.customAttributes
-        return (
-            <>
-                <p className="ajax-cart-item-property" key="rose-color">Rose Colors: {attributeList[0].value}</p>
-                <p className="ajax-cart-item-property" key="rose-box">Box: {attributeList[1].value}</p>
-                <p className="ajax-cart-item-property" key="rose-style">Style: {attributeList[2].value}</p>
-            </>
-        )
+        if (lineItem.customAttributes.length > 1) {
+            const attributeList = lineItem.customAttributes
+            return (
+                <>
+                    <p className="ajax-cart-item-property" key="rose-color">Rose Colors: {attributeList[0].value}</p>
+                    <p className="ajax-cart-item-property" key="rose-box">Box: {attributeList[1].value}</p>
+                    <p className="ajax-cart-item-property" key="rose-style">Style: {attributeList[2].value}</p>
+                </>
+            )
+        } else {
+            const optionAttributeList = lineItem.variant.selectedOptions
+            if (optionAttributeList.length > 0) {
+                return (
+                    <>
+                    {(optionAttributeList.map((item, index) => {
+                        if (item.name === "Box Material") {
+                            return <p className="ajax-cart-item-property" key="box-material" >Box Material: { item.value }</p>
+                        } else if (item.name === "Rose Color") {
+                            return <p className="ajax-cart-item-property" key="rose-color" >Rose Color: { item.value }<span className="color-circle variant-item-color" data-color={ item.value }></span></p>
+                        } else if (item.name === "Box Color") {
+                            return <p className="ajax-cart-item-property" key="box-color" >Box: { item.value }<span className="color-circle variant-item-color" data-color={ item.value }></span></p>
+                        } else {
+                            return <p className="ajax-cart-item-property" key={index} >{ item.name }: { item.value }</p>
+                        }
+                    }))}
+                    </>
+                )
+            }
+        }
     }
     const getLineItemImage = (lineItem) => {
         const attributeList = lineItem.customAttributes
@@ -235,11 +256,11 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                                         </div>
                                         <div className="ajax-cart-item-middle-part">
                                             <div className="ajax-cart-item__title">
-                                                <Link to={`/products/${item.variant.product.handle}`}>{item.variant.title}</Link>
+                                                <Link to={`/products/${item.variant.product.handle}`}>{item.title}</Link>
                                             </div>
                                             <div className="ajax-cart-item-properties">
                                                 {
-                                                    (item.customAttributes.length > 1) && getCustomAttributes(item)
+                                                    getCustomAttributes(item)
                                                 }
                                             </div>
                                             <div className="ajax-cart-item-quantity-container">
