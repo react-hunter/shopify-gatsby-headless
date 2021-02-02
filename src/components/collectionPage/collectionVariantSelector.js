@@ -2,12 +2,14 @@ import React, { useContext, useState, useEffect } from 'react';
 import { navigate, Link } from 'gatsby'
 import StoreContext from '../../context/store'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import ImageSpin from '../common/imageSpin'
 
 const CollectionVariantSelector = props => {
     const context = useContext(StoreContext);
     const product = props.product;
     const firstVariant = product.variants[0];
     const [variant, setVariant] = useState(firstVariant)
+    const [showSpin, setShowSpin] = useState(false);
     const mainOption = product.options[0]
     const otherOptions = product.options.length > 1 ? product.options.slice(1, product.options.length) : []
 
@@ -66,9 +68,12 @@ const CollectionVariantSelector = props => {
         setVariant(theVariant)
     }
     const addToSideCart =() => {
-        console.log("addToSideCart: ", variant.shopifyId);
+        setShowSpin(true);
         context.addVariantToCart(variant.shopifyId, 1);
-//        props.closeModal()
+        setTimeout(showCart, 1200);
+    }
+    function showCart() {
+        setShowSpin(false);
         document.querySelector('.site-header__cart').click()
     }
     const changeUrl = () => {
@@ -215,7 +220,9 @@ const CollectionVariantSelector = props => {
                             (
                                 <button className="variant-selector_add_to_bag" 
                                     onClick={addToSideCart}
-                                    style={{ display: 'inline-block' }}>ADD TO BAG - ${variant.price}</button>
+                                    style={{ display: 'inline-block' }}>
+                                        ADD TO BAG - ${variant.price}{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }
+                                </button>
                             ) : 
                             (
                                 <button className="variant-selector_add_to_bag" 

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ImageSpin from '../common/imageSpin'
 
 const Buttons = ({ context, available, productVariant,  quantity}) => {
+    const [showSpin, setShowSpin] = useState(false);
     const handleAddToCart = () => {
+        setShowSpin(true);
         context.addVariantToCart(productVariant.shopifyId, quantity);
-        openCartDrawer();
-        openCartOverlay();
+        setTimeout(openCartDrawer, 1200);
     }
 
     const handleAddToCart_BuyNow = () => {
@@ -12,11 +14,9 @@ const Buttons = ({ context, available, productVariant,  quantity}) => {
     }
 
     function openCartDrawer() {
+        setShowSpin(false);
         document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
         document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
-    }
-    
-    function openCartOverlay() {
         document.querySelector(".js-ajax-cart-overlay").classList.add('is-open');
         document.documentElement.classList.add('is-locked');
     }
@@ -27,7 +27,7 @@ const Buttons = ({ context, available, productVariant,  quantity}) => {
                 <button id="AddToCart"
                     className="btn product-form__cart-submit btn--secondary-accent js-ajax-add-to-cart"
                     disabled={!available}
-                    onClick={handleAddToCart}>{available ? "ADD TO BAG" : "SOLD OUT"}</button>
+                    onClick={handleAddToCart}>{available ? "ADD TO BAG" : "SOLD OUT"}{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }</button>
                 <div className="shopify-payment-button">
                     <button
                         className="shopify-payment-button__button shopify-payment-button__button--unbranded"

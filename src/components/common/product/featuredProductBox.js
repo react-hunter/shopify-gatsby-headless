@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Link } from 'gatsby'
 import StoreContext from '../../../context/store'
 import ProductBoxGallery from '../../collectionPage/productBoxGallery'
+import ImageSpin from '../imageSpin'
 
 const FeaturedProductBox = props => {
     const context = useContext(StoreContext);
@@ -9,6 +10,7 @@ const FeaturedProductBox = props => {
     const reviewBadge = props.review ? props.review.badge : '';
     const mainOption = getMainOption()
     const [swatchColor, setSwatchColor] = useState(mainOption === '' ? '' : mainOption.values[0])
+    const [showSpin, setShowSpin] = useState(false);
     function getMainOption() {
         let tempOption = '';
         const options = product.options ? product.options.filter(option => option.name === 'Rose Color') : []
@@ -19,11 +21,16 @@ const FeaturedProductBox = props => {
     }
     const addToBag = () => {
         if(product.variants.length === 1) {
+            setShowSpin(true);
             context.addVariantToCart(product.variants[0].shopifyId, 1)
-            setTimeout(document.querySelector('.site-header__cart').click(), 300)
+            setTimeout(showCart, 1200)
         } else {
           props.showVariantModal(product);
         }
+    }
+    function showCart() {
+        setShowSpin(false)
+        document.querySelector('.site-header__cart').click()
     }
 
     const notifyMe = () => {
@@ -82,7 +89,9 @@ const FeaturedProductBox = props => {
                 {
                     (product.variants.length === 1 && !product.variants[0].availableForSale) ? 
                         <button className="openVariantModal" onClick={notifyMe}>NOTIFY ME</button> :
-                        <button className="openVariantModal" onClick={addToBag}>ADD TO BAG</button>
+                        <button className="openVariantModal" onClick={addToBag}>
+                            ADD TO BAG{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }
+                        </button>
                 }
             </div>
         </li>

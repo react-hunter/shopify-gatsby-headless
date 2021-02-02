@@ -3,10 +3,12 @@ import { Link } from 'gatsby'
 import StoreContext from '../../context/store'
 import CollectionVariantSelector from './collectionVariantSelector'
 import ProductBoxGallery from './productBoxGallery'
+import ImageSpin from '../common/imageSpin'
 
 const CollectionProductBox = props => {
     const context = useContext(StoreContext);
     const [varaintModalShow, setVaraintModalShow] = useState(false);
+    const [showSpin, setShowSpin] = useState(false);
     const product = props.product;
     const reviewBadge = props.review ? props.review.badge : '';
     const mainOption = getMainOption()
@@ -21,11 +23,16 @@ const CollectionProductBox = props => {
     }
     const addToBag = () => {
         if(product.variants.length === 1) {
-            context.addVariantToCart(product.variants[0].shopifyId, 1)
-            setTimeout(document.querySelector('.site-header__cart').click(), 300)
+            setShowSpin(true);
+            context.addVariantToCart(product.variants[0].shopifyId, 1);
+            setTimeout(showCart, 1200);
         } else {
             setVaraintModalShow(true);
         }
+    }
+    const showCart = () => {
+        setShowSpin(false);
+        document.querySelector('.site-header__cart').click();
     }
 
     const notifyMe = () => {
@@ -95,7 +102,7 @@ const CollectionProductBox = props => {
                 {
                     (product.variants.length === 1 && !product.variants[0].availableForSale) ? 
                         <button className="openVariantModal" onClick={notifyMe}>NOTIFY ME</button> :
-                        <button className="openVariantModal" onClick={addToBag}>ADD TO BAG</button>
+                        <button className="openVariantModal" onClick={addToBag}>ADD TO BAG{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }</button>
                 }
 
                 {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} showNotifyModal={props.showNotifyModal} product={product} /> )}
