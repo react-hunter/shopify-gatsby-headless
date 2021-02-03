@@ -106,40 +106,38 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
       </div>
       <div className="Best-Sellers-Carousel">
       
-      
-        <Glider draggable={true} scrollLock={true} duration={1} slidesToShow={2}
+        <button type="button" id="prev" className="slick-arrow slick-prev"> Previous</button>
+        <Glider draggable={true} scrollLock={true} duration={1} slidesToShow={2} hasArrows={true}
           arrows= {{
-            prev: <button type="button" id="prev" className="slick-arrow slick-prev"> Previous</button>,
-            next: <button type="button" id="next" className="slick-arrow slick-next"> Next</button>
+            prev: '.slick-prev',
+            next: '.slick-next'
           }}
           responsive={[{
-            // screens greater than >= 775px
             breakpoint: 775,
             settings: {
-              // Set to `auto` and provide item width to adjust to viewport
               slidesToShow: 2,
             }
           },{
-            // screens greater than >= 1024px
             breakpoint: 1024,
             settings: {
               slidesToShow: 5,
             }
           }
         ]}>
-        {
-          products
-            .map((p, i) => {
-              let product = p
-              let productReview = reviewList.filter(re => re.handle === product.handle)
-              return (
-                <div key={i} className="products-on-page grid grid--uniform grid--view-items">
-                  <FeaturedProductBox product={product} review={productReview[0]} showNotifyModal={showNotifyModal}
-                      badgeStyles={badgeStyles} showVariantModal={showVariantModal} />
-                </div>
-              )
-        })}
+          {
+            products
+              .map((p, i) => {
+                let product = p
+                let productReview = reviewList.filter(re => re.handle === product.handle)
+                return (
+                  <div key={i} className="products-on-page grid grid--uniform grid--view-items">
+                    <FeaturedProductBox product={product} review={productReview[0]} showNotifyModal={showNotifyModal}
+                        badgeStyles={badgeStyles} showVariantModal={showVariantModal} />
+                  </div>
+                )
+          })}
         </Glider>
+        <button type="button" id="next" className="slick-arrow slick-next"> Next</button>
 
         {/* <Slider {...settings}>
           {
