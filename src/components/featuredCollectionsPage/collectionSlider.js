@@ -73,21 +73,24 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
         breakpoint: 1024,
         settings: {
           slidesToShow: 5,
-          slidesToScroll: 1,
+          //slidesToScroll: 1,
+          swipeToSlide: true,
         }
       },
       {
         breakpoint: 960,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 1
+          //slidesToScroll: 1
+          swipeToSlide: true,
         }
       },
       {
         breakpoint: 760,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 1
+          //slidesToScroll: 1
+          swipeToSlide: true,
         }
       }
     ]
