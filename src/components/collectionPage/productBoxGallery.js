@@ -34,8 +34,7 @@ const ProductBoxGallery = props => {
         touchVerticalScroll: false,
         dragThreshold : 10, 
         selectedAttraction: 0.01,
-        friction: 0.2,
-        beforeChange: (current, next) => setSlideIndex(next)
+        friction: 0.2
     }
     
     productGalleryCount = mainOption === '' ? Math.min(product.images.length,3) : Math.min(swatchImages.length,3);
@@ -63,6 +62,8 @@ const ProductBoxGallery = props => {
                 setSlideIndex(flkty.selectedIndex);
                 console.log("flkty.selectedIndex = ", flkty.selectedIndex)
             })
+        } else {
+            console.log("flkty = ", flkty);
         }
 
     }, [mainOption, swatchColor, product.variants])
@@ -112,9 +113,7 @@ const ProductBoxGallery = props => {
         }
     }
 
-    let slider = useRef(null);
-
-    let flkty = null;
+    let flkty;
 
     return (
         <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
@@ -152,7 +151,7 @@ const ProductBoxGallery = props => {
                             }
                         </Flickity>
                     : 
-                    <Flickity options={flickityOptions}>
+                    <Flickity options={flickityOptions} flickityRef={c=> flkty = c} >
                     {
                         swatchImages.map((swatchImage, swatchImageIndex) => {
                             return (
