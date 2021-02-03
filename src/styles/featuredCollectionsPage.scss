@@ -128,10 +128,6 @@
         }
     }
 
-    .carousel-scrollbar {
-        height: 2px;
-    }
-
     .collection-product_image_container .slick-list {
         height: unset!important;
     }
@@ -159,12 +155,15 @@
 
         .grid__item {
             padding-left: 0;
-            
+
             @media (max-width: 767px) {
                 padding-left: 5px;
                 padding-right: 5px;
             }
         }
     }
+}
 
+.carousel-scrollbar {
+    height: 2px;
 }
