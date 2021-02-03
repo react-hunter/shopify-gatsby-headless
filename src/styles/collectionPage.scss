@@ -610,6 +610,10 @@ border-radius: 50%;
         .slick-arrow {
             display: block!important;
         }
+
+        .flickity-button {
+            display: block!important;
+        }
     }
     .slick-list {
         height: 18vw !important;
@@ -635,6 +639,25 @@ border-radius: 50%;
             right:0;
         }
     }
+
+
+    .flickity-button {
+        display: none!important;
+    }
+
+    .flickity-prev-next-button {
+        border-radius: 0;
+        width: 30px;
+        height: 30px;
+        
+        &.next {
+            right: 0;
+        }
+        &.previous {
+            left: 0;
+        }
+    }
+ 
 }
 
 @media (max-width: 750px) {

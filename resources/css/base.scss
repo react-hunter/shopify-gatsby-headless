@@ -14428,13 +14428,6 @@ header .menu-category-panel .menu-panel .menu-panel_image_wrapper {
   touch-action: none
 }
 
-.collection-product_image_container {
-  transition: transform 0.4s;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: none
-}
-
 @media (max-width: 768px) {
   #klaviyo-bis-modal {
     margin-top: 50% !important
@@ -14456,11 +14449,6 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 .product-collection_image_alternate {
   transform: translateX(100%)
 }
-
-// .collection-product_image_container.hover_effect
-// .collection-product_image_container:hover, .collection-product_image_container.hover_effect {
-//   transform: translateX(-100%);
-// }
 
 #prevButton,
 #nextButton {
