@@ -5,6 +5,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../styles/relatedProductList.scss";
 
+import Glider, {GliderMethods} from 'react-glider';
+import 'glider-js/glider.min.css';
+
 const RelatedProductList = ({ products, reviewList }) => {
   const settings = {
     dots: false,
@@ -47,8 +50,42 @@ const RelatedProductList = ({ products, reviewList }) => {
         <span className="you-may-like_header">YOU MAY ALSO LIKE</span>
         <span className="you-may-like_header_underline"></span>
       </div>
-      <div className="Best-Sellers-Carousel glider draggable">
-        <Slider {...settings}>
+      <div className="Best-Sellers-Carousel">
+
+      <Glider draggable={true} scrollLock={true} duration={1} slidesToShow={2}
+          arrows= {{
+            prev: <button type="button" id="prev" className="slick-arrow slick-prev"> Previous</button>,
+            next: <button type="button" id="next" className="slick-arrow slick-next"> Next</button>
+          }}
+          responsive={[{
+            // screens greater than >= 775px
+            breakpoint: 775,
+            settings: {
+              // Set to `auto` and provide item width to adjust to viewport
+              slidesToShow: 2,
+            }
+          },{
+            // screens greater than >= 1024px
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 5,
+            }
+          }
+        ]}>
+          {
+            products
+              .map((p, i) => {
+                let product = p
+                const productReview = reviewList.filter(re => re.handle === product.handle)
+                return (
+                  <div key={i}>
+                    <ProductBox product={product} review={productReview[0]} />
+                  </div>
+                )
+          })}
+        </Glider>
+
+        {/* <Slider {...settings}>
             {
               products
                 .map((p, i) => {
@@ -60,7 +97,7 @@ const RelatedProductList = ({ products, reviewList }) => {
                     </div>
                   )
             })}
-        </Slider>
+        </Slider> */}
       </div>
     </div>
   );

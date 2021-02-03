@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'gatsby'
 import CollectionVariantSelector from '../collectionPage/collectionVariantSelector'
 import FeaturedProductBox from "../common/product/featuredProductBox"
@@ -8,6 +8,9 @@ import "../../styles/collectionPage.scss"
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+import Glider, {GliderMethods} from 'react-glider';
+import 'glider-js/glider.min.css';
 
 const CollectionSlider = ({products, title, handle, reviewList}) => {
   const [notifyModalShow, setNotifyModalShow] = useState(false);
@@ -64,8 +67,8 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
   const settings = {
     dots: false,
     infinite: false,
-    speed: 500,
     slidesToShow: 5,
+    speed: 5000,
     // slidesToScroll: 1,
     swipeToSlide: true,
     responsive: [
@@ -95,13 +98,50 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
       }
     ]
   };
+
   return (
     <div className="collection-carousel">
       <div className="carousel-header_wrapper">
         <span className="carousel-header">{title}</span>
       </div>
       <div className="Best-Sellers-Carousel">
-        <Slider {...settings}>
+      
+      
+        <Glider draggable={true} scrollLock={true} duration={1} slidesToShow={2}
+          arrows= {{
+            prev: <button type="button" id="prev" className="slick-arrow slick-prev"> Previous</button>,
+            next: <button type="button" id="next" className="slick-arrow slick-next"> Next</button>
+          }}
+          responsive={[{
+            // screens greater than >= 775px
+            breakpoint: 775,
+            settings: {
+              // Set to `auto` and provide item width to adjust to viewport
+              slidesToShow: 2,
+            }
+          },{
+            // screens greater than >= 1024px
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 5,
+            }
+          }
+        ]}>
+        {
+          products
+            .map((p, i) => {
+              let product = p
+              let productReview = reviewList.filter(re => re.handle === product.handle)
+              return (
+                <div key={i} className="products-on-page grid grid--uniform grid--view-items">
+                  <FeaturedProductBox product={product} review={productReview[0]} showNotifyModal={showNotifyModal}
+                      badgeStyles={badgeStyles} showVariantModal={showVariantModal} />
+                </div>
+              )
+        })}
+        </Glider>
+
+        {/* <Slider {...settings}>
           {
             products
               .map((p, i) => {
@@ -114,7 +154,7 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
                   </div>
                 )
           })}
-        </Slider>
+        </Slider> */}
         {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} 
                                     showNotifyModal={showNotifyModal} product={selectedProduct} /> )}
         <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
