@@ -97,6 +97,11 @@
         margin-bottom: 3px !important;
     }
     
+    .collection-carousel {
+        @media (max-width: 768px) {
+            padding: 55px 0;
+        }
+    }
     .Best-Sellers-Carousel {
         margin-top: 35px;
         position: relative;
@@ -113,14 +118,33 @@
           margin-top: 15px;
           .slick-prev, .slick-next {
               display: block!important;
-              padding: 10px;
+              background-image: none;
+              background-color: #EEE;
+              padding: 15px;
               border-radius: 50%;
+              top: 35%;
+              &::after {
+                content: ' ';
+                position: absolute;
+                top: calc(50% - 10px);
+                width: 20px;
+                height: 20px;
+                background-size: contain;
+              }
           }
           .slick-prev {
               left: 20px;
+              &::after {
+                left: 4px;
+                background-image: url("../images/leftArrow_small.png");
+              }
           }
           .slick-next {
-              right: 20px;
+            right: 20px;
+            &::after {
+              right: 4px;
+              background-image: url("../images/rightArrow_small.png");
+            }
           }
         }
     }
