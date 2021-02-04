@@ -69,6 +69,7 @@
        
         @media (max-width: 980px) {
           position: absolute;
+          top: 40px;
         }
     }
       
@@ -868,10 +869,6 @@ border-radius: 50%;
 }
 
 @media (max-width: 414px) {
-    .variantSelector-section {
-        height: 55vh;
-    }
     .closeVariantSelector {
-        height: 20vh;
     }
 }

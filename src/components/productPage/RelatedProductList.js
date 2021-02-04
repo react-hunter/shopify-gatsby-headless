@@ -52,11 +52,12 @@ const RelatedProductList = ({ products, reviewList }) => {
       </div>
       <div className="Best-Sellers-Carousel">
 
-      <Glider draggable={true} scrollLock={true} duration={1} slidesToShow={2}
-          arrows= {{
-            prev: <button type="button" id="prev" className="slick-arrow slick-prev"> Previous</button>,
-            next: <button type="button" id="next" className="slick-arrow slick-next"> Next</button>
-          }}
+      <button type="button" id='prev' className="slick-arrow slick-prev"> Previous</button>
+      <Glider draggable={true} scrollLock={true} duration={1} slidesToShow={2} hasArrows={true}
+         arrows= {{
+          prev: '#prev',
+          next: '#next'
+        }}
           responsive={[{
             // screens greater than >= 775px
             breakpoint: 775,
@@ -84,6 +85,7 @@ const RelatedProductList = ({ products, reviewList }) => {
                 )
           })}
         </Glider>
+        <button type="button" id='next' className="slick-arrow slick-next"> Next</button>
 
         {/* <Slider {...settings}>
             {

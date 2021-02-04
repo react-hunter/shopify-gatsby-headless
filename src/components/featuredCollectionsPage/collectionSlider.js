@@ -100,17 +100,17 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
   };
 
   return (
-    <div className="collection-carousel">
+    <div className="collection-carousel" data-title={title}>
       <div className="carousel-header_wrapper">
         <span className="carousel-header">{title}</span>
       </div>
       <div className="Best-Sellers-Carousel">
       
-        <button type="button" id="prev" className="slick-arrow slick-prev"> Previous</button>
+        <button type="button" id={`prev-${handle}`} className="slick-arrow slick-prev"> Previous</button>
         <Glider draggable={true} scrollLock={true} duration={1} slidesToShow={2} hasArrows={true}
           arrows= {{
-            prev: '.slick-prev',
-            next: '.slick-next'
+            prev: `#prev-${handle}`,
+            next: `#next-${handle}`
           }}
           responsive={[{
             breakpoint: 775,
@@ -137,7 +137,7 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
                 )
           })}
         </Glider>
-        <button type="button" id="next" className="slick-arrow slick-next"> Next</button>
+        <button type="button" id={`next-${handle}`} className="slick-arrow slick-next"> Next</button>
 
         {/* <Slider {...settings}>
           {

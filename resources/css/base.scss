@@ -17405,6 +17405,7 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   display: flex;
   justify-content: center;
   padding-top: 30px;
+  height: 100%;
 
   @media(min-width:414px){
     // height: 420px !important;
@@ -17414,7 +17415,7 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 
   @media(max-width:414px){
     // height: Calc(100vh - 230px) !important;
-    height: 65vh;
+    // height: 65vh;
     overflow: scroll;
     overflow-x: hidden;
     overflow-y: hidden !important;

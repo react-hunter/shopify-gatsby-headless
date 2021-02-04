@@ -14,7 +14,7 @@ const ProductPage = ({ data, pageContext }) => {
     const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
     const {id, productReviews} = pageContext;
     const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 8) : [];
-    
+
     const productReview = productReviews.filter(pr => pr.handle === id)
     
     useEffect(() => {
