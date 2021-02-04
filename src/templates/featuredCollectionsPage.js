@@ -23,6 +23,7 @@ const featuredCollectionsPage = ({ data, pageContext }) => {
                         title={collection.node.title}
                         handle={collection.node.handle}
                         reviewList={productReviews}
+                        key={collectionIndex}
                       />
             })
            }

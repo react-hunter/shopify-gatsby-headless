@@ -868,8 +868,23 @@ border-radius: 50%;
     to {opacity:0;}
 }
 
+.option_options_wrapper .swatch-wrapper .color-swatch {
+    position: relative;
+}
 @media (max-width: 768px) {
-    .closeVariantSelector {
-        min-height: 100px;
+    .variantSelector-section {
+        overflow-y: auto!important;
+        position: relative;
+
+        .closeVariantSelector {
+            position: absolute;
+            top: 0;
+            min-height: 120px;
+            z-index: 3;
+            background: transparent;
+        }
+        .preview-main-option_wrapper {
+            z-index: 1;
+        }
     }
 }

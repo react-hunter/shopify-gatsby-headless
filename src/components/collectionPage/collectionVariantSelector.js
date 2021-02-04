@@ -135,19 +135,18 @@ const CollectionVariantSelector = props => {
     return (
         <div className="variantoverlayNew" id="variantOverlay-">
             <div className="variantSelector_wrapper animate-bottom" data-toggle="modal">
-                <div className="closeVariantSelector">
-                    <div className="closeVariantSelector_content">
-                        <span className="variantSelector_close_message" 
-                            onClick={changeUrl} onKeyDown={handleKeyDown} role="button" tabIndex="0"
-                            style={{ float: 'left', cursor: 'pointer', marginLeft: '10px' }}>Need more options? Customize now</span>
-                        <span className="variantSelector_close"  
-                            onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0"
-                            style={{ float: 'right'}}>×</span>
-                    </div>
-                    <div className="closeVariantSelector-mobile_swipe"></div>
-                </div>
-
                 <div className="variantSelector-section"> 
+                    <div className="closeVariantSelector">
+                        <div className="closeVariantSelector_content">
+                            <span className="variantSelector_close_message" 
+                                onClick={changeUrl} onKeyDown={handleKeyDown} role="button" tabIndex="0"
+                                style={{ float: 'left', cursor: 'pointer', marginLeft: '10px' }}>Need more options? Customize now</span>
+                            <span className="variantSelector_close"  
+                                onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0"
+                                style={{ float: 'right'}}>×</span>
+                        </div>
+                        <div className="closeVariantSelector-mobile_swipe"></div>
+                    </div>
                     <div className="preview-main-option_wrapper">
                         <div className="preview_wrapper">
                             <LazyLoadImage className="variantSelector-preview_img" alt=""
