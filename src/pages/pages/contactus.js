@@ -25,7 +25,7 @@ const ContactUs = () => {
                         
                         <div className="grid__item medium-up--one-half">
                           <label htmlFor="ContactForm-email" >Email <span aria-hidden="true">*</span></label>
-                          <input type="email" id="ContactForm-email" name="contact[email]" autocorrect="off" autocapitalize="off" 
+                          <input type="email" id="ContactForm-email" name="contact[email]" autoCorrect="off" autocapitalize="off" 
                               value="" aria-required="true" />
                         </div>
                       </div>

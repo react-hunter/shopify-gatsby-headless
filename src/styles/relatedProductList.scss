@@ -1,6 +1,13 @@
 
 .Best-Sellers-Carousel {
- 
+  margin-top: 35px;
+  position: relative;
+  .slick-prev {
+      left: -50px;
+  }
+  .slick-next {
+      right: -50px;
+  }
 }
 
 .slick-prev {

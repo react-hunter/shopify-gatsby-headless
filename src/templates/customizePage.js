@@ -5,6 +5,8 @@ import { graphql } from 'gatsby'
 import Preloader from "../components/common/preloader"
 import StoreContext from '../context/store'
 import { client } from '../contentful'
+import ImageSpin from '../components/common/imageSpin'
+import '../styles/customizePage.scss'
 
 const CustomizePage = ({ data }) => {
   const context = useContext(StoreContext);
@@ -21,6 +23,7 @@ const CustomizePage = ({ data }) => {
     roseColor: [],
     products: []
   })
+  const [showSpin, setShowSpin] = useState(false);
   const collectionProducts = data.shopifyCollection.products.map(pr => {
     const productVariants = pr.variants.map(va => {
       return {
@@ -936,7 +939,7 @@ const CustomizePage = ({ data }) => {
 
   const AddToBag = () => {
     const bagProduct = collectionProducts.filter(cp => cp.title === selections[0])
-    console.log('selections: ', selections)
+    // console.log('selections: ', selections)
     const bagVariants = bagProduct[0].variants
     let bagVariant = null
     for(var i = 0; i < bagVariants.length; i++) {
@@ -946,25 +949,22 @@ const CustomizePage = ({ data }) => {
       }
     }
 
-    openCartDrawer();
-    openCartOverlay();
-
+    setShowSpin(true);
     context.addVariantToCart(bagVariant.id, 1, [
       {key: 'Rose Color', value: selections[3]},
       {key: 'Box', value: selections[1]},
       {key: 'Style', value: selections[2]},
       {key: 'linkImage', value: 'https://mediacarryapi.com/customizer/assets/' + selections[0] + '~' + selections[2] + '~' + selections[3].replace('+', ',') + '.png'}
     ])
+    setTimeout(openCartDrawer, 1200);
   }
 
   function openCartDrawer() {
+    setShowSpin(false);
     document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
     document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
-  }
-
-  function openCartOverlay() {
-      document.querySelector(".js-ajax-cart-overlay").classList.add('is-open');
-      document.documentElement.classList.add('is-locked');
+    document.querySelector(".js-ajax-cart-overlay").classList.add('is-open');
+    document.documentElement.classList.add('is-locked');
   }
 
   const hideNumbers = (e) => {
@@ -1143,7 +1143,9 @@ const CustomizePage = ({ data }) => {
               <div className="step-wrapper">
                   <div className="step-previous" onClick={previous} onKeyDown={handleKeyDown} role="presentation">Back</div>
                   <div className="step-next" id="step-next" onClick={next} onKeyDown={handleKeyDown} role="presentation">Next</div>
-                  <div style={{display:'none'}} className="step-next" id="addToBAG" onClick={AddToBag} onKeyDown={handleKeyDown} role="presentation">Add To Bag</div>
+                  <div style={{display:'none'}} className="step-next" id="addToBAG" onClick={AddToBag} onKeyDown={handleKeyDown} role="presentation">
+                    Add To Bag{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }
+                  </div>
               </div>
             </div>
           </div>

@@ -19,11 +19,11 @@ const featuredCollectionsPage = ({ data, pageContext }) => {
            {
             data.allShopifyCollection.edges.map((collection, collectionIndex) => {
               return <CollectionSlider
-                        key={collectionIndex}
                         products={collection.node.products.slice(0, 10)}
                         title={collection.node.title}
                         handle={collection.node.handle}
                         reviewList={productReviews}
+                        key={collectionIndex}
                       />
             })
            }

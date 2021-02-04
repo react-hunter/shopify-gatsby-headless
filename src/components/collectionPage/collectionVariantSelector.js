@@ -2,12 +2,14 @@ import React, { useContext, useState, useEffect } from 'react';
 import { navigate, Link } from 'gatsby'
 import StoreContext from '../../context/store'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import ImageSpin from '../common/imageSpin'
 
 const CollectionVariantSelector = props => {
     const context = useContext(StoreContext);
     const product = props.product;
     const firstVariant = product.variants[0];
     const [variant, setVariant] = useState(firstVariant)
+    const [showSpin, setShowSpin] = useState(false);
     const mainOption = product.options[0]
     const otherOptions = product.options.length > 1 ? product.options.slice(1, product.options.length) : []
 
@@ -66,9 +68,12 @@ const CollectionVariantSelector = props => {
         setVariant(theVariant)
     }
     const addToSideCart =() => {
-        console.log("addToSideCart: ", variant.shopifyId);
+        setShowSpin(true);
         context.addVariantToCart(variant.shopifyId, 1);
-//        props.closeModal()
+        setTimeout(showCart, 1200);
+    }
+    function showCart() {
+        setShowSpin(false);
         document.querySelector('.site-header__cart').click()
     }
     const changeUrl = () => {
@@ -130,19 +135,18 @@ const CollectionVariantSelector = props => {
     return (
         <div className="variantoverlayNew" id="variantOverlay-">
             <div className="variantSelector_wrapper animate-bottom" data-toggle="modal">
-                <div className="closeVariantSelector">
-                    <div className="closeVariantSelector_content">
-                        <span className="variantSelector_close_message" 
-                            onClick={changeUrl} onKeyDown={handleKeyDown} role="button" tabIndex="0"
-                            style={{ float: 'left', cursor: 'pointer', marginLeft: '10px' }}>Need more options? Customize now</span>
-                        <span className="variantSelector_close"  
-                            onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0"
-                            style={{ float: 'right'}}>×</span>
-                    </div>
-                    <div className="closeVariantSelector-mobile_swipe"></div>
-                </div>
-
                 <div className="variantSelector-section"> 
+                    <div className="closeVariantSelector">
+                        <div className="closeVariantSelector_content">
+                            <span className="variantSelector_close_message" 
+                                onClick={changeUrl} onKeyDown={handleKeyDown} role="button" tabIndex="0"
+                                style={{ float: 'left', cursor: 'pointer', marginLeft: '10px' }}>Need more options? Customize now</span>
+                            <span className="variantSelector_close"  
+                                onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0"
+                                style={{ float: 'right'}}>×</span>
+                        </div>
+                        <div className="closeVariantSelector-mobile_swipe"></div>
+                    </div>
                     <div className="preview-main-option_wrapper">
                         <div className="preview_wrapper">
                             <LazyLoadImage className="variantSelector-preview_img" alt=""
@@ -215,7 +219,9 @@ const CollectionVariantSelector = props => {
                             (
                                 <button className="variant-selector_add_to_bag" 
                                     onClick={addToSideCart}
-                                    style={{ display: 'inline-block' }}>ADD TO BAG - ${variant.price}</button>
+                                    style={{ display: 'inline-block' }}>
+                                        ADD TO BAG - ${variant.price}{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }
+                                </button>
                             ) : 
                             (
                                 <button className="variant-selector_add_to_bag" 

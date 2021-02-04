@@ -14428,13 +14428,6 @@ header .menu-category-panel .menu-panel .menu-panel_image_wrapper {
   touch-action: none
 }
 
-.collection-product_image_container {
-  transition: transform 0.4s;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: none
-}
-
 @media (max-width: 768px) {
   #klaviyo-bis-modal {
     margin-top: 50% !important
@@ -14456,11 +14449,6 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 .product-collection_image_alternate {
   transform: translateX(100%)
 }
-
-// .collection-product_image_container.hover_effect
-// .collection-product_image_container:hover, .collection-product_image_container.hover_effect {
-//   transform: translateX(-100%);
-// }
 
 #prevButton,
 #nextButton {
@@ -15284,7 +15272,8 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 
 .accordion_content p {
   color: #000000 !important;
-  margin: 15px 0 !important
+  margin: 15px 0 !important;
+  overflow-wrap: anywhere;
 }
 
 .accordion_content a {
@@ -17415,7 +17404,8 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   font-family: 'Big Caslon';
   display: flex;
   justify-content: center;
-  padding-top: 30px;
+  padding-top: 0;
+  height: 100%;
 
   @media(min-width:414px){
     // height: 420px !important;
@@ -17425,7 +17415,7 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 
   @media(max-width:414px){
     // height: Calc(100vh - 230px) !important;
-    height: 65vh;
+    // height: 65vh;
     overflow: scroll;
     overflow-x: hidden;
     overflow-y: hidden !important;

@@ -28,6 +28,9 @@
         left: 20px;
       }
     }
+    @media (max-width: 768px) {
+      margin-top: 30px;
+    }
   }
 }
 
@@ -87,10 +90,15 @@
   margin-left: 10px;
 }
 
-@media (max-width: 768px) {
-  #AddToCart {
-    width: 100% !important;
-    
+#AddToCart {
+  position: relative;
+  .image-spin-wrapper {
+    position: absolute;
+    right: 25%;
+    top: 5px;
+  }
+  @media (max-width: 768px) {
+    width: 100% !important;    
   }
 }
 .top0 {top: 0!important}
@@ -178,6 +186,11 @@
 
 .product-single__media-wrapper {
   img {
-    width: 100%
+    width: 100%;
+    background: #F1F2F1;
   }
+}
+
+.accordion_content p {
+  overflow-wrap: break-word;
 }
