@@ -94,13 +94,29 @@ export const query = graphql`
                 id
                 handle
                 title
+                tags
+                options {
+                    id
+                    name
+                    values
+                }
                 images {
                     originalSrc
                 }
                 variants {
                     id
+                    title
                     availableForSale
                     price
+                    shopifyId
+                    compareAtPrice
+                    image {
+                        originalSrc
+                    }
+                    selectedOptions {
+                        name
+                        value
+                    }
                 }
             }
         }
