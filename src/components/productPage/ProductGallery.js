@@ -153,8 +153,10 @@ const ProductGallery = ({ product, selectedVariant }) => {
                     }
                 </Flickity>
 
-                <div className="carousel-scrollbar">
-                    <div className="carousel-scrollbar_bar" style={getStyle()}></div>
+                <div className="status-bar" style={{ backgroundColor: '#F1F2F1' }}>
+                    <div className="carousel-scrollbar">
+                        <div className="carousel-scrollbar_bar" style={getStyle()}></div>
+                    </div>
                 </div>
 
                 <script src="//foursixty.com/media/scripts/fs.slider.v2.5.js" data-feed-id="dose-of-roses" data-for-url="true" data-theme="slider_v2_5" data-open-links-in-same-page="true" data-connector-filter="30963" data-cell-size="20%"></script>

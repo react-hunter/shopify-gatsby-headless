@@ -52,10 +52,14 @@
       }
     }
 
+    .status-bar {
+      background-color: rgb(241, 242, 241);
+      padding-top: 10px;
+      padding-bottom: 8px;
+    }
+
     .carousel-scrollbar {
-      margin-top: 10px;
-      margin-bottom: 10px;
-      
+      background-color: #F1F2F1;
       @media (min-width: 769px) {
         display: none;
       }
