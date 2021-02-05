@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import ProductBox from "../common/product/productBox"
-import Slider from "react-slick";
+
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../styles/relatedProductList.scss";
 
-import Glider, {GliderMethods} from 'react-glider';
+import Glider from 'react-glider';
 import 'glider-js/glider.min.css';
-
 
 import CollectionVariantSelector from '../collectionPage/collectionVariantSelector'
 import FeaturedProductBox from "../common/product/featuredProductBox"
 import NotifyModal from "../collectionPage/notifyModal"
 import { client } from "../../contentful"
-
 
 const RelatedProductList = ({ products, reviewList }) => {
   const [notifyModalShow, setNotifyModalShow] = useState(false);
@@ -69,41 +66,6 @@ const RelatedProductList = ({ products, reviewList }) => {
     }, 550)
   }
 
-  const settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 5,
-    // slidesToScroll: 1,
-    swipeToSlide: true,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 5,
-          //slidesToScroll: 1,
-          swipeToSlide: true,
-        }
-      },
-      {
-        breakpoint: 960,
-        settings: {
-          slidesToShow: 3,
-          //slidesToScroll: 1,
-          swipeToSlide: true,
-        }
-      },
-      {
-        breakpoint: 760,
-        settings: {
-          slidesToShow: 2,
-          //slidesToScroll: 1
-          swipeToSlide: true,
-        }
-      }
-    ]
-  };
-
   return (
     <div className="you-may-like_section">
       <div className="you-may-like_header_wrapper">
@@ -133,18 +95,6 @@ const RelatedProductList = ({ products, reviewList }) => {
             }
           }
         ]}>
-          {/* {
-            products
-              .map((p, i) => {
-                let product = p
-                const productReview = reviewList.filter(re => re.handle === product.handle)
-                return (
-                  <div key={i}>
-                    <ProductBox product={product} review={productReview[0]} />
-                  </div>
-                )
-          })} */}
-
           {
             products
               .map((p, i) => {
@@ -163,20 +113,6 @@ const RelatedProductList = ({ products, reviewList }) => {
         {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} 
                                     showNotifyModal={showNotifyModal} product={selectedProduct} /> )}
         <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
-
-        {/* <Slider {...settings}>
-            {
-              products
-                .map((p, i) => {
-                  let product = p
-                  const productReview = reviewList.filter(re => re.handle === product.handle)
-                  return (
-                    <div key={i}>
-                      <ProductBox product={product} review={productReview[0]} />
-                    </div>
-                  )
-            })}
-        </Slider> */}
       </div>
     </div>
   );

@@ -232,3 +232,10 @@
     }
 }
   
+
+
+.grid-view-item__image-wrapper {
+    @media (max-width: 768px) {
+      height: unset;
+    }
+}

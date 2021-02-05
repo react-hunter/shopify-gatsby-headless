@@ -2,11 +2,19 @@
 .Best-Sellers-Carousel {
   margin-top: 35px;
   position: relative;
-  .slick-prev {
+  
+  .slick-arrow {
+    &.slick-prev {
       left: -50px;
-  }
-  .slick-next {
-      right: -50px;
+    }
+    
+    &.slick-next {
+        right: -50px;
+    }
+
+    &.disabled {
+      opacity: 0;
+    }
   }
 }
 
@@ -132,14 +140,11 @@
 
   .Best-Sellers-Carousel {
     margin-top: 35px;
-  }
 
-  @media (max-width: 768px) {
-    .Best-Sellers-Carousel {
+    @media (max-width: 768px) {
       margin-top: 15px;
     }
   }
-
 
   @media (max-width: 900px) {
     .best-sellers-form .button-atc {

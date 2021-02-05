@@ -888,3 +888,36 @@ border-radius: 50%;
         }
     }
 }
+
+#shop-all-content {
+  display: flex;
+  flex-wrap: wrap;
+
+  li {
+    width: calc(100% / 4);
+
+    &:nth-child(7n) {
+        width: 100% !important;
+
+        .grid-view-item__image-wrapper {
+            @media (max-width: 750px) {
+                height: 100% !important;
+            }
+        }
+
+        @media (min-width: 769px) {
+            width: 25% !important;
+        }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    justify-content: space-between;
+    margin: 0;
+
+    li {
+        width: 49% !important;
+        padding-left: 0
+    }
+  }
+}

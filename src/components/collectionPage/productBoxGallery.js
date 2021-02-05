@@ -39,8 +39,6 @@ const ProductBoxGallery = props => {
     
     productGalleryCount = mainOption === '' ? Math.min(product.images.length,3) : Math.min(swatchImages.length,3);
 
-
-
     useEffect(() => {
         if (mainOption !== '') {
             const selectedImages = product.variants.map(variant => {

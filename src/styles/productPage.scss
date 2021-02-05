@@ -37,7 +37,30 @@
     .slick-dots {
       position: absolute;
       bottom: 5px;
+
+      li {
+        height: unset;
+        button {
+          padding: 0px;
+        }
+      }
     }
+
+    .flickity-button {
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    .carousel-scrollbar {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      
+      @media (min-width: 769px) {
+        display: none;
+      }
+    }
+
   }
 }
 
