@@ -8,6 +8,11 @@
   .pdp-carousel-main {
     margin-bottom: 30px !important;
     
+    @media (max-width: 768px) {
+      margin-top: 0px;
+      margin-bottom: 0!important;
+    }
+
     .slick-arrow {
       background-repeat: no-repeat;
       background-position: center;
@@ -28,8 +33,10 @@
         left: 20px;
       }
     }
-    @media (max-width: 768px) {
-      margin-top: 30px;
+
+    .slick-dots {
+      position: absolute;
+      bottom: 5px;
     }
   }
 }
@@ -185,6 +192,11 @@
 // }
 
 .product-single__media-wrapper {
+
+  @media (max-width: 768px) {
+    margin-bottom: -5px;
+  }
+
   img {
     width: 100%;
     background: #F1F2F1;

@@ -34,6 +34,8 @@
 
 .announcement-bar .slick-dots {
     background-color: #000000;
+    bottom: 0;
+    position: unset;
 }
 
 .announcement-bar .slick-dots li button {

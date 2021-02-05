@@ -27,9 +27,28 @@ const ProductGallery = ({ product, selectedVariant }) => {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
+        swipeToSlide: true,
         afterChange: (current, next) => {
             selectedImageIndex = parseInt(current)
-        }
+        },
+        responsive: [
+            {
+              breakpoint: 960,
+              settings: {
+                slidesToShow: 1,
+                arrows: false,
+                dots: true,
+              }
+            },
+            {
+              breakpoint: 760,
+              settings: {
+                slidesToShow: 1,
+                arrows: false,
+                dots: true,
+              }
+            }
+          ]
     }
 
     return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductBox from "../common/product/productBox"
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -8,7 +8,67 @@ import "../../styles/relatedProductList.scss";
 import Glider, {GliderMethods} from 'react-glider';
 import 'glider-js/glider.min.css';
 
+
+import CollectionVariantSelector from '../collectionPage/collectionVariantSelector'
+import FeaturedProductBox from "../common/product/featuredProductBox"
+import NotifyModal from "../collectionPage/notifyModal"
+import { client } from "../../contentful"
+
+
 const RelatedProductList = ({ products, reviewList }) => {
+  const [notifyModalShow, setNotifyModalShow] = useState(false);
+  const [badgeStyles, setBadgeStyles] = useState([]);
+  const [varaintModalShow, setVaraintModalShow] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  useEffect(() => {
+    async function getBadgeData() {
+      const badgeStyleData = await client.getEntries({'content_type': 'collectionBadgeStyleItem'});
+      setBadgeStyles(badgeStyleData.items);
+
+      console.log("badgeStyleData.items = ", badgeStyleData.items);
+    }
+    setHoverEffectsForCollection();
+    // getBadgeData();
+  }, [])
+
+  function setHoverEffectsForCollection() {
+    const allFirstImageElements = document.querySelectorAll(".disableSaveImageIOS");
+    for (let i = 0; i < allFirstImageElements.length; i++) {
+      allFirstImageElements[i].on('touchstart', function () {  
+        this.toggleClass('hover_effect');
+      });
+    }
+  }
+
+  const showNotifyModal = () => {
+    setNotifyModalShow(true)
+  }
+  const showVariantModal = (p) => {
+    setSelectedProduct(p);
+    setVaraintModalShow(true);
+  }
+
+  const closeNotifyModal = () => {
+    document.querySelector(".klav-popup").classList.remove("fade-in");
+    document.querySelector(".klav-popup").classList.add("fade-out");
+    setTimeout(() => {
+        document.querySelector(".klav-popup").classList.remove("fade-out");
+        setNotifyModalShow(false);
+    }, 500)
+  }
+  const closeCollectionModal = () => {
+    document.querySelector(".variantSelector_wrapper").classList.remove('animate-bottom');
+    document.querySelector(".variantSelector_wrapper").classList.add('animate-top');
+
+    setTimeout(() => {
+        document.querySelector(".variantSelector_wrapper").classList.remove('animate-top');
+        setVaraintModalShow(false);
+        document.getElementsByTagName("html")[0].classList.remove("no-scroll");
+        document.querySelector(".scrollPreventer").style.overflow = "visible";
+    }, 550)
+  }
+
   const settings = {
     dots: false,
     infinite: false,
@@ -73,7 +133,7 @@ const RelatedProductList = ({ products, reviewList }) => {
             }
           }
         ]}>
-          {
+          {/* {
             products
               .map((p, i) => {
                 let product = p
@@ -83,9 +143,26 @@ const RelatedProductList = ({ products, reviewList }) => {
                     <ProductBox product={product} review={productReview[0]} />
                   </div>
                 )
+          })} */}
+
+          {
+            products
+              .map((p, i) => {
+                let product = p
+                let productReview = reviewList.filter(re => re.handle === product.handle)
+                return (
+                  <div key={i} className="products-on-page grid grid--uniform grid--view-items">
+                    <FeaturedProductBox product={product} review={productReview[0]} showNotifyModal={showNotifyModal}
+                        badgeStyles={badgeStyles} showVariantModal={showVariantModal} />
+                  </div>
+                )
           })}
         </Glider>
         <button type="button" id='next' className="slick-arrow slick-next"> Next</button>
+
+        {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} 
+                                    showNotifyModal={showNotifyModal} product={selectedProduct} /> )}
+        <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
 
         {/* <Slider {...settings}>
             {
