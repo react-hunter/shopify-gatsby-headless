@@ -48,7 +48,7 @@ export const onPreRouteUpdate = () => {
     removejscssfile("//foursixty.com/media/scripts/fs.slider.v2.5.js", "js")
     addScript("//foursixty.com/media/scripts/fs.slider.v2.5.js")
   } else {
-    removejscssfile("//foursixty.com/media/scripts/fs.embed.v2.5.js", "js")
-    addScript("//foursixty.com/media/scripts/fs.embed.v2.5.js")
+    // removejscssfile("//foursixty.com/media/scripts/fs.embed.v2.5.js", "js")
+    // addScript("//foursixty.com/media/scripts/fs.embed.v2.5.js")
   }
 }
