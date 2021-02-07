@@ -633,6 +633,7 @@ const CustomizePage = ({ data }) => {
     subDiv.setAttribute("class", "rose-contents");
   
     var roses =  customizeData.roseColor;// selectedProduct["roses"];
+
     var styles = selectedProduct["styles"];
   
     for (var k = 0; k < styles.length; k++) {
@@ -727,8 +728,28 @@ const CustomizePage = ({ data }) => {
     return false;
   }
   
+  function isProductNotUsingStencil(productHandle, style) {
+
+    if (document.querySelector("#excluded_products")) {
+
+      console.log(" isProductNotUsingStencil === true ");
+
+      let excludedProducts = document.querySelector("#excluded_products").dataset.ids;
+      let array = (new Function(`return ${excludedProducts.slice(0, -2) + "]"};`)());
+
+      console.log(" product id & style ",`${productHandle}-${style}`)
+
+      const result = array.filter(excluded => excluded == `${productHandle}-${style}`);
+      return result.length == 0 ? false : true;
+    } else {
+      return false;
+    }
+  }
 
   function setRose(type, element, layer) {
+
+    console.log("setRose ---------------------------------------------- ")
+
     var images = document.getElementById(`roseblock-${layer}`).getElementsByClassName("round");
   
     for (var i = 0; i < images.length; i++) {
@@ -741,7 +762,6 @@ const CustomizePage = ({ data }) => {
 
     var newLayer = layer + 1;
 
-
     document.getElementById(`rose-mobile-${newLayer}`).innerText = type;
     
     let roseType = 1;
@@ -753,22 +773,39 @@ const CustomizePage = ({ data }) => {
   
       var choices = selectedRoses.join(",");
   
-      let productId = Number(document.getElementById(document.getElementById("arr-Type").innerHTML).classList[0].split("-")[0]);
+      let StyleType = document.getElementById("Style-Type").innerHTML;
+
+      console.log(document.getElementById(document.getElementById("arr-Type").innerHTML));
+
+//      let productId = Number(document.getElementById(document.getElementById("arr-Type").innerHTML).classList[0].split("-")[0]);
+      let productHandle = document.getElementById("arr-Type").innerHTML;
+
+      console.log('productHandle = ', productHandle);
+
       //Check if product is using drawn stencil
-      let usingStencil = isProductNotUsingStencil(productId);
+      let usingStencil = isProductNotUsingStencil(productHandle ,StyleType);
       
+      console.log("usingStencil = ", usingStencil);
+
       if(usingStencil === true){
         let arrangement_selected = document.getElementById("arr-Type").innerHTML.replaceAll(' ', "_");
         let box_selected = document.getElementById('BOX-Type').innerHTML.replaceAll(' ', "_");
         let style_selected = document.getElementById('Style-Type').innerHTML.replaceAll(' ', "_");
         let imageToDisplay = `${arrangement_selected}-${box_selected}-${style_selected}-${choices}`;
         
-        document.getElementById("mainIMG").src = `https://ik.imagekit.io/vajwlqjsrw/customizer-images/${imageToDisplay}.jpg`
+//        let imageToDisplay = `${arrangement_selected}-${box_selected}-${style_selected}-${choices.split(" ").join("_")}`;
+
+        console.log(`https://ik.imagekit.io/vajwlqjsrw/customizer-images/${imageToDisplay}.png`);
+        
+        document.getElementById("mainIMG").src = `https://ik.imagekit.io/vajwlqjsrw/customizer-images/${imageToDisplay}.png`
+
       }else{
         var xhr = new XMLHttpRequest();
   
         xhr.addEventListener("readystatechange", function () {
           if (this.readyState === 4) {
+            console.log(`${this.responseText}`);
+
             document.getElementById("mainIMG").src = `${this.responseText}`
           }
         });
@@ -776,6 +813,7 @@ const CustomizePage = ({ data }) => {
           xhr.open("GET", `https://mediacarryapi.com/dor/generator?store=dose-roses.com&product=${selectedProduct.Arrangement}&style=${document.getElementById("Style-Type").innerText}&data=${choices}`);
           xhr.send();
         }
+
       }
   
       if (!document.getElementById("Rose-Type")) {
@@ -1027,7 +1065,24 @@ const CustomizePage = ({ data }) => {
     <>
       {/* <Preloader /> */}
       <div className="container">
-      
+
+      <div id="shopify-section-customizer-schema" class="shopify-section">
+        <span id="excluded_products" 
+          data-ids="[
+            'Single Round-Solid',
+            'Acrylic Large Square-Solid',
+            'Acrylic Small Square-Solid',
+            'Acrylic Medium Square-Solid',
+            'Acrylic Large Heart-Solid',
+            'Suede Large Heart-Solid',
+            'Medium Square-Solid',
+            'Large Square-Solid',
+            'Large Round Flat-Solid',
+            'Medium Round Flat-Solid',
+            'Large Round Dome-Solid',            
+            'Medium Round Dome-Solid',]"></span>
+      </div>
+
         {
           collectionProducts.map((prod, prodIndex) => {
             return (

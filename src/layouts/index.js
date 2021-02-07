@@ -1,7 +1,7 @@
 import "../../resources/css/base.scss";
 import "../../resources/css/preloader.css";
 import "../styles/instagram.css";
-import "../styles/header.css";
+import "../styles/header.scss";
 
 import React from 'react';
 import { StaticQuery, graphql } from 'gatsby'

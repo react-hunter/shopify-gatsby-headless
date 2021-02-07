@@ -56,6 +56,10 @@
       background-color: rgb(241, 242, 241);
       padding-top: 10px;
       padding-bottom: 8px;
+
+      @media (min-width: 769px) {
+        display: none;
+      }
     }
 
     .carousel-scrollbar {
