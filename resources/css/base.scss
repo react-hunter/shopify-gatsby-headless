@@ -6901,9 +6901,6 @@ article .article__meta-buttons {
   display: block
 }
 
-.mobile-nav--open .icon-close {
-  display: none
-}
 
 .mobile-nav--close .icon-hamburger {
   display: none
@@ -10568,19 +10565,10 @@ article .article__meta-buttons {
 
 @media (max-width: 1150px) {
 
-  .nav-cart_icon,
-  #mobile-nav--open {
+  .nav-cart_icon {
     display: flex !important;
     align-items: center;
     width: 30px
-  }
-}
-
-@media (max-width: 1150px) {
-  #mobile-nav--open {
-    width: 30px;
-    display: flex !important;
-    align-items: center
   }
 }
 

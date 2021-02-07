@@ -42,10 +42,15 @@ const Header = ({ path }) => {
   const context = useContext(StoreContext)
   const { checkout } = context.store
   const [quantity, setQuantity] = useState(countQuantity(checkout ? checkout.lineItems : []))
-  // const [modal, setModal] = useState(false)
+
   const [ searchShow, setSearchShow ] = useState(false);
   const [mobileHeaderMenu, setMobileHeaderMenu] = useState([]);
   
+  let modal = document.getElementById('sidenav');
+  let mobileToggleBtn = document.getElementById('mobile-mega-toggle');
+
+  let mobileMenuStep = 0;
+
   useEffect(() => {
     async function getMobileMenuData() {
       const mobileMenuData = await client.getEntries({'content_type': 'mobileHeaderMenu'});
@@ -67,49 +72,77 @@ const Header = ({ path }) => {
     setQuantity(countQuantity(checkout ? checkout.lineItems : []));
   }, [checkout]);
 
-  const showSideNav = (e) => {
-    e.preventDefault();
+  function changehamburgMenuIcon() {
 
-    let modal = document.getElementById('sidenav');
-    let openIcon = document.getElementById('mobile-nav--open');
-    let closeIcon = document.getElementById('hideSideNav');
-    closeIcon.style.display = "flex";
-    closeIcon.style.justifyContent = "center";
-    modal.style.display = "flex";
-    
-    document.getElementsByTagName("html")[0].classList.add("side-menu-scroll")
-    openIcon.setAttribute("style", "display: none !important;")
+    mobileToggleBtn.classList.remove("active");
+    mobileToggleBtn.classList.remove("closeBtn");  
+    mobileToggleBtn.classList.remove("backBtn");  
 
-    initiateBannerSlider();
+    if (mobileMenuStep == 0) { // not open step
+
+    } else if (mobileMenuStep == 1) {  // menu opened
+
+      mobileToggleBtn.classList.add("active");
+      mobileToggleBtn.classList.remove("backBtn");  
+      mobileToggleBtn.classList.add("closeBtn");  
+
+    } else if (mobileMenuStep == 2) {   // child menu opened
+
+      mobileToggleBtn.classList.add("active");
+      mobileToggleBtn.classList.add("backBtn");
+    }
   }
   
   const hideSideNav = (e) => {
     e.preventDefault();
-    nextSlide();
+
+    mobileMenuStep = 0;
+    changehamburgMenuIcon();
+
+    hideMobileMenuNav();
   }
 
-  function nextSlide() {
-    let modal = document.getElementById('sidenav');
-    let openIcon = document.getElementById('mobile-nav--open');
-    let closeIcon = document.getElementById('hideSideNav');
-    let backIcon = document.getElementById('goBackNavMenu');
+  const clickToggleBtn = (e) => {
+    e.preventDefault();
 
-    openIcon.classList.remove("mobile-nav--close");
-    openIcon.classList.add("mobile-nav--open");
-    closeIcon.style.display = "none";
-    //openIcon.style.display = "flex";
+    if (mobileMenuStep == 0) {
+      mobileMenuStep = 1;
+    }
+    else if (mobileMenuStep == 1) {
+      mobileMenuStep = 0;
+    }
+    else if (mobileMenuStep == 2) {
+      mobileMenuStep = 1;
+    }
+    
+    changehamburgMenuIcon();
+
+    console.log("mobileMenuStep == ", mobileMenuStep);
+
+    if (mobileMenuStep == 0) {
+      hideMobileMenuNav();
+    }
+    else if (mobileMenuStep == 1) {
+      showDefaultMenuItems();
+
+      modal.style.display = "flex";
+      document.getElementsByTagName("html")[0].classList.add("side-menu-scroll")
+      initiateBannerSlider();
+    }
+    else if (mobileMenuStep == 2) {
+    }
+  }
+
+  function hideMobileMenuNav() {
     modal.style.display = "none";
-    document.getElementsByTagName("html")[0].classList.remove("side-menu-scroll")
-    openIcon.setAttribute("style", "display: flex !important;")
 
-    backIcon.style.display = "none";
+    document.getElementsByTagName("html")[0].classList.remove("side-menu-scroll")
   }
 
   const showSearchBar = (e) => {
     e.preventDefault();
     setSearchShow(true)
   }
-
 
   const hideSearch = () => {
     setSearchShow(false)
@@ -131,6 +164,9 @@ const Header = ({ path }) => {
   const showChildCollection = (e, id) => {
     e.preventDefault();
 
+    mobileMenuStep = 2;
+    changehamburgMenuIcon();
+
     //------------------- hide
     let allMenuItems = document.getElementsByClassName("menuItem");
     for (var i=0; i<allMenuItems.length; i++) {
@@ -150,37 +186,18 @@ const Header = ({ path }) => {
     for (var j=0; j<needChildMenuLink.length; j++) {
       needChildMenuLink[j].style.display = 'flex';
     }
-    
-    showBackArrowButton();
   }
 
   const menuClickHandler = (e, hasChild, title) => {
     if(hasChild) {
       showChildCollection(e, title)
     } else {
-      hideSideNav(e)
-      // console.log('target: ', e.target.closest('a').dataset.url)
-      navigate(e.target.closest('a').dataset.url)
+      hideSideNav(e);
+      navigate(e.target.closest('a').dataset.url);
     }
   }
 
-  function showBackArrowButton() {
-    // let modal = document.getElementById('sidenav');
-    let openIcon = document.getElementById('mobile-nav--open');
-    let closeIcon = document.getElementById('hideSideNav');
-    let backIcon = document.getElementById('goBackNavMenu')
-
-    openIcon.classList.remove("mobile-nav--close");
-    openIcon.classList.add("mobile-nav--open");
-    closeIcon.style.display = "none";
-    backIcon.style.display = "flex";
-  }
-
-  function showDefaultMenuItems (e) {
-    e.preventDefault();
-
-    document.querySelector('#hideSideNav').style.display = "flex";
-    document.querySelector('#goBackNavMenu').style.display = "none";
+  function showDefaultMenuItems () {
 
     // ---------- hide
     let allItems = document.getElementsByClassName("sidenav-item_inner");
@@ -353,22 +370,17 @@ const Header = ({ path }) => {
             <div className="main-header site-header__mobile-nav">
               <SiteNav />
               
-              <a href="/fakeUrl" onClick={hideSideNav} id="hideSideNav" key="hidesidenav">
-                <ReactSVG src={CloseIcon} />
-              </a>
-
-              <button onClick={showSideNav} type="button" id="mobile-nav--open" 
-                className="btn--link site-header__icon site-header__menu js-mobile-nav-toggle" 
-                aria-controls="MobileNav" aria-expanded="false" aria-label="Menu"
-              >          
-                <ReactSVG src={HamburgerIcon} />
+              <button className="header-drawer-toggle" id="mobile-mega-toggle" onClick={clickToggleBtn} 
+                aria-controls="MobileNav" aria-expanded="false" aria-label="Menu">
+                <span className="header-drawer-toggle__icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Navigation menu</span>
               </button>
 
-              <a href="/fakeUrl" id="goBackNavMenu" 
+              {/* <a href="/fakeUrl" id="goBackNavMenu" 
                 style={{ fontFamily: "monospace", cursor: "pointer" }} 
                 onClick={showDefaultMenuItems} key="gobacknavmenu">
                 &lt;
-              </a>
+              </a> */}
 
               <div className="header_logo-container" key="logocontainer">
                 <h1 className="h2 site-header__logo">
@@ -452,7 +464,7 @@ const Header = ({ path }) => {
                             <Link to={child_item.fields.url} style={{ display: 'none' }} 
                               data-parent-id={child_item.fields.parent}
                               data-title={child_item.fields.title} key={`child-${menuIndex}-${child_index}`}
-                              onClick={nextSlide}
+                              onClick={hideSideNav}
                               className="sidenav-item_inner child-item" >
                               <div className="sidenav-item_name" key={`childitemname-${menuIndex}-${child_index}`}>
                                 <div className="sidenav-item_name-inner">

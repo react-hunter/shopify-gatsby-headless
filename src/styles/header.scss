@@ -1,0 +1,210 @@
+.site-header__logo-image {
+    max-width: 250px;
+}
+    
+.announcement-bar {
+    background-color: #000000;
+}
+    
+/*
+.text_image_banner-container_outer {
+    margin-top: 110px !important;
+}
+
+@media (max-width: 768px) {
+    .text_image_banner-container_outer {
+        margin-top: 115px !important;
+    }
+}
+*/
+
+@media (max-width: 768px) {
+    .sidenav-modal {
+        padding-top: 90px !important;
+    }
+}
+
+.announcement-bar__link:hover {
+    background-color: #292929;        
+}
+
+.announcement-bar__message {
+    color: #ffffff;
+}
+
+.announcement-bar .slick-dots {
+    background-color: #000000;
+    bottom: 0;
+    position: unset;
+}
+
+.announcement-bar .slick-dots li button {
+    background-color: #000000;
+}
+.announcement-bar .slick-dots li button:before {
+    color: #ffffff;
+}
+
+.announcement-bar .slick-dots li.slick-active button:before {
+    color: #ffffff;
+}
+
+#wrapper-announcement {
+    position: absolute;
+}
+
+#wrapper-announcement #carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    width: 0.875em;
+    font-size: 0.875em;
+}
+
+.ann_bars {
+    position: relative;
+}
+
+.ann_bars .flickity-button-icon {
+    position: absolute;
+    fill: white;
+    height: 20px;
+    top: 5px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .ann_bars .flickity-button-icon {
+        display: none;
+    }
+}
+
+#annoucmentBar_prev_button {
+    left: 20px;
+}
+
+#annoucmentBar_next_button {
+    right: 20px;
+}
+
+.lazy-load-image-background {
+    display: block!important;
+}
+
+.no-scroll, .cart-drawer-open {
+    overflow: hidden;
+    position: relative;
+    touch-action: none;
+    height: 100% !important;
+}
+
+@media (min-width: 769px) {
+    .no-scroll, .cart-drawer-open {
+        padding-right: 25px;
+    }
+}
+
+
+.visually-hidden {
+    clip: rect(1px,1px,1px,1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute!important;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.header-drawer-toggle {
+    margin-left: 10px;
+    margin-right: 7px;
+
+    @media only screen and (min-width: 769px){
+        display: none!important;
+    }
+    
+    @media only screen and (max-width: 1179px) { 
+        transition-duration: .3s;
+
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: none;
+        border: 0;
+        border-radius: 0;
+        color: inherit;
+        cursor: pointer;
+        flex-shrink: 0;
+        font: inherit;
+        height: 55px;
+        padding: 0;
+        position: relative;
+        text-align: inherit;
+        width: 40px;
+    }
+
+    @media only screen and (max-width: 768px){
+        height: 45px;
+        margin-left: 7px;
+    }
+    
+    &.active {
+        &.closeBtn .header-drawer-toggle__icon {
+            background: transparent;
+            transition-duration: .3s;
+
+            &:before {
+                transform: rotate(45deg) scaleX(1.25) translate(3px,6px);
+            }
+
+            &:after {
+                transform: rotate(-45deg) scaleX(1.25) translate(4.5px,-7px);
+            }
+        }
+
+        &.backBtn .header-drawer-toggle__icon {
+            background: transparent;
+            transition-duration: .3s;
+
+            &:before {
+                transform: rotate(30deg) scaleX(1) translate(-1px, 3px);
+            }
+
+            &:after {
+                transform: rotate(-30deg) scaleX(1) translate(-1px, -4px);
+            }
+        }
+    }
+
+    &.disable {
+        display: none;
+    }
+}
+
+.header-drawer-toggle__icon {
+    background-color: #fff;
+    height: 1px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 22px;
+    transition-duration: .3s;
+
+    &:after, &:before {
+        transition-duration: .3s;
+        background-color: #fff;
+        content: "";
+        height: 1px;
+        position: absolute;
+        width: 22px;
+    }
+
+    &:before {
+        top: -8px;
+    }
+
+    &:after {
+        top: 8px;
+    }
+}
