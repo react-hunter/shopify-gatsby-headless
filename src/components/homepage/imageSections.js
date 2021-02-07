@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby'
-import CustomImage from '../common/image'
+// import CustomImage from '../common/image'
+import MyImage from '../common/lazyImage'
 import "../../styles/imageSections.css";
 
 const ImageSections = (props) => {
@@ -13,7 +14,7 @@ const ImageSections = (props) => {
 
                         { imageItem.fields.imageLeft &&
                             <div className="fifty_fifty-image_container">
-                                <CustomImage className="fifty_fifty-img ls-is-cached lazyloaded" 
+                                <MyImage className="fifty_fifty-img ls-is-cached lazyloaded" 
                                     src={imageItem.fields.imageUrl.fields.file.url} alt="" />
                             </div>
                         }
@@ -34,7 +35,7 @@ const ImageSections = (props) => {
 
                         { imageItem.fields.imageLeft === false &&
                             <div className="fifty_fifty-image_container">
-                                <CustomImage className="fifty_fifty-img ls-is-cached lazyloaded" 
+                                <MyImage className="fifty_fifty-img ls-is-cached lazyloaded" 
                                     src={imageItem.fields.imageUrl.fields.file.url} alt="" />
                             </div>
                         }

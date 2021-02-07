@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby'
-import Img from 'gatsby-image'
+import MyImage from '../common/lazyImage'
 
 const ArticleSmallBox = props => {
     const article = props.article
@@ -11,11 +11,10 @@ const ArticleSmallBox = props => {
           <div className="article_sidebar-image">
             <Link to={`/article/${article.handle}`} >
               { article.image ? 
-                (<Img
-                    key={article.image.id}
-                    fluid={article.image.localFile.childImageSharp.fluid}
-                    alt={article.title}
-                />) : ""
+                (<MyImage
+                  src={article.image.src}
+                  alt={article.title}
+              />) : ""
               }
             </Link>
           </div>

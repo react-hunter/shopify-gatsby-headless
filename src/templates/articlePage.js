@@ -1,5 +1,5 @@
 import React from 'react' /* eslint-disable */
-import Img from "gatsby-image"
+import MyImage from '../components/common/lazyImage'
 import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
@@ -46,7 +46,7 @@ const articlePage = ({ data }) => {
                   />
 
                   <div className="article-img">
-                    <Img fluid={data.shopifyArticle.image.localFile.childImageSharp.fluid}
+                    <MyImage src={data.shopifyArticle.image.src}
                       alt="" loading="eager" />
                   </div>
                   <div className="clear"></div>
@@ -84,13 +84,6 @@ export const query = graphql`
       image {
         id
         src
-        localFile {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid_withWebp_noBase64
-            }
-          }
-        }
       }
       publishedAt
     }
@@ -105,13 +98,6 @@ export const query = graphql`
           image {
             id
             src
-            localFile {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp_noBase64
-                }
-              }
-            }
           }
         }
       }

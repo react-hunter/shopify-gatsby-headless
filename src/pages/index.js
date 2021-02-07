@@ -20,6 +20,7 @@ const IndexPage = ({ data: {allShopifyArticle}}) => {
     },
     imageSections: []
   };
+
   async function getHomeEntry() {
     return await client.getEntries({'content_type': 'homepage'})
   }
@@ -62,13 +63,6 @@ export const query = graphql`
           image {
             id
             src
-            localFile {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp_noBase64
-                }
-              }
-            }
           }
         }
       }

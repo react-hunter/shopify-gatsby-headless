@@ -11,6 +11,20 @@ const Instagram = () => {
 
         getInstagramData()
     })
+    useEffect(() => {
+        window.addEventListener('load', () => {
+            setTimeout(addScript('//foursixty.com/media/scripts/fs.embed.v2.5.js'), 500);
+        });
+    }, [])
+    const addScript = url => {
+        const script = document.createElement("script")
+        script.src = url
+        script.setAttribute('data-feed-id', 'dose-of-roses')
+        script.setAttribute('data-theme', 'showcase_v2_5')
+        script.setAttribute('data-open-links-in-same-page', true)
+        script.setAttribute('data-page-size', 10)
+        document.getElementById('insta_header').appendChild(script)
+    }
     const instaHeaderStyle = {
         paddingTop: '30px',
         paddingBottom: '0px',
@@ -27,9 +41,8 @@ const Instagram = () => {
     }
     return (
         <div className="instagram-section">
-            <div className="insta_header" style={ instaHeaderStyle }>
+            <div className="insta_header" id="insta_header" style={ instaHeaderStyle }>
                 <h1 style={ InstaH1Style }>{ instagramTitle }</h1>
-                <script src="//foursixty.com/media/scripts/fs.embed.v2.5.js" data-feed-id="dose-of-roses" data-theme="showcase_v2_5" data-open-links-in-same-page="true" data-page-size="10"></script>
             </div>
         </div>
     );

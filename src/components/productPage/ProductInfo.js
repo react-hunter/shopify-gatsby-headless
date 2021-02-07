@@ -5,7 +5,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons"
 const ProductInfo = ({ product, review }) => {
     const [featuresList, setFeaturesList] = useState([]);
     useEffect(() => {
-        const featuresString = review.features
+        const featuresString = review ? review.features : ''
         if (featuresString !== '') {
             const featureList = featuresString.split(/\r?\n/);
             setFeaturesList(featureList);

@@ -33,7 +33,8 @@ module.exports = {
         shopName: process.env.SHOP_NAME,
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
         apiVersion: "2020-10",
-        paginationSize: 5,
+        paginationSize: 3,
+        downloadImages: false,
         includeCollections: ["shop", "content"]
       }
     },
@@ -44,12 +45,6 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: "UA-146773242-1",
-    //   },
-    // },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -62,13 +57,6 @@ module.exports = {
         theme_color: `#333`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`,
-      },
-    },
-    {
-      resolve: `gatsby-source-instagram`,
-      options: {
-        username: `10179203510`,
-        maxPosts: 10,
       },
     }
   ],
