@@ -8,6 +8,7 @@ import '../../styles/flickity.css';
 
 const ProductBoxGallery = props => {
     let productGalleryCount = 0;
+    let flkty;
     const product = props.product;
     const mainOption = props.mainOption;
     const swatchColor = props.swatchColor;
@@ -52,7 +53,7 @@ const ProductBoxGallery = props => {
             console.log("flkty = ", flkty);
         }
 
-    }, [mainOption, swatchColor, product.variants])
+    }, [mainOption, swatchColor, product.variants, flkty])
 
     const isBadgeEnable = () => {
         let isBadgeEnable = false;
@@ -98,9 +99,6 @@ const ProductBoxGallery = props => {
             }
         }
     }
-
-    let flkty;
-
     return (
         <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
             <div className="grid-view-item__image-wrapper product-card__image-wrapper js">

@@ -23,6 +23,7 @@ const CustomImage = (props) => {
               className={`${className} ${hideClass}`}
               style={style}
               onLoad={imageLoaded}
+              alt=""
               {...other} />
           </>
         }

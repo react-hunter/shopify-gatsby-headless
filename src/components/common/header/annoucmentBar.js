@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { client } from '../../../contentful'
-
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -39,12 +38,6 @@ const AnnoucmentBar = ({ path }) => {
     }
     getAnnountmentSettings();
   }, []);
-
-  var forEach = function (array, callback, scope) {
-    for (var i = 0; i < array.length; i++) {
-      callback.call(scope, i, array[i]);
-    }
-  };
 
   function sliderPause() {
     slider.current.slickPause();
@@ -93,11 +86,10 @@ const AnnoucmentBar = ({ path }) => {
           document.getElementById("wrapper-announcement").setAttribute("data-state", "Stopped")
           clearInterval(window.anninterval)
           document.getElementById("carousel-button").setAttribute("class", "fas fa-play pause-btn")
-          forEach(document.querySelectorAll('.progress-announcement'), function (index, value) {
-            let max = -219.99078369140625;
-            percent = value.getAttribute('data-progress');
-            value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - (Math.round((anntimer / Number("5000")) * 100)).toFixed(2)) / 100) * max);
-          });
+          const progressElement = document.querySelectorAll('.progress-announcement')[0];
+          let max = -219.99078369140625;
+          percent = parseInt(progressElement.getAttribute('data-progress'));
+          progressElement.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - (Math.round((anntimer / Number("5000")) * 100)).toFixed(2)) / 100) * max);
         })
       }
     }, 300);
@@ -112,11 +104,10 @@ const AnnoucmentBar = ({ path }) => {
       } else {
         anntimer = anntimer + 1000;
       }
-      forEach(document.querySelectorAll('.progress-announcement'), function (index, value) {
-        let max = -219.99078369140625;
-        percent = value.getAttribute('data-progress');
-        value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - (Math.round((anntimer / Number("5000")) * 100)).toFixed(2)) / 100) * max);
-      });
+      const progressElement = document.querySelectorAll('.progress-announcement')[0];
+      let max = -219.99078369140625;
+      percent = parseInt(progressElement.getAttribute('data-progress'));
+      progressElement.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - (Math.round((anntimer / Number("5000")) * 100)).toFixed(2)) / 100) * max);
   
     }, 830);
   }

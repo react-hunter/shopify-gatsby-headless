@@ -10,6 +10,7 @@ import '../../styles/flickity.css';
 
 const ProductGallery = ({ product, selectedVariant }) => {
     let selectedImageIndex = 0;
+    let flkty;
     product.images.map((image, imageIndex) => {
         if(image.originalSrc === selectedVariant.image.originalSrc) {
             selectedImageIndex = imageIndex
@@ -26,7 +27,7 @@ const ProductGallery = ({ product, selectedVariant }) => {
             console.log("flkty = Null ");
         }
         
-    }, [selectedVariant, selectedImageIndex])
+    }, [selectedVariant, selectedImageIndex, flkty])
 
     let productGalleryCount = product.images.length;    
     const [ slideIndex, setSlideIndex] = useState(0);
@@ -36,9 +37,6 @@ const ProductGallery = ({ product, selectedVariant }) => {
         let translateX = 100 * slideIndex;
         return { width: `${width}%`, transform: `translateX(${translateX}%)` };
     }
-
-    let flkty;
-
     const flickityOptions = {
         pageDots: false, 
         imagesLoaded: true, 

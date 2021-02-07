@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
+// import { LazyLoadImage } from 'react-lazy-load-image-component'
 import CustomImage from '../common/image'
 import { client } from '../../contentful'
 

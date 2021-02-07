@@ -3,7 +3,7 @@ import "../../resources/css/preloader.css";
 import "../styles/instagram.css";
 import "../styles/header.css";
 
-import React, { useState } from 'react';
+import React from 'react';
 import { StaticQuery, graphql } from 'gatsby'
 import {
 	QueryClient,

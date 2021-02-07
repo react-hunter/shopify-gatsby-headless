@@ -3,6 +3,7 @@ import Glider from 'react-glider';
 import CollectionVariantSelector from '../collectionPage/collectionVariantSelector'
 import FeaturedProductBox from "../common/product/featuredProductBox"
 import NotifyModal from "../collectionPage/notifyModal"
+import { client } from "../../contentful"
 import 'glider-js/glider.min.css';
 import "../../styles/relatedProductList.scss";
 
@@ -13,7 +14,12 @@ const RelatedProductList = ({ products, reviewList }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
+    async function getBadgeData() {
+      const badgeStyleData = await client.getEntries({'content_type': 'collectionBadgeStyleItem'});
+      setBadgeStyles(badgeStyleData.items);
+    }
     setHoverEffectsForCollection();
+    getBadgeData();
   }, [])
 
   function setHoverEffectsForCollection() {
