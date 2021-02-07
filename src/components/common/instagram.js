@@ -12,9 +12,7 @@ const Instagram = () => {
         getInstagramData()
     })
     useEffect(() => {
-        window.addEventListener('load', () => {
-            setTimeout(addScript('//foursixty.com/media/scripts/fs.embed.v2.5.js'), 500);
-        });
+        setTimeout(addScript('//foursixty.com/media/scripts/fs.embed.v2.5.js'), 2000);
     }, [])
     const addScript = url => {
         const script = document.createElement("script")
