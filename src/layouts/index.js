@@ -1,5 +1,4 @@
 import "../../resources/css/base.scss";
-import "../../resources/css/stampedio.css";
 import "../../resources/css/preloader.css";
 import "../styles/instagram.css";
 import "../styles/header.css";
@@ -13,10 +12,9 @@ import {
 import Header from "../components/common/header/header"
 import Footer from "../components/common/footer"
 import Instagram from "../components/common/instagram"
-//import SubscribeSection from "../components/common/subscribeSection"
 import Provider from "../context/provider"
 import AjaxCartCustom from "../components/common/ajaxCartCustom"
-import Preloader from "../components/common/preloader"
+// import Preloader from "../components/common/preloader"
 
 const queryClient = new QueryClient()
 
@@ -63,11 +61,6 @@ const Layout = ({ path, children }) => {
 												null : 
 												<Instagram />
 										}
-										{/* {
-											path.includes('/cart') ? 
-												null :
-												<SubscribeSection />
-										} */}
 									</div>
 									<Footer />
 								</div>

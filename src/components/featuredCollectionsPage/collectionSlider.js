@@ -19,8 +19,6 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
     async function getBadgeData() {
       const badgeStyleData = await client.getEntries({'content_type': 'collectionBadgeStyleItem'});
       setBadgeStyles(badgeStyleData.items);
-
-      console.log("badgeStyleData.items = ", badgeStyleData.items);
     }
     setHoverEffectsForCollection();
     getBadgeData();

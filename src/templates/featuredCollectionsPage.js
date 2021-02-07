@@ -1,8 +1,9 @@
 import React from 'react';
 import { graphql } from "gatsby";
-import Preloader from "../components/common/preloader"
+// import Preloader from "../components/common/preloader"
 import CollectionSlider from "../components/featuredCollectionsPage/collectionSlider";
 import '../styles/featuredCollectionsPage.scss';
+import '../styles/widget.min.css';
 
 const featuredCollectionsPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;

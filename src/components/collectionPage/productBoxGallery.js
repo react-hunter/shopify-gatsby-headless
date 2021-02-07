@@ -1,9 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { LazyLoadImage } from 'react-lazy-load-image-component'
 import CustomImage from '../common/image'
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import '../../styles/productGallery.css';
 
 import Flickity from 'react-flickity-component'
@@ -18,14 +15,6 @@ const ProductBoxGallery = props => {
 
     const [ slideIndex, setSlideIndex] = useState(0);
     
-    const productBoxSliderSettings = {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        beforeChange: (current, next) => setSlideIndex(next)
-    }
     const [ swatchImages, setSwatchImages ] = useState([]);
 
     const flickityOptions = {
@@ -58,7 +47,6 @@ const ProductBoxGallery = props => {
         if (flkty) {
             flkty.on('change', () => {
                 setSlideIndex(flkty.selectedIndex);
-                console.log("flkty.selectedIndex = ", flkty.selectedIndex)
             })
         } else {
             console.log("flkty = ", flkty);
@@ -166,55 +154,7 @@ const ProductBoxGallery = props => {
                     </Flickity>
                 }
                 </div>
-
-                {/* <div className="collection-product_image_container">
-                { 
-                    mainOption === '' ?
-                        <Slider {...productBoxSliderSettings}>
-                            { product.images[0] ? 
-                                (<CustomImage 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={product.images[0].originalSrc}
-                                    alt={product.title}
-                                />) : ""
-                            }
-                            { product.images[1] ? 
-                                (<CustomImage 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={product.images[1].originalSrc}
-                                    alt={product.title}
-                                    style={{ cursor: 'pointer' }} 
-                                />) : ""
-                            }
-                            { product.images[2] ? 
-                                (<CustomImage 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={product.images[2].originalSrc}
-                                    alt={product.title}
-                                    style={{ cursor: 'pointer' }} 
-                                />) : ""
-                            }
-                        </Slider>
-                    : 
-                    <Slider {...productBoxSliderSettings}>
-                    {
-                        swatchImages.map((swatchImage, swatchImageIndex) => {
-                            return (
-                                <CustomImage 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={swatchImage}
-                                    alt=''
-                                    style={{ cursor: 'pointer' }} 
-                                    key={swatchImageIndex}
-                                />
-                            )
-                        })
-                    }
-                    </Slider>
-                }
-                </div> */}
-            </div>
-                    
+            </div>                    
             <div className="carousel-scrollbar">
                 <div className="carousel-scrollbar_bar" style={getStyle()}></div>
             </div>

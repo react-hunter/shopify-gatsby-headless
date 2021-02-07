@@ -91,9 +91,9 @@ const CollectionVariantSelector = props => {
 
     function attachCloseMobileVariantSelector() {
         let mobileTriggers = document.querySelectorAll(".closeVariantSelector");
-        let mobileTrigger = null
-        for (let i = 0; i < mobileTriggers.length; i++) {
-            mobileTrigger = mobileTriggers[i];
+        let mobileTrigger = mobileTriggers[0]
+        // for (let i = 0; i < mobileTriggers.length; i++) {
+            // mobileTrigger = mobileTriggers[i];
             mobileTrigger.addEventListener('touchstart', (evt) => {
                 const firstTouch = getTouches(evt)[0];
                 xDownVariant = firstTouch.clientX;
@@ -125,7 +125,7 @@ const CollectionVariantSelector = props => {
                 xDownVariant = null;
                 yDownVariant = null;
             }, false);
-        }
+        // }
     }
     function getTouches(evt) {
         return evt.touches ||             // browser API

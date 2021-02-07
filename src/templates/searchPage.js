@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import queryString from 'query-string'
 import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
-import Preloader from "../components/common/preloader"
+// import Preloader from "../components/common/preloader"
 import CollectionProductBox from "../components/collectionPage/collectionProductBox"
 import { client } from '../contentful'
+import '../styles/widget.min.css';
 
 const SearchPage = ( { data, pageContext, location } ) => {
   const { searchText } = location.search ? queryString.parse(location.search) : { searchText: ''}

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { client } from '../../../contentful'
 
-/* Banner carousel animation for side menu */
-
 const CardSlider = ({ path }) => {
     const [cardSlider, setCardSlider] = useState([]);
     useEffect(() => {

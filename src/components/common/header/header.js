@@ -6,7 +6,6 @@ import { ReactSVG } from 'react-svg';
 import LogoIcon from '../../../images/icon-logo.svg';
 import HamburgerIcon from '../../../images/icon-hamburger.svg';
 import CloseIcon from '../../../images/icon-close.svg';
-import { LazyLoadImage } from 'react-lazy-load-image-component'
 import SearchHeaderIcon from '../../../images/icon-search-header.svg';
 import LoginHeaderIcon from '../../../images/icon-login-header.svg';
 import MessageIcon from '../../../images/icon-message.svg';

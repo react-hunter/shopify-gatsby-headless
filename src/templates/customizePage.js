@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-// import { useStateWithCallbackLazy } from 'use-state-with-callback';
 import { graphql } from 'gatsby'
-// import { customizePageData } from '../data/customizePage' 
-import Preloader from "../components/common/preloader"
+// import Preloader from "../components/common/preloader"
 import StoreContext from '../context/store'
 import { client } from '../contentful'
 import ImageSpin from '../components/common/imageSpin'
@@ -173,14 +171,6 @@ const CustomizePage = ({ data }) => {
         break;
       }
     }
-  }
-
-  // function scanJSONForSoldOut(json) {
-
-  // }
-
-  function setAllProduct() {
-    allProducts = customizeData.products;
   }
 
   function setSelectedProduct(product) {

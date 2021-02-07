@@ -6,8 +6,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 const Product = ({ line_item }) => {
 
     const context = useContext(StoreContext)
-    // console.log('context checkout: ', context.store.checkout)
-
+    
     const imageItem = line_item.variant.image && (
         <LazyLoadImage
             className="cart__image"

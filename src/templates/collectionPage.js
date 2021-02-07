@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react' /* eslint-disable */
 import { graphql } from "gatsby"
-import Preloader from "../components/common/preloader"
+// import Preloader from "../components/common/preloader"
 import CollectionProductBox from "../components/collectionPage/collectionProductBox"
 import NotifyModal from '../components/collectionPage/notifyModal'
 import { client } from '../contentful'
