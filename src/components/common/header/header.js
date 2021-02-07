@@ -46,9 +46,6 @@ const Header = ({ path }) => {
 
   const [ searchShow, setSearchShow ] = useState(false);
   const [mobileHeaderMenu, setMobileHeaderMenu] = useState([]);
-  
-  let modal = document.getElementById('sidenav');
-  let mobileToggleBtn = document.getElementById('mobile-mega-toggle');
 
   let mobileMenuStep = 0;
 
@@ -74,6 +71,7 @@ const Header = ({ path }) => {
   }, [checkout]);
 
   function changehamburgMenuIcon() {
+    let mobileToggleBtn = document.getElementById('mobile-mega-toggle');
 
     mobileToggleBtn.classList.remove("active");
     mobileToggleBtn.classList.remove("closeBtn");  
@@ -126,7 +124,7 @@ const Header = ({ path }) => {
     else if (mobileMenuStep == 1) {
       showDefaultMenuItems();
 
-      modal.style.display = "flex";
+      document.getElementById('sidenav').style.display = "flex";
       document.getElementsByTagName("html")[0].classList.add("side-menu-scroll")
       initiateBannerSlider();
     }
@@ -135,7 +133,7 @@ const Header = ({ path }) => {
   }
 
   function hideMobileMenuNav() {
-    modal.style.display = "none";
+    document.getElementById('sidenav').style.display = "none";
 
     document.getElementsByTagName("html")[0].classList.remove("side-menu-scroll")
   }
