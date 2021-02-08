@@ -126,6 +126,7 @@ const Header = ({ path }) => {
 
       document.getElementById('sidenav').style.display = "flex";
       document.getElementsByTagName("html")[0].classList.add("side-menu-scroll")
+
       initiateBannerSlider();
     }
     else if (mobileMenuStep == 2) {
