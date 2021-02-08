@@ -18,8 +18,8 @@ const HeroSection = (props) => {
                     </Link>
 
                     <div className="text_image_banner-content_container">
-                        <div className="text_image_banner-title">{props.heroImage.title}</div>
-                        <div className="text_image_banner-subtitle">{props.heroImage.subTitle}</div>
+                        <h2 className="text_image_banner-title">{props.heroImage.title}</h2>
+                        <p className="text_image_banner-subtitle">{props.heroImage.subTitle}</p>
                         <Link to={props.heroImage.imageUrl} 
                             className="text_image_banner-button">{props.heroImage.buttonText}</Link>
                     </div>

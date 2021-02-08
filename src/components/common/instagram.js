@@ -40,7 +40,7 @@ const Instagram = () => {
     return (
         <div className="instagram-section">
             <div className="insta_header" id="insta_header" style={ instaHeaderStyle }>
-                <h1 style={ InstaH1Style }>{ instagramTitle }</h1>
+                <p style={ InstaH1Style }>{ instagramTitle }</p>
             </div>
         </div>
     );
