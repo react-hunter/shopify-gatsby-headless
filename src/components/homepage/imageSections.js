@@ -6,7 +6,7 @@ import "../../styles/imageSections.css";
 
 const ImageSections = (props) => {
     return (
-        <div>
+        <>
         { props.imageSections.map((imageItem, imageIndex) => 
             <div className="shopify-section" key={imageIndex}>
                 <div className="fifty_fifty-container">
@@ -21,14 +21,14 @@ const ImageSections = (props) => {
                     
                         <div className="fifty_fifty-text_container">
                             <div className="fifty_fifty-text_container_inner">
-                                <div className="fifty_fifty-title">
+                                <h3 className="fifty_fifty-title">
                                     {imageItem.fields.title}
-                                </div>
-                                <div className="fifty_fifty-subtitle">
+                                </h3>
+                                <p className="fifty_fifty-subtitle">
                                     {imageItem.fields.description}
-                                </div>
+                                </p>
                                 <Link to={imageItem.fields.shopLink} className="fifty_fifty-button">
-                                    SHOP NOW
+                                    <span>SHOP NOW</span>
                                 </Link>
                             </div>
                         </div>
@@ -43,7 +43,7 @@ const ImageSections = (props) => {
                 </div>
             </div>
         )}
-        </div>        
+        </>        
     );
 };
     
