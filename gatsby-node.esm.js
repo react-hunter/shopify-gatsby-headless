@@ -153,7 +153,8 @@ exports.createPages = async ({ graphql, actions }) => {
       })      
     } catch (error) {
       console.log('customize page create error: ', error)
-    }
+    }   
+    
   })
 }
 

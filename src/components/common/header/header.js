@@ -77,15 +77,15 @@ const Header = ({ path }) => {
     mobileToggleBtn.classList.remove("closeBtn");  
     mobileToggleBtn.classList.remove("backBtn");  
 
-    if (mobileMenuStep == 0) { // not open step
+    if (mobileMenuStep === 0) { // not open step
 
-    } else if (mobileMenuStep == 1) {  // menu opened
+    } else if (mobileMenuStep === 1) {  // menu opened
 
       mobileToggleBtn.classList.add("active");
       mobileToggleBtn.classList.remove("backBtn");  
       mobileToggleBtn.classList.add("closeBtn");  
 
-    } else if (mobileMenuStep == 2) {   // child menu opened
+    } else if (mobileMenuStep === 2) {   // child menu opened
 
       mobileToggleBtn.classList.add("active");
       mobileToggleBtn.classList.add("backBtn");
@@ -104,13 +104,13 @@ const Header = ({ path }) => {
   const clickToggleBtn = (e) => {
     e.preventDefault();
 
-    if (mobileMenuStep == 0) {
+    if (mobileMenuStep === 0) {
       mobileMenuStep = 1;
     }
-    else if (mobileMenuStep == 1) {
+    else if (mobileMenuStep === 1) {
       mobileMenuStep = 0;
     }
-    else if (mobileMenuStep == 2) {
+    else if (mobileMenuStep === 2) {
       mobileMenuStep = 1;
     }
     
@@ -118,10 +118,10 @@ const Header = ({ path }) => {
 
     console.log("mobileMenuStep == ", mobileMenuStep);
 
-    if (mobileMenuStep == 0) {
+    if (mobileMenuStep === 0) {
       hideMobileMenuNav();
     }
-    else if (mobileMenuStep == 1) {
+    else if (mobileMenuStep === 1) {
       showDefaultMenuItems();
 
       document.getElementById('sidenav').style.display = "flex";
@@ -129,7 +129,7 @@ const Header = ({ path }) => {
 
       initiateBannerSlider();
     }
-    else if (mobileMenuStep == 2) {
+    else if (mobileMenuStep === 2) {
     }
   }
 

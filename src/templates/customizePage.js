@@ -98,14 +98,21 @@ const CustomizePage = ({ data }) => {
         roseColor: roses,
         products: products
       });
+
+      console.log("selectedProduct === ", selectedProduct);
+
     }
     getCustomizeData();
+
+    console.log("selectedProduct === ", selectedProduct);
   }, []);
 
   useEffect(() => {
     allProducts = customizeData.products;
     var arrTypes = document.getElementById("arrangementSelector-0");
   
+    console.log('allProducts', allProducts);
+
     for (var i = 0; i < allProducts.length; i++) {
       var product = allProducts[i];
   
@@ -116,6 +123,8 @@ const CustomizePage = ({ data }) => {
       arrangment.innerHTML = `<span>${product.Arrangement}</span>`;
       arrTypes.appendChild(arrangment)
     }
+
+    console.log("arrTypes = ", arrTypes);
   
     let needShowItems = document.querySelectorAll('#arrangementSelector-0 .arr-type-box');
     for (var j=0; j<needShowItems.length; j++ ) {
@@ -139,7 +148,7 @@ const CustomizePage = ({ data }) => {
     for (var i = 0; i < allProducts.length; i++) {
       var product = allProducts[i];
       if (product.productId === id) {
-        setSelectedProduct(product);
+        setSelectedProduct(product, i);
         if (!document.getElementById("arr-Type")) {
           addArrangementBlock("ARRANGEMENT", "arr-Type", product.Arrangement, product.subtext, "0")
         } else {
@@ -171,10 +180,24 @@ const CustomizePage = ({ data }) => {
         break;
       }
     }
+
+    console.log("selectArrangement ===> selectedProduct = ", selectedProduct);
+
   }
 
-  function setSelectedProduct(product) {
+  let selectedProductIndex = -1;
+
+  function setSelectedProduct(product, id) {
+
+    console.log("id ===", id);
+
+    selectedProductIndex = id;
+
+    console.log("before setSelectedProduct ===> product = ", product);
+
     selectedProduct = product;
+
+    console.log("after setSelectedProduct ===> selectedProduct = ", selectedProduct);
   }
 
   function setCharAt(str, index, chr) {
@@ -244,7 +267,12 @@ const CustomizePage = ({ data }) => {
           eventFire(document.getElementById('step-next'), 'click')
       }
     } else {
-      eventFire(document.getElementById("arrangementSelector-0").firstElementChild, 'click')
+      console.log('document.getElementById("arrangementSelector-0").firstElementChild ===', document.getElementById("arrangementSelector-0").firstElementChild);
+      
+      if (document.getElementById("arrangementSelector-0")) {
+        console.log("document.getElementById('arrangementSelector-0') === ", document.getElementById("arrangementSelector-0"))
+        eventFire(document.getElementById("arrangementSelector-0").firstElementChild, 'click')
+      }
     }
   }
 
@@ -261,6 +289,7 @@ const CustomizePage = ({ data }) => {
   }
   
   function nextStep() {
+    console.log("nextStep function");
     currentStep = currentStep + 1;
   
     if (document.getElementById(`arrangementSelector-${currentStep}`)) {
@@ -539,8 +568,8 @@ const CustomizePage = ({ data }) => {
       if (result.available !== false) {
         box.addEventListener("click", function(e){
           setBox(this.getAttribute('title'), this.getAttribute('src') ,this);
-        });
 
+        });
         box.setAttribute("class", "box");
       } else {
         box.setAttribute("class", "boxSoldOut");
@@ -739,8 +768,8 @@ const CustomizePage = ({ data }) => {
 
       console.log(" product id & style ",`${productHandle}-${style}`)
 
-      const result = array.filter(excluded => excluded == `${productHandle}-${style}`);
-      return result.length == 0 ? false : true;
+      const result = array.filter(excluded => excluded === `${productHandle}-${style}`);
+      return result.length === 0 ? false : true;
     } else {
       return false;
     }
@@ -881,6 +910,9 @@ const CustomizePage = ({ data }) => {
   }
 
   const previous = () => {
+    console.log("previous button click");
+    console.log("currentStep = ", currentStep);
+
     if (currentStep - 1 !== -1) {
       if (currentStep - 1 === maxOptions) {
         document.getElementById("addToBAG").style.display = "none"
@@ -891,6 +923,14 @@ const CustomizePage = ({ data }) => {
   }
 
   const next = () => {
+    console.log("selectedProduct = ", selectedProduct);
+
+    if (!selectedProduct)
+      return false;
+
+    console.log("selectedProduct.productId = ", selectedProduct.productId);
+    console.log("selectedProduct.Arrangement = ", selectedProduct.Arrangement);
+
     if (selections[0]) {
       if (!selections[0].includes(selectedProduct.Arrangement)) {
         resetSelections();
@@ -967,6 +1007,13 @@ const CustomizePage = ({ data }) => {
 
   const AddToBag = () => {
     const bagProduct = collectionProducts.filter(cp => cp.title === selections[0])
+
+
+    console.log("selections[0] = ", selections[0]);
+    console.log("bagProduct == ", bagProduct);
+
+
+
     // console.log('selections: ', selections)
     const bagVariants = bagProduct[0].variants
     let bagVariant = null
@@ -1066,7 +1113,7 @@ const CustomizePage = ({ data }) => {
       {/* <Preloader /> */}
       <div className="container">
 
-      <div id="shopify-section-customizer-schema" class="shopify-section">
+      <div id="shopify-section-customizer-schema" className="shopify-section">
         <span id="excluded_products" 
           data-ids="[
             'Single Round-Solid',

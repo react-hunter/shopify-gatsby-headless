@@ -8,8 +8,27 @@ import "../../styles/galaxy-star.scss";
 import { ReactSVG } from 'react-svg';
 import DownChevron from '../../images/down-chevron.svg';
 
+import { useStaticQuery, graphql } from "gatsby"
  
-const GalaxyStarProjector = () => {
+const GalaxyStarProjector = ()  => {
+
+    const id = "galaxy-star-projector";
+
+    const { product } = useStaticQuery(
+        graphql`
+            query {
+                product: shopifyProduct(handle: {eq: "galaxy-star-projector"}) {
+                    id
+                    shopifyId
+                    variants {
+                        id
+                        shopifyId
+                        price
+                    }
+                }
+            }
+        `
+    )
 
     const context = useContext(StoreContext);
     const [showSpin, setShowSpin] = useState(false);
@@ -27,7 +46,12 @@ const GalaxyStarProjector = () => {
         e.preventDefault();
 
         setShowSpin(true);
-        context.addVariantToCart(32761018056750, 1);
+
+
+        console.log("product = ", product);
+        console.log("product.variants[0].shopifyId == ", product.variants[0].shopifyId);
+
+        context.addVariantToCart(product.variants[0].shopifyId, 1);
 
         setTimeout(showCart, 1200);
     }
@@ -39,6 +63,8 @@ const GalaxyStarProjector = () => {
 
     useEffect(() => {
         console.log("galaxy-star-projector------------------------------------------------");
+
+        console.log("product === ", product);
 
         document.querySelectorAll('.galaxy_accordion-title').forEach(button => {
             button.addEventListener('click', () => {
@@ -70,7 +96,7 @@ const GalaxyStarProjector = () => {
                     <div className="galaxy_product-container">
                         <div className="galaxy_product-wrapper">
                             <div className="galaxy_product-textbox">
-                                <div className="galaxy_product-price">$69.00</div>
+                                <div className="galaxy_product-price">${product.variants[0].price}</div>
                                 <div className="quadpay-widget"></div>
                                 <div className="galaxy_product-description">See the Galaxy in the comfort of your own home and fall asleep under the stars. Transform any room in your living space instantly with the Galaxy Projector, an easy plug &amp; play installation that casts an ethereal orchestra of the night sky onto each surface light can contact</div>
                                 <button className="galaxy_product-ATC" onClick={addItemToCart}>ADD TO BAG</button>

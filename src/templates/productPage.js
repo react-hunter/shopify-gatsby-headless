@@ -18,6 +18,9 @@ const ProductPage = ({ data, pageContext }) => {
     const productReview = productReviews.filter(pr => pr.handle === id)
     
     useEffect(() => {
+
+        console.log("product page === ", product.id);
+
         setTimeout(setPDPHeaderPadding, 1000);
         const addToCartButtonSticky = document.querySelector(".atcSticky");
 

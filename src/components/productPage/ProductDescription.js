@@ -45,7 +45,7 @@ const ProductDescription = ({ product, review, selectVariant }) => {
 
 
     function rotateButton(identifier){
-        if(document.getElementsByClassName(identifier)[0].firstElementChild.style.transform == "rotate(0deg)"){
+        if(document.getElementsByClassName(identifier)[0].firstElementChild.style.transform === "rotate(0deg)"){
           document.getElementsByClassName(identifier)[0].firstElementChild.style.transform = "rotate(180deg)"
         }else{
           document.getElementsByClassName(identifier)[0].firstElementChild.style.transform = "rotate(0deg)"

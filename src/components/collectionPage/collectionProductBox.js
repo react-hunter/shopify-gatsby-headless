@@ -24,6 +24,10 @@ const CollectionProductBox = props => {
     const addToBag = () => {
         if(product.variants.length === 1) {
             setShowSpin(true);
+
+            console.log("product = ", product);
+            console.log("product.variants[0].shopifyId == ", product.variants[0].shopifyId);
+
             context.addVariantToCart(product.variants[0].shopifyId, 1);
             setTimeout(showCart, 1200);
         } else {
