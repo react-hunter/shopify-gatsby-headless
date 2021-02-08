@@ -4,8 +4,8 @@ import { Link, navigate } from 'gatsby'
 import StoreContext from '../../../context/store'
 import { ReactSVG } from 'react-svg';
 import LogoIcon from '../../../images/icon-logo.svg';
-import HamburgerIcon from '../../../images/icon-hamburger.svg';
-import CloseIcon from '../../../images/icon-close.svg';
+// import HamburgerIcon from '../../../images/icon-hamburger.svg';
+// import CloseIcon from '../../../images/icon-close.svg';
 import SearchHeaderIcon from '../../../images/icon-search-header.svg';
 import LoginHeaderIcon from '../../../images/icon-login-header.svg';
 import MessageIcon from '../../../images/icon-message.svg';
@@ -452,7 +452,7 @@ const Header = ({ path }) => {
                           </div>
                         </div>
                         <div className="sidenav-item_img" key={`itemimg-${menuIndex}`}>
-                          <MyImage effect="blur" loading="eager" src={menuItem.fields.image.fields.file.url} alt="" />
+                          <MyImage src={menuItem.fields.image.fields.file.url} className="" alt="" />
                         </div>
                       </Link>
 
@@ -471,7 +471,7 @@ const Header = ({ path }) => {
                                 </div>
                               </div>
                               <div className="sidenav-item_img" key={`childitemimg-${menuIndex}-${child_index}`}>
-                                <MyImage effect="blur" loading="eager" src={child_item.fields.image.fields.file.url} alt="" />
+                                <MyImage src={child_item.fields.image.fields.file.url} className="" alt="" />
                               </div>
                             </Link>
                           )
