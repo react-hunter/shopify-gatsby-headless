@@ -2,14 +2,12 @@ import React from 'react' /* eslint-disable */
 import MyImage from '../components/common/lazyImage'
 import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
-import Preloader from "../components/common/preloader"
 import RecentArticles from "../components/articles/recentArticles"
 import ShareIcons from "../components/common/shareIcons"
 import "../styles/blogs.scss";
 
 
-const articlePage = ({ data }) => {
-    
+const articlePage = ({ data, ...other }) => {
   let date = changeDateFormat();
   function changeDateFormat(){
     let mydate = new Date(data.shopifyArticle.publishedAt);
@@ -21,7 +19,6 @@ const articlePage = ({ data }) => {
 
   return (
     <>
-      {/* <Preloader /> */}
       <SEO title={data.shopifyArticle.title} />
 
       <div id="article-page">
@@ -46,8 +43,7 @@ const articlePage = ({ data }) => {
                   />
 
                   <div className="article-img">
-                    <MyImage src={data.shopifyArticle.image.src}
-                      alt="" loading="eager" />
+                    <MyImage src={data.shopifyArticle.image.src} alt="" />
                   </div>
                   <div className="clear"></div>
                   <div className="rte">

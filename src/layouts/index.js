@@ -4,6 +4,7 @@ import "../styles/instagram.css";
 import "../styles/header.scss";
 
 import React from 'react';
+import loadable from '@loadable/component'
 import { StaticQuery, graphql } from 'gatsby'
 import {
 	QueryClient,
@@ -13,7 +14,8 @@ import Header from "../components/common/header/header"
 import Footer from "../components/common/footer"
 import Instagram from "../components/common/instagram"
 import Provider from "../context/provider"
-import AjaxCartCustom from "../components/common/ajaxCartCustom"
+// import AjaxCartCustom from "../components/common/ajaxCartCustom"
+const AjaxCartCustom = loadable(() => import("../components/common/ajaxCartCustom"));
 // import Preloader from "../components/common/preloader"
 
 const queryClient = new QueryClient()

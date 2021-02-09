@@ -3,22 +3,17 @@ import { LazyImage } from "react-lazy-images";
 import '../../styles/imageloader.css';
 
 const MyImage = (props) => {
-    const { src, className, style, ...other } = props
+    const { src, ...other } = props
     return (
       <LazyImage
-        src={props.src}
-        className={className}
-        style={style}
+        src={src}
         {...other}
         placeholder={
           ({ref}) =>
             <ImageSpin ref={ref} />
         }
         actual={
-          ({imageProps}) =>
-            <div className={'LazyImage-Actual'}>
-              <img {...imageProps} />
-            </div>
+          ({imageProps}) => <div className={'LazyImage-Actual'}><img {...imageProps} /></div>
         }
       />
     );

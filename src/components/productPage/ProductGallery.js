@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import CustomImage from '../common/image'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import '../../styles/productGallery.css';
-
 import Flickity from 'react-flickity-component'
+import '../../styles/productGallery.css';
 import '../../styles/flickity.css';
 
 const ProductGallery = ({ product, selectedVariant }) => {

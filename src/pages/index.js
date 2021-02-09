@@ -1,14 +1,19 @@
 import React from 'react'
+import loadable from '@loadable/component'
 import { useQuery } from 'react-query'
 import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
 import Preloader from "../components/common/preloader"
-import HeroSection from "../components/homepage/heroSection"
-import ImageSection from "../components/homepage/imageSections"
-import ArticleSection from "../components/articles/articleSection"
 import { client } from '../contentful';
+// import HeroSection from "../components/homepage/heroSection"
+// import ImageSection from "../components/homepage/imageSections"
+// import ArticleSection from "../components/articles/articleSection"
+const HeroSection = loadable(() => import("../components/homepage/heroSection"));
+const ImageSection = loadable(() => import("../components/homepage/imageSections"));
+const ArticleSection = loadable(() => import("../components/articles/articleSection"));
 
-const IndexPage = ({ data: {allShopifyArticle}}) => {
+const IndexPage = ({ data: {allShopifyArticle, allContentfulHomepage}}) => {
+  console.log('allContentfulHomepage: ', allContentfulHomepage.nodes[0])
   let homeData = {
     heroImage: {
       desktopImage: null,
@@ -63,6 +68,37 @@ export const query = graphql`
           image {
             id
             src
+          }
+        }
+      }
+    }
+    allContentfulHomepage {
+      nodes {
+        homeImageSectionItem {
+          imageUrl {
+            file {
+              url
+            }
+          }
+          imageLeft
+          title
+          description
+        }
+        heroImage {
+          desktopImage {
+            fluid {
+              sizes
+              src
+              srcSet
+              srcWebp
+              aspectRatio
+              base64
+            }
+          }
+          mobileImage {
+            file {
+              url
+            }
           }
         }
       }
