@@ -76,7 +76,7 @@ const ProductGallery = ({ product, selectedVariant }) => {
                     }
                 </Flickity>
 
-                <div className="status-bar" style={{ backgroundColor: '#F1F2F1' }}>
+                <div className="status-bar">
                     <div className="carousel-scrollbar">
                         <div className="carousel-scrollbar_bar" style={getStyle()}></div>
                     </div>

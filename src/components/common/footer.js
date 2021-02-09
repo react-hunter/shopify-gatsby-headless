@@ -13,10 +13,31 @@ const Footer = () => {
         }
 
         getFooterMenu();
+
+        addScript('//acsbap.com/apps/app/assets/js/acsb.js')
     }, []);
+
+    const addScript = url => {
+        const s = document.createElement('script')
+        s.src = url;
+        //s.onload = function(){
+            // acsbJS.init({
+            //     statementLink : '',feedbackLink : '',footerHtml : '',hideMobile : true,hideTrigger : true,
+            //     language : 'en',position : 'left',leadColor : '#000000',triggerColor : '#000000',triggerRadius : '50%',
+            //     triggerPositionX : 'left',triggerPositionY : 'bottom',triggerIcon : 'default',
+            //     triggerSize : 'medium',triggerOffsetX : 20,triggerOffsetY : 20,
+            //     mobile : {
+            //         triggerSize : 'small',triggerPositionX : 'left',triggerPositionY : 'center',
+            //         triggerOffsetX : 0,triggerOffsetY : 0,triggerRadius : '0'
+            //     }
+            // });
+        //};
+        document.getElementById('footer-section').appendChild(s)
+    }
+
     return (
         <div className="shopify-section">
-            <footer className="footer-section">
+            <footer className="footer-section" id="footer-section">
                 <div className="footer-socials_container" key="social-container">
                     <div className="footer-social_cell" key="icon-facebook">
                         <a href="https://www.facebook.com/DoseofRoses" target="_blank" rel="noreferrer">
@@ -51,6 +72,9 @@ const Footer = () => {
                 </div>
                 <div className="newsletter-nav" key="newsletter-nav-desktop">
                     <ul className="footer-links">
+                        <li className="newsletter_nav_link">
+                            <a className="accessibility_trigger-desktop" data-acsb-custom-trigger="true">Accessibility</a>
+                        </li>
                         { footerMenu.map((menuItem, menuIndex) => 
                             <li className="newsletter_nav_link" key={menuIndex}>
                                 <Link to={menuItem.fields.handle}><span>{ menuItem.fields.title }</span></Link>

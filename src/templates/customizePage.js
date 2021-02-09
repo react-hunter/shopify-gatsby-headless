@@ -267,8 +267,6 @@ const CustomizePage = ({ data }) => {
           eventFire(document.getElementById('step-next'), 'click')
       }
     } else {
-      console.log('document.getElementById("arrangementSelector-0").firstElementChild ===', document.getElementById("arrangementSelector-0").firstElementChild);
-      
       if (document.getElementById("arrangementSelector-0")) {
         console.log("document.getElementById('arrangementSelector-0') === ", document.getElementById("arrangementSelector-0"))
         eventFire(document.getElementById("arrangementSelector-0").firstElementChild, 'click')
@@ -411,12 +409,12 @@ const CustomizePage = ({ data }) => {
     for (var i = 0; i < json.length; i++) {
       if (json[i].title === `${selections[1]} / Box`) {
         if (!document.getElementById("price-Type")) {
-          addArrangementBlock("Price", "price-Type", `$${json[i].price / 100}`, "", currentStep)
+          addArrangementBlock("Price", "price-Type", `$${json[i].price}`, "", currentStep)
         } else {
-          document.getElementById("price-Type").innerText = `$${json[i].price / 100}`;
+          document.getElementById("price-Type").innerText = `$${json[i].price}`;
   
         }
-        document.getElementById("mobile-arr-price-span").innerText = `$${json[i].price / 100}`
+        document.getElementById("mobile-arr-price-span").innerText = `$${json[i].price}`
       }
     }
   }
@@ -433,12 +431,12 @@ const CustomizePage = ({ data }) => {
       if (choice.join(",") === element.title.replace(" \/ ", ",")) {
   
         if (!document.getElementById("price-Type")) {
-          addArrangementBlock("Price", "price-Type", `$${element.price / 100}`, "", currentStep)
+          addArrangementBlock("Price", "price-Type", `$${element.price}`, "", currentStep)
         } else {
-          document.getElementById("price-Type").innerText = `$${element.price / 100}`;
+          document.getElementById("price-Type").innerText = `$${element.price}`;
   
         }
-        document.getElementById("mobile-arr-price-span").innerText = `$${element.price / 100}`
+        document.getElementById("mobile-arr-price-span").innerText = `$${element.price}`
         break;
       }
     }

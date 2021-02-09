@@ -145,6 +145,11 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
                             return <p className="ajax-cart-item-property" key="rose-color" >Rose Color: { item.value }<span className="color-circle variant-item-color" data-color={ item.value }></span></p>
                         } else if (item.name === "Box Color") {
                             return <p className="ajax-cart-item-property" key="box-color" >Box: { item.value }<span className="color-circle variant-item-color" data-color={ item.value }></span></p>
+                        } else if (item.name === "Title") {
+                            if ( item.value === 'Default Title')
+                                return '';
+                            else 
+                                return <p className="ajax-cart-item-property" key={index} >{ item.name }: { item.value }</p>
                         } else {
                             return <p className="ajax-cart-item-property" key={index} >{ item.name }: { item.value }</p>
                         }

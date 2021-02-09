@@ -1,61 +1,4 @@
 
-.Best-Sellers-Carousel {
-  margin-top: 35px;
-  position: relative;
-  
-  .slick-arrow {
-    &.slick-prev {
-      left: -50px;
-    }
-    
-    &.slick-next {
-        right: -50px;
-    }
-
-    &.disabled {
-      opacity: 0;
-    }
-  }
-}
-
-.slick-prev {
-  background-image: url("../images/leftArrow_small.png");
-  background-size: contain;
-  left: 20px;
-  z-index: 2;
-
-  &:hover {
-    background-image: url("../images/leftArrow_small.png");
-    background-size: 20px 20px;
-  }
-  &.slick-disabled {
-    opacity: 0.5;
-  }
-
-  @media (max-width: 900px) {
-    display: none!important;
-  }
-}
-
-.slick-next {
-  background-image: url("../images/rightArrow_small.png");
-  background-size: contain;
-  right: 20px;
-  z-index: 2;
-
-  &:hover {
-    background-image: url("../images/rightArrow_small.png");
-    background-size: 20px 20px;
-  }
-  &.slick-disabled {
-    opacity: 0.5;
-  }
-  
-  @media (max-width: 900px) {
-    display: none!important;
-  }
-}
-
 .slick-next:before, .slick-prev:before {
   content: none;
 }
@@ -90,7 +33,18 @@
   padding: 30px 5% 20px 5%;
 
   @media (max-width: 900px) {
-    padding: 40px 2.5% 0 2.5%
+    padding: 40px 0% 0 0%
+  }
+
+  .Best-Sellers-Carousel {
+    margin-top: 35px;
+    position: relative;
+    
+    .slick-arrow {
+      &.disabled {
+        opacity: 0;
+      }
+    }
   }
 
   .you-may-like_header_wrapper  {

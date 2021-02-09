@@ -49,14 +49,16 @@ const ProductInfo = ({ product, review }) => {
                             </dd>
                         </div>
 
-                        <div className="price__badges">
+
+                        {/* <div className="price__badges">
                             <span className="price__badge price__badge--sale" aria-hidden="true">
                                 <span>Sale</span>
                             </span>
                             <span className="price__badge price__badge--sold-out">
                                 <span>Sold out</span>
                             </span>
-                        </div>
+                        </div> */}
+
                     </div>
                     <div className="price__unit">
                         <dt>
