@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { client } from '../../contentful'
 
 const Instagram = () => {
+    const [photoCount, setShotoCount] = useState(0);
+
     const [instagramTitle, setInstagramTitle] = useState('');
     useEffect(() => {
         async function getInstagramData() {
@@ -9,20 +11,38 @@ const Instagram = () => {
             setInstagramTitle(instagramData.items[0].fields.title);
         }
 
-        getInstagramData()
+        getInstagramData();
+        mobileRearrange();
+        window.onresize = function () { mobileRearrange() };
     })
     useEffect(() => {
-        setTimeout(addScript('//foursixty.com/media/scripts/fs.embed.v2.5.js'), 2000);
-    }, [])
+        if (photoCount > 0) {
+            const previousInstagram = document.querySelectorAll(".fs-wrapper");
+            for (var i=0;i<previousInstagram.length;i++) {
+                previousInstagram[i].remove();
+            }
+            setTimeout(addScript('//foursixty.com/media/scripts/fs.embed.v2.5.js'), 2000);
+        }
+    }, [photoCount])
+
     const addScript = url => {
         const script = document.createElement("script")
         script.src = url
         script.setAttribute('data-feed-id', 'dose-of-roses')
         script.setAttribute('data-theme', 'showcase_v2_5')
         script.setAttribute('data-open-links-in-same-page', true)
-        script.setAttribute('data-page-size', 10)
+        script.setAttribute('data-page-size', photoCount)
         document.getElementById('insta_header').appendChild(script)
     }
+
+    function mobileRearrange() {
+        if (window.innerWidth <= 768) {
+            setShotoCount(9);
+        } else {
+            setShotoCount(10);
+        }
+      }
+
     const instaHeaderStyle = {
         paddingTop: '30px',
         paddingBottom: '0px',

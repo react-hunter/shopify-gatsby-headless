@@ -1,6 +1,6 @@
 .fs-has-links::after { padding:4px 8px; color:#ffffff; content:"SHOP NOW" }
 .fs-desktop .fs-entry-container { width:20% !important; padding-top:20% !important }
-.fs-mobile .fs-entry-container { width:50% !important; padding-top:50% !important }
+.fs-mobile .fs-entry-container { width:33.3% !important; padding-top:33.3% !important }
 .fs-wrapper div.fs-text-container .fs-entry-title, div.fs-detail-title { font-family:Times New Roman, serif; font-style:normal; font-weight:normal; font-size:14px }
 div.fs-text-container .fs-entry-date, div.fs-detail-container .fs-post-info, div.fs-wrapper div.fs-has-links::after, .fs-text-product, .fs-overlink-text { /*font-family:Helvetica Neue, Helvetica, Arial, sans-serif;*/ font-style:normal; font-weight:normal; font-size:14px }
 .fs-wrapper div.fs-text-container * { color:#ffffff }
