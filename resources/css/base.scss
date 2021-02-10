@@ -6,28 +6,32 @@
   font-family: "berlingskeserif-blk-webfont";
   src: url('../fonts/berlingskeserif-blk-webfont.woff2') format("woff2"), url('../fonts/berlingskeserif-blk-webfont.woff') format("woff");
   font-weight: normal;
-  font-style: normal
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "berlingskeserif-dbd-webfont";
   src: url('../fonts/berlingskeserif-dbd-webfont.woff2') format("woff2"), url('../fonts/berlingskeserif-dbd-webfont.woff') format("woff");
   font-weight: normal;
-  font-style: normal
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Relative-Medium";
   src: url('../fonts/Relative-Medium.woff2') format("woff2"), url('../fonts/Relative-Medium.woff?v=18438682349880492084') format("woff");
   font-weight: normal;
-  font-style: normal
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Big Caslon';
   src: url('../fonts/BigCaslon-Medium.woff2') format("woff2"), url('../fonts/BigCaslon-Medium.woff') format("woff");
   font-weight: normal;
-  font-style: normal
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -35,28 +39,32 @@
   src: url("../fonts/ProximaNovaACond-Extrabld.eot");
   src: url("../fonts/ProximaNovaACond-Extrabld.eot?#iefix") format("embedded-opentype"), url("../fonts/ProximaNovaACond-Extrabld.woff2") format("woff2"), url("../fonts/ProximaNovaACond-Extrabld.woff") format("woff"), url("../fonts/ProximaNovaAltCond-Extrabold.ttf") format("truetype");
   font-weight: normal;
-  font-style: normal
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Atkiv';
   src: url("../fonts/geomanist.woff2") format("woff2"), url("../fonts/geomanist.woff") format("woff");
   font-weight: normal;
-  font-style: normal
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Avenir';
   src: url("../fonts/Avenir-Regular.woff") format("woff");
   font-weight: normal;
-  font-style: normal
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'vinterlight';
   src: url("../fonts/vinter-light-webfont.woff") format("woff"), url("../fonts/vinter-light-webfont.woff2") format("woff2");
   font-weight: normal;
-  font-style: normal
+  font-style: normal;
+  font-display: swap;
 }
 
 .slick-slider {

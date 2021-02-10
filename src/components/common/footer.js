@@ -4,16 +4,9 @@ import SocialIcon from './socialIcon';
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { client } from '../../contentful'
 
-const Footer = () => {
-    const [footerMenu, setFooterMenu] = useState([]);
+const Footer = (props) => {
+    const footerMenu = props.menuList;
     useEffect(() => {
-        async function getFooterMenu() {
-            const footerMenuData = await client.getEntries({'content_type': 'footerMenu'});
-            setFooterMenu(footerMenuData.items[0].fields.footerMenuItem);
-        }
-
-        getFooterMenu();
-
         addScript('//acsbap.com/apps/app/assets/js/acsb.js')
     }, []);
 
@@ -77,7 +70,7 @@ const Footer = () => {
                         </li>
                         { footerMenu.map((menuItem, menuIndex) => 
                             <li className="newsletter_nav_link" key={menuIndex}>
-                                <Link to={menuItem.fields.handle}><span>{ menuItem.fields.title }</span></Link>
+                                <Link to={menuItem.node.handle}><span>{ menuItem.node.title }</span></Link>
                             </li>
                         )}
                     </ul>
@@ -86,7 +79,7 @@ const Footer = () => {
                     <ul className="footer-links">
                         { footerMenu.map((mobileMenuItem, menuIndex) => 
                             <li className="newsletter_nav_link" key={menuIndex}>
-                                <Link to={mobileMenuItem.fields.handle} ><span>{ mobileMenuItem.fields.title }</span></Link>
+                                <Link to={mobileMenuItem.node.handle} ><span>{ mobileMenuItem.node.title }</span></Link>
                             </li>
                         )}
                     </ul>

@@ -10,10 +10,10 @@ const HeroSection = (props) => {
             <div className="text_image_banner-container_outer">
                 <div className="text_image_banner-container_inner">
                     <Link to={props.heroImage.imageUrl}> 
-                        <MyImage src={props.heroImage.desktopImage ? props.heroImage.desktopImage.fields.file.url : ''}
+                        <MyImage src={props.heroImage.desktopImage ? props.heroImage.desktopImage.fluid.srcWebp : ''}
                             className="text_image_banner-img banner_img-desktop" style={{backgroundColor: '#000'}} alt="" />
                         
-                        <MyImage src={props.heroImage.mobileImage ? props.heroImage.mobileImage.fields.file.url : ''}
+                        <MyImage src={props.heroImage.mobileImage ? props.heroImage.mobileImage.fluid.srcWebp : ''}
                             className="text_image_banner-img banner_img-mobile" alt="" />
                     </Link>
 

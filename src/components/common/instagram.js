@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { client } from '../../contentful'
 
-const Instagram = () => {
-    const [photoCount, setShotoCount] = useState(0);
-
-    const [instagramTitle, setInstagramTitle] = useState('');
+const Instagram = (props) => {
+    const [photoCount, setPhotoCount] = useState(0);
     useEffect(() => {
-        async function getInstagramData() {
-            const instagramData = await client.getEntries({'content_type': 'instagramSettings'});
-            setInstagramTitle(instagramData.items[0].fields.title);
-        }
-
-        getInstagramData();
         mobileRearrange();
         window.onresize = function () { mobileRearrange() };
     })
@@ -37,9 +28,9 @@ const Instagram = () => {
 
     function mobileRearrange() {
         if (window.innerWidth <= 768) {
-            setShotoCount(9);
+            setPhotoCount(9);
         } else {
-            setShotoCount(10);
+            setPhotoCount(10);
         }
       }
 
@@ -60,7 +51,7 @@ const Instagram = () => {
     return (
         <div className="instagram-section">
             <div className="insta_header" id="insta_header" style={ instaHeaderStyle }>
-                <p style={ InstaH1Style }>{ instagramTitle }</p>
+                <p style={ InstaH1Style }>{ props.title }</p>
             </div>
         </div>
     );
