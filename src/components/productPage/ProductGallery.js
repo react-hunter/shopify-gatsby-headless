@@ -24,8 +24,21 @@ const ProductGallery = ({ product, selectedVariant }) => {
             console.log("flkty = Null ");
         }
         
-    }, [selectedVariant, selectedImageIndex, flkty])
-
+    }, [product, selectedVariant])
+    useEffect(() => {
+        setTimeout(addSliderScript('//foursixty.com/media/scripts/fs.slider.v2.5.js'), 2000);
+    }, [])
+    const addSliderScript = url => {
+        const script = document.createElement("script")
+        script.src = url
+        script.setAttribute('data-feed-id', 'dose-of-roses')
+        script.setAttribute('data-for-url', true)
+        script.setAttribute('data-theme', 'slider_v2_5')
+        script.setAttribute('data-open-links-in-same-page', true)
+        script.setAttribute('data-connector-filter', "30963")
+        script.setAttribute('data-cell-size', "50%")
+        document.getElementById('instagram-slider').appendChild(script)
+    }
     let productGalleryCount = product.images.length;    
     const [ slideIndex, setSlideIndex] = useState(0);
 
@@ -81,8 +94,9 @@ const ProductGallery = ({ product, selectedVariant }) => {
                         <div className="carousel-scrollbar_bar" style={getStyle()}></div>
                     </div>
                 </div>
+                <div id="instagram-slider"></div>
 
-                <script src="//foursixty.com/media/scripts/fs.slider.v2.5.js" data-feed-id="dose-of-roses" data-for-url="true" data-theme="slider_v2_5" data-open-links-in-same-page="true" data-connector-filter="30963" data-cell-size="20%"></script>
+                
             </div>
         </div>
     );

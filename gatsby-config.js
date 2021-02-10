@@ -9,6 +9,7 @@ module.exports = {
     author: `@alexislepresle`,
   },
   plugins: [
+    `gatsby-plugin-preact`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-fontawesome-css`,
     `gatsby-plugin-sass`,
