@@ -26,7 +26,7 @@ const ProductGallery = ({ product, selectedVariant }) => {
         
     }, [product, selectedVariant])
     useEffect(() => {
-        setTimeout(addSliderScript('//foursixty.com/media/scripts/fs.slider.v2.5.js'), 2000);
+        setTimeout(addSliderScript('//foursixty.com/media/scripts/fs.slider.v2.5.js'), 200);
     }, [])
     const addSliderScript = url => {
         const script = document.createElement("script")

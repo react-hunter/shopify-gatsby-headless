@@ -40,7 +40,7 @@ export const query = graphql`
       nodes {
         homeImageSectionItem {
           imageUrl {
-            fluid {
+            fluid (maxWidth: 400) {
               srcWebp
             }
           }
@@ -51,23 +51,13 @@ export const query = graphql`
         }
         heroImage {
           desktopImage {
-            fluid {
-              sizes
-              src
-              srcSet
+            fluid (maxWidth: 1000) {
               srcWebp
-              aspectRatio
-              base64
             }
           }
           mobileImage {
-            fluid {
-              sizes
-              src
-              srcSet
+            fluid (maxWidth: 500) {
               srcWebp
-              aspectRatio
-              base64
             }
           }
           buttonText

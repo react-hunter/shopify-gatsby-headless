@@ -13,7 +13,7 @@ const ImageSections = (props) => {
 
                         { imageItem.imageLeft &&
                             <div className="fifty_fifty-image_container">
-                                <MyImage className="fifty_fifty-img ls-is-cached lazyloaded" 
+                                <MyImage className="fifty_fifty-img ls-is-cached" 
                                     src={imageItem.imageUrl.fluid.srcWebp} alt="" />
                             </div>
                         }
@@ -34,7 +34,7 @@ const ImageSections = (props) => {
 
                         { imageItem.imageLeft === false &&
                             <div className="fifty_fifty-image_container">
-                                <MyImage className="fifty_fifty-img ls-is-cached lazyloaded" 
+                                <MyImage className="fifty_fifty-img ls-is-cached" 
                                     src={imageItem.imageUrl.fluid.srcWebp} alt="" />
                             </div>
                         }

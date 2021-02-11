@@ -12,7 +12,7 @@ const Instagram = (props) => {
             for (var i=0;i<previousInstagram.length;i++) {
                 previousInstagram[i].remove();
             }
-            setTimeout(addScript('//foursixty.com/media/scripts/fs.embed.v2.5.js'), 2000);
+            setTimeout(addScript('//foursixty.com/media/scripts/fs.embed.v2.5.js'), 200);
         }
     }, [photoCount])
 

@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'gatsby';
 import SocialIcon from './socialIcon';
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-import { client } from '../../contentful'
 
 const Footer = (props) => {
     const footerMenu = props.menuList;
     useEffect(() => {
-        addScript('//acsbap.com/apps/app/assets/js/acsb.js')
+        setTimeout(addScript('//acsbap.com/apps/app/assets/js/acsb.js'), 200);
     }, []);
 
-    const addScript = url => {
-        const s = document.createElement('script')
-        s.src = url;
-        //s.onload = function(){
-            // acsbJS.init({
-            //     statementLink : '',feedbackLink : '',footerHtml : '',hideMobile : true,hideTrigger : true,
-            //     language : 'en',position : 'left',leadColor : '#000000',triggerColor : '#000000',triggerRadius : '50%',
-            //     triggerPositionX : 'left',triggerPositionY : 'bottom',triggerIcon : 'default',
-            //     triggerSize : 'medium',triggerOffsetX : 20,triggerOffsetY : 20,
-            //     mobile : {
-            //         triggerSize : 'small',triggerPositionX : 'left',triggerPositionY : 'center',
-            //         triggerOffsetX : 0,triggerOffsetY : 0,triggerRadius : '0'
-            //     }
-            // });
-        //};
-        document.getElementById('footer-section').appendChild(s)
+    function addScript(url) {
+        const script = document.createElement("script");
+        script.src = url;
+        // script.setAttribute('onload', initAcsb());
+        document.getElementById('footer-section').appendChild(script);
     }
-
+    // const initAcsb = () => {
+    //     acsbJS.init({
+    //         statementLink : '',feedbackLink : '',footerHtml : '',hideMobile : true,hideTrigger : true,
+    //         language : 'en',position : 'left',leadColor : '#000000',triggerColor : '#000000',triggerRadius : '50%',
+    //         triggerPositionX : 'left',triggerPositionY : 'bottom',triggerIcon : 'default',
+    //         triggerSize : 'medium',triggerOffsetX : 20,triggerOffsetY : 20,
+    //         mobile : {
+    //             triggerSize : 'small',triggerPositionX : 'left',triggerPositionY : 'center',
+    //             triggerOffsetX : 0,triggerOffsetY : 0,triggerRadius : '0'
+    //         }
+    //     });
+    // }
+    
     return (
         <div className="shopify-section">
             <footer className="footer-section" id="footer-section">

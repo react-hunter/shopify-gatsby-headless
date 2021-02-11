@@ -1,5 +1,5 @@
 import React from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component'
+import MyImage from '../lazyImage';
 
 const CardSlider = ({ cardList }) => {
     return (
@@ -11,7 +11,7 @@ const CardSlider = ({ cardList }) => {
                             <div className="card-item" key={index}>
                                 <a href={item.node.href}>
                                     <div style={{ width:'100%' }}>
-                                        <LazyLoadImage effect="blur" loading="eager" src={item.node.imageUrl.fluid.srcWebp} alt="" />
+                                        <MyImage src={item.node.imageUrl.fluid.srcWebp} alt="" />
                                     </div>
                                 </a>
                             </div>

@@ -4,19 +4,15 @@ import { Link, navigate } from 'gatsby'
 import StoreContext from '../../../context/store'
 import { ReactSVG } from 'react-svg';
 import LogoIcon from '../../../images/icon-logo.svg';
-// import HamburgerIcon from '../../../images/icon-hamburger.svg';
-// import CloseIcon from '../../../images/icon-close.svg';
 import SearchHeaderIcon from '../../../images/icon-search-header.svg';
 import LoginHeaderIcon from '../../../images/icon-login-header.svg';
 import MessageIcon from '../../../images/icon-message.svg';
 import CartHeaderIcon from '../../../images/icon-cart-header.svg';
-// import { client } from '../../../contentful'
 
 import SearchDrawer from './searchDrawer';
 import SiteNav from './siteNav';
 import AnnoucmentBar from './annoucmentBar';
 import CardSlider from './cardSlider';
-// import CustomImage from '../image'
 import MyImage from '../lazyImage'
 
 let runBannerAnimation = false;
