@@ -98,7 +98,7 @@ const CollectionVariantSelector = props => {
                 const firstTouch = getTouches(evt)[0];
                 xDownVariant = firstTouch.clientX;
                 yDownVariant = firstTouch.clientY;
-            }, false);
+            }, {passive: true});
 
             mobileTrigger.addEventListener('touchmove', (evt) => {
                 if (!xDownVariant || !yDownVariant) {
@@ -124,7 +124,7 @@ const CollectionVariantSelector = props => {
                 /* reset values */
                 xDownVariant = null;
                 yDownVariant = null;
-            }, false);
+            }, {passive: true});
         // }
     }
     function getTouches(evt) {

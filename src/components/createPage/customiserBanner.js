@@ -36,7 +36,7 @@ const CustomiserBanner = () => {
 
         const element_position = document.getElementsByClassName("create_steps-outer")[0].offsetTop;
         
-        window.addEventListener('scroll', function() {     
+        window.addEventListener('scroll', function() {
             let y_scroll_pos = window.pageYOffset;
             let scroll_pos_test = element_position;
 
@@ -47,7 +47,7 @@ const CustomiserBanner = () => {
                 if (document.getElementById('fadeOpacity_wrapper') != null)
                     document.getElementById('fadeOpacity_wrapper').style.opacity = "1";
             }
-        });
+        }, {passive: true});
     }
 
     const scrollToOptions = (e) => {

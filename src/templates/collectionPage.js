@@ -41,7 +41,7 @@ const collectionPage = ({ data, pageContext }) => {
   
       $(allFirstImageElements[i]).on('touchstart', function () {  
         $(this).toggleClass('hover_effect');
-      });
+      }, {passive: true});
   
     }
   }

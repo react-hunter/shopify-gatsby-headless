@@ -134,8 +134,8 @@ const Header = ({ path, mobileHeaderMenu, announceList, cardList, desktopHeader 
     
       slides = document.getElementsByClassName("card-item");
       bannerContainer = document.getElementById("card-slider-container");
-      bannerContainer.addEventListener('touchstart', handleTouchStart, false);
-      bannerContainer.addEventListener('touchmove', handleTouchMove, false);
+      bannerContainer.addEventListener('touchstart', handleTouchStart, {passive: true});
+      bannerContainer.addEventListener('touchmove', handleTouchMove, {passive: true});
     
       showBanners();
     }
@@ -301,7 +301,7 @@ const Header = ({ path, mobileHeaderMenu, announceList, cardList, desktopHeader 
     let header = document.querySelector(".stickyHeader");
     let prevScrollpos = window.pageYOffset;
   
-    window.onscroll = function () {
+    window.addEventListener('scroll', function() {
       let currentScrollpos = window.pageYOffset;
   
       if (prevScrollpos < currentScrollpos) {
@@ -315,7 +315,7 @@ const Header = ({ path, mobileHeaderMenu, announceList, cardList, desktopHeader 
         header.style.top = "0";
       }
       prevScrollpos = currentScrollpos;
-    }
+    }, { passive: true});
   }
 
   const openSlideCart = (e) => {

@@ -135,11 +135,11 @@ const CustomizePage = ({ data }) => {
     
     isShareLink();
     mobileRearrange()
-    window.addEventListener('scroll', stickyFunction);
+    window.addEventListener('scroll', stickyFunction, {passive: true});
     window.onresize = function () { mobileRearrange() }
 
     return function cleanup() {
-      window.removeEventListener('scroll', stickyFunction);
+      window.removeEventListener('scroll', stickyFunction, {passive: true});
     }
 
   }, [customizeData.products])

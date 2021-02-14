@@ -31,7 +31,7 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
   
       allFirstImageElements[i].on('touchstart', function () {  
         this.toggleClass('hover_effect');
-      });
+      }, {passive: true});
   
     }
   }

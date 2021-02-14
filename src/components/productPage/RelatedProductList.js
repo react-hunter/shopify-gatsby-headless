@@ -27,7 +27,7 @@ const RelatedProductList = ({ products, reviewList }) => {
     for (let i = 0; i < allFirstImageElements.length; i++) {
       allFirstImageElements[i].on('touchstart', function () {  
         this.toggleClass('hover_effect');
-      });
+      }, {passive: true});
     }
   }
 
