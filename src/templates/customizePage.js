@@ -185,13 +185,10 @@ const CustomizePage = ({ data }) => {
 
   }
 
-  let selectedProductIndex = -1;
 
   function setSelectedProduct(product, id) {
 
     console.log("id ===", id);
-
-    selectedProductIndex = id;
 
     console.log("before setSelectedProduct ===> product = ", product);
 
@@ -743,17 +740,17 @@ const CustomizePage = ({ data }) => {
     selectedRoses[position] = data
   }
 
-  function isProductNotUsingStencil(productId) {
-    if (document.querySelector("#excluded_products")) {
-      let excludedProducts = JSON.parse(document.querySelector("#excluded_products").dataset.ids);
-      for (let i = 0; i < excludedProducts.length; i++) {
-        if (excludedProducts[i] === productId) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
+  // function isProductNotUsingStencil(productId) {
+  //   if (document.querySelector("#excluded_products")) {
+  //     let excludedProducts = JSON.parse(document.querySelector("#excluded_products").dataset.ids);
+  //     for (let i = 0; i < excludedProducts.length; i++) {
+  //       if (excludedProducts[i] === productId) {
+  //         return true;
+  //       }
+  //     }
+  //   }
+  //   return false;
+  // }
   
   function isProductNotUsingStencil(productHandle, style) {
 

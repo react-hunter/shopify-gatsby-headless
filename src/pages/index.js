@@ -40,7 +40,7 @@ export const query = graphql`
       nodes {
         homeImageSectionItem {
           imageUrl {
-            fluid (maxWidth: 400) {
+            fluid (maxWidth: 800) {
               srcWebp
             }
           }

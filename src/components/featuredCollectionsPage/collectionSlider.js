@@ -6,7 +6,7 @@ import NotifyModal from "../collectionPage/notifyModal"
 import { client } from "../../contentful"
 import "../../styles/collectionPage.scss"
 
-import Glider from 'react-glider';
+import Glider, {GliderMethods} from 'react-glider';
 import 'glider-js/glider.min.css';
 
 const CollectionSlider = ({products, title, handle, reviewList}) => {
@@ -35,9 +35,11 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
   
     }
   }
+  
   const showNotifyModal = () => {
     setNotifyModalShow(true)
   }
+
   const showVariantModal = (p) => {
     setSelectedProduct(p);
     setVaraintModalShow(true);
@@ -51,6 +53,7 @@ const CollectionSlider = ({products, title, handle, reviewList}) => {
         setNotifyModalShow(false);
     }, 500)
   }
+
   const closeCollectionModal = () => {
     document.querySelector(".variantSelector_wrapper").classList.remove('animate-bottom');
     document.querySelector(".variantSelector_wrapper").classList.add('animate-top');

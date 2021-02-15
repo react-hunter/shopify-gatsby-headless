@@ -20,9 +20,17 @@ const ProductDescription = ({ product, review, selectVariant }) => {
 
     useEffect(() => {
         async function getAccordionData() {
+            console.log("getAccordionData-------------------------");
+
             const accordionData = await client.getEntries({'content_type': 'productAccordion'});
             setProductAccordions(accordionData.items);
+
+            console.log("queryselectorall = ", document.querySelectorAll('.accordion_button'));
+
             document.querySelectorAll('.accordion_button').forEach(button => {
+
+                console.log("accordion_button -------------- ")
+
                 const accordionButton = button;
                 accordionButton.innerHTML = accordionButton.innerHTML + '<i className="fas fa-angle-down"></i>';
                 button.addEventListener('click', () => {

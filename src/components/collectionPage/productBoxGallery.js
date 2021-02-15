@@ -55,6 +55,12 @@ const ProductBoxGallery = props => {
 
     }, [mainOption, swatchColor, product.variants, flkty])
 
+
+    function gotoProductPage () {
+        console.log("product.handle = ", product.handle);
+        window.location.href=`/products/${product.handle}`;
+    }
+
     const isBadgeEnable = () => {
         let isBadgeEnable = false;
 
@@ -100,7 +106,7 @@ const ProductBoxGallery = props => {
         }
     }
     return (
-        <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
+        <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper >
             <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
                 {   
                     isBadgeEnable() ? <img  src={getBadgeImage()} className="badge" alt="" /> : ''
@@ -114,6 +120,7 @@ const ProductBoxGallery = props => {
                                 (<CustomImage 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[0].originalSrc}
+                                    onClick={gotoProductPage}
                                     alt={product.title}
                                 />) : ""
                             }
@@ -122,6 +129,7 @@ const ProductBoxGallery = props => {
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[1].originalSrc}
                                     alt={product.title}
+                                    onClick={gotoProductPage}
                                     style={{ cursor: 'pointer' }} 
                                 />) : ""
                             }
@@ -130,6 +138,7 @@ const ProductBoxGallery = props => {
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[2].originalSrc}
                                     alt={product.title}
+                                    onClick={gotoProductPage}
                                     style={{ cursor: 'pointer' }} 
                                 />) : ""
                             }
@@ -143,6 +152,7 @@ const ProductBoxGallery = props => {
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={swatchImage}
                                     alt=''
+                                    onClick={gotoProductPage}
                                     style={{ cursor: 'pointer' }} 
                                     key={swatchImageIndex}
                                 />

@@ -917,7 +917,13 @@ border-radius: 50%;
 
     li {
         width: 49% !important;
-        padding-left: 0
+        padding-left: 0;
+
+        .openVariantModal {
+            width: 90%;
+            margin-left: 5%;
+            margin-right: 5%;
+        }
     }
   }
 }
