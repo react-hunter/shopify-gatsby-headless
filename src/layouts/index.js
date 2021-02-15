@@ -97,7 +97,7 @@ const Layout = ({ path, children }) => {
 									node {
 										href
 										imageUrl {
-											fluid (maxWidth: 200) {
+											fluid (maxWidth: 700) {
 												srcWebp
 											}
 										}

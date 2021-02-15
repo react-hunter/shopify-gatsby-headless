@@ -84,24 +84,33 @@
         display: none;
     }
     
-    .Best-Sellers-Carousel-Cell:hover .main_img {
-        display: none !important;
+    .Best-Sellers-Carousel-Cell {
+        &:hover {
+            .main_img {
+                display: none !important;
+            }
+
+            .hover_img {
+                display: block !important;
+            }
+
+            .best-sellers-form .button-atc {
+                visibility: visible !important;
+            }
+        }
+
+        .Best-Sellers-Title {
+            margin-bottom: 3px !important;
+        }
     }
-    
-    .Best-Sellers-Carousel-Cell:hover .hover_img {
-        display: block !important;
-    }
-    
-    
-    .Best-Sellers-Carousel-Cell .Best-Sellers-Title {
-        margin-bottom: 3px !important;
-    }
-    
+
     .collection-carousel {
         @media (max-width: 768px) {
             padding: 35px 0 10px;
         }
     }
+
+
     .Best-Sellers-Carousel {
         margin-top: 35px;
         position: relative;
@@ -118,9 +127,6 @@
         visibility: hidden;
     }
 
-    .Best-Sellers-Carousel-Cell:hover .best-sellers-form .button-atc {
-        visibility: visible !important;
-    }
 
     .collection-product_image_container .slick-list {
         height: unset!important;
@@ -140,43 +146,45 @@
 }
 
 
-    .Best-Sellers-Carousel {
-      margin-top: 15px;
-      .slick-prev, .slick-next {
-          display: block!important;
-          background-image: none;
-          background-color: #EEE;
-          padding: 15px;
-          border-radius: 50%;
-          top: 35%;
-          z-index: 2;
+.Best-Sellers-Carousel {
+    margin-top: 15px;
+    .slick-prev, .slick-next {
+        display: block;
+        background-image: none;
+        background-color: #EEE;
+        padding: 15px;
+        border-radius: 50%;
+        top: 35%;
+        z-index: 2;
 
-          &::after {
+        &::after {
             content: ' ';
             position: absolute;
             top: calc(50% - 10px);
             width: 20px;
             height: 20px;
             background-size: contain;
-          }
-      }
-      .slick-prev {
-          left: 20px;
-          &::after {
+        }
+
+        &.disabled {
+            display: none;
+        }
+    }
+    .slick-prev {
+        left: 20px;
+        &::after {
             left: 4px;
             background-image: url("../images/leftArrow_small.png");
-          }
-      }
-      .slick-next {
+        }
+    }
+    .slick-next {
         right: 20px;
         &::after {
           right: 4px;
           background-image: url("../images/rightArrow_small.png");
         }
-      }
     }
 
-.Best-Sellers-Carousel {
     .products-on-page.glider-slide {
         margin-left: 20px;
 
