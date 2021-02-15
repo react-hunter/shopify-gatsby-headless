@@ -871,11 +871,10 @@ border-radius: 50%;
 .option_options_wrapper .swatch-wrapper .color-swatch {
     position: relative;
 }
-@media (max-width: 768px) {
-    .variantSelector-section {
-        overflow-y: auto!important;
-        position: relative;
 
+.variantSelector-section {
+    @media (max-width: 768px) {
+        
         .closeVariantSelector {
             position: absolute;
             top: 0;
