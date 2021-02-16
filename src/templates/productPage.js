@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import loadable from '@loadable/component';
 import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
-import ProductGallery from "../components/productPage/ProductGallery"
-import ProductDescription from "../components/productPage/ProductDescription"
-import RelatedProductList from "../components/productPage/RelatedProductList";
-
 import '../styles/productPage.scss';
 import '../styles/widget.min.css';
+const ProductGallery = loadable(() => import("../components/productPage/ProductGallery"))
+const ProductDescription = loadable(() => import("../components/productPage/ProductDescription"))
+const RelatedProductList = loadable(() => import("../components/productPage/RelatedProductList"))
+
 
 const ProductPage = ({ data, pageContext }) => {
     const product = data.shopifyProduct;

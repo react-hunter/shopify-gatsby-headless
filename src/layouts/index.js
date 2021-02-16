@@ -4,19 +4,20 @@ import "../styles/instagram.css";
 import "../styles/header.scss";
 
 import React from 'react';
-import Provider from "../context/provider"
-import { StaticQuery, graphql } from 'gatsby'
+import loadable from '@loadable/component';
+import { StaticQuery, graphql } from 'gatsby';
 import {
 	QueryClient,
 	QueryClientProvider,
-} from 'react-query'
-import Header from "../components/common/header/header";
-import Footer from "../components/common/footer";
-import Instagram from "../components/common/instagram";
-import AjaxCartCustom from "../components/common/ajaxCartCustom";
+} from 'react-query';
+import Provider from "../context/provider"
+const Header = loadable(() => import('../components/common/header/header'));
+const Footer = loadable(() => import('../components/common/footer'));
+const Instagram = loadable(() => import('../components/common/instagram'));
+const AjaxCartCustom = loadable(() => import('../components/common/ajaxCartCustom'));
 // import Preloader from "../components/common/preloader"
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 const Layout = ({ path, children }) => {
 	// const [allHidden, setAllHidden] = useState(true)
