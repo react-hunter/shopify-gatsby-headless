@@ -24,7 +24,7 @@ module.exports = {
       resolve: 'gatsby-plugin-purgecss',
       options: {
         develop: true,
-        purgeOnly: ['resources/css/'],
+        purgeOnly: ['resources/css/', 'node_modules/gatsby-plugin-fontawesome-css/'],
       },
     },
     {
