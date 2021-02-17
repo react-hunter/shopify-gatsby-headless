@@ -46,11 +46,12 @@ const ProductBoxGallery = props => {
         }
 
         if (flkty) {
+            console.log("flkty is live = ", flkty);
             flkty.on('change', () => {
                 setSlideIndex(flkty.selectedIndex);
             })
         } else {
-            console.log("flkty = ", flkty);
+            console.log("flkty is null = ", flkty);
         }
 
     }, [mainOption, swatchColor, product.variants, flkty])
@@ -115,7 +116,7 @@ const ProductBoxGallery = props => {
                 <div className="collection-product_image_container">
                 {
                     mainOption === '' ?
-                        <Flickity options={flickityOptions} flickityRef={c=> flkty = c} >
+                        <Flickity options={flickityOptions} flickityRef={c=> flkty = c} >                           
                             { product.images[0] ? 
                                 (<CustomImage 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"

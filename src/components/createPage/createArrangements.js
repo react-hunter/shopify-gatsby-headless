@@ -61,10 +61,6 @@ const CreateArrangements = () => {
                         { createArrangements.products.map((item, index) => 
                             
                         <div className="create_arrange-block" key={index} data-product-name={item.fields.name}>
-     
-                            {
-                                console.log("item.fields.nam = ", item.fields.name, " & index = ", index)
-                            }
                             <Link to={item.fields.url}>
                                 <CustomImage className="product-image" 
                                     src={item.fields.image.fields.file.url} data-imgs={getProductImages(item.fields)} alt="" />
