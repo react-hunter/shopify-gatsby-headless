@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby'
-import MyImage from '../common/lazyImage'
+import Img from 'gatsby-image'
+// import MyImage from '../common/lazyImage'
 import "../../styles/imageSections.css";
 
 const ImageSections = (props) => {
@@ -13,8 +14,9 @@ const ImageSections = (props) => {
 
                         { imageItem.imageLeft &&
                             <div className="fifty_fifty-image_container">
-                                <MyImage className="fifty_fifty-img ls-is-cached" 
-                                    src={imageItem.imageUrl.fluid.srcWebp} alt="" />
+                                {/* <MyImage className="fifty_fifty-img ls-is-cached" 
+                                    src={imageItem.imageUrl.fluid.srcWebp} alt="" /> */}
+                                <Img fluid={imageItem.imageUrl.fluid} className="fifty_fifty-img ls-is-cached" alt="" />
                             </div>
                         }
                     
@@ -34,8 +36,9 @@ const ImageSections = (props) => {
 
                         { imageItem.imageLeft === false &&
                             <div className="fifty_fifty-image_container">
-                                <MyImage className="fifty_fifty-img ls-is-cached" 
-                                    src={imageItem.imageUrl.fluid.srcWebp} alt="" />
+                                {/* <MyImage className="fifty_fifty-img ls-is-cached" 
+                                    src={imageItem.imageUrl.fluid.srcWebp} alt="" /> */}
+                                <Img fluid={imageItem.imageUrl.fluid} className="fifty_fifty-img ls-is-cached" alt="" />
                             </div>
                         }
                     </div>

@@ -3,18 +3,18 @@ import { Link } from 'gatsby';
 import SocialIcon from './socialIcon';
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-const Footer = (props) => {
+const Footer = React.memo(function Footer(props) {
     const footerMenu = props.menuList;
     useEffect(() => {
-        setTimeout(addScript('//acsbap.com/apps/app/assets/js/acsb.js'), 200);
+        // setTimeout(addScript('//acsbap.com/apps/app/assets/js/acsb.js'), 200);
     }, []);
 
-    function addScript(url) {
-        const script = document.createElement("script");
-        script.src = url;
-        // script.setAttribute('onload', initAcsb());
-        document.getElementById('footer-section').appendChild(script);
-    }
+    // function addScript(url) {
+    //     const script = document.createElement("script");
+    //     script.src = url;
+    //     // script.setAttribute('onload', initAcsb());
+    //     document.getElementById('footer-section').appendChild(script);
+    // }
     // const initAcsb = () => {
     //     acsbJS.init({
     //         statementLink : '',feedbackLink : '',footerHtml : '',hideMobile : true,hideTrigger : true,
@@ -89,6 +89,6 @@ const Footer = (props) => {
             </footer>
         </div>
     );
-};
+});
 
 export default Footer;

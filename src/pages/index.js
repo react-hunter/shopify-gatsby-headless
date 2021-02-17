@@ -41,7 +41,7 @@ export const query = graphql`
         homeImageSectionItem {
           imageUrl {
             fluid (maxWidth: 800) {
-              srcWebp
+              ...GatsbyContentfulFluid_withWebp_noBase64
             }
           }
           imageLeft
@@ -52,12 +52,12 @@ export const query = graphql`
         heroImage {
           desktopImage {
             fluid (maxWidth: 1000) {
-              srcWebp
+              ...GatsbyContentfulFluid_withWebp_noBase64
             }
           }
           mobileImage {
             fluid (maxWidth: 500) {
-              srcWebp
+              ...GatsbyContentfulFluid_withWebp_noBase64
             }
           }
           buttonText

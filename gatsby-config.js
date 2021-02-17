@@ -24,7 +24,7 @@ module.exports = {
       resolve: 'gatsby-plugin-purgecss',
       options: {
         develop: true,
-        purgeOnly: ['resources/css/'],
+        purgeOnly: ['resources/css/', 'node_modules/gatsby-plugin-fontawesome-css/'],
       },
     },
     {
@@ -32,7 +32,7 @@ module.exports = {
       options: {
         shopName: process.env.SHOP_NAME,
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
-        apiVersion: "2020-10",
+        apiVersion: "2021-01",
         paginationSize: 3,
         downloadImages: false,
         includeCollections: ["shop", "content"]
@@ -46,7 +46,14 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaultQuality: 50,
+        useMozJpeg: true,
+
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

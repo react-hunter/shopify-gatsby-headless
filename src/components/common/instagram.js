@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Instagram = (props) => {
+const Instagram = React.memo(function Instagram(props) {
     const [photoCount, setPhotoCount] = useState(0);
     useEffect(() => {
         mobileRearrange();
@@ -55,6 +55,6 @@ const Instagram = (props) => {
             </div>
         </div>
     );
-};
+});
     
 export default Instagram;
