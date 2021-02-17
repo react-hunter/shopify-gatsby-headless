@@ -66,7 +66,7 @@ const Layout = ({ path, children }) => {
 											title
 											url
 											image {
-												fluid (maxWidth: 150) {
+												fluid (maxWidth: 450) {
 													srcWebp
 												}
 											}
@@ -75,7 +75,7 @@ const Layout = ({ path, children }) => {
 												url
 												parentText
 												image {
-													fluid (maxWidth: 150) {
+													fluid (maxWidth: 450) {
 														srcWebp
 													}
 												}
