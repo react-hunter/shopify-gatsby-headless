@@ -1,4 +1,3 @@
-import PropTypes from "prop-types"
 import React, { useContext, useState, useEffect } from 'react'
 import { Link, navigate } from 'gatsby'
 import StoreContext from '../../../context/store'
@@ -16,32 +15,30 @@ import CardSlider from './cardSlider';
 import MyImage from '../lazyImage'
 
 let runBannerAnimation = false;
-
 let slideIndex = 0;
 let swipedLast = false;
-
 let slides = null;
 let bannerContainer = null;
-
 var xDown = null;
 var yDown = null;
 
 const countQuantity = lineItems => {
   let quantity = 0
-
   lineItems.forEach(item => {
     quantity = quantity + item.quantity
   });
   return quantity
 }
 
-const Header = ({ path, mobileHeaderMenu, announceList, cardList, desktopHeader }) => {
+const Header = React.memo(function Header(props) {
   const context = useContext(StoreContext)
   const { checkout } = context.store
   const [quantity, setQuantity] = useState(countQuantity(checkout ? checkout.lineItems : []))
-
   const [ searchShow, setSearchShow ] = useState(false);
-
+  const mobileHeaderMenu = props.mobileHeaderMenu;
+  const announceList = props.announceList;
+  const cardList = props.cardList;
+  const desktopHeader = props.desktopHeader;
   let mobileMenuStep = 0;
 
   useEffect(() => {
@@ -466,14 +463,6 @@ const Header = ({ path, mobileHeaderMenu, announceList, cardList, desktopHeader 
       </div>
     </>
   )
-}
-
-Header.propTypes = {
-  path: PropTypes.string,
-}
-
-Header.defaultProps = {
-  path: `/`,
-}
+});
 
 export default Header
