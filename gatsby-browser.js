@@ -40,7 +40,13 @@ export const onClientEntry = () => {
   // }
 }
 
-export const onPreRouteUpdate = () => {
-  removejscssfile("https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=NDbw2r&shop=dose-of-roses.myshopify.com", "js")
-  addScript("https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=NDbw2r&shop=dose-of-roses.myshopify.com")
+export const onPreRouteUpdate = ({ location }) => {
+  var currentPath = location.pathname;
+  if(currentPath.includes('/products/') || 
+    currentPath.includes('/collections/') || 
+    currentPath.includes('pages/collections') || 
+    currentPath.includes('/search')) {
+      removejscssfile("https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=NDbw2r&shop=dose-of-roses.myshopify.com", "js")
+      addScript("https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=NDbw2r&shop=dose-of-roses.myshopify.com")
+  }
 }

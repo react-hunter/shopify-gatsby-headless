@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react' /* eslint-disable */
 import { graphql } from "gatsby"
-// import Preloader from "../components/common/preloader"
+import loadable from '@loadable/component';
 import CollectionProductBox from "../components/collectionPage/collectionProductBox"
-import NotifyModal from '../components/collectionPage/notifyModal'
+const NotifyModal = loadable(() => import('../components/collectionPage/notifyModal'))
 import { client } from '../contentful'
 import '../styles/collectionPage.scss';
 import '../styles/widget.min.css';

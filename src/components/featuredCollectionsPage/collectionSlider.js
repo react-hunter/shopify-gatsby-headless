@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'gatsby'
+import loadable from '@loadable/component';
 import CollectionVariantSelector from '../collectionPage/collectionVariantSelector'
 import FeaturedProductBox from "../common/product/featuredProductBox"
-import NotifyModal from "../collectionPage/notifyModal"
+const NotifyModal = loadable(() => import("../collectionPage/notifyModal"))
 import { client } from "../../contentful"
 import "../../styles/collectionPage.scss"
 

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import loadable from '@loadable/component';
 import Glider from 'react-glider';
 import CollectionVariantSelector from '../collectionPage/collectionVariantSelector'
 import FeaturedProductBox from "../common/product/featuredProductBox"
-import NotifyModal from "../collectionPage/notifyModal"
+const NotifyModal = loadable(() => import("../collectionPage/notifyModal"))
 import { client } from "../../contentful"
 import 'glider-js/glider.min.css';
 import "../../styles/relatedProductList.scss";
