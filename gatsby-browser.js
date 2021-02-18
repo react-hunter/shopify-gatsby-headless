@@ -32,13 +32,13 @@ const addScript = url => {
   script.id = "stamped-script-widget";
   script.setAttribute("data-api-key", "pubkey-76rP6Zq8e371uFqgk0DjXju08d2ACm");
   head.appendChild(script);
-} */
+}
 
 export const onClientEntry = () => {
-  // window.onload = () => {
-    // addScriptHead("https://cdn-stamped-io.azureedge.net/files/widget.min.js")
-  // }
-}
+  window.onload = () => {
+    addScriptHead("https://cdn-stamped-io.azureedge.net/files/widget.min.js")
+  }
+} */
 
 export const onPreRouteUpdate = ({ location }) => {
   var currentPath = location.pathname;
