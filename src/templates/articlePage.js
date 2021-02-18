@@ -1,10 +1,11 @@
 import React from 'react' /* eslint-disable */
+import loadable from '@loadable/component';
 import MyImage from '../components/common/lazyImage'
 import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
-import RecentArticles from "../components/articles/recentArticles"
 import ShareIcons from "../components/common/shareIcons"
 import "../styles/blogs.scss";
+const RecentArticles = loadable(() => import("../components/articles/recentArticles"))
 
 
 const articlePage = ({ data, ...other }) => {
