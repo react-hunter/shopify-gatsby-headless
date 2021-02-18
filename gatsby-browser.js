@@ -23,7 +23,7 @@ const addScript = url => {
   document.body.appendChild(script)
 }
 
-const addScriptHead = url => {
+/* const addScriptHead = url => {
   var head = document.getElementsByTagName('head')[0];
   var script = document.createElement('script');
   script.type = 'text/javascript';
@@ -32,7 +32,7 @@ const addScriptHead = url => {
   script.id = "stamped-script-widget";
   script.setAttribute("data-api-key", "pubkey-76rP6Zq8e371uFqgk0DjXju08d2ACm");
   head.appendChild(script);
-}
+} */
 
 export const onClientEntry = () => {
   // window.onload = () => {

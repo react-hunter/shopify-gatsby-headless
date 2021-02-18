@@ -17,7 +17,7 @@ const AddToBagButton = ({ getCurrentStep, getCollectionProducts, getSelections, 
         var selections = getSelections();
         var mainImageUrl = getMainImageUrl();
 
-        if (currentStep != 3)
+        if (currentStep !== 3)
            return;
     
         const bagProduct = collectionProducts.filter(cp => cp.title === selections[0])

@@ -159,7 +159,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
                             collection ? 
                             <>
                                 {
-                                collection.handle != 'lingerie' ? 
+                                collection.handle !== 'lingerie' ? 
                                     <div className="preview_wrapper">
                                         <LazyLoadImage className="variantSelector-preview_img" alt=""
                                             src={variant.image ? variant.image.originalSrc : ''}

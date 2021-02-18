@@ -5,7 +5,7 @@ import CollectionVariantSelector from '../collectionPage/collectionVariantSelect
 import FeaturedProductBox from "../common/product/featuredProductBox"
 import { client } from "../../contentful"
 import "../../styles/collectionPage.scss"
-import Glider, {GliderMethods} from 'react-glider';
+import Glider from 'react-glider';
 import 'glider-js/glider.min.css';
 const NotifyModal = loadable(() => import("../collectionPage/notifyModal"))
 

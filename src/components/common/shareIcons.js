@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPrint } from "@fortawesome/free-solid-svg-icons"
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
-import { faFacebookF } from "@fortawesome/free-brands-svg-icons"
-import { faTwitter } from "@fortawesome/free-brands-svg-icons"
-import { faPinterest } from "@fortawesome/free-brands-svg-icons"
+import { faPrint, faEnvelope } from "@fortawesome/free-solid-svg-icons"
+import { faFacebookF, faTwitter, faPinterest } from "@fortawesome/free-brands-svg-icons"
 
 const ShareIcons = (props) => {
 

@@ -13,7 +13,7 @@ const MyImage = (props) => {
             <ImageSpin ref={ref} />
         }
         actual={
-          ({imageProps}) => <div className={'LazyImage-Actual'}><img {...imageProps} /></div>
+          ({imageProps}) => <div className={'LazyImage-Actual'}><img {...imageProps} alt="" /></div>
         }
       />
     );

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import CustomImage from '../common/image'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import Flickity from 'react-flickity-component'
@@ -20,7 +20,6 @@ const ProductGallery = ({ product, selectedVariant }) => {
     })
 
     useEffect(() => {
-        console.log(flkty);
         if (flkty != null) {
             setFlktyObject(flkty);
         }
@@ -34,14 +33,12 @@ const ProductGallery = ({ product, selectedVariant }) => {
 
         if (flkty) {
             flkty.on('change', () => {
-                console.log("ProductGallery on change is live = ", flkty);
-                console.log("flkty.selectedIndex === ", flkty.selectedIndex);
                 setSlideIndex(flkty.selectedIndex);
             })
         } else {
         }
 
-    }, [selectedVariant, selectedImageIndex])
+    }, [selectedVariant, selectedImageIndex, flktyObject])
 
     useEffect(() => {
         setTimeout(addSliderScript('//foursixty.com/media/scripts/fs.slider.v2.5.js'), 200);
