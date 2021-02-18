@@ -52,10 +52,7 @@ const CustomizePage = ({ data }) => {
   })
   
   var allProducts;
-
   var selectedProduct;
-
-  console.log("local ==============selectedProduct = ", selectedProduct);
 
   var currentStep = 0;
 
@@ -66,9 +63,6 @@ const CustomizePage = ({ data }) => {
   let selectedProductBoxStock;
 
   var isShare = false;
-
-  console.log("currentStep === ", currentStep);
-  console.log("selectedProduct === ", selectedProduct);
 
   const orderedProducts = [
     "Large Square",
@@ -105,14 +99,14 @@ const CustomizePage = ({ data }) => {
     "Turquoise",
     "Yellow",
     "Black",
-    "Coral"
+    "Coral",
+    "TieDye",
+    "Light TieDye"
   ]
 
   var mainImageUrl = '';
 
   useEffect(() => {
-
-    console.log("useEffect === currentStep = ", currentStep);
 
     async function getCustomizeData() {
       const customizeRoseData = await client.getEntries({'content_type': 'roseColor'});
@@ -176,7 +170,6 @@ const CustomizePage = ({ data }) => {
   }, []);
 
   useEffect(() => {
-    console.log("useEffect[customizeData.products] === currentStep = ", currentStep);
 
     allProducts = customizeData.products;
     var arrTypes = document.getElementById("arrangementSelector-0");
@@ -212,14 +205,10 @@ const CustomizePage = ({ data }) => {
   }, [customizeData.products])
 
   const selectArrangement = (id) => {
-    console.log("selectArrangement, id = ", id);
-    console.log("selectArrangement --- before --- selectedProduct =  ", selectedProduct);
 
     for (var i = 0; i < allProducts.length; i++) {
       var product = allProducts[i];
       if (product.productId === id) {
-
-        console.log("selectArrangement --- product.productId =   ", product.productId);
 
         setSelectedProduct(product, i);
         if (!document.getElementById("arr-Type")) {
@@ -236,7 +225,6 @@ const CustomizePage = ({ data }) => {
           if (product.featured_image) {
             document.getElementById("mainIMG").src = product.featured_image;
             mainImageUrl = product.featured_image;
-            console.log("mainImageUrl === ", mainImageUrl);
           }
         }
   
@@ -256,9 +244,6 @@ const CustomizePage = ({ data }) => {
         break;
       }
     }
-
-    console.log("selectArrangement --- after --- selectedProduct =  ", selectedProduct);
-
   }
 
   function getCurrentStep() {
@@ -447,6 +432,8 @@ const CustomizePage = ({ data }) => {
   
     element.style.boxShadow = "0px 0px 0px 4px rgba(0,0,0,1)"
   
+    document.getElementById("mobile-arr-box-color-span").innerText = title;
+
     document.getElementById("mainIMG").src = src;
     mainImageUrl = src;
     console.log("mainImageUrl === ", mainImageUrl);
@@ -464,6 +451,8 @@ const CustomizePage = ({ data }) => {
   }
   
   function setStyle(title, style) {
+
+    console.log("setStyle,,,, ",title )
 
     if (!document.getElementById("Style-Type")) {
       addArrangementBlock("Style", "Style-Type", title, "", `${currentStep}`)
@@ -569,14 +558,20 @@ const CustomizePage = ({ data }) => {
 
   function getMainImage() {
 
-    if (document.getElementById("Style-Type").innerText !== "Letters" || document.getElementById("Style-Type").innerText !== "Numbers") {
+    console.log("document.getElementById('Style-Type').innerText == ", document.getElementById("Style-Type").innerText);
+    if (document.getElementById("Style-Type").innerText !== "Letters" 
+      || document.getElementById("Style-Type").innerText !== "Numbers" ) {
       resetNumbersAndLetter();
       var xhr = new XMLHttpRequest();
   
+      if (document.getElementById("Style-Type").innerText === "Solid")
+        return;
+        
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === 4) {
           document.getElementById("mainIMG").src = `${this.responseText}`;
           mainImageUrl = `${this.responseText}`;
+          console.log("this === ", this);
           console.log("mainImageUrl === ", mainImageUrl);
         }
       });
@@ -1045,7 +1040,6 @@ const CustomizePage = ({ data }) => {
   }
 
   const previous = () => {
-    console.log("previous === selectedProduct = ", selectedProduct);
 
     if (currentStep - 1 !== -1) {
       if (currentStep - 1 === maxOptions) {
@@ -1057,8 +1051,6 @@ const CustomizePage = ({ data }) => {
   }
 
   const next = () => {
-    console.log("next === currentStep =", currentStep);
-    console.log("next === selectedProduct = ", selectedProduct);
 
     if (!selectedProduct)
       return false;
@@ -1250,6 +1242,14 @@ const CustomizePage = ({ data }) => {
               </div>
               <div className="arrangement_row_right" id="arr-price-mobile">
                   <span id="mobile-arr-price-span">$-</span>
+              </div>
+            </div>
+            <div className="arrangement-choices_row">
+              <div className="arrangement_row_left">
+                  <span id="mobile-box-color">Box Color</span>
+              </div>
+              <div className="arrangement_row_right">
+                  <span id="mobile-arr-box-color-span" style={{ display: 'block' }}></span>
               </div>
             </div>
             <div className="arrangement-choices_row">
