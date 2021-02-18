@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import '../../styles/heroSection.css';
 
-const HeroSection = (props) => {
+const HeroSection = React.memo(function HeroSection(props) {
     return (
         <div className="shopify-section">
             <div className="text_image_banner-container_outer">
@@ -25,6 +25,6 @@ const HeroSection = (props) => {
             </div>
         </div>
     );
-};
+});
 
 export default HeroSection;

@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import Img from 'gatsby-image'
 import "../../styles/imageSections.css";
 
-const ImageSections = (props) => {
+const ImageSections = React.memo(function ImageSections(props) {
     return (
         <>
         { props.imageSections.map((imageItem, imageIndex) => 
@@ -44,6 +44,6 @@ const ImageSections = (props) => {
         )}
         </>        
     );
-};
+});
     
 export default ImageSections;
