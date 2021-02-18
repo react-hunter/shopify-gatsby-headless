@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-// import { LazyLoadImage } from 'react-lazy-load-image-component'
 import CustomImage from '../common/image'
 import '../../styles/productGallery.css';
 
 import Flickity from 'react-flickity-component'
 import '../../styles/flickity.css';
 
-const ProductBoxGallery = props => {
+const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
     let productGalleryCount = 0;
     let flkty;
     const product = props.product;
@@ -169,6 +168,6 @@ const ProductBoxGallery = props => {
             </div>
         </div>
     );
-};
+});
 
 export default ProductBoxGallery;

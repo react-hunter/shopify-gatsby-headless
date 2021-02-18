@@ -6,20 +6,7 @@ import StoreContext from '../../context/store'
 import { Link } from 'gatsby'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-const AjaxCartCustom = ({giftVariant, rushVariant}) => {
-    // const defaults = {
-    //     cartModal: '.js-ajax-cart-modal', // classname
-    //     cartModalContent: '.js-ajax-cart-modal-content', // classname
-    //     cartModalClose: '.js-ajax-cart-modal-close', // classname
-    //     cartDrawer: '.js-ajax-cart-drawer', // classname
-    //     cartDrawerContent: '.js-ajax-cart-drawer-content', // classname
-    //     cartDrawerTrigger: '.js-ajax-cart-drawer-trigger', // classname
-    //     cartOverlay: '.js-ajax-cart-overlay', // classname
-    //     cartCounter: '.cartCount', // classname
-    //     addToCart: '.js-ajax-add-to-cart', // classname
-    //     checkoutButton: '.js-ajax-checkout-button',
-    // };
-
+const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVariant}) {
     const context = useContext(StoreContext);
     const [lineItems, setLineItems] = useState([]);
     const [messageShow, setMessageShow] = useState(false);
@@ -307,6 +294,6 @@ const AjaxCartCustom = ({giftVariant, rushVariant}) => {
             <div className="ajax-cart__overlay js-ajax-cart-overlay"></div>
         </div>
     );
-};
-    
+});
+
 export default AjaxCartCustom;

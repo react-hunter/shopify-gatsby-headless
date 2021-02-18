@@ -4,7 +4,7 @@ import StoreContext from '../../context/store'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import ImageSpin from '../common/imageSpin'
 
-const CollectionVariantSelector = props => {
+const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
     const context = useContext(StoreContext);
     const product = props.product;
     const firstVariant = product.variants[0];
@@ -238,6 +238,6 @@ const CollectionVariantSelector = props => {
             </div>
         </div>
     );
-};
+});
     
 export default CollectionVariantSelector;

@@ -5,7 +5,7 @@ import CollectionVariantSelector from './collectionVariantSelector'
 import ProductBoxGallery from './productBoxGallery'
 import ImageSpin from '../common/imageSpin'
 
-const CollectionProductBox = props => {
+const CollectionProductBox = React.memo(function CollectionProductBox(props) {
     const context = useContext(StoreContext);
     const [varaintModalShow, setVaraintModalShow] = useState(false);
     const [showSpin, setShowSpin] = useState(false);
@@ -113,6 +113,6 @@ const CollectionProductBox = props => {
             </div>
         </li>
     );
-};
+});
 
 export default CollectionProductBox;

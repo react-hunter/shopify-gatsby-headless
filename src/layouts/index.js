@@ -15,7 +15,6 @@ const Header = loadable(() => import('../components/common/header/header'));
 const Footer = loadable(() => import('../components/common/footer'));
 const Instagram = loadable(() => import('../components/common/instagram'));
 const AjaxCartCustom = loadable(() => import('../components/common/ajaxCartCustom'));
-// import Preloader from "../components/common/preloader"
 
 const queryClient = new QueryClient();
 

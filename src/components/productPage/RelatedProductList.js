@@ -3,10 +3,10 @@ import loadable from '@loadable/component';
 import Glider from 'react-glider';
 import CollectionVariantSelector from '../collectionPage/collectionVariantSelector'
 import FeaturedProductBox from "../common/product/featuredProductBox"
-const NotifyModal = loadable(() => import("../collectionPage/notifyModal"))
 import { client } from "../../contentful"
 import 'glider-js/glider.min.css';
 import "../../styles/relatedProductList.scss";
+const NotifyModal = loadable(() => import("../collectionPage/notifyModal"))
 
 const RelatedProductList = ({ products, reviewList }) => {
   const [notifyModalShow, setNotifyModalShow] = useState(false);

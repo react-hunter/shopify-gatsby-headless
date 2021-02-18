@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
-// import MyImage from '../common/lazyImage'
 import '../../styles/heroSection.css';
 
 const HeroSection = (props) => {
@@ -10,10 +9,6 @@ const HeroSection = (props) => {
             <div className="text_image_banner-container_outer">
                 <div className="text_image_banner-container_inner">
                     <Link to={props.heroImage.imageUrl}> 
-                        {/* <MyImage src={props.heroImage.desktopImage ? props.heroImage.desktopImage.fluid.srcWebp : ''}
-                            className="text_image_banner-img banner_img-desktop" style={{backgroundColor: '#000'}} alt="" />
-                        <MyImage src={props.heroImage.mobileImage ? props.heroImage.mobileImage.fluid.srcWebp : ''}
-                            className="text_image_banner-img banner_img-mobile" alt="" /> */}
                         <Img fluid={props.heroImage.desktopImage.fluid} alt="" className="text_image_banner-img banner_img-desktop" loading="lazy" />
                         <Img fluid={props.heroImage.mobileImage.fluid} alt="" className="text_image_banner-img banner_img-mobile" loading="lazy" />
                         

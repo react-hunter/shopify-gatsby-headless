@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
+import loadable from '@loadable/component';
 import { Link, navigate } from 'gatsby'
 import StoreContext from '../../../context/store'
 import { ReactSVG } from 'react-svg';
@@ -7,12 +8,12 @@ import SearchHeaderIcon from '../../../images/icon-search-header.svg';
 import LoginHeaderIcon from '../../../images/icon-login-header.svg';
 import MessageIcon from '../../../images/icon-message.svg';
 import CartHeaderIcon from '../../../images/icon-cart-header.svg';
-
-import SearchDrawer from './searchDrawer';
-import SiteNav from './siteNav';
-import AnnoucmentBar from './annoucmentBar';
 import CardSlider from './cardSlider';
 import MyImage from '../lazyImage'
+
+const SearchDrawer = loadable(() => import('./searchDrawer'));
+const SiteNav = loadable(() => import('./siteNav'));
+const AnnoucmentBar = loadable(() => import('./annoucmentBar'));
 
 let runBannerAnimation = false;
 let slideIndex = 0;

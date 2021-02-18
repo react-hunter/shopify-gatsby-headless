@@ -3,12 +3,11 @@ import { Link } from 'gatsby'
 import loadable from '@loadable/component';
 import CollectionVariantSelector from '../collectionPage/collectionVariantSelector'
 import FeaturedProductBox from "../common/product/featuredProductBox"
-const NotifyModal = loadable(() => import("../collectionPage/notifyModal"))
 import { client } from "../../contentful"
 import "../../styles/collectionPage.scss"
-
 import Glider, {GliderMethods} from 'react-glider';
 import 'glider-js/glider.min.css';
+const NotifyModal = loadable(() => import("../collectionPage/notifyModal"))
 
 const CollectionSlider = ({products, title, handle, reviewList}) => {
   const [notifyModalShow, setNotifyModalShow] = useState(false);
