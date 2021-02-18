@@ -72,36 +72,6 @@ module.exports = {
         spaceId: `6i951l4zkbg4`,
         accessToken: `4sHDdzR4c01y0m9bnsreCxA2FFLyiq142RYnIE5qvtI`,
       },
-    },
-    {
-      resolve: `gatsby-plugin-offline`,
-      options: {
-        workboxConfig: {
-          importWorkboxFrom: `cdn`,
-          cacheId: `doserose-offline`,
-          dontCacheBustURLsMatching: /(\.js$|\.css$|static\/)/,
-          runtimeCaching: [
-            {
-              urlPattern: /(\.js$|\.css$|static\/)/,
-              handler: `CacheFirst`,
-            },
-            {
-              urlPattern: /^https?:.*\/page-data\/.*\.json/,
-              handler: `StaleWhileRevalidate`,
-            },
-            {
-              urlPattern: /^https?:.*\.(png|jpg|jpeg|webp|svg|gif|tiff|js|woff|woff2|json|css)$/,
-              handler: `StaleWhileRevalidate`,
-            },
-            {
-              urlPattern: /^https?:\/\/fonts\.googleapis\.com\/css/,
-              handler: `StaleWhileRevalidate`,
-            },
-          ],
-          skipWaiting: true,
-          clientsClaim: true,
-        },
-      },
     }
   ],
 }

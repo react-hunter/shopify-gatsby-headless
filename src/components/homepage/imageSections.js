@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby'
 import Img from 'gatsby-image'
-// import MyImage from '../common/lazyImage'
 import "../../styles/imageSections.css";
 
 const ImageSections = (props) => {
@@ -14,9 +13,8 @@ const ImageSections = (props) => {
 
                         { imageItem.imageLeft &&
                             <div className="fifty_fifty-image_container">
-                                {/* <MyImage className="fifty_fifty-img ls-is-cached" 
-                                    src={imageItem.imageUrl.fluid.srcWebp} alt="" /> */}
-                                <Img fluid={imageItem.imageUrl.fluid} className="fifty_fifty-img ls-is-cached" alt="" />
+                                <span className="banner_img-desktop"><Img fluid={imageItem.imageUrl.fluid} className="fifty_fifty-img ls-is-cached" loading="lazy" alt="" /></span>
+                                <span className="banner_img-mobile"><Img fixed={imageItem.imageUrl.fixed} className="fifty_fifty-img ls-is-cached" loading="lazy" alt="" /></span>
                             </div>
                         }
                     
@@ -36,9 +34,8 @@ const ImageSections = (props) => {
 
                         { imageItem.imageLeft === false &&
                             <div className="fifty_fifty-image_container">
-                                {/* <MyImage className="fifty_fifty-img ls-is-cached" 
-                                    src={imageItem.imageUrl.fluid.srcWebp} alt="" /> */}
-                                <Img fluid={imageItem.imageUrl.fluid} className="fifty_fifty-img ls-is-cached" alt="" />
+                                <span className="banner_img-desktop"><Img fluid={imageItem.imageUrl.fluid} loading="lazy" alt="" /></span>
+                                <span className="banner_img-mobile"><Img fixed={imageItem.imageUrl.fixed} loading="lazy" alt="" /></span>
                             </div>
                         }
                     </div>

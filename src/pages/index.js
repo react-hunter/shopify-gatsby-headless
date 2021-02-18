@@ -40,8 +40,11 @@ export const query = graphql`
       nodes {
         homeImageSectionItem {
           imageUrl {
-            fluid (maxWidth: 800) {
+            fluid(toFormat: WEBP) {
               ...GatsbyContentfulFluid_withWebp_noBase64
+            }
+            fixed(width: 200, toFormat: WEBP) {
+              ...GatsbyContentfulFixed_withWebp_noBase64
             }
           }
           imageLeft
