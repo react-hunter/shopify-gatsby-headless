@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby'
 import ArticleBox from "./articleBox";
 
-const ArticleSection = ({ data }) => {
+const ArticleSection = React.memo(function ArticleSection({ data }) {
   const articles = data
   
   return (
@@ -28,6 +28,6 @@ const ArticleSection = ({ data }) => {
       </div>
     </div>
   );
-};
+});
 
 export default ArticleSection;
