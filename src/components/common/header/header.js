@@ -8,9 +8,9 @@ import SearchHeaderIcon from '../../../images/icon-search-header.svg';
 import LoginHeaderIcon from '../../../images/icon-login-header.svg';
 import MessageIcon from '../../../images/icon-message.svg';
 import CartHeaderIcon from '../../../images/icon-cart-header.svg';
-import CardSlider from './cardSlider';
 import MyImage from '../lazyImage'
 
+const CardSlider = loadable(() => import('./cardSlider'));
 const SearchDrawer = loadable(() => import('./searchDrawer'));
 const SiteNav = loadable(() => import('./siteNav'));
 const AnnoucmentBar = loadable(() => import('./annoucmentBar'));
