@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import StoreContext from '../../context/store'
 import Preloader from "../../components/common/preloader"
@@ -11,8 +11,6 @@ import DownChevron from '../../images/down-chevron.svg';
 import { useStaticQuery, graphql } from "gatsby"
  
 const GalaxyStarProjector = ()  => {
-
-    const id = "galaxy-star-projector";
 
     const { product } = useStaticQuery(
         graphql`
@@ -31,7 +29,6 @@ const GalaxyStarProjector = ()  => {
     )
 
     const context = useContext(StoreContext);
-    const [showSpin, setShowSpin] = useState(false);
 
     const galaxyScroll = (e) => {
         e.preventDefault();
@@ -45,20 +42,17 @@ const GalaxyStarProjector = ()  => {
     const addItemToCart = (e) => {
         e.preventDefault();
 
-        setShowSpin(true);
-
-
-        console.log("product = ", product);
-        console.log("product.variants[0].shopifyId == ", product.variants[0].shopifyId);
-
         context.addVariantToCart(product.variants[0].shopifyId, 1);
 
         setTimeout(showCart, 1200);
     }
 
     const showCart = () => {
-        setShowSpin(false);
         document.querySelector('.site-header__cart').click();
+    }
+
+    const handleKeyDown = (e) => {
+        e.preventDefault();
     }
 
     useEffect(() => {
@@ -85,7 +79,7 @@ const GalaxyStarProjector = ()  => {
                     <div className="galaxy_hero-textbox">
                         <div className="galaxy_hero-title">GALAXY STAR PROJECTOR</div>
                         <div className="galaxy_hero-subtitle">The Galaxy Projector turns any room into a night of stars, light, and color and entering you in a cosmic world</div>
-                        <a className="galaxy_hero-arrow" onClick={ galaxyScroll }>
+                        <a className="galaxy_hero-arrow" onClick={ galaxyScroll } onKeyDown={handleKeyDown} role="presentation">
                             <ReactSVG src={DownChevron} />
                         </a>
                     </div>
@@ -102,7 +96,7 @@ const GalaxyStarProjector = ()  => {
                                 <button className="galaxy_product-ATC" onClick={addItemToCart}>ADD TO BAG</button>
                             </div> 
                             <div className="galaxy_product-imagebox">
-                                <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/projector_1_1100x.png?v=1611775949" />
+                                <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/projector_1_1100x.png?v=1611775949" alt=""  />
                             </div>
                         </div>
                     </div>
@@ -113,8 +107,10 @@ const GalaxyStarProjector = ()  => {
                     <div className="galaxy_video-container">
                         <div className="galaxy_video-wrapper">
                             <div className="galaxy_video">
-                                <video controls="" muted="" 
-                                    src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/234/assets/GalaxyProjector.mp4?v=9032016789607494561"></video>
+                                <video controls>
+                                    <source src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/234/assets/GalaxyProjector.mp4?v=9032016789607494561"
+                                        type="video/mp4" />
+                                </video>
                             </div>
                         </div>
                     </div>
@@ -182,21 +178,24 @@ const GalaxyStarProjector = ()  => {
                         
                             <div className="galaxy_included-content">
                                 <div className="galaxy_included-content_image">
-                                    <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/GalaxyProjector_TopShot_2_1100x.png?v=1611232648" />
+                                    <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/GalaxyProjector_TopShot_2_1100x.png?v=1611232648"
+                                        alt="" />
                                 </div>
                                 <div className="galaxy_included-content_title">Galaxy Projector</div>
                             </div>
                         
                             <div className="galaxy_included-content">
                                 <div className="galaxy_included-content_image">
-                                    <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/GalaxyProjector_Adapter_1_1100x.png?v=1611232658" />
+                                    <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/GalaxyProjector_Adapter_1_1100x.png?v=1611232658"
+                                     alt=""  />
                                 </div>
                                 <div className="galaxy_included-content_title">Power Adapter</div>
                             </div>
                         
                             <div className="galaxy_included-content">
                                 <div className="galaxy_included-content_image">
-                                    <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/GalaxyProjector_Cable_1_1100x.png?v=1611232669" />
+                                    <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/GalaxyProjector_Cable_1_1100x.png?v=1611232669"
+                                     alt=""  />
                                 </div>
                                 <div className="galaxy_included-content_title">Micro USB Charging Cable</div>
                             </div>

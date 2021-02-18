@@ -12,3 +12,10 @@
       }
   }
 }
+
+.arrangement-choices_container-mobile {
+  &.active {
+    display: block;
+    height: auto;
+  }
+}

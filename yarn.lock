@@ -967,6 +967,13 @@
     core-js-pure "^3.0.0"
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.0.0":
+  version "7.12.17"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.17.tgz#9821f8de0f8d518624198b7382b74bd71b17f75c"
+  integrity sha512-nEvWif7aHm4O0lTT2p4kYCfYwsGSBiWA8XmAqovusBDKugpUy3BVggAjJL4iFWIwrFJktay2VLtAQl1/l8Xsow==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/runtime@^7.10.0", "@babel/runtime@^7.10.2", "@babel/runtime@^7.11.2", "@babel/runtime@^7.12.5", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.7", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7":
   version "7.12.13"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.12.13.tgz#0a21452352b02542db0ffb928ac2d3ca7cb6d66d"
@@ -2998,17 +3005,17 @@ async@1.5.2:
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
   integrity sha1-7GphrlZIDAw8skHJVhjiCJL5Zyo=
 
+async@>=0.2.9, async@^3.1.0, async@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/async/-/async-3.2.0.tgz#b3a2685c5ebb641d3de02d161002c60fc9f85720"
+  integrity sha512-TR2mEZFVOj2pLStYxLht7TyfuRzaydfpxr3k9RpHIzMgw7A64dzsdqCxH1WJyQdoe8T10nDXd9wnEigmiuHIZw==
+
 async@^2.6.2:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
   integrity sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==
   dependencies:
     lodash "^4.17.14"
-
-async@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/async/-/async-3.2.0.tgz#b3a2685c5ebb641d3de02d161002c60fc9f85720"
-  integrity sha512-TR2mEZFVOj2pLStYxLht7TyfuRzaydfpxr3k9RpHIzMgw7A64dzsdqCxH1WJyQdoe8T10nDXd9wnEigmiuHIZw==
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -6929,6 +6936,14 @@ flickity@^2.2.1:
     unidragger "^2.3.0"
     unipointer "^2.3.0"
 
+fluent-ffmpeg@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/fluent-ffmpeg/-/fluent-ffmpeg-2.1.2.tgz#c952de2240f812ebda0aa8006d7776ee2acf7d74"
+  integrity sha1-yVLeIkD4EuvaCqgAbXd27irPfXQ=
+  dependencies:
+    async ">=0.2.9"
+    which "^1.1.1"
+
 flush-write-stream@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.1.1.tgz#8dd7d873a1babc207d94ead0c2e0e44276ebf2e8"
@@ -7261,6 +7276,20 @@ gatsby-plugin-apollo@^3.0.1:
   dependencies:
     isomorphic-fetch "^3.0.0"
 
+gatsby-plugin-ffmpeg@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-ffmpeg/-/gatsby-plugin-ffmpeg-0.3.1.tgz#5e15e8b5d27fe42ad388a0f0353e28e23fac786d"
+  integrity sha512-JDSN5ExALyHXGA1hwaRVBt4+wmrOQrJwxs+Sp/fykCwagqhsi9IKikY+4vwtcgdOHNJbQ3gi7+BMbRHlqKwtwQ==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    async "^3.1.0"
+    bluebird "^3.5.5"
+    fluent-ffmpeg "^2.1.2"
+    fs-exists-cached "^1.0.0"
+    gatsby ">2.0.0"
+    lodash "^4.17.15"
+    progress "^2.0.3"
+
 gatsby-plugin-fontawesome-css@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-fontawesome-css/-/gatsby-plugin-fontawesome-css-1.0.0.tgz#12b0d9e4eb45f9321556e83accfa93fc6627d608"
@@ -7575,6 +7604,14 @@ gatsby-telemetry@^1.10.0:
     node-fetch "^2.6.1"
     uuid "3.4.0"
 
+gatsby-transformer-ffmpeg@^0.3.8:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-ffmpeg/-/gatsby-transformer-ffmpeg-0.3.8.tgz#9ae000d13f5899e0712e43343cec305282d752b8"
+  integrity sha512-pdKQSRxatY+9frUSLSa9AlTu7JO815XAXToU1Ph+FnGqUGwT4Exw8Y2NP7oKgku9hZXmFVB/Wzs5QPyfbC8tdw==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    bluebird "^3.5.5"
+
 gatsby-transformer-sharp@^2.3.14:
   version "2.12.0"
   resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.12.0.tgz#c33a92788e8b432f01960f4de2745c105cea4784"
@@ -7588,7 +7625,7 @@ gatsby-transformer-sharp@^2.3.14:
     semver "^7.3.4"
     sharp "^0.27.0"
 
-gatsby@^2.24.11:
+gatsby@>2.0.0, gatsby@^2.24.11:
   version "2.32.3"
   resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.32.3.tgz#af4c12e676c9e0cdbc69c29508af2384da462c11"
   integrity sha512-6l1ktlIbj6dRDnAPi+dh/tAEx7FdEYm55RwM3aiFEpwNIHeevG+Jw1RZhIpwUmhkGBwaOjr559KJYf7dYuXk3w==
@@ -15786,7 +15823,7 @@ which-pm-runs@^1.0.0:
   resolved "https://registry.yarnpkg.com/which-pm-runs/-/which-pm-runs-1.0.0.tgz#670b3afbc552e0b55df6b7780ca74615f23ad1cb"
   integrity sha1-Zws6+8VS4LVd9rd4DKdGFfI60cs=
 
-which@1, which@^1.2.14, which@^1.2.9:
+which@1, which@^1.1.1, which@^1.2.14, which@^1.2.9:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/which/-/which-1.3.1.tgz#a45043d54f5805316da8d62f9f50918d3da70b0a"
   integrity sha512-HxJdYWq1MTIQbJ3nw0cqssHoTNU267KlrDuGZ1WYlxDStUtKUhOaJmh112/TZmHxxUfuJqPXSOm7tDyas0OSIQ==

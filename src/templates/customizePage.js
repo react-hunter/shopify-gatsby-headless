@@ -1,14 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { graphql } from 'gatsby'
-// import Preloader from "../components/common/preloader"
-//import StoreContext from '../context/store'
 import { client } from '../contentful'
-import ImageSpin from '../components/common/imageSpin'
 import '../styles/customizePage.scss'
 import AddToBagButton from '../components/customizePage/addToBagButton'
 
 const CustomizePage = ({ data }) => {
-  //const context = useContext(StoreContext);
   const [customizeData, setCustomizeData] = useState({
     arrangementSelectorNumbers: [{number: '0'}, {number: '1'}, {number: '2'}, {number: '3'}, {number: '4'},
                                   {number: '5'}, {number: '6'}, {number: '7'}, {number: '8'},{number: '9'}
@@ -22,7 +18,7 @@ const CustomizePage = ({ data }) => {
     roseColor: [],
     products: []
   })
-  const [showSpin, setShowSpin] = useState(false);
+
   const collectionProducts = data.shopifyCollection.products.map(pr => {
     const productVariants = pr.variants.map(va => {
       return {
@@ -161,8 +157,8 @@ const CustomizePage = ({ data }) => {
 
       var newProducts = [];
 
-      for (var i=0; i< orderedProducts.length; i++) {
-        for (var j=0; j< products.length;j++ ) {
+      for (i=0; i< orderedProducts.length; i++) {
+        for (j=0; j< products.length;j++ ) {
           if (orderedProducts[i] === products[j].Arrangement) {
             newProducts.push(products[j]);
           }
@@ -368,8 +364,18 @@ const CustomizePage = ({ data }) => {
     }
   }
 
-  function stickyFunction(){
+  function stickyFunction(){  
+    var header = document.getElementsByClassName("arrangement-choices_container-mobile")[0];
+    var sticky = header.offsetTop;
+  
+    if (window.pageYOffset > sticky && !(document.querySelector('#mobile-panel').classList.contains("sticky"))) {
+      header.style.display = "block";
+      header.classList.add("sticky");
 
+    } else if (window.pageYOffset <= sticky + 100 && document.querySelector('#mobile-panel').classList.contains("sticky")) {
+      header.classList.remove("sticky");
+      header.style.height = "auto";
+    }
   }
   
   function nextStep() {
@@ -926,7 +932,6 @@ const CustomizePage = ({ data }) => {
     }
 
     if (roseType === selectedRoses.length) {
-  
 
       var choices = selectedRoses.join(",");
   
@@ -1132,50 +1137,6 @@ const CustomizePage = ({ data }) => {
     }
   }
 
-  // const AddToBag = () => {
-
-  //   if (currentStep != 3)
-  //     return;
-
-  //   const bagProduct = collectionProducts.filter(cp => cp.title === selections[0])
-
-  //   const bagVariants = bagProduct[0].variants
-  //   let bagVariant = null
-  //   for(var i = 0; i < bagVariants.length; i++) {
-  //     if(bagVariants[i].options[0] === selections[1] && bagVariants[i].options[1] === selections[2]) {
-  //       bagVariant = bagVariants[i]
-  //       break
-  //     }
-  //   }
-
-  //   setShowSpin(true);
-    
-  //   context.addVariantToCart(bagVariant.id, 1, [
-  //     {key: 'Rose Color', value: selections[3]},
-  //     {key: 'Box', value: selections[1]},
-  //     {key: 'Style', value: selections[2]},
-  //     //{key: 'linkImage', value: 'https://mediacarryapi.com/customizer/assets/' + selections[0] + '~' + selections[2] + '~' + selections[3].replace('+', ',') + '.png'}
-  //     {key: 'linkImage', value: mainImageUrl }
-  //   ])
-    
-  //   setTimeout(openCartDrawer, 1200);
-  // }
-
-  // function openCartDrawer() {
-
-  //   setShowSpin(false);
-
-  //   document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
-  //   document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
-  //   document.querySelector(".js-ajax-cart-overlay").classList.add('is-open');
-  //   document.documentElement.classList.add('is-locked');
-
-  // }
-
-  function getSmallCharaters(string) {
-    return 
-  }
-
   const hideNumbers = (e) => {
     e.preventDefault();
     
@@ -1366,9 +1327,6 @@ const CustomizePage = ({ data }) => {
               <div className="step-wrapper">
                   <div className="step-previous" onClick={previous} onKeyDown={handleKeyDown} role="presentation">Back</div>
                   <div className="step-next" id="step-next" onClick={next} onKeyDown={handleKeyDown} role="presentation">Next</div>
-                  {/* <div style={{display:'none'}} className="step-next" id="addToBAG" onClick={AddToBag} onKeyDown={handleKeyDown} role="presentation">
-                    Add To Bag{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }
-                  </div> */}
                   <AddToBagButton 
                     getCurrentStep={getCurrentStep} 
                     getCollectionProducts={getCollectionProducts}

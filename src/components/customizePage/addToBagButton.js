@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import ImageSpin from '../common/imageSpin'
 import StoreContext from '../../context/store'
 
