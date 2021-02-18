@@ -9,7 +9,6 @@ const ProductGallery = ({ product, selectedVariant }) => {
     let selectedImageIndex = 0;
     const [flktyObject, setFlktyObject] = useState(null);
     var flkty;
-    // const flkty = useRef(null);
 
     const [ slideIndex, setSlideIndex] = useState(0);
 
@@ -21,39 +20,25 @@ const ProductGallery = ({ product, selectedVariant }) => {
     })
 
     useEffect(() => {
-        console.log('11111111');
         console.log(flkty);
         if (flkty != null) {
             setFlktyObject(flkty);
         }
     }, [flkty]);
 
-    // useEffect(() => {
-    //     slider.current.slickGoTo(selectedImageIndex);
-    // }, [selectedVariant, selectedImageIndex])
-
     useEffect(() => {
-        console.log("selectedVariant = ", selectedVariant);
-        console.log("selectedImageIndex === ", selectedImageIndex);
-
-        //flkty.select(selectedImageIndex);
-        //Flickity.current.select(selectedImageIndex);
-
-        console.log('22222222', flktyObject);
 
         if (flktyObject) {
             flktyObject.select(selectedImageIndex);
         }
 
         if (flkty) {
-            console.log("----------------------------------- ProductGallery flkty is live = ", flkty);
             flkty.on('change', () => {
                 console.log("ProductGallery on change is live = ", flkty);
                 console.log("flkty.selectedIndex === ", flkty.selectedIndex);
                 setSlideIndex(flkty.selectedIndex);
             })
         } else {
-            console.log("----------------------------------- ProductGallery flkty is null = ", flkty);
         }
 
     }, [selectedVariant, selectedImageIndex])

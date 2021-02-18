@@ -45,12 +45,10 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
         }
 
         if (flkty) {
-            console.log("flkty is live = ", flkty);
             flkty.on('change', () => {
                 setSlideIndex(flkty.selectedIndex);
             })
         } else {
-            console.log("flkty is null = ", flkty);
         }
 
     }, [mainOption, swatchColor, product.variants, flkty])

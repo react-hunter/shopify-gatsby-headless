@@ -81,7 +81,6 @@ const collectionPage = ({ data, pageContext }) => {
     }, 500)
   }
 
-
   const displayedProducts = data.shopifyCollection.products.slice(0, displayProductCount)
   return (
     <>
@@ -126,7 +125,7 @@ const collectionPage = ({ data, pageContext }) => {
               {
                 displayedProducts.map((productItem, productIndex) => {
                   const productReview = productReviews.filter(pr => pr.handle === productItem.handle)
-                  return <CollectionProductBox product={productItem} key={productIndex} review={productReview[0]} showNotifyModal={showNotifyModal} badgeStyles={badgeStyles} />
+                  return <CollectionProductBox collection={data.shopifyCollection} product={productItem} key={productIndex} review={productReview[0]} showNotifyModal={showNotifyModal} badgeStyles={badgeStyles} />
                 })
               }
           </ul>
