@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby'
-import Img from 'gatsby-image'
+import MyImage from '../common/lazyImage'
 
 const BlogBox = props => {
     const article = props.article
@@ -18,8 +18,8 @@ const BlogBox = props => {
         <div className="article-content">
           <Link to={`/article/${article.handle}`}>
             { article.image ? 
-                (<Img className="article__grid-image ls-is-cached"
-                fluid={article.image.localFile.childImageSharp.fluid}
+                (<MyImage className="article__grid-image ls-is-cached"
+                src={article.image.src}
                 alt={article.title}
             />) : "" }
           </Link>

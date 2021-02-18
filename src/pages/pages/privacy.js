@@ -5,7 +5,7 @@ const Privacy = () => {
     return (
       <>
         <Preloader />
-        <div className="page-width top-spacing page-template">
+        <div className="page-width page-template">
             <div className="grid">
                 <div className="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
                     <div className="rte proper-margins">

@@ -1,53 +1,4 @@
 
-.Best-Sellers-Carousel {
-  margin-top: 35px;
-  position: relative;
-  .slick-prev {
-      left: -50px;
-  }
-  .slick-next {
-      right: -50px;
-  }
-}
-
-.slick-prev {
-  background-image: url("../images/leftArrow_small.png");
-  background-size: contain;
-  left: 20px;
-  z-index: 2;
-
-  &:hover {
-    background-image: url("../images/leftArrow_small.png");
-    background-size: 20px 20px;
-  }
-  &.slick-disabled {
-    opacity: 0.5;
-  }
-
-  @media (max-width: 900px) {
-    display: none!important;
-  }
-}
-
-.slick-next {
-  background-image: url("../images/rightArrow_small.png");
-  background-size: contain;
-  right: 20px;
-  z-index: 2;
-
-  &:hover {
-    background-image: url("../images/rightArrow_small.png");
-    background-size: 20px 20px;
-  }
-  &.slick-disabled {
-    opacity: 0.5;
-  }
-  
-  @media (max-width: 900px) {
-    display: none!important;
-  }
-}
-
 .slick-next:before, .slick-prev:before {
   content: none;
 }
@@ -82,7 +33,22 @@
   padding: 30px 5% 20px 5%;
 
   @media (max-width: 900px) {
-    padding: 40px 2.5% 0 2.5%
+    padding: 40px 0% 0 0%
+  }
+
+  .Best-Sellers-Carousel {
+    margin-top: 35px;
+    position: relative;
+    
+    @media (max-width: 768px) {
+      margin-top: 15px;
+    }
+
+    .slick-arrow {
+      &.disabled {
+        opacity: 0;
+      }
+    }
   }
 
   .you-may-like_header_wrapper  {
@@ -113,33 +79,30 @@
     display: none;
   }
 
-  .Best-Sellers-Carousel-Cell:hover .main_img {
-    display: none !important;
-  }
+  .Best-Sellers-Carousel-Cell {
+    &:hover {
+      .main_img {
+        display: none !important;
+      }
 
-  .Best-Sellers-Carousel-Cell:hover .hover_img {
-    display: block !important;
-  }
+      .hover_img {
+        display: block !important;
+      }
 
-  .Best-Sellers-Carousel-Cell .Best-Sellers-Title {
-    margin-top: 0;
-    margin-bottom: 3px !important;
-  }
+      .best-sellers-form .button-atc {
+        visibility: visible !important;
+      }
+    }
 
-  .Best-Sellers-Carousel-Cell img {
-    height: unset;
-  }
+    .Best-Sellers-Title {
+      margin-top: 0;
+      margin-bottom: 3px !important;
+    }
 
-  .Best-Sellers-Carousel {
-    margin-top: 35px;
-  }
-
-  @media (max-width: 768px) {
-    .Best-Sellers-Carousel {
-      margin-top: 15px;
+    img {
+      height: unset;
     }
   }
-
 
   @media (max-width: 900px) {
     .best-sellers-form .button-atc {
@@ -151,7 +114,5 @@
     visibility: hidden;
   }
 
-  .Best-Sellers-Carousel-Cell:hover .best-sellers-form .button-atc {
-    visibility: visible !important;
-  }
+
 }

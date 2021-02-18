@@ -13,6 +13,7 @@ module.exports = {
     `gatsby-plugin-fontawesome-css`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-layout`,
+    `gatsby-transformer-ffmpeg`,
     {
       resolve: `gatsby-plugin-apollo-shopify`,
       options: {
@@ -24,7 +25,7 @@ module.exports = {
       resolve: 'gatsby-plugin-purgecss',
       options: {
         develop: true,
-        purgeOnly: ['resources/css/'],
+        purgeOnly: ['resources/css/', 'node_modules/gatsby-plugin-fontawesome-css/'],
       },
     },
     {
@@ -32,8 +33,9 @@ module.exports = {
       options: {
         shopName: process.env.SHOP_NAME,
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
-        apiVersion: "2020-10",
-        paginationSize: 5,
+        apiVersion: "2021-01",
+        paginationSize: 3,
+        downloadImages: false,
         includeCollections: ["shop", "content"]
       }
     },
@@ -44,14 +46,15 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-google-analytics`,
-    //   options: {
-    //     trackingId: "UA-146773242-1",
-    //   },
-    // },
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaultQuality: 50,
+        useMozJpeg: true,
+
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -65,10 +68,10 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-instagram`,
+      resolve: `gatsby-source-contentful`,
       options: {
-        username: `10179203510`,
-        maxPosts: 10,
+        spaceId: `6i951l4zkbg4`,
+        accessToken: `4sHDdzR4c01y0m9bnsreCxA2FFLyiq142RYnIE5qvtI`,
       },
     }
   ],

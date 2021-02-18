@@ -1,48 +1,19 @@
 import React from 'react'
-import { useQuery } from 'react-query'
+import loadable from '@loadable/component';
 import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
-import Preloader from "../components/common/preloader"
-import HeroSection from "../components/homepage/heroSection"
-import ImageSection from "../components/homepage/imageSections"
-import ArticleSection from "../components/articles/articleSection"
-import { client } from '../contentful';
+const HeroSection = loadable(() => import("../components/homepage/heroSection"));
+const ImageSection = loadable(() => import("../components/homepage/imageSections"));
+const ArticleSection = loadable(() => import("../components/articles/articleSection"));
 
-const IndexPage = ({ data: {allShopifyArticle}}) => {
-  let homeData = {
-    heroImage: {
-      desktopImage: null,
-      mobileImage: null,
-      imageUrl: '/collections/best-sellers',
-      title: "VALENTINE'S DAY BEST-SELLERS",
-      subTitle: "Due to extremely high demand and COVID-19 delays, schedule your Valentine's Day Gift before it's sold out with scheduled delivery!",
-      buttonText: 'SHOP NOW'
-    },
-    imageSections: []
-  };
-  async function getHomeEntry() {
-    return await client.getEntries({'content_type': 'homepage'})
-  }
-  const { isLoading, data } = useQuery('homeQuery', getHomeEntry);
-  if (!isLoading) {
-    homeData = {
-      ...homeData,
-      heroImage: data.items[0].fields.heroImage.fields,
-      imageSections: data.items[0].fields.homeImageSectionItem
-    }
-  }
+const IndexPage = ({ data: {allShopifyArticle, allContentfulHomepage}}) => {
+  const homepageData = allContentfulHomepage.nodes[0];
   return (
     <>
-      {
-        isLoading ? <Preloader /> : (
-          <>
-            <SEO title="Home" />
-            <HeroSection heroImage={homeData.heroImage} />
-            <ImageSection imageSections={homeData.imageSections} />
-            <ArticleSection data={allShopifyArticle.edges} />
-          </>
-        )
-      }
+      <SEO title="Home" />
+      <HeroSection heroImage={homepageData.heroImage} />
+      <ImageSection imageSections={homepageData.homeImageSectionItem} />
+      <ArticleSection data={allShopifyArticle.edges} />
     </>
   )
 }
@@ -62,14 +33,41 @@ export const query = graphql`
           image {
             id
             src
-            localFile {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp_noBase64
-                }
-              }
+          }
+        }
+      }
+    }
+    allContentfulHomepage {
+      nodes {
+        homeImageSectionItem {
+          imageUrl {
+            fluid(toFormat: WEBP) {
+              ...GatsbyContentfulFluid_withWebp_noBase64
+            }
+            fixed(width: 200, toFormat: WEBP) {
+              ...GatsbyContentfulFixed_withWebp_noBase64
             }
           }
+          imageLeft
+          title
+          description
+          shopLink
+        }
+        heroImage {
+          desktopImage {
+            fluid (toFormat: WEBP) {
+              ...GatsbyContentfulFluid_withWebp_noBase64
+            }
+          }
+          mobileImage {
+            fluid (toFormat: WEBP) {
+              ...GatsbyContentfulFluid_withWebp_noBase64
+            }
+          }
+          buttonText
+          title
+          subTitle
+          imageUrl
         }
       }
     }

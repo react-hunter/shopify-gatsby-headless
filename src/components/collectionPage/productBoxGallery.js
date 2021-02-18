@@ -1,16 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
-// import { LazyLoadImage } from 'react-lazy-load-image-component'
+import React, { useState, useEffect } from 'react';
 import CustomImage from '../common/image'
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import '../../styles/productGallery.css';
 
 import Flickity from 'react-flickity-component'
 import '../../styles/flickity.css';
 
-const ProductBoxGallery = props => {
+const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
     let productGalleryCount = 0;
+    let flkty;
     const product = props.product;
     const mainOption = props.mainOption;
     const swatchColor = props.swatchColor;
@@ -18,14 +15,6 @@ const ProductBoxGallery = props => {
 
     const [ slideIndex, setSlideIndex] = useState(0);
     
-    const productBoxSliderSettings = {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        beforeChange: (current, next) => setSlideIndex(next)
-    }
     const [ swatchImages, setSwatchImages ] = useState([]);
 
     const flickityOptions = {
@@ -38,8 +27,6 @@ const ProductBoxGallery = props => {
     }
     
     productGalleryCount = mainOption === '' ? Math.min(product.images.length,3) : Math.min(swatchImages.length,3);
-
-
 
     useEffect(() => {
         if (mainOption !== '') {
@@ -60,13 +47,17 @@ const ProductBoxGallery = props => {
         if (flkty) {
             flkty.on('change', () => {
                 setSlideIndex(flkty.selectedIndex);
-                console.log("flkty.selectedIndex = ", flkty.selectedIndex)
             })
         } else {
-            console.log("flkty = ", flkty);
         }
 
-    }, [mainOption, swatchColor, product.variants])
+    }, [mainOption, swatchColor, product.variants, flkty])
+
+
+    function gotoProductPage () {
+        console.log("product.handle = ", product.handle);
+        window.location.href=`/products/${product.handle}`;
+    }
 
     const isBadgeEnable = () => {
         let isBadgeEnable = false;
@@ -112,11 +103,8 @@ const ProductBoxGallery = props => {
             }
         }
     }
-
-    let flkty;
-
     return (
-        <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper>
+        <div className="product-card__image-with-placeholder-wrapper" data-image-with-placeholder-wrapper >
             <div className="grid-view-item__image-wrapper product-card__image-wrapper js">
                 {   
                     isBadgeEnable() ? <img  src={getBadgeImage()} className="badge" alt="" /> : ''
@@ -125,11 +113,12 @@ const ProductBoxGallery = props => {
                 <div className="collection-product_image_container">
                 {
                     mainOption === '' ?
-                        <Flickity options={flickityOptions} flickityRef={c=> flkty = c} >
+                        <Flickity options={flickityOptions} flickityRef={c=> flkty = c} >                           
                             { product.images[0] ? 
                                 (<CustomImage 
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[0].originalSrc}
+                                    onClick={gotoProductPage}
                                     alt={product.title}
                                 />) : ""
                             }
@@ -138,6 +127,7 @@ const ProductBoxGallery = props => {
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[1].originalSrc}
                                     alt={product.title}
+                                    onClick={gotoProductPage}
                                     style={{ cursor: 'pointer' }} 
                                 />) : ""
                             }
@@ -146,6 +136,7 @@ const ProductBoxGallery = props => {
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={product.images[2].originalSrc}
                                     alt={product.title}
+                                    onClick={gotoProductPage}
                                     style={{ cursor: 'pointer' }} 
                                 />) : ""
                             }
@@ -159,6 +150,7 @@ const ProductBoxGallery = props => {
                                     className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
                                     src={swatchImage}
                                     alt=''
+                                    onClick={gotoProductPage}
                                     style={{ cursor: 'pointer' }} 
                                     key={swatchImageIndex}
                                 />
@@ -168,60 +160,12 @@ const ProductBoxGallery = props => {
                     </Flickity>
                 }
                 </div>
-
-                {/* <div className="collection-product_image_container">
-                { 
-                    mainOption === '' ?
-                        <Slider {...productBoxSliderSettings}>
-                            { product.images[0] ? 
-                                (<CustomImage 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={product.images[0].originalSrc}
-                                    alt={product.title}
-                                />) : ""
-                            }
-                            { product.images[1] ? 
-                                (<CustomImage 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={product.images[1].originalSrc}
-                                    alt={product.title}
-                                    style={{ cursor: 'pointer' }} 
-                                />) : ""
-                            }
-                            { product.images[2] ? 
-                                (<CustomImage 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={product.images[2].originalSrc}
-                                    alt={product.title}
-                                    style={{ cursor: 'pointer' }} 
-                                />) : ""
-                            }
-                        </Slider>
-                    : 
-                    <Slider {...productBoxSliderSettings}>
-                    {
-                        swatchImages.map((swatchImage, swatchImageIndex) => {
-                            return (
-                                <CustomImage 
-                                    className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-                                    src={swatchImage}
-                                    alt=''
-                                    style={{ cursor: 'pointer' }} 
-                                    key={swatchImageIndex}
-                                />
-                            )
-                        })
-                    }
-                    </Slider>
-                }
-                </div> */}
-            </div>
-                    
+            </div>                    
             <div className="carousel-scrollbar">
                 <div className="carousel-scrollbar_bar" style={getStyle()}></div>
             </div>
         </div>
     );
-};
+});
 
 export default ProductBoxGallery;

@@ -11,7 +11,9 @@ const NotifyModal = (props) => {
     <div className={classes}>
       <a href="/fakeUrl" className="klav-popup-overlay close-klav-popup" onClick={closeNotifyModal}>close</a>
       <div className="klav-popup-content">
-        <a href="fakeUrl" className="close-klav-popup popup-close-icon" onClick={closeNotifyModal}><i className="fa fa-times"></i></a>
+        <a href="fakeUrl" className="close-klav-popup popup-close-icon" onClick={closeNotifyModal}>
+          <i className="fa fa-times"></i>
+        </a>
         <div className="klav-form">
           <h2>GET NOTIFIED WHEN IT'S BACK IN STOCK!</h2>
           <KlaviyoForm />

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTruck, faCheck } from "@fortawesome/free-solid-svg-icons"
+import { faCheck } from "@fortawesome/free-solid-svg-icons"
 
 const ProductInfo = ({ product, review }) => {
     const [featuresList, setFeaturesList] = useState([]);
     useEffect(() => {
-        const featuresString = review.features
+        const featuresString = review ? review.features : ''
         if (featuresString !== '') {
             const featureList = featuresString.split(/\r?\n/);
             setFeaturesList(featureList);
@@ -49,14 +49,16 @@ const ProductInfo = ({ product, review }) => {
                             </dd>
                         </div>
 
-                        <div className="price__badges">
+
+                        {/* <div className="price__badges">
                             <span className="price__badge price__badge--sale" aria-hidden="true">
                                 <span>Sale</span>
                             </span>
                             <span className="price__badge price__badge--sold-out">
                                 <span>Sold out</span>
                             </span>
-                        </div>
+                        </div> */}
+
                     </div>
                     <div className="price__unit">
                         <dt>

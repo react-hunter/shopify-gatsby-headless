@@ -1,15 +1,14 @@
 import React from 'react' /* eslint-disable */
-import Img from "gatsby-image"
+import loadable from '@loadable/component';
+import MyImage from '../components/common/lazyImage'
 import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
-import Preloader from "../components/common/preloader"
-import RecentArticles from "../components/articles/recentArticles"
 import ShareIcons from "../components/common/shareIcons"
 import "../styles/blogs.scss";
+const RecentArticles = loadable(() => import("../components/articles/recentArticles"))
 
 
-const articlePage = ({ data }) => {
-    
+const articlePage = ({ data, ...other }) => {
   let date = changeDateFormat();
   function changeDateFormat(){
     let mydate = new Date(data.shopifyArticle.publishedAt);
@@ -21,7 +20,6 @@ const articlePage = ({ data }) => {
 
   return (
     <>
-      {/* <Preloader /> */}
       <SEO title={data.shopifyArticle.title} />
 
       <div id="article-page">
@@ -46,8 +44,7 @@ const articlePage = ({ data }) => {
                   />
 
                   <div className="article-img">
-                    <Img fluid={data.shopifyArticle.image.localFile.childImageSharp.fluid}
-                      alt="" loading="eager" />
+                    <MyImage src={data.shopifyArticle.image.src} alt="" />
                   </div>
                   <div className="clear"></div>
                   <div className="rte">
@@ -84,13 +81,6 @@ export const query = graphql`
       image {
         id
         src
-        localFile {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid_withWebp_noBase64
-            }
-          }
-        }
       }
       publishedAt
     }
@@ -105,13 +95,6 @@ export const query = graphql`
           image {
             id
             src
-            localFile {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp_noBase64
-                }
-              }
-            }
           }
         }
       }

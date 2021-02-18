@@ -22,6 +22,9 @@ const ProductDescription = ({ product, review, selectVariant }) => {
         async function getAccordionData() {
             const accordionData = await client.getEntries({'content_type': 'productAccordion'});
             setProductAccordions(accordionData.items);
+
+            console.log("queryselectorall = ", document.querySelectorAll('.accordion_button'));
+
             document.querySelectorAll('.accordion_button').forEach(button => {
                 const accordionButton = button;
                 accordionButton.innerHTML = accordionButton.innerHTML + '<i className="fas fa-angle-down"></i>';
@@ -45,7 +48,7 @@ const ProductDescription = ({ product, review, selectVariant }) => {
 
 
     function rotateButton(identifier){
-        if(document.getElementsByClassName(identifier)[0].firstElementChild.style.transform == "rotate(0deg)"){
+        if(document.getElementsByClassName(identifier)[0].firstElementChild.style.transform === "rotate(0deg)"){
           document.getElementsByClassName(identifier)[0].firstElementChild.style.transform = "rotate(180deg)"
         }else{
           document.getElementsByClassName(identifier)[0].firstElementChild.style.transform = "rotate(0deg)"
@@ -133,17 +136,14 @@ const ProductDescription = ({ product, review, selectVariant }) => {
                     <div className="product_accordions-container">
                     { productAccordions.map((item, index) => 
                         <div key={index}>
-                        <button key={`btn_${index}`} className={`accordion_button ${item.fields.headerClass}`}>
-                            { item.fields.header }
-                            
-                            <FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />
-                            
-                        </button>   
-                        <div key={`content_${index}`} className={`accordion_content ${item.fields.contentClass}`} dangerouslySetInnerHTML={{ __html: item.fields.content.content[0].content[0].value }} />
+                            <button key={`btn_${index}`} className={`accordion_button ${item.fields.headerClass}`}>
+                                { item.fields.header }
+                                <FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />                                
+                            </button>
+                            <div key={`content_${index}`} className={`accordion_content ${item.fields.contentClass}`} dangerouslySetInnerHTML={{ __html: item.fields.content }} />
                         </div>
                     )}
                     </div>
-
                 </div>
             </div>
         </div>

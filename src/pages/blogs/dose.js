@@ -80,13 +80,6 @@ export const query = graphql`
           image {
             id
             src
-            localFile {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp_noBase64
-                }
-              }
-            }
           }
         }
       }

@@ -1,43 +1,81 @@
-import React, { useEffect, useRef } from 'react'
-import Slider from "react-slick";
+import React, { useEffect, useState } from 'react'
 import CustomImage from '../common/image'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import Flickity from 'react-flickity-component'
 import '../../styles/productGallery.css';
+import '../../styles/flickity.css';
 
 const ProductGallery = ({ product, selectedVariant }) => {
     let selectedImageIndex = 0;
-    let slider = useRef(null);
+    const [flktyObject, setFlktyObject] = useState(null);
+    var flkty;
+
+    const [ slideIndex, setSlideIndex] = useState(0);
 
     product.images.map((image, imageIndex) => {
         if(image.originalSrc === selectedVariant.image.originalSrc) {
-            selectedImageIndex = imageIndex
+            selectedImageIndex = imageIndex;
         }
         return true
     })
 
     useEffect(() => {
-        slider.current.slickGoTo(selectedImageIndex);
-    }, [selectedVariant, selectedImageIndex])
-
-    const settings = {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        afterChange: (current, next) => {
-            selectedImageIndex = parseInt(current)
+        if (flkty != null) {
+            setFlktyObject(flkty);
         }
+    }, [flkty]);
+
+    useEffect(() => {
+
+        if (flktyObject) {
+            flktyObject.select(selectedImageIndex);
+        }
+
+        if (flkty) {
+            flkty.on('change', () => {
+                setSlideIndex(flkty.selectedIndex);
+            })
+        } else {
+        }
+
+    }, [selectedVariant, selectedImageIndex, flktyObject])
+
+    useEffect(() => {
+        setTimeout(addSliderScript('//foursixty.com/media/scripts/fs.slider.v2.5.js'), 200);
+    }, [])
+    const addSliderScript = url => {
+        const script = document.createElement("script")
+        script.src = url
+        script.setAttribute('data-feed-id', 'dose-of-roses')
+        script.setAttribute('data-for-url', true)
+        script.setAttribute('data-theme', 'slider_v2_5')
+        script.setAttribute('data-open-links-in-same-page', true)
+        script.setAttribute('data-connector-filter', "30963")
+        script.setAttribute('data-cell-size', "50%")
+        document.getElementById('instagram-slider').appendChild(script)
+    }
+
+    let productGalleryCount = product.images.length;    
+
+    const getStyle = () => {
+        let width = 100/productGalleryCount;
+        let translateX = 100 * slideIndex;
+        return { width: `${width}%`, transform: `translateX(${translateX}%)` };
+    }
+    const flickityOptions = {
+        pageDots: false, 
+        imagesLoaded: true, 
+        touchVerticalScroll: false,
+        dragThreshold : 10, 
+        selectedAttraction: 0.01,
+        friction: 0.2,
     }
 
     return (
-        <>
         <div className="product_image-container 1">
             <div className="pdp-carousel-main grid__item product-single__media-group medium-up--one-half glider draggable">
-                <Slider ref={slider} {...settings}>
-                    {
+                <Flickity options={flickityOptions} flickityRef={c=> flkty = c } >
+                {
                     product.images.length === 0? 
                         (<div className="product-single__media-wrapper placefolder">
                             <LazyLoadImage 
@@ -64,12 +102,17 @@ const ProductGallery = ({ product, selectedVariant }) => {
                             )
                         })
                     }
-                </Slider>
+                </Flickity>
+                <div className="status-bar">
+                    <div className="carousel-scrollbar">
+                        <div className="carousel-scrollbar_bar" style={getStyle()}></div>
+                    </div>
+                </div>
+                <div id="instagram-slider"></div>
 
-                <script src="//foursixty.com/media/scripts/fs.slider.v2.5.js" data-feed-id="dose-of-roses" data-for-url="true" data-theme="slider_v2_5" data-open-links-in-same-page="true" data-connector-filter="30963" data-cell-size="20%"></script>
+                
             </div>
         </div>
-        </>
     );
 }
 

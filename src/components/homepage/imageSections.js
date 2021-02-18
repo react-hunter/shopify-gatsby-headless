@@ -1,49 +1,49 @@
 import React from 'react';
 import { Link } from 'gatsby'
-import CustomImage from '../common/image'
+import Img from 'gatsby-image'
 import "../../styles/imageSections.css";
 
-const ImageSections = (props) => {
+const ImageSections = React.memo(function ImageSections(props) {
     return (
-        <div>
+        <>
         { props.imageSections.map((imageItem, imageIndex) => 
             <div className="shopify-section" key={imageIndex}>
                 <div className="fifty_fifty-container">
                     <div className="fifty_fifty-wrapper">
 
-                        { imageItem.fields.imageLeft &&
+                        { imageItem.imageLeft &&
                             <div className="fifty_fifty-image_container">
-                                <CustomImage className="fifty_fifty-img ls-is-cached lazyloaded" 
-                                    src={imageItem.fields.imageUrl.fields.file.url} alt="" />
+                                <span className="banner_img-desktop"><Img fluid={imageItem.imageUrl.fluid} className="fifty_fifty-img ls-is-cached" loading="lazy" alt="" /></span>
+                                <span className="banner_img-mobile"><Img fixed={imageItem.imageUrl.fixed} className="fifty_fifty-img ls-is-cached" loading="lazy" alt="" /></span>
                             </div>
                         }
                     
                         <div className="fifty_fifty-text_container">
                             <div className="fifty_fifty-text_container_inner">
-                                <div className="fifty_fifty-title">
-                                    {imageItem.fields.title}
-                                </div>
-                                <div className="fifty_fifty-subtitle">
-                                    {imageItem.fields.description}
-                                </div>
-                                <Link to={imageItem.fields.shopLink} className="fifty_fifty-button">
-                                    SHOP NOW
+                                <h3 className="fifty_fifty-title">
+                                    {imageItem.title}
+                                </h3>
+                                <p className="fifty_fifty-subtitle">
+                                    {imageItem.description}
+                                </p>
+                                <Link to={imageItem.shopLink} className="fifty_fifty-button">
+                                    <span>SHOP NOW</span>
                                 </Link>
                             </div>
                         </div>
 
-                        { imageItem.fields.imageLeft === false &&
+                        { imageItem.imageLeft === false &&
                             <div className="fifty_fifty-image_container">
-                                <CustomImage className="fifty_fifty-img ls-is-cached lazyloaded" 
-                                    src={imageItem.fields.imageUrl.fields.file.url} alt="" />
+                                <span className="banner_img-desktop"><Img fluid={imageItem.imageUrl.fluid} loading="lazy" alt="" /></span>
+                                <span className="banner_img-mobile"><Img fixed={imageItem.imageUrl.fixed} loading="lazy" alt="" /></span>
                             </div>
                         }
                     </div>
                 </div>
             </div>
         )}
-        </div>        
+        </>        
     );
-};
+});
     
 export default ImageSections;

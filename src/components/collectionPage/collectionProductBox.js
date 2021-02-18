@@ -1,14 +1,16 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'gatsby'
+import loadable from '@loadable/component';
 import StoreContext from '../../context/store'
-import CollectionVariantSelector from './collectionVariantSelector'
-import ProductBoxGallery from './productBoxGallery'
 import ImageSpin from '../common/imageSpin'
+const CollectionVariantSelector = loadable(() => import('./collectionVariantSelector'))
+const ProductBoxGallery = loadable(() => import('./productBoxGallery'))
 
-const CollectionProductBox = props => {
+const CollectionProductBox = React.memo(function CollectionProductBox(props) {
     const context = useContext(StoreContext);
     const [varaintModalShow, setVaraintModalShow] = useState(false);
     const [showSpin, setShowSpin] = useState(false);
+    const collection = props.collection;
     const product = props.product;
     const reviewBadge = props.review ? props.review.badge : '';
     const mainOption = getMainOption()
@@ -24,6 +26,10 @@ const CollectionProductBox = props => {
     const addToBag = () => {
         if(product.variants.length === 1) {
             setShowSpin(true);
+
+            console.log("product = ", product);
+            console.log("product.variants[0].shopifyId == ", product.variants[0].shopifyId);
+
             context.addVariantToCart(product.variants[0].shopifyId, 1);
             setTimeout(showCart, 1200);
         } else {
@@ -57,14 +63,16 @@ const CollectionProductBox = props => {
         e.preventDefault();
     }
 
+    console.log("collectionProductBox collection = ", collection);
+
     return (
         
         <li className="grid__item grid__item--collection-template " key={product.title}>
             <div className="grid-view-item product-card">
                 <span className="visually-hidden product-card-title">{product.title}</span>
-                               
+ 
                 <ProductBoxGallery product={product} mainOption={mainOption} swatchColor={swatchColor} badgeStyles={props.badgeStyles} />
-                    
+                  
                 <div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
                     <Link to={`/products/${product.handle}`}>{product.title}</Link>
                 </div>
@@ -105,10 +113,10 @@ const CollectionProductBox = props => {
                         <button className="openVariantModal" onClick={addToBag}>ADD TO BAG{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }</button>
                 }
 
-                {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} showNotifyModal={props.showNotifyModal} product={product} /> )}
+                {varaintModalShow && ( <CollectionVariantSelector collection={collection} closeModal={closeCollectionModal} showNotifyModal={props.showNotifyModal} product={product} /> )}
             </div>
         </li>
     );
-};
+});
 
 export default CollectionProductBox;

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react' /* eslint-disable */
 import { graphql } from "gatsby"
-import Preloader from "../components/common/preloader"
+import loadable from '@loadable/component';
 import CollectionProductBox from "../components/collectionPage/collectionProductBox"
-import NotifyModal from '../components/collectionPage/notifyModal'
 import { client } from '../contentful'
 import '../styles/collectionPage.scss';
 import '../styles/widget.min.css';
+const NotifyModal = loadable(() => import('../components/collectionPage/notifyModal'))
 
 const collectionPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
@@ -41,7 +41,7 @@ const collectionPage = ({ data, pageContext }) => {
   
       $(allFirstImageElements[i]).on('touchstart', function () {  
         $(this).toggleClass('hover_effect');
-      });
+      }, {passive: true});
   
     }
   }
@@ -80,7 +80,6 @@ const collectionPage = ({ data, pageContext }) => {
         setNotifyModalShow(false);
     }, 500)
   }
-
 
   const displayedProducts = data.shopifyCollection.products.slice(0, displayProductCount)
   return (
@@ -126,7 +125,7 @@ const collectionPage = ({ data, pageContext }) => {
               {
                 displayedProducts.map((productItem, productIndex) => {
                   const productReview = productReviews.filter(pr => pr.handle === productItem.handle)
-                  return <CollectionProductBox product={productItem} key={productIndex} review={productReview[0]} showNotifyModal={showNotifyModal} badgeStyles={badgeStyles} />
+                  return <CollectionProductBox collection={data.shopifyCollection} product={productItem} key={productIndex} review={productReview[0]} showNotifyModal={showNotifyModal} badgeStyles={badgeStyles} />
                 })
               }
           </ul>

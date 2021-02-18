@@ -1,15 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
-// import { useStateWithCallbackLazy } from 'use-state-with-callback';
+import React, { useState, useEffect } from 'react';
 import { graphql } from 'gatsby'
-// import { customizePageData } from '../data/customizePage' 
-import Preloader from "../components/common/preloader"
-import StoreContext from '../context/store'
 import { client } from '../contentful'
-import ImageSpin from '../components/common/imageSpin'
 import '../styles/customizePage.scss'
+import AddToBagButton from '../components/customizePage/addToBagButton'
 
 const CustomizePage = ({ data }) => {
-  const context = useContext(StoreContext);
   const [customizeData, setCustomizeData] = useState({
     arrangementSelectorNumbers: [{number: '0'}, {number: '1'}, {number: '2'}, {number: '3'}, {number: '4'},
                                   {number: '5'}, {number: '6'}, {number: '7'}, {number: '8'},{number: '9'}
@@ -23,7 +18,7 @@ const CustomizePage = ({ data }) => {
     roseColor: [],
     products: []
   })
-  const [showSpin, setShowSpin] = useState(false);
+
   const collectionProducts = data.shopifyCollection.products.map(pr => {
     const productVariants = pr.variants.map(va => {
       return {
@@ -58,7 +53,9 @@ const CustomizePage = ({ data }) => {
   
   var allProducts;
   var selectedProduct;
+
   var currentStep = 0;
+
   var selections = [];
   var selectedRoses = [];
   var selectedRosesLine = [];
@@ -67,47 +64,116 @@ const CustomizePage = ({ data }) => {
 
   var isShare = false;
 
+  const orderedProducts = [
+    "Large Square",
+    "Large Round Flat",
+    "Medium Square",
+    "Medium Round Flat",
+    "Single Round",
+    "Acrylic Large Heart",
+    "Suede Large Heart",
+    "Large Round Dome",
+    "Medium Round Dome",
+    "Single Square Acrylic",
+    "Acrylic Small Square",
+    "Acrylic Medium Square",
+    "Acrylic Large Square"
+  ]
+
+  const orderedColors = [
+    "Red",
+    "Dark Red",
+    "Pink",
+    "White",
+    "Deep Purple",
+    "Galaxy",
+    "Green",
+    "Lavender",
+    "Lilac",
+    "Magenta",
+    "Neon Yellow",
+    "Orange",
+    "Peach",
+    "Royal Blue",
+    "Sky Blue",
+    "Turquoise",
+    "Yellow",
+    "Black",
+    "Coral",
+    "TieDye",
+    "Light TieDye"
+  ]
+
+  var mainImageUrl = '';
+
   useEffect(() => {
+
     async function getCustomizeData() {
       const customizeRoseData = await client.getEntries({'content_type': 'roseColor'});
       const customizeProductsData = await client.getEntries({'content_type': 'products'});
-      const roses = customizeRoseData.items.map(rd => {
+      
+      var roses = customizeRoseData.items.map(rd => {
         return {
           rose: rd.fields.rose,
           src: rd.fields.src.fields.file.url
         }
       })
 
-      const products = customizeProductsData.items.map(pd => {
+      var newRoses = [];
+
+      for (var i=0; i< orderedColors.length; i++) {
+        for (var j=0; j< roses.length;j++ ) {
+          if (orderedColors[i] === roses[j].rose) {
+            newRoses.push(roses[j]);
+          }
+        }
+      }
+      
+      var products = customizeProductsData.items.map(pd => {
         const styles = pd.fields.styles.map(ps => ps.fields);
         const boxes = pd.fields.boxes.map(pb => {
+
           return {
             title: pb.fields.title,
             src: pb.fields.src.fields.file.url
           }
         })
+
         return {
           Arrangement: pd.fields.arrangement,
           boxes: boxes,
           styles: styles,
           productId: pd.fields.productId,
-          subtext: pd.fields.subtext
+          subtext: pd.fields.subtext,
+          roses: pd.fields.roses
         }
       })
 
+      var newProducts = [];
+
+      for (i=0; i< orderedProducts.length; i++) {
+        for (j=0; j< products.length;j++ ) {
+          if (orderedProducts[i] === products[j].Arrangement) {
+            newProducts.push(products[j]);
+          }
+        }
+      }
+
       setCustomizeData({
         ...customizeData,
-        roseColor: roses,
-        products: products
+        roseColor: newRoses,
+        products: newProducts
       });
     }
+
     getCustomizeData();
   }, []);
 
   useEffect(() => {
+
     allProducts = customizeData.products;
     var arrTypes = document.getElementById("arrangementSelector-0");
-  
+
     for (var i = 0; i < allProducts.length; i++) {
       var product = allProducts[i];
   
@@ -118,7 +184,7 @@ const CustomizePage = ({ data }) => {
       arrangment.innerHTML = `<span>${product.Arrangement}</span>`;
       arrTypes.appendChild(arrangment)
     }
-  
+
     let needShowItems = document.querySelectorAll('#arrangementSelector-0 .arr-type-box');
     for (var j=0; j<needShowItems.length; j++ ) {
       needShowItems[j].addEventListener("click", function(e){
@@ -128,20 +194,23 @@ const CustomizePage = ({ data }) => {
     
     isShareLink();
     mobileRearrange()
-    window.addEventListener('scroll', stickyFunction);
+
+    window.addEventListener('scroll', stickyFunction, {passive: true});
     window.onresize = function () { mobileRearrange() }
 
     return function cleanup() {
-      window.removeEventListener('scroll', stickyFunction);
+      window.removeEventListener('scroll', stickyFunction, {passive: true});
     }
 
   }, [customizeData.products])
 
   const selectArrangement = (id) => {
+
     for (var i = 0; i < allProducts.length; i++) {
       var product = allProducts[i];
       if (product.productId === id) {
-        setSelectedProduct(product);
+
+        setSelectedProduct(product, i);
         if (!document.getElementById("arr-Type")) {
           addArrangementBlock("ARRANGEMENT", "arr-Type", product.Arrangement, product.subtext, "0")
         } else {
@@ -150,10 +219,12 @@ const CustomizePage = ({ data }) => {
         }
   
         if (document.getElementById(`${product.Arrangement}-product`)) {
-          product = JSON.parse(document.getElementById(`${product.Arrangement}-product`).dataset.json)
+          product = JSON.parse(document.getElementById(`${product.Arrangement}-product`).dataset.json);
           selectedProductBoxStock = product;
+
           if (product.featured_image) {
             document.getElementById("mainIMG").src = product.featured_image;
+            mainImageUrl = product.featured_image;
           }
         }
   
@@ -175,15 +246,23 @@ const CustomizePage = ({ data }) => {
     }
   }
 
-  // function scanJSONForSoldOut(json) {
-
-  // }
-
-  function setAllProduct() {
-    allProducts = customizeData.products;
+  function getCurrentStep() {
+    return currentStep;
   }
 
-  function setSelectedProduct(product) {
+  function getCollectionProducts () {
+    return collectionProducts;
+  }
+
+  function getSelections () {
+    return selections;
+  }
+
+  function getMainImageUrl () {
+    return mainImageUrl;
+  }
+
+  function setSelectedProduct(product, id) {
     selectedProduct = product;
   }
 
@@ -193,6 +272,7 @@ const CustomizePage = ({ data }) => {
   }
 
   function isShareLink(){
+
     if (window.location.href.includes("&")) {
       isShare = true;
       var point = window.location.href.toString().split("?")[1]
@@ -254,11 +334,14 @@ const CustomizePage = ({ data }) => {
           eventFire(document.getElementById('step-next'), 'click')
       }
     } else {
-      eventFire(document.getElementById("arrangementSelector-0").firstElementChild, 'click')
-    }
+      if (document.getElementById("arrangementSelector-0")) {
+        eventFire(document.getElementById("arrangementSelector-0").firstElementChild, 'click')
+      }
+    }    
   }
 
   function mobileRearrange() {
+
     if (window.innerWidth <= 700) {
 //      document.getElementById("col-left").insertAfter(document.getElementById("col-right"), null);
     } else {
@@ -266,19 +349,32 @@ const CustomizePage = ({ data }) => {
     }
   }
 
-  function stickyFunction(){
+  function stickyFunction(){  
+    // var header = document.getElementsByClassName("arrangement-choices_container-mobile")[0];
+    // var sticky = header.offsetTop;
+  
+    // if (window.pageYOffset > sticky && !(document.querySelector('#mobile-panel').classList.contains("sticky"))) {
+    //   header.style.display = "block";
+    //   header.classList.add("sticky");
 
+    // } else if (window.pageYOffset <= sticky + 100 && document.querySelector('#mobile-panel').classList.contains("sticky")) {
+    //   header.classList.remove("sticky");
+    //   header.style.height = "auto";
+    // }
   }
   
   function nextStep() {
+
     currentStep = currentStep + 1;
   
     if (document.getElementById(`arrangementSelector-${currentStep}`)) {
       document.getElementById(`arrangementSelector-${currentStep}`).style.display = "block"
     }
+
   }
 
   function addArrangementBlock(heading, subtype, subheading, tagline, step) {
+
     var container = document.getElementById("col-left");
     var statusBlock = document.createElement("div");
     statusBlock.setAttribute("class", `statusBox`)
@@ -298,9 +394,11 @@ const CustomizePage = ({ data }) => {
         revert(parseInt(this.getAttribute('data-step')));
       });
     }
+
   }
   
   function revert(step) {
+
     document.getElementById("addToBAG").style.display = "none"
     document.getElementsByClassName("step-next")[0].style.display = "block"
   
@@ -321,9 +419,11 @@ const CustomizePage = ({ data }) => {
   
     document.getElementById("arrangementSelector_title").innerHTML = title
     document.getElementById(`arrangementSelector-${step}`).style.display = "block";
+
   }
 
   function setBox(title, src, element) {
+
     var images = document.getElementsByClassName("box-contents")[0].getElementsByClassName("box");
   
     for (var i = 0; i < images.length; i++) {
@@ -332,8 +432,12 @@ const CustomizePage = ({ data }) => {
   
     element.style.boxShadow = "0px 0px 0px 4px rgba(0,0,0,1)"
   
+    document.getElementById("mobile-arr-box-color-span").innerText = title;
+
     document.getElementById("mainIMG").src = src;
-  
+    mainImageUrl = src;
+    console.log("mainImageUrl === ", mainImageUrl);
+
     if (!document.getElementById("BOX-Type")) {
       addArrangementBlock("BOX", "BOX-Type", title, "", `${currentStep}`)
     } else {
@@ -343,10 +447,13 @@ const CustomizePage = ({ data }) => {
     addSelection(currentStep, title)
     getFirstVariantBasePrice();
     document.getElementById("mobile-arr-type").innerText = selections[0]
+
   }
   
   function setStyle(title, style) {
-  
+
+    console.log("setStyle,,,, ",title )
+
     if (!document.getElementById("Style-Type")) {
       addArrangementBlock("Style", "Style-Type", title, "", `${currentStep}`)
     } else {
@@ -383,26 +490,31 @@ const CustomizePage = ({ data }) => {
   }
 
   function setStep(step) {
+
     currentStep = Number(step);
+
   }
 
   function getFirstVariantBasePrice() {
+
     var json = JSON.parse(document.getElementById(`${selectedProduct.Arrangement}`).dataset.json)
   
     for (var i = 0; i < json.length; i++) {
       if (json[i].title === `${selections[1]} / Box`) {
         if (!document.getElementById("price-Type")) {
-          addArrangementBlock("Price", "price-Type", `$${json[i].price / 100}`, "", currentStep)
+          addArrangementBlock("Price", "price-Type", `$${json[i].price}`, "", currentStep)
         } else {
-          document.getElementById("price-Type").innerText = `$${json[i].price / 100}`;
+          document.getElementById("price-Type").innerText = `$${json[i].price}`;
   
         }
-        document.getElementById("mobile-arr-price-span").innerText = `$${json[i].price / 100}`
+        document.getElementById("mobile-arr-price-span").innerText = `$${json[i].price}`
       }
     }
+
   }
 
   function updatePrice() {
+
     var json = JSON.parse(document.getElementById(`${selectedProduct.Arrangement}`).dataset.json);
     var choice = [];
     for (var i = 1; i < selections.length; i++) {
@@ -414,22 +526,26 @@ const CustomizePage = ({ data }) => {
       if (choice.join(",") === element.title.replace(" \/ ", ",")) {
   
         if (!document.getElementById("price-Type")) {
-          addArrangementBlock("Price", "price-Type", `$${element.price / 100}`, "", currentStep)
+          addArrangementBlock("Price", "price-Type", `$${element.price}`, "", currentStep)
         } else {
-          document.getElementById("price-Type").innerText = `$${element.price / 100}`;
+          document.getElementById("price-Type").innerText = `$${element.price}`;
   
         }
-        document.getElementById("mobile-arr-price-span").innerText = `$${element.price / 100}`
+        document.getElementById("mobile-arr-price-span").innerText = `$${element.price}`
         break;
       }
     }
+
   }
 
   function addSelection(position, data) {
+
     selections[position] = data
+
   }
 
   function eventFire(el, etype) {
+
     if (el.fireEvent) {
       el.fireEvent('on' + etype);
     } else {
@@ -437,16 +553,26 @@ const CustomizePage = ({ data }) => {
       evObj.initEvent(etype, true, false);
       el.dispatchEvent(evObj);
     }
+
   }
 
   function getMainImage() {
-    if (document.getElementById("Style-Type").innerText !== "Letters" || document.getElementById("Style-Type").innerText !== "Numbers") {
+
+    console.log("document.getElementById('Style-Type').innerText == ", document.getElementById("Style-Type").innerText);
+    if (document.getElementById("Style-Type").innerText !== "Letters" 
+      || document.getElementById("Style-Type").innerText !== "Numbers" ) {
       resetNumbersAndLetter();
       var xhr = new XMLHttpRequest();
   
+      if (document.getElementById("Style-Type").innerText === "Solid")
+        return;
+        
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === 4) {
-          document.getElementById("mainIMG").src = `${this.responseText}`
+          document.getElementById("mainIMG").src = `${this.responseText}`;
+          mainImageUrl = `${this.responseText}`;
+          console.log("this === ", this);
+          console.log("mainImageUrl === ", mainImageUrl);
         }
       });
   
@@ -493,9 +619,11 @@ const CustomizePage = ({ data }) => {
         xhr.send();
       }
     }
+
   }
   
   function resetNumbersAndLetter() {
+
     var styles = document.getElementsByClassName("numberChoice");
   
     for (var i = 0; i < styles.length; i++) {
@@ -509,6 +637,7 @@ const CustomizePage = ({ data }) => {
       Letterstyles[j].style.background = "#ffffff"
       Letterstyles[j].firstElementChild.style.color = "#000000"
     }
+
   }
 
   const handleKeyDown = (e) => {
@@ -523,13 +652,16 @@ const CustomizePage = ({ data }) => {
   }
 
   function movePrice() {
+
     if (document.getElementById("price-Type")) {
       var price = document.getElementById("price-Type").parentElement;
       document.getElementById("col-left").appendChild(price);
     }
+
   }
 
   function generateBoxSelector() {
+
     var container = document.createElement("div");
     container.setAttribute("id", `arrangementSelector-${currentStep}`);
 
@@ -538,6 +670,7 @@ const CustomizePage = ({ data }) => {
     subDiv.setAttribute("style", "margin-top: 10px;")
   
     var boxes = selectedProduct["boxes"];
+
     for (var i = 0; i < boxes.length; i++) {
       const boxTitle = boxes[i].title;
       let result = selectedProductBoxStock.variants.filter(variant => variant.option1 === boxTitle)[0];
@@ -545,12 +678,12 @@ const CustomizePage = ({ data }) => {
   
       box.src = boxes[i].src;
       box.setAttribute('title', `${boxes[i].title}`)
-      box.setAttribute('id', `${boxes[i].title.replace(" ", "-")}`)
+      box.setAttribute('id', `${boxes[i].title.replace(" ", "-")}`);
+
       if (result.available !== false) {
         box.addEventListener("click", function(e){
           setBox(this.getAttribute('title'), this.getAttribute('src') ,this);
         });
-
         box.setAttribute("class", "box");
       } else {
         box.setAttribute("class", "boxSoldOut");
@@ -573,9 +706,11 @@ const CustomizePage = ({ data }) => {
       eventFire(firstAvailable, 'click')
       firstAvailable.style.boxShadow = "#000000 0px 0px 0px 4px"
     }
+
   }
 
   function generateStyleSelector() {
+
     var container = document.createElement("div");
   
     container.setAttribute("id", "arrangementSelector-" + currentStep);
@@ -626,9 +761,24 @@ const CustomizePage = ({ data }) => {
         eventFire(document.getElementsByClassName("style-container")[0].firstElementChild, 'click')
       }
     }
+
+  }
+
+  function isShowRoseColor(title) {
+
+    var productRoses = selectedProduct["roses"];
+
+    for (var i = 0; i< productRoses.length; i++ ) {
+      if (productRoses[i].fields.title === title && productRoses[i].fields.soldOut === false) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   function generateRosesSelector() {
+    
     if (document.getElementById("arrangementSelector-" + currentStep)) {
       document.getElementById("arrangementSelector-" + currentStep).remove();
       // resetRoseSelections()
@@ -644,6 +794,7 @@ const CustomizePage = ({ data }) => {
   
     var roses =  customizeData.roseColor;// selectedProduct["roses"];
     var styles = selectedProduct["styles"];
+
   
     for (var k = 0; k < styles.length; k++) {
       if (document.getElementById("Style-Type").innerText === styles[k].style) {
@@ -652,7 +803,7 @@ const CustomizePage = ({ data }) => {
     }
   
     var rosesCount = selectedStyle.style === 'Solid' ? 1 : 2;
-
+    
     for (var i = 0; i < rosesCount; i++) {
       var header = document.createElement("div")
       header.setAttribute("class", "rosechoice-header")
@@ -663,7 +814,8 @@ const CustomizePage = ({ data }) => {
       roseblock.setAttribute("id", `roseblock-${i}`)
   
       for (var j = 0; j < roses.length; j++) {
-//      if (roses[j].soldOut !== true) {  // need to implement
+
+        if (isShowRoseColor(roses[j].rose)) {
           var rose = document.createElement("img");
           rose.setAttribute("class", "round");
           rose.setAttribute("id", roses[j].rose + "-" + i)
@@ -681,7 +833,7 @@ const CustomizePage = ({ data }) => {
           } else {
             roseblock.appendChild(rose)
           }
-//      }
+        }
       }
       subDiv.appendChild(roseblock)
     }
@@ -715,6 +867,7 @@ const CustomizePage = ({ data }) => {
         }
       }
     }
+
   }
 
   function addRoseSelectionLine(position, data) {
@@ -725,20 +878,35 @@ const CustomizePage = ({ data }) => {
     selectedRoses[position] = data
   }
 
-  function isProductNotUsingStencil(productId) {
-    if (document.querySelector("#excluded_products")) {
-      let excludedProducts = JSON.parse(document.querySelector("#excluded_products").dataset.ids);
-      for (let i = 0; i < excludedProducts.length; i++) {
-        if (excludedProducts[i] === productId) {
-          return true;
-        }
-      }
-    }
-    return false;
-  }
+  // function isProductNotUsingStencil(productId) {
+  //   if (document.querySelector("#excluded_products")) {
+  //     let excludedProducts = JSON.parse(document.querySelector("#excluded_products").dataset.ids);
+  //     for (let i = 0; i < excludedProducts.length; i++) {
+  //       if (excludedProducts[i] === productId) {
+  //         return true;
+  //       }
+  //     }
+  //   }
+  //   return false;
+  // }
   
+  function isProductNotUsingStencil(productHandle, style) {
+
+    if (document.querySelector("#excluded_products")) {
+
+      let excludedProducts = document.querySelector("#excluded_products").dataset.ids;
+      let array = (new Function(`return ${excludedProducts.slice(0, -2) + "]"};`)());
+
+      const result = array.filter(excluded => excluded === `${productHandle}-${style}`);
+      return result.length === 0 ? false : true;
+    } else {
+      return false;
+    }
+
+  }
 
   function setRose(type, element, layer) {
+
     var images = document.getElementById(`roseblock-${layer}`).getElementsByClassName("round");
   
     for (var i = 0; i < images.length; i++) {
@@ -751,7 +919,6 @@ const CustomizePage = ({ data }) => {
 
     var newLayer = layer + 1;
 
-
     document.getElementById(`rose-mobile-${newLayer}`).innerText = type;
     
     let roseType = 1;
@@ -760,32 +927,44 @@ const CustomizePage = ({ data }) => {
     }
 
     if (roseType === selectedRoses.length) {
-  
+
       var choices = selectedRoses.join(",");
   
-      let productId = Number(document.getElementById(document.getElementById("arr-Type").innerHTML).classList[0].split("-")[0]);
+      let StyleType = document.getElementById("Style-Type").innerHTML;
+
+//      let productId = Number(document.getElementById(document.getElementById("arr-Type").innerHTML).classList[0].split("-")[0]);
+      let productHandle = document.getElementById("arr-Type").innerHTML;
+
       //Check if product is using drawn stencil
-      let usingStencil = isProductNotUsingStencil(productId);
+      let usingStencil = isProductNotUsingStencil(productHandle ,StyleType);
       
       if(usingStencil === true){
         let arrangement_selected = document.getElementById("arr-Type").innerHTML.replaceAll(' ', "_");
         let box_selected = document.getElementById('BOX-Type').innerHTML.replaceAll(' ', "_");
         let style_selected = document.getElementById('Style-Type').innerHTML.replaceAll(' ', "_");
-        let imageToDisplay = `${arrangement_selected}-${box_selected}-${style_selected}-${choices}`;
-        
-        document.getElementById("mainIMG").src = `https://ik.imagekit.io/vajwlqjsrw/customizer-images/${imageToDisplay}.jpg`
-      }else{
+        let imageToDisplay = `${arrangement_selected}-${box_selected}-${style_selected}-${choices.split(" ").join("_")}`;
+
+        document.getElementById("mainIMG").src = `https://ik.imagekit.io/vajwlqjsrw/customizer-images/${imageToDisplay}.png`;
+        mainImageUrl = `https://ik.imagekit.io/vajwlqjsrw/customizer-images/${imageToDisplay}.png`;
+        console.log("mainImageUrl === ", mainImageUrl);
+      } 
+      else 
+      {
         var xhr = new XMLHttpRequest();
   
         xhr.addEventListener("readystatechange", function () {
           if (this.readyState === 4) {
-            document.getElementById("mainIMG").src = `${this.responseText}`
+            document.getElementById("mainIMG").src = `${this.responseText}`;
+
+            mainImageUrl = `${this.responseText}`;
+            console.log("mainImageUrl === ", mainImageUrl);
           }
         });
         if (!isShare) {
           xhr.open("GET", `https://mediacarryapi.com/dor/generator?store=dose-roses.com&product=${selectedProduct.Arrangement}&style=${document.getElementById("Style-Type").innerText}&data=${choices}`);
           xhr.send();
         }
+
       }
   
       if (!document.getElementById("Rose-Type")) {
@@ -801,20 +980,26 @@ const CustomizePage = ({ data }) => {
         ChangeUrl("Arrangement", window.location.origin + "/pages/customize?" + selectString.split(" ").join("-"))
       }  
     }
+
   }
 
   const maxOptions = 3;
   
   function resetRoseSelections() {
+
     selectedRosesLine = []
     selectedRoses = [];
+
   }
 
   function setSelectedStyle(style) {
+
     selectedStyle = style;
+
   }
 
   function hasStyle(StyleName) {
+
     var styles = selectedProduct.styles;
     var contains = false;
     for (var i = 0; i < styles.length; i++) {
@@ -833,6 +1018,7 @@ const CustomizePage = ({ data }) => {
   }
 
   function ChangeUrl(title, url) {
+
     if (typeof (window.history.pushState) != "undefined") {
       var obj = { Title: title, Url: url };
       window.history.pushState(obj, obj.Title, obj.Url);
@@ -842,6 +1028,7 @@ const CustomizePage = ({ data }) => {
   }
 
   function resetSelections() {
+
     selections = [];
     var i = 1;
     do {
@@ -853,6 +1040,7 @@ const CustomizePage = ({ data }) => {
   }
 
   const previous = () => {
+
     if (currentStep - 1 !== -1) {
       if (currentStep - 1 === maxOptions) {
         document.getElementById("addToBAG").style.display = "none"
@@ -863,6 +1051,10 @@ const CustomizePage = ({ data }) => {
   }
 
   const next = () => {
+
+    if (!selectedProduct)
+      return false;
+
     if (selections[0]) {
       if (!selections[0].includes(selectedProduct.Arrangement)) {
         resetSelections();
@@ -937,43 +1129,12 @@ const CustomizePage = ({ data }) => {
     }
   }
 
-  const AddToBag = () => {
-    const bagProduct = collectionProducts.filter(cp => cp.title === selections[0])
-    // console.log('selections: ', selections)
-    const bagVariants = bagProduct[0].variants
-    let bagVariant = null
-    for(var i = 0; i < bagVariants.length; i++) {
-      if(bagVariants[i].options[0] === selections[1] && bagVariants[i].options[1] === selections[2]) {
-        bagVariant = bagVariants[i]
-        break
-      }
-    }
-
-    setShowSpin(true);
-    context.addVariantToCart(bagVariant.id, 1, [
-      {key: 'Rose Color', value: selections[3]},
-      {key: 'Box', value: selections[1]},
-      {key: 'Style', value: selections[2]},
-      {key: 'linkImage', value: 'https://mediacarryapi.com/customizer/assets/' + selections[0] + '~' + selections[2] + '~' + selections[3].replace('+', ',') + '.png'}
-    ])
-    setTimeout(openCartDrawer, 1200);
-  }
-
-  function openCartDrawer() {
-    setShowSpin(false);
-    document.querySelector(".js-ajax-cart-drawer").classList.add('is-open');
-    document.getElementsByTagName("html")[0].classList.add("cart-drawer-open");
-    document.querySelector(".js-ajax-cart-overlay").classList.add('is-open');
-    document.documentElement.classList.add('is-locked');
-  }
-
   const hideNumbers = (e) => {
     e.preventDefault();
     
     document.getElementById(`arrangementSelector-${currentStep}`).style.display = "block";
     document.getElementById(`arrangementSelector-Numbers`).style.display = "none";
   }
- 
 
   const setLetterStyle = (e, title) => {
     e.preventDefault();
@@ -1020,8 +1181,6 @@ const CustomizePage = ({ data }) => {
   
     }
   
-    console.log("title = ", title);
-
     const selectedItem = document.querySelector(`#${title}.numberChoice`);
 
     if (selectedItem) {
@@ -1029,7 +1188,7 @@ const CustomizePage = ({ data }) => {
       selectedItem.firstElementChild.style.color = "#ffffff"
     }
 
-    updatePrice()
+    updatePrice();
   }
 
 
@@ -1037,7 +1196,24 @@ const CustomizePage = ({ data }) => {
     <>
       {/* <Preloader /> */}
       <div className="container">
-      
+
+      <div id="shopify-section-customizer-schema" className="shopify-section">
+        <span id="excluded_products" 
+          data-ids="[
+            'Single Round-Solid',
+            'Acrylic Large Square-Solid',
+            'Acrylic Small Square-Solid',
+            'Acrylic Medium Square-Solid',
+            'Acrylic Large Heart-Solid',
+            'Suede Large Heart-Solid',
+            'Medium Square-Solid',
+            'Large Square-Solid',
+            'Large Round Flat-Solid',
+            'Medium Round Flat-Solid',
+            'Large Round Dome-Solid',            
+            'Medium Round Dome-Solid',]"></span>
+      </div>
+
         {
           collectionProducts.map((prod, prodIndex) => {
             return (
@@ -1066,6 +1242,14 @@ const CustomizePage = ({ data }) => {
               </div>
               <div className="arrangement_row_right" id="arr-price-mobile">
                   <span id="mobile-arr-price-span">$-</span>
+              </div>
+            </div>
+            <div className="arrangement-choices_row">
+              <div className="arrangement_row_left">
+                  <span id="mobile-box-color">Box Color</span>
+              </div>
+              <div className="arrangement_row_right">
+                  <span id="mobile-arr-box-color-span" style={{ display: 'block' }}></span>
               </div>
             </div>
             <div className="arrangement-choices_row">
@@ -1143,9 +1327,11 @@ const CustomizePage = ({ data }) => {
               <div className="step-wrapper">
                   <div className="step-previous" onClick={previous} onKeyDown={handleKeyDown} role="presentation">Back</div>
                   <div className="step-next" id="step-next" onClick={next} onKeyDown={handleKeyDown} role="presentation">Next</div>
-                  <div style={{display:'none'}} className="step-next" id="addToBAG" onClick={AddToBag} onKeyDown={handleKeyDown} role="presentation">
-                    Add To Bag{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }
-                  </div>
+                  <AddToBagButton 
+                    getCurrentStep={getCurrentStep} 
+                    getCollectionProducts={getCollectionProducts}
+                    getSelections={getSelections} 
+                    getMainImageUrl={getMainImageUrl}/>
               </div>
             </div>
           </div>

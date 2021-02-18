@@ -1,24 +1,22 @@
 import "../../resources/css/base.scss";
-import "../../resources/css/stampedio.css";
 import "../../resources/css/preloader.css";
 import "../styles/instagram.css";
-import "../styles/header.css";
+import "../styles/header.scss";
 
-import React, { useState } from 'react';
-import { StaticQuery, graphql } from 'gatsby'
+import React from 'react';
+import loadable from '@loadable/component';
+import { StaticQuery, graphql } from 'gatsby';
 import {
 	QueryClient,
 	QueryClientProvider,
-} from 'react-query'
-import Header from "../components/common/header/header"
-import Footer from "../components/common/footer"
-import Instagram from "../components/common/instagram"
-//import SubscribeSection from "../components/common/subscribeSection"
+} from 'react-query';
 import Provider from "../context/provider"
-import AjaxCartCustom from "../components/common/ajaxCartCustom"
-import Preloader from "../components/common/preloader"
+const Header = loadable(() => import('../components/common/header/header'));
+const Footer = loadable(() => import('../components/common/footer'));
+const Instagram = loadable(() => import('../components/common/instagram'));
+const AjaxCartCustom = loadable(() => import('../components/common/ajaxCartCustom'));
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 const Layout = ({ path, children }) => {
 	// const [allHidden, setAllHidden] = useState(true)
@@ -47,6 +45,74 @@ const Layout = ({ path, children }) => {
 									price
 								}
 							}
+							allContentfulInstagramSettings {
+								nodes {
+									title
+								}
+							}
+							allContentfulFooterMenuItem {
+								edges {
+									node {
+										handle
+										title
+									}
+								}
+							}
+							allContentfulMobileHeaderMenu {
+								edges {
+									node {
+										mobileHeaderMenuItem {
+											hasChildren
+											title
+											url
+											image {
+												fluid (maxWidth: 450) {
+													srcWebp
+												}
+											}
+											mobileHeaderMenuItemChild {
+												title
+												url
+												parentText
+												image {
+													fluid (maxWidth: 450) {
+														srcWebp
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+							allContentfulAnnounceTextItem {
+								edges {
+									node {
+										fontSize
+										description
+									}
+								}
+							}
+							allContentfulCardSliderItem {
+								edges {
+									node {
+										href
+										imageUrl {
+											fluid (maxWidth: 700) {
+												srcWebp
+											}
+										}
+									}
+								}
+							}
+							allContentfulDesktopHeaderMenuItem {
+								edges {
+									node {
+										id
+										link
+										title
+									}
+								}
+							}
 						}
 					`}
 					render={data => (
@@ -55,21 +121,22 @@ const Layout = ({ path, children }) => {
 							{/* <div className={`scrollPreventer ${hideClass}`}> */}
 							<div className="scrollPreventer">
 								<AjaxCartCustom giftVariant={data.giftProduct.variants[0]} rushVariant={data.rushProduct.variants[0]} />
-								<Header path={path} />
+								<Header
+									path={path}
+									mobileHeaderMenu={data.allContentfulMobileHeaderMenu.edges[0].node.mobileHeaderMenuItem}
+									announceList={data.allContentfulAnnounceTextItem.edges}
+									cardList={data.allContentfulCardSliderItem.edges}
+									desktopHeader={data.allContentfulDesktopHeaderMenuItem.edges}
+								/>
 								<div className="page-container drawer-page-content" id="PageContainer">
 									{children}
 									<div className="shopify-section index-section index-section--flush">
 										{ path.includes('/products/') || path.includes('/cart') ? 
 												null : 
-												<Instagram />
+												<Instagram title={data.allContentfulInstagramSettings.nodes[0].title} />
 										}
-										{/* {
-											path.includes('/cart') ? 
-												null :
-												<SubscribeSection />
-										} */}
 									</div>
-									<Footer />
+									<Footer menuList={data.allContentfulFooterMenuItem.edges} />
 								</div>
 							</div>
 						</>

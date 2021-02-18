@@ -1,116 +1,126 @@
-import PropTypes from "prop-types"
 import React, { useContext, useState, useEffect } from 'react'
+import loadable from '@loadable/component';
 import { Link, navigate } from 'gatsby'
 import StoreContext from '../../../context/store'
 import { ReactSVG } from 'react-svg';
 import LogoIcon from '../../../images/icon-logo.svg';
-import HamburgerIcon from '../../../images/icon-hamburger.svg';
-import CloseIcon from '../../../images/icon-close.svg';
-import { LazyLoadImage } from 'react-lazy-load-image-component'
 import SearchHeaderIcon from '../../../images/icon-search-header.svg';
 import LoginHeaderIcon from '../../../images/icon-login-header.svg';
 import MessageIcon from '../../../images/icon-message.svg';
 import CartHeaderIcon from '../../../images/icon-cart-header.svg';
-import { client } from '../../../contentful'
+import MyImage from '../lazyImage'
 
-import SearchDrawer from './searchDrawer';
-import SiteNav from './siteNav';
-import AnnoucmentBar from './annoucmentBar';
-import CardSlider from './cardSlider';
-import CustomImage from '../image'
+const CardSlider = loadable(() => import('./cardSlider'));
+const SearchDrawer = loadable(() => import('./searchDrawer'));
+const SiteNav = loadable(() => import('./siteNav'));
+const AnnoucmentBar = loadable(() => import('./annoucmentBar'));
 
 let runBannerAnimation = false;
-
 let slideIndex = 0;
 let swipedLast = false;
-
 let slides = null;
 let bannerContainer = null;
-
 var xDown = null;
 var yDown = null;
 
 const countQuantity = lineItems => {
   let quantity = 0
-
   lineItems.forEach(item => {
     quantity = quantity + item.quantity
   });
   return quantity
 }
 
-const Header = ({ path }) => {
+const Header = React.memo(function Header(props) {
   const context = useContext(StoreContext)
   const { checkout } = context.store
   const [quantity, setQuantity] = useState(countQuantity(checkout ? checkout.lineItems : []))
-  // const [modal, setModal] = useState(false)
   const [ searchShow, setSearchShow ] = useState(false);
-  const [mobileHeaderMenu, setMobileHeaderMenu] = useState([]);
-  
+  const mobileHeaderMenu = props.mobileHeaderMenu;
+  const announceList = props.announceList;
+  const cardList = props.cardList;
+  const desktopHeader = props.desktopHeader;
+  let mobileMenuStep = 0;
+
   useEffect(() => {
-    async function getMobileMenuData() {
-      const mobileMenuData = await client.getEntries({'content_type': 'mobileHeaderMenu'});
-      const mobileMenuChildData = await client.getEntries({'content_type': 'mobileHeaderMenuItemChild'});
-      let mobileMenuList = mobileMenuData.items[0].fields.mobileHeaderMenuItem
-      for(let i=0; i<mobileMenuList.length; i++) {
-        if(mobileMenuList[i].fields.hasChildren) {
-          const properMenuChild = mobileMenuChildData.items.filter(menuChild => menuChild.fields.parent === mobileMenuList[i].fields.title);
-          mobileMenuList[i].fields.mobileHeaderMenuItemChild = properMenuChild;
-        }
-      }
-      setMobileHeaderMenu(mobileMenuList);
-      initializeHeader();
-    }
-    getMobileMenuData();
+    initializeHeader();
   }, []);
 
   useEffect(() => {
     setQuantity(countQuantity(checkout ? checkout.lineItems : []));
   }, [checkout]);
 
-  const showSideNav = (e) => {
-    e.preventDefault();
+  function changehamburgMenuIcon() {
+    let mobileToggleBtn = document.getElementById('mobile-mega-toggle');
 
-    let modal = document.getElementById('sidenav');
-    let openIcon = document.getElementById('mobile-nav--open');
-    let closeIcon = document.getElementById('hideSideNav');
-    closeIcon.style.display = "flex";
-    closeIcon.style.justifyContent = "center";
-    modal.style.display = "flex";
-    
-    document.getElementsByTagName("html")[0].classList.add("side-menu-scroll")
-    openIcon.setAttribute("style", "display: none !important;")
+    mobileToggleBtn.classList.remove("active");
+    mobileToggleBtn.classList.remove("closeBtn");  
+    mobileToggleBtn.classList.remove("backBtn");  
 
-    initiateBannerSlider();
+    if (mobileMenuStep === 0) { // not open step
+
+    } else if (mobileMenuStep === 1) {  // menu opened
+
+      mobileToggleBtn.classList.add("active");
+      mobileToggleBtn.classList.remove("backBtn");  
+      mobileToggleBtn.classList.add("closeBtn");  
+
+    } else if (mobileMenuStep === 2) {   // child menu opened
+
+      mobileToggleBtn.classList.add("active");
+      mobileToggleBtn.classList.add("backBtn");
+    }
   }
   
   const hideSideNav = (e) => {
     e.preventDefault();
-    nextSlide();
+
+    mobileMenuStep = 0;
+    changehamburgMenuIcon();
+
+    hideMobileMenuNav();
   }
 
-  function nextSlide() {
-    let modal = document.getElementById('sidenav');
-    let openIcon = document.getElementById('mobile-nav--open');
-    let closeIcon = document.getElementById('hideSideNav');
-    let backIcon = document.getElementById('goBackNavMenu');
+  const clickToggleBtn = (e) => {
+    e.preventDefault();
 
-    openIcon.classList.remove("mobile-nav--close");
-    openIcon.classList.add("mobile-nav--open");
-    closeIcon.style.display = "none";
-    //openIcon.style.display = "flex";
-    modal.style.display = "none";
+    if (mobileMenuStep === 0) {
+      mobileMenuStep = 1;
+    }
+    else if (mobileMenuStep === 1) {
+      mobileMenuStep = 0;
+    }
+    else if (mobileMenuStep === 2) {
+      mobileMenuStep = 1;
+    }
+    
+    changehamburgMenuIcon();
+
+    if (mobileMenuStep === 0) {
+      hideMobileMenuNav();
+    }
+    else if (mobileMenuStep === 1) {
+      showDefaultMenuItems();
+
+      document.getElementById('sidenav').style.display = "flex";
+      document.getElementsByTagName("html")[0].classList.add("side-menu-scroll")
+
+      initiateBannerSlider();
+    }
+    else if (mobileMenuStep === 2) {
+    }
+  }
+
+  function hideMobileMenuNav() {
+    document.getElementById('sidenav').style.display = "none";
+
     document.getElementsByTagName("html")[0].classList.remove("side-menu-scroll")
-    openIcon.setAttribute("style", "display: flex !important;")
-
-    backIcon.style.display = "none";
   }
 
   const showSearchBar = (e) => {
     e.preventDefault();
     setSearchShow(true)
   }
-
 
   const hideSearch = () => {
     setSearchShow(false)
@@ -122,8 +132,8 @@ const Header = ({ path }) => {
     
       slides = document.getElementsByClassName("card-item");
       bannerContainer = document.getElementById("card-slider-container");
-      bannerContainer.addEventListener('touchstart', handleTouchStart, false);
-      bannerContainer.addEventListener('touchmove', handleTouchMove, false);
+      bannerContainer.addEventListener('touchstart', handleTouchStart, {passive: true});
+      bannerContainer.addEventListener('touchmove', handleTouchMove, {passive: true});
     
       showBanners();
     }
@@ -131,6 +141,9 @@ const Header = ({ path }) => {
 
   const showChildCollection = (e, id) => {
     e.preventDefault();
+
+    mobileMenuStep = 2;
+    changehamburgMenuIcon();
 
     //------------------- hide
     let allMenuItems = document.getElementsByClassName("menuItem");
@@ -151,37 +164,18 @@ const Header = ({ path }) => {
     for (var j=0; j<needChildMenuLink.length; j++) {
       needChildMenuLink[j].style.display = 'flex';
     }
-    
-    showBackArrowButton();
   }
 
   const menuClickHandler = (e, hasChild, title) => {
     if(hasChild) {
       showChildCollection(e, title)
     } else {
-      hideSideNav(e)
-      // console.log('target: ', e.target.closest('a').dataset.url)
-      navigate(e.target.closest('a').dataset.url)
+      hideSideNav(e);
+      navigate(e.target.closest('a').dataset.url);
     }
   }
 
-  function showBackArrowButton() {
-    // let modal = document.getElementById('sidenav');
-    let openIcon = document.getElementById('mobile-nav--open');
-    let closeIcon = document.getElementById('hideSideNav');
-    let backIcon = document.getElementById('goBackNavMenu')
-
-    openIcon.classList.remove("mobile-nav--close");
-    openIcon.classList.add("mobile-nav--open");
-    closeIcon.style.display = "none";
-    backIcon.style.display = "flex";
-  }
-
-  function showDefaultMenuItems (e) {
-    e.preventDefault();
-
-    document.querySelector('#hideSideNav').style.display = "flex";
-    document.querySelector('#goBackNavMenu').style.display = "none";
+  function showDefaultMenuItems () {
 
     // ---------- hide
     let allItems = document.getElementsByClassName("sidenav-item_inner");
@@ -305,7 +299,7 @@ const Header = ({ path }) => {
     let header = document.querySelector(".stickyHeader");
     let prevScrollpos = window.pageYOffset;
   
-    window.onscroll = function () {
+    window.addEventListener('scroll', function() {
       let currentScrollpos = window.pageYOffset;
   
       if (prevScrollpos < currentScrollpos) {
@@ -319,7 +313,7 @@ const Header = ({ path }) => {
         header.style.top = "0";
       }
       prevScrollpos = currentScrollpos;
-    }
+    }, { passive: true});
   }
 
   const openSlideCart = (e) => {
@@ -352,24 +346,19 @@ const Header = ({ path }) => {
                 ) : null
             }
             <div className="main-header site-header__mobile-nav">
-              <SiteNav />
+              <SiteNav desktopHeader={desktopHeader} />
               
-              <a href="/fakeUrl" onClick={hideSideNav} id="hideSideNav" key="hidesidenav">
-                <ReactSVG src={CloseIcon} />
-              </a>
-
-              <button onClick={showSideNav} type="button" id="mobile-nav--open" 
-                className="btn--link site-header__icon site-header__menu js-mobile-nav-toggle" 
-                aria-controls="MobileNav" aria-expanded="false" aria-label="Menu"
-              >          
-                <ReactSVG src={HamburgerIcon} />
+              <button className="header-drawer-toggle" id="mobile-mega-toggle" onClick={clickToggleBtn} 
+                aria-controls="MobileNav" aria-expanded="false" aria-label="Menu">
+                <span className="header-drawer-toggle__icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Navigation menu</span>
               </button>
 
-              <a href="/fakeUrl" id="goBackNavMenu" 
+              {/* <a href="/fakeUrl" id="goBackNavMenu" 
                 style={{ fontFamily: "monospace", cursor: "pointer" }} 
                 onClick={showDefaultMenuItems} key="gobacknavmenu">
                 &lt;
-              </a>
+              </a> */}
 
               <div className="header_logo-container" key="logocontainer">
                 <h1 className="h2 site-header__logo">
@@ -415,10 +404,8 @@ const Header = ({ path }) => {
                   </div>
                 </div>
               </div>
-            </div>
-                     
-            <AnnoucmentBar />
-
+            </div>   
+            <AnnoucmentBar announceList={announceList} />
           </header>
           <div id="sidenav" className="sidenav-outer">
             <div className="sidenav-modal">
@@ -427,41 +414,41 @@ const Header = ({ path }) => {
               </div>
 
               <div className="sidenav-item_outer" key="sidenav-item_outer">
-                <CardSlider key="card-slider" />
+                <CardSlider key="card-slider" cardList={cardList} />
                 { mobileHeaderMenu.map((menuItem, menuIndex) => {                 
                   return (
-                    <div className={`menuItem ${menuItem.fields.hasChildren ? 'hasChild' : ''}`} 
-                      data-show-parent-id={menuItem.fields.title} key={menuIndex}>    
+                    <div className={`menuItem ${menuItem.hasChildren ? 'hasChild' : ''}`} 
+                      data-show-parent-id={menuItem.title} key={menuIndex}>    
 
-                      <Link key={`menuItem-${menuIndex}`} to={`${menuItem.fields.hasChildren ? '/fakeUrl' : menuItem.fields.url}`} data-id={menuItem.fields.title}
-                        onClick={e => menuClickHandler(e, menuItem.fields.hasChildren, menuItem.fields.title)} data-url={menuItem.fields.url}
-                        className={`${menuItem.fields.hasChildren ? 'hasChild' : ''} sidenav-item_inner first-level-item_inner`}>
+                      <Link key={`menuItem-${menuIndex}`} to={`${menuItem.hasChildren ? '/fakeUrl' : menuItem.url}`} data-id={menuItem.title}
+                        onClick={e => menuClickHandler(e, menuItem.hasChildren, menuItem.title)} data-url={menuItem.url}
+                        className={`${menuItem.hasChildren ? 'hasChild' : ''} sidenav-item_inner first-level-item_inner`}>
                         <div className="sidenav-item_name" key={`itemname-${menuIndex}`}>
                           <div className="sidenav-item_name-inner">
-                            {menuItem.fields.title}
+                            {menuItem.title}
                           </div>
                         </div>
                         <div className="sidenav-item_img" key={`itemimg-${menuIndex}`}>
-                          <CustomImage effect="blur" loading="eager" src={menuItem.fields.image.fields.file.url} alt="" />
+                          <MyImage src={menuItem.image.fluid.srcWebp} className="" alt="" />
                         </div>
                       </Link>
 
-                      {menuItem.fields.hasChildren ? 
+                      {menuItem.hasChildren ? 
                       (
-                        menuItem.fields.mobileHeaderMenuItemChild.map((child_item, child_index) => {
+                        menuItem.mobileHeaderMenuItemChild.map((child_item, child_index) => {
                           return (
-                            <Link to={child_item.fields.url} style={{ display: 'none' }} 
-                              data-parent-id={child_item.fields.parent}
-                              data-title={child_item.fields.title} key={`child-${menuIndex}-${child_index}`}
-                              onClick={nextSlide}
+                            <Link to={child_item.url} style={{ display: 'none' }} 
+                              data-parent-id={child_item.parentText}
+                              data-title={child_item.title} key={`child-${menuIndex}-${child_index}`}
+                              onClick={hideSideNav}
                               className="sidenav-item_inner child-item" >
                               <div className="sidenav-item_name" key={`childitemname-${menuIndex}-${child_index}`}>
                                 <div className="sidenav-item_name-inner">
-                                  {child_item.fields.title}
+                                  {child_item.title}
                                 </div>
                               </div>
                               <div className="sidenav-item_img" key={`childitemimg-${menuIndex}-${child_index}`}>
-                                <CustomImage effect="blur" loading="eager" src={child_item.fields.image.fields.file.url} alt="" />
+                                <MyImage src={child_item.image.fluid.srcWebp} className="" alt="" />
                               </div>
                             </Link>
                           )
@@ -477,14 +464,6 @@ const Header = ({ path }) => {
       </div>
     </>
   )
-}
-
-Header.propTypes = {
-  path: PropTypes.string,
-}
-
-Header.defaultProps = {
-  path: `/`,
-}
+});
 
 export default Header

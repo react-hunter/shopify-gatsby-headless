@@ -23,7 +23,7 @@ const addScript = url => {
   document.body.appendChild(script)
 }
 
-const addScriptHead = url => {
+/* const addScriptHead = url => {
   var head = document.getElementsByTagName('head')[0];
   var script = document.createElement('script');
   script.type = 'text/javascript';
@@ -38,17 +38,15 @@ export const onClientEntry = () => {
   window.onload = () => {
     addScriptHead("https://cdn-stamped-io.azureedge.net/files/widget.min.js")
   }
-}
+} */
 
-export const onPreRouteUpdate = () => {
-  removejscssfile("https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=NDbw2r&shop=dose-of-roses.myshopify.com", "js")
-  addScript("https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=NDbw2r&shop=dose-of-roses.myshopify.com")
-  const currentUrl = window.location.href;
-  if(currentUrl.includes('/products/')) {
-    removejscssfile("//foursixty.com/media/scripts/fs.slider.v2.5.js", "js")
-    addScript("//foursixty.com/media/scripts/fs.slider.v2.5.js")
-  } else {
-    removejscssfile("//foursixty.com/media/scripts/fs.embed.v2.5.js", "js")
-    addScript("//foursixty.com/media/scripts/fs.embed.v2.5.js")
+export const onPreRouteUpdate = ({ location }) => {
+  var currentPath = location.pathname;
+  if(currentPath.includes('/products/') || 
+    currentPath.includes('/collections/') || 
+    currentPath.includes('pages/collections') || 
+    currentPath.includes('/search')) {
+      removejscssfile("https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=NDbw2r&shop=dose-of-roses.myshopify.com", "js")
+      addScript("https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=NDbw2r&shop=dose-of-roses.myshopify.com")
   }
 }

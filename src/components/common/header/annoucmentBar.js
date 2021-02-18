@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { client } from '../../../contentful'
-
+import React, { useEffect, useRef } from 'react'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPause } from "@fortawesome/free-solid-svg-icons"
 
-const AnnoucmentBar = ({ path }) => {
-  const [announceBarSettings, setAnnounceBarSettings] = useState([])
+const AnnoucmentBar = ({ announceList }) => {
   let anntimer = 0;
   let percent = 0;
 
@@ -28,23 +25,10 @@ const AnnoucmentBar = ({ path }) => {
       }
     ]
   };
-
   const slider = useRef(null);
-
   useEffect(() => {
-    async function getAnnountmentSettings() {
-      const announcementData = await client.getEntries({'content_type': 'announceBarSettings'});
-      setAnnounceBarSettings(announcementData.items[0].fields.announceTextItem);
-      progressAnnouncement();
-    }
-    getAnnountmentSettings();
+    progressAnnouncement();
   }, []);
-
-  var forEach = function (array, callback, scope) {
-    for (var i = 0; i < array.length; i++) {
-      callback.call(scope, i, array[i]);
-    }
-  };
 
   function sliderPause() {
     slider.current.slickPause();
@@ -93,11 +77,10 @@ const AnnoucmentBar = ({ path }) => {
           document.getElementById("wrapper-announcement").setAttribute("data-state", "Stopped")
           clearInterval(window.anninterval)
           document.getElementById("carousel-button").setAttribute("class", "fas fa-play pause-btn")
-          forEach(document.querySelectorAll('.progress-announcement'), function (index, value) {
-            let max = -219.99078369140625;
-            percent = value.getAttribute('data-progress');
-            value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - (Math.round((anntimer / Number("5000")) * 100)).toFixed(2)) / 100) * max);
-          });
+          const progressElement = document.querySelectorAll('.progress-announcement')[0];
+          let max = -219.99078369140625;
+          percent = parseInt(progressElement.getAttribute('data-progress'));
+          progressElement.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - (Math.round((anntimer / Number("5000")) * 100)).toFixed(2)) / 100) * max);
         })
       }
     }, 300);
@@ -112,11 +95,10 @@ const AnnoucmentBar = ({ path }) => {
       } else {
         anntimer = anntimer + 1000;
       }
-      forEach(document.querySelectorAll('.progress-announcement'), function (index, value) {
-        let max = -219.99078369140625;
-        percent = value.getAttribute('data-progress');
-        value.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - (Math.round((anntimer / Number("5000")) * 100)).toFixed(2)) / 100) * max);
-      });
+      const progressElement = document.querySelectorAll('.progress-announcement')[0];
+      let max = -219.99078369140625;
+      percent = parseInt(progressElement.getAttribute('data-progress'));
+      progressElement.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - (Math.round((anntimer / Number("5000")) * 100)).toFixed(2)) / 100) * max);
   
     }, 830);
   }
@@ -135,8 +117,8 @@ const AnnoucmentBar = ({ path }) => {
         <div className="announcement-bar">
           <div className="ann_bars">
             <Slider ref={slider} {...settings}>
-            { announceBarSettings.map((item, index) => 
-              <p className="announcement-bar__message" key={index} style={{ fontSize: item.fields.fontSize }}>{item.fields.description}</p>
+            { announceList.map((item, index) => 
+              <p className="announcement-bar__message" key={index} style={{ fontSize: item.node.fontSize }}>{item.node.description}</p>
               )}
             </Slider>
             
@@ -153,4 +135,4 @@ const AnnoucmentBar = ({ path }) => {
   )
 }
 
-export default AnnoucmentBar
+export default AnnoucmentBar;

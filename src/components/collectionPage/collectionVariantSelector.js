@@ -4,14 +4,17 @@ import StoreContext from '../../context/store'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import ImageSpin from '../common/imageSpin'
 
-const CollectionVariantSelector = props => {
+const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
     const context = useContext(StoreContext);
     const product = props.product;
+    const collection = props.collection;
     const firstVariant = product.variants[0];
     const [variant, setVariant] = useState(firstVariant)
     const [showSpin, setShowSpin] = useState(false);
     const mainOption = product.options[0]
     const otherOptions = product.options.length > 1 ? product.options.slice(1, product.options.length) : []
+
+    console.log("CollectionVariantSelector collection=== ",collection);
 
     useEffect(() => {
         Array.prototype.slice.call(document.querySelectorAll('.color-swatch')).map(el => {
@@ -64,7 +67,8 @@ const CollectionVariantSelector = props => {
     }
 
     const selectVariantOption =(optionName, optionValue) => {
-        const theVariant = getVariantByOption(optionName, optionValue)
+        const theVariant = getVariantByOption(optionName, optionValue);
+        console.log("theVariant = ", theVariant);
         setVariant(theVariant)
     }
     const addToSideCart =() => {
@@ -91,14 +95,14 @@ const CollectionVariantSelector = props => {
 
     function attachCloseMobileVariantSelector() {
         let mobileTriggers = document.querySelectorAll(".closeVariantSelector");
-        let mobileTrigger = null
-        for (let i = 0; i < mobileTriggers.length; i++) {
-            mobileTrigger = mobileTriggers[i];
+        let mobileTrigger = mobileTriggers[0]
+        // for (let i = 0; i < mobileTriggers.length; i++) {
+            // mobileTrigger = mobileTriggers[i];
             mobileTrigger.addEventListener('touchstart', (evt) => {
                 const firstTouch = getTouches(evt)[0];
                 xDownVariant = firstTouch.clientX;
                 yDownVariant = firstTouch.clientY;
-            }, false);
+            }, {passive: true});
 
             mobileTrigger.addEventListener('touchmove', (evt) => {
                 if (!xDownVariant || !yDownVariant) {
@@ -124,8 +128,8 @@ const CollectionVariantSelector = props => {
                 /* reset values */
                 xDownVariant = null;
                 yDownVariant = null;
-            }, false);
-        }
+            }, {passive: true});
+        // }
     }
     function getTouches(evt) {
         return evt.touches ||             // browser API
@@ -148,11 +152,37 @@ const CollectionVariantSelector = props => {
                         <div className="closeVariantSelector-mobile_swipe"></div>
                     </div>
                     <div className="preview-main-option_wrapper">
-                        <div className="preview_wrapper">
-                            <LazyLoadImage className="variantSelector-preview_img" alt=""
-                                src={variant.image ? variant.image.originalSrc : ''}
-                                effect="blur" loading="eager"  />
-                        </div>
+                        {
+                            console.log("collection = ", collection)
+                        }
+                        { 
+                            collection ? 
+                            <>
+                                {
+                                collection.handle !== 'lingerie' ? 
+                                    <div className="preview_wrapper">
+                                        <LazyLoadImage className="variantSelector-preview_img" alt=""
+                                            src={variant.image ? variant.image.originalSrc : ''}
+                                            effect="blur" loading="eager"  />
+                                    </div>
+                                : 
+                                <div className="preview_wrapper special_ratio">
+                                    <LazyLoadImage className="variantSelector-preview_img" alt=""
+                                        src={product.images[0] ? product.images[0].originalSrc : ''}
+                                        effect="blur" loading="eager"  />
+                                    <LazyLoadImage className="variantSelector-preview_img second_image" alt=""
+                                        src={product.images[1] ? product.images[1].originalSrc : ''}
+                                        effect="blur" loading="eager"  />
+                                </div>
+                                }
+                            </>
+                            :
+                            <div className="preview_wrapper">
+                                <LazyLoadImage className="variantSelector-preview_img" alt=""
+                                    src={variant.image ? variant.image.originalSrc : ''}
+                                    effect="blur" loading="eager"  />
+                            </div>
+                        }
                         <div className="main-option_wrapper variantSelector-option_wrapper">
                             <span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span>
                             <div className="option_options_wrapper">
@@ -238,6 +268,6 @@ const CollectionVariantSelector = props => {
             </div>
         </div>
     );
-};
+});
     
 export default CollectionVariantSelector;

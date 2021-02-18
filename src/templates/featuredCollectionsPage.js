@@ -1,8 +1,9 @@
 import React from 'react';
 import { graphql } from "gatsby";
-import Preloader from "../components/common/preloader"
+// import Preloader from "../components/common/preloader"
 import CollectionSlider from "../components/featuredCollectionsPage/collectionSlider";
 import '../styles/featuredCollectionsPage.scss';
+import '../styles/widget.min.css';
 
 const featuredCollectionsPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
@@ -19,6 +20,7 @@ const featuredCollectionsPage = ({ data, pageContext }) => {
            {
             data.allShopifyCollection.edges.map((collection, collectionIndex) => {
               return <CollectionSlider
+                        collection = {collection}
                         products={collection.node.products.slice(0, 10)}
                         title={collection.node.title}
                         handle={collection.node.handle}

@@ -21,8 +21,10 @@ const CreateArrangements = () => {
                 options: arrangeData.items[0].fields.optionItem,
                 products: productsData.items
             });
+
         }
         getArrangeData();
+            
     }, [])
     const handleKeyDown = (e) => {
         e.preventDefault();
@@ -57,6 +59,7 @@ const CreateArrangements = () => {
                     <div className="create_arrange-content_inner">
  
                         { createArrangements.products.map((item, index) => 
+                            
                         <div className="create_arrange-block" key={index} data-product-name={item.fields.name}>
                             <Link to={item.fields.url}>
                                 <CustomImage className="product-image" 

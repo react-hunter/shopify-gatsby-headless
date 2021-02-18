@@ -1,0 +1,10 @@
+.fifty_fifty-image_container .gatsby-image-wrapper {
+  width: 100%!important;
+  margin: 0 auto;
+  display: block!important;
+}
+.fifty_fifty-image_container .gatsby-image-wrapper img {
+  width: 100%;
+  margin: 0 auto;
+  object-fit: contain !important;
+}

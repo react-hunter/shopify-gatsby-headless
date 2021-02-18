@@ -2,7 +2,7 @@ const path = require(`path`)
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`
 })
-const featuredCollectionHandles = ["rose-bear", "galaxy", "persuede", "marbleous", "leather", "bloom-box", "tie-dye", "24k-gold-dipped-roses"];
+const featuredCollectionHandles = ["rose-bear", "galaxy", "persuede", "marbleous", "leather", "bloom-box", "tie-dye", "24k-gold-dipped-roses", "lingerie"];
 const Shopify = require('shopify-api-node')
 const shopify = new Shopify({
   shopName: process.env.SHOP_NAME,
@@ -153,12 +153,13 @@ exports.createPages = async ({ graphql, actions }) => {
       })      
     } catch (error) {
       console.log('customize page create error: ', error)
-    }
+    }   
+    
   })
 }
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
-    devtool: 'eval-source-map',
+    devtool: 'eval',
   })
 }
