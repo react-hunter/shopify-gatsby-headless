@@ -65,8 +65,6 @@ const CustomizePage = ({ data }) => {
 
   var isShare = false;
 
-  console.log("currentStep = ", currentStep);
-
   const orderedProducts = [
     "Large Square",
     "Large Round Flat",
@@ -119,15 +117,11 @@ const CustomizePage = ({ data }) => {
         }
       })
 
-      console.log("currentStep = ", currentStep);
-
       var newRoses = [];
 
       for (var i=0; i< orderedColors.length; i++) {
         for (var j=0; j< roses.length;j++ ) {
           if (orderedColors[i] === roses[j].rose) {
-
-            console.log("orderedColors[i] = ", orderedColors[i], "roses[j] = ", roses[j])
             newRoses.push(roses[j]);
           }
         }
@@ -158,7 +152,6 @@ const CustomizePage = ({ data }) => {
       for (var i=0; i< orderedProducts.length; i++) {
         for (var j=0; j< products.length;j++ ) {
           if (orderedProducts[i] === products[j].Arrangement) {
-            console.log("orderedProducts[i] = ", orderedProducts[i], "products[j].Arrangement = ", products[j].Arrangement)
             newProducts.push(products[j]);
           }
         }
@@ -172,13 +165,9 @@ const CustomizePage = ({ data }) => {
     }
 
     getCustomizeData();
-
-    console.log("useEffect currentStep = ", currentStep);
-
   }, []);
 
   useEffect(() => {
-    console.log("currentStep = ", currentStep);
     
     allProducts = customizeData.products;
     var arrTypes = document.getElementById("arrangementSelector-0");
@@ -204,8 +193,6 @@ const CustomizePage = ({ data }) => {
     isShareLink();
     mobileRearrange()
 
-    console.log("useEffect currentStep = ", currentStep);
-
     window.addEventListener('scroll', stickyFunction, {passive: true});
     window.onresize = function () { mobileRearrange() }
 
@@ -213,12 +200,9 @@ const CustomizePage = ({ data }) => {
       window.removeEventListener('scroll', stickyFunction, {passive: true});
     }
 
-    console.log("useEffect currentStep = ", currentStep);
-
   }, [customizeData.products])
 
   const selectArrangement = (id) => {
-    console.log("currentStep = ", currentStep);
 
     for (var i = 0; i < allProducts.length; i++) {
       var product = allProducts[i];
@@ -258,18 +242,11 @@ const CustomizePage = ({ data }) => {
         break;
       }
     }
-
-    console.log("currentStep = ", currentStep);
   }
 
 
   function setSelectedProduct(product, id) {
-
-    console.log("currentStep = ", currentStep);
-
     selectedProduct = product;
-
-    console.log("currentStep = ", currentStep);
   }
 
   function setCharAt(str, index, chr) {
@@ -278,7 +255,6 @@ const CustomizePage = ({ data }) => {
   }
 
   function isShareLink(){
-    console.log("currentStep = ", currentStep);
 
     if (window.location.href.includes("&")) {
       isShare = true;
@@ -344,15 +320,10 @@ const CustomizePage = ({ data }) => {
       if (document.getElementById("arrangementSelector-0")) {
         eventFire(document.getElementById("arrangementSelector-0").firstElementChild, 'click')
       }
-    }
-
-
-    console.log("isShareLink currentStep = ", currentStep);
-    
+    }    
   }
 
   function mobileRearrange() {
-    console.log("currentStep = ", currentStep);
 
     if (window.innerWidth <= 700) {
 //      document.getElementById("col-left").insertAfter(document.getElementById("col-right"), null);
@@ -366,7 +337,6 @@ const CustomizePage = ({ data }) => {
   }
   
   function nextStep() {
-    console.log("currentStep = ", currentStep);
 
     currentStep = currentStep + 1;
   
@@ -374,11 +344,9 @@ const CustomizePage = ({ data }) => {
       document.getElementById(`arrangementSelector-${currentStep}`).style.display = "block"
     }
 
-    console.log("nextStep currentStep = ", currentStep);
   }
 
   function addArrangementBlock(heading, subtype, subheading, tagline, step) {
-    console.log("currentStep = ", currentStep);
 
     var container = document.getElementById("col-left");
     var statusBlock = document.createElement("div");
@@ -399,11 +367,10 @@ const CustomizePage = ({ data }) => {
         revert(parseInt(this.getAttribute('data-step')));
       });
     }
-    console.log("currentStep = ", currentStep);
+
   }
   
   function revert(step) {
-    console.log("currentStep = ", currentStep);
 
     document.getElementById("addToBAG").style.display = "none"
     document.getElementsByClassName("step-next")[0].style.display = "block"
@@ -426,11 +393,9 @@ const CustomizePage = ({ data }) => {
     document.getElementById("arrangementSelector_title").innerHTML = title
     document.getElementById(`arrangementSelector-${step}`).style.display = "block";
 
-    console.log("currentStep = ", currentStep);
   }
 
   function setBox(title, src, element) {
-    console.log("currentStep = ", currentStep);
 
     var images = document.getElementsByClassName("box-contents")[0].getElementsByClassName("box");
   
@@ -454,11 +419,9 @@ const CustomizePage = ({ data }) => {
     getFirstVariantBasePrice();
     document.getElementById("mobile-arr-type").innerText = selections[0]
 
-    console.log("currentStep = ", currentStep);
   }
   
   function setStyle(title, style) {
-    console.log("currentStep = ", currentStep);
 
     if (!document.getElementById("Style-Type")) {
       addArrangementBlock("Style", "Style-Type", title, "", `${currentStep}`)
@@ -493,19 +456,15 @@ const CustomizePage = ({ data }) => {
     }
   
     updatePrice()
-    console.log("currentStep = ", currentStep);
   }
 
   function setStep(step) {
-    console.log("setStep -> currentStep = ", currentStep);
 
     currentStep = Number(step);
 
-    console.log("setStep -> currentStep = ", currentStep);
   }
 
   function getFirstVariantBasePrice() {
-    console.log("currentStep = ", currentStep);
 
     var json = JSON.parse(document.getElementById(`${selectedProduct.Arrangement}`).dataset.json)
   
@@ -521,12 +480,9 @@ const CustomizePage = ({ data }) => {
       }
     }
 
-    console.log("currentStep = ", currentStep);
-
   }
 
   function updatePrice() {
-    console.log("currentStep = ", currentStep);
 
     var json = JSON.parse(document.getElementById(`${selectedProduct.Arrangement}`).dataset.json);
     var choice = [];
@@ -548,19 +504,16 @@ const CustomizePage = ({ data }) => {
         break;
       }
     }
-    console.log("currentStep = ", currentStep);
+
   }
 
   function addSelection(position, data) {
-    console.log("currentStep = ", currentStep);
 
     selections[position] = data
 
-    console.log("currentStep = ", currentStep);
   }
 
   function eventFire(el, etype) {
-    console.log("currentStep = ", currentStep);
 
     if (el.fireEvent) {
       el.fireEvent('on' + etype);
@@ -570,11 +523,9 @@ const CustomizePage = ({ data }) => {
       el.dispatchEvent(evObj);
     }
 
-    console.log("currentStep = ", currentStep);
   }
 
   function getMainImage() {
-    console.log("currentStep = ", currentStep);
 
     if (document.getElementById("Style-Type").innerText !== "Letters" || document.getElementById("Style-Type").innerText !== "Numbers") {
       resetNumbersAndLetter();
@@ -632,11 +583,9 @@ const CustomizePage = ({ data }) => {
       }
     }
 
-    console.log("currentStep = ", currentStep);
   }
   
   function resetNumbersAndLetter() {
-    console.log("currentStep = ", currentStep);
 
     var styles = document.getElementsByClassName("numberChoice");
   
@@ -652,7 +601,6 @@ const CustomizePage = ({ data }) => {
       Letterstyles[j].firstElementChild.style.color = "#000000"
     }
 
-    console.log("currentStep = ", currentStep);
   }
 
   const handleKeyDown = (e) => {
@@ -667,18 +615,15 @@ const CustomizePage = ({ data }) => {
   }
 
   function movePrice() {
-    console.log("currentStep = ", currentStep);
 
     if (document.getElementById("price-Type")) {
       var price = document.getElementById("price-Type").parentElement;
       document.getElementById("col-left").appendChild(price);
     }
 
-    console.log("currentStep = ", currentStep);
   }
 
   function generateBoxSelector() {
-    console.log("currentStep = ", currentStep);
 
     var container = document.createElement("div");
     container.setAttribute("id", `arrangementSelector-${currentStep}`);
@@ -725,11 +670,9 @@ const CustomizePage = ({ data }) => {
       firstAvailable.style.boxShadow = "#000000 0px 0px 0px 4px"
     }
 
-    console.log("currentStep = ", currentStep);
   }
 
   function generateStyleSelector() {
-    console.log("currentStep = ", currentStep);
 
     var container = document.createElement("div");
   
@@ -782,11 +725,9 @@ const CustomizePage = ({ data }) => {
       }
     }
 
-    console.log("currentStep = ", currentStep);
   }
 
   function isShowRoseColor(title) {
-    console.log("currentStep = ", currentStep);
 
     var productRoses = selectedProduct["roses"];
 
@@ -796,14 +737,11 @@ const CustomizePage = ({ data }) => {
       }
     }
 
-    console.log("currentStep = ", currentStep);
-
     return false;
   }
 
   function generateRosesSelector() {
-    console.log("currentStep = ", currentStep);
-
+    
     if (document.getElementById("arrangementSelector-" + currentStep)) {
       document.getElementById("arrangementSelector-" + currentStep).remove();
       // resetRoseSelections()
@@ -893,7 +831,6 @@ const CustomizePage = ({ data }) => {
       }
     }
 
-    console.log("currentStep = ", currentStep);
   }
 
   function addRoseSelectionLine(position, data) {
@@ -917,7 +854,6 @@ const CustomizePage = ({ data }) => {
   // }
   
   function isProductNotUsingStencil(productHandle, style) {
-    console.log("currentStep = ", currentStep);
 
     if (document.querySelector("#excluded_products")) {
 
@@ -930,11 +866,9 @@ const CustomizePage = ({ data }) => {
       return false;
     }
 
-    console.log("currentStep = ", currentStep);
   }
 
   function setRose(type, element, layer) {
-    console.log("currentStep = ", currentStep);
 
     var images = document.getElementById(`roseblock-${layer}`).getElementsByClassName("round");
   
@@ -1011,33 +945,24 @@ const CustomizePage = ({ data }) => {
       }  
     }
 
-    console.log("currentStep = ", currentStep);
   }
 
   const maxOptions = 3;
   
   function resetRoseSelections() {
 
-    console.log("currentStep = ", currentStep);
-
     selectedRosesLine = []
     selectedRoses = [];
 
-    console.log("currentStep = ", currentStep);
   }
 
   function setSelectedStyle(style) {
 
-    console.log("currentStep = ", currentStep);
-
     selectedStyle = style;
 
-    console.log("currentStep = ", currentStep);
   }
 
   function hasStyle(StyleName) {
-
-    console.log("currentStep = ", currentStep);
 
     var styles = selectedProduct.styles;
     var contains = false;
@@ -1057,7 +982,6 @@ const CustomizePage = ({ data }) => {
   }
 
   function ChangeUrl(title, url) {
-    console.log("currentStep = ", currentStep);
 
     if (typeof (window.history.pushState) != "undefined") {
       var obj = { Title: title, Url: url };
@@ -1068,8 +992,6 @@ const CustomizePage = ({ data }) => {
   }
 
   function resetSelections() {
-
-    console.log("currentStep = ", currentStep);
 
     selections = [];
     var i = 1;
@@ -1082,7 +1004,6 @@ const CustomizePage = ({ data }) => {
   }
 
   const previous = () => {
-    console.log("previous currentStep = ", currentStep);
 
     if (currentStep - 1 !== -1) {
       if (currentStep - 1 === maxOptions) {
@@ -1094,7 +1015,6 @@ const CustomizePage = ({ data }) => {
   }
 
   const next = () => {
-    console.log("next currentStep = ", currentStep);
 
     if (!selectedProduct)
       return false;
@@ -1174,7 +1094,9 @@ const CustomizePage = ({ data }) => {
   }
 
   const AddToBag = () => {
-    console.log("AddToBag == currentStep = ", currentStep);
+
+    if (currentStep != 3)
+      return;
 
     const bagProduct = collectionProducts.filter(cp => cp.title === selections[0])
 
@@ -1200,8 +1122,6 @@ const CustomizePage = ({ data }) => {
     ])
     
     setTimeout(openCartDrawer, 1200);
-
-    console.log("currentStep = ", currentStep);
   }
 
   function getSmallCharaters(string) {
@@ -1209,7 +1129,6 @@ const CustomizePage = ({ data }) => {
   }
 
   function openCartDrawer() {
-    console.log("currentStep = ", currentStep);
 
     setShowSpin(false);
 
@@ -1218,7 +1137,6 @@ const CustomizePage = ({ data }) => {
     document.querySelector(".js-ajax-cart-overlay").classList.add('is-open');
     document.documentElement.classList.add('is-locked');
 
-    console.log("openCartDrawer == currentStep = ", currentStep);
   }
 
   const hideNumbers = (e) => {
@@ -1231,8 +1149,6 @@ const CustomizePage = ({ data }) => {
 
   const setLetterStyle = (e, title) => {
     e.preventDefault();
-
-    console.log("currentStep = ", currentStep);
 
     if (!document.getElementById("Style-Type")) {
       addArrangementBlock("Style", "Style-Type", title, "", `${currentStep}`)
@@ -1255,14 +1171,10 @@ const CustomizePage = ({ data }) => {
     selectedItem.firstElementChild.style.color = "#ffffff"
   
     updatePrice()
-
-    console.log("currentStep = ", currentStep);
   }
   
   const setNumberStyle = (e, title) => {
     e.preventDefault();
-
-    console.log("currentStep = ", currentStep);
 
     if (!document.getElementById("Style-Type")) {
       addArrangementBlock("Style", "Style-Type", title, "", `${currentStep}`)
@@ -1287,9 +1199,7 @@ const CustomizePage = ({ data }) => {
       selectedItem.firstElementChild.style.color = "#ffffff"
     }
 
-    updatePrice()
-
-    console.log("currentStep = ", currentStep);
+    updatePrice();
   }
 
 

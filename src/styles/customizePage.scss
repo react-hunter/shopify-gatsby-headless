@@ -2,7 +2,13 @@
   position: relative;
   .image-spin-wrapper {
       position: absolute;
-      right: 25%;
       top: 5px;
+      left: 0;
+      right: 0;
+
+      .imageloader.small {
+        margin-left: auto;
+        margin-right: auto;
+      }
   }
 }
