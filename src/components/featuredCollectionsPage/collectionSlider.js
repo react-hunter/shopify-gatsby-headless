@@ -107,7 +107,7 @@ const CollectionSlider = ({collection, products, title, handle, reviewList}) => 
         <button type="button" id={`next-${handle}`} className="slick-arrow slick-next"> Next</button>
 
         {varaintModalShow && ( <CollectionVariantSelector 
-                                    collection = {collection}
+                                    collection = {collection.node}
                                     closeModal={closeCollectionModal} 
                                     showNotifyModal={showNotifyModal} 
                                     product={selectedProduct} /> )}

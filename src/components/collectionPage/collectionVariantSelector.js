@@ -152,23 +152,34 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
                         <div className="closeVariantSelector-mobile_swipe"></div>
                     </div>
                     <div className="preview-main-option_wrapper">
+                        {
+                            console.log("collection = ", collection)
+                        }
                         { 
-                            collection.node.handle != 'lingerie' ? 
-                                <div className="preview_wrapper">
+                            collection ? 
+                            <>
+                                {
+                                collection.handle != 'lingerie' ? 
+                                    <div className="preview_wrapper">
+                                        <LazyLoadImage className="variantSelector-preview_img" alt=""
+                                            src={variant.image ? variant.image.originalSrc : ''}
+                                            effect="blur" loading="eager"  />
+                                    </div>
+                                : 
+                                <div className="preview_wrapper special_ratio">
                                     <LazyLoadImage className="variantSelector-preview_img" alt=""
-                                        src={variant.image ? variant.image.originalSrc : ''}
+                                        src={product.images[0] ? product.images[0].originalSrc : ''}
+                                        effect="blur" loading="eager"  />
+                                    <LazyLoadImage className="variantSelector-preview_img second_image" alt=""
+                                        src={product.images[1] ? product.images[1].originalSrc : ''}
                                         effect="blur" loading="eager"  />
                                 </div>
-                            : 
-                            <div className="preview_wrapper special_ratio">
+                                }
+                            </>
+                            :
+                            <div className="preview_wrapper">
                                 <LazyLoadImage className="variantSelector-preview_img" alt=""
-                                    src={product.images[0] ? product.images[0].originalSrc : ''}
-                                    effect="blur" loading="eager"  />
-                                <LazyLoadImage className="variantSelector-preview_img second_image" alt=""
-                                    src={product.images[1] ? product.images[1].originalSrc : ''}
-                                    effect="blur" loading="eager"  />
-                                <LazyLoadImage className="variantSelector-preview_img third_image" alt=""
-                                    src={product.images[2] ? product.images[2].originalSrc : ''}
+                                    src={variant.image ? variant.image.originalSrc : ''}
                                     effect="blur" loading="eager"  />
                             </div>
                         }

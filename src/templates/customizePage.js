@@ -365,17 +365,17 @@ const CustomizePage = ({ data }) => {
   }
 
   function stickyFunction(){  
-    var header = document.getElementsByClassName("arrangement-choices_container-mobile")[0];
-    var sticky = header.offsetTop;
+    // var header = document.getElementsByClassName("arrangement-choices_container-mobile")[0];
+    // var sticky = header.offsetTop;
   
-    if (window.pageYOffset > sticky && !(document.querySelector('#mobile-panel').classList.contains("sticky"))) {
-      header.style.display = "block";
-      header.classList.add("sticky");
+    // if (window.pageYOffset > sticky && !(document.querySelector('#mobile-panel').classList.contains("sticky"))) {
+    //   header.style.display = "block";
+    //   header.classList.add("sticky");
 
-    } else if (window.pageYOffset <= sticky + 100 && document.querySelector('#mobile-panel').classList.contains("sticky")) {
-      header.classList.remove("sticky");
-      header.style.height = "auto";
-    }
+    // } else if (window.pageYOffset <= sticky + 100 && document.querySelector('#mobile-panel').classList.contains("sticky")) {
+    //   header.classList.remove("sticky");
+    //   header.style.height = "auto";
+    // }
   }
   
   function nextStep() {
