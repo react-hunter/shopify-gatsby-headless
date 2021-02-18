@@ -1,9 +1,10 @@
 import React from 'react'
+import loadable from '@loadable/component';
 import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
-import HeroSection from "../components/homepage/heroSection";
-import ImageSection from "../components/homepage/imageSections";
-import ArticleSection from "../components/articles/articleSection";
+const HeroSection = loadable(() => import("../components/homepage/heroSection"));
+const ImageSection = loadable(() => import("../components/homepage/imageSections"));
+const ArticleSection = loadable(() => import("../components/articles/articleSection"));
 
 const IndexPage = ({ data: {allShopifyArticle, allContentfulHomepage}}) => {
   const homepageData = allContentfulHomepage.nodes[0];

@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'gatsby'
+import loadable from '@loadable/component';
 import StoreContext from '../../context/store'
-import CollectionVariantSelector from './collectionVariantSelector'
-import ProductBoxGallery from './productBoxGallery'
 import ImageSpin from '../common/imageSpin'
+const CollectionVariantSelector = loadable(() => import('./collectionVariantSelector'))
+const ProductBoxGallery = loadable(() => import('./productBoxGallery'))
 
 const CollectionProductBox = React.memo(function CollectionProductBox(props) {
     const context = useContext(StoreContext);
