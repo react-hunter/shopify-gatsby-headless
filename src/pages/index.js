@@ -31,8 +31,13 @@ export const query = graphql`
           excerpt
           content
           image {
-            id
-            src
+            localFile {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
+              }
+            }
           }
         }
       }

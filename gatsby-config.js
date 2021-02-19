@@ -35,7 +35,7 @@ module.exports = {
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
         apiVersion: "2021-01",
         paginationSize: 3,
-        downloadImages: false,
+        downloadImages: true,
         includeCollections: ["shop", "content"]
       }
     },

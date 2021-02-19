@@ -4,8 +4,11 @@ const Instagram = React.memo(function Instagram(props) {
     const [photoCount, setPhotoCount] = useState(0);
     useEffect(() => {
         mobileRearrange();
-        window.onresize = function () { mobileRearrange() };
-    })
+        window.addEventListener('resize', mobileRearrange, true);
+        return function cleanup() {
+            window.removeEventListener('resize', mobileRearrange, true);
+        }
+    }, [])
     useEffect(() => {
         if (photoCount > 0) {
             const previousInstagram = document.querySelectorAll(".fs-wrapper");

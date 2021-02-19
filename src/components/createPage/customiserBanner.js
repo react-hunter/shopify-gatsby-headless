@@ -27,27 +27,29 @@ const CustomiserBanner = () => {
             setUI();
         }
         getBannerData();
+        window.addEventListener('scroll', scrollHandler, { passive: true })
+        return function cleanup() {
+            window.removeEventListener('scroll', scrollHandler, { passive: true });
+        }
     }, []);
 
     function setUI() {
         setTimeout(function(){
             smoothLoadBanner();
         }, 500)
+    }
 
-        const element_position = document.getElementsByClassName("create_steps-outer")[0].offsetTop;
-        
-        window.addEventListener('scroll', function() {
-            let y_scroll_pos = window.pageYOffset;
-            let scroll_pos_test = element_position;
+    const scrollHandler = () => {
+        let y_scroll_pos = window.pageYOffset;
+        let scroll_pos_test = document.getElementsByClassName("create_steps-outer")[0].offsetTop;
 
-            if (y_scroll_pos > scroll_pos_test - 600) {
-                if (document.getElementById('fadeOpacity_wrapper') != null)
-                    document.getElementById('fadeOpacity_wrapper').style.opacity = "0";
-            } else {
-                if (document.getElementById('fadeOpacity_wrapper') != null)
-                    document.getElementById('fadeOpacity_wrapper').style.opacity = "1";
-            }
-        }, {passive: true});
+        if (y_scroll_pos > scroll_pos_test - 600) {
+            if (document.getElementById('fadeOpacity_wrapper') != null)
+                document.getElementById('fadeOpacity_wrapper').style.opacity = "0";
+        } else {
+            if (document.getElementById('fadeOpacity_wrapper') != null)
+                document.getElementById('fadeOpacity_wrapper').style.opacity = "1";
+        }
     }
 
     const scrollToOptions = (e) => {

@@ -196,10 +196,11 @@ const CustomizePage = ({ data }) => {
     mobileRearrange()
 
     window.addEventListener('scroll', stickyFunction, {passive: true});
-    window.onresize = function () { mobileRearrange() }
+    window.addEventListener('resize', mobileRearrange, true)
 
     return function cleanup() {
       window.removeEventListener('scroll', stickyFunction, {passive: true});
+      window.removeEventListener('resize', mobileRearrange, true)
     }
 
   }, [customizeData.products])

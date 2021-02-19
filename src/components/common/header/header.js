@@ -43,7 +43,10 @@ const Header = React.memo(function Header(props) {
   let mobileMenuStep = 0;
 
   useEffect(() => {
-    initializeHeader();
+    window.addEventListener('scroll', scrollHandler, {passive: true});
+    return function cleanup() {
+      window.removeEventListener('scroll', scrollHandler, {passive: true});
+    }
   }, []);
 
   useEffect(() => {
@@ -293,27 +296,23 @@ const Header = React.memo(function Header(props) {
   };
   
 
-  function initializeHeader() {
+  function scrollHandler() {
 
     //Set Header attributes and sticky
     let header = document.querySelector(".stickyHeader");
     let prevScrollpos = window.pageYOffset;
   
-    window.addEventListener('scroll', function() {
-      let currentScrollpos = window.pageYOffset;
-  
-      if (prevScrollpos < currentScrollpos) {
-  
-        if (currentScrollpos >= 5) {
-          //Hide
-          header.style.top = "-200px";
-        }
-      } else {
-        //Show
-        header.style.top = "0";
+    let currentScrollpos = window.pageYOffset;
+
+    if (prevScrollpos < currentScrollpos) {
+
+      if (currentScrollpos >= 5) {
+        header.style.top = "-200px";
       }
-      prevScrollpos = currentScrollpos;
-    }, { passive: true});
+    } else {
+      header.style.top = "0";
+    }
+    prevScrollpos = currentScrollpos;
   }
 
   const openSlideCart = (e) => {
