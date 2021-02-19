@@ -437,8 +437,7 @@ const CustomizePage = ({ data }) => {
 
     document.getElementById("mainIMG").src = src;
     mainImageUrl = src;
-    console.log("mainImageUrl === ", mainImageUrl);
-
+    
     if (!document.getElementById("BOX-Type")) {
       addArrangementBlock("BOX", "BOX-Type", title, "", `${currentStep}`)
     } else {
@@ -452,9 +451,6 @@ const CustomizePage = ({ data }) => {
   }
   
   function setStyle(title, style) {
-
-    console.log("setStyle,,,, ",title )
-
     if (!document.getElementById("Style-Type")) {
       addArrangementBlock("Style", "Style-Type", title, "", `${currentStep}`)
     } else {
@@ -559,7 +555,6 @@ const CustomizePage = ({ data }) => {
 
   function getMainImage() {
 
-    console.log("document.getElementById('Style-Type').innerText == ", document.getElementById("Style-Type").innerText);
     if (document.getElementById("Style-Type").innerText !== "Letters" 
       || document.getElementById("Style-Type").innerText !== "Numbers" ) {
       resetNumbersAndLetter();
@@ -572,8 +567,6 @@ const CustomizePage = ({ data }) => {
         if (this.readyState === 4) {
           document.getElementById("mainIMG").src = `${this.responseText}`;
           mainImageUrl = `${this.responseText}`;
-          console.log("this === ", this);
-          console.log("mainImageUrl === ", mainImageUrl);
         }
       });
   
@@ -947,7 +940,6 @@ const CustomizePage = ({ data }) => {
 
         document.getElementById("mainIMG").src = `https://ik.imagekit.io/vajwlqjsrw/customizer-images/${imageToDisplay}.png`;
         mainImageUrl = `https://ik.imagekit.io/vajwlqjsrw/customizer-images/${imageToDisplay}.png`;
-        console.log("mainImageUrl === ", mainImageUrl);
       } 
       else 
       {
@@ -958,7 +950,6 @@ const CustomizePage = ({ data }) => {
             document.getElementById("mainIMG").src = `${this.responseText}`;
 
             mainImageUrl = `${this.responseText}`;
-            console.log("mainImageUrl === ", mainImageUrl);
           }
         });
         if (!isShare) {
