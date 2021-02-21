@@ -11,9 +11,9 @@ import {
 	QueryClientProvider,
 } from 'react-query';
 import Provider from "../context/provider"
+import Footer from '../components/common/footer'
+import Instagram from '../components/common/instagram'
 const Header = loadable(() => import('../components/common/header/header'));
-const Footer = loadable(() => import('../components/common/footer'));
-const Instagram = loadable(() => import('../components/common/instagram'));
 const AjaxCartCustom = loadable(() => import('../components/common/ajaxCartCustom'));
 
 const queryClient = new QueryClient();
