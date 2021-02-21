@@ -63,8 +63,6 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
         e.preventDefault();
     }
 
-    console.log("collectionProductBox collection = ", collection);
-
     return (
         
         <li className="grid__item grid__item--collection-template " key={product.title}>
