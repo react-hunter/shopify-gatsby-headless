@@ -28,7 +28,7 @@
     }
 
     .product-tile__image {
-        position: unset;
+      position: unset;
     }
 
     .slick-dots {
@@ -51,6 +51,10 @@
             }
         }
     }
+}
+
+.product-tile__image {
+  touch-action: unset;
 }
 
 .variantoverlayNew {
