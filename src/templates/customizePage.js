@@ -101,7 +101,10 @@ const CustomizePage = ({ data }) => {
     "Black",
     "Coral",
     "TieDye",
-    "Light TieDye"
+    "Light TieDye",
+    "Metallic Rose Gold",
+    "Metallic Silver",
+    "Metallic Gold"
   ]
 
   var mainImageUrl = '';

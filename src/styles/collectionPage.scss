@@ -595,6 +595,20 @@ border-radius: 50%;
     background-size: cover;
   }
   
+  .color-swatch[data-rose_color="Gold"] {
+    background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_Metallic_Rose_Gold.png);
+    background-size: cover;
+  }
+  
+  .color-swatch[data-rose_color="Silver"] {
+    background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_Metallic_Silver.png);
+    background-size: cover;
+  }
+  
+  .color-swatch[data-rose_color="Rose Gold"] {
+    background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_Metallic_Gold.png);
+    background-size: cover;
+  }
   
   
   /* Size Swatches */
@@ -890,7 +904,7 @@ border-radius: 50%;
 
     .lazy-load-image-background {
       @media (max-width: 768px) {
-        width: 40%;
+        width: 45%;
         img {
           width: 100%;
           height: unset;
