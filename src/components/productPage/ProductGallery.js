@@ -28,12 +28,9 @@ const ProductGallery = ({ product, isVarantSelected, selectedVariant }) => {
     }, [flkty]);
 
     useEffect(() => {
-
         if (flktyObject) {
             flktyObject.select(selectedImageIndex);
-        }
-
-        console.log("selectedImageIndex , ", selectedImageIndex);        
+        }     
 
         if (flkty) {
             flkty.on('change', () => {
@@ -64,7 +61,6 @@ const ProductGallery = ({ product, isVarantSelected, selectedVariant }) => {
     const getStyle = () => {
         let width = 100/productGalleryCount;
         let translateX = 100 * slideIndex;
-        console.log('slideIndex , ', slideIndex);
         return { width: `${width}%`, transform: `translateX(${translateX}%)` };
     }
     const flickityOptions = {
