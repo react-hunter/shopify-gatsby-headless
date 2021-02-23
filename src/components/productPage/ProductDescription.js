@@ -7,7 +7,7 @@ import Buttons from "./Buttons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 
-const ProductDescription = ({ product, review, selectVariant }) => {
+const ProductDescription = ({ product, review, clickVariantSelect, selectVariant }) => {
 
     const context = useContext(StoreContext);
     const [quantity, setQuantity] = useState(1);
@@ -22,8 +22,6 @@ const ProductDescription = ({ product, review, selectVariant }) => {
         async function getAccordionData() {
             const accordionData = await client.getEntries({'content_type': 'productAccordion'});
             setProductAccordions(accordionData.items);
-
-            console.log("queryselectorall = ", document.querySelectorAll('.accordion_button'));
 
             document.querySelectorAll('.accordion_button').forEach(button => {
                 const accordionButton = button;
@@ -118,6 +116,7 @@ const ProductDescription = ({ product, review, selectVariant }) => {
                             modalClass={modalClass}
                             variantList={product.variants}
                             variant={variant}
+                            clickVariantSelect={clickVariantSelect}
                             // productVariant={productVariant}
                             selectVariant={selectVariant}
                         />
