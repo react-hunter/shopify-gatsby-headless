@@ -6,6 +6,8 @@ import ImageSpin from '../common/imageSpin'
 const CollectionVariantSelector = loadable(() => import('./collectionVariantSelector'))
 const ProductBoxGallery = loadable(() => import('./productBoxGallery'))
 
+const NotifyModal = loadable(() => import('./notifyModal'))
+
 const CollectionProductBox = React.memo(function CollectionProductBox(props) {
     const context = useContext(StoreContext);
     const [varaintModalShow, setVaraintModalShow] = useState(false);
@@ -14,6 +16,9 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
     const reviewBadge = props.review ? props.review.badge : '';
     const mainOption = getMainOption()
     const [swatchColor, setSwatchColor] = useState(mainOption === '' ? '' : mainOption.values[0])
+
+    const [notifyModalShow, setNotifyModalShow] = useState(false);
+
     function getMainOption() {
         let tempOption = '';
         const options = product.options ? product.options.filter(option => option.name === 'Rose Color') : []
@@ -41,7 +46,8 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
     }
 
     const notifyMe = () => {
-        props.showNotifyModal();
+        console.log("notifyMe - collectionProductBox")
+        showNotifyModal();
     }
     const closeCollectionModal = () => {
         document.querySelector(".variantSelector_wrapper").classList.remove('animate-bottom');
@@ -62,9 +68,27 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
         e.preventDefault();
     }
 
+    const showNotifyModal = () => {
+        setNotifyModalShow(true);
+    }
+
+    const closeNotifyModal = () => {
+        console.log(`[data-product-handle="${product.handle}"] .klav-popup`);
+        if (document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`)) {
+          document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`).classList.remove("fade-in");
+          document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`).classList.add("fade-out");
+        }
+        setTimeout(() => {
+          if (document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`)) {
+            document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`).classList.remove("fade-out");
+          }
+          setNotifyModalShow(false);
+        }, 500)
+    }
+
     return (
         
-        <li className="grid__item grid__item--collection-template " key={product.title}>
+        <li className="grid__item grid__item--collection-template " key={product.title} data-product-handle={product.handle}>
             <div className="grid-view-item product-card">
                 <span className="visually-hidden product-card-title">{product.title}</span>
  
@@ -110,8 +134,11 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
                         <button className="openVariantModal" onClick={addToBag}>ADD TO BAG{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }</button>
                 }
 
-                {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} showNotifyModal={props.showNotifyModal} product={product} /> )}
+                {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} showNotifyModal={showNotifyModal} product={product} /> )}
             </div>
+            {(product.variants.length === 1 && !product.variants[0].availableForSale) ? 
+                <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
+            : null }
         </li>
     );
 });

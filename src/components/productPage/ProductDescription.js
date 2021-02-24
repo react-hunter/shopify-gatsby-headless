@@ -128,6 +128,7 @@ const ProductDescription = ({ product, review, clickVariantSelect, selectVariant
                     }
 
                     <Buttons 
+                        product={product}
                         context={context} 
                         available={available} 
                         quantity={quantity} 

@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import ImageSpin from '../common/imageSpin'
+import loadable from '@loadable/component';
 
-const Buttons = ({ context, available, productVariant,  quantity}) => {
+const NotifyModal = loadable(() => import('../collectionPage/notifyModal'))
+
+const Buttons = ({ product, context, available, productVariant,  quantity}) => {
     const [showSpin, setShowSpin] = useState(false);
+    const [notifyModalShow, setNotifyModalShow] = useState(false);
+
     const handleAddToCart = () => {
         setShowSpin(true);
         context.addVariantToCart(productVariant.shopifyId, quantity);
@@ -21,6 +26,29 @@ const Buttons = ({ context, available, productVariant,  quantity}) => {
         document.documentElement.classList.add('is-locked');
     }
     
+    const notifyMe = (e) => {
+        e.preventDefault();
+        showNotifyModal()
+    }  
+
+    const showNotifyModal = () => {
+        setNotifyModalShow(true);
+    }
+
+    const closeNotifyModal = () => {
+        console.log(`[data-product-handle="${product.handle}"] .klav-popup`);
+        if (document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`)) {
+          document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`).classList.remove("fade-in");
+          document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`).classList.add("fade-out");
+        }
+        setTimeout(() => {
+          if (document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`)) {
+            document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`).classList.remove("fade-out");
+          }
+          setNotifyModalShow(false);
+        }, 500)
+    }
+
     return (
         <div className="product-form__controls-group product-form__controls-group--submit">
             <div className="product-form__item product-form__item--submit mobile-in-view_trigger product-form__item--payment-button">
@@ -34,7 +62,11 @@ const Buttons = ({ context, available, productVariant,  quantity}) => {
                         disabled={!available}
                         onClick={handleAddToCart_BuyNow}>Buy It Now</button>
                 </div>
+
+                {!available? <a className="btn klaviyo-bis-trigger" href="/fakeUrl" onClick={notifyMe}>NOTIFY ME</a> : null}
             </div>
+
+            {!available? <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} /> : null}
         </div>
     );
 };

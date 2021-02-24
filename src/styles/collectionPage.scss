@@ -316,6 +316,9 @@ border-radius: 50%;
     font-family: 'Big Caslon';
 }
 
+.glider-contain .glider, .glider-contain .glider-track {
+  transform: unset;
+}
 
 .klav-popup-content {
     position:fixed;

@@ -1,8 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'gatsby'
+import loadable from '@loadable/component';
 import StoreContext from '../../../context/store'
 import ProductBoxGallery from '../../collectionPage/productBoxGallery'
 import ImageSpin from '../imageSpin'
+
+const NotifyModal = loadable(() => import('../../collectionPage/notifyModal'))
 
 const FeaturedProductBox = props => {
     const context = useContext(StoreContext);
@@ -11,6 +14,9 @@ const FeaturedProductBox = props => {
     const mainOption = getMainOption()
     const [swatchColor, setSwatchColor] = useState(mainOption === '' ? '' : mainOption.values[0])
     const [showSpin, setShowSpin] = useState(false);
+
+    const [notifyModalShow, setNotifyModalShow] = useState(false);
+
     function getMainOption() {
         let tempOption = '';
         const options = product.options ? product.options.filter(option => option.name === 'Rose Color') : []
@@ -34,7 +40,8 @@ const FeaturedProductBox = props => {
     }
 
     const notifyMe = () => {
-        props.showNotifyModal();
+        console.log("notifyMe - featuredProductBox")
+        showNotifyModal();
     }
     const selectProductSwatch = (swatchColor) => {
         setSwatchColor(swatchColor)
@@ -44,9 +51,26 @@ const FeaturedProductBox = props => {
         e.preventDefault();
     }
 
+    const showNotifyModal = () => {
+        setNotifyModalShow(true);
+    }
+
+    const closeNotifyModal = () => {
+        console.log(`[data-product-handle="${product.handle}"] .klav-popup`);
+        if (document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`)) {
+          document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`).classList.remove("fade-in");
+          document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`).classList.add("fade-out");
+        }
+        setTimeout(() => {
+          if (document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`)) {
+            document.querySelector(`[data-product-handle="${product.handle}"] .klav-popup`).classList.remove("fade-out");
+          }
+          setNotifyModalShow(false);
+        }, 500)
+    }
+
     return (
-        
-        <li className="grid__item grid__item--collection-template " key={product.title}>
+        <li className="grid__item grid__item--collection-template " key={product.title} data-product-handle={product.handle}>
             <div className="grid-view-item product-card">
                 <span className="visually-hidden product-card-title">{product.title}</span>
      
@@ -94,6 +118,9 @@ const FeaturedProductBox = props => {
                         </button>
                 }
             </div>
+            {(product.variants.length === 1 && !product.variants[0].availableForSale) ? 
+                <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
+            :null}
         </li>
     );
 };

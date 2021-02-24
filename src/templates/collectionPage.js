@@ -10,7 +10,7 @@ const NotifyModal = loadable(() => import('../components/collectionPage/notifyMo
 const collectionPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
   const [ displayProductCount, setDisplayProductCount ] = useState(16);
-  const [notifyModalShow, setNotifyModalShow] = useState(false);
+
   const [badgeStyles, setBadgeStyles] = useState([]);
   const loadMoreProducts = (e) => {
     e.preventDefault();
@@ -68,19 +68,6 @@ const collectionPage = ({ data, pageContext }) => {
     e.preventDefault();
   }
 
-  const showNotifyModal = () => {
-    setNotifyModalShow(true)
-  }
-
-  const closeNotifyModal = () => {
-    document.querySelector(".klav-popup").classList.remove("fade-in");
-    document.querySelector(".klav-popup").classList.add("fade-out");
-    setTimeout(() => {
-        document.querySelector(".klav-popup").classList.remove("fade-out");
-        setNotifyModalShow(false);
-    }, 500)
-  }
-
   const displayedProducts = data.shopifyCollection.products.slice(0, displayProductCount)
   return (
     <>
@@ -125,11 +112,14 @@ const collectionPage = ({ data, pageContext }) => {
               {
                 displayedProducts.map((productItem, productIndex) => {
                   const productReview = productReviews.filter(pr => pr.handle === productItem.handle)
-                  return <CollectionProductBox product={productItem} key={productIndex} review={productReview[0]} showNotifyModal={showNotifyModal} badgeStyles={badgeStyles} />
+                  return <CollectionProductBox 
+                            product={productItem} 
+                            key={productIndex} 
+                            review={productReview[0]}
+                            badgeStyles={badgeStyles}  />
                 })
               }
           </ul>
-          <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
         </div>
         
         {

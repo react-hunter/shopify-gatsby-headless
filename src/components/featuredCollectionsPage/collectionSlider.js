@@ -110,7 +110,7 @@ const CollectionSlider = ({ products, title, handle, reviewList}) => {
                                     closeModal={closeCollectionModal} 
                                     showNotifyModal={showNotifyModal} 
                                     product={selectedProduct} /> )}
-        <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
+        {/* <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} /> */}
       </div>
       <div className="collection-carousel-button_wrapper">
         <Link className="collection-carousel-button" to={`/collections/${handle}`}>Shop {title}</Link>
