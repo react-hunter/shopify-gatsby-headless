@@ -125,7 +125,7 @@ const collectionPage = ({ data, pageContext }) => {
               {
                 displayedProducts.map((productItem, productIndex) => {
                   const productReview = productReviews.filter(pr => pr.handle === productItem.handle)
-                  return <CollectionProductBox collection={data.shopifyCollection} product={productItem} key={productIndex} review={productReview[0]} showNotifyModal={showNotifyModal} badgeStyles={badgeStyles} />
+                  return <CollectionProductBox product={productItem} key={productIndex} review={productReview[0]} showNotifyModal={showNotifyModal} badgeStyles={badgeStyles} />
                 })
               }
           </ul>
@@ -160,6 +160,7 @@ export const query = graphql`
         handle
         title
         tags
+        productType
         options {
           id
           name

@@ -9,7 +9,7 @@ import Glider from 'react-glider';
 import 'glider-js/glider.min.css';
 const NotifyModal = loadable(() => import("../collectionPage/notifyModal"))
 
-const CollectionSlider = ({collection, products, title, handle, reviewList}) => {
+const CollectionSlider = ({ products, title, handle, reviewList}) => {
   const [notifyModalShow, setNotifyModalShow] = useState(false);
   const [badgeStyles, setBadgeStyles] = useState([]);
   const [varaintModalShow, setVaraintModalShow] = useState(false);
@@ -106,8 +106,7 @@ const CollectionSlider = ({collection, products, title, handle, reviewList}) => 
         </Glider>
         <button type="button" id={`next-${handle}`} className="slick-arrow slick-next"> Next</button>
 
-        {varaintModalShow && ( <CollectionVariantSelector 
-                                    collection = {collection.node}
+        {varaintModalShow && ( <CollectionVariantSelector
                                     closeModal={closeCollectionModal} 
                                     showNotifyModal={showNotifyModal} 
                                     product={selectedProduct} /> )}

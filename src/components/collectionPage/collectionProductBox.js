@@ -10,7 +10,6 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
     const context = useContext(StoreContext);
     const [varaintModalShow, setVaraintModalShow] = useState(false);
     const [showSpin, setShowSpin] = useState(false);
-    const collection = props.collection;
     const product = props.product;
     const reviewBadge = props.review ? props.review.badge : '';
     const mainOption = getMainOption()
@@ -111,7 +110,7 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
                         <button className="openVariantModal" onClick={addToBag}>ADD TO BAG{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }</button>
                 }
 
-                {varaintModalShow && ( <CollectionVariantSelector collection={collection} closeModal={closeCollectionModal} showNotifyModal={props.showNotifyModal} product={product} /> )}
+                {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} showNotifyModal={props.showNotifyModal} product={product} /> )}
             </div>
         </li>
     );

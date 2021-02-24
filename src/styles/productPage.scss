@@ -131,17 +131,6 @@
 
 #AddToCart {
   position: relative;
-  .image-spin-wrapper {
-    position: absolute;
-    top: 5px;
-    left: 0;
-    right: 0;
-
-    .imageloader {
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
   @media (max-width: 768px) {
     width: 100% !important;    
   }

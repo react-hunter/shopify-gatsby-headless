@@ -7,14 +7,11 @@ import ImageSpin from '../common/imageSpin'
 const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
     const context = useContext(StoreContext);
     const product = props.product;
-    const collection = props.collection;
     const firstVariant = product.variants[0];
     const [variant, setVariant] = useState(firstVariant)
     const [showSpin, setShowSpin] = useState(false);
     const mainOption = product.options[0]
     const otherOptions = product.options.length > 1 ? product.options.slice(1, product.options.length) : []
-
-    console.log("CollectionVariantSelector collection=== ",collection);
 
     useEffect(() => {
         Array.prototype.slice.call(document.querySelectorAll('.color-swatch')).map(el => {
@@ -153,36 +150,26 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
                     </div>
                     <div className="preview-main-option_wrapper">
                         {
-                            console.log("collection = ", collection)
+                            console.log('product type, ', product.productType )
                         }
                         { 
-                            collection ? 
-                            <>
-                                {
-                                collection.handle !== 'lingerie' ? 
-                                    <div className="preview_wrapper">
-                                        <LazyLoadImage className="variantSelector-preview_img" alt=""
-                                            src={variant.image ? variant.image.originalSrc : ''}
-                                            effect="blur" loading="eager"  />
-                                    </div>
-                                : 
-                                <div className="preview_wrapper special_ratio">
-                                    <LazyLoadImage className="variantSelector-preview_img" alt=""
-                                        src={product.images[0] ? product.images[0].originalSrc : ''}
-                                        effect="blur" loading="eager"  />
-                                    <LazyLoadImage className="variantSelector-preview_img second_image" alt=""
-                                        src={product.images[1] ? product.images[1].originalSrc : ''}
-                                        effect="blur" loading="eager"  />
-                                </div>
-                                }
-                            </>
-                            :
+                        product.productType !== 'Lingerie'? 
                             <div className="preview_wrapper">
                                 <LazyLoadImage className="variantSelector-preview_img" alt=""
                                     src={variant.image ? variant.image.originalSrc : ''}
                                     effect="blur" loading="eager"  />
                             </div>
+                        : 
+                        <div className="preview_wrapper special_ratio">
+                            <LazyLoadImage className="variantSelector-preview_img" alt=""
+                                src={product.images[0] ? product.images[0].originalSrc : ''}
+                                effect="blur" loading="eager"  />
+                            <LazyLoadImage className="variantSelector-preview_img second_image" alt=""
+                                src={product.images[1] ? product.images[1].originalSrc : ''}
+                                effect="blur" loading="eager"  />
+                        </div>
                         }
+
                         <div className="main-option_wrapper variantSelector-option_wrapper">
                             <span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span>
                             <div className="option_options_wrapper">

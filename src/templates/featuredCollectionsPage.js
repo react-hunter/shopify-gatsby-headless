@@ -20,7 +20,6 @@ const featuredCollectionsPage = ({ data, pageContext }) => {
            {
             data.allShopifyCollection.edges.map((collection, collectionIndex) => {
               return <CollectionSlider
-                        collection = {collection}
                         products={collection.node.products.slice(0, 10)}
                         title={collection.node.title}
                         handle={collection.node.handle}
@@ -50,6 +49,7 @@ export const query = graphql`
             handle
             title
             tags
+            productType
             options {
               id
               name
