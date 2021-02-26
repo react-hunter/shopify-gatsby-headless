@@ -906,7 +906,7 @@ border-radius: 50%;
 
     .lazy-load-image-background {
       @media (max-width: 768px) {
-        width: 45%;
+        width: 50%;
         img {
           width: 100%;
           height: unset;
@@ -918,8 +918,7 @@ border-radius: 50%;
       display: none!important;
 
       @media (max-width: 768px) {
-        display: block!important;        
-        padding: 0 5px;
+        display: block!important;
       }
     }
   }
