@@ -59,7 +59,7 @@ export const query = graphql`
         }
         heroImage {
           desktopImage {
-            fluid (toFormat: WEBP) {
+            fluid (maxWidth: 1500, toFormat: WEBP) {
               ...GatsbyContentfulFluid_withWebp_noBase64
             }
           }

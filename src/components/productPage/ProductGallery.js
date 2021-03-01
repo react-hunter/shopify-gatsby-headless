@@ -29,7 +29,9 @@ const ProductGallery = ({ product, isVarantSelected, selectedVariant }) => {
 
     useEffect(() => {
         if (flktyObject) {
-            flktyObject.select(selectedImageIndex);
+            if (isVarantSelected) {
+                flktyObject.select(selectedImageIndex);
+            }
         }     
 
         if (flkty) {
