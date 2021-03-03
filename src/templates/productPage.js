@@ -15,6 +15,8 @@ const ProductPage = ({ data, pageContext }) => {
     const {id, productReviews} = pageContext;
     const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 8) : [];
 
+    const [isVarantSelected, setIsVarantSelected] = useState(false);
+
     const productReview = productReviews.filter(pr => pr.handle === id)
     
     useEffect(() => {
@@ -39,8 +41,13 @@ const ProductPage = ({ data, pageContext }) => {
             <SEO title={product.title} />
             <div key="product-template" id="ProductSection-product-template" className="product-template__container">
                 <div className="grid product-single product-single--medium-media">
-                    <ProductGallery product={product} selectedVariant={selectedVariant} key="product-gallery" />
-                    <ProductDescription product={product} data={data} review={productReview[0]} selectVariant={setSelectedVariant} key="product-description" />
+                    <ProductGallery product={product} isVarantSelected={isVarantSelected} selectedVariant={selectedVariant} key="product-gallery" />
+                    <ProductDescription product={product} 
+                        data={data} 
+                        review={productReview[0]} 
+                        clickVariantSelect = {setIsVarantSelected}
+                        selectVariant={setSelectedVariant} 
+                        key="product-description" />
                 </div>
             </div>
             <RelatedProductList key="related-list" products={relatedProducts} reviewList={productReviews} />

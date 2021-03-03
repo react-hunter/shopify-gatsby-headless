@@ -3,11 +3,14 @@ import ProductInfo from "./ProductInfo"
 import StoreContext from '../../context/store'
 import { client } from '../../contentful'
 import VariantSelectorsForModal from "./VariantSelectorsForModal"
+import VariantsSelectorButtons from "./VariantsSelectorButtons"
+import LingerieVariantsSelectorButtons from "./LingerieVariantsSelectorButtons"
+
 import Buttons from "./Buttons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 
-const ProductDescription = ({ product, review, selectVariant }) => {
+const ProductDescription = ({ product, review, clickVariantSelect, selectVariant }) => {
 
     const context = useContext(StoreContext);
     const [quantity, setQuantity] = useState(1);
@@ -22,8 +25,6 @@ const ProductDescription = ({ product, review, selectVariant }) => {
         async function getAccordionData() {
             const accordionData = await client.getEntries({'content_type': 'productAccordion'});
             setProductAccordions(accordionData.items);
-
-            console.log("queryselectorall = ", document.querySelectorAll('.accordion_button'));
 
             document.querySelectorAll('.accordion_button').forEach(button => {
                 const accordionButton = button;
@@ -73,6 +74,7 @@ const ProductDescription = ({ product, review, selectVariant }) => {
     }
 
     const openVariantAndFill = (optionName) => {
+        console.log("optionName , ", optionName)
         const selectedOption = product.options.filter(po => po.name === optionName)[0];
         setOptions(selectedOption);
         setModalClass('top0');
@@ -81,29 +83,52 @@ const ProductDescription = ({ product, review, selectVariant }) => {
     const closeModal = () => {
         setModalClass('');
     }
+
+    function showAccordions(jsonObj) {
+        if (jsonObj) {
+            for (var i=0; i<jsonObj.length; i++) {
+                if (jsonObj[i].productHandle === product.handle) {
+                    return { display: `none` };
+                }
+            }
+        }        
+    }
     
+    function findVariant (optionName, optionValue) {
+        var properVariant = null
+        const otherOptionKeys = Object.keys(variant).filter(optionKey => optionKey !== optionName)
+
+        product.variants.map(va => {
+            var matched = true;
+            otherOptionKeys.map(ook => {
+                if(!va.title.split(' / ').includes(variant[ook])) {
+                    matched = false
+                }
+            })
+            if(matched === true && va.title.split(' / ').includes(optionValue)) {
+                properVariant = va;
+            }
+        })
+        return properVariant
+    }
+
     return (
         <div className="product_description-container">
             <div className="grid__item medium-up--one-half rightSideProductContainer">
                 <div className="product-single__meta">
                     <ProductInfo product={product} review={review} />
-                    <div className="variants-selector-buttons">
-                    { 
-                        product.options.map((options, optionIndex) => (
-                            !(options.name === 'Title' && variant[options.name] === 'Default Title') ? 
-                            (<div id={`variantModal-${options.name}-button`} data-type={options.name} 
-                                className="optionBtn optionDefault" onClick={() => openVariantAndFill(options.name)} key={optionIndex}>
-
-                                <span id={options.name} >{options.name}</span>
-                                <span style={{ float: 'right', letterSpacing: '2px' }}> &gt; </span>
-                                <span style={{ float:'right', marginRight: '20px' , letterSpacing: '2px'}} id="choice" 
-                                    className="choice-Box Color variantChoice">{variant[options.name]}</span>
-                            </div>) : null
-                        ))
+                    {product.productType === 'Lingerie'? 
+                        <LingerieVariantsSelectorButtons product={product} variant={variant}
+                            changeOption={handleOptionChange} 
+                            selectVariant={selectVariant} 
+                            clickVariantSelect={clickVariantSelect}
+                            findVariant={findVariant} />
+                        :
+                        <VariantsSelectorButtons product={product} variant={variant} openVariantAndFill={openVariantAndFill} />
                     }
-                    </div>
 
                     <Buttons 
+                        product={product}
                         context={context} 
                         available={available} 
                         quantity={quantity} 
@@ -116,10 +141,10 @@ const ProductDescription = ({ product, review, selectVariant }) => {
                             options={modalOptions}
                             closeModal={closeModal}
                             modalClass={modalClass}
-                            variantList={product.variants}
-                            variant={variant}
+                            clickVariantSelect={clickVariantSelect}
                             // productVariant={productVariant}
                             selectVariant={selectVariant}
+                            findVariant={findVariant}
                         />
                     </div>
                    
@@ -135,7 +160,7 @@ const ProductDescription = ({ product, review, selectVariant }) => {
 
                     <div className="product_accordions-container">
                     { productAccordions.map((item, index) => 
-                        <div key={index}>
+                        <div key={index} style={showAccordions(item.fields.disableProductList)} >
                             <button key={`btn_${index}`} className={`accordion_button ${item.fields.headerClass}`}>
                                 { item.fields.header }
                                 <FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />                                

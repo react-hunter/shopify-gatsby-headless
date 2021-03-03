@@ -1,35 +1,18 @@
 import React from 'react'; /* eslint-disable */
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-const VariantSelectorForModal = ({/*productVariant, */variantList, variant, changeOption, options, closeModal, modalClass, selectVariant}) => {
+const VariantSelectorForModal = ({changeOption, options, closeModal, modalClass, clickVariantSelect, selectVariant, findVariant}) => {
     const clickSelect = (optionName, optionValue) => {
         changeOption(optionName, optionValue)
         console.log("selected varaint num = ", findVariant(optionName, optionValue));
-        selectVariant(findVariant(optionName, optionValue))
+        selectVariant(findVariant(optionName, optionValue));
+        clickVariantSelect(true);
         closeModal()
     }
 
     const closeNav = (e) => {
         e.preventDefault();
         closeModal()
-    }
-
-    const findVariant = (optionName, optionValue) => {
-        var properVariant = null
-        const otherOptionKeys = Object.keys(variant).filter(optionKey => optionKey !== optionName)
-
-        variantList.map(va => {
-            var matched = true;
-            otherOptionKeys.map(ook => {
-                if(!va.title.split(' / ').includes(variant[ook])) {
-                    matched = false
-                }
-            })
-            if(matched === true && va.title.split(' / ').includes(optionValue)) {
-                properVariant = va;
-            }
-        })
-        return properVariant
     }
 
     const checkVariant = (optionName, optionValue) => {
@@ -50,14 +33,14 @@ const VariantSelectorForModal = ({/*productVariant, */variantList, variant, chan
             <div id={`variantModal-${options.name}`} className={`sidenav variantModal ${modalClass}`}>
                 <div className="gridR">
                     <h3 className="varTitle">{options.name}</h3>
+                    <a href="/fakeUrl" className="closebtn" onClick={closeNav}>×</a>
                     {
                         options.values.map((value, optionIndex) => (
                             checkVariant(options.name, value) ? 
                                 (<div className="gridC" onClick={() => clickSelect(options.name, value)} key={optionIndex}>
                                     <LazyLoadImage effect="blur" loading="eager" src={findImage(options.name, value)} alt="" />
                                     <h3>{ value }</h3>
-                                    <span className="sidePrice">${findPrice(options.name, value)}</span>
-                                    <a href="/fakeUrl" className="closebtn" onClick={closeNav}>×</a>
+                                    <span className="sidePrice">${findPrice(options.name, value)}</span>                                
                                 </div> ) : null
                         ))
                     }

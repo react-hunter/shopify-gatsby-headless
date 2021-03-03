@@ -130,8 +130,10 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
                             return <p className="ajax-cart-item-property" key="box-material" >Box Material: { item.value }</p>
                         } else if (item.name === "Rose Color") {
                             return <p className="ajax-cart-item-property" key="rose-color" >Rose Color: { item.value }<span className="color-circle variant-item-color" data-color={ item.value }></span></p>
-                        } else if (item.name === "Box Color") {
-                            return <p className="ajax-cart-item-property" key="box-color" >Box: { item.value }<span className="color-circle variant-item-color" data-color={ item.value }></span></p>
+                        } else if (item.name === "Box Color") {   
+                            let color = item.value.split(" ")[0];
+
+                            return <p className="ajax-cart-item-property" key="box-color" >Box: { color }<span className="color-circle variant-item-color" data-color={ color }></span></p>
                         } else if (item.name === "Title") {
                             if ( item.value === 'Default Title')
                                 return '';

@@ -1,21 +1,22 @@
 #addToBAG {
   position: relative;
-  .image-spin-wrapper {
-      position: absolute;
-      top: 5px;
-      left: 0;
-      right: 0;
-
-      .imageloader.small {
-        margin-left: auto;
-        margin-right: auto;
-      }
-  }
 }
 
 .arrangement-choices_container-mobile {
   &.active {
     display: block;
     height: auto;
+  }
+}
+
+.image-spin-wrapper {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+
+  .imageloader.small {
+    margin-left: auto;
+    margin-right: auto;
   }
 }

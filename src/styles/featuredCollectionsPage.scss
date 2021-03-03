@@ -138,11 +138,6 @@
 }
 .openVariantModal {
     position: relative;
-    .image-spin-wrapper {
-        position: absolute;
-        right: 25%;
-        top: 5px;
-    }
 }
 
 
@@ -151,12 +146,16 @@
     .slick-prev, .slick-next {
         display: block;
         background-image: none;
-        background-color: #EEE;
+        background-color: #EEE!important;
         padding: 15px;
         border-radius: 50%;
         top: 35%;
         z-index: 2;
 
+        &::before {
+            display: none;
+        }
+        
         &::after {
             content: ' ';
             position: absolute;

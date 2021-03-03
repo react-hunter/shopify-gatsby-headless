@@ -5,7 +5,7 @@ import Flickity from 'react-flickity-component'
 import '../../styles/productGallery.css';
 import '../../styles/flickity.css';
 
-const ProductGallery = ({ product, selectedVariant }) => {
+const ProductGallery = ({ product, isVarantSelected, selectedVariant }) => {
     let selectedImageIndex = 0;
     const [flktyObject, setFlktyObject] = useState(null);
     var flkty;
@@ -14,7 +14,9 @@ const ProductGallery = ({ product, selectedVariant }) => {
 
     product.images.map((image, imageIndex) => {
         if(image.originalSrc === selectedVariant.image.originalSrc) {
-            selectedImageIndex = imageIndex;
+            if (isVarantSelected) {
+                selectedImageIndex = imageIndex;
+            }
         }
         return true
     })
@@ -26,10 +28,11 @@ const ProductGallery = ({ product, selectedVariant }) => {
     }, [flkty]);
 
     useEffect(() => {
-
         if (flktyObject) {
-            flktyObject.select(selectedImageIndex);
-        }
+            if (isVarantSelected) {
+                flktyObject.select(selectedImageIndex);
+            }
+        }     
 
         if (flkty) {
             flkty.on('change', () => {
