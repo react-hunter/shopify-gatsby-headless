@@ -279,3 +279,36 @@
 .ajax-cart-item-properties .variant-item-color[data-color="Dark Tie Dye"] {
   background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/TOPDOWN_TieDye_zSTYD_SdxU7JG.png);
   background-size: cover; }
+
+  .atcSticky button {
+    background-color: black !important;
+    color: white !important;
+    
+  }
+
+  .atcSticky {
+    position: fixed;
+    left: 0;
+    bottom: -10px;
+    width: 100%;
+    text-align: right;
+    margin-bottom: 0 !important;
+    font-family: 'Proxima Condensed Extra Bold Alt',sans-serif;
+    font-weight: 700;
+    z-index: 20;
+    background-color: black;
+    transition: all 0.3s ease-out 0s;
+
+    &.show {
+      bottom: -90px;
+    }
+  }
+
+  .product-form__controls-group--submit {
+    margin-top: 0;
+  }
+  
+  .product-form__controls-group.product-form__controls-group--submit {
+    margin-top: 15px
+  }
+  

@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
+
 const VariantsSelectorButtons = ({product,variant,openVariantAndFill}) => {
 
     return (
@@ -11,7 +14,7 @@ const VariantsSelectorButtons = ({product,variant,openVariantAndFill}) => {
                     className="optionBtn optionDefault" onClick={() => openVariantAndFill(options.name)} key={optionIndex}>
 
                     <span id={options.name} >{options.name}</span>
-                    <span style={{ float: 'right', letterSpacing: '2px' }}> &gt; </span>
+                    <FontAwesomeIcon className="fa-angle-down" icon={faAngleRight} size="1x" style={{ float: 'right', marginTop: '3px' }} />  
                     <span style={{ float:'right', marginRight: '20px' , letterSpacing: '2px'}} id="choice" 
                         className="choice-Box Color variantChoice">{variant[options.name]}</span>
                 </div>) : null

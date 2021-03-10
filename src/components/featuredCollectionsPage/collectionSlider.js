@@ -59,7 +59,9 @@ const CollectionSlider = ({ products, title, handle, reviewList}) => {
     document.querySelector(".variantSelector_wrapper").classList.add('animate-top');
 
     setTimeout(() => {
-        document.querySelector(".variantSelector_wrapper").classList.remove('animate-top');
+        if (document.querySelector(".variantSelector_wrapper")) {
+          document.querySelector(".variantSelector_wrapper").classList.remove('animate-top');
+        }
         setVaraintModalShow(false);
         document.getElementsByTagName("html")[0].classList.remove("no-scroll");
         document.querySelector(".scrollPreventer").style.overflow = "visible";

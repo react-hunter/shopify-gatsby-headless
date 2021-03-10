@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react' /* eslint-disable */
 import ProductInfo from "./ProductInfo"
 import StoreContext from '../../context/store'
+import loadable from '@loadable/component';
 import { client } from '../../contentful'
 import VariantSelectorsForModal from "./VariantSelectorsForModal"
 import VariantsSelectorButtons from "./VariantsSelectorButtons"
@@ -9,6 +10,8 @@ import LingerieVariantsSelectorButtons from "./LingerieVariantsSelectorButtons"
 import Buttons from "./Buttons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
+
+const AtcSticky = loadable(() => import("./AtcSticky"))
 
 const ProductDescription = ({ product, review, clickVariantSelect, selectVariant }) => {
 
@@ -151,26 +154,39 @@ const ProductDescription = ({ product, review, clickVariantSelect, selectVariant
                 </div>
                 
                 <div className="product-single__description rte">
-                    <div
-                        key={`body`}
-                        id="content"
-                        className="content"
-                        dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-                    />
-
+                    
                     <div className="product_accordions-container">
-                    { productAccordions.map((item, index) => 
-                        <div key={index} style={showAccordions(item.fields.disableProductList)} >
-                            <button key={`btn_${index}`} className={`accordion_button ${item.fields.headerClass}`}>
-                                { item.fields.header }
-                                <FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />                                
-                            </button>
-                            <div key={`content_${index}`} className={`accordion_content ${item.fields.contentClass}`} dangerouslySetInnerHTML={{ __html: item.fields.content }} />
+                        <div className="product_description">
+                            <button className={`accordion_button description`}>
+                                    DESCRIPTION
+                                    <FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />                                
+                                </button>
+                            <div
+                                key={`body`}
+                                id="content"
+                                className="content accordion_content"
+                                dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+                            />
                         </div>
-                    )}
+
+                        { productAccordions.map((item, index) => 
+                            <div key={index} style={showAccordions(item.fields.disableProductList)} >
+                                <button key={`btn_${index}`} className={`accordion_button ${item.fields.headerClass}`}>
+                                    { item.fields.header }
+                                    <FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />                                
+                                </button>
+                                <div key={`content_${index}`} className={`accordion_content ${item.fields.contentClass}`} dangerouslySetInnerHTML={{ __html: item.fields.content }} />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
+            <AtcSticky 
+                product={product}
+                context={context} 
+                available={available} 
+                quantity={quantity} 
+                productVariant={productVariant} />
         </div>
     );
 }

@@ -149,9 +149,6 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
                         <div className="closeVariantSelector-mobile_swipe"></div>
                     </div>
                     <div className="preview-main-option_wrapper">
-                        {
-                            console.log('product type, ', product.productType )
-                        }
                         { 
                         product.productType !== 'Lingerie'? 
                             <div className="preview_wrapper">
@@ -246,7 +243,16 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
                                     style={{ display: 'inline-block' }}>NOTIFY ME</button>
                             )
                     }
-                    <Link to="/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZER NOW</Link>
+
+                    {
+                        console.log("product.productType ->", product.productType)
+                    }
+                    { 
+                    product.productType !== 'Lingerie' && product.productType !== 'Rose Bear' ? 
+                        <Link to="/pages/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZER NOW</Link>
+                        : 
+                        ''
+                    }
                 </div>
             </div>
             <div className="variantSelector_overlay" 

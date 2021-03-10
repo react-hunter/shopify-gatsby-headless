@@ -7,6 +7,10 @@ import '../styles/collectionPage.scss';
 import '../styles/widget.min.css';
 const NotifyModal = loadable(() => import('../components/collectionPage/notifyModal'))
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faMinus } from "@fortawesome/free-solid-svg-icons"
+
 const collectionPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
   const [ displayProductCount, setDisplayProductCount ] = useState(16);
@@ -28,7 +32,8 @@ const collectionPage = ({ data, pageContext }) => {
       document.querySelector("#collectionReadMoreBtn").style.display = "none";
       document.querySelector("#collectionReadMoreFade_wrapper").style.display = "none";
     } else {
-      document.querySelector("#collectionReadMoreBtn").innerHTML = 'Read More';
+      document.querySelector("#collectionReadMoreBtn .fa-plus").style.display ='block';
+      document.querySelector("#collectionReadMoreBtn .fa-minus").style.display ='none';
     }
     setHoverEffectsForCollection();
     getBadgeData();
@@ -54,12 +59,16 @@ const collectionPage = ({ data, pageContext }) => {
     if (showAll === false) {
       document.querySelector('#collectionDescription').style.maxHeight = 'unset';
       document.querySelector("#collectionReadMoreFade_wrapper").style.display = "none";
-      document.querySelector("#collectionReadMoreBtn").innerHTML = 'Read Less';
+
+      document.querySelector("#collectionReadMoreBtn .fa-plus").style.display ='none';
+      document.querySelector("#collectionReadMoreBtn .fa-minus").style.display ='block';
       showAll = true;
     } else {
       document.querySelector('#collectionDescription').style.maxHeight = '50px';
       document.querySelector("#collectionReadMoreFade_wrapper").style.display = "block";
-      document.querySelector("#collectionReadMoreBtn").innerHTML = 'Read More';
+
+      document.querySelector("#collectionReadMoreBtn .fa-plus").style.display ='block';
+      document.querySelector("#collectionReadMoreBtn .fa-minus").style.display ='none';
       showAll = false;
     }
   }
@@ -96,8 +105,11 @@ const collectionPage = ({ data, pageContext }) => {
                   <div id="collectionReadMoreFade">
                   </div>
                 </div>
+
                 <div id="collectionReadMoreBtn" style={{ textAlign: 'center', cursor: 'pointer'}}                  
                   onClick={showAllContent} onKeyDown={handleKeyDown} role="button" tabIndex="0">
+                    <FontAwesomeIcon className="fa-icon fa-plus" icon={faPlus} size="1x" style={{}} />
+                    <FontAwesomeIcon className="fa-icon fa-minus" icon={faMinus} size="1x" style={{}} />
                 </div>
               </div>
 

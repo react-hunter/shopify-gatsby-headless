@@ -8,7 +8,6 @@ const ProductGallery = loadable(() => import("../components/productPage/ProductG
 const ProductDescription = loadable(() => import("../components/productPage/ProductDescription"))
 const RelatedProductList = loadable(() => import("../components/productPage/RelatedProductList"))
 
-
 const ProductPage = ({ data, pageContext }) => {
     const product = data.shopifyProduct;
     const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
@@ -21,12 +20,6 @@ const ProductPage = ({ data, pageContext }) => {
     
     useEffect(() => {
         setTimeout(setPDPHeaderPadding, 1000);
-        const addToCartButtonSticky = document.querySelector(".atcSticky");
-        if (addToCartButtonSticky){
-            for (var i=0;i<addToCartButtonSticky.length;i++) {
-                addToCartButtonSticky[i].style.display = "none";
-            }
-        }
     }, [])
 
     function setPDPHeaderPadding() {
@@ -94,6 +87,7 @@ export const query = graphql`
             products {
                 id
                 handle
+                productType
                 title
                 tags
                 options {
