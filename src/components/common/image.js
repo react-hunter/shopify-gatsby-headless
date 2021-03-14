@@ -2,27 +2,27 @@ import React, { useState } from 'react';
 import '../../styles/imageloader.css';
 
 const CustomImage = (props) => {
-    const [loading, setLoading] = useState(true);
-    const { src, ...other } = props
-    const imageLoaded = () => {
-      setLoading(false);
-    }
-    const hideClass = loading ? 'hide' : ''
-    return (
-      <>
-        {src === '' ? null :
-          <>
-            { loading ? <ImageSpin small={props.small} /> : null }
-            <img 
-              src={src}
-              className={`${props.className} ${hideClass}`}
-              onLoad={imageLoaded}
-              alt=""
-              {...other} />
-          </>
-        }
-      </>
-    );
+  const [loading, setLoading] = useState(true);
+  const { src, ...other } = props
+  const imageLoaded = () => {
+    setLoading(false);
+  }
+  const hideClass = loading ? 'hide' : ''
+  return (
+    <>
+      {src === '' ? null :
+        <>
+          { loading ? <ImageSpin small={props.small} /> : null }
+          <img 
+            src={src}
+            className={`${props.className} ${hideClass}`}
+            onLoad={imageLoaded}
+            alt=""
+            {...other} />
+        </>
+      }
+    </>
+  );
 };
 
 const ImageSpin = (props) => {

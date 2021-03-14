@@ -8,12 +8,14 @@ module.exports = {
     description: `Simple theme to build a blazing simple and fast store with Gatsby and Shopify.`,
     author: `@alexislepresle`,
   },
+  flags: { PRESERVE_WEBPACK_CACHE: true },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-fontawesome-css`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-layout`,
     `gatsby-transformer-ffmpeg`,
+    `gatsby-plugin-gatsby-cloud`,
     {
       resolve: `gatsby-plugin-apollo-shopify`,
       options: {

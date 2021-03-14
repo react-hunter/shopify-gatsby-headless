@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react' /* eslint-disable */
 import ProductInfo from "./ProductInfo"
 import StoreContext from '../../context/store'
+import loadable from '@loadable/component';
 import { client } from '../../contentful'
 import VariantSelectorsForModal from "./VariantSelectorsForModal"
 import VariantsSelectorButtons from "./VariantsSelectorButtons"
@@ -10,169 +11,182 @@ import Buttons from "./Buttons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 
+const AtcSticky = loadable(() => import("./AtcSticky"))
+
 const ProductDescription = ({ product, review, clickVariantSelect, selectVariant }) => {
+	const context = useContext(StoreContext);
+	const [quantity, setQuantity] = useState(1);
+	const [variant, setVariant] = useState(product.variants[0]);
+	const productVariant = context.store.client.product.helpers.variantForOptions(product, variant) || variant;
+	const [available, setAvailable] = useState(productVariant.availableForSale)
+	const [modalOptions, setOptions] = useState(product.options[0])
+	const [modalClass, setModalClass] = useState('');
+	const [productAccordions, setProductAccordions] = useState([]);
 
-    const context = useContext(StoreContext);
-    const [quantity, setQuantity] = useState(1);
-    const [variant, setVariant] = useState(product.variants[0]);
-    const productVariant = context.store.client.product.helpers.variantForOptions(product, variant) || variant;
-    const [available, setAvailable] = useState(productVariant.availableForSale)
-    const [modalOptions, setOptions] = useState(product.options[0])
-    const [modalClass, setModalClass] = useState('');
-    const [productAccordions, setProductAccordions] = useState([]);
+	useEffect(() => {
+		async function getAccordionData() {
+			const accordionData = await client.getEntries({'content_type': 'productAccordion'});
+			setProductAccordions(accordionData.items);
 
-    useEffect(() => {
-        async function getAccordionData() {
-            const accordionData = await client.getEntries({'content_type': 'productAccordion'});
-            setProductAccordions(accordionData.items);
+			document.querySelectorAll('.accordion_button').forEach(button => {
+				const accordionButton = button;
+				accordionButton.innerHTML = accordionButton.innerHTML + '<i className="fas fa-angle-down"></i>';
+				button.addEventListener('click', () => {
+					button.classList.toggle('accordion_button--active');
+				});
+			});
+		}
+		let defaultOptionValues = {}
+		product.options.forEach(selector => {
+			defaultOptionValues[selector.name] = selector.values[0]
+		})
 
-            document.querySelectorAll('.accordion_button').forEach(button => {
-                const accordionButton = button;
-                accordionButton.innerHTML = accordionButton.innerHTML + '<i className="fas fa-angle-down"></i>';
-                button.addEventListener('click', () => {
-                    button.classList.toggle('accordion_button--active');
-                });
-            });
-        }
-        let defaultOptionValues = {}
-        product.options.forEach(selector => {
-            defaultOptionValues[selector.name] = selector.values[0]
-        })
+		setVariant(defaultOptionValues);
+		getAccordionData()
+	}, [])
 
-        setVariant(defaultOptionValues);
-        getAccordionData()
-    }, [])
-
-    useEffect(() => {
-        checkAvailability(product.shopifyId)
-    }, [productVariant])
+	useEffect(() => {
+		checkAvailability(product.shopifyId)
+	}, [productVariant])
 
 
-    function rotateButton(identifier){
-        if(document.getElementsByClassName(identifier)[0].firstElementChild.style.transform === "rotate(0deg)"){
-          document.getElementsByClassName(identifier)[0].firstElementChild.style.transform = "rotate(180deg)"
-        }else{
-          document.getElementsByClassName(identifier)[0].firstElementChild.style.transform = "rotate(0deg)"
-        }
-    }
+	function rotateButton(identifier){
+		if(document.getElementsByClassName(identifier)[0].firstElementChild.style.transform === "rotate(0deg)"){
+			document.getElementsByClassName(identifier)[0].firstElementChild.style.transform = "rotate(180deg)"
+		}else{
+			document.getElementsByClassName(identifier)[0].firstElementChild.style.transform = "rotate(0deg)"
+		}
+	}
 
-    const checkAvailability = productId => {
-        context.store.client.product.fetch(productId).then((product) => {
-            // this checks the currently selected variant for availability
-            const result = product.variants.filter(
-                variant => variant.id === productVariant.shopifyId
-            )
-            setAvailable(result[0] ? result[0].available : false)
-        })
-    }
+	const checkAvailability = productId => {
+		context.store.client.product.fetch(productId).then((product) => {
+			// this checks the currently selected variant for availability
+			const result = product.variants.filter(
+				variant => variant.id === productVariant.shopifyId
+			)
+			setAvailable(result[0] ? result[0].available : false)
+		})
+	}
 
-    const handleOptionChange = (name, value) => {
-        setVariant(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
-    }
+	const handleOptionChange = (name, value) => {
+		setVariant(prevState => ({
+			...prevState,
+			[name]: value
+		}))
+	}
 
-    const openVariantAndFill = (optionName) => {
-        console.log("optionName , ", optionName)
-        const selectedOption = product.options.filter(po => po.name === optionName)[0];
-        setOptions(selectedOption);
-        setModalClass('top0');
-    }
+	const openVariantAndFill = (optionName) => {
+		const selectedOption = product.options.filter(po => po.name === optionName)[0];
+		setOptions(selectedOption);
+		setModalClass('top0');
+	}
 
-    const closeModal = () => {
-        setModalClass('');
-    }
+	const closeModal = () => {
+		setModalClass('');
+	}
 
-    function showAccordions(jsonObj) {
-        if (jsonObj) {
-            for (var i=0; i<jsonObj.length; i++) {
-                if (jsonObj[i].productHandle === product.handle) {
-                    return { display: `none` };
-                }
-            }
-        }        
-    }
-    
-    function findVariant (optionName, optionValue) {
-        var properVariant = null
-        const otherOptionKeys = Object.keys(variant).filter(optionKey => optionKey !== optionName)
+	function showAccordions(jsonObj) {
+		if (jsonObj) {
+			for (var i=0; i<jsonObj.length; i++) {
+				if (jsonObj[i].productHandle === product.handle) {
+					return { display: `none` };
+				}
+			}
+		}
+	}
+	
+	function findVariant (optionName, optionValue) {
+		var properVariant = null
+		const otherOptionKeys = Object.keys(variant).filter(optionKey => optionKey !== optionName)
 
-        product.variants.map(va => {
-            var matched = true;
-            otherOptionKeys.map(ook => {
-                if(!va.title.split(' / ').includes(variant[ook])) {
-                    matched = false
-                }
-            })
-            if(matched === true && va.title.split(' / ').includes(optionValue)) {
-                properVariant = va;
-            }
-        })
-        return properVariant
-    }
+		product.variants.map(va => {
+			var matched = true;
+			otherOptionKeys.map(ook => {
+				if(!va.title.split(' / ').includes(variant[ook])) {
+					matched = false
+				}
+			})
+			if(matched === true && va.title.split(' / ').includes(optionValue)) {
+				properVariant = va;
+			}
+		})
+		return properVariant
+	}
 
-    return (
-        <div className="product_description-container">
-            <div className="grid__item medium-up--one-half rightSideProductContainer">
-                <div className="product-single__meta">
-                    <ProductInfo product={product} review={review} />
-                    {product.productType === 'Lingerie'? 
-                        <LingerieVariantsSelectorButtons product={product} variant={variant}
-                            changeOption={handleOptionChange} 
-                            selectVariant={selectVariant} 
-                            clickVariantSelect={clickVariantSelect}
-                            findVariant={findVariant} />
-                        :
-                        <VariantsSelectorButtons product={product} variant={variant} openVariantAndFill={openVariantAndFill} />
-                    }
+	return (
+		<div className="product_description-container">
+			<div className="grid__item medium-up--one-half rightSideProductContainer">
+				<div className="product-single__meta">
+					<ProductInfo product={product} review={review} />
+					{product.productType === 'Lingerie'? 
+						<LingerieVariantsSelectorButtons product={product} variant={variant}
+							changeOption={handleOptionChange} 
+							selectVariant={selectVariant} 
+							clickVariantSelect={clickVariantSelect}
+							findVariant={findVariant} />
+						:
+						<VariantsSelectorButtons product={product} variant={variant} openVariantAndFill={openVariantAndFill} />
+					}
 
-                    <Buttons 
-                        product={product}
-                        context={context} 
-                        available={available} 
-                        quantity={quantity} 
-                        productVariant={productVariant}
-                    />
+					<Buttons 
+						product={product}
+						context={context} 
+						available={available} 
+						quantity={quantity} 
+						productVariant={productVariant}
+					/>
 
-                    <div className="variant-selector-sideNav">
-                        <VariantSelectorsForModal
-                            changeOption={handleOptionChange}
-                            options={modalOptions}
-                            closeModal={closeModal}
-                            modalClass={modalClass}
-                            clickVariantSelect={clickVariantSelect}
-                            // productVariant={productVariant}
-                            selectVariant={selectVariant}
-                            findVariant={findVariant}
-                        />
-                    </div>
-                   
-                </div>
-                
-                <div className="product-single__description rte">
-                    <div
-                        key={`body`}
-                        id="content"
-                        className="content"
-                        dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-                    />
+					<div className="variant-selector-sideNav">
+						<VariantSelectorsForModal
+							changeOption={handleOptionChange}
+							options={modalOptions}
+							closeModal={closeModal}
+							modalClass={modalClass}
+							clickVariantSelect={clickVariantSelect}
+							// productVariant={productVariant}
+							selectVariant={selectVariant}
+							findVariant={findVariant}
+						/>
+					</div>
+						
+				</div>
+				
+				<div className="product-single__description rte">
+						
+					<div className="product_accordions-container">
+						<div className="product_description">
+							<button className={`accordion_button description`}>
+								DESCRIPTION
+								<FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />                                
+							</button>
+							<div
+								key={`body`}
+								id="content"
+								className="content accordion_content"
+								dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+							/>
+						</div>
 
-                    <div className="product_accordions-container">
-                    { productAccordions.map((item, index) => 
-                        <div key={index} style={showAccordions(item.fields.disableProductList)} >
-                            <button key={`btn_${index}`} className={`accordion_button ${item.fields.headerClass}`}>
-                                { item.fields.header }
-                                <FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />                                
-                            </button>
-                            <div key={`content_${index}`} className={`accordion_content ${item.fields.contentClass}`} dangerouslySetInnerHTML={{ __html: item.fields.content }} />
-                        </div>
-                    )}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
+						{ productAccordions.map((item, index) => 
+							<div key={index} style={showAccordions(item.fields.disableProductList)} >
+								<button key={`btn_${index}`} className={`accordion_button ${item.fields.headerClass}`}>
+									{ item.fields.header }
+									<FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />                                
+								</button>
+								<div key={`content_${index}`} className={`accordion_content ${item.fields.contentClass}`} dangerouslySetInnerHTML={{ __html: item.fields.content }} />
+							</div>
+						)}
+					</div>
+				</div>
+			</div>
+			<AtcSticky 
+				product={product}
+				context={context} 
+				available={available} 
+				quantity={quantity} 
+				productVariant={productVariant} />
+		</div>
+	);
 }
 
 export default ProductDescription;

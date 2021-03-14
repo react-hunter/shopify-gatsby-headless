@@ -1,24 +1,27 @@
 import React from 'react';
 
-const VariantsSelectorButtons = ({product,variant,openVariantAndFill}) => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
 
-    return (
-        <div className="variants-selector-buttons">
-        { 
-            product.options.map((options, optionIndex) => (
-                !(options.name === 'Title' && variant[options.name] === 'Default Title') ? 
-                (<div id={`variantModal-${options.name}-button`} data-type={options.name} 
-                    className="optionBtn optionDefault" onClick={() => openVariantAndFill(options.name)} key={optionIndex}>
+const VariantsSelectorButtons = ({product, variant, openVariantAndFill}) => {
 
-                    <span id={options.name} >{options.name}</span>
-                    <span style={{ float: 'right', letterSpacing: '2px' }}> &gt; </span>
-                    <span style={{ float:'right', marginRight: '20px' , letterSpacing: '2px'}} id="choice" 
-                        className="choice-Box Color variantChoice">{variant[options.name]}</span>
-                </div>) : null
-            ))
-        }
-        </div>
-    );
+	return (
+		<div className="variants-selector-buttons">
+		{ 
+			product.options.map((options, optionIndex) => (
+				!(options.name === 'Title' && variant[options.name] === 'Default Title') ? 
+				(<div id={`variantModal-${options.name}-button`} data-type={options.name} 
+					className="optionBtn optionDefault" onClick={() => openVariantAndFill(options.name)} key={optionIndex} role="button">
+
+					<span id={options.name} >{options.name}</span>
+					<FontAwesomeIcon className="fa-angle-down" icon={faAngleRight} size="1x" style={{ float: 'right', marginTop: '3px' }} />  
+					<span style={{ float:'right', marginRight: '20px' , letterSpacing: '2px'}} id="choice" 
+						className="choice-Box Color variantChoice">{variant[options.name]}</span>
+				</div>) : null
+			))
+		}
+		</div>
+	);
 };
 
 export default VariantsSelectorButtons;
