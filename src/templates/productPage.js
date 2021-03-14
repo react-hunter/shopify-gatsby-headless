@@ -9,49 +9,49 @@ const ProductDescription = loadable(() => import("../components/productPage/Prod
 const RelatedProductList = loadable(() => import("../components/productPage/RelatedProductList"))
 
 const ProductPage = ({ data, pageContext }) => {
-    const product = data.shopifyProduct;
-    const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
-    const {id, productReviews} = pageContext;
-    const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 8) : [];
+	const product = data.shopifyProduct;
+	const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
+	const {id, productReviews} = pageContext;
+	const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 8) : [];
 
-    const [isVarantSelected, setIsVarantSelected] = useState(false);
+	const [isVarantSelected, setIsVarantSelected] = useState(false);
 
-    const productReview = productReviews.filter(pr => pr.handle === id)
-    
-    useEffect(() => {
-        setTimeout(setPDPHeaderPadding, 1000);
-    }, [])
+	const productReview = productReviews.filter(pr => pr.handle === id)
+	
+	useEffect(() => {
+		setTimeout(setPDPHeaderPadding, 1000);
+	}, [])
 
-    function setPDPHeaderPadding() {
-        const headerElement = document.querySelector(".stickyHeader");
-        const headerHeight = headerElement.offsetHeight;
-        let mainProductSection = document.querySelector(".product-template__container");
-        mainProductSection.style.marginTop = `${headerHeight}px`;
-    }
-         
-    return (
-        <>
-            <SEO title={product.title} />
-            <div key="product-template" id="ProductSection-product-template" className="product-template__container">
-                <div className="grid product-single product-single--medium-media">
-                    <ProductGallery product={product} isVarantSelected={isVarantSelected} selectedVariant={selectedVariant} key="product-gallery" />
-                    <ProductDescription product={product} 
-                        data={data} 
-                        review={productReview[0]} 
-                        clickVariantSelect = {setIsVarantSelected}
-                        selectVariant={setSelectedVariant} 
-                        key="product-description" />
-                </div>
-            </div>
-            <RelatedProductList key="related-list" products={relatedProducts} reviewList={productReviews} />
-        </>
-    )
+	function setPDPHeaderPadding() {
+		const headerElement = document.querySelector(".stickyHeader");
+		const headerHeight = headerElement.offsetHeight;
+		let mainProductSection = document.querySelector(".product-template__container");
+		mainProductSection.style.marginTop = `${headerHeight}px`;
+	}
+		 
+	return (
+		<>
+			<SEO title={product.title} />
+			<div key="product-template" id="ProductSection-product-template" className="product-template__container">
+				<div className="grid product-single product-single--medium-media">
+					<ProductGallery product={product} isVarantSelected={isVarantSelected} selectedVariant={selectedVariant} key="product-gallery" />
+					<ProductDescription product={product} 
+						data={data} 
+						review={productReview[0]} 
+						clickVariantSelect = {setIsVarantSelected}
+						selectVariant={setSelectedVariant} 
+						key="product-description" />
+				</div>
+			</div>
+			<RelatedProductList key="related-list" products={relatedProducts} reviewList={productReviews} />
+		</>
+	)
 }
 
 export default ProductPage
 
 export const query = graphql`
-    query($id: String!){
+	query($id: String!){
 		shopifyProduct(handle: {eq: $id}) {
 			id
 			title
@@ -69,10 +69,10 @@ export const query = graphql`
 				title
 				price
 				availableForSale
-                shopifyId
-                image {
-                    originalSrc
-                }
+				shopifyId
+				image {
+					originalSrc
+				}
 				selectedOptions {
 					name
 					value
@@ -80,40 +80,40 @@ export const query = graphql`
 			}
 			images {
 				originalSrc
-                id
-            }
-        }
-        shopifyCollection(handle: {eq: "best-sellers"}) {
-            products {
-                id
-                handle
-                productType
-                title
-                tags
-                options {
-                    id
-                    name
-                    values
-                }
-                images {
-                    originalSrc
-                }
-                variants {
-                    id
-                    title
-                    availableForSale
-                    price
-                    shopifyId
-                    compareAtPrice
-                    image {
-                        originalSrc
-                    }
-                    selectedOptions {
-                        name
-                        value
-                    }
-                }
-            }
-        }
+				id
+			}
+		}
+		shopifyCollection(handle: {eq: "best-sellers"}) {
+			products {
+				id
+				handle
+				productType
+				title
+				tags
+				options {
+					id
+					name
+					values
+				}
+				images {
+					originalSrc
+				}
+				variants {
+					id
+					title
+					availableForSale
+					price
+					shopifyId
+					compareAtPrice
+					image {
+						originalSrc
+					}
+					selectedOptions {
+						name
+						value
+					}
+				}
+			}
+		}
 	}
 `

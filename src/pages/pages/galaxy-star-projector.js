@@ -56,10 +56,6 @@ const GalaxyStarProjector = ()  => {
     }
 
     useEffect(() => {
-        console.log("galaxy-star-projector------------------------------------------------");
-
-        console.log("product === ", product);
-
         document.querySelectorAll('.galaxy_accordion-title').forEach(button => {
             button.addEventListener('click', () => {
                 button.classList.toggle('galaxy_accordion-title--active');
@@ -79,7 +75,7 @@ const GalaxyStarProjector = ()  => {
                     <div className="galaxy_hero-textbox">
                         <div className="galaxy_hero-title">GALAXY STAR PROJECTOR</div>
                         <div className="galaxy_hero-subtitle">The Galaxy Projector turns any room into a night of stars, light, and color and entering you in a cosmic world</div>
-                        <a className="galaxy_hero-arrow" onClick={ galaxyScroll } onKeyDown={handleKeyDown} role="presentation">
+                        <a href="#fakeUrl" className="galaxy_hero-arrow" onClick={ galaxyScroll } onKeyDown={handleKeyDown} role="presentation">
                             <ReactSVG src={DownChevron} />
                         </a>
                     </div>
@@ -110,6 +106,7 @@ const GalaxyStarProjector = ()  => {
                                 <video controls>
                                     <source src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/234/assets/GalaxyProjector.mp4?v=9032016789607494561"
                                         type="video/mp4" />
+                                    <track src="" kind="captions" srclang="en" label="galaxy projector"></track>
                                 </video>
                             </div>
                         </div>

@@ -14,13 +14,13 @@ const Preloader = (props) => {
   return (
     <>
       { loadMore ? 
-          (
-            <div className="preloader">
-              <div className="load-more_loader">
-              </div>
+        (
+          <div className="preloader">
+            <div className="load-more_loader">
             </div>
-          ) :
-          null
+          </div>
+        ) :
+        null
       }
     </>
   );

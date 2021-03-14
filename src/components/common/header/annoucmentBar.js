@@ -87,8 +87,7 @@ const AnnoucmentBar = ({ announceList }) => {
   }
 
   function triggerPlay() {
-    window.anninterval = setInterval(() => {
-  
+    window.anninterval = setInterval(() => {  
       if (anntimer === Number("5000")) {
         anntimer = 0;
   
@@ -98,8 +97,7 @@ const AnnoucmentBar = ({ announceList }) => {
       const progressElement = document.querySelectorAll('.progress-announcement')[0];
       let max = -219.99078369140625;
       percent = parseInt(progressElement.getAttribute('data-progress'));
-      progressElement.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - (Math.round((anntimer / Number("5000")) * 100)).toFixed(2)) / 100) * max);
-  
+      progressElement.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - (Math.round((anntimer / Number("5000")) * 100)).toFixed(2)) / 100) * max);  
     }, 830);
   }
 

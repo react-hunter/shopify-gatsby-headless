@@ -3,8 +3,6 @@ import React, { useState } from 'react';
 const Sort = ({context}) => {
   const [sort, setSort] = useState(context.filteredSort)
   const sorts = []
-
-
   sorts.push(
     <>
       <option key={0} value="featured">

@@ -53,10 +53,10 @@ const RelatedProductList = ({ products, reviewList }) => {
     document.querySelector(".variantSelector_wrapper").classList.add('animate-top');
 
     setTimeout(() => {
-        document.querySelector(".variantSelector_wrapper").classList.remove('animate-top');
-        setVaraintModalShow(false);
-        document.getElementsByTagName("html")[0].classList.remove("no-scroll");
-        document.querySelector(".scrollPreventer").style.overflow = "visible";
+      document.querySelector(".variantSelector_wrapper").classList.remove('animate-top');
+      setVaraintModalShow(false);
+      document.getElementsByTagName("html")[0].classList.remove("no-scroll");
+      document.querySelector(".scrollPreventer").style.overflow = "visible";
     }, 550)
   }
 
@@ -97,7 +97,7 @@ const RelatedProductList = ({ products, reviewList }) => {
                 return (
                   <div key={i} className="products-on-page grid grid--uniform grid--view-items">
                     <FeaturedProductBox product={product} review={productReview[0]} showNotifyModal={showNotifyModal}
-                        badgeStyles={badgeStyles} showVariantModal={showVariantModal} />
+                      badgeStyles={badgeStyles} showVariantModal={showVariantModal} />
                   </div>
                 )
           })}

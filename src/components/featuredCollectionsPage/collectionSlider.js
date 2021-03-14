@@ -25,14 +25,11 @@ const CollectionSlider = ({ products, title, handle, reviewList}) => {
   }, [])
 
   function setHoverEffectsForCollection() {
-
     const allFirstImageElements = document.querySelectorAll(".disableSaveImageIOS");
-    for (let i = 0; i < allFirstImageElements.length; i++) {
-  
+    for (let i = 0; i < allFirstImageElements.length; i++) {  
       allFirstImageElements[i].on('touchstart', function () {  
         this.toggleClass('hover_effect');
-      }, {passive: true});
-  
+      }, {passive: true});  
     }
   }
   
@@ -49,22 +46,21 @@ const CollectionSlider = ({ products, title, handle, reviewList}) => {
     document.querySelector(".klav-popup").classList.remove("fade-in");
     document.querySelector(".klav-popup").classList.add("fade-out");
     setTimeout(() => {
-        document.querySelector(".klav-popup").classList.remove("fade-out");
-        setNotifyModalShow(false);
+      document.querySelector(".klav-popup").classList.remove("fade-out");
+      setNotifyModalShow(false);
     }, 500)
   }
 
   const closeCollectionModal = () => {
     document.querySelector(".variantSelector_wrapper").classList.remove('animate-bottom');
     document.querySelector(".variantSelector_wrapper").classList.add('animate-top');
-
     setTimeout(() => {
-        if (document.querySelector(".variantSelector_wrapper")) {
-          document.querySelector(".variantSelector_wrapper").classList.remove('animate-top');
-        }
-        setVaraintModalShow(false);
-        document.getElementsByTagName("html")[0].classList.remove("no-scroll");
-        document.querySelector(".scrollPreventer").style.overflow = "visible";
+      if (document.querySelector(".variantSelector_wrapper")) {
+        document.querySelector(".variantSelector_wrapper").classList.remove('animate-top');
+      }
+      setVaraintModalShow(false);
+      document.getElementsByTagName("html")[0].classList.remove("no-scroll");
+      document.querySelector(".scrollPreventer").style.overflow = "visible";
     }, 550)
   }
 
@@ -73,8 +69,7 @@ const CollectionSlider = ({ products, title, handle, reviewList}) => {
       <div className="carousel-header_wrapper">
         <span className="carousel-header">{title}</span>
       </div>
-      <div className="Best-Sellers-Carousel">
-      
+      <div className="Best-Sellers-Carousel">      
         <button type="button" id={`prev-${handle}`} className="slick-arrow slick-prev"> Previous</button>
         <Glider draggable={true} scrollLock={true} duration={1} slidesToShow={2} hasArrows={true}
           arrows= {{
@@ -109,10 +104,10 @@ const CollectionSlider = ({ products, title, handle, reviewList}) => {
         <button type="button" id={`next-${handle}`} className="slick-arrow slick-next"> Next</button>
 
         {varaintModalShow && ( <CollectionVariantSelector
-                                    closeModal={closeCollectionModal} 
-                                    showNotifyModal={showNotifyModal} 
-                                    product={selectedProduct} /> )}
-        {/* <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} /> */}
+                                  closeModal={closeCollectionModal} 
+                                  showNotifyModal={showNotifyModal} 
+                                  product={selectedProduct} /> )}
+        <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
       </div>
       <div className="collection-carousel-button_wrapper">
         <Link className="collection-carousel-button" to={`/collections/${handle}`}>Shop {title}</Link>

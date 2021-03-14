@@ -16,42 +16,42 @@ import piVisa from '../../images/slideCartFooter/pi-visa.svg'
 
 
 const ajaxCartFooter = () => {
-    return (
-        <ul className="payment-icons">
-            <li>
-                <ReactSVG src={piAmazon} />
-            </li> 
-            <li>
-                <ReactSVG src={piAmerican_express} />
-            </li> 
-            <li>
-                <ReactSVG src={piApple_pay} />
-            </li> 
-            <li>
-                <ReactSVG src={piBitcoin} />
-            </li> 
-            <li>
-                <ReactSVG src={piBitcoin_cash} />
-            </li> 
+	return (
+		<ul className="payment-icons">
+			<li>
+				<ReactSVG src={piAmazon} />
+			</li> 
+			<li>
+				<ReactSVG src={piAmerican_express} />
+			</li> 
+			<li>
+				<ReactSVG src={piApple_pay} />
+			</li> 
+			<li>
+				<ReactSVG src={piBitcoin} />
+			</li> 
+			<li>
+				<ReactSVG src={piBitcoin_cash} />
+			</li> 
 
-            <li>
-                <ReactSVG src={piDiscover} />
-            </li> 
-            <li>
-                <ReactSVG src={piEthereum} />
-            </li> 
+			<li>
+				<ReactSVG src={piDiscover} />
+			</li> 
+			<li>
+				<ReactSVG src={piEthereum} />
+			</li> 
 
-            <li>
-                <ReactSVG src={piLitecoin} />
-            </li> 
-            <li>
-                <ReactSVG src={piMaster} />
-            </li> 
-            <li>
-                <ReactSVG src={piVisa} />
-            </li>
-        </ul>
-    );
+			<li>
+				<ReactSVG src={piLitecoin} />
+			</li> 
+			<li>
+				<ReactSVG src={piMaster} />
+			</li> 
+			<li>
+				<ReactSVG src={piVisa} />
+			</li>
+		</ul>
+	);
 };
-    
+	
 export default ajaxCartFooter;

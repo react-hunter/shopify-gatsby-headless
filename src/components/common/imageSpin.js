@@ -4,8 +4,7 @@ const ImageSpin = (props) => {
   const smallClass = props.small === 'small' ? 'small' : ''
   return (
     <div className={`imageloader ${smallClass}`}>
-      <div className="load-more_loader">
-      </div>
+      <div className="load-more_loader"></div>
     </div>
   );
 }
