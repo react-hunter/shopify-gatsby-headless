@@ -111,9 +111,9 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 					mainOption === '' ? '': 
 					mainOption.values.slice(0, 5).map((item, index) => {
 						return (
-							<div className="color-swatch" key={index} 
+							<div className="color-swatch" key={index}
 								onClick={() => selectProductSwatch(item)} onKeyDown={handleKeyDown}
-								role="button" tabIndex="0" data-rose_color={item}>                                        
+								role="button" tabIndex="0" data-rose_color={item}>
 							</div>
 						)
 					})
