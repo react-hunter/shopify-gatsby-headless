@@ -17,7 +17,7 @@ const ImageSections = React.memo(function ImageSections(props) {
 						{ imageItem.imageLeft &&
 							<div className="fifty_fifty-image_container">
 								{isDesktop && <span className="banner_img-desktop"><Img fluid={imageItem.imageUrl.fluid} className="fifty_fifty-img ls-is-cached" loading="lazy" alt="" /></span>}
-								{isMobile && <span className="banner_img-mobile"><Img fixed={imageItem.imageUrl.fixed} className="fifty_fifty-img ls-is-cached" loading="lazy" alt="" /></span>}
+								<span className="banner_img-mobile"><Img fixed={imageItem.imageUrl.fixed} className="fifty_fifty-img ls-is-cached" loading="lazy" alt="" /></span>
 							</div>
 						}					
 						<div className="fifty_fifty-text_container">
@@ -36,7 +36,7 @@ const ImageSections = React.memo(function ImageSections(props) {
 						{ imageItem.imageLeft === false &&
 							<div className="fifty_fifty-image_container">
 								{isDesktop && <span className="banner_img-desktop"><Img fluid={imageItem.imageUrl.fluid} loading="lazy" alt="" /></span>}
-								{isMobile && <span className="banner_img-mobile"><Img fixed={imageItem.imageUrl.fixed} loading="lazy" alt="" /></span>}
+								<span className="banner_img-mobile"><Img fixed={imageItem.imageUrl.fixed} loading="lazy" alt="" /></span>
 							</div>
 						}
 					</div>
