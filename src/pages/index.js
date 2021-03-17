@@ -45,12 +45,18 @@ export const query = graphql`
       nodes {
         homeImageSectionItem {
           imageUrl {
-            fluid(toFormat: WEBP) {
-              ...GatsbyContentfulFluid_withWebp_noBase64
-            }
-            fixed(width: 200, toFormat: WEBP) {
-              ...GatsbyContentfulFixed_withWebp_noBase64
-            }
+            # fluid(toFormat: WEBP) {
+            #   ...GatsbyContentfulFluid_withWebp_noBase64
+            # }
+            # fixed(width: 200, toFormat: WEBP) {
+            #   ...GatsbyContentfulFixed_withWebp_noBase64
+            # }
+            gatsbyImageData(
+              width: 500
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+              layout: FULL_WIDTH
+            )
           }
           imageLeft
           title
@@ -59,14 +65,26 @@ export const query = graphql`
         }
         heroImage {
           desktopImage {
-            fluid (maxWidth: 1500, quality: 80, toFormat: WEBP) {
-              ...GatsbyContentfulFluid_withWebp_noBase64
-            }
+            # fluid (maxWidth: 1500, quality: 80, toFormat: WEBP) {
+            #   ...GatsbyContentfulFluid_withWebp_noBase64
+            # }
+            gatsbyImageData(
+              width: 1500
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+              layout: FULL_WIDTH
+            )
           }
           mobileImage {
-            fluid (maxWidth: 450, quality: 100, toFormat: WEBP) {
-              ...GatsbyContentfulFluid_withWebp_noBase64
-            }
+            # fluid (maxWidth: 450, quality: 100, toFormat: WEBP) {
+            #   ...GatsbyContentfulFluid_withWebp_noBase64
+            # }
+            gatsbyImageData(
+              width: 450
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+              layout: FULL_WIDTH
+            )
           }
           buttonText
           title

@@ -1,22 +1,28 @@
 import React from 'react';
 import { Link } from 'gatsby'
-import Img from 'gatsby-image'
-import {
-	isDesktop,
-	isMobile
-} from 'react-device-detect';
+// import Img from 'gatsby-image'
+import { GatsbyImage } from "gatsby-plugin-image"
+import useDeviceDetect from "../../utils/useDeviceDetect";
 import '../../styles/heroSection.css';
 
 const HeroSection = React.memo(function HeroSection(props) {
+	const { isMobile } = useDeviceDetect();
+	
 	return (
 		<div className="shopify-section">
 			<div className="text_image_banner-container_outer">
 				<div className="text_image_banner-container_inner">
 					<Link to={props.heroImage.imageUrl}> 
-						{isDesktop ? 
-							<Img fluid={props.heroImage.desktopImage.fluid} alt="" className="text_image_banner-img banner_img-desktop" loading="lazy" /> : 
-							<Img fluid={props.heroImage.mobileImage.fluid} alt="" className="text_image_banner-img banner_img-mobile" loading="lazy" />
-						}
+					{/* { isMobile ? 
+							<Img fluid={props.heroImage.mobileImage.fluid} alt="" className="text_image_banner-img banner_img-mobile" loading="lazy" /> :
+							<Img fluid={props.heroImage.desktopImage.fluid} alt="" className="text_image_banner-img banner_img-desktop" loading="lazy" />
+					} */}
+					{ isMobile ? 
+							<GatsbyImage image={props.heroImage.mobileImage.gatsbyImageData} className="text_image_banner-img banner_img-mobile" loading="eager" alt="" /> :
+							<GatsbyImage image={props.heroImage.desktopImage.gatsbyImageData} className="text_image_banner-img banner_img-desktop" loading="eager" alt="" />
+							// <Img fluid={props.heroImage.mobileImage.fluid} alt="" className="text_image_banner-img banner_img-mobile" loading="lazy" /> :
+							// <Img fluid={props.heroImage.desktopImage.fluid} alt="" className="text_image_banner-img banner_img-desktop" loading="lazy" />
+					}
 					</Link>
 					<div className="text_image_banner-content_container">
 						<h2 className="text_image_banner-title">{props.heroImage.title}</h2>
@@ -27,7 +33,7 @@ const HeroSection = React.memo(function HeroSection(props) {
 				</div>
 			</div>
 		</div>
-	);
+	)
 });
 
 export default HeroSection;
