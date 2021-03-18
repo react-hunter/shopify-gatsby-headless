@@ -32,9 +32,12 @@ export const query = graphql`
           image {
             localFile {
               childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
+                gatsbyImageData(
+                  width: 500
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP]
+                  layout: FULL_WIDTH
+                )
               }
             }
           }
@@ -45,14 +48,8 @@ export const query = graphql`
       nodes {
         homeImageSectionItem {
           imageUrl {
-            # fluid(toFormat: WEBP) {
-            #   ...GatsbyContentfulFluid_withWebp_noBase64
-            # }
-            # fixed(width: 200, toFormat: WEBP) {
-            #   ...GatsbyContentfulFixed_withWebp_noBase64
-            # }
             gatsbyImageData(
-              width: 500
+              width: 320
               placeholder: BLURRED
               formats: [AUTO, WEBP]
               layout: FULL_WIDTH
@@ -65,9 +62,6 @@ export const query = graphql`
         }
         heroImage {
           desktopImage {
-            # fluid (maxWidth: 1500, quality: 80, toFormat: WEBP) {
-            #   ...GatsbyContentfulFluid_withWebp_noBase64
-            # }
             gatsbyImageData(
               width: 1500
               placeholder: BLURRED
@@ -76,9 +70,6 @@ export const query = graphql`
             )
           }
           mobileImage {
-            # fluid (maxWidth: 450, quality: 100, toFormat: WEBP) {
-            #   ...GatsbyContentfulFluid_withWebp_noBase64
-            # }
             gatsbyImageData(
               width: 450
               placeholder: BLURRED
