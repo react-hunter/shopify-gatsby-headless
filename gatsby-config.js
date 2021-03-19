@@ -11,9 +11,8 @@ module.exports = {
   flags: { 
     PRESERVE_WEBPACK_CACHE: true,
     FAST_DEV: process.env.NODE_ENV === 'development',
-    FAST_REFRESH: process.env.NODE_ENV === 'development',
     DEV_SSR: process.env.NODE_ENV === 'development',
-    PARALLEL_SOURCING: true,
+    PARALLEL_SOURCING: !(process.env.NODE_ENV === 'development'),
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -42,7 +41,7 @@ module.exports = {
         shopName: process.env.SHOP_NAME,
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
         apiVersion: "2021-01",
-        paginationSize: process.env.NODE_ENV === 'development' ? 3 : 20,
+        paginationSize: 3,
         downloadImages: true,
         includeCollections: ["shop", "content"]
       }
