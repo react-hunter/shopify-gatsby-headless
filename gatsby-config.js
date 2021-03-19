@@ -10,6 +10,10 @@ module.exports = {
   },
   flags: { 
     PRESERVE_WEBPACK_CACHE: true,
+    FAST_DEV: process.env.NODE_ENV === 'development',
+    FAST_REFRESH: process.env.NODE_ENV === 'development',
+    DEV_SSR: process.env.NODE_ENV === 'development',
+    PARALLEL_SOURCING: true,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -75,7 +79,7 @@ module.exports = {
       resolve: `gatsby-source-contentful`,
       options: {
         spaceId: `6i951l4zkbg4`,
-        accessToken: `4sHDdzR4c01y0m9bnsreCxA2FFLyiq142RYnIE5qvtI`,
+        accessToken: `4W4im1-wC9IlKdSz0di8RfajRr7Ud4MDtDylKitjxLE`,
       },
     }
   ],
