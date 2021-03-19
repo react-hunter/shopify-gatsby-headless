@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'gatsby'
-import { GatsbyImage } from "gatsby-plugin-image"
+import { Link } from 'gatsby';
+import { GatsbyImage } from "gatsby-plugin-image";
 import '../../styles/heroSection.css';
 
 const HeroSection = React.memo(function HeroSection(props) {

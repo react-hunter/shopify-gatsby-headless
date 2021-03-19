@@ -8,7 +8,11 @@ module.exports = {
     description: `Simple theme to build a blazing simple and fast store with Gatsby and Shopify.`,
     author: `@alexislepresle`,
   },
-  flags: { PRESERVE_WEBPACK_CACHE: true },
+  flags: { 
+    PRESERVE_WEBPACK_CACHE: true,
+    PRESERVE_FILE_DOWNLOAD_CACHE: true,
+    QUERY_ON_DEMAND: true,
+  },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-fontawesome-css`,

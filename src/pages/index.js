@@ -1,6 +1,6 @@
 import React from 'react'
-import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
+import SEO from "../components/common/seo"
 import HeroSection from "../components/homepage/heroSection"
 import ImageSection from "../components/homepage/imageSections"
 import ArticleSection from "../components/articles/articleSection"
@@ -36,7 +36,7 @@ export const query = graphql`
                   width: 500
                   placeholder: BLURRED
                   formats: [AUTO, WEBP]
-                  layout: FULL_WIDTH
+                  layout: CONSTRAINED
                 )
               }
             }
@@ -47,12 +47,20 @@ export const query = graphql`
     allContentfulHomepage {
       nodes {
         homeImageSectionItem {
-          imageUrl {
+          desktopImage: imageUrl {
             gatsbyImageData(
-              width: 320
+              width: 500
               placeholder: BLURRED
               formats: [AUTO, WEBP]
-              layout: FULL_WIDTH
+              layout: CONSTRAINED
+            )
+          }
+          mobileImage: imageUrl {
+            gatsbyImageData(
+              width: 200
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+              layout: CONSTRAINED
             )
           }
           imageLeft
@@ -71,10 +79,11 @@ export const query = graphql`
           }
           mobileImage {
             gatsbyImageData(
-              width: 450
-              placeholder: BLURRED
+              width: 600
+              placeholder: BLURRED,
+              quality: 80,
               formats: [AUTO, WEBP]
-              layout: FULL_WIDTH
+              layout: CONSTRAINED
             )
           }
           buttonText
