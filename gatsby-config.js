@@ -10,8 +10,6 @@ module.exports = {
   },
   flags: { 
     PRESERVE_WEBPACK_CACHE: true,
-    PRESERVE_FILE_DOWNLOAD_CACHE: true,
-    QUERY_ON_DEMAND: true,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -30,7 +28,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-purgecss',
       options: {
-        develop: true,
+        develop: process.env.NODE_ENV === 'development',
         purgeOnly: ['resources/css/', 'node_modules/gatsby-plugin-fontawesome-css/'],
       },
     },
@@ -40,7 +38,7 @@ module.exports = {
         shopName: process.env.SHOP_NAME,
         accessToken: process.env.SHOPIFY_ACCESS_TOKEN,
         apiVersion: "2021-01",
-        paginationSize: 3,
+        paginationSize: process.env.NODE_ENV === 'development' ? 3 : 20,
         downloadImages: true,
         includeCollections: ["shop", "content"]
       }

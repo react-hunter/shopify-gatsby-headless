@@ -52,7 +52,7 @@ export const query = graphql`
               width: 500
               placeholder: BLURRED
               formats: [AUTO, WEBP]
-              layout: CONSTRAINED
+              layout: FULL_WIDTH
             )
           }
           mobileImage: imageUrl {
@@ -60,7 +60,7 @@ export const query = graphql`
               width: 200
               placeholder: BLURRED
               formats: [AUTO, WEBP]
-              layout: CONSTRAINED
+              layout: FULL_WIDTH
             )
           }
           imageLeft
@@ -83,7 +83,7 @@ export const query = graphql`
               placeholder: BLURRED,
               quality: 80,
               formats: [AUTO, WEBP]
-              layout: CONSTRAINED
+              layout: FULL_WIDTH
             )
           }
           buttonText
