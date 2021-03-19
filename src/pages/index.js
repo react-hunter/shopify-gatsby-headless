@@ -1,6 +1,6 @@
 import React from 'react'
-import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
+import SEO from "../components/common/seo"
 import HeroSection from "../components/homepage/heroSection"
 import ImageSection from "../components/homepage/imageSections"
 import ArticleSection from "../components/articles/articleSection"
@@ -32,9 +32,12 @@ export const query = graphql`
           image {
             localFile {
               childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
+                gatsbyImageData(
+                  width: 500
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP]
+                  layout: CONSTRAINED
+                )
               }
             }
           }
@@ -44,13 +47,21 @@ export const query = graphql`
     allContentfulHomepage {
       nodes {
         homeImageSectionItem {
-          imageUrl {
-            fluid(toFormat: WEBP) {
-              ...GatsbyContentfulFluid_withWebp_noBase64
-            }
-            fixed(width: 200, toFormat: WEBP) {
-              ...GatsbyContentfulFixed_withWebp_noBase64
-            }
+          desktopImage: imageUrl {
+            gatsbyImageData(
+              width: 500
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+              layout: FULL_WIDTH
+            )
+          }
+          mobileImage: imageUrl {
+            gatsbyImageData(
+              width: 200
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+              layout: FULL_WIDTH
+            )
           }
           imageLeft
           title
@@ -59,14 +70,21 @@ export const query = graphql`
         }
         heroImage {
           desktopImage {
-            fluid (maxWidth: 1500, toFormat: WEBP) {
-              ...GatsbyContentfulFluid_withWebp_noBase64
-            }
+            gatsbyImageData(
+              width: 1500
+              placeholder: BLURRED
+              formats: [AUTO, WEBP]
+              layout: FULL_WIDTH
+            )
           }
           mobileImage {
-            fluid (toFormat: WEBP) {
-              ...GatsbyContentfulFluid_withWebp_noBase64
-            }
+            gatsbyImageData(
+              width: 600
+              placeholder: BLURRED,
+              quality: 80,
+              formats: [AUTO, WEBP]
+              layout: FULL_WIDTH
+            )
           }
           buttonText
           title

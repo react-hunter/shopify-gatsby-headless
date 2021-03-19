@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby'
-import Img from 'gatsby-image'
+import { GatsbyImage } from "gatsby-plugin-image"
 import "../../styles/imageSections.css";
 
 const ImageSections = React.memo(function ImageSections(props) {
@@ -12,8 +12,8 @@ const ImageSections = React.memo(function ImageSections(props) {
 					<div className="fifty_fifty-wrapper">
 						{ imageItem.imageLeft &&
 							<div className="fifty_fifty-image_container">
-								<span className="banner_img-desktop"><Img fluid={imageItem.imageUrl.fluid} className="fifty_fifty-img ls-is-cached" loading="lazy" alt="" /></span>
-								<span className="banner_img-mobile"><Img fixed={imageItem.imageUrl.fixed} className="fifty_fifty-img ls-is-cached" loading="lazy" alt="" /></span>
+								<span className="banner_img-mobile"><GatsbyImage image={imageItem.mobileImage.gatsbyImageData} className="fifty_fifty-img ls-is-cached" loading="lazy" alt="" /></span>
+								<span className="banner_img-desktop"><GatsbyImage image={imageItem.desktopImage.gatsbyImageData} className="fifty_fifty-img ls-is-cached" loading="lazy" alt="" /></span>
 							</div>
 						}					
 						<div className="fifty_fifty-text_container">
@@ -31,15 +31,15 @@ const ImageSections = React.memo(function ImageSections(props) {
 						</div>
 						{ imageItem.imageLeft === false &&
 							<div className="fifty_fifty-image_container">
-								<span className="banner_img-desktop"><Img fluid={imageItem.imageUrl.fluid} loading="lazy" alt="" /></span>
-								<span className="banner_img-mobile"><Img fixed={imageItem.imageUrl.fixed} loading="lazy" alt="" /></span>
+								<span className="banner_img-mobile"><GatsbyImage image={imageItem.mobileImage.gatsbyImageData} className="fifty_fifty-img ls-is-cached" loading="lazy" alt="" /></span>
+								<span className="banner_img-desktop"><GatsbyImage image={imageItem.desktopImage.gatsbyImageData} className="fifty_fifty-img ls-is-cached" loading="lazy" alt="" /></span>
 							</div>
 						}
 					</div>
 				</div>
 			</div>
 		)}
-		</>        
+		</>
 	);
 });
 	
