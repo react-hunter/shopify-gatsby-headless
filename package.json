@@ -59,6 +59,7 @@
     "react-helmet": "^6.1.0",
     "react-lazy-images": "^1.1.0",
     "react-lazy-load-image-component": "^1.5.1",
+    "react-loading-skeleton": "^2.2.0",
     "react-query": "^3.6.0",
     "react-slick": "^0.28.0",
     "react-svg": "^12.1.0",
