@@ -87,7 +87,11 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 		<li className="grid__item grid__item--collection-template " key={product.title} data-product-handle={product.handle}>
 			<div className="grid-view-item product-card">
 				<span className="visually-hidden product-card-title">{product.title}</span>
-				<ProductBoxGallery product={product} mainOption={mainOption} swatchColor={swatchColor} badgeStyles={props.badgeStyles} />
+				<ProductBoxGallery product={product} 
+					mainOption={mainOption} 
+					swatchColor={swatchColor} 
+					badgeStyles={props.badgeStyles}
+					placeholderImage={props.placeholderImage} />
 				<div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
 					<Link to={`/products/${product.handle}`}>{product.title}</Link>
 				</div>
