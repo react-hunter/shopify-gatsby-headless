@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react' /* eslint-disable */
 import { graphql } from "gatsby"
-import loadable from '@loadable/component';
 import CollectionProductBox from "../components/collectionPage/collectionProductBox"
 import { client } from '../contentful'
 import '../styles/collectionPage.scss';
 import '../styles/widget.min.css';
-const NotifyModal = loadable(() => import('../components/collectionPage/notifyModal'))
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
