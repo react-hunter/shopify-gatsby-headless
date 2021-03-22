@@ -221,7 +221,7 @@ export const query = graphql`
           width: 500
           placeholder: BLURRED
           formats: [AUTO, WEBP]
-          layout: FULL_WIDTH
+          layout: CONSTRAINED
         )
       }
     }
