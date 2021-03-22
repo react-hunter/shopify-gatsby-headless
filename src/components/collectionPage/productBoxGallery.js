@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import CustomImage from '../common/image'
-import '../../styles/productGallery.css';
-
 import Flickity from 'react-flickity-component'
+// import CustomImage from '../common/image'
+import { GatsbyImage } from "gatsby-plugin-image";
+
+import '../../styles/productGallery.css';
 import '../../styles/flickity.css';
 
 const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
@@ -12,11 +13,8 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 	const mainOption = props.mainOption;
 	const swatchColor = props.swatchColor;
 	const badgeStyles = props.badgeStyles;
-
 	const [ slideIndex, setSlideIndex] = useState(0);
-	
 	const [ swatchImages, setSwatchImages ] = useState([]);
-
 	const flickityOptions = {
 		pageDots: false, 
 		imagesLoaded: true, 
@@ -24,23 +22,21 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 		dragThreshold : 10, 
 		selectedAttraction: 0.01,
 		friction: 0.2
-	}
-	
-	productGalleryCount = mainOption === '' ? Math.min(product.images.length,3) : Math.min(swatchImages.length,3);
-
+	};
+	productGalleryCount = mainOption === '' ? Math.min(product.images.length, 3) : Math.min(swatchImages.length, 3);
 	useEffect(() => {
 		if (mainOption !== '') {
 			const selectedImages = product.variants.map(variant => {
-				let imageUrl = '';
+				let imageData = null;
 				variant.selectedOptions.map(selectedOption => {
 					if(selectedOption.name === 'Rose Color' && selectedOption.value === swatchColor) {
-						imageUrl = variant.image ? variant.image.originalSrc : 'https://cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_500x.png';
+						imageData = variant.image ? variant.image.imageData.childImageSharp.gatsbyImageData : props.placeholderImage;
 					}
 					return true
 				})
-				return imageUrl
+				return imageData
 			})
-			const filteredImages = selectedImages.filter(img => img !== '')
+			const filteredImages = selectedImages.filter(img => img !== null)
 			setSwatchImages(filteredImages.slice(0, 3))
 		}
 
@@ -51,7 +47,7 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 		} else {
 		}
 
-	}, [mainOption, swatchColor, product.variants, flkty])
+	}, [mainOption, swatchColor, product.variants, flkty, props.placeholderImage])
 
 
 	function gotoProductPage () {
@@ -115,30 +111,25 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 					mainOption === '' ?
 						<Flickity options={flickityOptions} flickityRef={c=> flkty = c} >                           
 							{ product.images[0] ? 
-								(<CustomImage 
-									className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-									src={product.images[0].originalSrc}
+								<GatsbyImage image={product.images[0].imageData.childImageSharp.gatsbyImageData} 
+									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
-									alt={product.title}
-								/>) : ""
+									style={{ cursor: 'pointer' }}
+									loading="lazy" alt={product.title} /> : null
 							}
 							{ product.images[1] ? 
-								(<CustomImage 
-									className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-									src={product.images[1].originalSrc}
-									alt={product.title}
+								<GatsbyImage image={product.images[1].imageData.childImageSharp.gatsbyImageData} 
+									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
-									style={{ cursor: 'pointer' }} 
-								/>) : ""
+									style={{ cursor: 'pointer' }}
+									loading="lazy" alt={product.title} /> : null
 							}
 							{ product.images[2] ? 
-								(<CustomImage 
-									className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-									src={product.images[2].originalSrc}
-									alt={product.title}
+								<GatsbyImage image={product.images[2].imageData.childImageSharp.gatsbyImageData} 
+									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
-									style={{ cursor: 'pointer' }} 
-								/>) : ""
+									style={{ cursor: 'pointer' }}
+									loading="lazy" alt={product.title} /> : null
 							}
 						</Flickity>
 					: 
@@ -146,12 +137,13 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 					{
 						swatchImages.map((swatchImage, swatchImageIndex) => {
 							return (
-								<CustomImage 
+								<GatsbyImage 
 									className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-									src={swatchImage}
+									image={swatchImage}
 									alt=''
 									onClick={gotoProductPage}
-									style={{ cursor: 'pointer' }} 
+									loading="lazy"
+									style={{ cursor: 'pointer' }}
 									key={swatchImageIndex}
 								/>
 							)

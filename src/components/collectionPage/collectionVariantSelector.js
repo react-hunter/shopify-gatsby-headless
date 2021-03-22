@@ -220,37 +220,22 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 							)
 						})
 					}
-
-					{/* <div className="loading-screen" style={{ display: 'none'}}>
-						<div className="loader-collection"></div> 
-					</div> */}
 				</div>
 
 				<div className="variant-selector_add_to_bag_wrapper">
-					{
-						variant.availableForSale ? 
-							(
-								<button className="variant-selector_add_to_bag" 
-									onClick={addToSideCart}
-									style={{ display: 'inline-block' }}>
-										ADD TO BAG - ${variant.price}{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }
-								</button>
-							) : 
-							(
-								<button className="variant-selector_add_to_bag" 
-									onClick={props.showNotifyModal}
-									style={{ display: 'inline-block' }}>NOTIFY ME</button>
-							)
+					{ variant.availableForSale ? 
+						<button className="variant-selector_add_to_bag" 
+							onClick={addToSideCart}
+							style={{ display: 'inline-block' }}>
+								ADD TO BAG - ${variant.price}{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }
+						</button> :
+						<button className="variant-selector_add_to_bag" 
+							onClick={props.showNotifyModal}
+							style={{ display: 'inline-block' }}>NOTIFY ME</button>
 					}
-
-					{
-						console.log("product.productType ->", product.productType)
-					}
-					{ 
-					product.productType !== 'Lingerie' && product.productType !== 'Rose Bear' ? 
-						<Link to="/pages/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZER NOW</Link>
-						: 
-						''
+					{ product.productType !== 'Lingerie' && product.productType !== 'Rose Bear' ? 
+						<Link to="/pages/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZER NOW</Link> :
+						null
 					}
 				</div>
 			</div>

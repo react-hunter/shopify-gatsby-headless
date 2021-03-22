@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react' /* eslint-disable */
-import { graphql } from "gatsby"
-import CollectionProductBox from "../components/collectionPage/collectionProductBox"
-import { client } from '../contentful'
+import React, { useEffect, useState } from 'react'; /* eslint-disable */
+import { graphql } from "gatsby";
+import CollectionProductBox from "../components/collectionPage/collectionProductBox";
+import CollectionPageSkeleton from "../components/collectionPage/collectionPageSkeleton";
+import { client } from '../contentful';
 import '../styles/collectionPage.scss';
 import '../styles/widget.min.css';
 
@@ -12,7 +13,7 @@ import { faMinus } from "@fortawesome/free-solid-svg-icons"
 const collectionPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
   const [ displayProductCount, setDisplayProductCount ] = useState(16);
-
+  const [ showContent, setShowContent ] = useState(false);
   const [badgeStyles, setBadgeStyles] = useState([]);
   const loadMoreProducts = (e) => {
     e.preventDefault();
@@ -35,6 +36,10 @@ const collectionPage = ({ data, pageContext }) => {
     }
     setHoverEffectsForCollection();
     getBadgeData();
+    const timer = setTimeout(() => {
+      setShowContent(true);
+    }, 1000);
+    return () => clearTimeout(timer);
   }, [])
 
   function setHoverEffectsForCollection() {
@@ -117,19 +122,23 @@ const collectionPage = ({ data, pageContext }) => {
         </div>
         
         <div className="" id="Collection">
-          <ul id="shop-all-content" 
-            className="products-on-page grid grid--uniform grid--view-items">
-              {
-                displayedProducts.map((productItem, productIndex) => {
-                  const productReview = productReviews.filter(pr => pr.handle === productItem.handle)
-                  return <CollectionProductBox 
-                            product={productItem} 
-                            key={productIndex} 
-                            review={productReview[0]}
-                            badgeStyles={badgeStyles}  />
-                })
-              }
-          </ul>
+          {showContent ? (
+            <ul id="shop-all-content" 
+              className="products-on-page grid grid--uniform grid--view-items">
+                {
+                  displayedProducts.map((productItem, productIndex) => {
+                    const productReview = productReviews.filter(pr => pr.handle === productItem.handle)
+                    return <CollectionProductBox 
+                              product={productItem} 
+                              key={productIndex} 
+                              review={productReview[0]}
+                              badgeStyles={badgeStyles}
+                              placeholderImage={data.placeholderImage.childImageSharp.gatsbyImageData}  />
+                  })
+                }
+            </ul>              
+            ) : <CollectionPageSkeleton />
+          }
         </div>
         
         {
@@ -168,6 +177,16 @@ export const query = graphql`
         }
         images {
           originalSrc
+          imageData: localFile {
+            childImageSharp {
+              gatsbyImageData (
+                width: 500
+                placeholder: BLURRED
+                formats: [AUTO, WEBP]
+                layout: CONSTRAINED
+              )
+            }
+          }
         }
         variants {
           id
@@ -178,12 +197,32 @@ export const query = graphql`
           compareAtPrice
           image {
             originalSrc
+            imageData: localFile {
+              childImageSharp {
+                gatsbyImageData (
+                  width: 500
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP]
+                  layout: CONSTRAINED
+                )
+              }
+            }
           }
           selectedOptions {
             name
             value
           }
         }
+      }
+    }
+    placeholderImage: file(relativePath: { regex: "/placeholder_500x.png/" }) {
+      childImageSharp {
+        gatsbyImageData (
+          width: 500
+          placeholder: BLURRED
+          formats: [AUTO, WEBP]
+          layout: FULL_WIDTH
+        )
       }
     }
 	}
