@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Flickity from 'react-flickity-component'
-// import CustomImage from '../common/image'
 import { GatsbyImage } from "gatsby-plugin-image";
 
 import '../../styles/productGallery.css';
@@ -57,7 +56,6 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 
 	const isBadgeEnable = () => {
 		let isBadgeEnable = false;
-
 		badgeStyles.map(item => {
 			for (var i=0;i<product.tags.length;i++) {
 				if (product.tags[i] === item.fields.name) {
