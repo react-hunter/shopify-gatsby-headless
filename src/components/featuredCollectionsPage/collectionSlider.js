@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'gatsby'
+import { Link } from 'gatsby';
 import loadable from '@loadable/component';
-import CollectionVariantSelector from '../collectionPage/collectionVariantSelector'
-import FeaturedProductBox from "../common/product/featuredProductBox"
-import { client } from "../../contentful"
-import "../../styles/collectionPage.scss"
 import Glider from 'react-glider';
+import CollectionVariantSelector from '../collectionPage/collectionVariantSelector';
+import FeaturedProductBox from "../common/product/featuredProductBox";
+import { client } from "../../contentful";
 import 'glider-js/glider.min.css';
-const NotifyModal = loadable(() => import("../collectionPage/notifyModal"))
+import "../../styles/collectionPage.scss";
+const NotifyModal = loadable(() => import("../collectionPage/notifyModal"));
 
 const CollectionSlider = ({ products, title, handle, reviewList}) => {
   const [notifyModalShow, setNotifyModalShow] = useState(false);
   const [badgeStyles, setBadgeStyles] = useState([]);
   const [varaintModalShow, setVaraintModalShow] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-
+  
   useEffect(() => {
     async function getBadgeData() {
       const badgeStyleData = await client.getEntries({'content_type': 'collectionBadgeStyleItem'});
@@ -29,7 +29,7 @@ const CollectionSlider = ({ products, title, handle, reviewList}) => {
     for (let i = 0; i < allFirstImageElements.length; i++) {  
       allFirstImageElements[i].on('touchstart', function () {  
         this.toggleClass('hover_effect');
-      }, {passive: true});  
+      }, {passive: true});
     }
   }
   
@@ -69,7 +69,7 @@ const CollectionSlider = ({ products, title, handle, reviewList}) => {
       <div className="carousel-header_wrapper">
         <span className="carousel-header">{title}</span>
       </div>
-      <div className="Best-Sellers-Carousel">      
+      <div className="Best-Sellers-Carousel">
         <button type="button" id={`prev-${handle}`} className="slick-arrow slick-prev"> Previous</button>
         <Glider draggable={true} scrollLock={true} duration={1} slidesToShow={2} hasArrows={true}
           arrows= {{
@@ -88,18 +88,18 @@ const CollectionSlider = ({ products, title, handle, reviewList}) => {
             }
           }
         ]}>
-          {
-            products
-              .map((p, i) => {
-                let product = p
-                let productReview = reviewList.filter(re => re.handle === product.handle)
-                return (
-                  <div key={i} className="products-on-page grid grid--uniform grid--view-items">
-                    <FeaturedProductBox product={product} review={productReview[0]} showNotifyModal={showNotifyModal}
-                        badgeStyles={badgeStyles} showVariantModal={showVariantModal} />
-                  </div>
-                )
-          })}
+          {products
+            .map((p, i) => {
+              let product = p
+              let productReview = reviewList.filter(re => re.handle === product.handle)
+              return (
+                <div key={i} className="products-on-page grid grid--uniform grid--view-items">
+                  <FeaturedProductBox product={product} review={productReview[0]} showNotifyModal={showNotifyModal}
+                      badgeStyles={badgeStyles} showVariantModal={showVariantModal} />
+                </div>
+              )
+            })
+          }
         </Glider>
         <button type="button" id={`next-${handle}`} className="slick-arrow slick-next"> Next</button>
 
