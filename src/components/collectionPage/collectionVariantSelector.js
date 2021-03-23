@@ -1,8 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { navigate, Link } from 'gatsby'
-import StoreContext from '../../context/store'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
-import ImageSpin from '../common/imageSpin'
+import { navigate, Link } from 'gatsby';
+import { GatsbyImage } from "gatsby-plugin-image";
+// import { LazyLoadImage } from 'react-lazy-load-image-component';
+import StoreContext from '../../context/store';
+import ImageSpin from '../common/imageSpin';
 
 const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
 	const context = useContext(StoreContext);
@@ -152,18 +153,30 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 						{ 
 						product.productType !== 'Lingerie'? 
 							<div className="preview_wrapper">
-								<LazyLoadImage className="variantSelector-preview_img" alt=""
-									src={variant.image ? variant.image.originalSrc : ''}
-									effect="blur" loading="eager" />
+								{ variant.image ? 
+									<GatsbyImage image={variant.image.imageData.childImageSharp.gatsbyImageData} 
+										className="variantSelector-preview_img"
+										loading="lazy" alt={variant.title} /> : null
+								}
 							</div>
 						: 
 						<div className="preview_wrapper special_ratio">
-							<LazyLoadImage className="variantSelector-preview_img" alt=""
+							{/* <LazyLoadImage className="variantSelector-preview_img" alt=""
 								src={product.images[0] ? product.images[0].originalSrc : ''}
 								effect="blur" loading="eager" />
 							<LazyLoadImage className="variantSelector-preview_img second_image" alt=""
 								src={product.images[1] ? product.images[1].originalSrc : ''}
-								effect="blur" loading="eager" />
+								effect="blur" loading="eager" /> */}
+							{ product.images[0] ? 
+								<GatsbyImage image={product.images[0].imageData.childImageSharp.gatsbyImageData} 
+									className="variantSelector-preview_img"
+									loading="lazy" alt={variant.title} /> : null
+							}
+							{ product.images[1] ? 
+								<GatsbyImage image={product.images[1].imageData.childImageSharp.gatsbyImageData} 
+									className="variantSelector-preview_img second_image"
+									loading="lazy" alt={variant.title} /> : null
+							}
 						</div>
 						}
 
