@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { graphql } from "gatsby";
-// import Preloader from "../components/common/preloader"
 import CollectionSlider from "../components/featuredCollectionsPage/collectionSlider";
+import CollectionSliderSkeleton from "../components/featuredCollectionsPage/collectionSliderSkeleton";
 import '../styles/featuredCollectionsPage.scss';
 import '../styles/widget.min.css';
 
-const featuredCollectionsPage = ({ data, pageContext }) => {
+const FeaturedCollectionsPage = ({ data, pageContext }) => {
+  const [ showContent, setShowContent ] = useState(false);
   const { productReviews } = pageContext;
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowContent(true);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
-      {/* <Preloader /> */}
       <div className="collection-collections-spacing">
         <div id="shopify-section-collection-collections" className="shopify-section">
           <div className="collections-collection-section">
@@ -17,17 +24,20 @@ const featuredCollectionsPage = ({ data, pageContext }) => {
               <span className="you-may-like_header">FEATURED COLLECTIONS</span>
               <span className="you-may-like_header_underline"></span>
             </div>
-           {
-            data.allShopifyCollection.edges.map((collection, collectionIndex) => {
-              return <CollectionSlider
-                        products={collection.node.products.slice(0, 10)}
-                        title={collection.node.title}
-                        handle={collection.node.handle}
-                        reviewList={productReviews}
-                        key={collectionIndex}
-                      />
-            })
-           }
+            {showContent ? 
+              data.allShopifyCollection.edges.map((collection, collectionIndex) => {
+                return (
+                  <CollectionSlider
+                    products={collection.node.products.slice(0, 10)}
+                    title={collection.node.title}
+                    handle={collection.node.handle}
+                    reviewList={productReviews}
+                    key={collectionIndex}
+                  />
+                )
+              }) :
+              <CollectionSliderSkeleton />
+            }
          </div>
         </div>
       </div>
@@ -35,7 +45,7 @@ const featuredCollectionsPage = ({ data, pageContext }) => {
   )
 }
 
-export default featuredCollectionsPage
+export default FeaturedCollectionsPage
 
 export const query = graphql`
   query GetShopifyCollections($collections: [String]){
@@ -57,6 +67,16 @@ export const query = graphql`
             }
             images {
               originalSrc
+              imageData: localFile {
+                childImageSharp {
+                  gatsbyImageData (
+                    width: 500
+                    placeholder: BLURRED
+                    formats: [AUTO, WEBP]
+                    layout: CONSTRAINED
+                  )
+                }
+              }
             }
             variants {
               id
@@ -67,6 +87,16 @@ export const query = graphql`
               compareAtPrice
               image {
                 originalSrc
+                imageData: localFile {
+                  childImageSharp {
+                    gatsbyImageData (
+                      width: 500
+                      placeholder: BLURRED
+                      formats: [AUTO, WEBP]
+                      layout: CONSTRAINED
+                    )
+                  }
+                }
               }
               selectedOptions {
                 name

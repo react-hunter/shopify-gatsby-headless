@@ -35,7 +35,7 @@ const Instagram = React.memo(function Instagram(props) {
 		} else {
 			setPhotoCount(10);
 		}
-	  }
+	}
 
 	const instaHeaderStyle = {
 		paddingTop: '30px',

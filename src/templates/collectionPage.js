@@ -49,16 +49,12 @@ const collectionPage = ({ data, pageContext }) => {
   
       $(allFirstImageElements[i]).on('touchstart', function () {  
         $(this).toggleClass('hover_effect');
-      }, {passive: true});
-  
+      }, {passive: true});  
     }
   }
-
   let showAll = false;
-
   const showAllContent =(e) => {
-    e.preventDefault();
-    
+    e.preventDefault();    
     if (showAll === false) {
       document.querySelector('#collectionDescription').style.maxHeight = 'unset';
       document.querySelector("#collectionReadMoreFade_wrapper").style.display = "none";
@@ -108,14 +104,12 @@ const collectionPage = ({ data, pageContext }) => {
                   <div id="collectionReadMoreFade">
                   </div>
                 </div>
-
                 <div id="collectionReadMoreBtn" style={{ textAlign: 'center', cursor: 'pointer'}}                  
                   onClick={showAllContent} onKeyDown={handleKeyDown} role="button" tabIndex="0">
                     <FontAwesomeIcon className="fa-icon fa-plus" icon={faPlus} size="1x" style={{}} />
                     <FontAwesomeIcon className="fa-icon fa-minus" icon={faMinus} size="1x" style={{}} />
                 </div>
               </div>
-
               <span className="filters-toolbar__product-count" ></span>
             </div>
           </header>

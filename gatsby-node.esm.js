@@ -33,22 +33,22 @@ exports.createPages = async ({ graphql, actions }) => {
     let productReview = {}
     metafields.map(mf => {
       productReview.handle = pr.handle
-      if(mf.namespace === 'stamped') {
-        switch (mf.key) {
-          case 'badge':
-            productReview.badge = mf.value
-          case 'reviews_count':
-            productReview.reviews_count = mf.value
-        }
-      }
+      // if(mf.namespace === 'stamped') {
+      //   switch (mf.key) {
+      //     case 'badge':
+      //       productReview.badge = mf.value
+      //     case 'reviews_count':
+      //       productReview.reviews_count = mf.value
+      //   }
+      // }
       if(mf.namespace === 'product' && mf.key==='features') {
         productReview.features = mf.value
       }
 
     })
-    productReview.badge = productReview.badge ? productReview.badge : ''
-    productReview.reviews_count = productReview.reviews_count ? parseInt(productReview.reviews_count) : 0
-    productReview.features = productReview.features ? productReview.features : ''
+    productReview.badge = productReview.badge ? productReview.badge : '';
+    productReview.reviews_count = productReview.reviews_count ? parseInt(productReview.reviews_count) : 0;
+    productReview.features = productReview.features ? productReview.features : '';
     return productReview
   }))
 
