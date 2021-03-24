@@ -72,16 +72,6 @@ export const query = graphql`
 				shopifyId
 				image {
 					originalSrc
-					imageData: localFile {
-						childImageSharp {
-							gatsbyImageData (
-								width: 500
-								placeholder: BLURRED
-								formats: [AUTO, WEBP]
-								layout: CONSTRAINED
-							)
-						}
-					}
 				}
 				selectedOptions {
 					name
@@ -91,16 +81,6 @@ export const query = graphql`
 			images {
 				originalSrc
 				id
-				imageData: localFile {
-					childImageSharp {
-						gatsbyImageData (
-							width: 500
-							placeholder: BLURRED
-							formats: [AUTO, WEBP]
-							layout: CONSTRAINED
-						)
-					}
-				}
 			}
 		}
 		shopifyCollection(handle: {eq: "best-sellers"}) {
