@@ -30,7 +30,7 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 				let imageData = null;
 				variant.selectedOptions.map(selectedOption => {
 					if(selectedOption.name === 'Rose Color' && selectedOption.value === swatchColor) {
-						imageData = variant.image ? variant.image.imageData.childImageSharp.gatsbyImageData : placeholderImage;
+						imageData = variant.image && variant.image.imageData ? variant.image.imageData.childImageSharp.gatsbyImageData : placeholderImage;
 					}
 					return true
 				})
@@ -109,22 +109,22 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 				{
 					mainOption === '' ?
 						<Flickity options={flickityOptions} flickityRef={c=> flkty = c} >                           
-							{ product.images[0] ? 
-								<GatsbyImage image={product.images[0].imageData.childImageSharp.gatsbyImageData} 
+							{ product.images[0] ?
+								<GatsbyImage image={product.images[0].imageData ? product.images[0].imageData.childImageSharp.gatsbyImageData : placeholderImage}
 									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
 									style={{ cursor: 'pointer' }}
 									loading="lazy" alt={product.title} /> : ''
 							}
-							{ product.images[1] ? 
-								<GatsbyImage image={product.images[1].imageData.childImageSharp.gatsbyImageData} 
+							{ product.images[1] ?
+								<GatsbyImage image={product.images[1].imageData ? product.images[1].imageData.childImageSharp.gatsbyImageData : placeholderImage}
 									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
 									style={{ cursor: 'pointer' }}
 									loading="lazy" alt={product.title} /> : ''
 							}
-							{ product.images[2] ? 
-								<GatsbyImage image={product.images[2].imageData.childImageSharp.gatsbyImageData} 
+							{ product.images[2] ?
+								<GatsbyImage image={product.images[2].imageData ? product.images[2].imageData.childImageSharp.gatsbyImageData : placeholderImage}
 									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
 									style={{ cursor: 'pointer' }}
@@ -138,7 +138,7 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 							return (
 								<GatsbyImage 
 									className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-									image={swatchImage}
+									image={swatchImage ? swatchImage : placeholderImage}
 									alt=''
 									onClick={gotoProductPage}
 									loading="lazy"

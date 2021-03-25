@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'gatsby'
-// import MyImage from '../common/lazyImage'
-// import Img from 'gatsby-image'
 import { GatsbyImage } from "gatsby-plugin-image"
 
 const ArticleBox = props => {

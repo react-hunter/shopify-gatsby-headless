@@ -9,7 +9,7 @@ import 'glider-js/glider.min.css';
 import "../../styles/collectionPage.scss";
 const NotifyModal = loadable(() => import("../collectionPage/notifyModal"));
 
-const CollectionSlider = ({ products, title, handle, reviewList}) => {
+const CollectionSlider = React.memo(function CollectionSlider({ products, title, handle, reviewList, placeholderImage}) {
   const [notifyModalShow, setNotifyModalShow] = useState(false);
   const [badgeStyles, setBadgeStyles] = useState([]);
   const [varaintModalShow, setVaraintModalShow] = useState(false);
@@ -94,8 +94,14 @@ const CollectionSlider = ({ products, title, handle, reviewList}) => {
               let productReview = reviewList.filter(re => re.handle === product.handle)
               return (
                 <div key={i} className="products-on-page grid grid--uniform grid--view-items">
-                  <FeaturedProductBox product={product} review={productReview[0]} showNotifyModal={showNotifyModal}
-                      badgeStyles={badgeStyles} showVariantModal={showVariantModal} />
+                  <FeaturedProductBox
+                    product={product}
+                    review={productReview[0]}
+                    showNotifyModal={showNotifyModal}
+                    badgeStyles={badgeStyles}
+                    showVariantModal={showVariantModal}
+                    placeholderImage={placeholderImage}
+                  />
                 </div>
               )
             })
@@ -106,7 +112,8 @@ const CollectionSlider = ({ products, title, handle, reviewList}) => {
         {varaintModalShow && ( <CollectionVariantSelector
                                   closeModal={closeCollectionModal} 
                                   showNotifyModal={showNotifyModal} 
-                                  product={selectedProduct} /> )}
+                                  product={selectedProduct}
+                                  placeholderImage={placeholderImage} /> )}
         <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
       </div>
       <div className="collection-carousel-button_wrapper">
@@ -114,6 +121,6 @@ const CollectionSlider = ({ products, title, handle, reviewList}) => {
       </div>
     </div>
   );
-};
+});
     
 export default CollectionSlider;

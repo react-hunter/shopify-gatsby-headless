@@ -43,7 +43,12 @@ const ProductPage = ({ data, pageContext }) => {
 						key="product-description" />
 				</div>
 			</div>
-			<RelatedProductList key="related-list" products={relatedProducts} reviewList={productReviews} />
+			<RelatedProductList 
+				key="related-list"
+				products={relatedProducts}
+				reviewList={productReviews}
+				placeholderImage={data.placeholderImage.childImageSharp.gatsbyImageData}
+			/>
 		</>
 	)
 }
@@ -135,5 +140,15 @@ export const query = graphql`
 				}
 			}
 		}
+		placeholderImage: file(relativePath: { regex: "/placeholder_500x.png/" }) {
+      childImageSharp {
+        gatsbyImageData (
+          width: 500
+          placeholder: BLURRED
+          formats: [AUTO, WEBP]
+          layout: CONSTRAINED
+        )
+      }
+    }
 	}
 `
