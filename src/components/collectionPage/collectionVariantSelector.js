@@ -152,10 +152,10 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 						{ 
 						product.productType !== 'Lingerie'? 
 							<div className="preview_wrapper">
-								{ variant.image ?
+								{ variant.image &&
 									<GatsbyImage image={variant.image.imageData ? variant.image.imageData.childImageSharp.gatsbyImageData : props.placeholderImage} 
 										className="variantSelector-preview_img"
-										loading="lazy" alt={variant.title} /> : ''
+										loading="lazy" alt={variant.title} />
 								}
 							</div>
 						: 
@@ -166,15 +166,15 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 							<LazyLoadImage className="variantSelector-preview_img second_image" alt=""
 								src={product.images[1] ? product.images[1].originalSrc : ''}
 								effect="blur" loading="eager" /> */}
-							{ product.images[0] ?
+							{ product.images[0] &&
 								<GatsbyImage image={product.images[0].imageData ? product.images[0].imageData.childImageSharp.gatsbyImageData : props.placeholderImage}
 									className="variantSelector-preview_img"
-									loading="lazy" alt={variant.title} /> : ''
+									loading="lazy" alt={variant.title} />
 							}
-							{ product.images[1] ?
+							{ product.images[1] &&
 								<GatsbyImage image={product.images[1].imageData ? product.images[1].imageData.childImageSharp.gatsbyImageData : props.placeholderImage}
 									className="variantSelector-preview_img second_image"
-									loading="lazy" alt={variant.title} /> : ''
+									loading="lazy" alt={variant.title} />
 							}
 						</div>
 						}

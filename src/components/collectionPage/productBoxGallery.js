@@ -109,26 +109,26 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 				{
 					mainOption === '' ?
 						<Flickity options={flickityOptions} flickityRef={c=> flkty = c} >                           
-							{ product.images[0] ?
+							{ product.images[0] &&
 								<GatsbyImage image={product.images[0].imageData ? product.images[0].imageData.childImageSharp.gatsbyImageData : placeholderImage}
 									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
 									style={{ cursor: 'pointer' }}
-									loading="lazy" alt={product.title} /> : ''
+									loading="lazy" alt={product.title} />
 							}
-							{ product.images[1] ?
+							{ product.images[1] &&
 								<GatsbyImage image={product.images[1].imageData ? product.images[1].imageData.childImageSharp.gatsbyImageData : placeholderImage}
 									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
 									style={{ cursor: 'pointer' }}
-									loading="lazy" alt={product.title} /> : ''
+									loading="lazy" alt={product.title} />
 							}
-							{ product.images[2] ?
+							{ product.images[2] &&
 								<GatsbyImage image={product.images[2].imageData ? product.images[2].imageData.childImageSharp.gatsbyImageData : placeholderImage}
 									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
 									style={{ cursor: 'pointer' }}
-									loading="lazy" alt={product.title} /> : ''
+									loading="lazy" alt={product.title} />
 							}
 						</Flickity>
 					: 
