@@ -156,7 +156,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 								{ variant.image ? 
 									<GatsbyImage image={variant.image.imageData.childImageSharp.gatsbyImageData} 
 										className="variantSelector-preview_img"
-										loading="lazy" alt={variant.title} /> : null
+										loading="lazy" alt={variant.title} /> : ''
 								}
 							</div>
 						: 
@@ -170,12 +170,12 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 							{ product.images[0] ? 
 								<GatsbyImage image={product.images[0].imageData.childImageSharp.gatsbyImageData} 
 									className="variantSelector-preview_img"
-									loading="lazy" alt={variant.title} /> : null
+									loading="lazy" alt={variant.title} /> : ''
 							}
 							{ product.images[1] ? 
 								<GatsbyImage image={product.images[1].imageData.childImageSharp.gatsbyImageData} 
 									className="variantSelector-preview_img second_image"
-									loading="lazy" alt={variant.title} /> : null
+									loading="lazy" alt={variant.title} /> : ''
 							}
 						</div>
 						}
