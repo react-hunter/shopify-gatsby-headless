@@ -12,6 +12,7 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 	const mainOption = props.mainOption;
 	const swatchColor = props.swatchColor;
 	const badgeStyles = props.badgeStyles;
+	const placeholderImage = props.placeholderImage;
 	const [ slideIndex, setSlideIndex] = useState(0);
 	const [ swatchImages, setSwatchImages ] = useState([]);
 	const flickityOptions = {
@@ -29,7 +30,7 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 				let imageData = null;
 				variant.selectedOptions.map(selectedOption => {
 					if(selectedOption.name === 'Rose Color' && selectedOption.value === swatchColor) {
-						imageData = variant.image ? variant.image.imageData.childImageSharp.gatsbyImageData : props.placeholderImage;
+						imageData = variant.image ? variant.image.imageData.childImageSharp.gatsbyImageData : placeholderImage;
 					}
 					return true
 				})
@@ -46,7 +47,7 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 		} else {
 		}
 
-	}, [mainOption, swatchColor, product.variants, flkty, props.placeholderImage])
+	}, [mainOption, swatchColor, product.variants, flkty, placeholderImage])
 
 
 	function gotoProductPage () {
@@ -113,21 +114,21 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
 									style={{ cursor: 'pointer' }}
-									loading="lazy" alt={product.title} /> : null
+									loading="lazy" alt={product.title} /> : ''
 							}
 							{ product.images[1] ? 
 								<GatsbyImage image={product.images[1].imageData.childImageSharp.gatsbyImageData} 
 									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
 									style={{ cursor: 'pointer' }}
-									loading="lazy" alt={product.title} /> : null
+									loading="lazy" alt={product.title} /> : ''
 							}
 							{ product.images[2] ? 
 								<GatsbyImage image={product.images[2].imageData.childImageSharp.gatsbyImageData} 
 									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
 									style={{ cursor: 'pointer' }}
-									loading="lazy" alt={product.title} /> : null
+									loading="lazy" alt={product.title} /> : ''
 							}
 						</Flickity>
 					: 
