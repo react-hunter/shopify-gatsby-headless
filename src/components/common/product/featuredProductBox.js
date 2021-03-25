@@ -7,7 +7,7 @@ import ImageSpin from '../imageSpin'
 
 const NotifyModal = loadable(() => import('../../collectionPage/notifyModal'))
 
-const FeaturedProductBox = props => {
+const FeaturedProductBox = React.memo(function FeaturedProductBox(props) {
 	const context = useContext(StoreContext);
 	const product = props.product;
 	const reviewBadge = props.review ? props.review.badge : '';
@@ -72,7 +72,13 @@ const FeaturedProductBox = props => {
 		<li className="grid__item grid__item--collection-template " key={product.title} data-product-handle={product.handle}>
 			<div className="grid-view-item product-card">
 				{/* <span className="visually-hidden product-card-title">{product.title}</span> */}
-				<ProductBoxGallery product={product} mainOption={mainOption} swatchColor={swatchColor} badgeStyles={props.badgeStyles} />
+				<ProductBoxGallery
+					product={product}
+					mainOption={mainOption}
+					swatchColor={swatchColor}
+					badgeStyles={props.badgeStyles}
+					placeholderImage={props.placeholderImage}
+				/>
 				<div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
 					<Link to={`/products/${product.handle}`}>{product.title}</Link>
 				</div>
@@ -120,6 +126,6 @@ const FeaturedProductBox = props => {
 			:null}
 		</li>
 	);
-};
+});
 
 export default FeaturedProductBox;

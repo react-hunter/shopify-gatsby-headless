@@ -33,6 +33,7 @@ const FeaturedCollectionsPage = ({ data, pageContext }) => {
                     handle={collection.node.handle}
                     reviewList={productReviews}
                     key={collectionIndex}
+                    placeholderImage={data.placeholderImage.childImageSharp.gatsbyImageData}
                   />
                 )
               }) :
@@ -105,6 +106,16 @@ export const query = graphql`
             }
           }
         }
+      }
+    }
+    placeholderImage: file(relativePath: { regex: "/placeholder_500x.png/" }) {
+      childImageSharp {
+        gatsbyImageData (
+          width: 500
+          placeholder: BLURRED
+          formats: [AUTO, WEBP]
+          layout: CONSTRAINED
+        )
       }
     }
   }

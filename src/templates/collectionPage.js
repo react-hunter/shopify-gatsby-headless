@@ -127,7 +127,7 @@ const collectionPage = ({ data, pageContext }) => {
                               key={productIndex} 
                               review={productReview[0]}
                               badgeStyles={badgeStyles}
-                              placeholderImage={data.placeholderImage.childImageSharp.gatsbyImageData}  />
+                              placeholderImage={data.placeholderImage.childImageSharp.gatsbyImageData} />
                   })
                 }
             </ul>              
