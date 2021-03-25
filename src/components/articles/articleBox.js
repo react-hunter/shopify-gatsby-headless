@@ -14,11 +14,11 @@ const ArticleBox = props => {
 				className="article__link">   
 				<div className="article__grid-image-wrapper js">
 					<div className="article__grid-image-container">
-						{ article.image ? 
-							(<GatsbyImage className="article__grid-image ls-is-cached"
+						{ article.image &&
+							<GatsbyImage className="article__grid-image ls-is-cached"
 								image={article.image.localFile.childImageSharp.gatsbyImageData}
 								alt={article.title} loading="lazy" 
-							/>) : null
+							/>
 						}
 					</div>
 				</div>      
