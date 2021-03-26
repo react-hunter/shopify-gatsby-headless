@@ -77,7 +77,6 @@ const FeaturedProductBox = React.memo(function FeaturedProductBox(props) {
 					mainOption={mainOption}
 					swatchColor={swatchColor}
 					badgeStyles={props.badgeStyles}
-					placeholderImage={props.placeholderImage}
 				/>
 				<div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
 					<Link to={`/products/${product.handle}`}>{product.title}</Link>

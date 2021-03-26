@@ -12,7 +12,6 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 	const mainOption = props.mainOption;
 	const swatchColor = props.swatchColor;
 	const badgeStyles = props.badgeStyles;
-	const placeholderImage = props.placeholderImage;
 	const [ slideIndex, setSlideIndex] = useState(0);
 	const [ swatchImages, setSwatchImages ] = useState([]);
 	const flickityOptions = {
@@ -47,7 +46,7 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 		} else {
 		}
 
-	}, [mainOption, swatchColor, product.variants, flkty, placeholderImage])
+	}, [mainOption, swatchColor, product.variants, flkty])
 
 
 	function gotoProductPage () {
