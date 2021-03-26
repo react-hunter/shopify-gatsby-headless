@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { navigate, Link } from 'gatsby';
-import { GatsbyImage } from "gatsby-plugin-image";
-// import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import StoreContext from '../../context/store';
 import ImageSpin from '../common/imageSpin';
 
@@ -152,21 +151,26 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 						{ 
 						product.productType !== 'Lingerie'? 
 							<div className="preview_wrapper">
-								{ variant.image &&
+								{/* { variant.image &&
 									<GatsbyImage image={variant.image.imageData ? variant.image.imageData.childImageSharp.gatsbyImageData : props.placeholderImage} 
 										className="variantSelector-preview_img"
 										loading="lazy" alt={variant.title} />
+								} */}
+								{ variant.image &&
+									<LazyLoadImage image={variant.image.originalSrc}
+										className="variantSelector-preview_img"
+										effect="blur" loading="eager" alt={variant.title} />
 								}
 							</div>
 						: 
 						<div className="preview_wrapper special_ratio">
-							{/* <LazyLoadImage className="variantSelector-preview_img" alt=""
+							<LazyLoadImage className="variantSelector-preview_img" alt=""
 								src={product.images[0] ? product.images[0].originalSrc : ''}
 								effect="blur" loading="eager" />
 							<LazyLoadImage className="variantSelector-preview_img second_image" alt=""
 								src={product.images[1] ? product.images[1].originalSrc : ''}
-								effect="blur" loading="eager" /> */}
-							{ product.images[0] &&
+								effect="blur" loading="eager" />
+							{/* { product.images[0] &&
 								<GatsbyImage image={product.images[0].imageData ? product.images[0].imageData.childImageSharp.gatsbyImageData : props.placeholderImage}
 									className="variantSelector-preview_img"
 									loading="lazy" alt={variant.title} />
@@ -175,7 +179,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 								<GatsbyImage image={product.images[1].imageData ? product.images[1].imageData.childImageSharp.gatsbyImageData : props.placeholderImage}
 									className="variantSelector-preview_img second_image"
 									loading="lazy" alt={variant.title} />
-							}
+							} */}
 						</div>
 						}
 
