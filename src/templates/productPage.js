@@ -47,7 +47,6 @@ const ProductPage = ({ data, pageContext }) => {
 				key="related-list"
 				products={relatedProducts}
 				reviewList={productReviews}
-				placeholderImage={data.placeholderImage.childImageSharp.gatsbyImageData}
 			/>
 		</>
 	)
