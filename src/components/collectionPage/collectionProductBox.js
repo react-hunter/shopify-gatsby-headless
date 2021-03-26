@@ -90,8 +90,7 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 				<ProductBoxGallery product={product} 
 					mainOption={mainOption} 
 					swatchColor={swatchColor} 
-					badgeStyles={props.badgeStyles}
-					placeholderImage={props.placeholderImage} />
+					badgeStyles={props.badgeStyles} />
 				<div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
 					<Link to={`/products/${product.handle}`}>{product.title}</Link>
 				</div>
