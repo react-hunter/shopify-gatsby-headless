@@ -13,7 +13,8 @@ import {
 import Provider from "../context/provider"
 import Footer from '../components/common/footer'
 import Instagram from '../components/common/instagram'
-const Header = loadable(() => import('../components/common/header/header'));
+// const Header = loadable(() => import('../components/common/header/header'));
+import Header from '../components/common/header/header';
 const AjaxCartCustom = loadable(() => import('../components/common/ajaxCartCustom'));
 
 const queryClient = new QueryClient();
