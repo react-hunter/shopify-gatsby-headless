@@ -22,6 +22,7 @@ const LingerieVariantsSelectorButtons = ({product,variant,changeOption,selectVar
 								options.values.map((value, index) => (
 									<span className={`lingerie-size-option ${variant[options.name] === value ? 'selected-lingerie-swatch ' : '' }`} 
 										onClick={() => clickSelect(options.name, value)}
+										role="presentation"
 										key={index}>{value}</span>
 								))
 							}								

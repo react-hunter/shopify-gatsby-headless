@@ -11,7 +11,8 @@ const VariantsSelectorButtons = ({product, variant, openVariantAndFill}) => {
 			product.options.map((options, optionIndex) => (
 				!(options.name === 'Title' && variant[options.name] === 'Default Title') ? 
 				(<div id={`variantModal-${options.name}-button`} data-type={options.name} 
-					className="optionBtn optionDefault" onClick={() => openVariantAndFill(options.name)} key={optionIndex} role="button">
+					className="optionBtn optionDefault"
+					onClick={() => openVariantAndFill(options.name)} key={optionIndex} role="presentation">
 
 					<span id={options.name} >{options.name}</span>
 					<FontAwesomeIcon className="fa-angle-down" icon={faAngleRight} size="1x" style={{ float: 'right', marginTop: '3px' }} />  
