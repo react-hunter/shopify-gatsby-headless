@@ -3,8 +3,8 @@ import { Link } from 'gatsby'
 import loadable from '@loadable/component';
 import StoreContext from '../../context/store'
 import ImageSpin from '../common/imageSpin'
+import ProductBoxGallery from './productBoxGallery'
 const CollectionVariantSelector = loadable(() => import('./collectionVariantSelector'))
-const ProductBoxGallery = loadable(() => import('./productBoxGallery'))
 
 const NotifyModal = loadable(() => import('./notifyModal'))
 
@@ -87,7 +87,8 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 		<li className="grid__item grid__item--collection-template " key={product.title} data-product-handle={product.handle}>
 			<div className="grid-view-item product-card">
 				<span className="visually-hidden product-card-title">{product.title}</span>
-				<ProductBoxGallery product={product} 
+				<ProductBoxGallery
+					product={product} 
 					mainOption={mainOption} 
 					swatchColor={swatchColor} 
 					badgeStyles={props.badgeStyles} />

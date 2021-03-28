@@ -47,6 +47,7 @@ const ProductPage = ({ data, pageContext }) => {
 				key="related-list"
 				products={relatedProducts}
 				reviewList={productReviews}
+				badgeStyles={data.allContentfulCollectionBadgeStyleItem.edges}
 			/>
 		</>
 	)
@@ -115,6 +116,19 @@ export const query = graphql`
 					selectedOptions {
 						name
 						value
+					}
+				}
+			}
+		}
+		allContentfulCollectionBadgeStyleItem {
+			edges {
+				node {
+					name
+					image {
+						gatsbyImageData
+						file {
+							url
+						}
 					}
 				}
 			}

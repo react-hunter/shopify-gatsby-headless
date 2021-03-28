@@ -66,7 +66,7 @@ const Footer = React.memo(function Footer(props) {
 				<div className="newsletter-nav" key="newsletter-nav-desktop">
 					<ul className="footer-links">
 						<li className="newsletter_nav_link">
-							<a className="accessibility_trigger-desktop" data-acsb-custom-trigger="true">Accessibility</a>
+							<a href="#accessibility" className="accessibility_trigger-desktop" data-acsb-custom-trigger="true">Accessibility</a>
 						</li>
 						{ footerMenu.map((menuItem, menuIndex) => 
 							<li className="newsletter_nav_link" key={menuIndex}>

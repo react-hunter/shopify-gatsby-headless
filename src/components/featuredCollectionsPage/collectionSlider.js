@@ -4,24 +4,17 @@ import loadable from '@loadable/component';
 import Glider from 'react-glider';
 import CollectionVariantSelector from '../collectionPage/collectionVariantSelector';
 import FeaturedProductBox from "../common/product/featuredProductBox";
-import { client } from "../../contentful";
 import 'glider-js/glider.min.css';
 import "../../styles/collectionPage.scss";
 const NotifyModal = loadable(() => import("../collectionPage/notifyModal"));
 
-const CollectionSlider = React.memo(function CollectionSlider({ products, title, handle, reviewList}) {
+const CollectionSlider = React.memo(function CollectionSlider({ products, title, handle, reviewList, badgeStyles}) {
   const [notifyModalShow, setNotifyModalShow] = useState(false);
-  const [badgeStyles, setBadgeStyles] = useState([]);
   const [varaintModalShow, setVaraintModalShow] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   
   useEffect(() => {
-    async function getBadgeData() {
-      const badgeStyleData = await client.getEntries({'content_type': 'collectionBadgeStyleItem'});
-      setBadgeStyles(badgeStyleData.items);
-    }
     setHoverEffectsForCollection();
-    getBadgeData();
   }, [])
 
   function setHoverEffectsForCollection() {

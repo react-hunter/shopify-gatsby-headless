@@ -75,7 +75,7 @@ const GalaxyStarProjector = ()  => {
                     <div className="galaxy_hero-textbox">
                         <div className="galaxy_hero-title">GALAXY STAR PROJECTOR</div>
                         <div className="galaxy_hero-subtitle">The Galaxy Projector turns any room into a night of stars, light, and color and entering you in a cosmic world</div>
-                        <a href="#fakeUrl" className="galaxy_hero-arrow" onClick={ galaxyScroll } onKeyDown={handleKeyDown} role="presentation">
+                        <a href="#fakeUrl" className="galaxy_hero-arrow" onClick={ galaxyScroll } onKeyDown={handleKeyDown}>
                             <ReactSVG src={DownChevron} />
                         </a>
                     </div>

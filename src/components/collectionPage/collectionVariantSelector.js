@@ -157,7 +157,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 										loading="lazy" alt={variant.title} />
 								} */}
 								{ variant.image &&
-									<LazyLoadImage image={variant.image.originalSrc}
+									<LazyLoadImage src={variant.image.originalSrc}
 										className="variantSelector-preview_img"
 										effect="blur" loading="eager" alt={variant.title} />
 								}

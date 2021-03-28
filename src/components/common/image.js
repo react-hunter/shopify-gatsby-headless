@@ -5,9 +5,10 @@ const CustomImage = (props) => {
   const [loading, setLoading] = useState(true);
   const { src, ...other } = props
   const imageLoaded = () => {
-    setLoading(false);
+    // setTimeout(() => setLoading(false), 1200);
+    setLoading(false)
   }
-  const hideClass = loading ? 'hide' : ''
+  const hideClass = loading ? 'hide' : '';
   return (
     <>
       {src === '' ? null :

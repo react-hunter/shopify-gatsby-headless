@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'; /* eslint-disable */
 import { graphql } from "gatsby";
 import CollectionProductBox from "../components/collectionPage/collectionProductBox";
 import CollectionPageSkeleton from "../components/collectionPage/collectionPageSkeleton";
-import { client } from '../contentful';
 import '../styles/collectionPage.scss';
 import '../styles/widget.min.css';
 
@@ -14,17 +13,12 @@ const collectionPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
   const [ displayProductCount, setDisplayProductCount ] = useState(16);
   const [ showContent, setShowContent ] = useState(false);
-  const [badgeStyles, setBadgeStyles] = useState([]);
   const loadMoreProducts = (e) => {
     e.preventDefault();
     setDisplayProductCount(displayProductCount + 16);
   }
 
   useEffect(() => {
-    async function getBadgeData() {
-      const badgeStyleData = await client.getEntries({'content_type': 'collectionBadgeStyleItem'});
-      setBadgeStyles(badgeStyleData.items);
-    }
     const collectionDescription = document.querySelector('#collectionDescription');
     
     if (collectionDescription.offsetHeight < 46) {
@@ -35,10 +29,9 @@ const collectionPage = ({ data, pageContext }) => {
       document.querySelector("#collectionReadMoreBtn .fa-minus").style.display ='none';
     }
     setHoverEffectsForCollection();
-    getBadgeData();
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 1000);
+    }, 2200);
     return () => clearTimeout(timer);
   }, [])
 
@@ -72,6 +65,8 @@ const collectionPage = ({ data, pageContext }) => {
     }
   }
 
+  const hideContent = showContent ? '' : 'visibility-hidden';
+  
   const handleKeyDown =(e) => {
     e.preventDefault();
   }
@@ -116,22 +111,21 @@ const collectionPage = ({ data, pageContext }) => {
         </div>
         
         <div className="" id="Collection">
-          {showContent ? (
-            <ul id="shop-all-content" 
-              className="products-on-page grid grid--uniform grid--view-items">
-                {
-                  displayedProducts.map((productItem, productIndex) => {
-                    const productReview = productReviews.filter(pr => pr.handle === productItem.handle)
-                    return <CollectionProductBox 
-                              product={productItem} 
-                              key={productIndex} 
-                              review={productReview[0]}
-                              badgeStyles={badgeStyles} />
-                  })
-                }
-            </ul>              
-            ) : <CollectionPageSkeleton />
-          }
+          {!showContent && <CollectionPageSkeleton />}
+          <ul id="shop-all-content" 
+            className={`products-on-page grid grid--uniform grid--view-items ${hideContent}`}>
+              {
+                displayedProducts.map((productItem, productIndex) => {
+                  const productReview = productReviews.filter(pr => pr.handle === productItem.handle)
+                  return <CollectionProductBox
+                            product={productItem}
+                            key={productIndex}
+                            review={productReview[0]}
+                            badgeStyles={data.allContentfulCollectionBadgeStyleItem.edges}
+                          />
+                })
+              }
+          </ul>
         </div>
         
         {
@@ -184,6 +178,19 @@ export const query = graphql`
           selectedOptions {
             name
             value
+          }
+        }
+      }
+    }
+    allContentfulCollectionBadgeStyleItem {
+      edges {
+        node {
+          name
+          image {
+            gatsbyImageData
+            file {
+              url
+            }
           }
         }
       }

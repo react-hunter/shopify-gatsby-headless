@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Flickity from 'react-flickity-component'
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-
 import '../../styles/productGallery.css';
 import '../../styles/flickity.css';
 
@@ -43,14 +41,11 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 			flkty.on('change', () => {
 				setSlideIndex(flkty.selectedIndex);
 			})
-		} else {
 		}
-
 	}, [mainOption, swatchColor, product.variants, flkty])
 
 
 	function gotoProductPage () {
-		console.log("product.handle = ", product.handle);
 		window.location.href=`/products/${product.handle}`;
 	}
 
@@ -58,7 +53,7 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 		let isBadgeEnable = false;
 		badgeStyles.map(item => {
 			for (var i=0;i<product.tags.length;i++) {
-				if (product.tags[i] === item.fields.name) {
+				if (product.tags[i] === item.node.name) {
 					isBadgeEnable = true;
 				}
 			}
@@ -71,8 +66,8 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 		let imageUrl = '';
 		badgeStyles.map(item => {
 			for (var i=0;i<product.tags.length;i++) {
-				if (product.tags[i] === item.fields.name) {
-					imageUrl = item.fields.image.fields.file.url;
+				if (product.tags[i] === item.node.name) {
+					imageUrl = item.node.image.file.url;
 				}
 			}
 			return true
@@ -109,28 +104,31 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 					mainOption === '' ?
 						<Flickity options={flickityOptions} flickityRef={c=> flkty = c} >                           
 							{ product.images[0] &&
-								<LazyLoadImage 
+								<img
 									src={product.images[0].originalSrc}
 									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
+									role="presentation"
 									style={{ cursor: 'pointer' }}
 									loading="lazy" alt={product.title}
 								/>
 							}
 							{ product.images[1] &&
-								<LazyLoadImage 
+								<img 
 									src={product.images[1].originalSrc}
 									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
+									role="presentation"
 									style={{ cursor: 'pointer' }}
 									loading="lazy" alt={product.title}
 								/>
 							}
 							{ product.images[2] &&
-								<LazyLoadImage 
+								<img 
 									src={product.images[2].originalSrc}
 									className="product-tile__image product-collection_image_primary grid-view-item__image"
 									onClick={gotoProductPage}
+									role="presentation"
 									style={{ cursor: 'pointer' }}
 									loading="lazy" alt={product.title}
 								/>
@@ -141,10 +139,11 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 					{
 						swatchImages.map((swatchImage, swatchImageIndex) => {
 							return (
-								<LazyLoadImage 
+								<img 
 									src={swatchImage}
 									className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
 									onClick={gotoProductPage}
+									role="presentation"
 									style={{ cursor: 'pointer' }}
 									loading="lazy"
 									key={swatchImageIndex}

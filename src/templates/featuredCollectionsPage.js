@@ -7,14 +7,14 @@ import '../styles/widget.min.css';
 
 const FeaturedCollectionsPage = ({ data, pageContext }) => {
   const [ showContent, setShowContent ] = useState(false);
+  const hideContent = showContent ? '' : 'visibility-hidden';
   const { productReviews } = pageContext;
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 1000);
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
-
   return (
     <>
       <div className="collection-collections-spacing">
@@ -24,20 +24,21 @@ const FeaturedCollectionsPage = ({ data, pageContext }) => {
               <span className="you-may-like_header">FEATURED COLLECTIONS</span>
               <span className="you-may-like_header_underline"></span>
             </div>
-            {showContent ? 
-              data.allShopifyCollection.edges.map((collection, collectionIndex) => {
+            {!showContent && <CollectionSliderSkeleton />}
+            <div className={`${hideContent}`}>
+              {data.allShopifyCollection.edges.map((collection, collectionIndex) => {
                 return (
                   <CollectionSlider
                     products={collection.node.products.slice(0, 10)}
                     title={collection.node.title}
                     handle={collection.node.handle}
                     reviewList={productReviews}
+                    badgeStyles={data.allContentfulCollectionBadgeStyleItem.edges}
                     key={collectionIndex}
                   />
                 )
-              }) :
-              <CollectionSliderSkeleton />
-            }
+              })}
+            </div>
          </div>
         </div>
       </div>
@@ -82,6 +83,19 @@ export const query = graphql`
                 name
                 value
               }
+            }
+          }
+        }
+      }
+    }
+    allContentfulCollectionBadgeStyleItem {
+      edges {
+        node {
+          name
+          image {
+            gatsbyImageData
+            file {
+              url
             }
           }
         }

@@ -2,27 +2,19 @@ import React, { useState, useEffect } from 'react'
 import queryString from 'query-string'
 import SEO from "../components/common/seo"
 import { graphql } from "gatsby"
-// import Preloader from "../components/common/preloader"
 import CollectionProductBox from "../components/collectionPage/collectionProductBox"
-import { client } from '../contentful'
 import '../styles/widget.min.css';
 
 const SearchPage = ( { data, pageContext, location } ) => {
   const { searchText } = location.search ? queryString.parse(location.search) : { searchText: ''}
   const [ filteredProducts, setFilteredProducts ] = useState([]);
-  const [badgeStyles, setBadgeStyles] = useState([]);
   const { productReviews } = pageContext;
   
   useEffect(() => {
-    async function getBadgeData() {
-      const badgeStyleData = await client.getEntries({'content_type': 'collectionBadgeStyleItem'});
-      setBadgeStyles(badgeStyleData.items);
-    }
     const allProducts = data.allShopifyProduct.edges.map(pr => pr.node)
     const filteredProductList = allProducts.filter(pr => pr.title.toUpperCase().includes(searchText.toUpperCase()) || 
                                                         pr.productType.toUpperCase().includes(searchText.toUpperCase()));
-    setFilteredProducts(filteredProductList)
-    getBadgeData();
+    setFilteredProducts(filteredProductList);
   }, [data.allShopifyProduct.edges, searchText]);
 
   const findReview = (pHandle) => {
@@ -32,7 +24,6 @@ const SearchPage = ( { data, pageContext, location } ) => {
 
   return (
     <>
-      {/* <Preloader /> */}
       <SEO title="Home" />
 
       <div className="main-content js-focus-hidden"  id="searchContent">
@@ -45,7 +36,12 @@ const SearchPage = ( { data, pageContext, location } ) => {
             !p ?
               <p>Nothings with : {searchText} </p>
               :
-              <CollectionProductBox product={p} review={findReview(p.handle)} badgeStyles={badgeStyles} key={i} />
+              <CollectionProductBox
+                product={p}
+                review={findReview(p.handle)}
+                badgeStyles={data.allContentfulCollectionBadgeStyleItem.edges}
+                key={i}
+              />
           ))}
         </ul>
       </div>
@@ -94,5 +90,18 @@ export const query = graphql`
         }
       }
     }
+    allContentfulCollectionBadgeStyleItem {
+			edges {
+				node {
+					name
+					image {
+						gatsbyImageData
+						file {
+							url
+						}
+					}
+				}
+			}
+		}
   }
 `
