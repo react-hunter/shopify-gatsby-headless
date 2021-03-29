@@ -46,6 +46,15 @@ const Layout = ({ path, children }) => {
 									price
 								}
 							}
+							siteLogo: file(relativePath: { eq: "icon-logo.png" }) {
+								childImageSharp {
+									gatsbyImageData (
+										width: 600
+										placeholder: BLURRED
+										formats: [AUTO, WEBP, AVIF]
+									)
+								}
+							}
 							allContentfulInstagramSettings {
 								nodes {
 									title
@@ -128,6 +137,7 @@ const Layout = ({ path, children }) => {
 									announceList={data.allContentfulAnnounceTextItem.edges}
 									cardList={data.allContentfulCardSliderItem.edges}
 									desktopHeader={data.allContentfulDesktopHeaderMenuItem.edges}
+									siteLogo={data.siteLogo.childImageSharp.gatsbyImageData}
 								/>
 								<div className="page-container drawer-page-content" id="PageContainer">
 									{children}

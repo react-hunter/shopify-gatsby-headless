@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps, no-useless-escape, no-new-func */
 import React, { useState, useEffect } from 'react';
 import { graphql } from 'gatsby'
 import { client } from '../contentful'

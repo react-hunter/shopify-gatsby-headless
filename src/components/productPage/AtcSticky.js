@@ -1,22 +1,31 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState, useCallback } from 'react';
 import ImageSpin from '../common/imageSpin'
 
 const AtcSticky = ({ product, context, available, productVariant,  quantity }) => {
 
-	let addToCartButtonSticky = ''; 
-	let addToCartButton = ''; 
-
+	let addToCartButtonSticky = '';
+	let addToCartButton = '';
 	let showing = false;
-
 	const [showSpin, setShowSpin] = useState(false);
-
+	const stickyFunction = useCallback(() => {
+		if (isInViewport(addToCartButton)) {
+			if (!showing) {
+				showing = true;
+				addToCartButtonSticky.classList.add('show');
+			}
+		} else {
+			if (showing) {
+				showing = false;
+				addToCartButtonSticky.classList.remove('show');
+			}
+		}
+	}, []);
 	useEffect(() => {
-		addToCartButtonSticky = document.querySelector(".atcSticky");
 		addToCartButton = document.querySelector(".mobile-in-view_trigger");
-
+		addToCartButtonSticky = document.querySelector(".atcSticky");
 		window.addEventListener('scroll', stickyFunction, {passive: true});
-	}, [])
-
+	}, [stickyFunction]);
 	function isInViewport(element) {
 		const rect = element.getBoundingClientRect();
 		return (
@@ -25,24 +34,6 @@ const AtcSticky = ({ product, context, available, productVariant,  quantity }) =
 			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
 			rect.right <= (window.innerWidth || document.documentElement.clientWidth)
 		);
-	}
-		
-	function stickyFunction () {
-		addToCartButton = document.querySelector(".mobile-in-view_trigger");
-
-		if (isInViewport(addToCartButton)) {
-			if (!showing) {
-				showing = true;
-				console.log('showing is true')
-				addToCartButtonSticky.classList.add('show');
-			}
-		} else {
-			if (showing) {
-				showing = false;
-				console.log('showing is false')
-				addToCartButtonSticky.classList.remove('show');
-			}
-		}
 	}
 
 	const handleAddToCart = () => {

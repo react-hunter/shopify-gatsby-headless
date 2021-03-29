@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
+import { GatsbyImage } from "gatsby-plugin-image"
 import loadable from '@loadable/component';
 import { Link, navigate } from 'gatsby'
 import StoreContext from '../../../context/store'
 import { ReactSVG } from 'react-svg';
-import LogoIcon from '../../../images/icon-logo.svg';
 import SearchHeaderIcon from '../../../images/icon-search-header.svg';
 import LoginHeaderIcon from '../../../images/icon-login-header.svg';
 import MessageIcon from '../../../images/icon-message.svg';
@@ -355,7 +355,7 @@ const Header = React.memo(function Header(props) {
               <div className="header_logo-container" key="logocontainer">
                 <h1 className="h2 site-header__logo">
                   <Link to="/" className="site-header__logo-image site-header__logo-image--centered">
-                    <ReactSVG src={LogoIcon} />
+                    <GatsbyImage image={props.siteLogo} alt="dose-roses" />
                   </Link>
                 </h1>
               </div>

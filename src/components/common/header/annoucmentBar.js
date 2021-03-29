@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps, no-loop-func, no-unused-vars */
 import React, { useEffect, useRef } from 'react'
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

@@ -8,8 +8,17 @@ const Instagram = React.memo(function Instagram(props) {
 		return function cleanup() {
 			window.removeEventListener('resize', mobileRearrange, true);
 		}
-	}, [])
+	}, []);
 	useEffect(() => {
+		async function addScript(url) {
+			const script = document.createElement("script")
+			script.src = url
+			script.setAttribute('data-feed-id', 'dose-of-roses')
+			script.setAttribute('data-theme', 'showcase_v2_5')
+			script.setAttribute('data-open-links-in-same-page', true)
+			script.setAttribute('data-page-size', photoCount)
+			document.getElementById('insta_header').appendChild(script)
+		}
 		if (photoCount > 0) {
 			const previousInstagram = document.querySelectorAll(".fs-wrapper");
 			for (var i=0;i<previousInstagram.length;i++) {
@@ -17,18 +26,7 @@ const Instagram = React.memo(function Instagram(props) {
 			}
 			addScript('//foursixty.com/media/scripts/fs.embed.v2.5.js')
 		}
-	}, [photoCount])
-
-	const addScript = url => {
-		const script = document.createElement("script")
-		script.src = url
-		script.setAttribute('data-feed-id', 'dose-of-roses')
-		script.setAttribute('data-theme', 'showcase_v2_5')
-		script.setAttribute('data-open-links-in-same-page', true)
-		script.setAttribute('data-page-size', photoCount)
-		document.getElementById('insta_header').appendChild(script)
-	}
-
+	}, [photoCount]);
 	function mobileRearrange() {
 		if (window.innerWidth <= 768) {
 			setPhotoCount(9);

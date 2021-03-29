@@ -64,7 +64,6 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 
 	const selectVariantOption =(optionName, optionValue) => {
 		const theVariant = getVariantByOption(optionName, optionValue);
-		console.log("theVariant = ", theVariant);
 		setVariant(theVariant)
 	}
 	const addToSideCart =() => {

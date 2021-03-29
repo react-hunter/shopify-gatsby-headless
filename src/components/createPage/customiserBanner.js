@@ -24,24 +24,18 @@ const CustomiserBanner = () => {
 				desktopImageItems: desktopImageData.items[0].fields.customiserImageItem,
 				mobileImageItems: mobileImageData.items[0].fields.customiserImageItem
 			});
-			setUI();
 		}
 		getBannerData();
+		setTimeout(smoothLoadBanner, 500);
 		window.addEventListener('scroll', scrollHandler, { passive: true })
 		return function cleanup() {
 			window.removeEventListener('scroll', scrollHandler, { passive: true });
 		}
 	}, []);
 
-	function setUI() {
-		setTimeout(function(){
-			smoothLoadBanner();
-		}, 500)
-	}
-
 	const scrollHandler = () => {
 		let y_scroll_pos = window.pageYOffset;
-		let scroll_pos_test = document.getElementsByClassName("create_steps-outer")[0].offsetTop;
+		let scroll_pos_test = document.getElementsByClassName("create_steps-outer").length > 0 ? document.getElementsByClassName("create_steps-outer")[0].offsetTop : 0;
 
 		if (y_scroll_pos > scroll_pos_test - 600) {
 			if (document.getElementById('fadeOpacity_wrapper') != null)
