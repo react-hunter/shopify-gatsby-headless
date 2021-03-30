@@ -13,12 +13,12 @@ const CollectionPageSkeleton = () => {
                   <Skeleton height="100%" />
                 </div>
                 <div className="h4 grid-view-item__title product-card__title product-card-title">
-                  <Skeleton height={20} width={`100%`} />
+                  <Skeleton height={16} width={`80%`} count={2} />
                 </div>
                 <div className="price price--listing price--on-sale">
                   <div className="price__sale">
                     <dd>
-                      <Skeleton height={20} width={`100px`} />
+                      <Skeleton height={16} width={`100px`} />
                     </dd>
                   </div>
                 </div>
