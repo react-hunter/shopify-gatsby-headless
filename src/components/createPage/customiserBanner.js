@@ -24,9 +24,9 @@ const CustomiserBanner = () => {
 				desktopImageItems: desktopImageData.items[0].fields.customiserImageItem,
 				mobileImageItems: mobileImageData.items[0].fields.customiserImageItem
 			});
+			setTimeout(smoothLoadBanner, 500);
 		}
 		getBannerData();
-		setTimeout(smoothLoadBanner, 500);
 		window.addEventListener('scroll', scrollHandler, { passive: true })
 		return function cleanup() {
 			window.removeEventListener('scroll', scrollHandler, { passive: true });

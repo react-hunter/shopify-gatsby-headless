@@ -249,7 +249,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 							style={{ display: 'inline-block' }}>NOTIFY ME</button>
 					}
 					{ product.productType !== 'Lingerie' && product.productType !== 'Rose Bear' ? 
-						<Link to="/pages/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZER NOW</Link> :
+						<Link to="/pages/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZE NOW</Link> :
 						null
 					}
 				</div>

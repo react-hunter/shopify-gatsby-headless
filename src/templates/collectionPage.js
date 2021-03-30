@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { faMinus } from "@fortawesome/free-solid-svg-icons"
 
-const collectionPage = ({ data, pageContext }) => {
+const CollectionPage = ({ data, pageContext }) => {
   const { productReviews } = pageContext;
   const [ displayProductCount, setDisplayProductCount ] = useState(16);
   const [ showContent, setShowContent ] = useState(false);
@@ -30,8 +30,8 @@ const collectionPage = ({ data, pageContext }) => {
     }
     setHoverEffectsForCollection();
     const timer = setTimeout(() => {
-      setShowContent(true);
-    }, 2200);
+      setShowContent(false);
+    }, 22200);
     return () => clearTimeout(timer);
   }, [])
 
@@ -142,7 +142,7 @@ const collectionPage = ({ data, pageContext }) => {
   )
 }
 
-export default collectionPage
+export default CollectionPage
 
 export const query = graphql`
   query($id: String!){

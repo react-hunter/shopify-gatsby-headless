@@ -15,7 +15,7 @@ import piMaster from '../../images/slideCartFooter/pi-master.svg'
 import piVisa from '../../images/slideCartFooter/pi-visa.svg'
 
 
-const ajaxCartFooter = () => {
+const AjaxCartFooter = () => {
 	return (
 		<ul className="payment-icons">
 			<li>
@@ -54,4 +54,4 @@ const ajaxCartFooter = () => {
 	);
 };
 	
-export default ajaxCartFooter;
+export default AjaxCartFooter;

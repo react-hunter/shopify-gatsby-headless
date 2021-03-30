@@ -8,7 +8,7 @@ import "../styles/blogs.scss";
 const RecentArticles = loadable(() => import("../components/articles/recentArticles"))
 
 
-const articlePage = ({ data, ...other }) => {
+const ArticlePage = ({ data, ...other }) => {
   let date = changeDateFormat();
   function changeDateFormat(){
     let mydate = new Date(data.shopifyArticle.publishedAt);
@@ -64,7 +64,7 @@ const articlePage = ({ data, ...other }) => {
   )
 }
 
-export default articlePage
+export default ArticlePage
 
 export const query = graphql`
   query($id: String!){

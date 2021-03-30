@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-const createExpert = () => {
+const CreateExpert = () => {
 	return (
 	  <>
 		<div id="shopify-section-create-expert" className="shopify-section">
@@ -38,4 +38,4 @@ const createExpert = () => {
 	)
 }
   
-export default createExpert
+export default CreateExpert
