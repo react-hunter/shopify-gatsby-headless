@@ -931,3 +931,24 @@ border-radius: 50%;
     margin-top: 5px;
   }
 }
+
+/* skeleton */
+@keyframes imageBackgroundAnimation {
+  0%{background-position:10% 0%}
+  50%{background-position:91% 100%}
+  100%{background-position:10% 0%}
+}
+.collection-skeleton {
+  .product-cart-image {
+    display: inline-block;
+    height: 0;
+    padding-bottom: 100%;
+    width: 100%;
+    background:linear-gradient(#D8D8D8, #E8E8E8, #F5F5F5);
+    animation: imageBackgroundAnimation 1s ease infinite;
+  }
+  .openVariantModal {
+    background: transparent;
+    border: none;
+  }
+}

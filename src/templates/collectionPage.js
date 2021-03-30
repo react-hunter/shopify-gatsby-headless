@@ -30,8 +30,8 @@ const CollectionPage = ({ data, pageContext }) => {
     }
     setHoverEffectsForCollection();
     const timer = setTimeout(() => {
-      setShowContent(false);
-    }, 22200);
+      setShowContent(true);
+    }, 2200);
     return () => clearTimeout(timer);
   }, [])
 
