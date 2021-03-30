@@ -947,6 +947,16 @@ border-radius: 50%;
     background:linear-gradient(#D8D8D8, #E8E8E8, #F5F5F5);
     animation: imageBackgroundAnimation 1s ease infinite;
   }
+  .collection-product-color-swatch {
+    .color-swatch {
+      .react-loading-skeleton {
+        @media (max-width: 768px) {
+          width: 25px!important;
+          height: 25px!important;
+        }
+      }
+    }
+  }
   .openVariantModal {
     background: transparent;
     border: none;

@@ -12,17 +12,23 @@ const CollectionPageSkeleton = () => {
                 <div className="product-cart-image">
                   <Skeleton height="100%" />
                 </div>
-                <div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
-                  <Skeleton height={35} width={`100%`} />
+                <div className="h4 grid-view-item__title product-card__title product-card-title">
+                  <Skeleton height={20} width={`100%`} />
                 </div>
                 <div className="price price--listing price--on-sale">
                   <div className="price__sale">
                     <dd>
-                      <Skeleton height={35} width={`100px`} />
+                      <Skeleton height={20} width={`100px`} />
                     </dd>
                   </div>
                 </div>
                 <div className="collection-product-color-swatch">
+                <div className="color-swatch">
+                    <Skeleton circle={true} height={35} width={35} />
+                  </div>
+                  <div className="color-swatch">
+                    <Skeleton circle={true} height={35} width={35} />
+                  </div>
                   <div className="color-swatch">
                     <Skeleton circle={true} height={35} width={35} />
                   </div>

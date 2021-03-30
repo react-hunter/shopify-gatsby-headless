@@ -95,7 +95,7 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 				<div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
 					<Link to={`/products/${product.handle}`}>{product.title}</Link>
 				</div>
-				<div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: reviewBadge }} />
+				{/* <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: reviewBadge }} /> */}
 				<div className="price price--listing price--on-sale">
 					<div className="price__regular"></div>
 					<div className="price__sale">
