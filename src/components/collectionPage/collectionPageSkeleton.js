@@ -12,28 +12,22 @@ const CollectionPageSkeleton = () => {
                 <div className="product-cart-image">
                   <Skeleton height="100%" />
                 </div>
-                <div className="h4 grid-view-item__title product-card__title product-card-title desktop-only">
-                  <Skeleton height={16} width={`80%`} count={2} />
-                </div>
-                <div className="h4 grid-view-item__title product-card__title product-card-title mobile-only">
-                  <Skeleton height={16} width={`80%`} count={(index + 1) % 7 === 0 && (index + 1) / 7 > 0 ? 1 : 2} />
+                <div className="h4 grid-view-item__title product-card__title product-card-title">
+                  <Skeleton height={16} width={`80%`} count={1} />
                 </div>
                 <div className="product-review">
                   <div className="review-stars">
-                    <Skeleton circle={true} height={12} width={12} />
-                    <Skeleton circle={true} height={12} width={12} />
-                    <Skeleton circle={true} height={12} width={12} />
-                    <Skeleton circle={true} height={12} width={12} />
-                    <Skeleton circle={true} height={12} width={12} />
-                  </div>
-                  <div className="review-count">
-                    <Skeleton height={16} width={`80px`} />
+                    <i className="star"></i>
+                    <i className="star"></i>
+                    <i className="star"></i>
+                    <i className="star"></i>
+                    <i className="star"></i>
                   </div>
                 </div>
                 <div className="price price--listing price--on-sale">
                   <div className="price__sale">
                     <dd>
-                      <Skeleton height={16} width={`100px`} />
+                      <Skeleton height={14} width={`100px`} />
                     </dd>
                   </div>
                 </div>
