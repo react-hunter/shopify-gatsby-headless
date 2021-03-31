@@ -355,7 +355,7 @@ const Header = React.memo(function Header(props) {
               <div className="header_logo-container" key="logocontainer">
                 <h1 className="h2 site-header__logo">
                   <Link to="/" className="site-header__logo-image site-header__logo-image--centered">
-                    <GatsbyImage image={props.siteLogo} alt="dose-roses" />
+                    <GatsbyImage image={props.siteLogo} loading="lazy" alt="dose-roses" />
                   </Link>
                 </h1>
               </div>

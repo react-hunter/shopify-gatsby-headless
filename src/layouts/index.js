@@ -47,7 +47,7 @@ const Layout = ({ path, children }) => {
 								childImageSharp {
 									gatsbyImageData (
 										width: 600
-										placeholder: BLURRED
+										placeholder: TRACED_SVG
 										formats: [AUTO, WEBP, AVIF]
 									)
 								}

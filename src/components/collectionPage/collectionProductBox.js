@@ -13,7 +13,7 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 	const [varaintModalShow, setVaraintModalShow] = useState(false);
 	const [showSpin, setShowSpin] = useState(false);
 	const product = props.product;
-	const reviewBadge = props.review ? props.review.badge : '';
+	// const reviewBadge = props.review ? props.review.badge : '';
 	const mainOption = getMainOption()
 	const [swatchColor, setSwatchColor] = useState(mainOption === '' ? '' : mainOption.values[0])
 
