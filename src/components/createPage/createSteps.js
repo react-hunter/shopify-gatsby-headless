@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { client } from '../../contentful'
 
-const CreateSteps = () => {
+const CreateSteps = React.memo(function CreateSteps() {
 	const [createSteps, setCreateSteps] = useState({
 		title: 'How to Create Your Custom Dose',
 		steps: []
@@ -43,6 +43,8 @@ const CreateSteps = () => {
 		</div>
 	  </>
 	)
-}
-  
-export default CreateSteps
+});
+
+CreateSteps.displayName = 'CreateSteps';
+
+export default CreateSteps;

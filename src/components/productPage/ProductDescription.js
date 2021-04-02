@@ -13,7 +13,12 @@ import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 
 const AtcSticky = loadable(() => import("./AtcSticky"))
 
-const ProductDescription = ({ product, review, clickVariantSelect, selectVariant }) => {
+const ProductDescription = React.memo(function ProductDescription({
+	product,
+	review,
+	clickVariantSelect,
+	selectVariant
+}) {
 	const context = useContext(StoreContext);
 	const [quantity, setQuantity] = useState(1);
 	const [variant, setVariant] = useState(product.variants[0]);
@@ -187,6 +192,8 @@ const ProductDescription = ({ product, review, clickVariantSelect, selectVariant
 				productVariant={productVariant} />
 		</div>
 	);
-}
+});
+
+ProductDescription.displayName = 'ProductDescription';
 
 export default ProductDescription;

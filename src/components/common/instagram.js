@@ -57,5 +57,7 @@ const Instagram = React.memo(function Instagram(props) {
 		</div>
 	);
 });
-	
+
+Instagram.displayName = 'Instagram';
+
 export default Instagram;

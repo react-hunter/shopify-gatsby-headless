@@ -163,4 +163,6 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 	);
 });
 
+ProductBoxGallery.displayName = 'ProductBoxGallery';
+
 export default ProductBoxGallery;

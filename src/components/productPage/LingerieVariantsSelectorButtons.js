@@ -1,6 +1,13 @@
 import React from 'react';
 
-const LingerieVariantsSelectorButtons = ({product,variant,changeOption,selectVariant,clickVariantSelect , findVariant }) => {
+const LingerieVariantsSelectorButtons = React.memo(function LingerieVariantsSelectorButtons({
+	product,
+	variant,
+	changeOption,
+	selectVariant,
+	clickVariantSelect,
+	findVariant
+}) {
 	const clickSelect = (optionName, optionValue) => {
 		changeOption(optionName, optionValue)
 		selectVariant(findVariant(optionName, optionValue));
@@ -33,6 +40,8 @@ const LingerieVariantsSelectorButtons = ({product,variant,changeOption,selectVar
 		}
 		</div>
 	);
-};
+});
+
+LingerieVariantsSelectorButtons.displayName = 'LingerieVariantsSelectorButtons';
 
 export default LingerieVariantsSelectorButtons;

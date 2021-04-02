@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPause } from "@fortawesome/free-solid-svg-icons"
 
-const AnnoucmentBar = ({ announceList }) => {
+const AnnoucmentBar = React.memo(function AnnoucmentBar({ announceList }) {
   let anntimer = 0;
   let percent = 0;
 
@@ -132,6 +132,8 @@ const AnnoucmentBar = ({ announceList }) => {
       </div>
     </>
   )
-}
+});
+
+AnnoucmentBar.displayName = 'AnnoucmentBar';
 
 export default AnnoucmentBar;

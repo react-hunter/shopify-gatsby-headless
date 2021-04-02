@@ -30,4 +30,6 @@ const ArticleSection = React.memo(function ArticleSection({ data }) {
   );
 });
 
+ArticleSection.displayName = 'ArticleSection';
+
 export default ArticleSection;

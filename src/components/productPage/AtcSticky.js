@@ -2,7 +2,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import ImageSpin from '../common/imageSpin'
 
-const AtcSticky = ({ product, context, available, productVariant,  quantity }) => {
+const AtcSticky = React.memo(function AtcSticky({
+	product,
+	context,
+	available,
+	productVariant,
+	quantity
+}) {
 
 	let addToCartButtonSticky = '';
 	let addToCartButton = '';
@@ -63,6 +69,8 @@ const AtcSticky = ({ product, context, available, productVariant,  quantity }) =
 			</div>
     </div>
   );
-};
+});
+
+AtcSticky.displayName = 'AtcSticky';
 
 export default AtcSticky;

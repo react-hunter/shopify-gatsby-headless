@@ -3,7 +3,11 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
 
-const VariantsSelectorButtons = ({product, variant, openVariantAndFill}) => {
+const VariantsSelectorButtons = React.memo(function VariantsSelectorButtons({
+	product,
+	variant,
+	openVariantAndFill
+}) {
 
 	return (
 		<div className="variants-selector-buttons">
@@ -23,6 +27,8 @@ const VariantsSelectorButtons = ({product, variant, openVariantAndFill}) => {
 		}
 		</div>
 	);
-};
+});
+
+VariantsSelectorButtons.displayName = 'VariantsSelectorButtons';
 
 export default VariantsSelectorButtons;

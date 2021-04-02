@@ -113,5 +113,7 @@ const CollectionSlider = React.memo(function CollectionSlider({ products, title,
     </div>
   );
 });
+
+CollectionSlider.displayName = 'CollectionSlider';
     
 export default CollectionSlider;

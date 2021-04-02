@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import StoreContext from "../../context/store"
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-const Product = ({ line_item }) => {
+const Product = React.memo(function Product({ line_item }) {
 	const context = useContext(StoreContext)
 	const imageItem = line_item.variant.image && (
 		<LazyLoadImage
@@ -67,6 +67,8 @@ const Product = ({ line_item }) => {
 			</tr>
 		</>
 	);
-};
+});
+
+Product.displayName = 'Product';
 
 export default Product;

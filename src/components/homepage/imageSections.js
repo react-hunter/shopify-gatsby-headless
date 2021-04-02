@@ -42,5 +42,7 @@ const ImageSections = React.memo(function ImageSections(props) {
 		</>
 	);
 });
-	
+
+ImageSections.displayName = 'ImageSections';
+
 export default ImageSections;

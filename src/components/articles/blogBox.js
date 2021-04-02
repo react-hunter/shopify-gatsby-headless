@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby'
 import MyImage from '../common/lazyImage'
 
-const BlogBox = props => {
+const BlogBox = React.memo(function BlogBox(props) {
   const article = props.article
   let date = changeDateFormat();
   function changeDateFormat(){
@@ -43,6 +43,8 @@ const BlogBox = props => {
       </div>
     </div>
   );
-};
+});
+
+BlogBox.displayName = 'BlogBox';
 
 export default BlogBox;

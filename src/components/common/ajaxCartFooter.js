@@ -15,7 +15,7 @@ import piMaster from '../../images/slideCartFooter/pi-master.svg'
 import piVisa from '../../images/slideCartFooter/pi-visa.svg'
 
 
-const AjaxCartFooter = () => {
+const AjaxCartFooter = React.memo(function AjaxCartFooter() {
 	return (
 		<ul className="payment-icons">
 			<li>
@@ -52,6 +52,8 @@ const AjaxCartFooter = () => {
 			</li>
 		</ul>
 	);
-};
+});
+
+AjaxCartFooter.displayName = 'AjaxCartFooter';
 	
 export default AjaxCartFooter;

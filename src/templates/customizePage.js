@@ -5,7 +5,7 @@ import { client } from '../contentful'
 import '../styles/customizePage.scss'
 import AddToBagButton from '../components/customizePage/addToBagButton'
 
-const CustomizePage = ({ data }) => {
+const CustomizePage = React.memo(function CustomizePage({ data }) {
   const [customizeData, setCustomizeData] = useState({
     arrangementSelectorNumbers: [{number: '0'}, {number: '1'}, {number: '2'}, {number: '3'}, {number: '4'},
                                   {number: '5'}, {number: '6'}, {number: '7'}, {number: '8'},{number: '9'}
@@ -1335,7 +1335,9 @@ const CustomizePage = ({ data }) => {
       </div>
     </>
   )
-}
+});
+
+CustomizePage.displayName = 'CustomizePage';
   
 export default CustomizePage
 

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPrint, faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import { faFacebookF, faTwitter, faPinterest } from "@fortawesome/free-brands-svg-icons"
 
-const ShareIcons = (props) => {
+const ShareIcons = React.memo(function ShareIcons(props) {
 
 	const printWindow = (e) => {
 		e.preventDefault();
@@ -48,16 +48,17 @@ const ShareIcons = (props) => {
 			</a>
 		</div>
 	);
-};
+});
 
 ShareIcons.propTypes = {
 	articleUrl: PropTypes.string,
 	articleMedia: PropTypes.string,
 }
-
 ShareIcons.defaultProps = {
 	articleUrl: ``,
 	articleMedia: ``,
 }
-	
+
+ShareIcons.displayName = 'ShareIcons';
+
 export default ShareIcons;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Preloader = (props) => {
+const Preloader = React.memo(function Preloader(props) {
   const [ loadMore, setLoadMore ] = useState(true)
   
   useEffect(() => {
@@ -24,6 +24,8 @@ const Preloader = (props) => {
       }
     </>
   );
-}
+});
+
+Preloader.displayName = 'Preloader';
 
 export default Preloader;

@@ -8,7 +8,7 @@ const ProductGallery = loadable(() => import("../components/productPage/ProductG
 const ProductDescription = loadable(() => import("../components/productPage/ProductDescription"))
 const RelatedProductList = loadable(() => import("../components/productPage/RelatedProductList"))
 
-const ProductPage = ({ data, pageContext }) => {
+const ProductPage = React.memo(function ProductPage({ data, pageContext }) {
 	const product = data.shopifyProduct;
 	const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
 	const {id, productReviews} = pageContext;
@@ -51,9 +51,11 @@ const ProductPage = ({ data, pageContext }) => {
 			/>
 		</>
 	)
-}
+});
 
-export default ProductPage
+ProductPage.displayName = 'ProductPage';
+
+export default ProductPage;
 
 export const query = graphql`
 	query($id: String!){

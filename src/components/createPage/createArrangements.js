@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import { client } from '../../contentful'
 import CustomImage from '../common/image'
 
-const CreateArrangements = () => {	
+const CreateArrangements = React.memo(function CreateArrangements() {	
 	const [createArrangements, setCreateArrangements] = useState({
 		title: 'SELECT A STYLE TO GET STARTED',
 		subTitle: 'Choose your box color, material and rose colors. Personalize it with letters, numbers or symbols.',
@@ -81,6 +81,8 @@ const CreateArrangements = () => {
 		</div>
 	  </>
 	)
-}
+});
+
+CreateArrangements.displayName = 'CreateArrangements';
   
 export default CreateArrangements

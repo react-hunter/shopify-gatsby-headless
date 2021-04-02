@@ -2,7 +2,12 @@ import React, { useState, useContext } from 'react';
 import ImageSpin from '../common/imageSpin'
 import StoreContext from '../../context/store'
 
-const AddToBagButton = ({ getCurrentStep, getCollectionProducts, getSelections, getMainImageUrl }) => {
+const AddToBagButton = React.memo(function AddToBagButton({
+	getCurrentStep,
+	getCollectionProducts,
+	getSelections,
+	getMainImageUrl
+}) {
 	const [showSpin, setShowSpin] = useState(false);   
 	const context = useContext(StoreContext);
 	
@@ -58,6 +63,8 @@ const AddToBagButton = ({ getCurrentStep, getCollectionProducts, getSelections, 
 				Add To Bag{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }
 		</div>
 	);
-};
+});
+
+AddToBagButton.display = 'AddToBagButton';
 
 export default AddToBagButton;

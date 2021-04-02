@@ -9,7 +9,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from "@fortawesome/free-solid-svg-icons"
 import { faMinus } from "@fortawesome/free-solid-svg-icons"
 
-const CollectionPage = ({ data, pageContext }) => {
+const CollectionPage = React.memo(function CollectionPage({
+  data,
+  pageContext
+}) {
   const { productReviews } = pageContext;
   const [ displayProductCount, setDisplayProductCount ] = useState(16);
   const [ showContent, setShowContent ] = useState(false);
@@ -140,9 +143,11 @@ const CollectionPage = ({ data, pageContext }) => {
       
     </>
   )
-}
+});
 
-export default CollectionPage
+CollectionPage.displayName = 'CollectionPage';
+
+export default CollectionPage;
 
 export const query = graphql`
   query($id: String!){

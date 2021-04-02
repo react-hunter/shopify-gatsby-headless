@@ -1,6 +1,10 @@
 import React from 'react'; /* eslint-disable */
 
-const VariantSelector = ({key, onChange, options}) => {
+const VariantSelector = React.memo(function VariantSelector({
+	key,
+	onChange,
+	options
+}) {
 	return (
 		<div className="field ">
 			<label className="label">{options.name} </label>
@@ -23,6 +27,8 @@ const VariantSelector = ({key, onChange, options}) => {
 			</div>
 		</div>
 	);
-};
+});
+
+VariantSelector.displayName = 'VariantSelector';
 
 export default VariantSelector;

@@ -6,7 +6,7 @@ import InstagramIcon from '../../images/icon-instagram.svg';
 import TwitterIcon from '../../images/icon-twitter.svg';
 import YoutubeIcon from '../../images/icon-youtube.svg';
 
-const SocialIcon = ({ icon }) => {
+const SocialIcon = React.memo(function SocialIcon({ icon }) {
   switch (icon) {
     case 'facebook':
       return <ReactSVG src={FacebookIcon} />
@@ -19,14 +19,14 @@ const SocialIcon = ({ icon }) => {
     default:
       break;
   }
-}
+});
 
 SocialIcon.propTypes = {
   icon: PropTypes.string,
 }
-
 SocialIcon.defaultProps = {
   icon: `facebook`,
 }
+SocialIcon.displayName = 'SocialIcon';
 
 export default SocialIcon;

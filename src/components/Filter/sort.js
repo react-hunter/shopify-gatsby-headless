@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Sort = ({context}) => {
+const Sort = React.memo(function Sort({context}) {
   const [sort, setSort] = useState(context.filteredSort)
   const sorts = []
   sorts.push(
@@ -46,6 +46,8 @@ const Sort = ({context}) => {
       </div>
     </label>
   );
-};
+});
+
+Sort.displayName = 'Sort';
 
 export default Sort;

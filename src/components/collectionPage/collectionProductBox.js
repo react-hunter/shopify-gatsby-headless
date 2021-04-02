@@ -141,4 +141,6 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 	);
 });
 
+CollectionProductBox.displayName = 'CollectionProductBox';
+
 export default CollectionProductBox;

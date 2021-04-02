@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby'
 import Product from './Product'
 
-const Products = ({checkout}) => {
+const Products = React.memo(function Products({checkout}) {
 	return (
 		<div data-cart-wrapper="">
 			<div className="cart-header">
@@ -48,6 +48,8 @@ const Products = ({checkout}) => {
 			</div>
 		</div>
 	);
-};
+});
+
+Products.displayName = 'Products';
 
 export default Products;

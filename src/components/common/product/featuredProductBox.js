@@ -130,4 +130,6 @@ const FeaturedProductBox = React.memo(function FeaturedProductBox(props) {
 	);
 });
 
+FeaturedProductBox.displayName = 'FeaturedProductBox';
+
 export default FeaturedProductBox;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 
-const SiteNav = ({ desktopHeader }) => {
+const SiteNav = React.memo(function SiteNav({ desktopHeader }) {
 	return (
 		<>
 			<nav className="small--hide border-bottom" id="AccessibleNav" role="navigation">
@@ -19,6 +19,8 @@ const SiteNav = ({ desktopHeader }) => {
 			</nav>
 		</>
 	)
-}
+});
 
-export default SiteNav
+SiteNav.displayName = 'SiteNav';
+
+export default SiteNav;

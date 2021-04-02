@@ -5,7 +5,7 @@ import HeroSection from "../components/homepage/heroSection"
 import ImageSection from "../components/homepage/imageSections"
 import ArticleSection from "../components/articles/articleSection"
 
-const IndexPage = ({ data: {allShopifyArticle, allContentfulHomepage}}) => {
+const IndexPage = React.memo(function IndexPage({ data: {allShopifyArticle, allContentfulHomepage}}) {
   const homepageData = allContentfulHomepage.nodes[0];
   return (
     <>
@@ -15,9 +15,11 @@ const IndexPage = ({ data: {allShopifyArticle, allContentfulHomepage}}) => {
       <ArticleSection data={allShopifyArticle.edges} />
     </>
   )
-}
+});
 
-export default IndexPage
+IndexPage.displayName = 'IndexPage';
+
+export default IndexPage;
 
 export const query = graphql`
   query {

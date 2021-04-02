@@ -1,7 +1,7 @@
 import React from 'react';
 import { KlaviyoForm } from '@nacelle/react-klaviyo';
 
-const NotifyModal = (props) => {
+const NotifyModal = React.memo(function NotifyModal(props) {
   const classes = props.modalShow ? "klav-popup fade-in" : "klav-popup fade-in hide"
   const closeNotifyModal = (e) => {
     e.preventDefault();
@@ -21,6 +21,8 @@ const NotifyModal = (props) => {
       </div>
     </div>
   );
-};
+});
+
+NotifyModal.displayName = 'NotifyModal';
 
 export default NotifyModal;

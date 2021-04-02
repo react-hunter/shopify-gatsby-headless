@@ -5,7 +5,10 @@ import CollectionSliderSkeleton from "../components/featuredCollectionsPage/coll
 import '../styles/featuredCollectionsPage.scss';
 import '../styles/widget.min.css';
 
-const FeaturedCollectionsPage = ({ data, pageContext }) => {
+const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
+  data,
+  pageContext
+}) {
   const [ showContent, setShowContent ] = useState(false);
   const hideContent = showContent ? '' : 'visibility-hidden';
   const { productReviews } = pageContext;
@@ -44,9 +47,11 @@ const FeaturedCollectionsPage = ({ data, pageContext }) => {
       </div>
     </>
   )
-}
+});
 
-export default FeaturedCollectionsPage
+FeaturedCollectionsPage.displayName = 'FeaturedCollectionsPage';
+
+export default FeaturedCollectionsPage;
 
 export const query = graphql`
   query GetShopifyCollections($collections: [String]){

@@ -297,4 +297,6 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 	);
 });
 
+AjaxCartCustom.displayName = 'AjaxCartCustom';
+
 export default AjaxCartCustom;

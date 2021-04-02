@@ -7,7 +7,11 @@ import 'glider-js/glider.min.css';
 import "../../styles/relatedProductList.scss";
 const NotifyModal = loadable(() => import("../collectionPage/notifyModal"))
 
-const RelatedProductList = ({ products, reviewList, badgeStyles }) => {
+const RelatedProductList = React.memo(function RelatedProductList({
+  products,
+  reviewList,
+  badgeStyles
+}) {
   const [notifyModalShow, setNotifyModalShow] = useState(false);
   const [varaintModalShow, setVaraintModalShow] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -103,6 +107,8 @@ const RelatedProductList = ({ products, reviewList, badgeStyles }) => {
       </div>
     </div>
   );
-};
+});
+
+RelatedProductList.displayName = 'RelatedProductList';
 
 export default RelatedProductList;

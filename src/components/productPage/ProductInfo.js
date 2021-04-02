@@ -4,7 +4,10 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons"
 import loadable from '@loadable/component';
 const ProductReview = loadable(() => import('../common/product/productReview'));
 
-const ProductInfo = ({ product, review }) => {
+const ProductInfo = React.memo(function ProductInfo({
+	product,
+	review
+}) {
 	const [featuresList, setFeaturesList] = useState([]);
 	useEffect(() => {
 		const featuresString = review ? review.features : ''
@@ -92,6 +95,8 @@ const ProductInfo = ({ product, review }) => {
 			</p>
 		</>
 	);
-};
+});
+
+ProductInfo.displayName = 'ProductInfo';
 
 export default ProductInfo;
