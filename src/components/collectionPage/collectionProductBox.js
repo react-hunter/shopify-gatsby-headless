@@ -4,7 +4,8 @@ import loadable from '@loadable/component';
 import StoreContext from '../../context/store'
 import ImageSpin from '../common/imageSpin'
 import ProductBoxGallery from './productBoxGallery'
-const CollectionVariantSelector = loadable(() => import('./collectionVariantSelector'))
+const CollectionVariantSelector = loadable(() => import('./collectionVariantSelector'));
+const ProductReview = loadable(() => import('../common/product/productReview'));
 
 const NotifyModal = loadable(() => import('./notifyModal'))
 
@@ -13,7 +14,6 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 	const [varaintModalShow, setVaraintModalShow] = useState(false);
 	const [showSpin, setShowSpin] = useState(false);
 	const product = props.product;
-	// const reviewBadge = props.review ? props.review.badge : '';
 	const mainOption = getMainOption()
 	const [swatchColor, setSwatchColor] = useState(mainOption === '' ? '' : mainOption.values[0])
 
@@ -95,7 +95,9 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 				<div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
 					<Link to={`/products/${product.handle}`}>{product.title}</Link>
 				</div>
-				{/* <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: reviewBadge }} /> */}
+				<div className="collection-product-reviews_wrapper">
+					<ProductReview data={props.review.data} />
+				</div>
 				<div className="price price--listing price--on-sale">
 					<div className="price__regular"></div>
 					<div className="price__sale">

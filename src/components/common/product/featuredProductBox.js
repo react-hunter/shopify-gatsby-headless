@@ -4,13 +4,13 @@ import loadable from '@loadable/component';
 import StoreContext from '../../../context/store'
 import ProductBoxGallery from '../../collectionPage/productBoxGallery'
 import ImageSpin from '../imageSpin'
+const ProductReview = loadable(() => import('./productReview'))
 
 const NotifyModal = loadable(() => import('../../collectionPage/notifyModal'))
 
 const FeaturedProductBox = React.memo(function FeaturedProductBox(props) {
 	const context = useContext(StoreContext);
 	const product = props.product;
-	const reviewBadge = props.review ? props.review.badge : '';
 	const mainOption = getMainOption()
 	const [swatchColor, setSwatchColor] = useState(mainOption === '' ? '' : mainOption.values[0])
 	const [showSpin, setShowSpin] = useState(false);
@@ -82,7 +82,10 @@ const FeaturedProductBox = React.memo(function FeaturedProductBox(props) {
 					<Link to={`/products/${product.handle}`}>{product.title}</Link>
 				</div>
 
-				<div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: reviewBadge }} />
+				{/* <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: reviewBadge }} /> */}
+				<div className="collection-product-reviews_wrapper">
+					<ProductReview data={props.review.data} />
+				</div>
 				
 				<div className="price price--listing price--on-sale">
 					<div className="price__regular"></div>

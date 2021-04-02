@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from "@fortawesome/free-solid-svg-icons"
+import loadable from '@loadable/component';
+const ProductReview = loadable(() => import('../common/product/productReview'));
 
 const ProductInfo = ({ product, review }) => {
 	const [featuresList, setFeaturesList] = useState([]);
@@ -15,7 +17,10 @@ const ProductInfo = ({ product, review }) => {
 	return (
 		<>
 			<h1 className="product-single__title">{product.title}</h1>
-			<div key="badge" dangerouslySetInnerHTML={{ __html: review? review.badge : '' }} />
+			{/* <div key="badge" dangerouslySetInnerHTML={{ __html: review? review.badge : '' }} /> */}
+			<div className="product-review">
+				<ProductReview data={review.data} />
+			</div>
 
 			<div className="product__price">
 				<dl className="price price--on-sale">
