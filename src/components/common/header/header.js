@@ -460,4 +460,6 @@ const Header = React.memo(function Header(props) {
   )
 });
 
+Header.displayName = 'Header';
+
 export default Header

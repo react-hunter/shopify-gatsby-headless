@@ -5,7 +5,11 @@ import Flickity from 'react-flickity-component'
 import '../../styles/productGallery.css';
 import '../../styles/flickity.css';
 
-const ProductGallery = ({ product, isVarantSelected, selectedVariant }) => {
+const ProductGallery = React.memo(function ProductGallery({
+	product,
+	isVarantSelected,
+	selectedVariant
+}) {
 	let selectedImageIndex = 0;
 	const [flktyObject, setFlktyObject] = useState(null);
 	var flkty;
@@ -113,6 +117,8 @@ const ProductGallery = ({ product, isVarantSelected, selectedVariant }) => {
 			</div>
 		</div>
 	);
-}
+});
+
+ProductGallery.displayName = 'ProductGallery';
 
 export default ProductGallery;

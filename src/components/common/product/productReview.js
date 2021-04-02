@@ -1,5 +1,4 @@
 import React from 'react';
-
 import '../../../styles/product-review.css'
 
 const ProductReview = React.memo(function ProductReview(props) {
@@ -29,5 +28,7 @@ const ProductReview = React.memo(function ProductReview(props) {
         </>
     );
 });
+
+ProductReview.displayName = 'ProductReview';
 
 export default ProductReview;

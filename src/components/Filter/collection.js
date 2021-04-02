@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const Collection = ({context, products}) => {
+const Collection = React.memo(function Collection({context, products}) {
 	const [type, setType] = useState(context.filteredType)
 
 	const productTypes = []
@@ -46,6 +46,8 @@ const Collection = ({context, products}) => {
 			</div>
 		</label>
 	);
-};
+});
+
+Collection.displayName = 'Collection';
 
 export default Collection;

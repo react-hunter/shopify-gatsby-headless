@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby'
 import { GatsbyImage } from "gatsby-plugin-image"
 
-const ArticleBox = props => {
+const ArticleBox = React.memo(function ArticleBox(props) {
 	const article = props.article
 	
 	return (
@@ -48,6 +48,8 @@ const ArticleBox = props => {
 			</article>
 		</li>
 	);
-};
+});
+
+ArticleBox.displayName = 'ArticleBox';
 
 export default ArticleBox;

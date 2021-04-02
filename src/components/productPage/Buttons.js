@@ -4,7 +4,13 @@ import loadable from '@loadable/component';
 
 const NotifyModal = loadable(() => import('../collectionPage/notifyModal'))
 
-const Buttons = ({ product, context, available, productVariant,  quantity}) => {
+const Buttons = React.memo(function Buttons({
+	product,
+	context,
+	available,
+	productVariant,
+	quantity
+}) {
 	const [showSpin, setShowSpin] = useState(false);
 	const [notifyModalShow, setNotifyModalShow] = useState(false);
 
@@ -69,6 +75,8 @@ const Buttons = ({ product, context, available, productVariant,  quantity}) => {
 			{!available? <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} /> : null}
 		</div>
 	);
-};
+});
+
+Buttons.displayName = 'Buttons';
 
 export default Buttons;

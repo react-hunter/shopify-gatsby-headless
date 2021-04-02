@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-// import { LazyLoadImage } from 'react-lazy-load-image-component'
 import CustomImage from '../common/image'
 import { client } from '../../contentful'
 
-const CustomiserBanner = () => {
+const CustomiserBanner = React.memo(function CustomiserBanner() {
 	const [customiserBanner, setCustomiserBanner] = useState({
 		title: 'CUSTOMIZE YOUR DOSE OF ROSES',
 		contents: "Choose arrangement style, box material, rose colors and personalize it with letters, numbers or symbols. All handmade with real roses that last up to five years.",
@@ -113,6 +112,8 @@ const CustomiserBanner = () => {
 		</div>
 	  </>
 	)
-}
-  
-export default CustomiserBanner
+});
+
+CustomiserBanner.displayName = 'CustomiserBanner';
+
+export default CustomiserBanner;

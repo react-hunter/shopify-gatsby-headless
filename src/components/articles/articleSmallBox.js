@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby'
 import MyImage from '../common/lazyImage'
 
-const ArticleSmallBox = props => {
+const ArticleSmallBox = React.memo(function ArticleSmallBox(props) {
   const article = props.article
   
   return (
@@ -37,6 +37,8 @@ const ArticleSmallBox = props => {
       </div>
     </div>
   );
-};
+});
+
+ArticleSmallBox.displayName = 'ArticleSmallBox';
 
 export default ArticleSmallBox;

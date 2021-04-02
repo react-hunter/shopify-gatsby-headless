@@ -24,4 +24,6 @@ const HeroSection = React.memo(function HeroSection(props) {
 	)
 });
 
+HeroSection.displayName = 'HeroSection';
+
 export default HeroSection;

@@ -3,7 +3,7 @@ import { ReactSVG } from 'react-svg';
 import SearchIcon from '../../../images/icon-search.svg';
 import CloseIcon from '../../../images/icon-close.svg';
 
-const SearchDrawer = ( props ) => {
+const SearchDrawer = React.memo(function SearchDrawer( props ) {
 	const hideSearch = (e) => {
 	  e.preventDefault();
 	  props.hideSearch();
@@ -38,6 +38,8 @@ const SearchDrawer = ( props ) => {
 		  </div>
 		</>
 	)
-}
+});
+
+SearchDrawer.displayName = 'SearchDrawer';
 
 export default SearchDrawer

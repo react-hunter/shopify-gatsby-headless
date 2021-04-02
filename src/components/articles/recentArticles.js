@@ -1,7 +1,7 @@
 import React from 'react';
 import ArticleSmallBox from "./articleSmallBox";
 
-const RecentArticles = props => {
+const RecentArticles = React.memo(function RecentArticles(props) {
   const articles = props.articles
   
   return (
@@ -17,6 +17,8 @@ const RecentArticles = props => {
     </>
     
   );
-};
+});
+
+RecentArticles.displayName = 'RecentArticles';
 
 export default RecentArticles;

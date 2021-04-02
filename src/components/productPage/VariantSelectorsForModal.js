@@ -1,7 +1,15 @@
 import React from 'react'; /* eslint-disable */
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-const VariantSelectorForModal = ({changeOption, options, closeModal, modalClass, clickVariantSelect, selectVariant, findVariant}) => {
+const VariantSelectorForModal = React.memo(function VariantSelectorForModal({
+	changeOption,
+	options,
+	closeModal,
+	modalClass,
+	clickVariantSelect,
+	selectVariant,
+	findVariant
+}) {
 	const clickSelect = (optionName, optionValue) => {
 		changeOption(optionName, optionValue)
 		console.log("selected varaint num: ", findVariant(optionName, optionValue));
@@ -47,6 +55,8 @@ const VariantSelectorForModal = ({changeOption, options, closeModal, modalClass,
 			</div>
 		</div>
 	);
-};
+});
+
+VariantSelectorForModal.displayName = 'VariantSelectorForModal';
 
 export default VariantSelectorForModal;

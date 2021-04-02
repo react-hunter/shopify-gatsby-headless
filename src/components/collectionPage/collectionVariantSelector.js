@@ -261,5 +261,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		</div>
 	);
 });
-	
+
+CollectionVariantSelector.displayName = 'CollectionVariantSelector';
+
 export default CollectionVariantSelector;

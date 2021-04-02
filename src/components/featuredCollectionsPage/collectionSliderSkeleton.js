@@ -3,7 +3,7 @@ import Skeleton from "react-loading-skeleton";
 import '../../styles/featuredCollectionsPage.scss';
 import "../../styles/collectionPage.scss";
 
-const CollectionSliderSkeleton = () => {
+const CollectionSliderSkeleton = React.memo(function CollectionSliderSkeleton() {
   return (
     Array(7)
       .fill()
@@ -19,5 +19,8 @@ const CollectionSliderSkeleton = () => {
         </div>
       ))
   );
-};
+});
+
+CollectionSliderSkeleton.displayName = 'CollectionSliderSkeleton';
+
 export default CollectionSliderSkeleton;

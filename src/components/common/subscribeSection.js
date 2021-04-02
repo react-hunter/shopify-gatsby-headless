@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'gatsby'
 import { commonData } from '../../data/common';
 
-const SubscribeSection = () => {
+const SubscribeSection = React.memo(function SubscribeSection() {
 	const newsletterBackgroundStyle = {
 		backgroundImage: `url(` + commonData.newsletterSettings.desktopBackground + `)`,
 		backgroundSize: 'cover',
@@ -72,6 +72,8 @@ const SubscribeSection = () => {
 			</div>
 		</div>
 	);
-};
+});
+
+SubscribeSection.displayName = 'SubscribeSection';
 	
 export default SubscribeSection;

@@ -1,7 +1,7 @@
 import React from 'react';
 import MyImage from '../lazyImage';
 
-const CardSlider = ({ cardList }) => {
+const CardSlider = React.memo(function CardSlider({ cardList }) {
 	return (
 		<>
 			<div id="card-slider-container" className="card-slider-container">
@@ -21,6 +21,8 @@ const CardSlider = ({ cardList }) => {
 			</div>
 		</>
 	)
-}
+});
+
+CardSlider.displayName = 'CardSlider';
 
 export default CardSlider

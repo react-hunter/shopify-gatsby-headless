@@ -7,7 +7,7 @@ import IconArrowRight from '../../images/icon-arrow-right.svg';
 import { ReactSVG } from 'react-svg';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
-const Dose = ({ data }) => {
+const Dose = React.memo(function Dose({ data }) {
   const articlePerPage = 50
   const articles = data.allShopifyArticle.edges;
   const pageCount = parseInt(data.allShopifyArticle.edges.length / articlePerPage + 1);
@@ -62,7 +62,9 @@ const Dose = ({ data }) => {
       </div>
     </>
   );
-}
+});
+
+Dose.displayName = 'Dose';
 
 export default Dose;
 

@@ -1,6 +1,9 @@
 import React from 'react';
 
-const QuantityButton = ({ quantity, setQuantity }) => {
+const QuantityButton = React.memo(function QuantityButton({
+	quantity,
+	setQuantity
+}) {
 	const increaseQuantity = () => {
 		setQuantity(q => q + 1);
 	}
@@ -31,6 +34,8 @@ const QuantityButton = ({ quantity, setQuantity }) => {
 			</div>
 		</div>
 	);
-};
+});
+
+QuantityButton.displayName = 'QuantityButton';
 
 export default QuantityButton;

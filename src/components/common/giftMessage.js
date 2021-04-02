@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-const GiftMessage = (props) => {
+const GiftMessage = React.memo(function GiftMessage(props) {
   const [messageContent, setMessageContent] = useState('');
   const addNoteToCart = () => {
     props.addNoteToCart(messageContent);
@@ -19,6 +19,8 @@ const GiftMessage = (props) => {
       <button className="addNote" onClick={addNoteToCart}>ADD GIFT MESSAGE</button>
     </div>
   )
-}
+});
+
+GiftMessage.displayName = 'GiftMessage';
 
 export default GiftMessage;
