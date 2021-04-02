@@ -43,6 +43,8 @@ const Header = React.memo(function Header(props) {
   let mobileMenuStep = 0;
 
   useEffect(() => {
+    let header = document.querySelector(".stickyHeader");
+    header.style.top = "0";
     window.addEventListener('wheel', wheelHandler, {passive: true});
     return function cleanup() {
       window.removeEventListener('wheel', wheelHandler, {passive: true});
