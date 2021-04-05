@@ -6,7 +6,6 @@ const ProductReview = React.memo(function ProductReview(props) {
     const reviewExist = props.data.reviewCount > 0;
     return (
         <>
-            { console.log(review.reviewCount) }
             {reviewExist && 
                 <div data-oke-reviews-version="2.11.0" className="okeReviews okeReviews--theme">
                     <div className="okeReviews-reviewsSummary js-okeReviews-reviewsSummary" data-oke-ga-click-action="Star Rating Summary Click">

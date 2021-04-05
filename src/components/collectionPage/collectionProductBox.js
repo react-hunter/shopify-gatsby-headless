@@ -117,14 +117,14 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 				<div className="collection-product-color-swatch">
 				{   
 					mainOption === '' ? null : 
-						mainOption.values.slice(0, 5).map((item, index) => {
-							return (
-								<div className="color-swatch" key={index}
-									onClick={() => selectProductSwatch(item)} onKeyDown={handleKeyDown}
-									role="button" tabIndex="0" data-rose_color={item}>
-								</div>
-							)
-						})
+					mainOption.values.slice(0, 5).map((item, index) => {
+						return (
+							<div className="color-swatch" key={index}
+								onClick={() => selectProductSwatch(item)} onKeyDown={handleKeyDown}
+								role="button" tabIndex="0" data-rose_color={item}>
+							</div>
+						)
+					})
 				}				
 				</div>
 

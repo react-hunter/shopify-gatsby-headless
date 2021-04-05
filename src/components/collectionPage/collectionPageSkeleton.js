@@ -31,7 +31,7 @@ const CollectionPageSkeleton = React.memo(function CollectionPageSkeleton() {
                   </dd>
                 </div>
               </div>
-              <div className="collection-product-color-swatch aa">
+              <div className="collection-product-color-swatch">
                 <div className="color-swatch">
                   <Skeleton circle={true} height={35} width={35} />
                 </div>
