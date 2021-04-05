@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'; /* eslint-disable */
 import { graphql } from "gatsby";
 import CollectionProductBox from "../components/collectionPage/collectionProductBox";
 import CollectionPageSkeleton from "../components/collectionPage/collectionPageSkeleton";
+import CollectionPageNonRoseSkeleton from "../components/collectionPage/collectionPageNonRoseSkeleton";
 import '../styles/collectionPage.scss';
 import '../styles/widget.min.css';
 
@@ -74,6 +75,16 @@ const CollectionPage = React.memo(function CollectionPage({
     e.preventDefault();
   }
 
+  const SkeletonUI = () => {
+    const firstProduct = data.shopifyCollection.products.length > 0 ? data.shopifyCollection.products[0] : null;
+		if (firstProduct) {
+      const options = firstProduct.options ? firstProduct.options.filter(option => option.name === 'Rose Color') : []
+		  return (options.length > 0 && options[0] !== '') ? <CollectionPageSkeleton /> : <CollectionPageNonRoseSkeleton />
+    } else {
+      return <CollectionPageNonRoseSkeleton />
+    }
+  }
+
   const displayedProducts = data.shopifyCollection.products.slice(0, displayProductCount)
   return (
     <>
@@ -85,9 +96,7 @@ const CollectionPage = React.memo(function CollectionPage({
               <div className="section-header text-center">
                 <h1>
                   <span className="visually-hidden">Collection: </span>
-
                   <span className="goals-section-text">{data.shopifyCollection.title}</span>
-                  
                   <span style={{ display: "flex", justifyContent: "center" }}>
                     <span className="collection-page_underline"></span>
                   </span>
@@ -114,7 +123,7 @@ const CollectionPage = React.memo(function CollectionPage({
         </div>
         
         <div className="" id="Collection">
-          {!showContent && <CollectionPageSkeleton />}
+          {!showContent && <SkeletonUI />}
           <ul id="shop-all-content" 
             className={`products-on-page grid grid--uniform grid--view-items ${hideContent}`}>
               {

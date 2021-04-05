@@ -11071,21 +11071,22 @@ article .article__meta-buttons {
   justify-content: center;
   border: none !important;
   text-align: center;
-  height: 40px;
+  // height: 40px;
   width: 100%;
-  margin-top: 22px
+  margin-top: 22px;
+  margin-bottom: 15px;
 }
 
 @media (max-width: 1080px) {
   .product-card-title {
-    height: 50px
   }
 }
 
 @media (max-width: 750px) {
   .product-card-title {
-    height: 40px;
-    margin-top: 10px
+    margin-top: 10px;
+    height: unset;
+    margin-bottom: 10px;
   }
 }
 
@@ -15411,13 +15412,13 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 32px;
-  margin-top: 3px
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 @media (max-width: 768px) {
   .collection-product-color-swatch {
-    height: 24px
+    // height: 24px
   }
 }
 
