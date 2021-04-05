@@ -95,9 +95,11 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 				<div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
 					<Link to={`/products/${product.handle}`}>{product.title}</Link>
 				</div>
-				<div className="collection-product-reviews_wrapper">
-					<ProductReview data={props.review.data} />
-				</div>
+				{props.review.data.reviewCount > 0 ? 
+					<div className="collection-product-reviews_wrapper">
+						<ProductReview data={props.review.data} />
+					</div>
+				: null }
 				<div className="price price--listing price--on-sale">
 					<div className="price__regular"></div>
 					<div className="price__sale">
@@ -114,7 +116,7 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 				</div>
 				<div className="collection-product-color-swatch">
 				{   
-					mainOption === '' ? '': 
+					mainOption === '' ? null : 
 					mainOption.values.slice(0, 5).map((item, index) => {
 						return (
 							<div className="color-swatch" key={index}
@@ -123,7 +125,7 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 							</div>
 						)
 					})
-				} 
+				}				
 				</div>
 
 				{
