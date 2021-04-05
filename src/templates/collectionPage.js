@@ -76,9 +76,13 @@ const CollectionPage = React.memo(function CollectionPage({
   }
 
   const SkeletonUI = () => {
-    const firstProduct = data.shopifyCollection.products[0];
-		const options = firstProduct.options ? firstProduct.options.filter(option => option.name === 'Rose Color') : []
-		return (options.length > 0 && options[0] !== '') ? <CollectionPageSkeleton /> : <CollectionPageNonRoseSkeleton />
+    const firstProduct = data.shopifyCollection.products.length > 0 ? data.shopifyCollection.products[0] : null;
+		if (firstProduct) {
+      const options = firstProduct.options ? firstProduct.options.filter(option => option.name === 'Rose Color') : []
+		  return (options.length > 0 && options[0] !== '') ? <CollectionPageSkeleton /> : <CollectionPageNonRoseSkeleton />
+    } else {
+      return <CollectionPageNonRoseSkeleton />
+    }
   }
 
   const displayedProducts = data.shopifyCollection.products.slice(0, displayProductCount)
