@@ -9,7 +9,7 @@ const IndexPage = React.memo(function IndexPage({ data: {allShopifyArticle, allC
   const homepageData = allContentfulHomepage.nodes[0];
   return (
     <>
-      <SEO title="Home" />
+      <SEO title="Dose of Roses – Create Your Rose Box, Rose Bear and Galaxy Rose" />
       <HeroSection heroImage={homepageData.heroImage} />
       <ImageSection imageSections={homepageData.homeImageSectionItem} />
       <ArticleSection data={allShopifyArticle.edges} />
