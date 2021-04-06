@@ -3,11 +3,6 @@ require('dotenv').config({
 });
 
 module.exports = {
-  siteMetadata: {
-    title: `Gatsby x Shopify`,
-    description: `Simple theme to build a blazing simple and fast store with Gatsby and Shopify.`,
-    author: `@alexislepresle`,
-  },
   flags: { 
     PRESERVE_WEBPACK_CACHE: true,
     FAST_DEV: process.env.NODE_ENV === 'development',

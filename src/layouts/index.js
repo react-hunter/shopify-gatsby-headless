@@ -48,7 +48,7 @@ const Layout = ({ path, children }) => {
 									gatsbyImageData (
 										width: 600
 										placeholder: TRACED_SVG
-										formats: [AUTO, WEBP, AVIF]
+										formats: [AUTO, WEBP]
 									)
 								}
 							}
