@@ -11071,22 +11071,16 @@ article .article__meta-buttons {
   justify-content: center;
   border: none !important;
   text-align: center;
-  // height: 40px;
+  height: 40px;
   width: 100%;
   margin-top: 22px;
-  margin-bottom: 15px;
+  margin-bottom: 3px;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 768px) {
   .product-card-title {
-  }
-}
-
-@media (max-width: 750px) {
-  .product-card-title {
-    margin-top: 10px;
-    height: unset;
-    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -11178,7 +11172,6 @@ article .article__meta-buttons {
 
 @media (max-width: 768px) {
   .collection-product-reviews_wrapper {
-    height: 24px
   }
 }
 
@@ -15412,6 +15405,7 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  height: 32px;
   margin-top: 10px;
   margin-bottom: 5px;
 }

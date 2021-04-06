@@ -95,11 +95,9 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 				<div className="h4 grid-view-item__title product-card__title product-card-title" aria-hidden="true">
 					<Link to={`/products/${product.handle}`}>{product.title}</Link>
 				</div>
-				{props.review.data.reviewCount > 0 ? 
-					<div className="collection-product-reviews_wrapper">
-						<ProductReview data={props.review.data} />
-					</div>
-				: null }
+				<div className="collection-product-reviews_wrapper">
+					<ProductReview data={props.review.data} />
+				</div>
 				<div className="price price--listing price--on-sale">
 					<div className="price__regular"></div>
 					<div className="price__sale">
