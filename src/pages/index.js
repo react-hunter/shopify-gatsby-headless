@@ -81,11 +81,11 @@ export const query = graphql`
           }
           mobileImage {
             gatsbyImageData(
-              width: 600
+              width: 1000
               placeholder: BLURRED,
-              quality: 80,
+              quality: 100,
               formats: [AUTO, WEBP]
-              layout: FULL_WIDTH
+              layout: CONSTRAINED
             )
           }
           buttonText
