@@ -9715,22 +9715,22 @@ article .article__meta-buttons {
 
 .banner_img-desktop {
   max-height: 110vh;
-  display: block
+  display: block!important;
 }
 
 @media (max-width: 1000px) {
   .banner_img-desktop {
-    display: none
+    display: none!important;
   }
 }
 
 .banner_img-mobile {
-  display: none
+  display: none!important;
 }
 
 @media (max-width: 1000px) {
   .banner_img-mobile {
-    display: block
+    display: block!important;
   }
 }
 
