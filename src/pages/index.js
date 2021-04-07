@@ -85,7 +85,7 @@ export const query = graphql`
               placeholder: BLURRED,
               quality: 100,
               formats: [AUTO, WEBP]
-              layout: FULL_WIDTH
+              layout: CONSTRAINED
             )
           }
           buttonText
