@@ -34,6 +34,14 @@ const SEO = React.memo(function SEO({ description, lang, meta, title }) {
           name: `twitter:title`,
           content: title,
         },
+        {
+          name: `facebook-domain-verification`,
+          content: `mw7ysgy9xz6mtfxtlu3zfxdytni45p`,
+        },
+        {
+          name: `facebook-domain-verification`,
+          content: `amuzhds1d539n8nbhnnl8a828vndzh`,
+        },
       ].concat(meta)}
     />
   )
