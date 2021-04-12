@@ -9,10 +9,9 @@ const SEO = React.memo(function SEO(props) {
     meta,
     title
   } = props;
-  const url = typeof window !== 'undefined' ? window.location.href : '';
-  console.log('url: ', url)
-  // const currentUrl = props.location;
-  // const isDoseofrose = currentUrl.includes('doseofroses.com');
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const isDoseofroses = currentUrl.includes('doseofroses.com');
+  const isDose_roses = currentUrl.includes('dose-roses.com');
   return (
     <Helmet
       htmlAttributes={{
@@ -44,10 +43,10 @@ const SEO = React.memo(function SEO(props) {
           name: `twitter:title`,
           content: title,
         },
-        // {
-        //   name: `facebook-domain-verification`,
-        //   content: isDoseofrose ? `mw7ysgy9xz6mtfxtlu3zfxdytni45p` : `amuzhds1d539n8nbhnnl8a828vndzh`,
-        // },
+        {
+          name: `facebook-domain-verification`,
+          content: isDoseofroses ? `mw7ysgy9xz6mtfxtlu3zfxdytni45p` : isDose_roses ? `amuzhds1d539n8nbhnnl8a828vndzh` : '',
+        },
       ].concat(meta)}
     />
   )
