@@ -3,6 +3,9 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 
 const SEO = React.memo(function SEO({ description, lang, meta, title }) {
+  console.log(window.location.href)
+  const currentUrl = window.location.href;
+  const isDoseofrose = currentUrl.includes('doseofroses.com');
   return (
     <Helmet
       htmlAttributes={{
@@ -36,11 +39,7 @@ const SEO = React.memo(function SEO({ description, lang, meta, title }) {
         },
         {
           name: `facebook-domain-verification`,
-          content: `mw7ysgy9xz6mtfxtlu3zfxdytni45p`,
-        },
-        {
-          name: `facebook-domain-verification`,
-          content: `amuzhds1d539n8nbhnnl8a828vndzh`,
+          content: isDoseofrose ? `mw7ysgy9xz6mtfxtlu3zfxdytni45p` : `amuzhds1d539n8nbhnnl8a828vndzh`,
         },
       ].concat(meta)}
     />
