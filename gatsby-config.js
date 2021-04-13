@@ -75,6 +75,27 @@ module.exports = {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
-    }
+    },
+    {
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: "674420356308050",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-google-tagmanager",
+      options: {
+        id: "GTM-KDND8G7",
+        includeInDevelopment: false,
+        defaultDataLayer: { platform: "gatsby" },
+  
+        // Specify optional GTM environment details.
+        // gtmAuth: "YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_AUTH_STRING",
+        // gtmPreview: "YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_PREVIEW_NAME",
+        // dataLayerName: "YOUR_DATA_LAYER_NAME",
+        // Defaults to gatsby-route-change
+        // routeChangeEventName: "YOUR_ROUTE_CHANGE_EVENT_NAME",
+      },
+    },
   ],
 }
