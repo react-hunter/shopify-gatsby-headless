@@ -65,16 +65,14 @@
     "react-query": "^3.6.0",
     "react-slick": "^0.28.0",
     "react-svg": "^12.1.0",
-    "rebass": "^4.0.7",
     "shopify-api-node": "^3.6.0",
     "shopify-buy": "^2.9.0",
-    "slick-carousel": "^1.8.1",
-    "styled-components": "^5.2.1",
-    "use-state-with-callback": "^2.0.3"
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
     "babel-preset-gatsby": "^1.0.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "gatsby-plugin-webpack-bundle-analyser-v2": "^1.1.10",
     "prettier": "^2.2.1"
   },
@@ -106,5 +104,10 @@
     "url": "https://github.com/alexislepresle/gatsby-shopify-theme/issues"
   },
   "homepage": "https://github.com/alexislepresle/gatsby-shopify-theme#readme",
-  "main": "gatsby-browser.js"
+  "main": "gatsby-browser.js",
+  "extends": {
+    "extends": "react-app",
+    "plugins": [ "react-hooks" ],
+    "prettier-eslint.eslintIntegration": true
+  }
 }
