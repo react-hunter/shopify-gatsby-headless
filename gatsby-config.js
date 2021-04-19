@@ -88,13 +88,19 @@ module.exports = {
         id: "GTM-KDND8G7",
         includeInDevelopment: false,
         defaultDataLayer: { platform: "gatsby" },
-  
-        // Specify optional GTM environment details.
-        // gtmAuth: "YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_AUTH_STRING",
-        // gtmPreview: "YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_PREVIEW_NAME",
-        // dataLayerName: "YOUR_DATA_LAYER_NAME",
-        // Defaults to gatsby-route-change
-        // routeChangeEventName: "YOUR_ROUTE_CHANGE_EVENT_NAME",
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-load-script',
+      options: {
+        src: 'https://sc-static.net/scevent.min.js',
+        crossorigin: 'anonymous',
+        onLoad: `() => {
+          snaptr('init', '71a99375-a469-4098-9c78-604a676001cc', {
+            'user_email': '__INSERT_USER_EMAIL__'
+          });
+          snaptr('track', 'PAGE_VIEW');
+        }`,
       },
     },
   ],

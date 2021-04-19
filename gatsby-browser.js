@@ -51,8 +51,3 @@ export const onClientEntry = () => {
 //       addScript("https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=NDbw2r&shop=dose-of-roses.myshopify.com")
 //   }
 // }
-
-// export const onPreRouteUpdate = () => {
-//   removejscssfile("./src/scripts/snapchat.js", "js");
-//   addScript("./src/scripts/snapchat.js");
-// }
