@@ -160,7 +160,7 @@ const ProductDescription = React.memo(function ProductDescription({
 						
 					<div className="product_accordions-container">
 						<div className="product_description">
-							<button className={`accordion_button description`}>
+							<button className={`accordion_button accordion_button--active description`}>
 								DESCRIPTION
 								<FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />                                
 							</button>
