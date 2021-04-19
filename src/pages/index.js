@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { graphql } from "gatsby"
 import SEO from "../components/common/seo"
 import HeroSection from "../components/homepage/heroSection"
