@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import queryString from 'query-string'
 import SEO from "../components/common/seo"

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 import SEO from "../components/common/seo"
