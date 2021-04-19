@@ -38,32 +38,7 @@ module.exports = {
         apiVersion: '2021-04',
         paginationSize: 3,
         downloadImages: true,
-        includeCollections: ['shop', 'content'],
-        // shopifyQueries: {
-        //   products: `
-        //     query GetProducts($first: Int!, $after: String) {
-        //       products(first: $first, after: $after) {
-        //         pageInfo {
-        //           hasNextPage
-        //         }
-        //         edges {
-        //           cursor
-        //           node {
-        //             availableForSale
-        //             createdAt
-        //             description
-        //             descriptionHtml
-        //             handle
-        //             id
-        //             seo {
-        //               title
-        //               description
-        //             }
-        //           }
-        //         }
-        //       }
-        //     }`
-        // }
+        includeCollections: ['shop', 'content']
       }
     },
     {
