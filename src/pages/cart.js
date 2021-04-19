@@ -1,4 +1,5 @@
-import React, { useContext } from 'react'; /* eslint-disable */
+/* eslint-disable */
+import React, { useContext } from 'react';
 import SEO from "../components/common/seo"
 import StoreContext from "../context/store"
 import Products from "../components/Cart/Products"

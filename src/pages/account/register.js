@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import SEO from "../../components/common/seo"
 import gql from 'graphql-tag';
