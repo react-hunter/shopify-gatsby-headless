@@ -22,7 +22,7 @@ const ProductInfo = React.memo(function ProductInfo({
 			<h1 className="product-single__title">{product.title}</h1>
 			{/* <div key="badge" dangerouslySetInnerHTML={{ __html: review? review.badge : '' }} /> */}
 			<div className="product-review">
-				<ProductReview data={review.data} />
+				{review && <ProductReview data={review.data} />}
 			</div>
 
 			<div className="product__price">

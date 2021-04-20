@@ -84,7 +84,7 @@ const FeaturedProductBox = React.memo(function FeaturedProductBox(props) {
 
 				{/* <div className="collection-product-reviews_wrapper" key="badge" dangerouslySetInnerHTML={{ __html: reviewBadge }} /> */}
 				<div className="collection-product-reviews_wrapper">
-					<ProductReview data={props.review.data} />
+					{props.review && <ProductReview data={props.review.data} />}
 				</div>
 				
 				<div className="price price--listing price--on-sale">

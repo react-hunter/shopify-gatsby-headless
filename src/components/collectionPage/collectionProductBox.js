@@ -96,7 +96,7 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 					<Link to={`/products/${product.handle}`}>{product.title}</Link>
 				</div>
 				<div className="collection-product-reviews_wrapper">
-					<ProductReview data={props.review.data} />
+					{props.review && <ProductReview data={props.review.data} />}
 				</div>
 				<div className="price price--listing price--on-sale">
 					<div className="price__regular"></div>
