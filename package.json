@@ -66,6 +66,7 @@
     "react-loading-skeleton": "^2.2.0",
     "react-query": "^3.13.10",
     "react-slick": "^0.28.1",
+    "react-snapchat-pixel": "^1.1.1",
     "react-svg": "^13.0.2",
     "shopify-api-node": "^3.6.10",
     "shopify-buy": "^2.11.0",

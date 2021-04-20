@@ -3,6 +3,7 @@ require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`
 })
 const featuredCollectionHandles = ["rose-bear", "galaxy", "persuede", "marbleous", "leather", "bloom-box", "tie-dye", "24k-gold-dipped-roses", "lingerie"];
+// const featuredCollectionHandles = ["best-sellers", "new-arrivals", "third-collection"];
 const Shopify = require('shopify-api-node')
 const shopify = new Shopify({
   shopName: process.env.SHOP_NAME,
@@ -45,6 +46,20 @@ exports.createPages = async ({ graphql, actions }) => {
     return productReview
   }))
 
+  let collectionList = new Array(0);
+  params = { limit: 30, fields: ['id', 'handle'] };
+  do {
+    const collectionListPiece = await shopify.customCollection.list(params);
+    collectionList.push(...collectionListPiece)
+    params = collectionListPiece.nextPageParameters;
+  } while (params !== undefined);
+  params = { limit: 30, fields: ['id', 'handle'] };
+  do {
+    const collectionListPiece = await shopify.smartCollection.list(params);
+    collectionList.push(...collectionListPiece)
+    params = collectionListPiece.nextPageParameters;
+  } while (params !== undefined);
+
   return graphql(`
     {
       allShopifyProduct {
@@ -69,8 +84,8 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `).then(result => {
-    result.data.allShopifyProduct.edges.forEach(({ node }) => {
+  `).then(async (result) => {
+    result.data.allShopifyProduct.edges.map(({ node }) => {
       const id = node.handle
       try {
         createPage({
@@ -85,7 +100,7 @@ exports.createPages = async ({ graphql, actions }) => {
         console.log('product create error: ', id)
       }
     })
-    result.data.allShopifyArticle.edges.forEach(({ node }) => {
+    result.data.allShopifyArticle.edges.map(({ node }) => {
       const articleId = node.handle
       try {
         createPage({
@@ -99,21 +114,37 @@ exports.createPages = async ({ graphql, actions }) => {
         console.log('article page create error: ', articleId)
       }
     })
-    result.data.allShopifyCollection.edges.forEach(({ node }) => {
-      const collectionId = node.handle
+    await Promise.all(result.data.allShopifyCollection.edges.map(async ({ node }) => {
+      const collectionId = collectionList.filter(col => col.handle === node.handle)[0].id
+      const collectionMetafield = await shopify.metafield.list({metafield: {owner_resource: 'collection', owner_id: collectionId}})
+      let collectionSeo = {
+        title: '',
+        description: ''
+      };
+      collectionMetafield.map(mf => {
+        if(mf.namespace === 'global' && mf.key === 'title_tag') {
+          collectionSeo.title = mf.value;
+        }
+        if(mf.namespace === 'global' && mf.key==='description_tag') {
+          collectionSeo.description = mf.value
+        }
+      })
+      
+      const collectionHandle = node.handle
       try {
-        createPage({
-          path: `/collections/${collectionId}/`,
+        await createPage({
+          path: `/collections/${collectionHandle}/`,
           component: path.resolve(`./src/templates/collectionPage.js`),
           context: {
-            id: collectionId,
-            productReviews: productReviews
+            id: collectionHandle,
+            productReviews: productReviews,
+            seoData: collectionSeo
           },
         })        
       } catch (error) {
-        console.log('collection create error: ', collectionId)
+        console.log('collection create error: ', collectionHandle)
       }
-    })
+    }))
     try {
       createPage({
         path: `/pages/collections`,

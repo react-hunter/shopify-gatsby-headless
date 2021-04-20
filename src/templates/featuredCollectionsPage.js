@@ -11,7 +11,9 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
 }) {
   const [ showContent, setShowContent ] = useState(false);
   const hideContent = showContent ? '' : 'visibility-hidden';
-  const { productReviews } = pageContext;
+  const { productReviews, collections } = pageContext;
+  console.log(data.allShopifyCollection.edges);
+  console.log('collections: ', collections);
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);

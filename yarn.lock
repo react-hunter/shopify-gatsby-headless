@@ -12385,6 +12385,11 @@ react-slick@^0.28.1:
     lodash.debounce "^4.0.8"
     resize-observer-polyfill "^1.5.0"
 
+react-snapchat-pixel@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-snapchat-pixel/-/react-snapchat-pixel-1.1.1.tgz#58904fc59fbdaa77038e54e832c42ddd51d85074"
+  integrity sha512-3lzBcq9YMhLS0j5HAijMmtsgdgvsoIlridY2nTyWXQEDASxZyx1eKS0X/gE8LlE7x3z9nClDD0lduvdELi6U5A==
+
 react-svg@^13.0.2:
   version "13.0.2"
   resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-13.0.2.tgz#b71914505d865d8fe4861e35d7eee142508d8abe"

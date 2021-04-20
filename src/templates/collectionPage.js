@@ -3,6 +3,7 @@ import { graphql } from "gatsby";
 import CollectionProductBox from "../components/collectionPage/collectionProductBox";
 import CollectionPageSkeleton from "../components/collectionPage/collectionPageSkeleton";
 import CollectionPageNonRoseSkeleton from "../components/collectionPage/collectionPageNonRoseSkeleton";
+import SEO from "../components/common/seo"
 import '../styles/collectionPage.scss';
 import '../styles/widget.min.css';
 
@@ -14,7 +15,7 @@ const CollectionPage = React.memo(function CollectionPage({
   data,
   pageContext
 }) {
-  const { productReviews } = pageContext;
+  const { productReviews, seoData } = pageContext;
   const [ displayProductCount, setDisplayProductCount ] = useState(16);
   const [ showContent, setShowContent ] = useState(false);
   const loadMoreProducts = (e) => {
@@ -89,6 +90,10 @@ const CollectionPage = React.memo(function CollectionPage({
   return (
     <>
       {/* <Preloader /> */}
+      <SEO
+        title={seoData.title === '' ? `${data.shopifyCollection.title} - Dose of Roses` : `${seoData.title} - Dose of Roses`}
+        description={seoData.description === '' ? data.shopifyCollection.description : seoData.description}
+      />
       <div id="shopify-section-collection-template" className="shopify-section">
         <div data-section-id="collection-template" data-section-type="collection-template">
           <header className="collection-header">
@@ -164,6 +169,7 @@ export const query = graphql`
 			id
       handle
       title
+      description
       descriptionHtml
       products {
         id

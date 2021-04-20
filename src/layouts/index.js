@@ -3,7 +3,7 @@ import "../../resources/css/preloader.css";
 import "../styles/instagram.css";
 import "../styles/header.scss";
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import loadable from '@loadable/component';
 import { StaticQuery, graphql } from 'gatsby';
 import {
@@ -19,6 +19,13 @@ const AjaxCartCustom = loadable(() => import('../components/common/ajaxCartCusto
 const queryClient = new QueryClient();
 
 const Layout = ({ path, children }) => {
+	useEffect(() => {
+		console.log('initialized');
+		// const ReactPixel =  require('react-snapchat-pixel');
+		// ReactPixel.init('71a99375-a469-4098-9c78-604a676001cc');
+		// ReactPixel.pageView();
+	});
+
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Provider>
