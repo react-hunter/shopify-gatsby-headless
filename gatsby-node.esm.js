@@ -84,8 +84,8 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
     }
-  `).then(result => {
-    result.data.allShopifyProduct.edges.forEach(({ node }) => {
+  `).then(async (result) => {
+    result.data.allShopifyProduct.edges.map(({ node }) => {
       const id = node.handle
       try {
         createPage({
@@ -100,7 +100,7 @@ exports.createPages = async ({ graphql, actions }) => {
         console.log('product create error: ', id)
       }
     })
-    result.data.allShopifyArticle.edges.forEach(({ node }) => {
+    result.data.allShopifyArticle.edges.map(({ node }) => {
       const articleId = node.handle
       try {
         createPage({
@@ -114,7 +114,7 @@ exports.createPages = async ({ graphql, actions }) => {
         console.log('article page create error: ', articleId)
       }
     })
-    result.data.allShopifyCollection.edges.forEach(async ({ node }) => {
+    await Promise.all(result.data.allShopifyCollection.edges.map(async ({ node }) => {
       const collectionId = collectionList.filter(col => col.handle === node.handle)[0].id
       const collectionMetafield = await shopify.metafield.list({metafield: {owner_resource: 'collection', owner_id: collectionId}})
       let collectionSeo = {
@@ -144,7 +144,7 @@ exports.createPages = async ({ graphql, actions }) => {
       } catch (error) {
         console.log('collection create error: ', collectionHandle)
       }
-    })
+    }))
     try {
       createPage({
         path: `/pages/collections`,
