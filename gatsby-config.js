@@ -90,18 +90,18 @@ module.exports = {
         defaultDataLayer: { platform: "gatsby" },
       },
     },
-    {
-      resolve: 'gatsby-plugin-load-script',
-      options: {
-        src: 'https://sc-static.net/scevent.min.js',
-        crossorigin: 'anonymous',
-        onLoad: `() => {
-          snaptr('init', '71a99375-a469-4098-9c78-604a676001cc', {
-            'user_email': '__INSERT_USER_EMAIL__'
-          });
-          snaptr('track', 'PAGE_VIEW');
-        }`,
-      },
-    },
+    // {
+    //   resolve: 'gatsby-plugin-load-script',
+    //   options: {
+    //     src: 'https://sc-static.net/scevent.min.js',
+    //     crossorigin: 'anonymous',
+    //     onLoad: `() => {
+    //       snaptr('init', '71a99375-a469-4098-9c78-604a676001cc', {
+    //         'user_email': '__INSERT_USER_EMAIL__'
+    //       });
+    //       snaptr('track', 'PAGE_VIEW');
+    //     }`,
+    //   },
+    // },
   ],
 }

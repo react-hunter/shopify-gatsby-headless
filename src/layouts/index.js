@@ -3,9 +3,10 @@ import "../../resources/css/preloader.css";
 import "../styles/instagram.css";
 import "../styles/header.scss";
 
-import React, { useEffect } from 'react';
+import React from 'react';
+import Helmet from "react-helmet"
 import loadable from '@loadable/component';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, withPrefix } from 'gatsby';
 import {
 	QueryClient,
 	QueryClientProvider,
@@ -19,13 +20,6 @@ const AjaxCartCustom = loadable(() => import('../components/common/ajaxCartCusto
 const queryClient = new QueryClient();
 
 const Layout = ({ path, children }) => {
-	useEffect(() => {
-		console.log('initialized');
-		// const ReactPixel =  require('react-snapchat-pixel');
-		// ReactPixel.init('71a99375-a469-4098-9c78-604a676001cc');
-		// ReactPixel.pageView();
-	});
-
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Provider>
@@ -133,6 +127,9 @@ const Layout = ({ path, children }) => {
 						<>
 							{/* <Preloader allHide={setAllHidden} /> */}
 							{/* <div className={`scrollPreventer ${hideClass}`}> */}
+							<Helmet>
+								<script src={withPrefix('snapchat.js')} type="text/javascript" />
+							</Helmet>
 							<div className="scrollPreventer">
 								<AjaxCartCustom giftVariant={data.giftProduct.variants[0]} rushVariant={data.rushProduct.variants[0]} />
 								<Header
