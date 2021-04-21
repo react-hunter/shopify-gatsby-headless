@@ -31,9 +31,16 @@ exports.createPages = async ({ graphql, actions }) => {
   
   productReviews = await Promise.all(products.map(async pr => {
     const metafields = await shopify.metafield.list({metafield: {owner_resource: 'product', owner_id: pr.id}});
-    let productReview = {}
+    let productReview = {
+      handle: pr.handle,
+      data: {
+        reviewCount: 0,
+        reviewAverageValue: ''
+      },
+      features: ''
+    }
     metafields.map(mf => {
-      productReview.handle = pr.handle
+      // productReview.handle = pr.handle
       if(mf.namespace === 'okendo' && mf.key === 'summaryData') {
         productReview.data = JSON.parse(mf.value);
       }
@@ -41,8 +48,8 @@ exports.createPages = async ({ graphql, actions }) => {
         productReview.features = mf.value
       }
     })
-    productReview.data = productReview.data ? productReview.data : {reviewCount: 0, reviewAverageValue: ''}
-    productReview.features = productReview.features ? productReview.features : ''
+    // productReview.data = productReview.data ? productReview.data : {reviewCount: 0, reviewAverageValue: ''}
+    // productReview.features = productReview.features ? productReview.features : ''
     return productReview
   }))
 
