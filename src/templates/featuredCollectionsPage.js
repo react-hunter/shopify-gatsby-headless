@@ -12,8 +12,9 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
   const [ showContent, setShowContent ] = useState(false);
   const hideContent = showContent ? '' : 'visibility-hidden';
   const { productReviews, collections } = pageContext;
-  console.log(data.allShopifyCollection.edges);
-  console.log('collections: ', collections);
+  const collectionList = collections.map(col => {
+    return data.allShopifyCollection.edges.find(collectionItem => collectionItem.node.handle === col)
+  })
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);
@@ -31,7 +32,7 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
             </div>
             {!showContent && <CollectionSliderSkeleton />}
             <div className={`${hideContent}`}>
-              {data.allShopifyCollection.edges.map((collection, collectionIndex) => {
+              {collectionList.map((collection, collectionIndex) => {
                 return (
                   <CollectionSlider
                     products={collection.node.products.slice(0, 10)}
