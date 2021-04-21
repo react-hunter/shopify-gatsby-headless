@@ -13,10 +13,11 @@ const HeroSection = React.memo(function HeroSection(props) {
 						<GatsbyImage image={props.heroImage.desktopImage.gatsbyImageData} className="text_image_banner-img banner_img-desktop" loading="lazy" alt="" />
 					</Link>
 					<div className="text_image_banner-content_container">
-						<h2 className="text_image_banner-title">{props.heroImage.title}</h2>
-						<p className="text_image_banner-subtitle">{props.heroImage.subTitle}</p>
-						<Link to={props.heroImage.imageUrl} 
-							className="text_image_banner-button">{props.heroImage.buttonText}</Link>
+						{props.heroImage.title && <h2 className="text_image_banner-title">{props.heroImage.title}</h2>}
+						{props.heroImage.subTitle && 
+							<p className="text_image_banner-subtitle">{props.heroImage.subTitle}</p>}
+						{props.heroImage.buttonText && <Link to={props.heroImage.imageUrl} 
+							className="text_image_banner-button">{props.heroImage.buttonText}</Link>}
 					</div>
 				</div>
 			</div>
