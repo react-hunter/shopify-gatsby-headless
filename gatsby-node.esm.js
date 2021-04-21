@@ -112,7 +112,7 @@ exports.createPages = async ({ graphql, actions }) => {
           path: `/products/${productHandle}/`,
           component: path.resolve(`./src/templates/productPage.js`),
           context: {
-            productHandle,
+            id: productHandle,
             productReviews: productReviews,
             seoData: productSeo
           },
