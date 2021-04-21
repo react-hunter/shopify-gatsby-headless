@@ -1,8 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps, no-useless-escape, no-new-func */
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { graphql } from 'gatsby'
 import { client } from '../contentful'
 import '../styles/customizePage.scss'
+import SEO from "../components/common/seo"
 import AddToBagButton from '../components/customizePage/addToBagButton'
 
 const CustomizePage = React.memo(function CustomizePage({ data }) {
@@ -1191,24 +1192,25 @@ const CustomizePage = React.memo(function CustomizePage({ data }) {
   return (
     <>
       {/* <Preloader /> */}
+      <SEO title="Create Your Rose Box - Dose of Roses" />
       <div className="container">
 
-      <div id="shopify-section-customizer-schema" className="shopify-section">
-        <span id="excluded_products" 
-          data-ids="[
-            'Single Round-Solid',
-            'Acrylic Large Square-Solid',
-            'Acrylic Small Square-Solid',
-            'Acrylic Medium Square-Solid',
-            'Acrylic Large Heart-Solid',
-            'Suede Large Heart-Solid',
-            'Medium Square-Solid',
-            'Large Square-Solid',
-            'Large Round Flat-Solid',
-            'Medium Round Flat-Solid',
-            'Large Round Dome-Solid',            
-            'Medium Round Dome-Solid',]"></span>
-      </div>
+        <div id="shopify-section-customizer-schema" className="shopify-section">
+          <span id="excluded_products" 
+            data-ids="[
+              'Single Round-Solid',
+              'Acrylic Large Square-Solid',
+              'Acrylic Small Square-Solid',
+              'Acrylic Medium Square-Solid',
+              'Acrylic Large Heart-Solid',
+              'Suede Large Heart-Solid',
+              'Medium Square-Solid',
+              'Large Square-Solid',
+              'Large Round Flat-Solid',
+              'Medium Round Flat-Solid',
+              'Large Round Dome-Solid',            
+              'Medium Round Dome-Solid',]"></span>
+        </div>
 
         {
           collectionProducts.map((prod, prodIndex) => {

@@ -1,5 +1,7 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { graphql } from "gatsby";
+import SEO from "../components/common/seo"
 import CollectionSlider from "../components/featuredCollectionsPage/collectionSlider";
 import CollectionSliderSkeleton from "../components/featuredCollectionsPage/collectionSliderSkeleton";
 import '../styles/featuredCollectionsPage.scss';
@@ -23,6 +25,7 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
   }, []);
   return (
     <>
+      <SEO title="Featured Collections - Dose of Roses" />
       <div className="collection-collections-spacing">
         <div id="shopify-section-collection-collections" className="shopify-section">
           <div className="collections-collection-section">

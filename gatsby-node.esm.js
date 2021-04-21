@@ -40,16 +40,13 @@ exports.createPages = async ({ graphql, actions }) => {
       features: ''
     }
     metafields.map(mf => {
-      // productReview.handle = pr.handle
       if(mf.namespace === 'okendo' && mf.key === 'summaryData') {
         productReview.data = JSON.parse(mf.value);
       }
       if(mf.namespace === 'product' && mf.key==='features') {
         productReview.features = mf.value
       }
-    })
-    // productReview.data = productReview.data ? productReview.data : {reviewCount: 0, reviewAverageValue: ''}
-    // productReview.features = productReview.features ? productReview.features : ''
+    });
     return productReview
   }))
 
@@ -92,21 +89,38 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     }
   `).then(async (result) => {
-    result.data.allShopifyProduct.edges.map(({ node }) => {
-      const id = node.handle
+    await Promise.all(result.data.allShopifyProduct.edges.map(async ({ node }) => {
+      const productHandle = node.handle;
+      const productId = products.filter(pr => pr.handle === productHandle)[0].id
+      const productMetafield = await shopify.metafield.list({metafield: {owner_resource: 'product', owner_id: productId}})
+      let productSeo = {
+        title: '',
+        description: ''
+      };
+      
+      productMetafield.map(mf => {
+        if(mf.namespace === 'global' && mf.key === 'title_tag') {
+          productSeo.title = mf.value;
+        }
+        if(mf.namespace === 'global' && mf.key==='description_tag') {
+          productSeo.description = mf.value
+        }
+      })
+      
       try {
         createPage({
-          path: `/products/${id}/`,
+          path: `/products/${productHandle}/`,
           component: path.resolve(`./src/templates/productPage.js`),
           context: {
-            id,
-            productReviews: productReviews
+            productHandle,
+            productReviews: productReviews,
+            seoData: productSeo
           },
         })
       } catch (error) {
-        console.log('product create error: ', id)
+        console.log('product create error: ', productHandle)
       }
-    })
+    }))
     result.data.allShopifyArticle.edges.map(({ node }) => {
       const articleId = node.handle
       try {
@@ -122,12 +136,14 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     })
     await Promise.all(result.data.allShopifyCollection.edges.map(async ({ node }) => {
-      const collectionId = collectionList.filter(col => col.handle === node.handle)[0].id
+      const collectionHandle = node.handle
+      const collectionId = collectionList.filter(col => col.handle === collectionHandle)[0].id
       const collectionMetafield = await shopify.metafield.list({metafield: {owner_resource: 'collection', owner_id: collectionId}})
       let collectionSeo = {
         title: '',
         description: ''
       };
+      
       collectionMetafield.map(mf => {
         if(mf.namespace === 'global' && mf.key === 'title_tag') {
           collectionSeo.title = mf.value;
@@ -137,7 +153,6 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       })
       
-      const collectionHandle = node.handle
       try {
         await createPage({
           path: `/collections/${collectionHandle}/`,
