@@ -28,6 +28,7 @@ const Logout = () => {
 					setValue({
 						customerAccessToken: ''
 					})
+					localStorage.setItem('dor_user_email', '');
 					navigate('/account/login')
 
 			  }}

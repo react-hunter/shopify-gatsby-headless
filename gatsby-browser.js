@@ -54,6 +54,9 @@ export const onClientEntry = () => {
 
 export const onPreRouteUpdate = () => {
   if(window.snaptr) {
+    window.snaptr('init', '71a99375-a469-4098-9c78-604a676001cc', {
+      'user_email': localStorage.getItem('dor_user_email')
+    });
     window.snaptr('track', 'PAGE_VIEW');
   }
 }
