@@ -12,7 +12,11 @@ const RelatedProductList = loadable(() => import("../components/productPage/Rela
 const ProductPage = React.memo(function ProductPage({ data, pageContext }) {
 	const product = data.shopifyProduct;
 	const [selectedVariant, setSelectedVariant] = useState(product.variants[0])
-	const {id, productReviews} = pageContext;
+	const {
+		id,
+		productReviews,
+		seoData
+	} = pageContext;
 	const relatedProducts = data.shopifyCollection.products ? data.shopifyCollection.products.slice(0, 8) : [];
 
 	const [isVarantSelected, setIsVarantSelected] = useState(false);
@@ -32,7 +36,10 @@ const ProductPage = React.memo(function ProductPage({ data, pageContext }) {
 		 
 	return (
 		<>
-			<SEO title={product.title} />
+			<SEO
+        title={seoData.title === '' ? `${product.title} - Dose of Roses` : `${seoData.title} - Dose of Roses`}
+        description={seoData.description === '' ? product.description : seoData.description}
+      />
 			<div key="product-template" id="ProductSection-product-template" className="product-template__container">
 				<div className="grid product-single product-single--medium-media">
 					<ProductGallery product={product} isVarantSelected={isVarantSelected} selectedVariant={selectedVariant} key="product-gallery" />

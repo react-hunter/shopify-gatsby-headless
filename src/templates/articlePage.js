@@ -1,4 +1,5 @@
-import React from 'react' /* eslint-disable */
+/* eslint-disable */
+import React from 'react'
 import loadable from '@loadable/component';
 import MyImage from '../components/common/lazyImage'
 import SEO from "../components/common/seo"
@@ -9,9 +10,9 @@ const RecentArticles = loadable(() => import("../components/articles/recentArtic
 
 
 const ArticlePage = React.memo(function ArticlePage({ data, ...other }) {
-  let date = changeDateFormat();
-  function changeDateFormat(){
-    let mydate = new Date(data.shopifyArticle.publishedAt);
+  const article = data.shopifyArticle
+  const changeDateFormat = (dataStr) => {
+    let mydate = new Date(dataStr);
     var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][mydate.getMonth()];
     var str = month + ' ' + mydate.getDay() + ',' + mydate.getFullYear();
@@ -20,7 +21,7 @@ const ArticlePage = React.memo(function ArticlePage({ data, ...other }) {
 
   return (
     <>
-      <SEO title={data.shopifyArticle.title} />
+      <SEO title={article.title} />
 
       <div id="article-page">
         <div className="row">
@@ -29,26 +30,26 @@ const ArticlePage = React.memo(function ArticlePage({ data, ...other }) {
               <span className="prev-prod desktop-1 mobile-hide"> 
               </span>
               <div className="goals-sectiont-title">
-                <h1>{data.shopifyArticle.title}</h1>
+                <h1>{article.title}</h1>
               </div>
               <span className="next-prod desktop-1 mobile-hide"></span>
             </div>
             <div id="page" className="desktop-12 tablet-6 mobile-3">
               <div id="blog-article" className="desktop-12 tablet-12 mobile-12">
                 <div id="article-body">
-                  <span className="posted">{date}</span>
+                  <span className="posted">{changeDateFormat(article.publishedAt)}</span>
 
                   <ShareIcons 
-                    articleUrl={data.shopifyArticle.url}
-                    articleMedia={data.shopifyArticle.image.src}
+                    articleUrl={article.url}
+                    articleMedia={article.image.src}
                   />
 
                   <div className="article-img">
-                    <MyImage src={data.shopifyArticle.image.src} alt="" />
+                    <MyImage src={article.image.src} alt="" />
                   </div>
                   <div className="clear"></div>
                   <div className="rte">
-                    <div dangerouslySetInnerHTML={{__html: data.shopifyArticle.contentHtml}} />
+                    <div dangerouslySetInnerHTML={{__html: article.contentHtml}} />
                   </div>
                 </div>
               </div>
