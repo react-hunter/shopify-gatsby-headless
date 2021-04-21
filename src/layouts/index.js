@@ -129,6 +129,8 @@ const Layout = ({ path, children }) => {
 							{/* <div className={`scrollPreventer ${hideClass}`}> */}
 							<Helmet>
 								<script src={withPrefix('snapchat.js')} type="text/javascript" />
+								<script src={withPrefix('voyage.js')} type="text/javascript" />
+								<script async src="https://assets.voyagetext.com/voyage.production.js"></script>
 							</Helmet>
 							<div className="scrollPreventer">
 								<AjaxCartCustom giftVariant={data.giftProduct.variants[0]} rushVariant={data.rushProduct.variants[0]} />
