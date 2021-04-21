@@ -15,6 +15,7 @@ export const defaultStoreContext = {
   filteredType: 'all',
   filteredSort: 'featured',
   customerAccessToken: null,
+  userEmail: '',
   setValue: () => { },
   addVariantToCart: () => { },
   addVariantToCartAndBuyNow: () => { },

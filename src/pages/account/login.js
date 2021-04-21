@@ -51,8 +51,9 @@ const LoginForm = () => {
     const isBrowser = typeof window !== 'undefined'
     isBrowser && localStorage.setItem('customerAccessToken', JSON.stringify(value))
     updateStore(state => {
-        return { ...state, customerAccessToken: value }
+        return { ...state, customerAccessToken: value, userEmail: email }
     })
+    localStorage.setItem('dor_user_email', email);
     navigate(`/account/login`);
     console.log(store)
   }
