@@ -5,4 +5,3 @@
   u.parentNode.insertBefore(r,u);})(window,document,
   'https://sc-static.net/scevent.min.js');
   snaptr('init', '71a99375-a469-4098-9c78-604a676001cc', {});
-  snaptr('track', 'PAGE_VIEW');
