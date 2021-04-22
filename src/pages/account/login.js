@@ -55,7 +55,6 @@ const LoginForm = () => {
     })
     localStorage.setItem('dor_user_email', email);
     navigate(`/account/login`);
-    console.log(store)
   }
 
   return (

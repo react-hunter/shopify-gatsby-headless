@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { navigate } from "@reach/router"
-import StoreContext, { defaultStoreContext } from '../context/store'
+import StoreContext, { defaultStoreContext } from './store'
+import { fbAddToCart, snapAddToCart } from '../helper';
 const isBrowser = typeof window !== 'undefined'
 
 const Provider = ({ children }) => {
@@ -96,6 +97,10 @@ const Provider = ({ children }) => {
 								return { ...state, checkout, adding: true }
 							})
 						})
+						.then(() => {
+							fbAddToCart([variantId], 'product', 'USD');
+							snapAddToCart();
+						})
 				},
 				addVariantToCartAndBuyNow: (variantId, quantity) => {
 					updateStore(state => {
@@ -112,6 +117,8 @@ const Provider = ({ children }) => {
 							updateStore(state => {
 								return { ...state, checkoutData, adding: false }
 							})
+							fbAddToCart([variantId], 'product', 'USD');
+							snapAddToCart();
 							navigate(checkoutData.webUrl)
 						})
 				},
