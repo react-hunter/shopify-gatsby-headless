@@ -29,8 +29,6 @@ const RegisterForm = () => {
   const [first_name, setFirstName] = useState(null);
   const [last_name, setLastName] = useState(null);
 
-  console.log('full name: ', first_name, last_name)
-
   return (
     <>
       <Preloader />
