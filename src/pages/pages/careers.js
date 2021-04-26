@@ -1,9 +1,17 @@
+/* eslint-disable */
 import React from 'react';
 import Preloader from "../../components/common/preloader"
+import SEO from "../../components/common/seo"
 
 const Careers = () => {
     return (
       <>
+        <SEO
+            title="Careers - Dose of Roses"
+            mainTitle="Careers"
+            description="Dose of Roses is the #1 luxury gift store as seen on celebrities &amp;amp; social media with a unique selection of gifts for any special occasion. Our HQ is located in downtown Los Angeles. If you’re a passionate and motivated individual looking for an amazing opportunity in Ecommerce, Social Media, and Marketing please ap"
+            type="website"
+        />
         <Preloader />
         <div className="page-width page-template">
             <div className="grid">

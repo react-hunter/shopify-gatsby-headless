@@ -1,7 +1,9 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import Preloader from "../../components/common/preloader"
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import {client} from '../../contentful'
+import SEO from "../../components/common/seo"
 
 const Faqs = () => {      
     const [faq, setFaq] = useState({
@@ -53,6 +55,12 @@ const Faqs = () => {
       
     return (
       <>
+        <SEO
+            title="FAQs - Dose of Roses"
+            mainTitle="FAQs"
+            description="Shop the largest selection of luxury gifts from our best-selling Rose Bear, Galaxy Rose or choose to customize and personalize your Rose Box. Send beautiful real roses that last up to 5 years."
+            type="website"
+        />
         <Preloader />
         <div className="faq_page">
             <div id="shopify-section-faq-banner-top" className="shopify-section">

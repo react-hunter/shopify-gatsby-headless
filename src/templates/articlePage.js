@@ -21,7 +21,12 @@ const ArticlePage = React.memo(function ArticlePage({ data, ...other }) {
 
   return (
     <>
-      <SEO title={article.title} />
+      <SEO
+        title={`${article.title} - Dose of Roses`}
+        mainTitle={article.title}
+        description={article.content}
+        type="article"
+      />
 
       <div id="article-page">
         <div className="row">

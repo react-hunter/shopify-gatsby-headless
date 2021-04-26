@@ -25,7 +25,12 @@ const SearchPage = ( { data, pageContext, location } ) => {
 
   return (
     <>
-      <SEO title="Home" />
+      <SEO
+        title={`Search results: 264 results for "${searchText}" - Dose of Roses`}
+        mainTitle={`Search results: 264 results for "${searchText}"`}
+        description="Shop the largest selection of luxury gifts from our best-selling Rose Bear, Galaxy Rose or choose to customize and personalize your Rose Box. Send beautiful real roses that last up to 5 years."
+        type="website"
+      />
 
       <div className="main-content js-focus-hidden"  id="searchContent">
         <hr aria-hidden="true" />

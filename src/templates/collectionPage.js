@@ -92,7 +92,9 @@ const CollectionPage = React.memo(function CollectionPage({
       {/* <Preloader /> */}
       <SEO
         title={seoData.title === '' ? `${data.shopifyCollection.title} - Dose of Roses` : `${seoData.title} - Dose of Roses`}
+        mainTitle={seoData.title === '' ? data.shopifyCollection.title : seoData.title}
         description={seoData.description === '' ? data.shopifyCollection.description : seoData.description}
+        type="product.group"
       />
       <div id="shopify-section-collection-template" className="shopify-section">
         <div data-section-id="collection-template" data-section-type="collection-template">

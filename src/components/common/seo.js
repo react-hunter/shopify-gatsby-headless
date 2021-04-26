@@ -6,8 +6,9 @@ const SEO = React.memo(function SEO(props) {
   const {
     description,
     lang,
-    meta,
-    title
+    title,
+    mainTitle,
+    type,
   } = props;
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
   const isDoseofroses = currentUrl.includes('doseofroses.com');
@@ -24,45 +25,59 @@ const SEO = React.memo(function SEO(props) {
           content: description,
         },
         {
+          name: `og:site_name`,
+          content: `Dose of Roses`,
+        },
+        {
+          name: `og:url`,
+          content: currentUrl,
+        },
+        {
           property: `og:title`,
-          content: title,
+          content: mainTitle,
+        },
+        {
+          property: `og:type`,
+          content: type,
         },
         {
           property: `og:description`,
           content: description,
         },
         {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary_large_image`,
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: mainTitle,
+        },
+        {
+          name: `twitter:description`,
+          content: description,
         },
         {
           name: `facebook-domain-verification`,
           content: isDoseofroses ? `mw7ysgy9xz6mtfxtlu3zfxdytni45p` : isDose_roses ? `amuzhds1d539n8nbhnnl8a828vndzh` : '',
         },
-      ].concat(meta)}
+      ]}
     />
   )
 });
 
 SEO.defaultProps = {
   lang: `en`,
-  meta: [],
+  title: ``,
   description: ``,
+  type: ``,
 }
 
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  mainTitle: PropTypes.string.isRequired,
+  type: PropTypes.string,
 }
 
 SEO.displayName = 'SEO';

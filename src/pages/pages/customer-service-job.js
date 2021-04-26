@@ -1,9 +1,17 @@
+/* eslint-disable */
 import React from 'react';
 import Preloader from "../../components/common/preloader"
+import SEO from "../../components/common/seo"
 
 const CustomerServiceJob = () => {
     return (
       <>
+        <SEO
+            title=""
+            mainTitle=""
+            description=""
+            type=""
+        />
         <Preloader />
         <div className="page-width page-template">
             <div className="grid">

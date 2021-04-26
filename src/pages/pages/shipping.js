@@ -1,9 +1,17 @@
+/* eslint-disable */
 import React from 'react';
 import Preloader from "../../components/common/preloader"
+import SEO from "../../components/common/seo"
 
 const Shipping = () => {
     return (
       <>
+        <SEO
+            title="Shipping Policy - Dose of Roses"
+            mainTitle="Shipping Policy"
+            description="We ship Monday through Friday. All orders are shipped USPS Priority or UPS and international orders are shipped FedEx International Priority, DHL or UPS. Once you have the tracking number please allow time for it to enter the carrier’s system and update."
+            type="website"
+        />
         <Preloader />
         <div className="page-width page-template">
             <div className="grid">

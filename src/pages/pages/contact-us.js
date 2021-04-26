@@ -1,9 +1,17 @@
+/* eslint-disable */
 import React from 'react';
 import Preloader from "../../components/common/preloader"
+import SEO from "../../components/common/seo"
 
 const ContactUs = () => {
     return (
       <>
+        <SEO
+          title="Contact us - Dose of Roses"
+          mainTitle="Contact us"
+          description="Dose of Roses customer care team is available 24/7 and can be reached via this form. We aim to respond back within 24 hours."
+          type="website"
+        />
         <Preloader />
         <div className="contact_us-page">
           <div className="page-width">
