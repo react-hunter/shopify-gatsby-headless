@@ -73,6 +73,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	}
 	function showCart() {
 		setShowSpin(false);
+		props.closeModal();
 		document.querySelector('.site-header__cart').click()
 	}
 	const changeUrl = () => {
