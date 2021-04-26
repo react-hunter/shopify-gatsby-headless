@@ -1,9 +1,17 @@
+/* eslint-disable */
 import React from 'react';
 import Preloader from "../../components/common/preloader"
+import SEO from "../../components/common/seo"
 
 const FloralDesigner = () => {
     return (
       <>
+        <SEO
+            title="Floral Designer - Dose of Roses"
+            mainTitle="Floral Designer"
+            description="Dose of Roses is a social media driven e-commerce brand as see on celebrities such as Jake Paul, Tana Mongeau, Erica Mina from Love &amp;amp; Hip-Hop. We’re quickly becoming the #1 brand on Instagram for shopping roses &amp;amp; luxury gifts perfect for birthdays, anniversaries, baby showers, and more. We’re looking for passio"
+            type="website"
+        />
         <Preloader />
         <div className="page-width page-template">
             <div className="grid">

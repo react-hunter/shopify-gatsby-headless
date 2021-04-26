@@ -38,7 +38,9 @@ const ProductPage = React.memo(function ProductPage({ data, pageContext }) {
 		<>
 			<SEO
         title={seoData.title === '' ? `${product.title} - Dose of Roses` : `${seoData.title} - Dose of Roses`}
+				mainTitle={seoData.title === '' ? product.title : seoData.title}
         description={seoData.description === '' ? product.description : seoData.description}
+				type="product"
       />
 			<div key="product-template" id="ProductSection-product-template" className="product-template__container">
 				<div className="grid product-single product-single--medium-media">

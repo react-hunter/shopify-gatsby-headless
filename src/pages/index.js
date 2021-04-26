@@ -10,7 +10,12 @@ const IndexPage = React.memo(function IndexPage({ data: {allShopifyArticle, allC
   const homepageData = allContentfulHomepage.nodes[0];
   return (
     <>
-      <SEO title="Dose of Roses – Create Your Rose Box, Rose Bear and Galaxy Rose" />
+      <SEO
+        title="Dose of Roses – Create Your Rose Box, Rose Bear and Galaxy Rose"
+        mainTitle="Dose of Roses – Create Your Rose Box, Rose Bear and Galaxy Rose"
+        description="Shop the largest selection of luxury gifts from our best-selling Rose Bear, Galaxy Rose or choose to customize and personalize your Rose Box. Send beautiful real roses that last up to 5 years."
+        type="website"
+      />
       <HeroSection heroImage={homepageData.heroImage} />
       <ImageSection imageSections={homepageData.homeImageSectionItem} />
       <ArticleSection data={allShopifyArticle.edges} />

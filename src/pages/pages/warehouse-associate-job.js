@@ -1,9 +1,17 @@
+/* eslint-disable */
 import React from 'react';
 import Preloader from "../../components/common/preloader"
+import SEO from "../../components/common/seo"
 
 const WareHouseAssociateJob = () => {
     return (
       <>
+        <SEO
+            title="Terms &amp; Conditions - Dose of Roses"
+            mainTitle="Terms &amp; Conditions"
+            description="Please read these Terms and Conditions (&quot;Terms&quot;, &quot;Terms and Conditions&quot;) carefully before using the doseofroses.com website (the &quot;Service&quot;) operated by Dose of Roses (&quot;us&quot;, &quot;we&quot;, or &quot;our&quot;)."
+            type="website"
+        />
         <Preloader />
         <div className="page-width page-template">
             <div className="grid">

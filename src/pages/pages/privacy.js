@@ -1,9 +1,17 @@
+/* eslint-disable */
 import React from 'react';
 import Preloader from "../../components/common/preloader"
+import SEO from "../../components/common/seo"
 
 const Privacy = () => {
     return (
       <>
+        <SEO
+            title="Privacy Policy - Dose of Roses"
+            mainTitle="Privacy Policy"
+            description="This page informs you of our policies regarding the collection, use, and disclosure of Personal Information when you use our Service. We will not use or share your information with anyone except as described in this Privacy Policy."
+            type="website"
+        />
         <Preloader />
         <div className="page-width page-template">
             <div className="grid">

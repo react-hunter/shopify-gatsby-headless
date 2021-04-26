@@ -1,9 +1,17 @@
+/* eslint-disable */
 import React from 'react';
 import Preloader from "../../components/common/preloader"
+import SEO from "../../components/common/seo"
 
 const Returns = () => {
     return (
       <>
+        <SEO
+            title="Returns &amp; Exchanges - Dose of Roses"
+            mainTitle="Returns &amp; Exchanges"
+            description="Our products can be returned within 14 days of the original purchase of the product. The product(s) must be unopened, in its original packaging and must have proof of purchase or order confirmation from Dose of Roses."
+            type="website"
+        />
         <Preloader />
         <div className="page-width page-template">
             <div className="grid">

@@ -1,9 +1,17 @@
+/* eslint-disable */
 import React from 'react';
 import Preloader from "../../components/common/preloader"
+import SEO from "../../components/common/seo"
 
 const Covid19 = () => {
     return (
       <>
+        <SEO
+            title="COVID-19 - Dose of Roses"
+            mainTitle="COVID-19"
+            description="WE’RE BETTER TOGETHEROUR RESPONSE TO COVID-19 At Dose of Roses, we are dedicated and intent on protecting the safety and health of our employees, customers and community. We want you to know that we&#39;re here for you and will continue to communicate the proactive steps we’re taking to support and maintain the safety"
+            type="website"
+        />
         <Preloader />
         <div className="page-width page-template">
             <div className="grid">

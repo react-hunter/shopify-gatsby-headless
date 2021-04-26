@@ -1,14 +1,12 @@
+/* eslint-disable */
 import React, { useEffect, useContext } from 'react';
-
 import StoreContext from '../../context/store'
 import Preloader from "../../components/common/preloader"
-
-import "../../styles/galaxy-star.scss";
-
 import { ReactSVG } from 'react-svg';
 import DownChevron from '../../images/down-chevron.svg';
-
 import { useStaticQuery, graphql } from "gatsby"
+import SEO from "../../components/common/seo"
+import "../../styles/galaxy-star.scss";
  
 const GalaxyStarProjector = ()  => {
 
@@ -65,12 +63,15 @@ const GalaxyStarProjector = ()  => {
     }, [])
 
     return (
-      <>
+        <>
+            <SEO
+                title="Galaxy Star Projector - Dose of Roses"
+                mainTitle="Galaxy Star Projector"
+                description="Shop the largest selection of luxury gifts from our best-selling Rose Bear, Galaxy Rose or choose to customize and personalize your Rose Box. Send beautiful real roses that last up to 5 years."
+                type="website"
+            />
             <Preloader />
-
             <div className="galaxy_projector-background">
-
-
                 <div className="galaxy_hero-container">
                     <div className="galaxy_hero-textbox">
                         <div className="galaxy_hero-title">GALAXY STAR PROJECTOR</div>
@@ -80,8 +81,6 @@ const GalaxyStarProjector = ()  => {
                         </a>
                     </div>
                 </div>
-
-
                 <div id="shopify-section-galaxy-projector-product" className="shopify-section">
                     <div className="galaxy_product-container">
                         <div className="galaxy_product-wrapper">
@@ -97,8 +96,6 @@ const GalaxyStarProjector = ()  => {
                         </div>
                     </div>
                 </div>
-
-
                 <div id="shopify-section-galaxy-projector-video" className="shopify-section">
                     <div className="galaxy_video-container">
                         <div className="galaxy_video-wrapper">
@@ -112,8 +109,6 @@ const GalaxyStarProjector = ()  => {
                         </div>
                     </div>
                 </div>
-
-
                 <div id="shopify-section-galaxy-projector-description" className="shopify-section">
                     <div id="galaxyDescription" className="galaxy_description-container">
 
@@ -126,8 +121,7 @@ const GalaxyStarProjector = ()  => {
                         </div>
 
                         <div className="galaxy_description-box_wrapper">
-                            <div className="galaxy_description-left_flex">
-                    
+                            <div className="galaxy_description-left_flex">                    
                                 <div className="galaxy_description-box">
                                     <div className="galaxy_description-title">BENEFITS</div>
                                     <div className="galaxy_description-paragraph">
@@ -139,7 +133,6 @@ const GalaxyStarProjector = ()  => {
                                     </div>
                                 </div>
                             </div>
-
                             <div className="galaxy_description-right_flex">
                                 <div className="galaxy_description-box">
                                     <div className="galaxy_description-title">SMART CONTROL</div>
@@ -167,28 +160,24 @@ const GalaxyStarProjector = ()  => {
                         </div>
                     </div>
                 </div>
-
                 <div id="shopify-section-galaxy-projector-included" className="shopify-section">
                     <div className="galaxy_included-container">
                         <div className="galaxy_included-title">WHAT'S INCLUDED</div>
-                        <div className="galaxy_included-contents_box">
-                        
+                        <div className="galaxy_included-contents_box">                        
                             <div className="galaxy_included-content">
                                 <div className="galaxy_included-content_image">
                                     <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/GalaxyProjector_TopShot_2_1100x.png?v=1611232648"
                                         alt="" />
                                 </div>
                                 <div className="galaxy_included-content_title">Galaxy Projector</div>
-                            </div>
-                        
+                            </div>                        
                             <div className="galaxy_included-content">
                                 <div className="galaxy_included-content_image">
                                     <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/GalaxyProjector_Adapter_1_1100x.png?v=1611232658"
                                      alt=""  />
                                 </div>
                                 <div className="galaxy_included-content_title">Power Adapter</div>
-                            </div>
-                        
+                            </div>                        
                             <div className="galaxy_included-content">
                                 <div className="galaxy_included-content_image">
                                     <img src="//cdn.shopify.com/s/files/1/0157/4420/4900/files/GalaxyProjector_Cable_1_1100x.png?v=1611232669"
@@ -199,53 +188,44 @@ const GalaxyStarProjector = ()  => {
                         </div>
                     </div>
                 </div>
-
-
                 <div id="shopify-section-galaxy-projector-accordions" className="shopify-section">
                     <div className="galaxy_accordion-container">
                         <div className="galaxy_accordion-wrapper">
-                            <div className="galaxy_accordion">
-                                
-                                    <div className="galaxy_accordion-title">
-                                        PRODUCT CARE
-                                        <div className="accordion_plus">
-                                            <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-plus" viewBox="0 0 20 20"><path fill="#444" d="M17.409 8.929h-6.695V2.258c0-.566-.506-1.029-1.071-1.029s-1.071.463-1.071 1.029v6.671H1.967C1.401 8.929.938 9.435.938 10s.463 1.071 1.029 1.071h6.605V17.7c0 .566.506 1.029 1.071 1.029s1.071-.463 1.071-1.029v-6.629h6.695c.566 0 1.029-.506 1.029-1.071s-.463-1.071-1.029-1.071z"></path></svg>
-                                        </div>
-                                        <div className="accordion_minus">
-                                        <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-minus" viewBox="0 0 20 20"><path fill="#444" d="M17.543 11.029H2.1A1.032 1.032 0 0 1 1.071 10c0-.566.463-1.029 1.029-1.029h15.443c.566 0 1.029.463 1.029 1.029 0 .566-.463 1.029-1.029 1.029z"></path></svg>
-                                        </div>
+                            <div className="galaxy_accordion">                                
+                                <div className="galaxy_accordion-title">
+                                    PRODUCT CARE
+                                    <div className="accordion_plus">
+                                        <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-plus" viewBox="0 0 20 20"><path fill="#444" d="M17.409 8.929h-6.695V2.258c0-.566-.506-1.029-1.071-1.029s-1.071.463-1.071 1.029v6.671H1.967C1.401 8.929.938 9.435.938 10s.463 1.071 1.029 1.071h6.605V17.7c0 .566.506 1.029 1.071 1.029s1.071-.463 1.071-1.029v-6.629h6.695c.566 0 1.029-.506 1.029-1.071s-.463-1.071-1.029-1.071z"></path></svg>
                                     </div>
-                                    <div className="galaxy_accordion-content"><p>TEST 1</p></div>
-                                
-                                    <div className="galaxy_accordion-title">
-                                        BENEFITS FROM OUR ROSES
-                                        <div className="accordion_plus">
-                                            <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-plus" viewBox="0 0 20 20"><path fill="#444" d="M17.409 8.929h-6.695V2.258c0-.566-.506-1.029-1.071-1.029s-1.071.463-1.071 1.029v6.671H1.967C1.401 8.929.938 9.435.938 10s.463 1.071 1.029 1.071h6.605V17.7c0 .566.506 1.029 1.071 1.029s1.071-.463 1.071-1.029v-6.629h6.695c.566 0 1.029-.506 1.029-1.071s-.463-1.071-1.029-1.071z"></path></svg>
-                                        </div>
-                                        <div className="accordion_minus">
-                                        <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-minus" viewBox="0 0 20 20"><path fill="#444" d="M17.543 11.029H2.1A1.032 1.032 0 0 1 1.071 10c0-.566.463-1.029 1.029-1.029h15.443c.566 0 1.029.463 1.029 1.029 0 .566-.463 1.029-1.029 1.029z"></path></svg>
-                                        </div>
+                                    <div className="accordion_minus">
+                                    <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-minus" viewBox="0 0 20 20"><path fill="#444" d="M17.543 11.029H2.1A1.032 1.032 0 0 1 1.071 10c0-.566.463-1.029 1.029-1.029h15.443c.566 0 1.029.463 1.029 1.029 0 .566-.463 1.029-1.029 1.029z"></path></svg>
                                     </div>
-
-                                    <div className="galaxy_accordion-content"><p>TEST 2</p></div>
-                                
-                                    <div className="galaxy_accordion-title">
-                                        LOCAL DELIVERY &amp; SHIPPING
-                                        <div className="accordion_plus">
-                                            <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-plus" viewBox="0 0 20 20"><path fill="#444" d="M17.409 8.929h-6.695V2.258c0-.566-.506-1.029-1.071-1.029s-1.071.463-1.071 1.029v6.671H1.967C1.401 8.929.938 9.435.938 10s.463 1.071 1.029 1.071h6.605V17.7c0 .566.506 1.029 1.071 1.029s1.071-.463 1.071-1.029v-6.629h6.695c.566 0 1.029-.506 1.029-1.071s-.463-1.071-1.029-1.071z"></path></svg>
-                                        </div>
-                                        <div className="accordion_minus">
-                                        <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-minus" viewBox="0 0 20 20"><path fill="#444" d="M17.543 11.029H2.1A1.032 1.032 0 0 1 1.071 10c0-.566.463-1.029 1.029-1.029h15.443c.566 0 1.029.463 1.029 1.029 0 .566-.463 1.029-1.029 1.029z"></path></svg>
-                                        </div>
+                                </div>
+                                <div className="galaxy_accordion-content"><p>TEST 1</p></div>                                
+                                <div className="galaxy_accordion-title">
+                                    BENEFITS FROM OUR ROSES
+                                    <div className="accordion_plus">
+                                        <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-plus" viewBox="0 0 20 20"><path fill="#444" d="M17.409 8.929h-6.695V2.258c0-.566-.506-1.029-1.071-1.029s-1.071.463-1.071 1.029v6.671H1.967C1.401 8.929.938 9.435.938 10s.463 1.071 1.029 1.071h6.605V17.7c0 .566.506 1.029 1.071 1.029s1.071-.463 1.071-1.029v-6.629h6.695c.566 0 1.029-.506 1.029-1.071s-.463-1.071-1.029-1.071z"></path></svg>
                                     </div>
-
-                                    <div className="galaxy_accordion-content"><p>TEST 3</p></div>
-                                
+                                    <div className="accordion_minus">
+                                    <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-minus" viewBox="0 0 20 20"><path fill="#444" d="M17.543 11.029H2.1A1.032 1.032 0 0 1 1.071 10c0-.566.463-1.029 1.029-1.029h15.443c.566 0 1.029.463 1.029 1.029 0 .566-.463 1.029-1.029 1.029z"></path></svg>
+                                    </div>
+                                </div>
+                                <div className="galaxy_accordion-content"><p>TEST 2</p></div>                                
+                                <div className="galaxy_accordion-title">
+                                    LOCAL DELIVERY &amp; SHIPPING
+                                    <div className="accordion_plus">
+                                        <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-plus" viewBox="0 0 20 20"><path fill="#444" d="M17.409 8.929h-6.695V2.258c0-.566-.506-1.029-1.071-1.029s-1.071.463-1.071 1.029v6.671H1.967C1.401 8.929.938 9.435.938 10s.463 1.071 1.029 1.071h6.605V17.7c0 .566.506 1.029 1.071 1.029s1.071-.463 1.071-1.029v-6.629h6.695c.566 0 1.029-.506 1.029-1.071s-.463-1.071-1.029-1.071z"></path></svg>
+                                    </div>
+                                    <div className="accordion_minus">
+                                    <svg aria-hidden="true" focusable="false" role="presentation" className="icon icon-minus" viewBox="0 0 20 20"><path fill="#444" d="M17.543 11.029H2.1A1.032 1.032 0 0 1 1.071 10c0-.566.463-1.029 1.029-1.029h15.443c.566 0 1.029.463 1.029 1.029 0 .566-.463 1.029-1.029 1.029z"></path></svg>
+                                    </div>
+                                </div>
+                                <div className="galaxy_accordion-content"><p>TEST 3</p></div>                                
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
       </>
     )
