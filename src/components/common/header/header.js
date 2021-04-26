@@ -45,9 +45,9 @@ const Header = React.memo(function Header(props) {
   useEffect(() => {
     let header = document.querySelector(".stickyHeader");
     header.style.top = "0";
-    window.addEventListener('wheel', wheelHandler, {passive: true});
+    window.addEventListener('scroll', scrollHandler, {passive: true});
     return function cleanup() {
-      window.removeEventListener('wheel', wheelHandler, {passive: true});
+      window.removeEventListener('scroll', scrollHandler, {passive: true});
     }
   }, []);
 
@@ -298,7 +298,7 @@ const Header = React.memo(function Header(props) {
   };
   
 
-  function wheelHandler(e) {
+  function scrollHandler(e) {
     let header = document.querySelector(".stickyHeader");
     let currentScrollpos = window.pageYOffset;
     if (e.deltaY > 0) {
