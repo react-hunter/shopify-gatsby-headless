@@ -28,7 +28,7 @@ const CustomiserBanner = React.memo(function CustomiserBanner() {
 		getBannerData();
 		window.addEventListener('scroll', scrollHandler, { passive: true })
 		return function cleanup() {
-			window.removeEventListener('scroll', scrollHandler, { passive: true });
+			window.removeEventListener('scroll', scrollHandler);
 		}
 	}, []);
 

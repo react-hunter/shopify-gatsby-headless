@@ -47,7 +47,7 @@ const Header = React.memo(function Header(props) {
     header.style.top = "0";
     window.addEventListener('scroll', scrollHandler, {passive: true});
     return function cleanup() {
-      window.removeEventListener('scroll', scrollHandler, {passive: true});
+      window.removeEventListener('scroll', scrollHandler);
     }
   }, []);
 
