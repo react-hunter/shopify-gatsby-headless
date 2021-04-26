@@ -1,7 +1,7 @@
 {
   "name": "dor-gatsby",
   "description": "DOR by gatsby and shopify",
-  "version": "2.0.0",
+  "version": "3.3.0",
   "author": "Nicolas <whitehorse1990324@gmail.com>",
   "dependencies": {
     "@apollo/client": "^3.3.15",
