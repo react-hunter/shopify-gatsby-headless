@@ -204,7 +204,7 @@ const CustomizePage = React.memo(function CustomizePage({ data }) {
     window.addEventListener('resize', mobileRearrange, true)
 
     return function cleanup() {
-      window.removeEventListener('scroll', stickyFunction, {passive: true});
+      window.removeEventListener('scroll', stickyFunction);
       window.removeEventListener('resize', mobileRearrange, true)
     }
 
