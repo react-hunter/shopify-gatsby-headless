@@ -92,11 +92,17 @@ const Layout = ({ path, children }) => {
 									}
 								}
 							}
-							allContentfulAnnounceTextItem {
+							allContentfulAnnounceTextItem(sort: {fields: position, order: ASC}) {
 								edges {
 									node {
-										fontSize
+										announcebarsettings {
+											textColor
+											backgroundColor
+										}
+										url
 										description
+										fontSize
+										position
 									}
 								}
 							}
