@@ -9,6 +9,7 @@ import { faPause } from "@fortawesome/free-solid-svg-icons"
 const AnnoucmentBar = React.memo(function AnnoucmentBar({ announceList }) {
   let anntimer = 0;
   let percent = 0;
+  console.log(announceList[0].node.announcebarsettings)
   
   const settings = {
     dots: false,
@@ -102,6 +103,17 @@ const AnnoucmentBar = React.memo(function AnnoucmentBar({ announceList }) {
     }, 830);
   }
 
+  const announcementBarStyle = {
+    backgroundColor: `${announceList[0].node.announcebarsettings[0].backgroundColor}`
+  };
+  
+  function announcementMessageStyle(index) {
+    console.log('announceList[0].node.announcebarsettings[0].backgroundColor', announceList[index].node.fontSize)
+    return {
+      fontSize: announceList[index].node.fontSize
+    }
+  };  
+
   return (
     <>
       <div className="annoucment-bar-w-controls">
@@ -113,14 +125,18 @@ const AnnoucmentBar = React.memo(function AnnoucmentBar({ announceList }) {
           
           <FontAwesomeIcon id="carousel-button" className="fa-pause" icon={faPause} size="sm" />
         </div>
-        <div className="announcement-bar" style={{ backgroundColor: announceList[0].node.announcebarsettings.backgroundColor }}>
+        <div className="announcement-bar" style={announcementBarStyle}>
           <div className="ann_bars">
             <Slider ref={slider} {...settings}>
             { announceList.map((item, index) => 
               item.node.url ?
-                <a href={item.node.url} className="announcement-bar__message" key={index} style={{ fontSize: item.node.fontSize, color: item.node.announcebarsettings.textColor }}>{item.node.description}</a>
+                <div>
+                  <a href={item.node.url} className="announcement-bar__message" key={index} style={announcementMessageStyle(index)}>{item.node.description}</a>
+                </div>
                 :
-                <p className="announcement-bar__message" key={index} style={{ fontSize: item.node.fontSize, color: item.node.announcebarsettings.textColor }}>{item.node.description}</p>
+                <div>
+                  <p className="announcement-bar__message" key={index} style={announcementMessageStyle(index)}>{item.node.description}</p>
+                </div>
             )}
             </Slider>
             
