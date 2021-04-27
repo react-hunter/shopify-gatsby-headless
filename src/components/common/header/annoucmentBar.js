@@ -9,7 +9,7 @@ import { faPause } from "@fortawesome/free-solid-svg-icons"
 const AnnoucmentBar = React.memo(function AnnoucmentBar({ announceList }) {
   let anntimer = 0;
   let percent = 0;
-
+  
   const settings = {
     dots: false,
     Infinte: true,
@@ -113,12 +113,15 @@ const AnnoucmentBar = React.memo(function AnnoucmentBar({ announceList }) {
           
           <FontAwesomeIcon id="carousel-button" className="fa-pause" icon={faPause} size="sm" />
         </div>
-        <div className="announcement-bar">
+        <div className="announcement-bar" style={{ backgroundColor: announceList[0].node.announcebarsettings.backgroundColor }}>
           <div className="ann_bars">
             <Slider ref={slider} {...settings}>
             { announceList.map((item, index) => 
-              <p className="announcement-bar__message" key={index} style={{ fontSize: item.node.fontSize }}>{item.node.description}</p>
-              )}
+              item.node.url ?
+                <a href={item.node.url} className="announcement-bar__message" key={index} style={{ fontSize: item.node.fontSize, color: item.node.announcebarsettings.textColor }}>{item.node.description}</a>
+                :
+                <p className="announcement-bar__message" key={index} style={{ fontSize: item.node.fontSize, color: item.node.announcebarsettings.textColor }}>{item.node.description}</p>
+            )}
             </Slider>
             
               <svg id="annoucmentBar_prev_button" 
