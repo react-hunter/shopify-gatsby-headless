@@ -3,7 +3,11 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-const VariantsSelectorButtons = React.memo(function VariantsSelectorButtons({ product, variant, openVariantAndFill }) {
+const VariantsSelectorButtons = React.memo(function VariantsSelectorButtons({
+	product,
+	variant,
+	openVariantAndFill
+}) {
   return (
     <div className="variants-selector-buttons">
       {product.options.map((options, optionIndex) =>
