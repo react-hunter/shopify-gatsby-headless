@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useContext, useState, useEffect } from 'react'
 import { GatsbyImage } from "gatsby-plugin-image"
 import loadable from '@loadable/component';
@@ -41,6 +42,7 @@ const Header = React.memo(function Header(props) {
   const cardList = props.cardList;
   const desktopHeader = props.desktopHeader;
   let mobileMenuStep = 0;
+  let lastScrollTop = 0;
 
   useEffect(() => {
     let header = document.querySelector(".stickyHeader");
@@ -67,8 +69,8 @@ const Header = React.memo(function Header(props) {
     } else if (mobileMenuStep === 1) {  // menu opened
 
       mobileToggleBtn.classList.add("active");
-      mobileToggleBtn.classList.remove("backBtn");  
-      mobileToggleBtn.classList.add("closeBtn");  
+      mobileToggleBtn.classList.remove("backBtn");
+      mobileToggleBtn.classList.add("closeBtn");
 
     } else if (mobileMenuStep === 2) {   // child menu opened
 
@@ -234,14 +236,11 @@ const Header = React.memo(function Header(props) {
   function leftSwipe() {
     for (var i = 0; i < slides.length; i++) {
       slides[i].style.animation = "left-swipe-hide 3s forwards";
-    }
-  
+    }  
     if (slideIndex > slides.length) {
       slideIndex = 1
-    }
-  
-    slides[slideIndex - 1].style.animation = "left-swipe-show 3s forwards";
-  
+    }  
+    slides[slideIndex - 1].style.animation = "left-swipe-show 3s forwards";  
     slideIndex++;
     swipedLast = true;
   }
@@ -250,13 +249,10 @@ const Header = React.memo(function Header(props) {
     for (var i = 0; i < slides.length; i++) {
       slides[i].style.animation = "right-swipe-hide 3s forwards";
     }
-  
     if (slideIndex > slides.length) {
       slideIndex = 1
     }
-  
-    slides[slideIndex - 1].style.animation = "right-swipe-show 3s forwards";
-  
+    slides[slideIndex - 1].style.animation = "right-swipe-show 3s forwards";  
     slideIndex++;
     swipedLast = true;
   }
@@ -300,19 +296,28 @@ const Header = React.memo(function Header(props) {
 
   function scrollHandler(e) {
     let header = document.querySelector(".stickyHeader");
+    let announceBar = document.querySelector(".annoucment-bar-w-controls");
+    let heroImageSection = document.querySelector(".text_image_banner-container_outer");
     let currentScrollpos = window.pageYOffset;
-    if (e.deltaY > 0) {
+    if(window.scrollY < 5) {
+      announceBar.style.display = "block";
+      heroImageSection.classList.remove("announce-hidden");
+    } else {
+      announceBar.style.display = "none";
+      heroImageSection.classList.add("announce-hidden");
+    }
+    if (window.scrollY > lastScrollTop) {
       if (currentScrollpos >= 5) {
         header.style.top = "-200px";
       }
     } else {
       header.style.top = "0";
     }
+    lastScrollTop = window.scrollY;
   }
 
   const openSlideCart = (e) => {
     e.preventDefault();
-    //fetchCart();w
     openCartDrawer();
     openCartOverlay();
   };

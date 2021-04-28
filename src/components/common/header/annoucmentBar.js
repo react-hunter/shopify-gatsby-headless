@@ -9,7 +9,6 @@ import { faPause } from "@fortawesome/free-solid-svg-icons"
 const AnnoucmentBar = React.memo(function AnnoucmentBar({ announceList }) {
   let anntimer = 0;
   let percent = 0;
-  console.log(announceList[0].node.announcebarsettings)
   
   const settings = {
     dots: false,
@@ -108,7 +107,6 @@ const AnnoucmentBar = React.memo(function AnnoucmentBar({ announceList }) {
   };
   
   function announcementMessageStyle(index) {
-    console.log('announceList[0].node.announcebarsettings[0].backgroundColor', announceList[index].node.fontSize)
     return {
       fontSize: announceList[index].node.fontSize
     }
@@ -130,12 +128,12 @@ const AnnoucmentBar = React.memo(function AnnoucmentBar({ announceList }) {
             <Slider ref={slider} {...settings}>
             { announceList.map((item, index) => 
               item.node.url ?
-                <div>
-                  <a href={item.node.url} className="announcement-bar__message" key={index} style={announcementMessageStyle(index)}>{item.node.description}</a>
+                <div key={index}>
+                  <a href={item.node.url} className="announcement-bar__message" style={announcementMessageStyle(index)}>{item.node.description}</a>
                 </div>
                 :
-                <div>
-                  <p className="announcement-bar__message" key={index} style={announcementMessageStyle(index)}>{item.node.description}</p>
+                <div key={index}>
+                  <p className="announcement-bar__message" style={announcementMessageStyle(index)}>{item.node.description}</p>
                 </div>
             )}
             </Slider>
