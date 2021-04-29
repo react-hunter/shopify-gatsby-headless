@@ -1192,7 +1192,12 @@ const CustomizePage = React.memo(function CustomizePage({ data }) {
   return (
     <>
       {/* <Preloader /> */}
-      <SEO title="Create Your Rose Box - Dose of Roses" />
+      <SEO
+        title="Create Your Rose Box - Dose of Roses"
+        mainTitle="Create Your Rose Box"
+        type="website"
+        description="Customize your Dose of Roses to create the perfect gift! Choose from box shape, style, material and rose colors and personalize it with letters, numbers and symbols. As always, these rose arrangements will stay beautiful for up to five years."
+      />
       <div className="container">
 
         <div id="shopify-section-customizer-schema" className="shopify-section">

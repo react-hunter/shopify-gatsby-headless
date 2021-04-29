@@ -26,13 +26,13 @@ const AddToBagButton = React.memo(function AddToBagButton({
 		   return;
 	
 		const bagProduct = collectionProducts.filter(cp => cp.title === selections[0])
-	
+		
 		const bagVariants = bagProduct[0].variants
 		let bagVariant = null
 		for(var i = 0; i < bagVariants.length; i++) {
-		  if(bagVariants[i].options[0] === selections[1] && bagVariants[i].options[1] === selections[2]) {
-			bagVariant = bagVariants[i]
-			break
+		  if(bagVariants[i].options[0] === selections[1] && compareNumberLetter(bagVariants[i].options[1], selections[2])) {
+				bagVariant = bagVariants[i]
+				break
 		  }
 		}
 	
@@ -46,6 +46,21 @@ const AddToBagButton = React.memo(function AddToBagButton({
 		])
 		
 		setTimeout(openCartDrawer, 1200);
+	}
+
+	function compareNumberLetter(variantOption, selectedOption) {
+		let compared = false;
+		if(variantOption === selectedOption) {
+			compared = true;
+		}
+		if(variantOption.includes("Letter") && selectedOption.includes("Letter")) {
+			compared = true;
+		}
+		if(variantOption.includes("Number") && selectedOption.includes("Number")) {
+			compared = true;
+		}
+
+		return compared;
 	}
 
 	function openCartDrawer() {
