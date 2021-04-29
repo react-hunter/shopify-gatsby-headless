@@ -178,7 +178,9 @@
   display: none;
 }
 
-.product-form__cart-submit {}
+.product-form__cart-submit {
+  border-color: transparent;
+}
 
 .product-form__item {
   margin-bottom: 0px !important;
