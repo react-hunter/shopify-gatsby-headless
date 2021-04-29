@@ -301,10 +301,10 @@ const Header = React.memo(function Header(props) {
     let currentScrollpos = window.pageYOffset;
     if(window.scrollY < 5) {
       announceBar.style.display = "block";
-      heroImageSection.classList.remove("announce-hidden");
+      heroImageSection && heroImageSection.classList.remove("announce-hidden");
     } else {
       announceBar.style.display = "none";
-      heroImageSection.classList.add("announce-hidden");
+      heroImageSection && heroImageSection.classList.add("announce-hidden");
     }
     if (window.scrollY > lastScrollTop) {
       if (currentScrollpos >= 5) {
