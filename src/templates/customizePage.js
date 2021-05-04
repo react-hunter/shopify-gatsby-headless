@@ -20,6 +20,7 @@ const CustomizePage = React.memo(function CustomizePage({ data }) {
     roseColor: [],
     products: []
   })
+  const protectionProduct = data.protectionProduct;
 
   const collectionProducts = data.shopifyCollection.products.map(pr => {
     const productVariants = pr.variants.map(va => {
@@ -1334,7 +1335,9 @@ const CustomizePage = React.memo(function CustomizePage({ data }) {
                     getCurrentStep={getCurrentStep} 
                     getCollectionProducts={getCollectionProducts}
                     getSelections={getSelections} 
-                    getMainImageUrl={getMainImageUrl}/>
+                    getMainImageUrl={getMainImageUrl}
+                    protectionProduct={protectionProduct}
+                  />
               </div>
             </div>
           </div>
@@ -1382,6 +1385,15 @@ export const query = graphql`
             value
           }
         }
+      }
+    }
+    protectionProduct: shopifyProduct(handle: {eq: "order-protection"}) {
+      id
+      shopifyId
+      variants {
+        id
+        shopifyId
+        price
       }
     }
 	}

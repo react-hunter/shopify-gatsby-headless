@@ -15,6 +15,7 @@ const AtcSticky = loadable(() => import("./AtcSticky"))
 
 const ProductDescription = React.memo(function ProductDescription({
 	product,
+	protectionProduct,
 	review,
 	clickVariantSelect,
 	selectVariant
@@ -135,6 +136,7 @@ const ProductDescription = React.memo(function ProductDescription({
 
 					<Buttons 
 						product={product}
+						protectionProduct={protectionProduct}
 						context={context} 
 						available={available} 
 						quantity={quantity} 

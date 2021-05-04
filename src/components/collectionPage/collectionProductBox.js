@@ -14,6 +14,7 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 	const [varaintModalShow, setVaraintModalShow] = useState(false);
 	const [showSpin, setShowSpin] = useState(false);
 	const product = props.product;
+	const protectionProduct = props.protectionProduct;
 	const mainOption = getMainOption()
 	const [swatchColor, setSwatchColor] = useState(mainOption === '' ? '' : mainOption.values[0])
 
@@ -30,8 +31,9 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 	const addToBag = () => {
 		if(product.variants.length === 1) {
 			setShowSpin(true);
-
+			
 			context.addVariantToCart(product.variants[0].shopifyId, 1);
+			context.addVariantToCart(protectionProduct.variants[2].shopifyId, 1);
 			setTimeout(showCart, 1200);
 		} else {
 			setVaraintModalShow(true);
@@ -132,7 +134,7 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 						<button className="openVariantModal" onClick={addToBag}>ADD TO BAG{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }</button>
 				}
 
-				{varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} showNotifyModal={showNotifyModal} product={product} /> )}
+				{varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} showNotifyModal={showNotifyModal} product={product} protectionProduct={protectionProduct} /> )}
 			</div>
 			{(product.variants.length === 1 && !product.variants[0].availableForSale) ? 
 				<NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />

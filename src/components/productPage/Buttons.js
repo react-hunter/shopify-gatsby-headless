@@ -6,6 +6,7 @@ const NotifyModal = loadable(() => import('../collectionPage/notifyModal'))
 
 const Buttons = React.memo(function Buttons({
 	product,
+	protectionProduct,
 	context,
 	available,
 	productVariant,
@@ -17,6 +18,7 @@ const Buttons = React.memo(function Buttons({
 	const handleAddToCart = () => {
 		setShowSpin(true);
 		context.addVariantToCart(productVariant.shopifyId, quantity);
+		context.addVariantToCart(protectionProduct.variants[2].shopifyId, 1);
 		setTimeout(openCartDrawer, 1200);
 	}
 
