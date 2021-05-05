@@ -18,8 +18,8 @@ const Buttons = React.memo(function Buttons({
 	const handleAddToCart = () => {
 		setShowSpin(true);
 		context.addVariantToCart(productVariant.shopifyId, quantity);
-		context.addProtection(protectionProduct.variants[2].shopifyId);
-		setTimeout(openCartDrawer, 1200);
+		setTimeout(() => context.addProtection(protectionProduct.variants[2].shopifyId), 1200);
+		setTimeout(openCartDrawer, 2500);
 	}
 
 	const handleAddToCart_BuyNow = () => {

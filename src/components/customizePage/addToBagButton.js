@@ -45,13 +45,13 @@ const AddToBagButton = React.memo(function AddToBagButton({
 		  {key: 'Style', value: selections[2]},
 		  {key: 'linkImage', value: mainImageUrl }
 		]);
-		context.addProtection(protectionProduct.variants[2].shopifyId);
+		setTimeout(() => context.addProtection(protectionProduct.variants[2].shopifyId), 1200);
 		if(checkIncludeFeature(selections[2])) {
 			console.log('added feature, need to add $50');
 			// context.addVariantToCart(roseFeatureVariantId, 1);
 		}
 		
-		setTimeout(openCartDrawer, 1200);
+		setTimeout(openCartDrawer, 2500);
 	}
 
 	function checkIncludeFeature(selectedFeature) {
