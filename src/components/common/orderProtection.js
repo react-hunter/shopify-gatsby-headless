@@ -11,7 +11,7 @@ const OrderProtection = (props) => {
   const protectionVariant = props.protectionVariant;
   const context = props.context;
   const lineItems = props.lineItems;
-  const filteredItems = lineItems.filter((item) => item.variant.id === protectionVariant.shopifyId);
+  const filteredItems = lineItems.filter((item) => item.title === 'Order Protection');
   let protectionLineItem = null;
   if (filteredItems.length > 0) {
     protectionLineItem = filteredItems[0];
