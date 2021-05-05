@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import '../../styles/order-protection-info.scss';
 

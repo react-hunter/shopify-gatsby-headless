@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 // import Switch from 'react-switch';
 import '../../styles/order-protection.scss';
@@ -45,9 +46,9 @@ const OrderProtection = (props) => {
       </div>
       <div className="order-protection-price">$2.15</div>
       <div className="switcher">
-        <label class="switch">
+        <label className="switch">
           <input type="checkbox" onChange={(e) => handleChange(e.target.checked)} checked={checked} />
-          <span class="slider rounded"></span>
+          <span className="slider rounded"></span>
         </label>
       </div>
       {openOrderProtectionInfo && <OrderProtectionInfo closeModal={setOpenOrderProtectionInfo}/>}

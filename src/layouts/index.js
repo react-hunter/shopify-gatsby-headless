@@ -147,7 +147,6 @@ const Layout = ({ path, children }) => {
 								<script src={withPrefix('voyage.js')} type="text/javascript" />
 								<script async src="https://assets.voyagetext.com/voyage.production.js"></script>
 							</Helmet>
-							{JSON.stringify(data.protectionProduct)}
 							<div className="scrollPreventer">
 								<AjaxCartCustom
 									giftVariant={data.giftProduct.variants[0]}
