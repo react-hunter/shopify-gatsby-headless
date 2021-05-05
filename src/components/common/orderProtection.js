@@ -6,16 +6,18 @@ import loadable from '@loadable/component';
 const OrderProtectionInfo = loadable(() => import('./orderProtectionInfo'));
 
 const OrderProtection = (props) => {
-  const [checked, setChecked] = useState(true);
   const [openOrderProtectionInfo, setOpenOrderProtectionInfo] = useState(false);
   const protectionVariant = props.protectionVariant;
   const context = props.context;
   const lineItems = props.lineItems;
-  const filteredItems = lineItems.filter((item) => item.title === 'Order Protection');
+  const filteredItems = lineItems.filter(li => li.variant.id === protectionVariant.shopifyId);
   let protectionLineItem = null;
+  let hasProtection = false;
   if (filteredItems.length > 0) {
     protectionLineItem = filteredItems[0];
+    hasProtection = true;
   }
+  const [checked, setChecked] = useState(hasProtection);
 
   const removeProtection = (itemId) => {
     context.removeLineItem(context.store.client, context.store.checkout.id, itemId);
@@ -23,13 +25,16 @@ const OrderProtection = (props) => {
   const addProtection = (itemId) => {
     context.addProtection(itemId);
   };
-  const handleChange = (checked) => {
-    if (checked) {
+  const handleChange = (checkedUpdate) => {
+    if (checkedUpdate) {
       addProtection(protectionVariant.shopifyId);
     } else {
-      removeProtection(protectionLineItem.id);
+      console.log('filteredItems:', filteredItems)
+      if(hasProtection) {
+        removeProtection(protectionLineItem.id);
+      }
     }
-    setChecked(checked);
+    setChecked(checkedUpdate);
   };
   return (
     <div className="order-protection">
