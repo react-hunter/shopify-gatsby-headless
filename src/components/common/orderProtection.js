@@ -21,7 +21,7 @@ const OrderProtection = (props) => {
     context.removeLineItem(context.store.client, context.store.checkout.id, itemId);
   };
   const addProtection = (itemId) => {
-    context.addVariantToCart(itemId, 1);
+    context.addProtection(itemId);
   };
   const handleChange = (checked) => {
     if (checked) {

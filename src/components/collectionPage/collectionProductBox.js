@@ -30,10 +30,9 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 	}
 	const addToBag = () => {
 		if(product.variants.length === 1) {
-			setShowSpin(true);
-			
+			setShowSpin(true);			
 			context.addVariantToCart(product.variants[0].shopifyId, 1);
-			context.addVariantToCart(protectionProduct.variants[2].shopifyId, 1);
+			context.addProtection(protectionProduct.variants[2].shopifyId);
 			setTimeout(showCart, 1200);
 		} else {
 			setVaraintModalShow(true);
