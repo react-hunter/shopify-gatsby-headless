@@ -6,7 +6,7 @@ import loadable from '@loadable/component';
 const OrderProtectionInfo = loadable(() => import('./orderProtectionInfo'));
 
 const OrderProtection = (props) => {
-  const [checked, setChecked] = useState(true);
+  const [checked, setChecked] = useState(false);
   const [openOrderProtectionInfo, setOpenOrderProtectionInfo] = useState(false);
   const protectionVariant = props.protectionVariant;
   const context = props.context;
@@ -21,7 +21,7 @@ const OrderProtection = (props) => {
     context.removeLineItem(context.store.client, context.store.checkout.id, itemId);
   };
   const addProtection = (itemId) => {
-    context.addVariantToCart(itemId, 1);
+    context.addProtection(itemId);
   };
   const handleChange = (checked) => {
     if (checked) {

@@ -45,7 +45,7 @@ const AddToBagButton = React.memo(function AddToBagButton({
 		  {key: 'Style', value: selections[2]},
 		  {key: 'linkImage', value: mainImageUrl }
 		]);
-		context.addVariantToCart(protectionProduct.variants[2].shopifyId, 1);
+		context.addProtection(protectionProduct.variants[2].shopifyId);
 		if(checkIncludeFeature(selections[2])) {
 			console.log('added feature, need to add $50');
 			// context.addVariantToCart(roseFeatureVariantId, 1);

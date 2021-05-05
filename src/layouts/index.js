@@ -140,8 +140,6 @@ const Layout = ({ path, children }) => {
 					`}
 					render={data => (
 						<>
-							{/* <Preloader allHide={setAllHidden} /> */}
-							{/* <div className={`scrollPreventer ${hideClass}`}> */}
 							<Helmet>
 								<script src={withPrefix('snapchat.js')} type="text/javascript" />
 								<script src={withPrefix('voyage.js')} type="text/javascript" />
@@ -151,7 +149,7 @@ const Layout = ({ path, children }) => {
 								<AjaxCartCustom
 									giftVariant={data.giftProduct.variants[0]}
 									rushVariant={data.rushProduct.variants[0]}
-									protectionVariant={data.rushProduct}
+									protectionVariant={data.protectionProduct.variants[2]}
 								/>
 								<Header
 									path={path}

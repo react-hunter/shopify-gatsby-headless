@@ -70,7 +70,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	const addToSideCart =() => {
 		setShowSpin(true);
 		context.addVariantToCart(variant.shopifyId, 1);
-		context.addVariantToCart(protectionProduct.variants[2].shopifyId, 1);
+		context.addProtection(protectionProduct.variants[2].shopifyId);
 		setTimeout(showCart, 1200);
 	}
 	function showCart() {
