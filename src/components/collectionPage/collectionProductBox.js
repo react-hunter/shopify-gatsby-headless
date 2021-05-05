@@ -33,7 +33,7 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 			setShowSpin(true);			
 			context.addVariantToCart(product.variants[0].shopifyId, 1);
 			setTimeout(() => context.addProtection(protectionProduct.variants[2].shopifyId), 1200);
-			setTimeout(showCart, 1800);
+			setTimeout(showCart, 2500);
 		} else {
 			setVaraintModalShow(true);
 		}

@@ -1,11 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
+import loadable from '@loadable/component';
 import AjaxCartFooter from './ajaxCartFooter';
 import GiftMessage from './giftMessage';
-import OrderProtection from './orderProtection';
+// import OrderProtection from './orderProtection';
 import AjaxCartEmpty from './ajaxCartEmpty';
 import StoreContext from '../../context/store'
 import { Link } from 'gatsby'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+const OrderProtection = loadable(() => import('./orderProtection'));
 
 const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVariant, protectionVariant}) {
 	const context = useContext(StoreContext);

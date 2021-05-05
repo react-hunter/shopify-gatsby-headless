@@ -51,7 +51,7 @@ const AddToBagButton = React.memo(function AddToBagButton({
 			// context.addVariantToCart(roseFeatureVariantId, 1);
 		}
 		
-		setTimeout(openCartDrawer, 1800);
+		setTimeout(openCartDrawer, 2500);
 	}
 
 	function checkIncludeFeature(selectedFeature) {

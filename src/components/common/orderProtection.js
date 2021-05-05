@@ -1,5 +1,6 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import StoreContext from '../../context/store'
 // import Switch from 'react-switch';
 import '../../styles/order-protection.scss';
 import loadable from '@loadable/component';
@@ -7,17 +8,17 @@ const OrderProtectionInfo = loadable(() => import('./orderProtectionInfo'));
 
 const OrderProtection = (props) => {
   const [openOrderProtectionInfo, setOpenOrderProtectionInfo] = useState(false);
+  const context = useContext(StoreContext);
   const protectionVariant = props.protectionVariant;
-  const context = props.context;
-  const lineItems = props.lineItems;
-  const filteredItems = lineItems.filter(li => li.variant.id === protectionVariant.shopifyId);
+  const lineItems = context.store.checkout.lineItems;
+  const filteredItems = lineItems.length > 0 ? lineItems.filter(li => li.variant.id === protectionVariant.shopifyId) : [];
   let protectionLineItem = null;
   let hasProtection = false;
   if (filteredItems.length > 0) {
     protectionLineItem = filteredItems[0];
     hasProtection = true;
   }
-  const [checked, setChecked] = useState(hasProtection);
+  const [checked, setChecked] = useState(true);
 
   const removeProtection = (itemId) => {
     context.removeLineItem(context.store.client, context.store.checkout.id, itemId);
@@ -29,7 +30,6 @@ const OrderProtection = (props) => {
     if (checkedUpdate) {
       addProtection(protectionVariant.shopifyId);
     } else {
-      console.log('filteredItems:', filteredItems)
       if(hasProtection) {
         removeProtection(protectionLineItem.id);
       }
