@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import AjaxCartFooter from './ajaxCartFooter';
-import GiftMessage from './giftMessage'
+import GiftMessage from './giftMessage';
+import OrderProtection from './orderProtection';
 import AjaxCartEmpty from './ajaxCartEmpty';
 import StoreContext from '../../context/store'
 import { Link } from 'gatsby'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
-const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVariant}) {
+const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVariant, protectionVariant}) {
 	const context = useContext(StoreContext);
 	const [lineItems, setLineItems] = useState([]);
 	const [messageShow, setMessageShow] = useState(false);
@@ -217,8 +218,12 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 					
 								<div style={{ margin: '0 0 10px 0', minHeight: '20px',textAlign: 'center'}}>
 									<span className="quadpay-cart">or 4 interest-free payments of <span id="quad-amount">${parseFloat(context.store.checkout.subtotalPrice / 4).toFixed(2)}</span> by <LazyLoadImage className="quadpay-img" src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/229/assets/quadpay_200x.png?v=14478482058500416670" alt="" /></span>
-
 								</div>
+								<OrderProtection
+									protectionVariant={protectionVariant}
+									context={context}
+									lineItems={lineItems}
+								/>
 							</div>
 							
 							<a href={context.store.checkout.webUrl} 
@@ -233,9 +238,9 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 
 					<div className="ajax-cart-drawer__content js-ajax-cart-drawer-content">
 						{ lineItems.length > 0 ?
-							(lineItems.map((item, index) => {
+							(lineItems.filter(li => li.title !== "Order Protection").map((item, index) => {
 								return (
-								<div className={`ajax-cart-item ${item.variant.title}`} key={index} data-line={index}>
+								<div className={`ajax-cart-item ${item.variant.title} ddddd`} key={index} data-line={index}>
 									<div className="price-and-remove-item-wrapper">
 										<div className="ajax-cart-item-remove js-ajax-remove-from-cart" role="button"
 											tabIndex="0" onKeyDown={handleKeyDown} onClick={() => removeItem(item.id)}>✖</div>

@@ -9,6 +9,7 @@ const NotifyModal = loadable(() => import("../collectionPage/notifyModal"))
 
 const RelatedProductList = React.memo(function RelatedProductList({
   products,
+  protectionProduct,
   reviewList,
   badgeStyles
 }) {
@@ -102,7 +103,7 @@ const RelatedProductList = React.memo(function RelatedProductList({
         <button type="button" id='next' className="slick-arrow slick-next"> Next</button>
 
         {varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} 
-                                    showNotifyModal={showNotifyModal} product={selectedProduct} /> )}
+                                    showNotifyModal={showNotifyModal} product={selectedProduct} protectionProduct={protectionProduct} /> )}
         <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
       </div>
     </div>

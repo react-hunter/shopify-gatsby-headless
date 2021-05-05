@@ -45,7 +45,9 @@ const ProductPage = React.memo(function ProductPage({ data, pageContext }) {
 			<div key="product-template" id="ProductSection-product-template" className="product-template__container">
 				<div className="grid product-single product-single--medium-media">
 					<ProductGallery product={product} isVarantSelected={isVarantSelected} selectedVariant={selectedVariant} key="product-gallery" />
-					<ProductDescription product={product} 
+					<ProductDescription
+						product={product}
+						protectionProduct={data.protectionProduct}
 						data={data} 
 						review={productReview[0]} 
 						clickVariantSelect = {setIsVarantSelected}
@@ -56,6 +58,7 @@ const ProductPage = React.memo(function ProductPage({ data, pageContext }) {
 			<RelatedProductList 
 				key="related-list"
 				products={relatedProducts}
+				protectionProduct={data.protectionProduct}
 				reviewList={productReviews}
 				badgeStyles={data.allContentfulCollectionBadgeStyleItem.edges}
 			/>
@@ -145,5 +148,14 @@ export const query = graphql`
 				}
 			}
 		}
+		protectionProduct: shopifyProduct(handle: {eq: "order-protection"}) {
+      id
+      shopifyId
+      variants {
+        id
+        shopifyId
+        price
+      }
+    }
 	}
 `

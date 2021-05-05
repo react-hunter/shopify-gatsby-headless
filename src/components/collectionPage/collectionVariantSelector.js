@@ -7,6 +7,7 @@ import ImageSpin from '../common/imageSpin';
 const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
 	const context = useContext(StoreContext);
 	const product = props.product;
+	const protectionProduct = props.protectionProduct;
 	const firstVariant = product.variants[0];
 	const [variant, setVariant] = useState(firstVariant)
 	const [showSpin, setShowSpin] = useState(false);
@@ -69,6 +70,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	const addToSideCart =() => {
 		setShowSpin(true);
 		context.addVariantToCart(variant.shopifyId, 1);
+		context.addProtection(protectionProduct.variants[2].shopifyId);
 		setTimeout(showCart, 1200);
 	}
 	function showCart() {

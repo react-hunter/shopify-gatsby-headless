@@ -8,7 +8,7 @@ import 'glider-js/glider.min.css';
 import "../../styles/collectionPage.scss";
 const NotifyModal = loadable(() => import("../collectionPage/notifyModal"));
 
-const CollectionSlider = React.memo(function CollectionSlider({ products, title, handle, reviewList, badgeStyles}) {
+const CollectionSlider = React.memo(function CollectionSlider({ products, title, handle, reviewList, badgeStyles, protectionProduct}) {
   const [notifyModalShow, setNotifyModalShow] = useState(false);
   const [varaintModalShow, setVaraintModalShow] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -104,7 +104,8 @@ const CollectionSlider = React.memo(function CollectionSlider({ products, title,
         {varaintModalShow && <CollectionVariantSelector
                                   closeModal={closeCollectionModal} 
                                   showNotifyModal={showNotifyModal} 
-                                  product={selectedProduct} />}
+                                  product={selectedProduct}
+                                  protectionProduct={protectionProduct} />}
         <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
       </div>
       <div className="collection-carousel-button_wrapper">

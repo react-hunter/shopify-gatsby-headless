@@ -16,6 +16,7 @@ const CollectionPage = React.memo(function CollectionPage({
   pageContext
 }) {
   const { productReviews, seoData } = pageContext;
+  const protectionProduct = data.protectionProduct;
   const [ displayProductCount, setDisplayProductCount ] = useState(16);
   const [ showContent, setShowContent ] = useState(false);
   const loadMoreProducts = (e) => {
@@ -138,6 +139,7 @@ const CollectionPage = React.memo(function CollectionPage({
                   const productReview = productReviews.filter(pr => pr.handle === productItem.handle)
                   return <CollectionProductBox
                             product={productItem}
+                            protectionProduct={protectionProduct}
                             key={productIndex}
                             review={productReview[0]}
                             badgeStyles={data.allContentfulCollectionBadgeStyleItem.edges}
@@ -215,6 +217,15 @@ export const query = graphql`
             }
           }
         }
+      }
+    }
+    protectionProduct: shopifyProduct(handle: {eq: "order-protection"}) {
+      id
+      shopifyId
+      variants {
+        id
+        shopifyId
+        price
       }
     }
 	}

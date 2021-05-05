@@ -44,6 +44,15 @@ const Layout = ({ path, children }) => {
 									price
 								}
 							}
+							protectionProduct: shopifyProduct(handle: {eq: "order-protection"}) {
+								id
+								shopifyId
+								variants {
+									id
+									shopifyId
+									price
+								}
+							}
 							siteLogo: file(relativePath: { eq: "icon-logo.png" }) {
 								childImageSharp {
 									gatsbyImageData (
@@ -131,15 +140,17 @@ const Layout = ({ path, children }) => {
 					`}
 					render={data => (
 						<>
-							{/* <Preloader allHide={setAllHidden} /> */}
-							{/* <div className={`scrollPreventer ${hideClass}`}> */}
 							<Helmet>
 								<script src={withPrefix('snapchat.js')} type="text/javascript" />
 								<script src={withPrefix('voyage.js')} type="text/javascript" />
 								<script async src="https://assets.voyagetext.com/voyage.production.js"></script>
 							</Helmet>
 							<div className="scrollPreventer">
-								<AjaxCartCustom giftVariant={data.giftProduct.variants[0]} rushVariant={data.rushProduct.variants[0]} />
+								<AjaxCartCustom
+									giftVariant={data.giftProduct.variants[0]}
+									rushVariant={data.rushProduct.variants[0]}
+									protectionVariant={data.protectionProduct.variants[2]}
+								/>
 								<Header
 									path={path}
 									mobileHeaderMenu={data.allContentfulMobileHeaderMenu.edges[0].node.mobileHeaderMenuItem}

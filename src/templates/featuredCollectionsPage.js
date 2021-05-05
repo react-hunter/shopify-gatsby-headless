@@ -39,6 +39,7 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
                 return (
                   <CollectionSlider
                     products={collection.node.products.slice(0, 10)}
+                    protectionProduct={data.protectionProduct}
                     title={collection.node.title}
                     handle={collection.node.handle}
                     reviewList={productReviews}
@@ -110,6 +111,15 @@ export const query = graphql`
             }
           }
         }
+      }
+    }
+    protectionProduct: shopifyProduct(handle: {eq: "order-protection"}) {
+      id
+      shopifyId
+      variants {
+        id
+        shopifyId
+        price
       }
     }
   }

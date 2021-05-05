@@ -20,6 +20,7 @@ const CustomizePage = React.memo(function CustomizePage({ data }) {
     roseColor: [],
     products: []
   })
+  const protectionProduct = data.protectionProduct;
 
   const collectionProducts = data.shopifyCollection.products.map(pr => {
     const productVariants = pr.variants.map(va => {
@@ -1192,7 +1193,12 @@ const CustomizePage = React.memo(function CustomizePage({ data }) {
   return (
     <>
       {/* <Preloader /> */}
-      <SEO title="Create Your Rose Box - Dose of Roses" />
+      <SEO
+        title="Create Your Rose Box - Dose of Roses"
+        mainTitle="Create Your Rose Box"
+        type="website"
+        description="Customize your Dose of Roses to create the perfect gift! Choose from box shape, style, material and rose colors and personalize it with letters, numbers and symbols. As always, these rose arrangements will stay beautiful for up to five years."
+      />
       <div className="container">
 
         <div id="shopify-section-customizer-schema" className="shopify-section">
@@ -1329,7 +1335,9 @@ const CustomizePage = React.memo(function CustomizePage({ data }) {
                     getCurrentStep={getCurrentStep} 
                     getCollectionProducts={getCollectionProducts}
                     getSelections={getSelections} 
-                    getMainImageUrl={getMainImageUrl}/>
+                    getMainImageUrl={getMainImageUrl}
+                    protectionProduct={protectionProduct}
+                  />
               </div>
             </div>
           </div>
@@ -1377,6 +1385,15 @@ export const query = graphql`
             value
           }
         }
+      }
+    }
+    protectionProduct: shopifyProduct(handle: {eq: "order-protection"}) {
+      id
+      shopifyId
+      variants {
+        id
+        shopifyId
+        price
       }
     }
 	}

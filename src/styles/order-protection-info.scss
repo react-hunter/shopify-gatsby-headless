@@ -1,0 +1,98 @@
+.order-protection-info-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999999999;
+  cursor: pointer;
+
+  .order-protection-info__wrapper {
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    touch-action: none;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    margin: 30px auto;
+    max-width: 350px;
+    width: 100%;
+    z-index: 9999;
+    padding: 0%;
+    padding: 20px;
+    border-radius: 20px;
+
+    img {
+      width: 90%;
+    }
+
+    .close-icon {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      right: 20px;
+      top: 20px;
+      background-image: url("data:image/svg+xml,%0A%3Csvg height='329pt' viewBox='0 0 329.26933 329' width='329pt' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m194.800781 164.769531 128.210938-128.214843c8.34375-8.339844 8.34375-21.824219 0-30.164063-8.339844-8.339844-21.824219-8.339844-30.164063 0l-128.214844 128.214844-128.210937-128.214844c-8.34375-8.339844-21.824219-8.339844-30.164063 0-8.34375 8.339844-8.34375 21.824219 0 30.164063l128.210938 128.214843-128.210938 128.214844c-8.34375 8.339844-8.34375 21.824219 0 30.164063 4.15625 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921875-2.089844 15.082031-6.25l128.210937-128.214844 128.214844 128.214844c4.160156 4.160156 9.621094 6.25 15.082032 6.25 5.460937 0 10.921874-2.089844 15.082031-6.25 8.34375-8.339844 8.34375-21.824219 0-30.164063zm0 0'/%3E%3C/svg%3E");
+      background-size: 100%;
+    }
+
+    @media (max-width: 1400px) {
+      // margin: 4% 28%;
+    }
+
+    .order-protection-info__huge-title {
+      font-size: 22px;
+      font-weight: bold;
+      text-transform: uppercase;
+      background: linear-gradient(to right, #06812b 0%, #0bd688 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      margin-bottom: 10px;
+      margin-top: 15px;
+    }
+
+    .order-protection-info__title {
+      font-size: 19px;
+      color: #000;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .order-protection-info__description {
+      line-height: 30px;
+      font-family: 'Avenir', sans-serif;
+      font-weight: 200;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .order-protection-info__description2 {
+      font-size: 15px;
+      color: #000;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .order-protection-info__credit {
+      font-style: 12px;
+      text-align: center;
+
+      span {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .order-protection-info__overlay {
+    position: fixed;
+    z-index: 30;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
