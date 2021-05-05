@@ -238,9 +238,9 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 
 					<div className="ajax-cart-drawer__content js-ajax-cart-drawer-content">
 						{ lineItems.length > 0 ?
-							(lineItems.map((item, index) => {
+							(lineItems.filter(li => li.title !== "Order Protection").map((item, index) => {
 								return (
-								<div className={`ajax-cart-item ${item.variant.title}`} key={index} data-line={index}>
+								<div className={`ajax-cart-item ${item.variant.title} ddddd`} key={index} data-line={index}>
 									<div className="price-and-remove-item-wrapper">
 										<div className="ajax-cart-item-remove js-ajax-remove-from-cart" role="button"
 											tabIndex="0" onKeyDown={handleKeyDown} onClick={() => removeItem(item.id)}>✖</div>

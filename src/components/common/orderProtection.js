@@ -6,7 +6,7 @@ import loadable from '@loadable/component';
 const OrderProtectionInfo = loadable(() => import('./orderProtectionInfo'));
 
 const OrderProtection = (props) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
   const [openOrderProtectionInfo, setOpenOrderProtectionInfo] = useState(false);
   const protectionVariant = props.protectionVariant;
   const context = props.context;
