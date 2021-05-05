@@ -16547,38 +16547,39 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
     padding: 15px 0 19px;
     overflow: hidden;
     overflow-y: auto;
-    max-height: 66%
+    // max-height: 66%
+    height: calc(100% - 425px);
   }
   
-  @media (max-height: 825px) {
-    .ajax-cart-drawer__content {
-      max-height: 58% !important
-    }
-  }
+  // @media (max-height: 825px) {
+  //   .ajax-cart-drawer__content {
+  //     max-height: 58% !important
+  //   }
+  // }
   
-  @media (max-height: 787px) {
-    .ajax-cart-drawer__content {
-      max-height: 52% !important
-    }
-  }
+  // @media (max-height: 787px) {
+  //   .ajax-cart-drawer__content {
+  //     max-height: 52% !important
+  //   }
+  // }
   
-  @media (max-height: 710px) {
-    .ajax-cart-drawer__content {
-      max-height: 48% !important
-    }
-  }
+  // @media (max-height: 710px) {
+  //   .ajax-cart-drawer__content {
+  //     max-height: 48% !important
+  //   }
+  // }
   
-  @media (max-height: 650px) {
-    .ajax-cart-drawer__content {
-      max-height: 42% !important
-    }
-  }
+  // @media (max-height: 650px) {
+  //   .ajax-cart-drawer__content {
+  //     max-height: 42% !important
+  //   }
+  // }
   
-  @media (max-height: 568px) {
-    .ajax-cart-drawer__content {
-      max-height: 26% !important
-    }
-  }
+  // @media (max-height: 568px) {
+  //   .ajax-cart-drawer__content {
+  //     max-height: 26% !important
+  //   }
+  // }
   
   .ajax-cart-drawer__content .cart-empty {
     font-size: 18px;
@@ -16611,7 +16612,7 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
     left: 0;
     bottom: 0;
     width: 100%;
-    height: fit-content;
+    height: 365px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
