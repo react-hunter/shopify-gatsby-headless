@@ -29,9 +29,16 @@ const OrderProtection = (props) => {
     setChecked(checked);
   };
   return (
-    <>
+    <div className="order-protection">
+      <div className="order-protection-mark">
+        <img src="https://cdn.shopify.com/s/files/1/0157/4420/4900/products/2IBrfX8_350x350.png?v=1619630339" alt="" />
+        ORDERPROTECTION.COM
+        Shipping Protection
+        from Damage, Loss, & Theft for $2.15
+        By deselecting shipping protection, Dose of Roses is not liable for lost, damaged, or stolen items.
+      </div>
       <Switch onChange={(val)=>handleChange(val)} checked={checked} />
-    </>
+    </div>
   );
 };
 

@@ -219,20 +219,11 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 								<div style={{ margin: '0 0 10px 0', minHeight: '20px',textAlign: 'center'}}>
 									<span className="quadpay-cart">or 4 interest-free payments of <span id="quad-amount">${parseFloat(context.store.checkout.subtotalPrice / 4).toFixed(2)}</span> by <LazyLoadImage className="quadpay-img" src="//cdn.shopify.com/s/files/1/0157/4420/4900/t/229/assets/quadpay_200x.png?v=14478482058500416670" alt="" /></span>
 								</div>
-								<div className="order-protection">
-									<div className="order-protection-mark">
-										<img src="https://cdn.shopify.com/s/files/1/0157/4420/4900/products/2IBrfX8_350x350.png?v=1619630339" alt="" />
-										ORDERPROTECTION.COM
-										Shipping Protection
-										from Damage, Loss, & Theft for $2.15
-										By deselecting shipping protection, Dose of Roses is not liable for lost, damaged, or stolen items.
-									</div>
-									<OrderProtection
-										protectionVariant={protectionVariant}
-										context={context}
-										lineItems={lineItems}
-									/>
-								</div>
+								<OrderProtection
+									protectionVariant={protectionVariant}
+									context={context}
+									lineItems={lineItems}
+								/>
 							</div>
 							
 							<a href={context.store.checkout.webUrl} 
