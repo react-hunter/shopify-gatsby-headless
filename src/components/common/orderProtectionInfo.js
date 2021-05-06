@@ -20,7 +20,7 @@ const OrderProtectionInfo = React.memo(function OrderProtectionInfo(props) {
         <div className="order-protection-info__description">Within a few clicks your approved claim will get a refund or reshipment for the following issue:</div>
         <div className="order-protection-info__description2">Stolen - Delivered Not Received - Damaged - Lost in Transit - Wrong Item</div>
         <div className="order-protection-info__credit">
-          OrderProtection.comn, Inc. <span> File a Claim</span>
+          OrderProtection.com, Inc. <span> <a href="https://claims.orderprotection.com/" target="_blank">File a Claim</a></span>
         </div>
       </div>
       <div className="order-protection-info__overlay" onClick={closeModal} onKeyDown={handleKeyDown} role="button" tabIndex="0"></div>
