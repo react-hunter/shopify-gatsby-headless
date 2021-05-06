@@ -16,10 +16,10 @@
     display: flex;
 
     .order-protection-mark__logo {
-      flex: 0 0 40px;
+      flex: 0 0 25px;
 
       img {
-        width: 90%;
+        width: 100%;
       }
     }
 
@@ -30,6 +30,7 @@
       font-weight: 200;
       font-family: 'Avenir', sans-serif;
       padding-left: 10px;
+      font-size: 13px;
 
     }
 
@@ -48,6 +49,7 @@
         border-radius: 10px;
         border: 1px solid black;
         font-style: italic;
+        align-items: center;
       }
     }
 
