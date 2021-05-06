@@ -16,10 +16,10 @@
     display: flex;
 
     .order-protection-mark__logo {
-      flex: 0 0 40px;
+      flex: 0 0 25px;
 
       img {
-        width: 90%;
+        width: 100%;
       }
     }
 
@@ -30,6 +30,7 @@
       font-weight: 200;
       font-family: 'Avenir', sans-serif;
       padding-left: 10px;
+      font-size: 13px;
 
     }
 
@@ -48,6 +49,7 @@
         border-radius: 10px;
         border: 1px solid black;
         font-style: italic;
+        align-items: center;
       }
     }
 
@@ -83,7 +85,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: rgb(226, 226, 226);
     -webkit-transition: .4s;
     transition: .4s;
   }
@@ -92,7 +94,7 @@
     position: absolute;
     content: "";
     height: 18px;
-    width: 18px;
+    width: 24px;
     left: 2px;
     bottom: 2px;
     background-color: white;
@@ -101,17 +103,17 @@
   }
 
   input:checked+.slider {
-    background-color: #03ca56;
+    background-color: #7e7e7e;
   }
 
   input:focus+.slider {
-    box-shadow: 0 0 1px #03ca56;
+    box-shadow: 0 0 1px #7e7e7e;
   }
 
   input:checked+.slider:before {
-    -webkit-transform: translateX(28px);
-    -ms-transform: translateX(28px);
-    transform: translateX(28px);
+    -webkit-transform: translateX(22px);
+    -ms-transform: translateX(22px);
+    transform: translateX(22px);
   }
 
   /* Rounded sliders */
@@ -120,6 +122,6 @@
   }
 
   .slider.rounded:before {
-    border-radius: 50%;
+    border-radius: 30px;
   }
 }
