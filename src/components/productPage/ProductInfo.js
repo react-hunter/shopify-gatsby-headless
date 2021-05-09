@@ -52,7 +52,7 @@ const ProductInfo = React.memo(function ProductInfo({
 								</dt>
 								<dd>
 									<s className="sale-default-price price-item price-item--regular">
-									${product.variants[0].price}
+									{product.variants[0].compareAtPrice > 0 ? '$' + product.variants[0].compareAtPrice : null}
 									</s>
 								</dd>
 						</div>
