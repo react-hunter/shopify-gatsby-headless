@@ -140,9 +140,11 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 				<div className="variantSelector-section"> 
 					<div className="closeVariantSelector">
 						<div className="closeVariantSelector_content">
-							<span className="variantSelector_close_message" 
-								onClick={changeUrl} onKeyDown={handleKeyDown} role="button" tabIndex="0"
-								style={{ float: 'left', cursor: 'pointer', marginLeft: '10px' }}>Need more options? Customize now</span>
+							{product.productType === 'Preserved Roses' &&
+								<span className="variantSelector_close_message"
+									onClick={changeUrl} onKeyDown={handleKeyDown} role="button" tabIndex="0"
+									style={{ float: 'left', cursor: 'pointer', marginLeft: '10px' }}>Need more options? Customize now</span>
+							}
 							<span className="variantSelector_close"  
 								onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0"
 								style={{ float: 'right'}}>×</span>
@@ -251,7 +253,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 							onClick={props.showNotifyModal}
 							style={{ display: 'inline-block' }}>NOTIFY ME</button>
 					}
-					{ product.productType !== 'Lingerie' && product.productType !== 'Rose Bear' ? 
+					{ product.productType === 'Preserved Roses' ? 
 						<Link to="/pages/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZE NOW</Link> :
 						null
 					}
