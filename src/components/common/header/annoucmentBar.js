@@ -127,11 +127,11 @@ const AnnoucmentBar = React.memo(function AnnoucmentBar({ announceList }) {
           <div className="ann_bars">
             <Slider ref={slider} {...settings}>
             { announceList.map((item, index) => 
-              item.node.url ?
-                <div key={index}>
-                  <a href={item.node.url} className="announcement-bar__message" style={announcementMessageStyle(index)}>{item.node.description}</a>
-                </div>
-                :
+              // item.node.url ?
+              //   <div key={index}>
+              //     <a href={item.node.url} className="announcement-bar__message" style={announcementMessageStyle(index)}>{item.node.description}</a>
+              //   </div>
+              //   :
                 <div key={index}>
                   <p className="announcement-bar__message" style={announcementMessageStyle(index)}>{item.node.description}</p>
                 </div>
