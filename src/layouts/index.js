@@ -108,7 +108,6 @@ const Layout = ({ path, children }) => {
 											textColor
 											backgroundColor
 										}
-										url
 										description
 										fontSize
 										position
