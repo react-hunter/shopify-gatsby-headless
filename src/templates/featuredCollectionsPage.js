@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { graphql } from "gatsby";
 import SEO from "../components/common/seo"
 import CollectionSlider from "../components/featuredCollectionsPage/collectionSlider";
-import CollectionSliderSkeleton from "../components/featuredCollectionsPage/collectionSliderSkeleton";
 import '../styles/featuredCollectionsPage.scss';
 import '../styles/widget.min.css';
 
@@ -23,6 +22,7 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <>
       <SEO title="Featured Collections - Dose of Roses" />
@@ -33,8 +33,10 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
               <span className="you-may-like_header">FEATURED COLLECTIONS</span>
               <span className="you-may-like_header_underline"></span>
             </div>
-            {!showContent && <CollectionSliderSkeleton />}
-            <div className={`${hideContent}`}>
+            {/* {!showContent && <div className="skeleton-wrapper">
+            <CollectionSliderNonRoseSkeleton />
+              </div>} */}
+            <div >
               {collectionList.map((collection, collectionIndex) => {
                 return (
                   <CollectionSlider
