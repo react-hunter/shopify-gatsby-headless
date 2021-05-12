@@ -5,12 +5,13 @@ import SEO from "../components/common/seo"
 import CollectionSlider from "../components/featuredCollectionsPage/collectionSlider";
 import '../styles/featuredCollectionsPage.scss';
 import '../styles/widget.min.css';
+import CollectionSliderNonRoseSkeleton from '../components/featuredCollectionsPage/collectionSliderNonRoseSkeleton';
 
 const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
   data,
   pageContext
 }) {
-  const [ showContent, setShowContent ] = useState(false);
+  const [showContent, setShowContent] = useState(false);
   const hideContent = showContent ? '' : 'visibility-hidden';
   const { productReviews, collections } = pageContext;
   const collectionList = collections.map(col => {
@@ -36,22 +37,25 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
             {/* {!showContent && <div className="skeleton-wrapper">
             <CollectionSliderNonRoseSkeleton />
               </div>} */}
-            <div >
-              {collectionList.map((collection, collectionIndex) => {
-                return (
-                  <CollectionSlider
-                    products={collection.node.products.slice(0, 10)}
-                    protectionProduct={data.protectionProduct}
-                    title={collection.node.title}
-                    handle={collection.node.handle}
-                    reviewList={productReviews}
-                    badgeStyles={data.allContentfulCollectionBadgeStyleItem.edges}
-                    key={collectionIndex}
-                  />
-                )
-              })}
-            </div>
-         </div>
+            {!showContent ?
+              <CollectionSliderNonRoseSkeleton /> :
+              <div >
+                {collectionList.map((collection, collectionIndex) => {
+                  return (
+                    <CollectionSlider
+                      products={collection.node.products.slice(0, 10)}
+                      protectionProduct={data.protectionProduct}
+                      title={collection.node.title}
+                      handle={collection.node.handle}
+                      reviewList={productReviews}
+                      badgeStyles={data.allContentfulCollectionBadgeStyleItem.edges}
+                      key={collectionIndex}
+                    />
+                  )
+                })}
+              </div>
+            }
+          </div>
         </div>
       </div>
     </>

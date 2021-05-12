@@ -4,26 +4,17 @@ import loadable from '@loadable/component';
 import Glider from 'react-glider';
 import CollectionVariantSelector from '../collectionPage/collectionVariantSelector';
 import FeaturedProductBox from "../common/product/featuredProductBox";
-import CollectionSliderSkeleton from "../../components/featuredCollectionsPage/collectionSliderSkeleton";
 import 'glider-js/glider.min.css';
 import "../../styles/collectionPage.scss";
-import '../../styles/featuredCollectionsPage.scss';
-import CollectionSliderNonRoseSkeleton from "../../components/featuredCollectionsPage/CollectionSliderNonRoseSkeleton";
 const NotifyModal = loadable(() => import("../collectionPage/notifyModal"));
-
 
 const CollectionSlider = React.memo(function CollectionSlider({ products, title, handle, reviewList, badgeStyles, protectionProduct}) {
   const [notifyModalShow, setNotifyModalShow] = useState(false);
   const [varaintModalShow, setVaraintModalShow] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [ showContent, setShowContent ] = useState(false);
   
   useEffect(() => {
     setHoverEffectsForCollection();
-    const timer = setTimeout(() => {
-      setShowContent(true);
-    }, 3000);
-    return () => clearTimeout(timer);
   }, [])
 
   function setHoverEffectsForCollection() {
@@ -65,16 +56,13 @@ const CollectionSlider = React.memo(function CollectionSlider({ products, title,
       document.querySelector(".scrollPreventer").style.overflow = "visible";
     }, 550)
   }
-  const hideContent = showContent ? '' : 'visibility-hidden';
+
   return (
     <div className="collection-carousel" data-title={title}>
       <div className="carousel-header_wrapper">
         <span className="carousel-header">{title}</span>
       </div>
       <div className="Best-Sellers-Carousel">
-      { !showContent ? <div className="skeleton-wrapper">
-        <CollectionSliderNonRoseSkeleton/></div>:
-        <>
         <button type="button" id={`prev-${handle}`} className="slick-arrow slick-prev"> Previous</button>
         <Glider draggable={true} scrollLock={true} duration={1} slidesToShow={2} hasArrows={true}
           arrows= {{
@@ -98,8 +86,7 @@ const CollectionSlider = React.memo(function CollectionSlider({ products, title,
               let product = p
               let productReview = reviewList.filter(re => re.handle === product.handle)
               return (
-                <div className='grid-item'>
-                <div key={i} className={`products-on-page grid grid--uniform grid--view-items ${hideContent}`}>
+                <div key={i} className="products-on-page grid grid--uniform grid--view-items">
                   <FeaturedProductBox
                     product={product}
                     review={productReview[0]}
@@ -108,13 +95,12 @@ const CollectionSlider = React.memo(function CollectionSlider({ products, title,
                     showVariantModal={showVariantModal}
                   />
                 </div>
-                </div>
               )
             })
           }
         </Glider>
         <button type="button" id={`next-${handle}`} className="slick-arrow slick-next"> Next</button>
-</>}
+
         {varaintModalShow && <CollectionVariantSelector
                                   closeModal={closeCollectionModal} 
                                   showNotifyModal={showNotifyModal} 
