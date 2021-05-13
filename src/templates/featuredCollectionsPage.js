@@ -3,15 +3,15 @@ import React, { useState, useEffect } from 'react';
 import { graphql } from "gatsby";
 import SEO from "../components/common/seo"
 import CollectionSlider from "../components/featuredCollectionsPage/collectionSlider";
-import CollectionSliderSkeleton from "../components/featuredCollectionsPage/collectionSliderSkeleton";
 import '../styles/featuredCollectionsPage.scss';
 import '../styles/widget.min.css';
+import CollectionSliderNonRoseSkeleton from '../components/featuredCollectionsPage/collectionSliderNonRoseSkeleton';
 
 const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
   data,
   pageContext
 }) {
-  const [ showContent, setShowContent ] = useState(false);
+  const [showContent, setShowContent] = useState(false);
   const hideContent = showContent ? '' : 'visibility-hidden';
   const { productReviews, collections } = pageContext;
   const collectionList = collections.map(col => {
@@ -23,6 +23,7 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
+
   return (
     <>
       <SEO title="Featured Collections - Dose of Roses" />
@@ -33,23 +34,28 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
               <span className="you-may-like_header">FEATURED COLLECTIONS</span>
               <span className="you-may-like_header_underline"></span>
             </div>
-            {!showContent && <CollectionSliderSkeleton />}
-            <div className={`${hideContent}`}>
-              {collectionList.map((collection, collectionIndex) => {
-                return (
-                  <CollectionSlider
-                    products={collection.node.products.slice(0, 10)}
-                    protectionProduct={data.protectionProduct}
-                    title={collection.node.title}
-                    handle={collection.node.handle}
-                    reviewList={productReviews}
-                    badgeStyles={data.allContentfulCollectionBadgeStyleItem.edges}
-                    key={collectionIndex}
-                  />
-                )
-              })}
-            </div>
-         </div>
+            {/* {!showContent && <div className="skeleton-wrapper">
+            <CollectionSliderNonRoseSkeleton />
+              </div>} */}
+            {!showContent ?
+              <CollectionSliderNonRoseSkeleton /> :
+              <div >
+                {collectionList.map((collection, collectionIndex) => {
+                  return (
+                    <CollectionSlider
+                      products={collection.node.products.slice(0, 10)}
+                      protectionProduct={data.protectionProduct}
+                      title={collection.node.title}
+                      handle={collection.node.handle}
+                      reviewList={productReviews}
+                      badgeStyles={data.allContentfulCollectionBadgeStyleItem.edges}
+                      key={collectionIndex}
+                    />
+                  )
+                })}
+              </div>
+            }
+          </div>
         </div>
       </div>
     </>
