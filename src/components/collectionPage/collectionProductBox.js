@@ -22,7 +22,8 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 
 	function getMainOption() {
 		let tempOption = '';
-		const options = product.options ? product.options.filter(option => option.name === 'Rose Color') : []
+		const options = product.options ? product.options.filter(option => (option.name === 'Rose Color' ||
+			option.name === 'Aroma')) : []
 		if(options.length > 0) {
 			tempOption = options[0]
 		}
@@ -115,15 +116,24 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 				</div>
 				<div className="collection-product-color-swatch">
 				{   
-					mainOption === '' ? null : 
-					mainOption.values.slice(0, 5).map((item, index) => {
-						return (
-							<div className="color-swatch" key={index}
-								onClick={() => selectProductSwatch(item)} onKeyDown={handleKeyDown}
-								role="button" tabIndex="0" data-rose_color={item}>
-							</div>
-						)
-					})
+						mainOption === '' ? null :
+							(mainOption.name === 'Rose Color' ?
+								mainOption.values.slice(0, 5).map((item, index) => {
+									return (
+										<div className="color-swatch" key={index}
+											onClick={() => selectProductSwatch(item)} onKeyDown={handleKeyDown}
+											role="button" tabIndex="0" data-rose_color={item}>
+										</div>
+									)
+								}) :
+								mainOption.values.slice(0, 4).map((item, index) => {
+									return (
+										<div className="color-swatch" key={index}
+											onClick={() => selectProductSwatch(item)} onKeyDown={handleKeyDown}
+											role="button" tabIndex="0" data-aroma={item}>
+										</div>
+									)
+								}))
 				}				
 				</div>
 
