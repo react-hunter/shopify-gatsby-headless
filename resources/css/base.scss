@@ -15419,7 +15419,19 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 .collection-product-color-swatch .color-swatch {
   width: 32px;
   height: 32px;
-  margin: 0 7.5px
+  margin: 0 7.5px;
+}
+
+.collection-product-color-swatch .color-swatch-size {
+  width: 32px;
+  height: 32px;
+  margin: 0 7.5px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-radius: 50%;
+  padding: 3px;
+  border: 2px solid black !important;
 }
 
 @media (max-width: 768px) {
@@ -15430,7 +15442,15 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   }
 }
 
-.collection-product-color-swatch .color-swatch:hover {
+@media (max-width: 768px) {
+  .collection-product-color-swatch .color-swatch-size {
+    width: 24px;
+    height: 24px;
+    margin: 0 4px
+  }
+}
+
+.collection-product-color-swatch .color-swatch:hover, .color-swatch-size:hover {
   cursor: pointer
 }
 
