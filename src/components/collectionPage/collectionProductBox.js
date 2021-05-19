@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'gatsby'
 import loadable from '@loadable/component';
 import StoreContext from '../../context/store'
@@ -20,10 +20,18 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 
 	const [notifyModalShow, setNotifyModalShow] = useState(false);
 
+	useEffect(() => {
+		Array.prototype.slice.call(document.querySelectorAll(mainOption.name === 'Size' ? '.color-swatch-size' : '.color-swatch')).map(el => {
+			const optionName = String(el.dataset.optionname)
+			const dataAttributeName = optionName.replace(' ', '_').toLowerCase()
+			el.dataset[dataAttributeName] = el.dataset.optionvalue
+			return true
+		})
+	});
+
 	function getMainOption() {
 		let tempOption = '';
-		const options = product.options ? product.options.filter(option => (option.name === 'Rose Color' ||
-			option.name === 'Aroma')) : []
+		const options = product.options ? product.options.filter(option => (option.name !== '')) : []
 		if(options.length > 0) {
 			tempOption = options[0]
 		}
@@ -115,26 +123,20 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 					</div>
 				</div>
 				<div className="collection-product-color-swatch">
-				{   
-						mainOption === '' ? null :
-							(mainOption.name === 'Rose Color' ?
+					{
+						mainOption === '' ? '' :
+							((mainOption.name !== 'Quantity') ?
 								mainOption.values.slice(0, 5).map((item, index) => {
 									return (
-										<div className="color-swatch" key={index}
+										<div className={`color-swatch${mainOption.name === 'Size' ? '-size' : ''}`} key={index}
 											onClick={() => selectProductSwatch(item)} onKeyDown={handleKeyDown}
-											role="button" tabIndex="0" data-rose_color={item}>
+											role="button" tabIndex="0" data-swatch_type={mainOption.name} data-optionname={mainOption.name} data-optionvalue={item}>
+											{mainOption.name === 'Size' ? item.charAt(0) : null}
 										</div>
 									)
 								}) :
-								mainOption.values.slice(0, 4).map((item, index) => {
-									return (
-										<div className="color-swatch" key={index}
-											onClick={() => selectProductSwatch(item)} onKeyDown={handleKeyDown}
-											role="button" tabIndex="0" data-aroma={item}>
-										</div>
-									)
-								}))
-				}				
+								null)
+					}
 				</div>
 
 				{

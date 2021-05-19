@@ -26,7 +26,7 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 			const selectedImages = product.variants.map(variant => {
 				let imageUrl = '';
 				variant.selectedOptions.map(selectedOption => {
-					if((selectedOption.name === 'Rose Color' || selectedOption.name === 'Aroma')&& selectedOption.value === swatchColor) {
+					if((selectedOption.name !== '')&& selectedOption.value === swatchColor) {
 						imageUrl = variant.image ? variant.image.originalSrc : 'https://cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_300x.png';
 					}
 					return true
