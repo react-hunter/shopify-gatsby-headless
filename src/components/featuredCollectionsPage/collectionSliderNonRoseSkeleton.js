@@ -19,8 +19,8 @@ const CollectionSliderNonRoseSkeleton = React.memo(function CollectionSliderNonR
                                 .fill()
                                 .map((item, index) => (
                                     <li className="grid__item--collection-template collection-skeleton">
-                                        <div className="grid-view-item product-card">
-                                            <Skeleton height={220} width={`100%`} />
+                                        <div className="grid-view-item product-card product-loading">
+                                            <Skeleton height={`100%`} width={`100%`} />
                                         </div>
                                         <div className="h4 grid-view-item__title product-card__title product-card-title">
                                             <Skeleton height={16} width={`80%`} count={1} />

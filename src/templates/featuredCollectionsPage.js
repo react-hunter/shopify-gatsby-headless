@@ -37,8 +37,8 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
             {/* {!showContent && <div className="skeleton-wrapper">
             <CollectionSliderNonRoseSkeleton />
               </div>} */}
-            {!showContent ?
-              <CollectionSliderNonRoseSkeleton /> :
+            {!showContent &&
+              <CollectionSliderNonRoseSkeleton /> }
               <div >
                 {collectionList.map((collection, collectionIndex) => {
                   return (
@@ -50,11 +50,11 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
                       reviewList={productReviews}
                       badgeStyles={data.allContentfulCollectionBadgeStyleItem.edges}
                       key={collectionIndex}
+                      hideContent ={`${hideContent}`}
                     />
                   )
                 })}
               </div>
-            }
           </div>
         </div>
       </div>
