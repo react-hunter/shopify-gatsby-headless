@@ -108,6 +108,13 @@
         @media (max-width: 768px) {
             padding: 35px 0 10px;
         }
+        .product-loading {
+            height: 0;
+            padding-bottom: 100%;
+            width: 100%;
+            background: linear-gradient(90deg,#D8D8D8,#F5F5F5, #D8D8D8);
+            animation: imageBackgroundAnimation 2s ease infinite;
+        }
     }
 
 
