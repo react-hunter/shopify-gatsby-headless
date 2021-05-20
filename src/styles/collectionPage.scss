@@ -434,6 +434,28 @@ border-radius: 50%;
         max-width: none!important;
     }
   }
+
+  @media (max-width: 768px) {
+    .skeleton-wrapper{
+      display: flex;
+      width: 100%;
+      margin: auto;
+      padding: 30px 0% 40px;
+      >*{
+          width: 100%;
+          flex: 1 0 50%;
+          padding-left: 5px;
+          padding-right: 5px;
+          max-width: none!important;
+      }
+      .grid__item {
+        padding-left: 0px;
+      }
+      .grid {
+        margin-left: 0px;
+      }
+    }
+  }
   
 #shop-all-content {
   display: flex;
