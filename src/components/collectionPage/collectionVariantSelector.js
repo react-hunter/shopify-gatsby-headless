@@ -3,6 +3,8 @@ import { navigate, Link } from 'gatsby';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import StoreContext from '../../context/store';
 import ImageSpin from '../common/imageSpin';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
 	const context = useContext(StoreContext);
@@ -13,6 +15,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	const [showSpin, setShowSpin] = useState(false);
 	const mainOption = product.options[0]
 	const otherOptions = product.options.length > 1 ? product.options.slice(1, product.options.length) : []
+	const [startDate, setStartDate] = useState(new Date());
 
 	useEffect(() => {
 		Array.prototype.slice.call(document.querySelectorAll('.color-swatch')).map(el => {
@@ -241,10 +244,14 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 				</div>
 
 				<div className="variant-selector_add_to_bag_wrapper">
+					<div className="delivery-date">
+						<label>Delivery Date</label>
+						<DatePicker selected={startDate} onChange={date => setStartDate(date)} withPortal/>
+					</div>
+					<div>
 					{ variant.availableForSale ? 
 						<button className="variant-selector_add_to_bag" 
-							onClick={addToSideCart}
-							style={{ display: 'inline-block' }}>
+							onClick={addToSideCart}>
 								ADD TO BAG - ${variant.price}{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }
 						</button> :
 						<button className="variant-selector_add_to_bag" 
@@ -255,6 +262,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 						<Link to="/pages/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZE NOW</Link> :
 						null
 					}
+					</div>
 				</div>
 			</div>
 			<div className="variantSelector_overlay" 
