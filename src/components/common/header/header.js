@@ -300,10 +300,11 @@ const Header = React.memo(function Header(props) {
     let heroImageSection = document.querySelector(".text_image_banner-container_outer");
     let currentScrollpos = window.pageYOffset;
     if(window.scrollY < 5) {
-      announceBar.style.display = "block";
+      announceBar.style.opacity = 1;
       heroImageSection && heroImageSection.classList.remove("announce-hidden");
     } else {
-      announceBar.style.display = "none";
+      announceBar.style.opacity = 0;
+      announceBar.style.height = 0;
       heroImageSection && heroImageSection.classList.add("announce-hidden");
     }
     if (window.scrollY > lastScrollTop) {
