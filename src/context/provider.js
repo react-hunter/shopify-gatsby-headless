@@ -136,11 +136,12 @@ const Provider = ({ children }) => {
 							snapAddToCart();
 						})
 				},
-				addProtection: (variantId) => {
+				addProtection: (variantId, deliveryDate=null) => {
 					updateStore(state => {
 						return { ...state, adding: true }
 					})
 					const { checkout, client } = store
+					const checkoutItem = checkout;
 					const checkoutId = checkout.id
 					let lineItems = JSON.stringify(checkout.lineItems)
 					const protectionLineItems = JSON.parse(lineItems).filter(item => item.title === "Order Protection")
@@ -153,6 +154,14 @@ const Provider = ({ children }) => {
 						return client.checkout
 							.addLineItems(checkoutId, lineItemsToUpdate)
 							.then(checkout => {
+								if (checkoutItem.lineItems.length === 0) {
+									checkout.lineItems.map(item => {
+										if (deliveryDate) {
+											item.deliveryDate = deliveryDate
+										}
+										return item
+									})
+								}
 								lineItems = JSON.stringify(checkout.lineItems)
 								localStorage.setItem('checkout_lineitems', lineItems)
 								updateStore(state => {
