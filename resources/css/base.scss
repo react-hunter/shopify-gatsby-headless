@@ -10949,7 +10949,23 @@ article .article__meta-buttons {
 }
 
 .product-single__meta {
-  margin-top: 30px
+  margin-top: 30px;
+  .delivery-date {
+    position: relative;
+    label{
+      margin-bottom: 5px;
+    }
+    input {
+      width: 100%;
+    }
+    span {
+      position: absolute;
+      top: 70%;
+      transform: translate(0,-50%);
+      font-size: inherit;
+      right: .5em;
+    }
+  }
 }
 
 .product-single__title {
@@ -11449,11 +11465,19 @@ body.modal-opened {
   }
 
   .delivery-date {
+    position: relative;
     label{
       margin-bottom: 5px;
     }
     input {
       width: 100%;
+    }
+    span {
+      position: absolute;
+      top: 70%;
+      transform: translate(0,-50%);
+      font-size: inherit;
+      right: .5em;
     }
   }
 

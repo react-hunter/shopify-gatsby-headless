@@ -6,6 +6,9 @@ import { client } from '../../contentful'
 import VariantSelectorsForModal from "./VariantSelectorsForModal"
 import VariantsSelectorButtons from "./VariantsSelectorButtons"
 import LingerieVariantsSelectorButtons from "./LingerieVariantsSelectorButtons"
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 
 import Buttons from "./Buttons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,6 +31,7 @@ const ProductDescription = React.memo(function ProductDescription({
 	const [modalOptions, setOptions] = useState(product.options[0])
 	const [modalClass, setModalClass] = useState('');
 	const [productAccordions, setProductAccordions] = useState([]);
+	const [startDate, setStartDate] = useState(new Date());
 
 	useEffect(() => {
 		async function getAccordionData() {
@@ -47,7 +51,9 @@ const ProductDescription = React.memo(function ProductDescription({
 			defaultOptionValues[selector.name] = selector.values[0]
 		})
 
-		setVariant(defaultOptionValues);
+		setVariant({...defaultOptionValues, deliveryDate: moment
+			(new Date())
+			.format('LL')});
 		getAccordionData()
 	}, [])
 
@@ -124,6 +130,19 @@ const ProductDescription = React.memo(function ProductDescription({
 			<div className="grid__item medium-up--one-half rightSideProductContainer">
 				<div className="product-single__meta">
 					<ProductInfo product={product} review={review} />
+					<div className="delivery-date">
+						<label>Delivery Date</label>
+						<DatePicker
+							selected={startDate}
+							onChange={date => {
+								setVariant({...variant, deliveryDate: moment
+									(date)
+									.format('LL')});
+								setStartDate(date)}}
+							minDate={new Date()}
+							withPortal />
+						<span class="fas fa-calendar-alt" size="1x" />
+					</div>
 					{product.productType === 'Lingerie'? 
 						<LingerieVariantsSelectorButtons product={product} variant={variant}
 							changeOption={handleOptionChange} 
@@ -141,6 +160,7 @@ const ProductDescription = React.memo(function ProductDescription({
 						available={available} 
 						quantity={quantity} 
 						productVariant={productVariant}
+						variant= {variant}
 					/>
 
 					<div className="variant-selector-sideNav">
