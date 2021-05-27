@@ -8,6 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
+import { getAvailableDates } from '../../helper';
 
 const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
 	const context = useContext(StoreContext);
@@ -23,6 +24,8 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	const mainOption = product.options[0]
 	const otherOptions = product.options.length > 1 ? product.options.slice(1, product.options.length) : []
 	const [startDate, setStartDate] = useState(new Date());
+	const [availableDates, setAvailableDates] = useState([]);
+
 	useEffect(() => {
 		Array.prototype.slice.call(document.querySelectorAll('.color-swatch')).map(el => {
 			const optionName = String(el.dataset.optionname)
@@ -33,7 +36,24 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		document.getElementsByTagName("html")[0].classList.add("no-scroll");
 		document.querySelector(".scrollPreventer").style.overflow = "hidden";
 		attachCloseMobileVariantSelector();
-	});
+
+		getAvailableDates().then(res => res.json())
+            .then((data) => {
+                if(data.output.allowedShipDates.length > 0){
+					const dates = data.output.allowedShipDates[0].shipDates;
+					setAvailableDates(dates);
+					setStartDate(new Date(dates[0]))
+					setVariant({
+						...variant, deliveryDate: moment
+							(new Date(dates[0]))
+							.format('LL')
+					})
+				}
+            })
+			
+		
+
+	},[]);
 	
 	const getVariantByOption = (optionName, optionValue) => {
 		var properVariant = null
@@ -141,6 +161,13 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	function getTouches(evt) {
 		return evt.touches ||             // browser API
 		evt.originalEvent.touches; // jQuery
+	}
+
+	const showAvailableDates = () => {
+		let date = [];
+		return date = availableDates ? availableDates.map(date => {
+			return new Date(date);
+		}) : []
 	}
   
 	return (
@@ -260,6 +287,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 									.format('LL')});
 								setStartDate(date)}}
 							minDate={new Date()}
+							includeDates={showAvailableDates()}
 							withPortal />
 						<span class="fas fa-calendar-alt" size="1x" />
 					</div>
