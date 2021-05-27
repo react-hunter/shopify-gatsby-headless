@@ -3,16 +3,28 @@ import { navigate, Link } from 'gatsby';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import StoreContext from '../../context/store';
 import ImageSpin from '../common/imageSpin';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import moment from 'moment';
+import { getAvailableDates } from '../../helper';
 
 const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
 	const context = useContext(StoreContext);
 	const product = props.product;
 	const protectionProduct = props.protectionProduct;
 	const firstVariant = product.variants[0];
-	const [variant, setVariant] = useState(firstVariant)
+	const [variant, setVariant] = useState({
+		...firstVariant, deliveryDate: moment
+			(new Date())
+			.format('LL')
+	});
 	const [showSpin, setShowSpin] = useState(false);
 	const mainOption = product.options[0]
 	const otherOptions = product.options.length > 1 ? product.options.slice(1, product.options.length) : []
+	const [startDate, setStartDate] = useState(new Date());
+	const [availableDates, setAvailableDates] = useState([]);
 
 	useEffect(() => {
 		Array.prototype.slice.call(document.querySelectorAll('.color-swatch')).map(el => {
@@ -24,7 +36,24 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		document.getElementsByTagName("html")[0].classList.add("no-scroll");
 		document.querySelector(".scrollPreventer").style.overflow = "hidden";
 		attachCloseMobileVariantSelector();
-	});
+
+		getAvailableDates().then(res => res.json())
+            .then((data) => {
+                if(data.output.allowedShipDates.length > 0){
+					const dates = data.output.allowedShipDates[0].shipDates;
+					setAvailableDates(dates);
+					setStartDate(new Date(dates[0]))
+					setVariant({
+						...variant, deliveryDate: moment
+							(new Date(dates[0]))
+							.format('LL')
+					})
+				}
+            })
+			
+		
+
+	},[]);
 	
 	const getVariantByOption = (optionName, optionValue) => {
 		var properVariant = null
@@ -69,8 +98,8 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	}
 	const addToSideCart =() => {
 		setShowSpin(true);
-		context.addVariantToCart(variant.shopifyId, 1);
-		setTimeout(() => context.addProtection(protectionProduct.variants[2].shopifyId), 1200);
+		context.addVariantToCart(variant.shopifyId, 1,null, variant.deliveryDate);
+		setTimeout(() => context.addProtection(protectionProduct.variants[2].shopifyId, variant.deliveryDate), 1200);
 		setTimeout(showCart, 2500);
 	}
 	function showCart() {
@@ -132,6 +161,13 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	function getTouches(evt) {
 		return evt.touches ||             // browser API
 		evt.originalEvent.touches; // jQuery
+	}
+
+	const showAvailableDates = () => {
+		let date = [];
+		return date = availableDates ? availableDates.map(date => {
+			return new Date(date);
+		}) : []
 	}
   
 	return (
@@ -241,10 +277,24 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 				</div>
 
 				<div className="variant-selector_add_to_bag_wrapper">
+					<div className="delivery-date">
+						<label>Delivery Date</label>
+						<DatePicker
+							selected={startDate}
+							onChange={date => {
+								setVariant({...variant, deliveryDate: moment
+									(date)
+									.format('LL')});
+								setStartDate(date)}}
+							minDate={new Date()}
+							includeDates={showAvailableDates()}
+							withPortal />
+						<span class="fas fa-calendar-alt" size="1x" />
+					</div>
+					<div>
 					{ variant.availableForSale ? 
 						<button className="variant-selector_add_to_bag" 
-							onClick={addToSideCart}
-							style={{ display: 'inline-block' }}>
+							onClick={addToSideCart}>
 								ADD TO BAG - ${variant.price}{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }
 						</button> :
 						<button className="variant-selector_add_to_bag" 
@@ -255,6 +305,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 						<Link to="/pages/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZE NOW</Link> :
 						null
 					}
+					</div>
 				</div>
 			</div>
 			<div className="variantSelector_overlay" 

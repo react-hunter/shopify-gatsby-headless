@@ -23,7 +23,7 @@ const Provider = ({ children }) => {
 				if (isBrowser) {
 					localStorage.setItem('shopify_checkout_id', JSON.stringify(checkout.id))
 				}
-
+				getDeliveryDate(checkout.lineItems);
 				updateStore(state => {
 					return { ...state, checkout, adding: true }
 				})
@@ -40,7 +40,15 @@ const Provider = ({ children }) => {
 						return { variantId: LI.variant.id, quantity: parseInt(LI.quantity, 10), customAttributes: attrList.length > 0 ? attrList : [] }
 					})
 					await store.client.checkout.addLineItems(newCheckout.id, lineItemsToUpdate)
-					const initialCheckout = await fetchCheckout(newCheckout.id)
+					let initialCheckout = await fetchCheckout(newCheckout.id);
+					initialCheckout.lineItems.map(item => {
+							let list = localLineItems.filter(i => i.variant.id === item.variant.id);
+							if(list.length >0){
+								item.deliveryDate = list[0].deliveryDate;
+							}
+						
+					return item
+					})
 					return initialCheckout
 				} else {
 					return newCheckout
@@ -66,16 +74,32 @@ const Provider = ({ children }) => {
 		}
 		initializeCheckout()
 	}, [store.client.checkout])
+
+	const getDeliveryDate=(lineItems)=>{
+		const { checkout} = store
+		lineItems.map(item => {
+			if(checkout){
+				let list = checkout.lineItems.filter(i => i.variant.id === item.variant.id);
+				if(list.length >0){
+					item.deliveryDate = list[0].deliveryDate;
+				}
+			}
+			
+		return item
+		})
+	}
+
 	return (
 		<StoreContext.Provider
 			value={{
 				store,
 				customerAccessToken: getlocalStorage('customerAccessToken'),
-				addVariantToCart: (variantId, quantity, properties=null) => {
+				addVariantToCart: (variantId, quantity, properties=null, deliveryDate=null) => {
 					updateStore(state => {
 						return { ...state, adding: true }
 					})
 					const { checkout, client } = store
+					let checkoutItem = checkout;
 					const checkoutId = checkout.id
 					let lineItemsToUpdate = []
 					if (!properties) {
@@ -91,7 +115,17 @@ const Provider = ({ children }) => {
 					return client.checkout
 						.addLineItems(checkoutId, lineItemsToUpdate)
 						.then(checkout => {
-							const lineItems = JSON.stringify(checkout.lineItems)
+							let lineItems = checkout.lineItems.map(item => {
+								if(item.variant.id === variantId && deliveryDate){
+									item.deliveryDate = deliveryDate
+								}else {
+									let list = checkoutItem.lineItems.filter(i => i.variant.id === item.variant.id);
+									item.deliveryDate = list.length > 0 ?list[0].deliveryDate : '';
+								}
+								return item
+							})
+							lineItems = JSON.stringify(checkout.lineItems)
+							
 							localStorage.setItem('checkout_lineitems', lineItems)
 							updateStore(state => {
 								return { ...state, checkout, adding: true }
@@ -102,23 +136,32 @@ const Provider = ({ children }) => {
 							snapAddToCart();
 						})
 				},
-				addProtection: (variantId) => {
+				addProtection: (variantId, deliveryDate=null) => {
 					updateStore(state => {
 						return { ...state, adding: true }
 					})
 					const { checkout, client } = store
+					const checkoutItem = checkout;
 					const checkoutId = checkout.id
 					let lineItems = JSON.stringify(checkout.lineItems)
 					const protectionLineItems = JSON.parse(lineItems).filter(item => item.title === "Order Protection")
 					if (protectionLineItems.length === 0) {
 						let lineItemsToUpdate = []
 						lineItemsToUpdate = [
-							{ variantId, quantity: 1 },
+							{ variantId, quantity: 1},
 						]
 						
 						return client.checkout
 							.addLineItems(checkoutId, lineItemsToUpdate)
 							.then(checkout => {
+								if (checkoutItem.lineItems.length === 0) {
+									checkout.lineItems.map(item => {
+										if (deliveryDate) {
+											item.deliveryDate = deliveryDate
+										}
+										return item
+									})
+								}
 								lineItems = JSON.stringify(checkout.lineItems)
 								localStorage.setItem('checkout_lineitems', lineItems)
 								updateStore(state => {
@@ -151,6 +194,7 @@ const Provider = ({ children }) => {
 					return client.checkout
 						.removeLineItems(checkoutID, [lineItemID])
 						.then(checkoutData => {
+							getDeliveryDate(checkoutData.lineItems);
 							localStorage.setItem('checkout_lineitems', JSON.stringify(checkoutData.lineItems))
 							updateStore(state => {
 								return { ...state, checkout: checkoutData }
@@ -158,12 +202,14 @@ const Provider = ({ children }) => {
 						})
 				},
 				updateLineItem: (client, checkoutID, lineItemID, quantity) => {
+					const { checkout } = store
 					const lineItemsToUpdate = [
 						{ id: lineItemID, quantity: parseInt(quantity, 10) },
 					]
 					return client.checkout
 						.updateLineItems(checkoutID, lineItemsToUpdate)
 						.then(checkoutData => {
+							getDeliveryDate(checkoutData.lineItems);
 							localStorage.setItem('checkout_lineitems', JSON.stringify(checkoutData.lineItems))
 							updateStore(state => {
 								return { ...state, checkout: checkoutData }

@@ -6,10 +6,14 @@ import { client } from '../../contentful'
 import VariantSelectorsForModal from "./VariantSelectorsForModal"
 import VariantsSelectorButtons from "./VariantsSelectorButtons"
 import LingerieVariantsSelectorButtons from "./LingerieVariantsSelectorButtons"
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
 
 import Buttons from "./Buttons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
+import { getAvailableDates } from '../../helper';
 
 const AtcSticky = loadable(() => import("./AtcSticky"))
 
@@ -28,6 +32,8 @@ const ProductDescription = React.memo(function ProductDescription({
 	const [modalOptions, setOptions] = useState(product.options[0])
 	const [modalClass, setModalClass] = useState('');
 	const [productAccordions, setProductAccordions] = useState([]);
+	const [startDate, setStartDate] = useState(new Date());
+	const [availableDates, setAvailableDates] = useState([]);
 
 	useEffect(() => {
 		async function getAccordionData() {
@@ -47,8 +53,21 @@ const ProductDescription = React.memo(function ProductDescription({
 			defaultOptionValues[selector.name] = selector.values[0]
 		})
 
-		setVariant(defaultOptionValues);
-		getAccordionData()
+		getAvailableDates().then(res => res.json())
+            .then((data) => {
+                if(data.output.allowedShipDates.length > 0){
+					const dates = data.output.allowedShipDates[0].shipDates;
+					setAvailableDates(dates);
+					setStartDate(new Date(dates[0]))
+					setVariant({
+						...defaultOptionValues, deliveryDate: moment
+							(new Date(dates[0]))
+							.format('LL')
+					})
+				}
+            })
+		getAccordionData();
+
 	}, [])
 
 	useEffect(() => {
@@ -119,11 +138,32 @@ const ProductDescription = React.memo(function ProductDescription({
 		return properVariant
 	}
 
+	const showAvailableDates = () => {
+		let date = [];
+		return date = availableDates ? availableDates.map(date => {
+			return new Date(date);
+		}) : []
+	}
+
 	return (
 		<div className="product_description-container">
 			<div className="grid__item medium-up--one-half rightSideProductContainer">
 				<div className="product-single__meta">
 					<ProductInfo product={product} review={review} />
+					<div className="delivery-date">
+						<label>Delivery Date</label>
+						<DatePicker
+							selected={startDate}
+							onChange={date => {
+								setVariant({...variant, deliveryDate: moment
+									(date)
+									.format('LL')});
+								setStartDate(date)}}
+							minDate={new Date()}
+							includeDates={showAvailableDates()}
+							withPortal />
+						<span class="fas fa-calendar-alt" size="1x" />
+					</div>
 					{product.productType === 'Lingerie'? 
 						<LingerieVariantsSelectorButtons product={product} variant={variant}
 							changeOption={handleOptionChange} 
@@ -141,6 +181,7 @@ const ProductDescription = React.memo(function ProductDescription({
 						available={available} 
 						quantity={quantity} 
 						productVariant={productVariant}
+						variant= {variant}
 					/>
 
 					<div className="variant-selector-sideNav">

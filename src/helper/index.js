@@ -38,3 +38,31 @@ export const snapAddToCart = () => {
     }
   }
 }
+
+const API_URL = 'https://tkstudiovn-eval-prod.apigee.net/get-fedex-date';
+
+const DEFAULT_OPTIONS = {
+  cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+  credentials: 'same-origin', // include, *omit
+  mode: 'cors', // no-cors, *same-origin
+  redirect: 'follow', // *manual, follow, error
+  referrer: 'no-referrer' // *client
+};
+
+const defaultHeader=()=>{
+  return {
+    Accept: 'application/json',
+    'user-agent': 'Mozilla/4.0 MDN',
+    'content-type': 'application/json',
+    'authorization': 'Bearer l7xx8daef6fbb1724f21b2ada537e059ad7b'
+  };
+  }
+
+  export const getAvailableDates = () => {
+		const method = 'GET';
+		const headers = 
+		  defaultHeader()
+		  ;
+      const opts = { method, headers, ...DEFAULT_OPTIONS };
+	  return fetch(`${API_URL}`,opts)
+	};
