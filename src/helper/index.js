@@ -41,8 +41,19 @@ export const snapAddToCart = () => {
 
 const API_URL = 'https://api.fedex.com/country/v2/countries/AU';
 
+const DEFAULT_OPTIONS = {
+  cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
+  credentials: 'same-origin', // include, *omit
+  mode: 'cors', // no-cors, *same-origin
+  redirect: 'follow', // *manual, follow, error
+  referrer: 'no-referrer' // *client
+};
+
 const defaultHeader=()=>{
   return {
+    Accept: 'application/json',
+    'user-agent': 'Mozilla/4.0 MDN',
+    'content-type': 'application/json',
     'authorization': 'Bearer l7xx8daef6fbb1724f21b2ada537e059ad7b'
   };
   }
@@ -52,6 +63,6 @@ const defaultHeader=()=>{
 		const headers = 
 		  defaultHeader()
 		  ;
-		const opts = { method, headers};
+      const opts = { method, headers, ...DEFAULT_OPTIONS };
 	  return fetch(`${API_URL}`,opts)
 	};
