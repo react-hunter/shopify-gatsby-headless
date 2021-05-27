@@ -53,19 +53,23 @@ const ProductDescription = React.memo(function ProductDescription({
 			defaultOptionValues[selector.name] = selector.values[0]
 		})
 
-		getAvailableDates().then(res => res.json())
-            .then((data) => {
-                if(data.output.allowedShipDates.length > 0){
-					const dates = data.output.allowedShipDates[0].shipDates;
-					setAvailableDates(dates);
-					setStartDate(new Date(dates[0]))
-					setVariant({
-						...defaultOptionValues, deliveryDate: moment
-							(new Date(dates[0]))
-							.format('LL')
-					})
-				}
-            })
+		setVariant({...defaultOptionValues, deliveryDate: moment
+			(new Date())
+			.format('LL')});
+
+		// getAvailableDates().then(res => res.json())
+        //     .then((data) => {
+        //         if(data.output.allowedShipDates.length > 0){
+		// 			const dates = data.output.allowedShipDates[0].shipDates;
+		// 			setAvailableDates(dates);
+		// 			setStartDate(new Date(dates[0]))
+		// 			setVariant({
+		// 				...defaultOptionValues, deliveryDate: moment
+		// 					(new Date(dates[0]))
+		// 					.format('LL')
+		// 			})
+		// 		}
+        //     })
 		getAccordionData();
 
 
@@ -161,7 +165,7 @@ const ProductDescription = React.memo(function ProductDescription({
 									.format('LL')});
 								setStartDate(date)}}
 							minDate={new Date()}
-							includeDates={showAvailableDates()}
+							// includeDates={showAvailableDates()}
 							withPortal />
 						<span class="fas fa-calendar-alt" size="1x" />
 					</div>

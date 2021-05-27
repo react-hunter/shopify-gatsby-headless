@@ -37,19 +37,19 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		document.querySelector(".scrollPreventer").style.overflow = "hidden";
 		attachCloseMobileVariantSelector();
 
-		getAvailableDates().then(res => res.json())
-            .then((data) => {
-                if(data.output.allowedShipDates.length > 0){
-					const dates = data.output.allowedShipDates[0].shipDates;
-					setAvailableDates(dates);
-					setStartDate(new Date(dates[0]))
-					setVariant({
-						...variant, deliveryDate: moment
-							(new Date(dates[0]))
-							.format('LL')
-					})
-				}
-            })
+		// getAvailableDates().then(res => res.json())
+        //     .then((data) => {
+        //         if(data.output.allowedShipDates.length > 0){
+		// 			const dates = data.output.allowedShipDates[0].shipDates;
+		// 			setAvailableDates(dates);
+		// 			setStartDate(new Date(dates[0]))
+		// 			setVariant({
+		// 				...variant, deliveryDate: moment
+		// 					(new Date(dates[0]))
+		// 					.format('LL')
+		// 			})
+		// 		}
+        //     })
 			
 		
 
@@ -287,7 +287,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 									.format('LL')});
 								setStartDate(date)}}
 							minDate={new Date()}
-							includeDates={showAvailableDates()}
+							// includeDates={showAvailableDates()}
 							withPortal />
 						<span class="fas fa-calendar-alt" size="1x" />
 					</div>
