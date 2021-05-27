@@ -39,7 +39,7 @@ export const snapAddToCart = () => {
   }
 }
 
-const API_URL = 'https://api.fedex.com/country/v2/countries/AU';
+const API_URL = 'https://cors-anywhere.herokuapp.com/https://api.fedex.com/country/v2/countries/US';
 
 const DEFAULT_OPTIONS = {
   cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
