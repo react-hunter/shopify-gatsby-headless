@@ -38,3 +38,20 @@ export const snapAddToCart = () => {
     }
   }
 }
+
+const API_URL = 'https://api.fedex.com/country/v2/countries/AU';
+
+const defaultHeader=()=>{
+  return {
+    'authorization': 'Bearer l7xx8daef6fbb1724f21b2ada537e059ad7b'
+  };
+  }
+
+  export const getAvailableDates = () => {
+		const method = 'GET';
+		const headers = 
+		  defaultHeader()
+		  ;
+		const opts = { method, headers};
+	  return fetch(`${API_URL}`,opts)
+	};
