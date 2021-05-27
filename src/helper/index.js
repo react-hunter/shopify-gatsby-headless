@@ -39,7 +39,7 @@ export const snapAddToCart = () => {
   }
 }
 
-const API_URL = 'https://cors-anywhere.herokuapp.com/https://api.fedex.com/country/v2/countries/US';
+const API_URL = 'https://tkstudiovn-eval-prod.apigee.net/get-fedex-date';
 
 const DEFAULT_OPTIONS = {
   cache: 'default', // *default, no-cache, reload, force-cache, only-if-cached
