@@ -140,6 +140,7 @@ const Layout = ({ path, children }) => {
 					render={data => (
 						<>
 							<Helmet>
+								<script src={withPrefix('gorgias.js')} type="text/javascript" />
 								<script src={withPrefix('snapchat.js')} type="text/javascript" />
 								<script src={withPrefix('voyage.js')} type="text/javascript" />
 								<script async src="https://assets.voyagetext.com/voyage.production.js"></script>
