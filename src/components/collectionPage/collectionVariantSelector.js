@@ -39,7 +39,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 					const dates = data.output.allowedShipDates[0].shipDates;
 					setAvailableDates(dates);
 					let result = new Date(dates[0]);
-					if (new Date(dates[0]) < new Date) {
+					if (new Date(dates[0]).setHours(0,0,0,0) < new Date().setHours(0,0,0,0)) {
 						result = new Date(dates[0])
 						setStartDate(result.setDate(result.getDate() + 1))
 					} else {
@@ -168,7 +168,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	const showAvailableDates = () => {
 		let date = [];
 		if(availableDates) {
-			if (new Date (availableDates[0]) < new Date()) {
+			if (new Date (availableDates[0]).setHours(0,0,0,0) < new Date().setHours(0,0,0,0)) {
 				return date =  availableDates.map(date => {
 					date = new Date(date)
 					return date.setDate(date.getDate() + 1);
