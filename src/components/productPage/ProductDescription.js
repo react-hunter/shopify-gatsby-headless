@@ -58,10 +58,16 @@ const ProductDescription = React.memo(function ProductDescription({
                 if(data.output.allowedShipDates.length > 0){
 					const dates = data.output.allowedShipDates[0].shipDates;
 					setAvailableDates(dates);
-					setStartDate(new Date(dates[0]))
+					let result = new Date(dates[0]);
+					if (new Date(dates[0]) < new Date) {
+						result = new Date(dates[0])
+						setStartDate(result.setDate(result.getDate() + 1))
+					} else {
+						setStartDate(new Date(result))
+					}
 					setVariant({
 						...defaultOptionValues, deliveryDate: moment
-							(new Date(dates[0]))
+							(new Date(result))
 							.format('LL')
 					})
 				}
@@ -140,9 +146,18 @@ const ProductDescription = React.memo(function ProductDescription({
 
 	const showAvailableDates = () => {
 		let date = [];
-		return date = availableDates ? availableDates.map(date => {
-			return new Date(date);
-		}) : []
+		if(availableDates) {
+			if (new Date (availableDates[0]) < new Date()) {
+				return date =  availableDates.map(date => {
+					date = new Date(date)
+					return date.setDate(date.getDate() + 1);
+				}) 
+			}else {
+				return date =  availableDates.map(date => {
+					return new Date(date);
+				}) 
+			}
+		}
 	}
 
 	return (
@@ -159,7 +174,7 @@ const ProductDescription = React.memo(function ProductDescription({
 									(date)
 									.format('LL')});
 								setStartDate(date)}}
-							minDate={new Date()}
+							// minDate={new Date()}
 							includeDates={showAvailableDates()}
 							withPortal />
 						<span class="fas fa-calendar-alt" size="1x" />
