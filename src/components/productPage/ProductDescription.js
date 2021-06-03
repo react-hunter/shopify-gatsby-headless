@@ -9,11 +9,12 @@ import LingerieVariantsSelectorButtons from "./LingerieVariantsSelectorButtons"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
-
+import  _map  from 'lodash/map';
+import  _get  from 'lodash/get';
 import Buttons from "./Buttons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
-import { getAvailableDates } from '../../helper';
+import { deliveryDatesData, getDeliveryDate, getLocation, getPickupDate, getPostalCode } from '../../helper';
 
 const AtcSticky = loadable(() => import("./AtcSticky"))
 
@@ -32,10 +33,10 @@ const ProductDescription = React.memo(function ProductDescription({
 	const [modalOptions, setOptions] = useState(product.options[0])
 	const [modalClass, setModalClass] = useState('');
 	const [productAccordions, setProductAccordions] = useState([]);
-	const [startDate, setStartDate] = useState(new Date());
+	const [startDate, setStartDate] = useState('');
 	const [availableDates, setAvailableDates] = useState([]);
 
-	useEffect(() => {
+	useEffect(async () => {
 		async function getAccordionData() {
 			const accordionData = await client.getEntries({'content_type': 'productAccordion'});
 			setProductAccordions(accordionData.items);
@@ -53,26 +54,70 @@ const ProductDescription = React.memo(function ProductDescription({
 			defaultOptionValues[selector.name] = selector.values[0]
 		})
 
-		getAvailableDates().then(res => res.json())
-            .then((data) => {
-                if(data.output.allowedShipDates.length > 0){
-					const dates = data.output.allowedShipDates[0].shipDates;
-					setAvailableDates(dates);
-					let result = new Date(dates[0]);
-					if (new Date(dates[0]).setHours(0,0,0,0) < new Date().setHours(0,0,0,0)) {
-						result = new Date(dates[0])
-						setStartDate(result.setDate(result.getDate() + 1))
-					} else {
-						setStartDate(new Date(result))
+		let pickupDate;
+		try {
+			let response = await getPickupDate();
+			data = await response.json();
+			if (data.output.allowedShipDates.length > 0) {
+				const dates = data.output.allowedShipDates[0].shipDates;
+				pickupDate = dates[0];
+			}
+		}
+		catch (error) {
+		}
+
+		let recipients = {};
+		try {
+			let data = await getLocation();
+			recipients = await data.json();
+			let response = await getPostalCode(recipients.lat, recipients.lon);
+			let address = await response.json();
+			let count = _get(address.results[0], 'address_components').length;
+			let zip = _get(address.results[0].address_components[count - 1], 'long_name', '');
+			recipients = { ...recipients, zip: zip };
+		}
+		catch (error) {
+		}
+		getAccordionData();
+
+		let data = {
+			...deliveryDatesData,
+			requestedShipment: {
+				...deliveryDatesData.requestedShipment,
+				recipients: [
+					{
+						address: {
+							city: _get(recipients, 'city', ''),
+							countryCode: _get(recipients, 'countryCode', ''),
+							streetLines: [
+								""
+							],
+							postalCode: _get(recipients, 'zip', ''),
+							residential: false,
+							stateOrProvinceCode: ""
+						}
 					}
+				],
+				shipTimestamp: pickupDate,
+			}
+		}
+
+		getDeliveryDate(data).then(res => res.json())
+			.then((data) => {
+				let dates = [];
+				if (data.output.rateReplyDetails && data.output.rateReplyDetails.length > 0) {
+					dates = _map(data.output.rateReplyDetails, item => {
+						return item.commit.dateDetail.day;
+					})
+					dates.length > 0 ? setStartDate(new Date(dates[0])) : setStartDate();
+					setAvailableDates(dates);
 					setVariant({
 						...defaultOptionValues, deliveryDate: moment
-							(new Date(result))
+							(new Date(dates[0]))
 							.format('LL')
 					})
 				}
-            })
-		getAccordionData();
+			})
 
 	}, [])
 
@@ -145,19 +190,14 @@ const ProductDescription = React.memo(function ProductDescription({
 	}
 
 	const showAvailableDates = () => {
-		let date = [];
-		if(availableDates) {
-			if (new Date (availableDates[0]).setHours(0,0,0,0) < new Date().setHours(0,0,0,0)) {
-				return date =  availableDates.map(date => {
-					date = new Date(date)
-					return date.setDate(date.getDate() + 1);
-				}) 
-			}else {
-				return date =  availableDates.map(date => {
-					return new Date(date);
-				}) 
-			}
+		let dates = [];
+		if (availableDates.length > 0) {
+			 dates = availableDates.map(date => {
+				return new Date(date);
+			})
 		}
+		return dates;
+
 	}
 
 	return (
