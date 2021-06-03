@@ -11,6 +11,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
 import  _map  from 'lodash/map';
 import  _get  from 'lodash/get';
+import  _filter  from 'lodash/filter';
+import  _includes  from 'lodash/includes';
 import Buttons from "./Buttons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
@@ -74,8 +76,7 @@ const ProductDescription = React.memo(function ProductDescription({
 			recipients = await data.json();
 			let response = await getPostalCode(recipients.lat, recipients.lon);
 			let address = await response.json();
-			let count = _get(address.results[0], 'address_components').length;
-			let zip = _get(address.results[0].address_components[count - 1], 'long_name', '');
+			let zip = _findSomethingFromGooglePlace(address.results[0], 'postal_code');
 			recipients = { ...recipients, zip: zip };
 		}
 		catch (error) {
@@ -126,6 +127,21 @@ const ProductDescription = React.memo(function ProductDescription({
 	useEffect(() => {
 		checkAvailability(product.shopifyId)
 	}, [productVariant])
+
+	const _findSomethingFromGooglePlace = (
+		googlePlace,
+		fieldText
+	  ) => {
+		const components = googlePlace.address_components;
+	  
+		const results= _filter(
+		  components,
+		  (addressComponent) =>
+			_includes(addressComponent.types, fieldText)
+		);
+	  
+		return _get(results, '[0].long_name', '');
+	  };
 
 
 	function rotateButton(identifier){
