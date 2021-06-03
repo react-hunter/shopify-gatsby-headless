@@ -78,11 +78,19 @@ export const getDeliveryDate = (data) => {
   return fetch(`https://tkstudiovn-eval-prod.apigee.net/fedex-api/rate/v2/rates/quotes`, opts)
 };
 
-export const getLocation = () => {
+
+export const getIP = () => {
   const method = 'GET';
 
   const opts = { method };
-  return fetch(`http://ip-api.com/json`, opts)
+  return fetch(`https://api.db-ip.com/v2/free/self`, opts)
+};
+
+export const getLocation = (IP) => {
+  const method = 'GET';
+
+  const opts = { method };
+  return fetch(`https://tkstudiovn-eval-prod.apigee.net/geo/`+ IP, opts)
 };
 
 export const getPostalCode = (lat, lon) => {
