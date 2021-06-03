@@ -14,7 +14,7 @@ import  _get  from 'lodash/get';
 import Buttons from "./Buttons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
-import { deliveryDatesData, getDeliveryDate, getLocation, getPickupDate, getPostalCode } from '../../helper';
+import { deliveryDatesData, getDeliveryDate, getIP, getLocation, getPickupDate, getPostalCode } from '../../helper';
 
 const AtcSticky = loadable(() => import("./AtcSticky"))
 
@@ -68,7 +68,9 @@ const ProductDescription = React.memo(function ProductDescription({
 
 		let recipients = {};
 		try {
-			let data = await getLocation();
+			let reponseIP = await getIP();
+			 let IP = await reponseIP.json();
+			 let data = await getLocation(IP.ipAddress);
 			recipients = await data.json();
 			let response = await getPostalCode(recipients.lat, recipients.lon);
 			let address = await response.json();

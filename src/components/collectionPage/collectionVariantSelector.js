@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import { getPickupDate, getLocation, getDeliveryDate, getPostalCode, deliveryDatesData } from '../../helper';
+import { getPickupDate, getLocation, getDeliveryDate, getPostalCode, deliveryDatesData, getIP } from '../../helper';
 import  _map  from 'lodash/map';
 import  _get  from 'lodash/get';
 
@@ -50,7 +50,9 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 
 		 let recipients = {};
 		 try {
-			 let data = await getLocation();
+			 let reponseIP = await getIP();
+			 let IP = await reponseIP.json();
+			 let data = await getLocation(IP.ipAddress);
 			 recipients = await data.json();
 			 let response = await getPostalCode(recipients.lat, recipients.lon);
 			 let address = await response.json();
