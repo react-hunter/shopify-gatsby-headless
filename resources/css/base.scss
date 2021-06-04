@@ -11008,7 +11008,16 @@ article .article__meta-buttons {
 
 @media (max-width: 740px) {
   .product-single__meta {
-    margin-top: 20px !important
+    margin-top: 20px !important;
+
+    .react-datepicker {
+      height: 80vh;
+      width: 100%;
+
+      .react-datepicker__month-container {
+        height: 100%;
+      }
+    }
   }
 }
 

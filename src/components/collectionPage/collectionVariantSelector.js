@@ -4,7 +4,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import StoreContext from '../../context/store';
 import ImageSpin from '../common/imageSpin';
 import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.css";
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
@@ -358,7 +358,8 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 								setStartDate(date)}}
 							// minDate={new Date()}
 							includeDates={showAvailableDates()}
-							withPortal />
+							withPortal 
+							onChangeRaw={(e)=> e.preventDefault()}/>
 						<span class="fas fa-calendar-alt" size="1x" />
 					</div>
 					<div>

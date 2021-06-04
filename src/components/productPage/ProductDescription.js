@@ -234,7 +234,8 @@ const ProductDescription = React.memo(function ProductDescription({
 								setStartDate(date)}}
 							// minDate={new Date()}
 							includeDates={showAvailableDates()}
-							withPortal />
+							onChangeRaw={(e)=> e.preventDefault()}
+							 withPortal/>
 						<span class="fas fa-calendar-alt" size="1x" />
 					</div>
 					{product.productType === 'Lingerie'? 
