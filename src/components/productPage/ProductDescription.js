@@ -9,11 +9,14 @@ import LingerieVariantsSelectorButtons from "./LingerieVariantsSelectorButtons"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
-
+import  _map  from 'lodash/map';
+import  _get  from 'lodash/get';
+import  _filter  from 'lodash/filter';
+import  _includes  from 'lodash/includes';
 import Buttons from "./Buttons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
-import { getAvailableDates } from '../../helper';
+import { deliveryDatesData, getDeliveryDate, getIP, getLocation, getPickupDate, getPostalCode } from '../../helper';
 
 const AtcSticky = loadable(() => import("./AtcSticky"))
 
@@ -32,10 +35,10 @@ const ProductDescription = React.memo(function ProductDescription({
 	const [modalOptions, setOptions] = useState(product.options[0])
 	const [modalClass, setModalClass] = useState('');
 	const [productAccordions, setProductAccordions] = useState([]);
-	const [startDate, setStartDate] = useState(new Date());
+	const [startDate, setStartDate] = useState('');
 	const [availableDates, setAvailableDates] = useState([]);
 
-	useEffect(() => {
+	useEffect(async () => {
 		async function getAccordionData() {
 			const accordionData = await client.getEntries({'content_type': 'productAccordion'});
 			setProductAccordions(accordionData.items);
@@ -53,26 +56,92 @@ const ProductDescription = React.memo(function ProductDescription({
 			defaultOptionValues[selector.name] = selector.values[0]
 		})
 
-		getAvailableDates().then(res => res.json())
-            .then((data) => {
-                if(data.output.allowedShipDates.length > 0){
-					const dates = data.output.allowedShipDates[0].shipDates;
+		let pickupDate;
+		try {
+			let response = await getPickupDate();
+			data = await response.json();
+			if (data.output.allowedShipDates.length > 0) {
+				const dates = data.output.allowedShipDates[0].shipDates;
+				pickupDate = dates[0];
+			}
+		}
+		catch (error) {
+		}
+
+		let recipients = {};
+		try {
+			let reponseIP = await getIP();
+			 let IP = await reponseIP.json();
+			 let data = await getLocation(IP.ipAddress);
+			recipients = await data.json();
+			let response = await getPostalCode(recipients.lat, recipients.lon);
+			let address = await response.json();
+			let zip = _findSomethingFromGooglePlace(address.results[0], 'postal_code');
+			recipients = { ...recipients, zip: zip };
+		}
+		catch (error) {
+		}
+		getAccordionData();
+
+		let data = {
+			...deliveryDatesData,
+			requestedShipment: {
+				...deliveryDatesData.requestedShipment,
+				recipients: [
+					{
+						address: {
+							city: _get(recipients, 'city', ''),
+							countryCode: _get(recipients, 'countryCode', ''),
+							streetLines: [
+								""
+							],
+							postalCode: _get(recipients, 'zip', ''),
+							residential: false,
+							stateOrProvinceCode: ""
+						}
+					}
+				],
+				shipTimestamp: pickupDate,
+			}
+		}
+
+		getDeliveryDate(data).then(res => res.json())
+			.then((data) => {
+				let dates = [];
+				if (data.output.rateReplyDetails && data.output.rateReplyDetails.length > 0) {
+					dates = _map(data.output.rateReplyDetails, item => {
+						return item.commit.dateDetail.day;
+					})
+					dates.length > 0 ? setStartDate(new Date(dates[0])) : setStartDate();
 					setAvailableDates(dates);
-					setStartDate(new Date(dates[0]))
 					setVariant({
 						...defaultOptionValues, deliveryDate: moment
 							(new Date(dates[0]))
 							.format('LL')
 					})
 				}
-            })
-		getAccordionData();
+			})
 
 	}, [])
 
 	useEffect(() => {
 		checkAvailability(product.shopifyId)
 	}, [productVariant])
+
+	const _findSomethingFromGooglePlace = (
+		googlePlace,
+		fieldText
+	  ) => {
+		const components = googlePlace.address_components;
+	  
+		const results= _filter(
+		  components,
+		  (addressComponent) =>
+			_includes(addressComponent.types, fieldText)
+		);
+	  
+		return _get(results, '[0].long_name', '');
+	  };
 
 
 	function rotateButton(identifier){
@@ -122,7 +191,7 @@ const ProductDescription = React.memo(function ProductDescription({
 	
 	function findVariant (optionName, optionValue) {
 		var properVariant = null
-		const otherOptionKeys = Object.keys(variant).filter(optionKey => optionKey !== optionName)
+		const otherOptionKeys = Object.keys(variant).filter(optionKey => (optionKey !== optionName && optionKey !== 'deliveryDate'))
 
 		product.variants.map(va => {
 			var matched = true;
@@ -139,10 +208,14 @@ const ProductDescription = React.memo(function ProductDescription({
 	}
 
 	const showAvailableDates = () => {
-		let date = [];
-		return date = availableDates ? availableDates.map(date => {
-			return new Date(date);
-		}) : []
+		let dates = [];
+		if (availableDates.length > 0) {
+			 dates = availableDates.map(date => {
+				return new Date(date);
+			})
+		}
+		return dates;
+
 	}
 
 	return (
@@ -159,9 +232,10 @@ const ProductDescription = React.memo(function ProductDescription({
 									(date)
 									.format('LL')});
 								setStartDate(date)}}
-							minDate={new Date()}
+							// minDate={new Date()}
 							includeDates={showAvailableDates()}
-							withPortal />
+							onChangeRaw={(e)=> e.preventDefault()}
+							 withPortal/>
 						<span class="fas fa-calendar-alt" size="1x" />
 					</div>
 					{product.productType === 'Lingerie'? 

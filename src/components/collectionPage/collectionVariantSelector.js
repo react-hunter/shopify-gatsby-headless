@@ -8,25 +8,24 @@ import "react-datepicker/dist/react-datepicker.css";
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import { getAvailableDates } from '../../helper';
+import { getPickupDate, getLocation, getDeliveryDate, getPostalCode, deliveryDatesData, getIP } from '../../helper';
+import  _map  from 'lodash/map';
+import  _get  from 'lodash/get';
+import  _filter  from 'lodash/filter';
+import  _includes  from 'lodash/includes';
 
 const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
 	const context = useContext(StoreContext);
 	const product = props.product;
 	const protectionProduct = props.protectionProduct;
 	const firstVariant = product.variants[0];
-	const [variant, setVariant] = useState({
-		...firstVariant, deliveryDate: moment
-			(new Date())
-			.format('LL')
-	});
+	const [variant, setVariant] = useState(firstVariant);
 	const [showSpin, setShowSpin] = useState(false);
 	const mainOption = product.options[0]
 	const otherOptions = product.options.length > 1 ? product.options.slice(1, product.options.length) : []
-	const [startDate, setStartDate] = useState(new Date());
+	const [startDate, setStartDate] = useState('');
 	const [availableDates, setAvailableDates] = useState([]);
-
-	useEffect(() => {
+	 useEffect(async () => {
 		Array.prototype.slice.call(document.querySelectorAll('.color-swatch')).map(el => {
 			const optionName = String(el.dataset.optionname)
 			const dataAttributeName = optionName.replace(' ', '_').toLowerCase()
@@ -36,24 +35,88 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		document.getElementsByTagName("html")[0].classList.add("no-scroll");
 		document.querySelector(".scrollPreventer").style.overflow = "hidden";
 		attachCloseMobileVariantSelector();
-
-		getAvailableDates().then(res => res.json())
-            .then((data) => {
-                if(data.output.allowedShipDates.length > 0){
-					const dates = data.output.allowedShipDates[0].shipDates;
-					setAvailableDates(dates);
-					setStartDate(new Date(dates[0]))
-					setVariant({
-						...variant, deliveryDate: moment
-							(new Date(dates[0]))
-							.format('LL')
-					})
-				}
-            })
-			
 		
 
-	},[]);
+		 let pickupDate;
+		 try {
+			 let response = await getPickupDate();
+			 data = await response.json();
+			 if (data.output.allowedShipDates.length > 0) {
+				 const dates = data.output.allowedShipDates[0].shipDates;
+				 pickupDate = dates[0];
+			 }
+		 }
+		 catch (error) {
+		 }
+
+		 let recipients = {};
+		 try {
+			 let reponseIP = await getIP();
+			 let IP = await reponseIP.json();
+			 let data = await getLocation(IP.ipAddress);
+			 recipients = await data.json();
+			 let response = await getPostalCode(recipients.lat, recipients.lon);
+			 let address = await response.json();
+			 let zip = _findSomethingFromGooglePlace(address.results[0], 'postal_code');
+			 recipients = { ...recipients, zip: zip };
+		 }
+		 catch (error) {
+		 }
+		 let data = {
+			 ...deliveryDatesData,
+			 requestedShipment: {
+				 ...deliveryDatesData.requestedShipment,
+				 recipients: [
+					 {
+						 address: {
+							 city: _get(recipients, 'city', ''),
+							 countryCode: _get(recipients, 'countryCode', ''),
+							 streetLines: [
+								 ""
+							 ],
+							 postalCode: _get(recipients, 'zip', ''),
+							 residential: false,
+							 stateOrProvinceCode: ""
+						 }
+					 }
+				 ],
+				 shipTimestamp: pickupDate,
+			 }
+		 }
+
+		 getDeliveryDate(data).then(res => res.json())
+			 .then((data) => {
+				 let dates = [];
+				 if (data.output.rateReplyDetails && data.output.rateReplyDetails.length > 0) {
+					 dates = _map(data.output.rateReplyDetails, item => {
+						 return item.commit.dateDetail.day;
+					 })
+					 dates.length > 0 ? setStartDate(new Date(dates[0])) : setStartDate();
+					 setAvailableDates(dates);
+					 setVariant({
+						 ...variant, deliveryDate: moment
+							 (new Date(dates[0]))
+							 .format('LL')
+					 })
+				 }
+			 })
+	 }, []);
+
+	 const _findSomethingFromGooglePlace = (
+		googlePlace,
+		fieldText
+	  ) => {
+		const components = googlePlace.address_components;
+	  
+		const results= _filter(
+		  components,
+		  (addressComponent) =>
+			_includes(addressComponent.types, fieldText)
+		);
+	  
+		return _get(results, '[0].long_name', '');
+	  };
+
 	
 	const getVariantByOption = (optionName, optionValue) => {
 		var properVariant = null
@@ -98,7 +161,9 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	}
 	const addToSideCart =() => {
 		setShowSpin(true);
-		context.addVariantToCart(variant.shopifyId, 1,null, variant.deliveryDate);
+		context.addVariantToCart(variant.shopifyId, 1,null, variant.deliveryDate || moment
+			(startDate)
+			.format('LL'));
 		setTimeout(() => context.addProtection(protectionProduct.variants[2].shopifyId, variant.deliveryDate), 1200);
 		setTimeout(showCart, 2500);
 	}
@@ -164,10 +229,14 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	}
 
 	const showAvailableDates = () => {
-		let date = [];
-		return date = availableDates ? availableDates.map(date => {
-			return new Date(date);
-		}) : []
+		let dates = [];
+		if (availableDates.length > 0) {
+			 dates = availableDates.map(date => {
+				return new Date(date);
+			})
+		}
+		return dates;
+
 	}
   
 	return (
@@ -225,7 +294,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 							<span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span>
 							<div className="option_options_wrapper">
 								{
-									mainOption.values.map((mo, moIndex) => {
+									product.variants.length > 1 && mainOption.values.map((mo, moIndex) => {
 										const selectEffectClass = getValueByName(mainOption.name) === mo ? 'select-effect' : ''
 										return (
 											<div className={`swatch-wrapper ${selectEffectClass}`} key={moIndex}>
@@ -253,9 +322,9 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 							return (
 								<div className="sub-option_wrapper variantSelector-option_wrapper" key={otherOptionIndex}>
 									<span className="option-header">{otherOption.name}: {getValueByName(otherOption.name)}</span>
-									<div className="option_options_wrapper">
+									{product.variants.length > 1 && <div className="option_options_wrapper">
 										{
-											otherOption.values.map((oo, ooIndex) => {
+											  otherOption.values.map((oo, ooIndex) => {
 												const selectOtherEffectClass = getValueByName(otherOption.name) === oo ? 'select-effect' : ''
 												return (
 													checkVariantExist(otherOption.name, oo) && (<div className={`swatch-wrapper ${selectOtherEffectClass}`} key={ooIndex}>
@@ -270,6 +339,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 											})
 										}
 									</div>
+						}
 								</div>
 							)
 						})
@@ -286,9 +356,10 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 									(date)
 									.format('LL')});
 								setStartDate(date)}}
-							minDate={new Date()}
+							// minDate={new Date()}
 							includeDates={showAvailableDates()}
-							withPortal />
+							withPortal 
+							onChangeRaw={(e)=> e.preventDefault()}/>
 						<span class="fas fa-calendar-alt" size="1x" />
 					</div>
 					<div>

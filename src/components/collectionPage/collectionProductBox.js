@@ -38,14 +38,14 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 		return tempOption
 	}
 	const addToBag = () => {
-		if(product.variants.length === 1) {
-			setShowSpin(true);			
-			context.addVariantToCart(product.variants[0].shopifyId, 1);
-			setTimeout(() => context.addProtection(protectionProduct.variants[2].shopifyId), 1200);
-			setTimeout(showCart, 2500);
-		} else {
+		// if(product.variants.length === 1) {
+		// 	setShowSpin(true);			
+		// 	context.addVariantToCart(product.variants[0].shopifyId, 1);
+		// 	setTimeout(() => context.addProtection(protectionProduct.variants[2].shopifyId), 1200);
+		// 	setTimeout(showCart, 2500);
+		// } else {
 			setVaraintModalShow(true);
-		}
+		// }
 	}
 	const showCart = () => {
 		setShowSpin(false);
