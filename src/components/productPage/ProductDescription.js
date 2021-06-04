@@ -191,7 +191,7 @@ const ProductDescription = React.memo(function ProductDescription({
 	
 	function findVariant (optionName, optionValue) {
 		var properVariant = null
-		const otherOptionKeys = Object.keys(variant).filter(optionKey => optionKey !== optionName)
+		const otherOptionKeys = Object.keys(variant).filter(optionKey => (optionKey !== optionName && optionKey !== 'deliveryDate'))
 
 		product.variants.map(va => {
 			var matched = true;

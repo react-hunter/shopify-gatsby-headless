@@ -4,7 +4,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import StoreContext from '../../context/store';
 import ImageSpin from '../common/imageSpin';
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
@@ -25,7 +25,6 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	const otherOptions = product.options.length > 1 ? product.options.slice(1, product.options.length) : []
 	const [startDate, setStartDate] = useState('');
 	const [availableDates, setAvailableDates] = useState([]);
-
 	 useEffect(async () => {
 		Array.prototype.slice.call(document.querySelectorAll('.color-swatch')).map(el => {
 			const optionName = String(el.dataset.optionname)
@@ -162,7 +161,9 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	}
 	const addToSideCart =() => {
 		setShowSpin(true);
-		context.addVariantToCart(variant.shopifyId, 1,null, variant.deliveryDate);
+		context.addVariantToCart(variant.shopifyId, 1,null, variant.deliveryDate || moment
+			(startDate)
+			.format('LL'));
 		setTimeout(() => context.addProtection(protectionProduct.variants[2].shopifyId, variant.deliveryDate), 1200);
 		setTimeout(showCart, 2500);
 	}
@@ -293,7 +294,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 							<span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span>
 							<div className="option_options_wrapper">
 								{
-									mainOption.values.map((mo, moIndex) => {
+									product.variants.length > 1 && mainOption.values.map((mo, moIndex) => {
 										const selectEffectClass = getValueByName(mainOption.name) === mo ? 'select-effect' : ''
 										return (
 											<div className={`swatch-wrapper ${selectEffectClass}`} key={moIndex}>
@@ -321,9 +322,9 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 							return (
 								<div className="sub-option_wrapper variantSelector-option_wrapper" key={otherOptionIndex}>
 									<span className="option-header">{otherOption.name}: {getValueByName(otherOption.name)}</span>
-									<div className="option_options_wrapper">
+									{product.variants.length > 1 && <div className="option_options_wrapper">
 										{
-											otherOption.values.map((oo, ooIndex) => {
+											  otherOption.values.map((oo, ooIndex) => {
 												const selectOtherEffectClass = getValueByName(otherOption.name) === oo ? 'select-effect' : ''
 												return (
 													checkVariantExist(otherOption.name, oo) && (<div className={`swatch-wrapper ${selectOtherEffectClass}`} key={ooIndex}>
@@ -338,6 +339,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 											})
 										}
 									</div>
+						}
 								</div>
 							)
 						})

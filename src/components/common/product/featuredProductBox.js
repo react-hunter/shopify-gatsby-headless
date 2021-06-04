@@ -34,13 +34,13 @@ const FeaturedProductBox = React.memo(function FeaturedProductBox(props) {
 		return tempOption
 	}
 	const addToBag = () => {
-		if(product.variants.length === 1) {
-			setShowSpin(true);
-			context.addVariantToCart(product.variants[0].shopifyId, 1)
-			setTimeout(showCart, 1200)
-		} else {
+		// if(product.variants.length === 1) {
+		// 	setShowSpin(true);
+		// 	context.addVariantToCart(product.variants[0].shopifyId, 1)
+		// 	setTimeout(showCart, 1200)
+		// } else {
 		  props.showVariantModal(product);
-		}
+		// }
 	}
 	function showCart() {
 		setShowSpin(false)
