@@ -11471,6 +11471,15 @@ body.modal-opened {
 
   @media (max-width: 768px) {
     flex-direction: column;
+
+    .react-datepicker {
+      height: 80vh;
+      width: 100%;
+
+      .react-datepicker__month-container {
+        height: 100%;
+      }
+    }
   }
 
   .delivery-date {
@@ -16688,7 +16697,7 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
     height: 365px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    // justify-content: flex-end;
     position: absolute;
     background: #ffffff;
     padding-bottom: 10px;
