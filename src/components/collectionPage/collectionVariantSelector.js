@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, forwardRef } from 'react';
 import { navigate, Link } from 'gatsby';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import StoreContext from '../../context/store';
@@ -13,6 +13,7 @@ import  _map  from 'lodash/map';
 import  _get  from 'lodash/get';
 import  _filter  from 'lodash/filter';
 import  _includes  from 'lodash/includes';
+import DeliveryDateModal from '../productPage/DeliveryDateModal';
 
 const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
 	const context = useContext(StoreContext);
@@ -25,6 +26,23 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	const otherOptions = product.options.length > 1 ? product.options.slice(1, product.options.length) : []
 	const [startDate, setStartDate] = useState('');
 	const [availableDates, setAvailableDates] = useState([]);
+	const [modal, setModal] = useState(false);
+
+	const hasWindow = typeof window !== 'undefined';
+
+	const [windowDimensions, setWindowDimensions] = useState(window.innerWidth);
+
+  useEffect(() => {
+    if (hasWindow) {
+      function handleResize() {
+        setWindowDimensions(window.innerWidth);
+      }
+
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, [hasWindow]);
+
 	 useEffect(async () => {
 		Array.prototype.slice.call(document.querySelectorAll('.color-swatch')).map(el => {
 			const optionName = String(el.dataset.optionname)
@@ -236,10 +254,16 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 			})
 		}
 		return dates;
-
 	}
+
+	const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+		<button className="date-button" onClick={onClick} ref={ref}>
+		  {value}
+		</button>
+	  ));
   
 	return (
+		<>
 		<div className="variantoverlayNew" id="variantOverlay-">
 			<div className="variantSelector_wrapper animate-bottom" data-toggle="modal">
 				<div className="variantSelector-section"> 
@@ -349,7 +373,11 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 				<div className="variant-selector_add_to_bag_wrapper">
 					<div className="delivery-date">
 						<label>Delivery Date</label>
-						<DatePicker
+						{windowDimensions < 550 && <button className='date-button' onClick={()=> setModal(true)}>{startDate ? moment
+									(startDate)
+									.format('LL'): ''}</button>
+						}
+						{windowDimensions > 550 && <DatePicker
 							selected={startDate}
 							onChange={date => {
 								setVariant({...variant, deliveryDate: moment
@@ -357,10 +385,14 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 									.format('LL')});
 								setStartDate(date)}}
 							// minDate={new Date()}
+							dateFormat="MMMM d, yyyy"
 							includeDates={showAvailableDates()}
 							withPortal 
+							customInput={<ExampleCustomInput />}
 							onChangeRaw={(e)=> e.preventDefault()}/>
+								}
 						<span class="fas fa-calendar-alt" size="1x" />
+						
 					</div>
 					<div>
 					{ variant.availableForSale ? 
@@ -383,7 +415,22 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 				onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0">
 
 			</div>
+			{modal && <DeliveryDateModal
+			selected={startDate}
+			onChange={(date) => {
+				setVariant({...variant, deliveryDate: moment
+					(date)
+					.format('LL')});
+				setStartDate(date);
+				setModal(false)
+			}}
+			includeDates={showAvailableDates()}
+			onClose={()=>setModal(false)}
+			/>
+			}
 		</div>
+		
+		</>
 	);
 });
 
