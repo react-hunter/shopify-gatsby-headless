@@ -1,0 +1,24 @@
+.react-datepicker {
+    width: 100%;
+    top: 20px;
+    border: none;
+
+    .react-datepicker__month-container {
+        width: 100%;
+        .react-datepicker__day-name {
+            width: 2.7rem;
+            height: 2.7rem;
+        }
+        .react-datepicker__day {
+            width: 2.7rem;
+            height: 2.7rem;
+        }
+    }
+}
+
+.fa-times {
+    padding-top: 8px;
+    float: right;
+    font-size: 20px;
+    padding-right: 8px;
+}

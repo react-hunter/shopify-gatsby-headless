@@ -10965,7 +10965,17 @@ article .article__meta-buttons {
       font-size: inherit;
       right: .5em;
     }
+    
   }
+}
+
+.date-button {
+  width: 100%;
+  background: white;
+  border: 2px #e5e5e5 solid;
+  height: 50px;
+  text-align: left;
+  padding-left: 25px;
 }
 
 .product-single__title {
@@ -15482,6 +15492,14 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   width: 32px;
   height: 32px;
   margin: 0 7.5px;
+}
+
+@media (max-width: 1440px) {
+  .collection-product-color-swatch .color-swatch {
+    width: 32px;
+    height: 32px;
+    margin: 0 0.5px;
+  }
 }
 
 .collection-product-color-swatch .color-swatch-size {
