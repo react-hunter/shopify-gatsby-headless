@@ -81,6 +81,11 @@
 
         .react-datepicker__week {
             display: flex;
+            .react-datepicker__day--selected {
+                border-radius: inherit; 
+                background-color: #CFCFCF;
+                color: rgb(0, 0, 0)
+            }
         }
     }
 }
