@@ -11016,20 +11016,6 @@ article .article__meta-buttons {
   background-color: black
 }
 
-@media (max-width: 740px) {
-  .product-single__meta {
-    margin-top: 20px !important;
-
-    .react-datepicker {
-      height: 80vh;
-      width: 100%;
-
-      .react-datepicker__month-container {
-        height: 100%;
-      }
-    }
-  }
-}
 
 @media (max-width: 740px) {
   .product-single__media-group {
@@ -11483,8 +11469,6 @@ body.modal-opened {
     flex-direction: column;
 
     .react-datepicker {
-      height: 80vh;
-      width: 100%;
 
       .react-datepicker__month-container {
         height: 100%;

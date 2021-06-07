@@ -14,7 +14,7 @@ import React, {useState } from 'react';
   
     return (
       <>
-      <div style={{position:'fixed', width: '100%', height:'100%',zIndex:999999, background:'white', left: '0px', top: '0px'}}>
+      <div className='date-modal'>
       <span class="fa fa-times"  size="1x" onClick={()=>{props.onClose()}} />
                 <DatePicker
                     selected={props.selected}
