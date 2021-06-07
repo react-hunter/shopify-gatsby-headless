@@ -15,7 +15,6 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 	const [messageShow, setMessageShow] = useState(false);
 	const [giftLineId, setGiftLineId] = useState('')
 	const [rushLineId, setRushLineId] = useState('')
-	
 	useEffect(() => {
 		const originalLineItemList = context.store.checkout.lineItems
 		const lineItemList = originalLineItemList.filter(li => li.variant.id !== giftVariant.shopifyId && li.variant.id !== rushVariant.shopifyId)
@@ -117,9 +116,9 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 			const attributeList = lineItem.customAttributes
 			return (
 				<>
-					<p className="ajax-cart-item-property" key="rose-color">Rose Colors: {attributeList[0].value}</p>
-					<p className="ajax-cart-item-property" key="rose-box">Box: {attributeList[1].value}</p>
-					<p className="ajax-cart-item-property" key="rose-style">Style: {attributeList[2].value}</p>
+					<p className="ajax-cart-item-property" key="rose-color"><b>Rose Colors:</b> {attributeList[0].value}</p>
+					<p className="ajax-cart-item-property" key="rose-box"><b>Box:</b> {attributeList[1].value}</p>
+					<p className="ajax-cart-item-property" key="rose-style"><b>Style:</b> {attributeList[2].value}</p>
 				</>
 			)
 		} else {
@@ -129,20 +128,20 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 					<>
 					{(optionAttributeList.map((item, index) => {
 						if (item.name === "Box Material") {
-							return <p className="ajax-cart-item-property" key="box-material" >Box Material: { item.value }</p>
+							return <p className="ajax-cart-item-property" key="box-material" ><b>Box Material:</b> { item.value }</p>
 						} else if (item.name === "Rose Color") {
-							return <p className="ajax-cart-item-property" key="rose-color" >Rose Color: { item.value }<span className="color-circle variant-item-color" data-color={ item.value }></span></p>
+							return <p className="ajax-cart-item-property" key="rose-color" ><b>Rose Color:</b> { item.value }<span className="color-circle variant-item-color" data-color={ item.value }></span></p>
 						} else if (item.name === "Box Color") {   
 							let color = item.value.split(" ")[0];
 
-							return <p className="ajax-cart-item-property" key="box-color" >Box: { color }<span className="color-circle variant-item-color" data-color={ color }></span></p>
+							return <p className="ajax-cart-item-property" key="box-color" ><b>Box:</b> { color }<span className="color-circle variant-item-color" data-color={ color }></span></p>
 						} else if (item.name === "Title") {
 							if ( item.value === 'Default Title')
 								return '';
 							else 
-								return <p className="ajax-cart-item-property" key={index} >{ item.name }: { item.value }</p>
+								return <p className="ajax-cart-item-property" key={index} ><b>{ item.name }:</b> { item.value }</p>
 						} else {
-							return <p className="ajax-cart-item-property" key={index} >{ item.name }: { item.value }</p>
+							return <p className="ajax-cart-item-property" key={index} ><b>{ item.name }:</b> { item.value }</p>
 						}
 					}))}
 					</>
@@ -258,15 +257,19 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 											<div className="ajax-cart-item__title">
 												<Link to={`/products/${item.variant.product.handle}`}>{item.title}</Link>
 											</div>
-											<div className="ajax-cart-item-properties">
-											<p className="ajax-cart-item-property" key="rose-color">Delivery Date: {item.deliveryDate || ''}</p>
-											</div>
-											<div className="ajax-cart-item-properties">
-												{
-													getCustomAttributes(item)
+												<div className="ajax-cart-item-properties">
+													{
+														getCustomAttributes(item)
+													}
+												</div>
+												<div className="ajax-cart-item-properties">
+													<p className="ajax-cart-item-property" key="rose-color"><b>Delivery Date:</b> {item.deliveryDate || ''}</p>
+												</div>
+												{item.messageContent && <div className="ajax-cart-item-properties">
+													<p className="ajax-cart-item-property" style={{whiteSpace: 'pre-wrap'}} key="rose-color"><b>Greeting Card Message:</b> <br/>{item.messageContent || ''}</p>
+												</div>
 												}
-											</div>
-											<div className="ajax-cart-item-quantity-container">
+												<div className="ajax-cart-item-quantity-container">
 												<div className="cart-item__qty">
 													<div className="js-qty">
 														<button type="button" 
