@@ -139,16 +139,19 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 					{
 						swatchImages.map((swatchImage, swatchImageIndex) => {
 							return (
-								<img 
-									src={swatchImage}
-									className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-									onClick={gotoProductPage}
-									role="presentation"
-									style={{ cursor: 'pointer' }}
-									// loading="lazy"
-									key={swatchImageIndex}
-									alt=''
-								/>
+								<>
+									<div className='image-skeleton'></div>
+									<img
+										src={swatchImage}
+										className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
+										onClick={gotoProductPage}
+										role="presentation"
+										style={{ cursor: 'pointer', left: 0 }}
+										// loading="lazy"
+										key={swatchImageIndex}
+										alt=''
+									/>
+								</>
 							)
 						})
 					}
