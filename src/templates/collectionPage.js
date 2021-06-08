@@ -37,7 +37,7 @@ const CollectionPage = React.memo(function CollectionPage({
     setHoverEffectsForCollection();
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 2200);
+    }, 4000);
     return () => clearTimeout(timer);
   }, [])
 
