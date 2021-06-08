@@ -145,7 +145,7 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 									onClick={gotoProductPage}
 									role="presentation"
 									style={{ cursor: 'pointer' }}
-									loading="lazy"
+									// loading="lazy"
 									key={swatchImageIndex}
 									alt=''
 								/>
