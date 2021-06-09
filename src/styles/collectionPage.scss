@@ -29,6 +29,7 @@
 
     .product-tile__image {
       position: unset;
+      left: 0 !important;
     }
 
     .slick-dots {
@@ -193,6 +194,16 @@ border-radius: 50%;
         &.previous {
             left: 0;
         }
+    }
+
+    .image-skeleton {
+      height: 0;
+      padding-bottom: 100%;
+      width: 100%;
+      background: linear-gradient( 
+  90deg
+   , #D8D8D8, #F5F5F5, #D8D8D8);
+      animation: imageBackgroundAnimation 2s ease infinite;
     }
  
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react' /* eslint-disable */
+import React, { useContext, useState, useEffect, forwardRef } from 'react' /* eslint-disable */
 import ProductInfo from "./ProductInfo"
 import StoreContext from '../../context/store'
 import loadable from '@loadable/component';
@@ -17,6 +17,7 @@ import Buttons from "./Buttons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 import { deliveryDatesData, getDeliveryDate, getIP, getLocation, getPickupDate, getPostalCode } from '../../helper';
+import DeliveryDateModal from './DeliveryDateModal';
 
 const AtcSticky = loadable(() => import("./AtcSticky"))
 
@@ -37,6 +38,20 @@ const ProductDescription = React.memo(function ProductDescription({
 	const [productAccordions, setProductAccordions] = useState([]);
 	const [startDate, setStartDate] = useState('');
 	const [availableDates, setAvailableDates] = useState([]);
+	const [modal, setModal] = useState(false);
+	const hasWindow = typeof window !== 'undefined';
+	const [windowDimensions, setWindowDimensions] = useState(window.innerWidth);
+
+	useEffect(() => {
+		if (hasWindow) {
+		  function handleResize() {
+			setWindowDimensions(window.innerWidth);
+		  }
+	
+		  window.addEventListener('resize', handleResize);
+		  return () => window.removeEventListener('resize', handleResize);
+		}
+	  }, [hasWindow]);
 
 	useEffect(async () => {
 		async function getAccordionData() {
@@ -191,7 +206,7 @@ const ProductDescription = React.memo(function ProductDescription({
 	
 	function findVariant (optionName, optionValue) {
 		var properVariant = null
-		const otherOptionKeys = Object.keys(variant).filter(optionKey => (optionKey !== optionName && optionKey !== 'deliveryDate'))
+		const otherOptionKeys = Object.keys(variant).filter(optionKey => (optionKey !== optionName && optionKey !== 'deliveryDate' && optionKey !== 'messageContent'))
 
 		product.variants.map(va => {
 			var matched = true;
@@ -217,25 +232,41 @@ const ProductDescription = React.memo(function ProductDescription({
 		return dates;
 
 	}
+	const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+		<button className="date-button" onClick={onClick} ref={ref}>
+		  {value}
+		</button>
+	  ));
 
 	return (
-		<div className="product_description-container">
+		<>
+		{! modal && <div className="product_description-container">
 			<div className="grid__item medium-up--one-half rightSideProductContainer">
 				<div className="product-single__meta">
 					<ProductInfo product={product} review={review} />
 					<div className="delivery-date">
-						<label>Delivery Date</label>
-						<DatePicker
-							selected={startDate}
-							onChange={date => {
-								setVariant({...variant, deliveryDate: moment
-									(date)
-									.format('LL')});
-								setStartDate(date)}}
-							// minDate={new Date()}
-							includeDates={showAvailableDates()}
-							onChangeRaw={(e)=> e.preventDefault()}
-							 withPortal/>
+						<label >Delivery Date</label>
+						{windowDimensions < 550 && <button className='date-button' onClick={()=> setModal(true)}>{startDate ? moment
+									(startDate)
+									.format('LL'): ''}</button>
+						}
+							{windowDimensions > 550 && <DatePicker
+								selected={startDate}
+								onChange={date => {
+									setVariant({
+										...variant, deliveryDate: moment
+											(date)
+											.format('LL')
+									});
+									setStartDate(date)
+								}}
+								// minDate={new Date()}
+								includeDates={showAvailableDates()}
+								onChangeRaw={(e) => e.preventDefault()}
+								dateFormat="MMMM d, yyyy"
+								customInput={<ExampleCustomInput />}
+								withPortal />
+							}
 						<span class="fas fa-calendar-alt" size="1x" />
 					</div>
 					{product.productType === 'Lingerie'? 
@@ -308,6 +339,21 @@ const ProductDescription = React.memo(function ProductDescription({
 				quantity={quantity} 
 				productVariant={productVariant} />
 		</div>
+}
+			{modal && <DeliveryDateModal
+			selected={startDate}
+			onChange={(date) => {
+				setVariant({...variant, deliveryDate: moment
+					(date)
+					.format('LL')});
+				setStartDate(date);
+				setModal(false)
+			}}
+			includeDates={showAvailableDates()}
+			onClose={()=>setModal(false)}
+			/>
+			}
+	</>
 	);
 });
 

@@ -10965,7 +10965,17 @@ article .article__meta-buttons {
       font-size: inherit;
       right: .5em;
     }
+    
   }
+}
+
+.date-button {
+  width: 100%;
+  background: white;
+  border: 2px #e5e5e5 solid;
+  height: 50px;
+  text-align: left;
+  padding-left: 25px;
 }
 
 .product-single__title {
@@ -11006,20 +11016,6 @@ article .article__meta-buttons {
   background-color: black
 }
 
-@media (max-width: 740px) {
-  .product-single__meta {
-    margin-top: 20px !important;
-
-    .react-datepicker {
-      height: 80vh;
-      width: 100%;
-
-      .react-datepicker__month-container {
-        height: 100%;
-      }
-    }
-  }
-}
 
 @media (max-width: 740px) {
   .product-single__media-group {
@@ -11473,8 +11469,6 @@ body.modal-opened {
     flex-direction: column;
 
     .react-datepicker {
-      height: 80vh;
-      width: 100%;
 
       .react-datepicker__month-container {
         height: 100%;
@@ -14172,14 +14166,14 @@ body.modal-open {
   padding: 20px;
   border: 1px solid #fafafa;
   opacity: 1;
-  height: 325px;
   overflow-y: none;
   -ms-transition: all .3s ease;
   -moz-transition: all .3s ease;
   -o-transition: all .3s ease;
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
-  font-weight: 300px
+  font-weight: 300px;
+  margin-bottom: 10px;
 }
 
 .giftmsg-container img {
@@ -14192,18 +14186,16 @@ body.modal-open {
   overflow-x: hidden;
   overflow-y: hidden;
   line-height: 4ch;
-  background-image: linear-gradient(transparent, transparent calc(4ch - 1px), #c9ba92 0px);
+  background-image: linear-gradient(transparent, transparent calc(4ch - 1px), #e4b77d 0px);
   background-size: 100% 4ch;
   background-color: #fff;
   border: 0 !important;
   text-align: center;
   resize: none;
   margin: 0 auto;
-  padding: 10px;
-  font-family: 'Proxima Condensed Extra Bold Alt', sans-serif;
+  font-family: "Libre Baskerville", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-weight: normal;
   height: 200px !important;
-  width: 300px !important;
   max-width: calc(100% - 20px) !important;
   font-style: normal;
   font-size: 16px;
@@ -14213,8 +14205,9 @@ body.modal-open {
   -o-transition: opacity .2s ease;
   -webkit-transition: opacity .2s ease;
   transition: opacity .2s ease;
-  width: auto;
-  min-width: unset
+  width: 100%;
+  min-width: unset;
+  padding: 5px;
 }
 
 .giftmsg-container textarea::placeholder {
@@ -14329,6 +14322,22 @@ header .menu-category-panel .menu-panel .menu-panel_image_wrapper {
   letter-spacing: 1.5px
 }
 
+.close-message {
+  font-size: 1rem;
+  border-color: #e4b77d;
+  border-style: solid;
+  border-width: 0.1rem;
+  border-radius: 0.25rem;
+  padding: .5rem 1.3rem;
+  color: #AAA;
+  background-color: white;
+}
+
+.add-message {
+  border: 2px solid #000;
+  border-color: #000000 !important;
+}
+
 .ajax-cart__modal {
   display: none
 }
@@ -14426,7 +14435,8 @@ header .menu-category-panel .menu-panel .menu-panel_image_wrapper {
 
 .product-collection_image_primary,
 .product-collection_image_alternate {
-  transition: transform 0.4s
+  transition: transform 0.4s;
+  background-color: white;
 }
 
 .product-tile__image {
@@ -14437,7 +14447,8 @@ header .menu-category-panel .menu-panel .menu-panel_image_wrapper {
   position: absolute;
   top: 0;
   width: 100%;
-  touch-action: none
+  touch-action: none;
+  left: 0 !important;
 }
 
 @media (max-width: 768px) {
@@ -15482,6 +15493,14 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   width: 32px;
   height: 32px;
   margin: 0 7.5px;
+}
+
+@media (max-width: 1440px) {
+  .collection-product-color-swatch .color-swatch {
+    width: 32px;
+    height: 32px;
+    margin: 0 0.5px;
+  }
 }
 
 .collection-product-color-swatch .color-swatch-size {

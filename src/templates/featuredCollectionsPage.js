@@ -20,7 +20,7 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 3000);
+    }, 4000);
     return () => clearTimeout(timer);
   }, []);
 
