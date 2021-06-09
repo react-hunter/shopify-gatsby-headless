@@ -14447,7 +14447,8 @@ header .menu-category-panel .menu-panel .menu-panel_image_wrapper {
   position: absolute;
   top: 0;
   width: 100%;
-  touch-action: none
+  touch-action: none;
+  left: 0 !important;
 }
 
 @media (max-width: 768px) {
