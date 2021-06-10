@@ -13,11 +13,13 @@ import _map from 'lodash/map';
 import _get from 'lodash/get';
 import _filter from 'lodash/filter';
 import _includes from 'lodash/includes';
+import _isEmpty from 'lodash/isEmpty';
 import Buttons from "./Buttons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 import { deliveryDatesData, getDeliveryDate, getIP, getLocation, getPickupDate, getPostalCode } from '../../helper';
 import DeliveryDateModal from './DeliveryDateModal';
+import { processFedExCalendar } from '../../helper/delivery';
 
 const AtcSticky = loadable(() => import("./AtcSticky"))
 
@@ -41,6 +43,20 @@ const ProductDescription = React.memo(function ProductDescription({
 	const [modal, setModal] = useState(false);
 	const hasWindow = typeof window !== 'undefined';
 	const [windowDimensions, setWindowDimensions] = useState(window.innerWidth);
+
+	useEffect(() => {
+		processFedExCalendar().then(dates => {
+			if (_isEmpty(dates) === false) {
+				setStartDate(new Date(dates[0]));
+				setAvailableDates(dates);
+				setVariant({
+					...variant, deliveryDate: moment
+						(new Date(dates[0]))
+						.format('LL')
+				})
+			}
+		});
+	}, []);
 
 	useEffect(() => {
 		if (hasWindow) {
@@ -71,93 +87,12 @@ const ProductDescription = React.memo(function ProductDescription({
 			defaultOptionValues[selector.name] = selector.values[0]
 		})
 		setVariant(defaultOptionValues);
-
-		// let pickupDate;
-		// try {
-		// 	let response = await getPickupDate();
-		// 	data = await response.json();
-		// 	if (data.output.allowedShipDates.length > 0) {
-		// 		const dates = data.output.allowedShipDates[0].shipDates;
-		// 		pickupDate = dates[0];
-		// 	}
-		// }
-		// catch (error) {
-		// }
-
-		// let recipients = {};
-		// try {
-		// 	let reponseIP = await getIP();
-		// 	 let IP = await reponseIP.json();
-		// 	 let data = await getLocation(IP.IPv4);
-		// 	recipients = await data.json();
-		// 	let response = await getPostalCode(recipients.lat, recipients.lon);
-		// 	let address = await response.json();
-		// 	let zip = _findSomethingFromGooglePlace(address.results[0], 'postal_code');
-		// 	recipients = { ...recipients, zip: zip };
-		// }
-		// catch (error) {
-		// }
 		getAccordionData();
-
-		// let data = {
-		// 	...deliveryDatesData,
-		// 	requestedShipment: {
-		// 		...deliveryDatesData.requestedShipment,
-		// 		recipients: [
-		// 			{
-		// 				address: {
-		// 					city: _get(recipients, 'city', ''),
-		// 					countryCode: _get(recipients, 'countryCode', ''),
-		// 					streetLines: [
-		// 						""
-		// 					],
-		// 					postalCode: _get(recipients, 'zip', ''),
-		// 					residential: false,
-		// 					stateOrProvinceCode: ""
-		// 				}
-		// 			}
-		// 		],
-		// 		shipTimestamp: pickupDate,
-		// 	}
-		// }
-
-		// getDeliveryDate(data).then(res => res.json())
-		// 	.then((data) => {
-		// 		let dates = [];
-		// 		if (data.output.rateReplyDetails && data.output.rateReplyDetails.length > 0) {
-		// 			dates = _map(data.output.rateReplyDetails, item => {
-		// 				return item.commit.dateDetail.day;
-		// 			})
-		// 			dates.length > 0 ? setStartDate(new Date(dates[0])) : setStartDate();
-		// 			setAvailableDates(dates);
-		// 			setVariant({
-		// 				...defaultOptionValues, deliveryDate: moment
-		// 					(new Date(dates[0]))
-		// 					.format('LL')
-		// 			})
-		// 		}
-		// 	})
-
 	}, [])
 
 	useEffect(() => {
 		checkAvailability(product.shopifyId)
 	}, [productVariant])
-
-	const _findSomethingFromGooglePlace = (
-		googlePlace,
-		fieldText
-	) => {
-		const components = googlePlace.address_components;
-
-		const results = _filter(
-			components,
-			(addressComponent) =>
-				_includes(addressComponent.types, fieldText)
-		);
-
-		return _get(results, '[0].long_name', '');
-	};
 
 
 	function rotateButton(identifier) {
@@ -245,31 +180,35 @@ const ProductDescription = React.memo(function ProductDescription({
 				<div className="grid__item medium-up--one-half rightSideProductContainer">
 					<div className="product-single__meta">
 						<ProductInfo product={product} review={review} />
-						{/* <div className="delivery-date">
-						<label >Delivery Date</label>
-						{windowDimensions < 550 && <button className='date-button' onClick={()=> setModal(true)}>{startDate ? moment
-									(startDate)
-									.format('LL'): ''}</button>
+						{
+							_isEmpty(availableDates) === false && (
+								<div className="delivery-date">
+									<label >Delivery Date</label>
+									{windowDimensions < 550 && <button className='date-button' onClick={() => setModal(true)}>{startDate ? moment
+										(startDate)
+										.format('LL') : ''}</button>
+									}
+									{windowDimensions > 550 && <DatePicker
+										selected={startDate}
+										onChange={date => {
+											setVariant({
+												...variant, deliveryDate: moment
+													(date)
+													.format('LL')
+											});
+											setStartDate(date)
+										}}
+										// minDate={new Date()}
+										includeDates={showAvailableDates()}
+										onChangeRaw={(e) => e.preventDefault()}
+										dateFormat="MMMM d, yyyy"
+										customInput={<ExampleCustomInput />}
+										withPortal />
+									}
+									<span class="fas fa-calendar-alt" size="1x" />
+								</div>
+							)
 						}
-							{windowDimensions > 550 && <DatePicker
-								selected={startDate}
-								onChange={date => {
-									setVariant({
-										...variant, deliveryDate: moment
-											(date)
-											.format('LL')
-									});
-									setStartDate(date)
-								}}
-								// minDate={new Date()}
-								includeDates={showAvailableDates()}
-								onChangeRaw={(e) => e.preventDefault()}
-								dateFormat="MMMM d, yyyy"
-								customInput={<ExampleCustomInput />}
-								withPortal />
-							}
-						<span class="fas fa-calendar-alt" size="1x" />
-					</div> */}
 						{product.productType === 'Lingerie' ?
 							<LingerieVariantsSelectorButtons product={product} variant={variant}
 								changeOption={handleOptionChange}
@@ -341,19 +280,21 @@ const ProductDescription = React.memo(function ProductDescription({
 					productVariant={productVariant} />
 			</div>
 			}
-			{/* {modal && <DeliveryDateModal
-			selected={startDate}
-			onChange={(date) => {
-				setVariant({...variant, deliveryDate: moment
-					(date)
-					.format('LL')});
-				setStartDate(date);
-				setModal(false)
-			}}
-			includeDates={showAvailableDates()}
-			onClose={()=>setModal(false)}
+			{_isEmpty(availableDates) === false && modal && <DeliveryDateModal
+				selected={startDate}
+				onChange={(date) => {
+					setVariant({
+						...variant, deliveryDate: moment
+							(date)
+							.format('LL')
+					});
+					setStartDate(date);
+					setModal(false)
+				}}
+				includeDates={showAvailableDates()}
+				onClose={() => setModal(false)}
 			/>
-			} */}
+			}
 		</>
 	);
 });

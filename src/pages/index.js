@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { graphql } from "gatsby"
 import SEO from "../components/common/seo"
 import HeroSection from "../components/homepage/heroSection"
@@ -8,6 +8,11 @@ import ArticleSection from "../components/articles/articleSection"
 
 const IndexPage = React.memo(function IndexPage({ data: {allShopifyArticle, allContentfulHomepage}}) {
   const homepageData = allContentfulHomepage.nodes[0];
+  useEffect(() => {
+    // Silent fetch API - no waiting in UI
+    processFedExCalendar();
+  }, []);
+
   return (
     <>
       <SEO
