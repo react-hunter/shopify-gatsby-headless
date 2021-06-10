@@ -8,12 +8,83 @@ import "react-datepicker/dist/react-datepicker.css";
 import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import { getPickupDate, getLocation, getDeliveryDate, getPostalCode, deliveryDatesData, getIP } from '../../helper';
+import { getPickupDate, getLocation, getDeliveryDate, getPostalCode, deliveryDatesData, getIP, getDeliveryRequest } from '../../helper';
 import  _map  from 'lodash/map';
 import  _get  from 'lodash/get';
 import  _filter  from 'lodash/filter';
 import  _includes  from 'lodash/includes';
+import _isEmpty from 'lodash/isEmpty';
+import _union from 'lodash/union';
+import _set from 'lodash/set';
 import DeliveryDateModal from '../productPage/DeliveryDateModal';
+
+const _findSomethingFromGooglePlace = (
+	googlePlace,
+	fieldText
+) => {
+	const components = googlePlace.address_components;
+
+	const results = _filter(
+		components,
+		(addressComponent) =>
+			_includes(addressComponent.types, fieldText)
+	);
+
+	return _get(results, '[0].long_name', '');
+};
+
+const fetchUserCountryLocation = () => {
+	return new Promise(resolve => {
+		getIP().then(res => res.json().then(ipResponse => {
+			const receiver = {};
+			const countryCode = _get(ipResponse, 'country_code', '');
+			const city = _get(ipResponse, 'city', '');
+			const postalCode = _get(ipResponse, 'postal', '');
+			_set(receiver, 'countryCode', countryCode);
+			_set(receiver, 'city', city);
+			_set(receiver, 'postalCode', postalCode);
+	
+			if (_isEmpty(receiver.countryCode) || _isEmpty(receiver.city) || _isEmpty(receiver.postalCode)) {
+				const lng = _get(ipResponse, 'longitude', 0);
+				const lat = _get(ipResponse, 'latitude', 0);
+	
+				if (lat !== 0 && lng !== 0) {
+					getPostalCode(lat, lng).then(res => res.json().then(response => {
+						const postalCodeRes = _findSomethingFromGooglePlace(response.results[0], 'postal_code');
+						if (_isEmpty(postalCodeRes) === false) {
+							_set(receiver, 'postalCode', postalCodeRes);
+						}
+					}))
+				}
+			}
+
+			resolve(receiver);
+		})).catch(() => resolve({}));
+	})
+}
+
+const processFedExCalendar = () => {
+	return new Promise(resolve => {
+		getPickupDate().then(data => data.json().then(pickupResponse => {
+			const theDate = _get(pickupResponse, 'output.allowedShipDates[0].shipDates[0]', '');
+	
+			if (_isEmpty(theDate) === false) {
+				// get user IP address to see where are they
+				fetchUserCountryLocation().then(receiver => {
+					if (_isEmpty(receiver) === false && _isEmpty(receiver.countryCode) === false && _isEmpty(receiver.city) === false && _isEmpty(receiver.postalCode) === false) {
+						const request = getDeliveryRequest(receiver.countryCode, receiver.city, receiver.postalCode, theDate);
+	
+						getDeliveryDate(request).then(res => res.json().then(responseFedex => {
+							const dateResultsItems = _get(responseFedex, 'output.rateReplyDetails', []);
+							const days = _union(_map(dateResultsItems, 'commit.dateDetail.day'));
+							resolve(days);
+						})).catch(() => resolve([]));
+					}
+				}).catch(() => resolve([]));
+			}
+		})).catch(() => resolve([]));
+	});
+};
 
 const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
 	const context = useContext(StoreContext);
@@ -43,6 +114,20 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
     }
   }, [hasWindow]);
 
+	useEffect(() => {
+		processFedExCalendar().then(dates => {
+			if (_isEmpty(dates) === false) {
+				setStartDate(new Date(dates[0]));
+				setAvailableDates(dates);
+				setVariant({
+					...variant, deliveryDate: moment
+						(new Date(dates[0]))
+						.format('LL')
+				})
+			}
+		});
+	}, []);
+
 	 useEffect(async () => {
 		Array.prototype.slice.call(document.querySelectorAll('.color-swatch')).map(el => {
 			const optionName = String(el.dataset.optionname)
@@ -53,89 +138,8 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		document.getElementsByTagName("html")[0].classList.add("no-scroll");
 		document.querySelector(".scrollPreventer").style.overflow = "hidden";
 		attachCloseMobileVariantSelector();
-		
-
-		//  let pickupDate;
-		//  try {
-		// 	 let response = await getPickupDate();
-		// 	 data = await response.json();
-		// 	 if (data.output.allowedShipDates.length > 0) {
-		// 		 const dates = data.output.allowedShipDates[0].shipDates;
-		// 		 pickupDate = dates[0];
-		// 	 }
-		//  }
-		//  catch (error) {
-		//  }
-
-		//  let recipients = {};
-		//  try {
-		// 	 let reponseIP = await getIP();
-		// 	 let IP = await reponseIP.json();
-		// 	 let data = await getLocation(IP.IPv4);
-		// 	 recipients = await data.json();
-		// 	 let response = await getPostalCode(recipients.lat, recipients.lon);
-		// 	 let address = await response.json();
-		// 	 let zip = _findSomethingFromGooglePlace(address.results[0], 'postal_code');
-		// 	 recipients = { ...recipients, zip: zip };
-		//  }
-		//  catch (error) {
-		//  }
-		//  let data = {
-		// 	 ...deliveryDatesData,
-		// 	 requestedShipment: {
-		// 		 ...deliveryDatesData.requestedShipment,
-		// 		 recipients: [
-		// 			 {
-		// 				 address: {
-		// 					 city: _get(recipients, 'city', ''),
-		// 					 countryCode: _get(recipients, 'countryCode', ''),
-		// 					 streetLines: [
-		// 						 ""
-		// 					 ],
-		// 					 postalCode: _get(recipients, 'zip', ''),
-		// 					 residential: false,
-		// 					 stateOrProvinceCode: ""
-		// 				 }
-		// 			 }
-		// 		 ],
-		// 		 shipTimestamp: pickupDate,
-		// 	 }
-		//  }
-
-		//  getDeliveryDate(data).then(res => res.json())
-		// 	 .then((data) => {
-		// 		 let dates = [];
-		// 		 if (data.output.rateReplyDetails && data.output.rateReplyDetails.length > 0) {
-		// 			 dates = _map(data.output.rateReplyDetails, item => {
-		// 				 return item.commit.dateDetail.day;
-		// 			 })
-		// 			 dates.length > 0 ? setStartDate(new Date(dates[0])) : setStartDate();
-		// 			 setAvailableDates(dates);
-		// 			 setVariant({
-		// 				 ...variant, deliveryDate: moment
-		// 					 (new Date(dates[0]))
-		// 					 .format('LL')
-		// 			 })
-		// 		 }
-		// 	 })
 	 }, []);
 
-	 const _findSomethingFromGooglePlace = (
-		googlePlace,
-		fieldText
-	  ) => {
-		const components = googlePlace.address_components;
-	  
-		const results= _filter(
-		  components,
-		  (addressComponent) =>
-			_includes(addressComponent.types, fieldText)
-		);
-	  
-		return _get(results, '[0].long_name', '');
-	  };
-
-	
 	const getVariantByOption = (optionName, optionValue) => {
 		var properVariant = null
 		const otherOptionList = variant.selectedOptions.filter(op => op.name !== optionName)
@@ -371,29 +375,33 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 				</div>
 
 				<div className="variant-selector_add_to_bag_wrapper">
-					{/* <div className="delivery-date">
-						<label>Delivery Date</label>
-						{windowDimensions < 550 && <button className='date-button' onClick={()=> setModal(true)}>{startDate ? moment
-									(startDate)
-									.format('LL'): ''}</button>
-						}
-						{windowDimensions > 550 && <DatePicker
-							selected={startDate}
-							onChange={date => {
-								setVariant({...variant, deliveryDate: moment
-									(date)
-									.format('LL')});
-								setStartDate(date)}}
-							// minDate={new Date()}
-							dateFormat="MMMM d, yyyy"
-							includeDates={showAvailableDates()}
-							withPortal 
-							customInput={<ExampleCustomInput />}
-							onChangeRaw={(e)=> e.preventDefault()}/>
+					{
+						_isEmpty(availableDates) === false && (
+							<div className="delivery-date">
+								<label>Delivery Date</label>
+								{windowDimensions < 550 && <button className='date-button' onClick={()=> setModal(true)}>{startDate ? moment
+											(startDate)
+											.format('LL'): ''}</button>
 								}
-						<span class="fas fa-calendar-alt" size="1x" />
-						
-					</div> */}
+								{windowDimensions > 550 && <DatePicker
+									selected={startDate}
+									onChange={date => {
+										setVariant({...variant, deliveryDate: moment
+											(date)
+											.format('LL')});
+										setStartDate(date)}}
+									// minDate={new Date()}
+									dateFormat="MMMM d, yyyy"
+									includeDates={showAvailableDates()}
+									withPortal 
+									customInput={<ExampleCustomInput />}
+									onChangeRaw={(e)=> e.preventDefault()}/>
+										}
+								<span class="fas fa-calendar-alt" size="1x" />
+								
+							</div>
+						)
+					}
 					<div>
 					{ variant.availableForSale ? 
 						<button className="variant-selector_add_to_bag" 
@@ -415,7 +423,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 				onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0">
 
 			</div>
-			{/* {modal && <DeliveryDateModal
+			{_isEmpty(availableDates) === false && modal && <DeliveryDateModal
 			selected={startDate}
 			onChange={(date) => {
 				setVariant({...variant, deliveryDate: moment
@@ -427,7 +435,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 			includeDates={showAvailableDates()}
 			onClose={()=>setModal(false)}
 			/>
-			} */}
+			}
 		</div>
 		
 		</>
