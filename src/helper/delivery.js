@@ -85,7 +85,9 @@ const fetchUserCountryLocation = () => {
 				} else {
           resolve({});
         }
-			}
+			} else {
+        resolve(receiver);
+      }
 		})).catch(() => resolve({}));
 	})
 }
