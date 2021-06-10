@@ -74,7 +74,7 @@ export const getDeliveryDate = (data) => {
     }
   };
   const body = JSON.stringify(data);
-  const opts = { method, body,headers, ...DEFAULT_OPTIONS };
+  const opts = { method, body, headers, ...DEFAULT_OPTIONS };
   return fetch(`https://tkstudiovn-eval-prod.apigee.net/fedex-api/rate/v2/rates/quotes`, opts)
 };
 
@@ -99,6 +99,139 @@ export const getPostalCode = (lat, lon) => {
   const opts = { method };
   return fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + lon + '&key=AIzaSyA8u1MTeHJ128oM7WxIiQZldp_p9T8E3uU', opts)
 };
+
+export const getDeliveryRequest = (countryCode, city, postalCode, pickupDate) => ({
+  rateRequestControlParameters: {
+    rateSortOrder: "COMMITASCENDING",
+    returnTransitTimes: true,
+    variableOptions: null,
+    servicesNeededOnRateFailure: false
+  },
+  requestedShipment: {
+    shipper: {
+      accountNumber: {
+        value: ""
+      },
+      address: {
+        city: "New York",
+        postalCode: "10007",
+        countryCode: "US",
+        streetLines: [
+          ""
+        ],
+        residential: false,
+        stateOrProvinceCode: "NY"
+      }
+    },
+    recipients: [
+      {
+        address: {
+          city,
+          countryCode,
+          streetLines: [
+            ""
+          ],
+          postalCode,
+          residential: false,
+          stateOrProvinceCode: ""
+        }
+      }
+    ],
+    shipTimestamp: pickupDate,
+    pickupType: "DROPOFF_AT_FEDEX_LOCATION",
+    packagingType: "YOUR_PACKAGING",
+    shippingChargesPayment: {
+      payor: {
+        responsibleParty: {
+          accountNumber: {
+            value: ""
+          },
+          address: {
+            countryCode: "US"
+          }
+        }
+      }
+    },
+    blockInsightVisibility: false,
+    edtRequestType: "NONE",
+    rateRequestType: [
+      "ACCOUNT",
+      "LIST"
+    ],
+    requestedPackageLineItems: [
+      {
+        groupPackageCount: 1,
+        physicalPackaging: "YOUR_PACKAGING",
+        insuredValue: {
+          currency: "USD",
+          currencySymbol: null,
+          amount: 0
+        },
+        weight: {
+          units: "LB",
+          value: 1
+        }
+      }
+    ],
+    preferredCurrency: "USD",
+    customsClearanceDetail: {
+      commodities: [
+        {
+          name: "documents",
+          numberOfPieces: 1,
+          description: "documents",
+          countryOfManufacture: "",
+          harmonizedCode: "",
+          harmonizedCodeDescription: "",
+          itemDescriptionForClearance: "",
+          weight: {
+            units: "LB",
+            value: 1
+          },
+          quantity: 1,
+          quantityUnits: "",
+          unitPrice: {
+            currency: "USD",
+            amount: null,
+            currencySymbol: ""
+          },
+          unitsOfMeasures: [
+            {
+              category: "",
+              code: "",
+              name: "",
+              value: "",
+              originalCode: ""
+            }
+          ],
+          excises: [
+            {
+              values: [
+                ""
+              ],
+              code: ""
+            }
+          ],
+          customsValue: {
+            currency: "USD",
+            amount: 1,
+            currencySymbol: ""
+          },
+          exportLicenseNumber: "",
+          partNumber: "",
+          exportLicenseExpirationDate: "",
+          getcIMarksAndNumbers: ""
+        }
+      ]
+    }
+  },
+  carrierCodes: [
+    "FDXG",
+    "FDXE"
+  ],
+  returnLocalizedDateTime: true,
+  webSiteCountryCode: "US"
+})
 
 export const deliveryDatesData = {
   rateRequestControlParameters: {
