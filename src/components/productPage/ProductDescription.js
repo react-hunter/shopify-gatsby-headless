@@ -45,20 +45,6 @@ const ProductDescription = React.memo(function ProductDescription({
 	const [windowDimensions, setWindowDimensions] = useState(window.innerWidth);
 
 	useEffect(() => {
-		processFedExCalendar().then(dates => {
-			if (_isEmpty(dates) === false) {
-				setStartDate(new Date(dates[0]));
-				setAvailableDates(dates);
-				setVariant({
-					...variant, deliveryDate: moment
-						(new Date(dates[0]))
-						.format('LL')
-				})
-			}
-		});
-	}, []);
-
-	useEffect(() => {
 		if (hasWindow) {
 			function handleResize() {
 				setWindowDimensions(window.innerWidth);
@@ -82,11 +68,22 @@ const ProductDescription = React.memo(function ProductDescription({
 				});
 			});
 		}
+
 		let defaultOptionValues = {}
 		product.options.forEach(selector => {
 			defaultOptionValues[selector.name] = selector.values[0]
 		})
-		setVariant(defaultOptionValues);
+		processFedExCalendar().then(dates => {
+			if (_isEmpty(dates) === false) {
+				setStartDate(new Date(dates[0]));
+				setAvailableDates(dates);
+				 setVariant({
+					...defaultOptionValues, deliveryDate: moment
+						(new Date(dates[0]))
+						.format('LL')
+				})
+			}
+		});
 		getAccordionData();
 	}, [])
 
