@@ -83,7 +83,7 @@ export const getIP = () => {
   const method = 'GET';
 
   const opts = { method };
-  return fetch(`https://api.db-ip.com/v2/free/self`, opts)
+  return fetch(`https://geolocation-db.com/json/`, opts)
 };
 
 export const getLocation = (IP) => {
