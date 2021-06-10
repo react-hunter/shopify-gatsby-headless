@@ -14436,7 +14436,7 @@ header .menu-category-panel .menu-panel .menu-panel_image_wrapper {
 .product-collection_image_primary,
 .product-collection_image_alternate {
   transition: transform 0.4s;
-  background-color: white;
+  background: linear-gradient( 90deg, #D8D8D8, #F5F5F5, #D8D8D8);
 }
 
 .product-tile__image {
