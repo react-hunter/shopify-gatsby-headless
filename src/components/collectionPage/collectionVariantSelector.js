@@ -55,69 +55,69 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		attachCloseMobileVariantSelector();
 		
 
-		 let pickupDate;
-		 try {
-			 let response = await getPickupDate();
-			 data = await response.json();
-			 if (data.output.allowedShipDates.length > 0) {
-				 const dates = data.output.allowedShipDates[0].shipDates;
-				 pickupDate = dates[0];
-			 }
-		 }
-		 catch (error) {
-		 }
+		//  let pickupDate;
+		//  try {
+		// 	 let response = await getPickupDate();
+		// 	 data = await response.json();
+		// 	 if (data.output.allowedShipDates.length > 0) {
+		// 		 const dates = data.output.allowedShipDates[0].shipDates;
+		// 		 pickupDate = dates[0];
+		// 	 }
+		//  }
+		//  catch (error) {
+		//  }
 
-		 let recipients = {};
-		 try {
-			 let reponseIP = await getIP();
-			 let IP = await reponseIP.json();
-			 let data = await getLocation(IP.IPv4);
-			 recipients = await data.json();
-			 let response = await getPostalCode(recipients.lat, recipients.lon);
-			 let address = await response.json();
-			 let zip = _findSomethingFromGooglePlace(address.results[0], 'postal_code');
-			 recipients = { ...recipients, zip: zip };
-		 }
-		 catch (error) {
-		 }
-		 let data = {
-			 ...deliveryDatesData,
-			 requestedShipment: {
-				 ...deliveryDatesData.requestedShipment,
-				 recipients: [
-					 {
-						 address: {
-							 city: _get(recipients, 'city', ''),
-							 countryCode: _get(recipients, 'countryCode', ''),
-							 streetLines: [
-								 ""
-							 ],
-							 postalCode: _get(recipients, 'zip', ''),
-							 residential: false,
-							 stateOrProvinceCode: ""
-						 }
-					 }
-				 ],
-				 shipTimestamp: pickupDate,
-			 }
-		 }
+		//  let recipients = {};
+		//  try {
+		// 	 let reponseIP = await getIP();
+		// 	 let IP = await reponseIP.json();
+		// 	 let data = await getLocation(IP.IPv4);
+		// 	 recipients = await data.json();
+		// 	 let response = await getPostalCode(recipients.lat, recipients.lon);
+		// 	 let address = await response.json();
+		// 	 let zip = _findSomethingFromGooglePlace(address.results[0], 'postal_code');
+		// 	 recipients = { ...recipients, zip: zip };
+		//  }
+		//  catch (error) {
+		//  }
+		//  let data = {
+		// 	 ...deliveryDatesData,
+		// 	 requestedShipment: {
+		// 		 ...deliveryDatesData.requestedShipment,
+		// 		 recipients: [
+		// 			 {
+		// 				 address: {
+		// 					 city: _get(recipients, 'city', ''),
+		// 					 countryCode: _get(recipients, 'countryCode', ''),
+		// 					 streetLines: [
+		// 						 ""
+		// 					 ],
+		// 					 postalCode: _get(recipients, 'zip', ''),
+		// 					 residential: false,
+		// 					 stateOrProvinceCode: ""
+		// 				 }
+		// 			 }
+		// 		 ],
+		// 		 shipTimestamp: pickupDate,
+		// 	 }
+		//  }
 
-		 getDeliveryDate(data).then(res => res.json())
-			 .then((data) => {
-				 let dates = [];
-				 if (data.output.rateReplyDetails && data.output.rateReplyDetails.length > 0) {
-					 dates = _map(data.output.rateReplyDetails, item => {
-						 return item.commit.dateDetail.day;
-					 })
-					 dates.length > 0 ? setStartDate(new Date(dates[0])) : setStartDate();
-					 setAvailableDates(dates);
-					 setVariant({
-						 ...variant, deliveryDate: moment
-							 (new Date(dates[0]))
-							 .format('LL')
-					 })
-				 }
-			 })
+		//  getDeliveryDate(data).then(res => res.json())
+		// 	 .then((data) => {
+		// 		 let dates = [];
+		// 		 if (data.output.rateReplyDetails && data.output.rateReplyDetails.length > 0) {
+		// 			 dates = _map(data.output.rateReplyDetails, item => {
+		// 				 return item.commit.dateDetail.day;
+		// 			 })
+		// 			 dates.length > 0 ? setStartDate(new Date(dates[0])) : setStartDate();
+		// 			 setAvailableDates(dates);
+		// 			 setVariant({
+		// 				 ...variant, deliveryDate: moment
+		// 					 (new Date(dates[0]))
+		// 					 .format('LL')
+		// 			 })
+		// 		 }
+		// 	 })
 	 }, []);
 
 	 const _findSomethingFromGooglePlace = (
@@ -371,7 +371,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 				</div>
 
 				<div className="variant-selector_add_to_bag_wrapper">
-					<div className="delivery-date">
+					{/* <div className="delivery-date">
 						<label>Delivery Date</label>
 						{windowDimensions < 550 && <button className='date-button' onClick={()=> setModal(true)}>{startDate ? moment
 									(startDate)
@@ -393,7 +393,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 								}
 						<span class="fas fa-calendar-alt" size="1x" />
 						
-					</div>
+					</div> */}
 					<div>
 					{ variant.availableForSale ? 
 						<button className="variant-selector_add_to_bag" 
@@ -415,7 +415,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 				onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0">
 
 			</div>
-			{modal && <DeliveryDateModal
+			{/* {modal && <DeliveryDateModal
 			selected={startDate}
 			onChange={(date) => {
 				setVariant({...variant, deliveryDate: moment
@@ -427,7 +427,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 			includeDates={showAvailableDates()}
 			onClose={()=>setModal(false)}
 			/>
-			}
+			} */}
 		</div>
 		
 		</>
