@@ -120,13 +120,15 @@ const Provider = ({ children }) => {
 							let lineItems = checkout.lineItems.map(item => {
 								if(item.variant.id === variantId && messageContent){
 									item.messageContent = messageContent;
+								}else {
+									let list = checkoutItem.lineItems.filter(i => i.variant.id === item.variant.id);
+									item.messageContent = list.length > 0 ?list[0].messageContent : '';
 								}
 								if(item.variant.id === variantId && deliveryDate){
 									item.deliveryDate = deliveryDate;
 								}else {
 									let list = checkoutItem.lineItems.filter(i => i.variant.id === item.variant.id);
 									item.deliveryDate = list.length > 0 ?list[0].deliveryDate : '';
-									item.messageContent = list.length > 0 ?list[0].messageContent : '';
 								}
 								return item
 							})
