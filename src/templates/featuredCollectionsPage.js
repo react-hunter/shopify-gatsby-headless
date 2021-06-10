@@ -6,6 +6,7 @@ import CollectionSlider from "../components/featuredCollectionsPage/collectionSl
 import '../styles/featuredCollectionsPage.scss';
 import '../styles/widget.min.css';
 import CollectionSliderNonRoseSkeleton from '../components/featuredCollectionsPage/collectionSliderNonRoseSkeleton';
+import { processFedExCalendar } from '../helper/delivery';
 
 const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
   data,
@@ -18,6 +19,9 @@ const FeaturedCollectionsPage = React.memo(function FeaturedCollectionsPage({
     return data.allShopifyCollection.edges.find(collectionItem => collectionItem.node.handle === col)
   })
   useEffect(() => {
+    // Silent fetch API - no waiting in UI
+    processFedExCalendar();
+
     const timer = setTimeout(() => {
       setShowContent(true);
     }, 4000);
