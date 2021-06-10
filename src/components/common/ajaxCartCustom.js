@@ -262,9 +262,9 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 														getCustomAttributes(item)
 													}
 												</div>
-												<div className="ajax-cart-item-properties">
+												{/* <div className="ajax-cart-item-properties">
 													<p className="ajax-cart-item-property" key="rose-color"><b>Delivery Date:</b> {item.deliveryDate || ''}</p>
-												</div>
+												</div> */}
 												{item.messageContent && <div className="ajax-cart-item-properties">
 													<p className="ajax-cart-item-property" style={{whiteSpace: 'pre-wrap'}} key="rose-color"><b>Greeting Card Message:</b> <br/>{item.messageContent || ''}</p>
 												</div>

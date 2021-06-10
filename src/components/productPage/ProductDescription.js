@@ -9,10 +9,10 @@ import LingerieVariantsSelectorButtons from "./LingerieVariantsSelectorButtons"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
-import  _map  from 'lodash/map';
-import  _get  from 'lodash/get';
-import  _filter  from 'lodash/filter';
-import  _includes  from 'lodash/includes';
+import _map from 'lodash/map';
+import _get from 'lodash/get';
+import _filter from 'lodash/filter';
+import _includes from 'lodash/includes';
 import Buttons from "./Buttons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
@@ -44,18 +44,18 @@ const ProductDescription = React.memo(function ProductDescription({
 
 	useEffect(() => {
 		if (hasWindow) {
-		  function handleResize() {
-			setWindowDimensions(window.innerWidth);
-		  }
-	
-		  window.addEventListener('resize', handleResize);
-		  return () => window.removeEventListener('resize', handleResize);
+			function handleResize() {
+				setWindowDimensions(window.innerWidth);
+			}
+
+			window.addEventListener('resize', handleResize);
+			return () => window.removeEventListener('resize', handleResize);
 		}
-	  }, [hasWindow]);
+	}, [hasWindow]);
 
 	useEffect(async () => {
 		async function getAccordionData() {
-			const accordionData = await client.getEntries({'content_type': 'productAccordion'});
+			const accordionData = await client.getEntries({ 'content_type': 'productAccordion' });
 			setProductAccordions(accordionData.items);
 
 			document.querySelectorAll('.accordion_button').forEach(button => {
@@ -70,72 +70,73 @@ const ProductDescription = React.memo(function ProductDescription({
 		product.options.forEach(selector => {
 			defaultOptionValues[selector.name] = selector.values[0]
 		})
+		setVariant(defaultOptionValues);
 
-		let pickupDate;
-		try {
-			let response = await getPickupDate();
-			data = await response.json();
-			if (data.output.allowedShipDates.length > 0) {
-				const dates = data.output.allowedShipDates[0].shipDates;
-				pickupDate = dates[0];
-			}
-		}
-		catch (error) {
-		}
+		// let pickupDate;
+		// try {
+		// 	let response = await getPickupDate();
+		// 	data = await response.json();
+		// 	if (data.output.allowedShipDates.length > 0) {
+		// 		const dates = data.output.allowedShipDates[0].shipDates;
+		// 		pickupDate = dates[0];
+		// 	}
+		// }
+		// catch (error) {
+		// }
 
-		let recipients = {};
-		try {
-			let reponseIP = await getIP();
-			 let IP = await reponseIP.json();
-			 let data = await getLocation(IP.IPv4);
-			recipients = await data.json();
-			let response = await getPostalCode(recipients.lat, recipients.lon);
-			let address = await response.json();
-			let zip = _findSomethingFromGooglePlace(address.results[0], 'postal_code');
-			recipients = { ...recipients, zip: zip };
-		}
-		catch (error) {
-		}
+		// let recipients = {};
+		// try {
+		// 	let reponseIP = await getIP();
+		// 	 let IP = await reponseIP.json();
+		// 	 let data = await getLocation(IP.IPv4);
+		// 	recipients = await data.json();
+		// 	let response = await getPostalCode(recipients.lat, recipients.lon);
+		// 	let address = await response.json();
+		// 	let zip = _findSomethingFromGooglePlace(address.results[0], 'postal_code');
+		// 	recipients = { ...recipients, zip: zip };
+		// }
+		// catch (error) {
+		// }
 		getAccordionData();
 
-		let data = {
-			...deliveryDatesData,
-			requestedShipment: {
-				...deliveryDatesData.requestedShipment,
-				recipients: [
-					{
-						address: {
-							city: _get(recipients, 'city', ''),
-							countryCode: _get(recipients, 'countryCode', ''),
-							streetLines: [
-								""
-							],
-							postalCode: _get(recipients, 'zip', ''),
-							residential: false,
-							stateOrProvinceCode: ""
-						}
-					}
-				],
-				shipTimestamp: pickupDate,
-			}
-		}
+		// let data = {
+		// 	...deliveryDatesData,
+		// 	requestedShipment: {
+		// 		...deliveryDatesData.requestedShipment,
+		// 		recipients: [
+		// 			{
+		// 				address: {
+		// 					city: _get(recipients, 'city', ''),
+		// 					countryCode: _get(recipients, 'countryCode', ''),
+		// 					streetLines: [
+		// 						""
+		// 					],
+		// 					postalCode: _get(recipients, 'zip', ''),
+		// 					residential: false,
+		// 					stateOrProvinceCode: ""
+		// 				}
+		// 			}
+		// 		],
+		// 		shipTimestamp: pickupDate,
+		// 	}
+		// }
 
-		getDeliveryDate(data).then(res => res.json())
-			.then((data) => {
-				let dates = [];
-				if (data.output.rateReplyDetails && data.output.rateReplyDetails.length > 0) {
-					dates = _map(data.output.rateReplyDetails, item => {
-						return item.commit.dateDetail.day;
-					})
-					dates.length > 0 ? setStartDate(new Date(dates[0])) : setStartDate();
-					setAvailableDates(dates);
-					setVariant({
-						...defaultOptionValues, deliveryDate: moment
-							(new Date(dates[0]))
-							.format('LL')
-					})
-				}
-			})
+		// getDeliveryDate(data).then(res => res.json())
+		// 	.then((data) => {
+		// 		let dates = [];
+		// 		if (data.output.rateReplyDetails && data.output.rateReplyDetails.length > 0) {
+		// 			dates = _map(data.output.rateReplyDetails, item => {
+		// 				return item.commit.dateDetail.day;
+		// 			})
+		// 			dates.length > 0 ? setStartDate(new Date(dates[0])) : setStartDate();
+		// 			setAvailableDates(dates);
+		// 			setVariant({
+		// 				...defaultOptionValues, deliveryDate: moment
+		// 					(new Date(dates[0]))
+		// 					.format('LL')
+		// 			})
+		// 		}
+		// 	})
 
 	}, [])
 
@@ -146,23 +147,23 @@ const ProductDescription = React.memo(function ProductDescription({
 	const _findSomethingFromGooglePlace = (
 		googlePlace,
 		fieldText
-	  ) => {
+	) => {
 		const components = googlePlace.address_components;
-	  
-		const results= _filter(
-		  components,
-		  (addressComponent) =>
-			_includes(addressComponent.types, fieldText)
+
+		const results = _filter(
+			components,
+			(addressComponent) =>
+				_includes(addressComponent.types, fieldText)
 		);
-	  
+
 		return _get(results, '[0].long_name', '');
-	  };
+	};
 
 
-	function rotateButton(identifier){
-		if(document.getElementsByClassName(identifier)[0].firstElementChild.style.transform === "rotate(0deg)"){
+	function rotateButton(identifier) {
+		if (document.getElementsByClassName(identifier)[0].firstElementChild.style.transform === "rotate(0deg)") {
 			document.getElementsByClassName(identifier)[0].firstElementChild.style.transform = "rotate(180deg)"
-		}else{
+		} else {
 			document.getElementsByClassName(identifier)[0].firstElementChild.style.transform = "rotate(0deg)"
 		}
 	}
@@ -196,26 +197,26 @@ const ProductDescription = React.memo(function ProductDescription({
 
 	function showAccordions(jsonObj) {
 		if (jsonObj) {
-			for (var i=0; i<jsonObj.length; i++) {
+			for (var i = 0; i < jsonObj.length; i++) {
 				if (jsonObj[i].productHandle === product.handle) {
 					return { display: `none` };
 				}
 			}
 		}
 	}
-	
-	function findVariant (optionName, optionValue) {
+
+	function findVariant(optionName, optionValue) {
 		var properVariant = null
 		const otherOptionKeys = Object.keys(variant).filter(optionKey => (optionKey !== optionName && optionKey !== 'deliveryDate' && optionKey !== 'messageContent'))
 
 		product.variants.map(va => {
 			var matched = true;
 			otherOptionKeys.map(ook => {
-				if(!va.title.split(' / ').includes(variant[ook])) {
+				if (!va.title.split(' / ').includes(variant[ook])) {
 					matched = false
 				}
 			})
-			if(matched === true && va.title.split(' / ').includes(optionValue)) {
+			if (matched === true && va.title.split(' / ').includes(optionValue)) {
 				properVariant = va;
 			}
 		})
@@ -225,7 +226,7 @@ const ProductDescription = React.memo(function ProductDescription({
 	const showAvailableDates = () => {
 		let dates = [];
 		if (availableDates.length > 0) {
-			 dates = availableDates.map(date => {
+			dates = availableDates.map(date => {
 				return new Date(date);
 			})
 		}
@@ -234,17 +235,17 @@ const ProductDescription = React.memo(function ProductDescription({
 	}
 	const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
 		<button className="date-button" onClick={onClick} ref={ref}>
-		  {value}
+			{value}
 		</button>
-	  ));
+	));
 
 	return (
 		<>
-		{! modal && <div className="product_description-container">
-			<div className="grid__item medium-up--one-half rightSideProductContainer">
-				<div className="product-single__meta">
-					<ProductInfo product={product} review={review} />
-					<div className="delivery-date">
+			{!modal && <div className="product_description-container">
+				<div className="grid__item medium-up--one-half rightSideProductContainer">
+					<div className="product-single__meta">
+						<ProductInfo product={product} review={review} />
+						{/* <div className="delivery-date">
 						<label >Delivery Date</label>
 						{windowDimensions < 550 && <button className='date-button' onClick={()=> setModal(true)}>{startDate ? moment
 									(startDate)
@@ -268,79 +269,79 @@ const ProductDescription = React.memo(function ProductDescription({
 								withPortal />
 							}
 						<span class="fas fa-calendar-alt" size="1x" />
-					</div>
-					{product.productType === 'Lingerie'? 
-						<LingerieVariantsSelectorButtons product={product} variant={variant}
-							changeOption={handleOptionChange} 
-							selectVariant={selectVariant} 
-							clickVariantSelect={clickVariantSelect}
-							findVariant={findVariant} />
-						:
-						<VariantsSelectorButtons product={product} variant={variant} openVariantAndFill={openVariantAndFill} />
-					}
+					</div> */}
+						{product.productType === 'Lingerie' ?
+							<LingerieVariantsSelectorButtons product={product} variant={variant}
+								changeOption={handleOptionChange}
+								selectVariant={selectVariant}
+								clickVariantSelect={clickVariantSelect}
+								findVariant={findVariant} />
+							:
+							<VariantsSelectorButtons product={product} variant={variant} openVariantAndFill={openVariantAndFill} />
+						}
 
-					<Buttons 
-						product={product}
-						protectionProduct={protectionProduct}
-						context={context} 
-						available={available} 
-						quantity={quantity} 
-						productVariant={productVariant}
-						variant= {variant}
-					/>
-
-					<div className="variant-selector-sideNav">
-						<VariantSelectorsForModal
-							changeOption={handleOptionChange}
-							options={modalOptions}
-							closeModal={closeModal}
-							modalClass={modalClass}
-							clickVariantSelect={clickVariantSelect}
-							// productVariant={productVariant}
-							selectVariant={selectVariant}
-							findVariant={findVariant}
+						<Buttons
+							product={product}
+							protectionProduct={protectionProduct}
+							context={context}
+							available={available}
+							quantity={quantity}
+							productVariant={productVariant}
+							variant={variant}
 						/>
-					</div>
-						
-				</div>
-				
-				<div className="product-single__description rte">
-						
-					<div className="product_accordions-container">
-						<div className="product_description">
-							<button className={`accordion_button accordion_button--active description`}>
-								DESCRIPTION
-								<FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />                                
-							</button>
-							<div
-								key={`body`}
-								id="content"
-								className="content accordion_content"
-								dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+
+						<div className="variant-selector-sideNav">
+							<VariantSelectorsForModal
+								changeOption={handleOptionChange}
+								options={modalOptions}
+								closeModal={closeModal}
+								modalClass={modalClass}
+								clickVariantSelect={clickVariantSelect}
+								// productVariant={productVariant}
+								selectVariant={selectVariant}
+								findVariant={findVariant}
 							/>
 						</div>
 
-						{ productAccordions.map((item, index) => 
-							<div key={index} style={showAccordions(item.fields.disableProductList)} >
-								<button key={`btn_${index}`} className={`accordion_button ${item.fields.headerClass}`}>
-									{ item.fields.header }
-									<FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />                                
+					</div>
+
+					<div className="product-single__description rte">
+
+						<div className="product_accordions-container">
+							<div className="product_description">
+								<button className={`accordion_button accordion_button--active description`}>
+									DESCRIPTION
+								<FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />
 								</button>
-								<div key={`content_${index}`} className={`accordion_content ${item.fields.contentClass}`} dangerouslySetInnerHTML={{ __html: item.fields.content }} />
+								<div
+									key={`body`}
+									id="content"
+									className="content accordion_content"
+									dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+								/>
 							</div>
-						)}
+
+							{productAccordions.map((item, index) =>
+								<div key={index} style={showAccordions(item.fields.disableProductList)} >
+									<button key={`btn_${index}`} className={`accordion_button ${item.fields.headerClass}`}>
+										{item.fields.header}
+										<FontAwesomeIcon className="fa-angle-down" icon={faAngleDown} size="1x" />
+									</button>
+									<div key={`content_${index}`} className={`accordion_content ${item.fields.contentClass}`} dangerouslySetInnerHTML={{ __html: item.fields.content }} />
+								</div>
+							)}
+						</div>
 					</div>
 				</div>
+				<AtcSticky
+					product={product}
+					context={context}
+					available={available}
+					quantity={quantity}
+					productVariant={productVariant} />
 			</div>
-			<AtcSticky 
-				product={product}
-				context={context} 
-				available={available} 
-				quantity={quantity} 
-				productVariant={productVariant} />
-		</div>
-}
-			{modal && <DeliveryDateModal
+			}
+			{/* {modal && <DeliveryDateModal
 			selected={startDate}
 			onChange={(date) => {
 				setVariant({...variant, deliveryDate: moment
@@ -352,8 +353,8 @@ const ProductDescription = React.memo(function ProductDescription({
 			includeDates={showAvailableDates()}
 			onClose={()=>setModal(false)}
 			/>
-			}
-	</>
+			} */}
+		</>
 	);
 });
 
