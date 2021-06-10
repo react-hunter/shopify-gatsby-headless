@@ -73,17 +73,19 @@ const ProductDescription = React.memo(function ProductDescription({
 		product.options.forEach(selector => {
 			defaultOptionValues[selector.name] = selector.values[0]
 		})
+		let listDates=[];
 		processFedExCalendar().then(dates => {
 			if (_isEmpty(dates) === false) {
+				listDates = dates
 				setStartDate(new Date(dates[0]));
 				setAvailableDates(dates);
-				 setVariant({
-					...defaultOptionValues, deliveryDate: moment
-						(new Date(dates[0]))
-						.format('LL')
-				})
 			}
 		});
+		setVariant({
+			...defaultOptionValues, deliveryDate: listDates ? moment
+				(new Date(listDates[0]))
+				.format('LL'): null
+		})
 		getAccordionData();
 	}, [])
 
