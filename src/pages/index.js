@@ -5,6 +5,7 @@ import SEO from "../components/common/seo"
 import HeroSection from "../components/homepage/heroSection"
 import ImageSection from "../components/homepage/imageSections"
 import ArticleSection from "../components/articles/articleSection"
+import { processFedExCalendar } from "../helper/delivery"
 
 const IndexPage = React.memo(function IndexPage({ data: {allShopifyArticle, allContentfulHomepage}}) {
   const homepageData = allContentfulHomepage.nodes[0];
