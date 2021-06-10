@@ -71,7 +71,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		 try {
 			 let reponseIP = await getIP();
 			 let IP = await reponseIP.json();
-			 let data = await getLocation(IP.ipAddress);
+			 let data = await getLocation(IP.IPv4);
 			 recipients = await data.json();
 			 let response = await getPostalCode(recipients.lat, recipients.lon);
 			 let address = await response.json();
