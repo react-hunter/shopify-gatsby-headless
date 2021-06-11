@@ -79,13 +79,14 @@ const ProductDescription = React.memo(function ProductDescription({
 				listDates = dates
 				setStartDate(new Date(dates[0]));
 				setAvailableDates(dates);
+				setVariant({
+					...defaultOptionValues, deliveryDate: listDates ? moment
+						(new Date(listDates[0]))
+						.format('LL'): null
+				})
 			}
 		});
-		setVariant({
-			...defaultOptionValues, deliveryDate: listDates ? moment
-				(new Date(listDates[0]))
-				.format('LL'): null
-		})
+		setVariant({...defaultOptionValues});
 		getAccordionData();
 	}, [])
 
