@@ -7,6 +7,7 @@ import React, {useState } from 'react';
   
   const DeliveryDateModal = (props) => {
     const [modal, setModal] = useState(props.isOpen);
+    const { includeDates } = props; 
 
     const toggle = () => {
       setModal(!modal);
@@ -18,7 +19,12 @@ import React, {useState } from 'react';
       <span class="fa fa-times"  size="1x" onClick={()=>{props.onClose()}} />
                 <DatePicker
                     selected={props.selected}
-                    includeDates={props.includeDates}
+                    // includeDates={props.includeDates}
+                    {
+                      ...includeDates.length > 0 && {
+                        minDate: new Date(includeDates[0])
+                      }
+                    }
                     onChange={(date) => {
                         props.onChange(date);
                     }}

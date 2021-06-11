@@ -321,9 +321,11 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 											(date)
 											.format('LL')});
 										setStartDate(date)}}
-									// minDate={new Date()}
+									{...availableDates.length > 0 && {
+										minDate: new Date(availableDates[0])
+									}}
 									dateFormat="MMMM d, yyyy"
-									includeDates={showAvailableDates()}
+									// includeDates={showAvailableDates()}
 									withPortal 
 									customInput={<ExampleCustomInput />}
 									onChangeRaw={(e)=> e.preventDefault()}/>

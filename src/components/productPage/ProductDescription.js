@@ -198,7 +198,12 @@ const ProductDescription = React.memo(function ProductDescription({
 											setStartDate(date)
 										}}
 										// minDate={new Date()}
-										includeDates={showAvailableDates()}
+										{
+											...availableDates.length > 0 && {
+												minDate: new Date(availableDates[0])
+											}
+										}
+										// includeDates={showAvailableDates()}
 										onChangeRaw={(e) => e.preventDefault()}
 										dateFormat="MMMM d, yyyy"
 										customInput={<ExampleCustomInput />}
