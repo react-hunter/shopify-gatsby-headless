@@ -135,27 +135,28 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 							}
 						</Flickity>
 					: 
-					<Flickity options={flickityOptions} flickityRef={c=> flkty = c} >
+					<div className='flickity-wrapper'>
+					<Flickity className='custom-flickity' options={flickityOptions} flickityRef={c=> flkty = c} >
 					{
 						swatchImages.map((swatchImage, swatchImageIndex) => {
 							return (
 								<>
-									<div className='image-skeleton'></div>
-									<img
-										src={swatchImage}
-										className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
-										onClick={gotoProductPage}
-										role="presentation"
-										style={{ cursor: 'pointer', left: 0 }}
-										// loading="lazy"
-										key={swatchImageIndex}
-										alt=''
-									/>
+								<img 
+									src={swatchImage}
+									className="product-tile__image product-collection_image_primary grid-view-item__image lazy-load-mc"
+									onClick={gotoProductPage}
+									role="presentation"
+									style={{ cursor: 'pointer', left: 0 }}
+									loading="lazy"
+									key={swatchImageIndex}
+									alt=''
+								/>
 								</>
 							)
 						})
 					}
 					</Flickity>
+					</div>
 				}
 				</div>
 			</div>                    
