@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ImageSpin from '../common/imageSpin'
 import loadable from '@loadable/component';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-// import HintModal from './HintModal';
+import SendHint from './SendHint';
 
 const NotifyModal = loadable(() => import('../collectionPage/notifyModal'))
 
@@ -90,9 +90,9 @@ const Buttons = React.memo(function Buttons({
 					className="btn product-form__cart-submit btn--secondary-accent js-ajax-add-to-cart"
 					disabled={!available}
 					onClick={handleAddToCart}>{available ? "ADD TO BAG" : "SOLD OUT"}{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null}</button>
-				{/* <button
+				<button
 					className="send-hint-button"
-					onClick={()=> setShowHintModal(true)}><span class="fas fa-gift" size="1x" />Send a hint</button> */}
+					onClick={()=> setShowHintModal(true)}><span class="fas fa-gift" size="1x" />Send a hint</button>
 				<div className="shopify-payment-button">
 					<button
 						className="shopify-payment-button__button shopify-payment-button__button--unbranded"
@@ -102,7 +102,7 @@ const Buttons = React.memo(function Buttons({
 
 				{!available ? <a className="btn klaviyo-bis-trigger" href="/fakeUrl" onClick={notifyMe}>NOTIFY ME</a> : null}
 			</div>
-			{/* {showHintModal && <HintModal onClose={() => setShowHintModal(false)} />} */}
+			{showHintModal && <SendHint onClose={() => setShowHintModal(false)} product = {product} />}
 
 			{!available ? <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} /> : null}
 		</div>

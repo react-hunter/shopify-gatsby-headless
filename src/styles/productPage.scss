@@ -200,6 +200,19 @@
   font-weight: 700 !important;
 }
 
+.send-hint-button {
+  font-size: 0.8125rem;
+    letter-spacing: 0.05625rem;
+    font-family: "sofia-pro";
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #e4b77d;
+    border: none;
+    background-color: white;
+    margin: .5rem;
+    width: 100%;
+}
+
 .shopify-payment-button__button:hover {
   background-color: black !important;
   color: white !important;
