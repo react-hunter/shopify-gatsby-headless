@@ -92,7 +92,7 @@ const Buttons = React.memo(function Buttons({
 					onClick={handleAddToCart}>{available ? "ADD TO BAG" : "SOLD OUT"}{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null}</button>
 				<button
 					className="send-hint-button"
-					onClick={()=> setShowHintModal(true)}><span class="fas fa-gift"/>Send a hint</button>
+					onClick={()=> setShowHintModal(true)}><span className="fas fa-gift"/>Send a hint</button>
 				<div className="shopify-payment-button">
 					<button
 						className="shopify-payment-button__button shopify-payment-button__button--unbranded"
