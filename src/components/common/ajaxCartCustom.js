@@ -9,7 +9,7 @@ import { Link } from 'gatsby'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 const OrderProtection = loadable(() => import('./orderProtection'));
 
-const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVariant, protectionVariant}) {
+const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVariant, protectionVariant, disableRushProcessing}) {
 	const context = useContext(StoreContext);
 	const [lineItems, setLineItems] = useState([]);
 	const [messageShow, setMessageShow] = useState(false);
@@ -202,15 +202,17 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 
 								{ messageShow && <GiftMessage addNoteToCart={addNoteToCart} /> }
 
-								<div className="cart-item" style={{ borderBottom: '1px solid #e5e5e5' }}>
-									<span>
-										<input type="checkbox" id="rush-processing" 
-											checked={rushLineId !== ''} onClick={rushProcessing} readOnly />
-									</span>
-									<span>
-										<strong style={{ fontFamily: "'Avenir', sans-serif" }}>Rush Processing:</strong> <span className="gift-message">Ship within 24 hours for $8.95</span> 
-									</span>
-								</div>
+								{disableRushProcessing !== true && (
+									<div className="cart-item" style={{ borderBottom: '1px solid #e5e5e5' }}>
+										<span>
+											<input type="checkbox" id="rush-processing" 
+												checked={rushLineId !== ''} onClick={rushProcessing} readOnly />
+										</span>
+										<span>
+											<strong style={{ fontFamily: "'Avenir', sans-serif" }}>Rush Processing:</strong> <span className="gift-message">Ship within 24 hours for $8.95</span> 
+										</span>
+									</div>
+								)}
 					
 								<div className="cart-subtotal-container">
 									<span className="subtotal-heading">Subtotal:</span>

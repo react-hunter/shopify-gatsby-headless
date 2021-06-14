@@ -150,6 +150,7 @@ const Layout = ({ path, children }) => {
 									giftVariant={data.giftProduct.variants[0]}
 									rushVariant={data.rushProduct.variants[0]}
 									protectionVariant={data.protectionProduct.variants[2]}
+									disableRushProcessing={false}
 								/>
 								<Header
 									path={path}
