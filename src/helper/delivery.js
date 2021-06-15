@@ -6,8 +6,42 @@ import _isEmpty from 'lodash/isEmpty';
 import _union from 'lodash/union';
 import _set from 'lodash/set';
 import _compact from 'lodash/compact';
+import moment from 'moment';
 
 import { getPickupDate, getDeliveryDate, getPostalCode, getIP, getDeliveryRequest } from './index';
+
+const _transformDeliverData = (ship, delivery) => ([
+  {
+    key: 'ship_date',
+    value: ship.format('MMMM Do YYYY')
+  },
+  {
+    key: 'delivery_date',
+    value: delivery.format('MMMM Do YYYY')
+  }
+]);
+
+export const calculateShipAndDeliverDate = (deliveryDate) => {
+  if (_isEmpty(deliveryDate) || deliveryDate === null) {
+    const today = moment();
+    let step = 1;
+
+    if (today.isoWeekday() === 6) {
+      // today is Sat
+      step = 2;
+    }
+
+    const ship = today.add(step, 'days');
+    const delivery = moment(ship).add(6, 'days');
+
+    return _transformDeliverData(ship, delivery);
+  }
+
+  const delivery = moment(deliveryDate);
+  const ship = moment(delivery).subtract(6, 'days');
+
+  return _transformDeliverData(ship, delivery);
+}
 
 const _getUniqueKey = () => `fedex_deliver_dates_${new Date().getDate()}-${new Date().getHours()}`; // Cache for 1 hour in session storage
 
