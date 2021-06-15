@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import loadable from '@loadable/component';
 import AjaxCartFooter from './ajaxCartFooter';
 import GiftMessage from './giftMessage';
+import _filter from 'lodash/filter';
 // import OrderProtection from './orderProtection';
 import AjaxCartEmpty from './ajaxCartEmpty';
 import StoreContext from '../../context/store'
@@ -112,8 +113,11 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 		e.preventDefault();
 	}
 	const getCustomAttributes = (lineItem) => {
-		if (lineItem.customAttributes.length > 1) {
-			const attributeList = lineItem.customAttributes
+		const processAttributes = _filter(lineItem.customAttributes, attribute => attribute.key !== 'ship_date' && attribute.key !== 'delivery_date');
+
+		if (processAttributes.length > 1) {
+			const attributeList = processAttributes;
+
 			return (
 				<>
 					<p className="ajax-cart-item-property" key="rose-color"><b>Rose Colors:</b> {attributeList[0].value}</p>

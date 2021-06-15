@@ -15,7 +15,7 @@ import  _filter  from 'lodash/filter';
 import  _includes  from 'lodash/includes';
 import _isEmpty from 'lodash/isEmpty';
 import DeliveryDateModal from '../productPage/DeliveryDateModal';
-import { processFedExCalendar } from '../../helper/delivery';
+import { processFedExCalendar, calculateShipAndDeliverDate } from '../../helper/delivery';
 
 const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
 	const context = useContext(StoreContext);
@@ -114,7 +114,8 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	}
 	const addToSideCart =() => {
 		setShowSpin(true);
-		context.addVariantToCart(variant.shopifyId, 1,null, variant.deliveryDate || moment
+		const properties = calculateShipAndDeliverDate(variant.deliveryDate);
+		context.addVariantToCart(variant.shopifyId, 1, properties, variant.deliveryDate || moment
 			(startDate)
 			.format('LL'));
 		setTimeout(() => context.addProtection(protectionProduct.variants[2].shopifyId, variant.deliveryDate), 1200);

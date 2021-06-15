@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { navigate } from "@reach/router"
+import _isEmpty from 'lodash/isEmpty';
 import StoreContext, { defaultStoreContext } from './store'
 import { fbAddToCart, snapAddToCart } from '../helper';
 const isBrowser = typeof window !== 'undefined'
@@ -181,15 +182,22 @@ const Provider = ({ children }) => {
 							})
 					}
 				},
-				addVariantToCartAndBuyNow: (variantId, quantity) => {
+				addVariantToCartAndBuyNow: (variantId, quantity, properties = []) => {
 					updateStore(state => {
 						return { ...state, adding: true }
 					})
 					const { checkout, client } = store
 					const checkoutId = checkout.id
-					const lineItemsToUpdate = [
-						{ variantId, quantity: parseInt(quantity, 10) },
-					]
+					let theItem = { variantId, quantity: parseInt(quantity, 10) };
+
+					if (_isEmpty(properties) === false) {
+						theItem = {
+							...theItem,
+							customAttributes: properties
+						}
+					}
+					const lineItemsToUpdate = [theItem];
+
 					return client.checkout
 						.addLineItems(checkoutId, lineItemsToUpdate)
 						.then(checkoutData => {

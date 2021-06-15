@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ImageSpin from '../common/imageSpin'
 import loadable from '@loadable/component';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { calculateShipAndDeliverDate } from '../../helper/delivery';
 
 const NotifyModal = loadable(() => import('../collectionPage/notifyModal'))
 
@@ -21,14 +22,16 @@ const Buttons = React.memo(function Buttons({
 
 	const handleAddToCart = () => {
 		setShowSpin(true);
-		context.addVariantToCart(productVariant.shopifyId, quantity, null, variant.deliveryDate, messageContent);
+		const properties = calculateShipAndDeliverDate(variant.deliveryDate);
+		context.addVariantToCart(productVariant.shopifyId, quantity, properties, variant.deliveryDate, messageContent);
 		setTimeout(() => context.addProtection(protectionProduct.variants[2].shopifyId, variant.deliveryDate, messageContent), 1200);
 		setTimeout(openCartDrawer, 2500);
 		setShowMessage(false);
 	}
 
 	const handleAddToCart_BuyNow = () => {
-		context.addVariantToCartAndBuyNow(productVariant.shopifyId, quantity)
+		const properties = calculateShipAndDeliverDate(variant.deliveryDate);
+		context.addVariantToCartAndBuyNow(productVariant.shopifyId, quantity, properties);
 	}
 
 	function openCartDrawer() {
