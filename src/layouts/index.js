@@ -19,7 +19,7 @@ import { getRushProcessingSetting } from '../helper/app-settings-helper';
 const AjaxCartCustom = loadable(() => import('../components/common/ajaxCartCustom'));
 
 const queryClient = new QueryClient();
-
+debugger
 const Layout = ({ path, children }) => {
 	return (
 		<QueryClientProvider client={queryClient}>
