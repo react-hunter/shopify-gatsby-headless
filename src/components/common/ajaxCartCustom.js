@@ -113,7 +113,7 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 		e.preventDefault();
 	}
 	const getCustomAttributes = (lineItem) => {
-		const processAttributes = _filter(lineItem.customAttributes, attribute => attribute.key !== 'ship_date' && attribute.key !== 'delivery_date');
+		const processAttributes = _filter(lineItem.customAttributes, attribute => attribute.key !== 'Ship date' && attribute.key !== 'Delivery date');
 
 		if (processAttributes.length > 1) {
 			const attributeList = processAttributes;

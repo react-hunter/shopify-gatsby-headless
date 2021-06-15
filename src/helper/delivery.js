@@ -12,11 +12,11 @@ import { getPickupDate, getDeliveryDate, getPostalCode, getIP, getDeliveryReques
 
 const _transformDeliverData = (ship, delivery) => ([
   {
-    key: 'ship_date',
+    key: 'Ship date',
     value: ship.format('MMMM Do YYYY')
   },
   {
-    key: 'delivery_date',
+    key: 'Delivery date',
     value: delivery.format('MMMM Do YYYY')
   }
 ]);

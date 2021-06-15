@@ -112,9 +112,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	const addToSideCart =() => {
 		setShowSpin(true);
 		const properties = calculateShipAndDeliverDate(variant.deliveryDate, _get(availableDates, 0));
-		context.addVariantToCart(variant.shopifyId, 1, properties, variant.deliveryDate || moment
-			(startDate)
-			.format('LL'));
+		context.addVariantToCart(variant.shopifyId, 1, properties, variant.deliveryDate);
 		setTimeout(() => context.addProtection(protectionProduct.variants[2].shopifyId, variant.deliveryDate), 1200);
 		setTimeout(showCart, 2500);
 	}
