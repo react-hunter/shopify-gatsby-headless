@@ -5,10 +5,7 @@ import StoreContext from '../../context/store';
 import ImageSpin from '../common/imageSpin';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
-import { getPickupDate, getLocation, getDeliveryDate, getPostalCode, deliveryDatesData, getIP, getDeliveryRequest } from '../../helper';
 import  _map  from 'lodash/map';
 import  _get  from 'lodash/get';
 import  _filter  from 'lodash/filter';
@@ -114,7 +111,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	}
 	const addToSideCart =() => {
 		setShowSpin(true);
-		const properties = calculateShipAndDeliverDate(variant.deliveryDate);
+		const properties = calculateShipAndDeliverDate(variant.deliveryDate, _get(availableDates, 0));
 		context.addVariantToCart(variant.shopifyId, 1, properties, variant.deliveryDate || moment
 			(startDate)
 			.format('LL'));

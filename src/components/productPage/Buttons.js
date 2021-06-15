@@ -13,7 +13,8 @@ const Buttons = React.memo(function Buttons({
 	available,
 	productVariant,
 	quantity,
-	variant
+	variant,
+	firstAvailbleDate
 }) {
 	const [showSpin, setShowSpin] = useState(false);
 	const [showMessage, setShowMessage] = useState(false);
@@ -22,7 +23,7 @@ const Buttons = React.memo(function Buttons({
 
 	const handleAddToCart = () => {
 		setShowSpin(true);
-		const properties = calculateShipAndDeliverDate(variant.deliveryDate);
+		const properties = calculateShipAndDeliverDate(variant.deliveryDate, firstAvailbleDate);
 		context.addVariantToCart(productVariant.shopifyId, quantity, properties, variant.deliveryDate, messageContent);
 		setTimeout(() => context.addProtection(protectionProduct.variants[2].shopifyId, variant.deliveryDate, messageContent), 1200);
 		setTimeout(openCartDrawer, 2500);
@@ -30,7 +31,7 @@ const Buttons = React.memo(function Buttons({
 	}
 
 	const handleAddToCart_BuyNow = () => {
-		const properties = calculateShipAndDeliverDate(variant.deliveryDate);
+		const properties = calculateShipAndDeliverDate(variant.deliveryDate, firstAvailbleDate);
 		context.addVariantToCartAndBuyNow(productVariant.shopifyId, quantity, properties);
 	}
 

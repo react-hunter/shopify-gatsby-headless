@@ -232,6 +232,7 @@ const ProductDescription = React.memo(function ProductDescription({
 							quantity={quantity}
 							productVariant={productVariant}
 							variant={variant}
+							firstAvailbleDate={_get(availableDates, 0)}
 						/>
 
 						<div className="variant-selector-sideNav">

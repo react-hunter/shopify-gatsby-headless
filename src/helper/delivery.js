@@ -21,24 +21,21 @@ const _transformDeliverData = (ship, delivery) => ([
   }
 ]);
 
-export const calculateShipAndDeliverDate = (deliveryDate) => {
-  if (_isEmpty(deliveryDate) || deliveryDate === null) {
-    const today = moment();
-    let step = 1;
-
-    if (today.isoWeekday() === 6) {
-      // today is Sat
-      step = 2;
-    }
-
-    const ship = today.add(step, 'days');
-    const delivery = moment(ship).add(6, 'days');
-
-    return _transformDeliverData(ship, delivery);
+export const calculateShipAndDeliverDate = (deliveryDate, firstDateOfDelivery) => {
+  if (_isEmpty(deliveryDate) || deliveryDate === null || _isEmpty(firstDateOfDelivery)) {
+    return [];
   }
 
+  const firstDelivery = moment(firstDateOfDelivery);
+  const today = moment();
+  const gap = Math.ceil(moment.duration(firstDelivery.diff(today)).asDays());
+
   const delivery = moment(deliveryDate);
-  const ship = moment(delivery).subtract(6, 'days');
+  let ship = moment(delivery).subtract(gap, 'days');
+
+  if (ship < today) {
+    ship = today;
+  }
 
   return _transformDeliverData(ship, delivery);
 }
