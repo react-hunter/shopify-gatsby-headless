@@ -603,13 +603,13 @@ border-radius: 50%;
 
   .color-swatch[data-color="Snakeskin"] {
     background: url(https://cdn.shopify.com/s/files/1/1526/7487/products/snakeskin-onyx_ebf26b56-8557-4ef2-bd06-33dfc7212cf3.jpg?v=1571708585);
-    background-size: cover;
+    background-size: cover !important;
     border-radius: 50%;
   }
 
   .color-swatch[data-color="Leopard"] {
     background: url(https://www.incluyo.be/wp-content/uploads/2019/05/060619083.jpg);
-    background-size: cover;
+    background-size: cover !important;
     border-radius: 50%;
   }
   
