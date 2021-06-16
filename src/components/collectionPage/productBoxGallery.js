@@ -23,14 +23,9 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 	productGalleryCount = mainOption === '' ? Math.min(product.images.length, 3) : Math.min(swatchImages.length, 3);
 	useEffect(() => {
 		if (mainOption !== '') {
-			const selectedImages = product.variants.map(variant => {
+			const selectedImages = product.images.map(image => {
 				let imageUrl = '';
-				variant.selectedOptions.map(selectedOption => {
-					if((selectedOption.name !== '')&& selectedOption.value === swatchColor) {
-						imageUrl = variant.image ? variant.image.originalSrc : 'https://cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_300x.png';
-					}
-					return true
-				})
+				imageUrl = image ? image.originalSrc : 'https://cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_300x.png';
 				return imageUrl
 			})
 			const filteredImages = selectedImages.filter(img => img !== '')
