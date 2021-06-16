@@ -15,7 +15,6 @@ import Provider from "../context/provider"
 import Footer from '../components/common/footer'
 import Instagram from '../components/common/instagram'
 import Header from '../components/common/header/header';
-import { getRushProcessingSetting } from '../helper/app-settings-helper';
 const AjaxCartCustom = loadable(() => import('../components/common/ajaxCartCustom'));
 
 const queryClient = new QueryClient();
@@ -65,12 +64,6 @@ const Layout = ({ path, children }) => {
 							allContentfulInstagramSettings {
 								nodes {
 									title
-								}
-							}
-							allContentfulNewsletterSettings {
-								nodes {
-									title
-									subTitle
 								}
 							}
 							allContentfulFooterMenuItem {
@@ -156,7 +149,6 @@ const Layout = ({ path, children }) => {
 									giftVariant={data.giftProduct.variants[0]}
 									rushVariant={data.rushProduct.variants[0]}
 									protectionVariant={data.protectionProduct.variants[2]}
-									disableRushProcessing={getRushProcessingSetting(data.allContentfulNewsletterSettings.nodes)}
 								/>
 								<Header
 									path={path}

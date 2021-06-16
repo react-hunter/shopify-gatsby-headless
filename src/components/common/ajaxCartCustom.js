@@ -7,14 +7,25 @@ import AjaxCartEmpty from './ajaxCartEmpty';
 import StoreContext from '../../context/store'
 import { Link } from 'gatsby'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { client } from '../../contentful';
+import { getRushProcessingSetting } from '../../helper/app-settings-helper';
+
 const OrderProtection = loadable(() => import('./orderProtection'));
 
-const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVariant, protectionVariant, disableRushProcessing}) {
+const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVariant, protectionVariant}) {
 	const context = useContext(StoreContext);
 	const [lineItems, setLineItems] = useState([]);
 	const [messageShow, setMessageShow] = useState(false);
 	const [giftLineId, setGiftLineId] = useState('')
-	const [rushLineId, setRushLineId] = useState('')
+	const [rushLineId, setRushLineId] = useState('');
+	const [disableRushProcessing, setDisableRush] = useState(false);
+
+	useEffect(() => {
+		client.getEntries({'content_type': 'newsletterSettings'}).then((entry => {
+			setDisableRush(getRushProcessingSetting(entry.items));
+		}))
+	})
+
 	useEffect(() => {
 		const originalLineItemList = context.store.checkout.lineItems
 		const lineItemList = originalLineItemList.filter(li => li.variant.id !== giftVariant.shopifyId && li.variant.id !== rushVariant.shopifyId)

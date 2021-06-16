@@ -5,9 +5,9 @@ import _get from 'lodash/get';
 import _find from 'lodash/find';
 import { appSettingPrefix, rushProcessingSetting } from '../data/app-settings';
 
-export const transformAppSettingsResponse = (rawData) => _map(_filter(rawData, item => _startsWith(item.title, appSettingPrefix)), setting => ({
-  key: setting.title.split(':')[1],
-  value: setting.subTitle
+export const transformAppSettingsResponse = (rawData) => _map(_filter(rawData, item => _startsWith(item.fields.title, appSettingPrefix)), setting => ({
+  key: setting.fields.title.split(':')[1],
+  value: setting.fields.subTitle
 }));
 
 export const getAppSetting = (appSettings, key, fallback) => _get(_find(appSettings, item => item.key === key), 'value', fallback);
