@@ -55,7 +55,12 @@ const ProductDescription = React.memo(function ProductDescription({
 
 	useEffect(async () => {
 		async function getAccordionData() {
-			const accordionData = await client.getEntries({ 'content_type': 'productAccordion' });
+			let accordionData = await client.getEntries({ 'content_type': 'productAccordion' });
+			if (product.productType !== 'Preserved Roses') {
+				accordionData.items = _filter(accordionData.items, item => {
+					return item.fields.header !== 'BENEFITS FROM OUR ROSES';
+				})
+			}
 			setProductAccordions(accordionData.items);
 
 			document.querySelectorAll('.accordion_button').forEach(button => {
