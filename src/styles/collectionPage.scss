@@ -534,6 +534,84 @@ border-radius: 50%;
     background: url(https://cdn.shopify.com/s/files/1/0157/4420/4900/products/Red_Pink_Heart_Front.png?v=1613020897);
     background-size: cover;
   }
+
+  .color-swatch[data-color="Black"] {
+    background-color: black;
+    border-radius: 50%;
+    border: 1px solid black;
+  }
+
+  .color-swatch[data-color="Orange"] {
+    background-color: orange;
+    border-radius: 50%;
+    border: 1px solid orange;
+  }
+
+  .color-swatch[data-color="White"] {
+    background-color: white;
+    border-radius: 50%;
+    border: 1px solid white;
+  }
+
+  .color-swatch[data-color="Red"] {
+    background-color: red;
+    border-radius: 50%;
+    border: 1px solid red;
+  }
+
+  .color-swatch[data-color="Burgundy"] {
+    background-color: #800020;
+    border-radius: 50%;
+    border: 1px solid #800020;
+  }
+
+  .color-swatch[data-color="Blue"] {
+    background-color: blue;
+    border-radius: 50%;
+    border: 1px solid blue;
+  }
+
+  .color-swatch[data-color="Yellow"] {
+    background-color: yellow;
+    border-radius: 50%;
+    border: 1px solid yellow;
+  }
+
+  .color-swatch[data-color="Purple"] {
+    background-color: purple;
+    border-radius: 50%;
+    border: 1px solid purple;
+  }
+
+  .color-swatch[data-color="Light Pink"] {
+    background-color: lightpink;
+    border-radius: 50%;
+    border: 1px solid lightpink;
+  }
+
+  .color-swatch[data-color="Hot Pink"] {
+    background-color: hotpink;
+    border-radius: 50%;
+    border: 1px solid hotpink;
+  }
+
+  .color-swatch[data-color="Neon Green"] {
+    background-color: #39ff14;
+    border-radius: 50%;
+    border: 1px solid #39ff14;
+  }
+
+  .color-swatch[data-color="Snakeskin"] {
+    background: url(https://cdn.shopify.com/s/files/1/1526/7487/products/snakeskin-onyx_ebf26b56-8557-4ef2-bd06-33dfc7212cf3.jpg?v=1571708585);
+    background-size: cover;
+    border-radius: 50%;
+  }
+
+  .color-swatch[data-color="Leopard"] {
+    background: url(https://www.incluyo.be/wp-content/uploads/2019/05/060619083.jpg);
+    background-size: cover;
+    border-radius: 50%;
+  }
   
   .color-swatch[data-rose_color="Red"] {
     background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_red_on9UbDVgPZ.png);
@@ -949,6 +1027,24 @@ border-radius: 50%;
     background-color: lavender;
     border-radius: 50%;
     border: 1px solid lightgrey;
+  }
+
+  .color-swatch[data-aroma="Silver"] {
+    background-color: silver;
+    border-radius: 50%;
+    border: 1px solid silver;
+  }
+
+  .color-swatch[data-aroma="Gold"] {
+    background-color: gold;
+    border-radius: 50%;
+    border: 1px solid gold;
+  }
+
+  .color-swatch[data-aroma="Red"] {
+    background-color: red;
+    border-radius: 50%;
+    border: 1px solid red;
   }
 
 
