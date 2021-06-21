@@ -315,7 +315,8 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 						}
 
 						<div className="main-option_wrapper variantSelector-option_wrapper">
-							<span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span>
+								{mainOption.name !== 'Title' ? <span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span> :
+									<span className="option-header">No options available</span>}
 							<div className="option_options_wrapper">
 								{
 									product.variants.length > 1 && mainOption.values.map((mo, moIndex) => {

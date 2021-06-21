@@ -612,6 +612,17 @@ border-radius: 50%;
     background-size: cover !important;
     border-radius: 50%;
   }
+  .color-swatch[data-color="Walnut"] {
+    background: url(https://www.olympic.com/cms/getmedia/767c5918-562d-47ec-ac8a-b1783a3a12ef/ois20_american-walnut.jpg);
+    background-size: cover !important;
+    border-radius: 50%;
+  }
+
+  .color-swatch[data-color="Oak"] {
+    background: url(https://www.sico.ca/cms/getmedia/4c5ff092-e13f-44cd-9a75-d19f455fe6e1/stain_translucent_oak-brown__2033-780.png);
+    background-size: cover !important;
+    border-radius: 50%;
+  }
   
   .color-swatch[data-rose_color="Red"] {
     background: url(https://ik.imagekit.io/vajwlqjsrw/Roses/Rose_red_on9UbDVgPZ.png);
@@ -1001,6 +1012,16 @@ border-radius: 50%;
   
   
   /* Style */
+
+  .color-swatch[data-style="Square"] {
+    background: url(https://static.thenounproject.com/png/331069-200.png);
+    background-size: cover;
+  }
+
+  .color-swatch[data-style="Round"] {
+    background: url(https://www.transparentpng.com/thumb/circle/H4gJTE-circle-icon.png);
+    background-size: cover;
+  }
   
   
   /* Aroma */
