@@ -58,7 +58,7 @@ const ProductDescription = React.memo(function ProductDescription({
 			let accordionData = await client.getEntries({ 'content_type': 'productAccordion' });
 			if (product.productType !== 'Preserved Roses') {
 				accordionData.items = _filter(accordionData.items, item => {
-					return item.fields.header !== 'BENEFITS FROM OUR ROSES';
+					return (item.fields.header !== 'BENEFITS FROM OUR ROSES' && item.fields.header !== 'PRODUCT CARE');
 				})
 			}
 			setProductAccordions(accordionData.items);
