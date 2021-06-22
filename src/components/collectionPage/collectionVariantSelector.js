@@ -43,7 +43,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
     }
   }, [hasWindow]);
 
-	 useEffect(async () => {
+	 useEffect(() => {
 		Array.prototype.slice.call(document.querySelectorAll('.color-swatch')).map(el => {
 			const optionName = String(el.dataset.optionname)
 			const dataAttributeName = optionName.replace(' ', '_').toLowerCase()
@@ -118,7 +118,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		// 			 })
 		// 		 }
 		// 	 })
-	 }, []);
+	 });
 
 	 const _findSomethingFromGooglePlace = (
 		googlePlace,
