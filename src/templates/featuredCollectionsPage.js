@@ -76,6 +76,7 @@ export const query = graphql`
           products {
             id
             handle
+            descriptionHtml
             title
             tags
             productType

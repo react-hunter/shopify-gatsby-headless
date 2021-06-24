@@ -17,9 +17,7 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 	const protectionProduct = props.protectionProduct;
 	const mainOption = getMainOption()
 	const [swatchColor, setSwatchColor] = useState(mainOption === '' ? '' : mainOption.values[0])
-
 	const [notifyModalShow, setNotifyModalShow] = useState(false);
-
 	useEffect(() => {
 		Array.prototype.slice.call(document.querySelectorAll(mainOption.name === 'Size' ? '.color-swatch-size' : '.color-swatch')).map(el => {
 			const optionName = String(el.dataset.optionname)
