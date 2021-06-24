@@ -31,7 +31,6 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	const hasWindow = typeof window !== 'undefined';
 
 	const [windowDimensions, setWindowDimensions] = useState(window.innerWidth);
-
   useEffect(() => {
     if (hasWindow) {
       function handleResize() {
@@ -270,8 +269,8 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 					<div className="closeVariantSelector">
 						<div className="closeVariantSelector_content">
 							<span className="variantSelector_close_message"
-								onClick={changeUrl} onKeyDown={handleKeyDown} role="button" tabIndex="0"
-								style={{ float: 'left', cursor: 'pointer', marginLeft: '10px' }}>Need more options? Customize now</span>
+								// onClick={changeUrl} onKeyDown={handleKeyDown} role="button" tabIndex="0"
+								style={{ float: 'left', cursor: 'pointer', marginLeft: '10px' }}>{product.title}</span>
 							<span className="variantSelector_close"  
 								onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0"
 								style={{ float: 'right'}}>×</span>
@@ -314,10 +313,15 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 						</div>
 						}
 
-						<div className="main-option_wrapper variantSelector-option_wrapper">
+							<div className="main-option_wrapper variantSelector-option_wrapper">
 								{mainOption.name !== 'Title' ? <span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span> :
-									<span className="option-header">No options available</span>}
-							<div className="option_options_wrapper">
+									<span style={{ paddingLeft: '10px', textTransformL: 'uppercase' }}><b>Description:</b>
+										<span className="text-description" dangerouslySetInnerHTML={{ __html: product.descriptionHtml ? product.descriptionHtml : props.desciption }}></span>
+										<div className="read-more" aria-hidden="true">
+											<Link to={`/products/${product.handle}`}>Read more</Link>
+										</div>
+									</span>}
+								<div className="option_options_wrapper">
 								{
 									product.variants.length > 1 && mainOption.values.map((mo, moIndex) => {
 										const selectEffectClass = getValueByName(mainOption.name) === mo ? 'select-effect' : ''
@@ -396,6 +400,10 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 						
 					</div> */}
 					<div>
+					{ product.productType === 'Preserved Roses' ?
+						<Link to="/pages/create" style={{paddingLeft:'10px'}}>Need more options? Design your own</Link> :
+						null
+					}
 					{ variant.availableForSale ? 
 						<button className="variant-selector_add_to_bag" 
 							onClick={addToSideCart}>
@@ -404,10 +412,6 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 						<button className="variant-selector_add_to_bag" 
 							onClick={props.showNotifyModal}
 							style={{ display: 'inline-block' }}>NOTIFY ME</button>
-					}
-					{ product.productType !== 'Lingerie' && product.productType !== 'Rose Bear' ?
-						<Link to="/pages/create" className="mobile-more-options">NEED MORE OPTIONS? CUSTOMIZE NOW</Link> :
-						null
 					}
 					</div>
 				</div>

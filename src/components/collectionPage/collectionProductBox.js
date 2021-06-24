@@ -17,8 +17,8 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 	const protectionProduct = props.protectionProduct;
 	const mainOption = getMainOption()
 	const [swatchColor, setSwatchColor] = useState(mainOption === '' ? '' : mainOption.values[0])
-
 	const [notifyModalShow, setNotifyModalShow] = useState(false);
+	const description = props.description ? props.description:'';
 
 	useEffect(() => {
 		Array.prototype.slice.call(document.querySelectorAll(mainOption.name === 'Size' ? '.color-swatch-size' : '.color-swatch')).map(el => {
@@ -145,7 +145,7 @@ const CollectionProductBox = React.memo(function CollectionProductBox(props) {
 						<button className="openVariantModal" onClick={addToBag}>ADD TO BAG{showSpin ? <span className="image-spin-wrapper"><ImageSpin small="small" /></span> : null }</button>
 				}
 
-				{varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} showNotifyModal={showNotifyModal} product={product} protectionProduct={protectionProduct} /> )}
+				{varaintModalShow && ( <CollectionVariantSelector closeModal={closeCollectionModal} showNotifyModal={showNotifyModal} product={product} protectionProduct={protectionProduct}  description ={description}/> )}
 			</div>
 			{(product.variants.length === 1 && !product.variants[0].availableForSale) ? 
 				<NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />

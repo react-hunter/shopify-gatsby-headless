@@ -17457,6 +17457,27 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   font-weight: bold;
 }
 
+.text-description {
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  padding-left: 10px;
+
+  img {
+    display: none;
+  }
+}
+
+.read-more {
+  padding-left: 10px;
+  a {
+    color: #551a8b;
+  }
+}
+
 .preview_wrapper,
 .main-option_wrapper {
   width: 50%;
