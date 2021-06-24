@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Flickity from 'react-flickity-component'
 import '../../styles/productGallery.css';
 import '../../styles/flickity.css';
+import _ from 'lodash';
 
 const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 	let productGalleryCount = 0;
@@ -23,7 +24,7 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 	productGalleryCount = mainOption === '' ? Math.min(product.images.length, 3) : Math.min(swatchImages.length, 3);
 	useEffect(() => {
 		if (mainOption !== '') {
-			const selectedImages = product.variants.map(variant => {
+			let selectedImages = product.variants.map(variant => {
 				let imageUrl = '';
 				variant.selectedOptions.map(selectedOption => {
 					if((selectedOption.name !== '')&& selectedOption.value === swatchColor) {
@@ -33,6 +34,14 @@ const ProductBoxGallery = React.memo(function ProductBoxGallery(props) {
 				})
 				return imageUrl
 			})
+			if (selectedImages.filter(img => img !== '').length < 3) {
+				const imagesProduct = product.images.map(image => {
+					let imageUrl = '';
+					imageUrl = image ? image.originalSrc : 'https://cdn.shopify.com/s/files/1/0157/4420/4900/t/230/assets/placeholder_300x.png';
+					return imageUrl;
+				})
+				selectedImages = _.union(selectedImages, imagesProduct);
+			}
 			const filteredImages = selectedImages.filter(img => img !== '')
 			setSwatchImages(filteredImages.slice(0, 3))
 		}

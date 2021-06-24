@@ -18,7 +18,6 @@ import Header from '../components/common/header/header';
 const AjaxCartCustom = loadable(() => import('../components/common/ajaxCartCustom'));
 
 const queryClient = new QueryClient();
-
 const Layout = ({ path, children }) => {
 	return (
 		<QueryClientProvider client={queryClient}>

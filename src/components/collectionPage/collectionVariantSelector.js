@@ -43,7 +43,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
     }
   }, [hasWindow]);
 
-	 useEffect(async () => {
+	 useEffect(() => {
 		Array.prototype.slice.call(document.querySelectorAll('.color-swatch')).map(el => {
 			const optionName = String(el.dataset.optionname)
 			const dataAttributeName = optionName.replace(' ', '_').toLowerCase()
@@ -118,7 +118,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		// 			 })
 		// 		 }
 		// 	 })
-	 }, []);
+	 });
 
 	 const _findSomethingFromGooglePlace = (
 		googlePlace,
@@ -315,7 +315,8 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 						}
 
 						<div className="main-option_wrapper variantSelector-option_wrapper">
-							<span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span>
+								{mainOption.name !== 'Title' ? <span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span> :
+									<span className="option-header">No options available</span>}
 							<div className="option_options_wrapper">
 								{
 									product.variants.length > 1 && mainOption.values.map((mo, moIndex) => {
