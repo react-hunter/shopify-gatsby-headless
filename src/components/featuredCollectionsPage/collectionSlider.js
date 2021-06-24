@@ -105,7 +105,6 @@ const CollectionSlider = React.memo(function CollectionSlider({ products, title,
                                   showNotifyModal={showNotifyModal} 
                                   product={selectedProduct}
                                   protectionProduct={protectionProduct}
-                                  description = {selectedProduct.ht}
                                   />}
         <NotifyModal closeModal={closeNotifyModal} modalShow={notifyModalShow} />
       </div>

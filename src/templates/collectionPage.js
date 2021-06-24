@@ -143,7 +143,6 @@ const CollectionPage = React.memo(function CollectionPage({
                             key={productIndex}
                             review={productReview[0]}
                             badgeStyles={data.allContentfulCollectionBadgeStyleItem.edges}
-                            description = {data.shopifyCollection.descriptionHtml}
                           />
                 })
               }
@@ -179,6 +178,7 @@ export const query = graphql`
       products {
         id
         handle
+        descriptionHtml
         title
         tags
         productType

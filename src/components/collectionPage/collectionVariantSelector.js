@@ -29,7 +29,6 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	const [modal, setModal] = useState(false);
 
 	const hasWindow = typeof window !== 'undefined';
-
 	const [windowDimensions, setWindowDimensions] = useState(window.innerWidth);
   useEffect(() => {
     if (hasWindow) {
@@ -315,8 +314,8 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 
 							<div className="main-option_wrapper variantSelector-option_wrapper">
 								{mainOption.name !== 'Title' ? <span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span> :
-									<span style={{ paddingLeft: '10px', textTransformL: 'uppercase' }}><b>Description:</b>
-										<span className="text-description" dangerouslySetInnerHTML={{ __html: product.descriptionHtml ? product.descriptionHtml : props.desciption }}></span>
+									<span style={{ paddingLeft: '10px' }}><b>Description:</b>
+										<span className="text-description" dangerouslySetInnerHTML={{ __html: product.descriptionHtml ? product.descriptionHtml : "" }}></span>
 										<div className="read-more" aria-hidden="true">
 											<Link to={`/products/${product.handle}`}>Read more</Link>
 										</div>
