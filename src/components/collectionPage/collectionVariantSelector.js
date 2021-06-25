@@ -314,7 +314,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 
 							<div className="main-option_wrapper variantSelector-option_wrapper">
 								{mainOption.name !== 'Title' ? <span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span> :
-									<span style={{ paddingLeft: '10px' }}><b>Description:</b>
+									<span>
 										<span className="text-description" dangerouslySetInnerHTML={{ __html: product.descriptionHtml ? product.descriptionHtml : "" }}></span>
 										<div className="read-more" aria-hidden="true">
 											<Link to={`/products/${product.handle}`} onClick={closeVariantSelector}>Read more</Link>
