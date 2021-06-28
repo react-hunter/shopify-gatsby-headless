@@ -316,9 +316,9 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 								{mainOption.name !== 'Title' ? <span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span> :
 									<span>
 										<span className="text-description" dangerouslySetInnerHTML={{ __html: product.descriptionHtml ? product.descriptionHtml : "" }}></span>
-										<div className="read-more" aria-hidden="true">
-											<Link to={`/products/${product.handle}`} onClick={closeVariantSelector}>Read more</Link>
-										</div>
+										<button className="read-more" aria-hidden="true">
+											<Link to={`/products/${product.handle}`} onClick={closeVariantSelector}>View Product Details</Link>
+										</button>
 									</span>}
 								<div className="option_options_wrapper">
 								{
