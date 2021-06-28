@@ -17599,7 +17599,15 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   height: 250px;
 
   @media (max-width: 768px) {
-    height: 56vh;
+    height: 25vh;
+  }
+}
+
+.variantSelector-preview-large_img {
+  height: 250px;
+
+  @media (max-width: 768px) {
+    height: 39vh;
   }
 }
 

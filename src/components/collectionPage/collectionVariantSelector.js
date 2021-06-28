@@ -287,16 +287,16 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 								} */}
 								{ variant.image &&
 									<LazyLoadImage src={variant.image.originalSrc}
-										className="variantSelector-preview_img"
+										className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"}
 										effect="blur" loading="eager" alt={variant.title} />
 								}
 							</div>
 						: 
 						<div className="preview_wrapper special_ratio">
-							<LazyLoadImage className="variantSelector-preview_img" alt=""
+							<LazyLoadImage className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"} alt=""
 								src={product.images[0] ? product.images[0].originalSrc : ''}
 								effect="blur" loading="eager" />
-							<LazyLoadImage className="variantSelector-preview_img second_image" alt=""
+							<LazyLoadImage className={mainOption.name !== 'Title' ? "variantSelector-preview_img second_image" : "variantSelector-preview-large_img second_image"} alt=""
 								src={product.images[1] ? product.images[1].originalSrc : ''}
 								effect="blur" loading="eager" />
 							{/* { product.images[0] &&
