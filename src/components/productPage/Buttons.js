@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ImageSpin from '../common/imageSpin'
 import loadable from '@loadable/component';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 // import HintModal from './HintModal';
 
 const NotifyModal = loadable(() => import('../collectionPage/notifyModal'))
@@ -18,7 +17,6 @@ const Buttons = React.memo(function Buttons({
 	const [showSpin, setShowSpin] = useState(false);
 	const [showMessage, setShowMessage] = useState(false);
 	const [notifyModalShow, setNotifyModalShow] = useState(false);
-	const [messageContent, setMessageContent] = useState('');
 	const [showHintModal, setShowHintModal] = useState(false);
 
 	const handleAddToCart = () => {
@@ -62,10 +60,6 @@ const Buttons = React.memo(function Buttons({
 			}
 			setNotifyModalShow(false);
 		}, 500)
-	}
-
-	const changeMessage = (e) => {
-		setMessageContent(e.target.value)
 	}
 
 	return (
