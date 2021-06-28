@@ -45,7 +45,6 @@ const Provider = ({ children }) => {
 							let list = localLineItems.filter(i => i.variant.id === item.variant.id);
 							if(list.length >0){
 								item.deliveryDate = list[0].deliveryDate;
-								item.messageContent = list[0].messageContent;
 							}
 						
 					return item
@@ -83,7 +82,6 @@ const Provider = ({ children }) => {
 				let list = checkout.lineItems.filter(i => i.variant.id === item.variant.id);
 				if(list.length >0){
 					item.deliveryDate = list[0].deliveryDate;
-					item.messageContent = list[0].messageContent;
 				}
 			}
 			
@@ -96,7 +94,7 @@ const Provider = ({ children }) => {
 			value={{
 				store,
 				customerAccessToken: getlocalStorage('customerAccessToken'),
-				addVariantToCart: (variantId, quantity, properties=null, deliveryDate=null, messageContent=null) => {
+				addVariantToCart: (variantId, quantity, properties=null, deliveryDate=null) => {
 					updateStore(state => {
 						return { ...state, adding: true }
 					})
@@ -118,12 +116,6 @@ const Provider = ({ children }) => {
 						.addLineItems(checkoutId, lineItemsToUpdate)
 						.then(checkout => {
 							let lineItems = checkout.lineItems.map(item => {
-								if(item.variant.id === variantId && messageContent){
-									item.messageContent = messageContent;
-								}else {
-									let list = checkoutItem.lineItems.filter(i => i.variant.id === item.variant.id);
-									item.messageContent = list.length > 0 ?list[0].messageContent : '';
-								}
 								if(item.variant.id === variantId && deliveryDate){
 									item.deliveryDate = deliveryDate;
 								}else {
@@ -144,7 +136,7 @@ const Provider = ({ children }) => {
 							snapAddToCart();
 						})
 				},
-				addProtection: (variantId, deliveryDate=null,messageContent=null) => {
+				addProtection: (variantId, deliveryDate=null) => {
 					updateStore(state => {
 						return { ...state, adding: true }
 					})
@@ -166,9 +158,6 @@ const Provider = ({ children }) => {
 									checkout.lineItems.map(item => {
 										if (deliveryDate) {
 											item.deliveryDate = deliveryDate
-										}
-										if (messageContent) {
-											item.messageContent = messageContent
 										}
 										return item
 									})
