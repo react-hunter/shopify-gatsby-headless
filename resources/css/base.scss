@@ -14336,6 +14336,20 @@ header .menu-category-panel .menu-panel .menu-panel_image_wrapper {
 .add-message {
   width: 100%;
   background-color: #fff;
+  font-family: Proxima Condensed Extra Bold Alt,sans-serif!important;
+  font-weight: 700;
+  border-radius: 5px;
+  padding: 15px;
+}
+@media (max-width: 500px) {
+  .add-message {
+    width: 100%;
+    background-color: #fff;
+    font-family: Proxima Condensed Extra Bold Alt,sans-serif!important;
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 12px;
+  }
 }
 
 .ajax-cart__modal {
