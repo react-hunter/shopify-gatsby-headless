@@ -14,6 +14,7 @@ import  _get  from 'lodash/get';
 import  _filter  from 'lodash/filter';
 import  _includes  from 'lodash/includes';
 import DeliveryDateModal from '../productPage/DeliveryDateModal';
+import ProductGallery from '../productPage/ProductGallery';
 
 const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
 	const context = useContext(StoreContext);
@@ -259,12 +260,24 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		  {value}
 		</button>
 	  ));
+
+	const getProduct = (product) => {
+		let images = [firstVariant.image, ...product.images.filter(item => item.originalSrc !== firstVariant.image.originalSrc)]
+		return {
+			...product,
+			images: images
+		}
+	}
+	const isFullImage =()=>{
+		return (mainOption.name !== 'Title' && mainOption.name !== 'Quantity' && product.productType !== 'Enchanted Rose'
+		&& product.productType !== 'Rose Bear');
+	}
   
 	return (
 		<>
 		<div className="variantoverlayNew" id="variantOverlay-">
 			<div className="variantSelector_wrapper animate-bottom" data-toggle="modal">
-				<div className="variantSelector-section"> 
+				<div className={isFullImage() ? "variantSelector-section" : "variantSelector-section-full variantSelector-section"}> 
 					<div className="closeVariantSelector">
 						<div className="closeVariantSelector_content">
 							<span className="variantSelector_close_message"
@@ -276,27 +289,28 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 						</div>
 						<div className="closeVariantSelector-mobile_swipe"></div>
 					</div>
-					<div className="preview-main-option_wrapper">
+					<div className={isFullImage() ?"preview-main-option_wrapper" : "preview-main-option_wrapper-full preview-main-option_wrapper"}>
 						{ 
 						product.productType !== 'Lingerie'? 
-							<div className="preview_wrapper">
+							<div className={isFullImage() ? "preview_wrapper": "preview_wrapper-large preview_wrapper"}>
 								{/* { variant.image &&
 									<GatsbyImage image={variant.image.imageData ? variant.image.imageData.childImageSharp.gatsbyImageData : props.placeholderImage} 
 										className="variantSelector-preview_img"
 										loading="lazy" alt={variant.title} />
 								} */}
-								{ variant.image &&
+								{/* { variant.image &&
 									<LazyLoadImage src={variant.image.originalSrc}
-										className="variantSelector-preview_img"
+										className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"}
 										effect="blur" loading="eager" alt={variant.title} />
-								}
+								} */}
+								<ProductGallery product={getProduct(product)} isVarantSelected={true} selectedVariant={variant} key="product-gallery" />
 							</div>
 						: 
 						<div className="preview_wrapper special_ratio">
-							<LazyLoadImage className="variantSelector-preview_img" alt=""
+							<LazyLoadImage className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"} alt=""
 								src={product.images[0] ? product.images[0].originalSrc : ''}
 								effect="blur" loading="eager" />
-							<LazyLoadImage className="variantSelector-preview_img second_image" alt=""
+							<LazyLoadImage className={mainOption.name !== 'Title' ? "variantSelector-preview_img second_image" : "variantSelector-preview-large_img second_image"} alt=""
 								src={product.images[1] ? product.images[1].originalSrc : ''}
 								effect="blur" loading="eager" />
 							{/* { product.images[0] &&
@@ -316,9 +330,9 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 								{mainOption.name !== 'Title' ? <span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span> :
 									<span>
 										<span className="text-description" dangerouslySetInnerHTML={{ __html: product.descriptionHtml ? product.descriptionHtml : "" }}></span>
-										<div className="read-more" aria-hidden="true">
-											<Link to={`/products/${product.handle}`} onClick={closeVariantSelector}>Read more</Link>
-										</div>
+										<button className="read-more" aria-hidden="true">
+											<Link to={`/products/${product.handle}`} onClick={closeVariantSelector}>View Product Details</Link>
+										</button>
 									</span>}
 								<div className="option_options_wrapper">
 								{

@@ -74,7 +74,7 @@
        
         @media (max-width: 980px) {
           position: absolute;
-          top: 40px;
+          top: 0px;
         }
     }
       
@@ -437,6 +437,11 @@ border-radius: 50%;
         .preview-main-option_wrapper {
             z-index: 1;
         }
+        .preview-main-option_wrapper-full {
+          z-index: 1;
+          position: absolute;
+          width: 100%;
+      }
     }
 }
 
