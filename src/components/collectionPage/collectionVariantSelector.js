@@ -14,6 +14,7 @@ import  _get  from 'lodash/get';
 import  _filter  from 'lodash/filter';
 import  _includes  from 'lodash/includes';
 import DeliveryDateModal from '../productPage/DeliveryDateModal';
+import ProductGallery from '../productPage/ProductGallery';
 
 const CollectionVariantSelector = React.memo(function CollectionVariantSelector(props) {
 	const context = useContext(StoreContext);
@@ -259,6 +260,14 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		  {value}
 		</button>
 	  ));
+
+	const getProduct = (product) => {
+		let images = [firstVariant.image, ...product.images.filter(item => item.originalSrc !== firstVariant.image.originalSrc)]
+		return {
+			...product,
+			images: images
+		}
+	}
   
 	return (
 		<>
@@ -279,17 +288,18 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 					<div className="preview-main-option_wrapper">
 						{ 
 						product.productType !== 'Lingerie'? 
-							<div className="preview_wrapper">
+							<div className={(mainOption.name !== 'Title' && mainOption.name !== 'Size' && mainOption.name !== 'Quantity') ? "preview_wrapper": "preview_wrapper-large preview_wrapper"}>
 								{/* { variant.image &&
 									<GatsbyImage image={variant.image.imageData ? variant.image.imageData.childImageSharp.gatsbyImageData : props.placeholderImage} 
 										className="variantSelector-preview_img"
 										loading="lazy" alt={variant.title} />
 								} */}
-								{ variant.image &&
+								{/* { variant.image &&
 									<LazyLoadImage src={variant.image.originalSrc}
 										className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"}
 										effect="blur" loading="eager" alt={variant.title} />
-								}
+								} */}
+								<ProductGallery product={getProduct(product)} isVarantSelected={true} selectedVariant={variant} key="product-gallery" />
 							</div>
 						: 
 						<div className="preview_wrapper special_ratio">

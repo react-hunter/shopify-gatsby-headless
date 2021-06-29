@@ -15,7 +15,6 @@ const ProductGallery = React.memo(function ProductGallery({
 	var flkty;
 
 	const [ slideIndex, setSlideIndex] = useState(0);
-
 	product.images.map((image, imageIndex) => {
 		if(image.originalSrc === selectedVariant.image.originalSrc) {
 			if (isVarantSelected) {
