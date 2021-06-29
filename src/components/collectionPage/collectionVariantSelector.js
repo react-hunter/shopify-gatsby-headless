@@ -288,7 +288,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 					<div className="preview-main-option_wrapper">
 						{ 
 						product.productType !== 'Lingerie'? 
-							<div className={(mainOption.name !== 'Title' && mainOption.name !== 'Size' && mainOption.name !== 'Quantity') ? "preview_wrapper": "preview_wrapper-large preview_wrapper"}>
+							<div className={(mainOption.name !== 'Title' && mainOption.name !== 'Quantity' && product.productType !== 'Enchanted Rose') ? "preview_wrapper": "preview_wrapper-large preview_wrapper"}>
 								{/* { variant.image &&
 									<GatsbyImage image={variant.image.imageData ? variant.image.imageData.childImageSharp.gatsbyImageData : props.placeholderImage} 
 										className="variantSelector-preview_img"
