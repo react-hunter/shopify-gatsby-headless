@@ -17538,15 +17538,15 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   flex-direction: column;
   align-items: center;
 
-  .product_image-container {
-    width: 100%;
-  }
-
   .pdp-carousel-main {
-    width: 80%;
-      height: 80%;
+    width: 280px;
     
   }
+  @media (min-width: 500px) {
+    .product-single__media-wrapper img {
+      height: 250px;
+  }
+    }
   @media (max-width: 500px) {
     .product_image-container {
       width: 50%;
@@ -17575,8 +17575,7 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   }
 
   .pdp-carousel-main {
-    width: 80%;
-  height: 80%;
+    width: 280px;
     
   }
   @media (max-width: 500px) {
