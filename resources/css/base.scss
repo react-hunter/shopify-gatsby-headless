@@ -17424,7 +17424,19 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
     overflow-x: hidden;
     overflow-y: hidden !important;
     padding-top: 0px;
-    flex-direction: unset;
+  }
+
+
+}
+
+.variantSelector-section-full {
+
+  @media(max-width:414px) {
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden !important;
+    padding-top: 0px;
+    flex-direction: initial;
   }
 
 
@@ -17479,10 +17491,10 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
     padding-left: 7px;
-    max-height: 64px;
+    max-height: 85px;
     font-family: "Relative-Medium";
     color: #000!important;
     margin: 1.75vh 4vh;

@@ -268,12 +268,16 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 			images: images
 		}
 	}
+	const isFullImage =()=>{
+		return (mainOption.name !== 'Title' && mainOption.name !== 'Quantity' && product.productType !== 'Enchanted Rose'
+		&& product.productType !== 'Rose Bear');
+	}
   
 	return (
 		<>
 		<div className="variantoverlayNew" id="variantOverlay-">
 			<div className="variantSelector_wrapper animate-bottom" data-toggle="modal">
-				<div className="variantSelector-section"> 
+				<div className={isFullImage() ? "variantSelector-section" : "variantSelector-section-full variantSelector-section"}> 
 					<div className="closeVariantSelector">
 						<div className="closeVariantSelector_content">
 							<span className="variantSelector_close_message"
@@ -285,10 +289,10 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 						</div>
 						<div className="closeVariantSelector-mobile_swipe"></div>
 					</div>
-					<div className="preview-main-option_wrapper">
+					<div className={isFullImage() ?"preview-main-option_wrapper" : "preview-main-option_wrapper-full preview-main-option_wrapper"}>
 						{ 
 						product.productType !== 'Lingerie'? 
-							<div className={(mainOption.name !== 'Title' && mainOption.name !== 'Quantity' && product.productType !== 'Enchanted Rose') ? "preview_wrapper": "preview_wrapper-large preview_wrapper"}>
+							<div className={isFullImage() ? "preview_wrapper": "preview_wrapper-large preview_wrapper"}>
 								{/* { variant.image &&
 									<GatsbyImage image={variant.image.imageData ? variant.image.imageData.childImageSharp.gatsbyImageData : props.placeholderImage} 
 										className="variantSelector-preview_img"

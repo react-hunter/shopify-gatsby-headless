@@ -436,8 +436,12 @@ border-radius: 50%;
         }
         .preview-main-option_wrapper {
             z-index: 1;
-            position: absolute;
         }
+        .preview-main-option_wrapper-full {
+          z-index: 1;
+          position: absolute;
+          width: 100%;
+      }
     }
 }
 
