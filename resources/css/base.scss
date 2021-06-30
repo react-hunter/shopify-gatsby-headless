@@ -14334,8 +14334,22 @@ header .menu-category-panel .menu-panel .menu-panel_image_wrapper {
 }
 
 .add-message {
-  border: 2px solid #000;
-  border-color: #000000 !important;
+  width: 100%;
+  background-color: #fff;
+  font-family: Proxima Condensed Extra Bold Alt,sans-serif!important;
+  font-weight: 700;
+  border-radius: 5px;
+  padding: 15px;
+}
+@media (max-width: 500px) {
+  .add-message {
+    width: 100%;
+    background-color: #fff;
+    font-family: Proxima Condensed Extra Bold Alt,sans-serif!important;
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 12px;
+  }
 }
 
 .ajax-cart__modal {
@@ -17429,6 +17443,19 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 
 }
 
+.variantSelector-section-full {
+
+  @media(max-width:414px) {
+    overflow: scroll;
+    overflow-x: hidden;
+    overflow-y: hidden !important;
+    padding-top: 0px;
+    flex-direction: initial;
+  }
+
+
+}
+
 .preview-main-option_wrapper {
   display: flex;
   flex-direction: row;
@@ -17444,7 +17471,7 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   margin: 20px;
 
   @media (max-width: 768px) {
-    margin: 0px 10px;
+    margin: 10px;
   }
 }
 
@@ -17455,6 +17482,60 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   align-items: center;
   justify-content: center;
   font-weight: bold;
+}
+
+.text-description {
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  padding-left: 10px;
+  font-family: "Relative-Medium";
+  color: #000!important;
+
+  img {
+    display: none;
+  }
+}
+@media (max-width: 500px) {
+  .text-description {
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    padding-left: 7px;
+    max-height: 85px;
+    font-family: "Relative-Medium";
+    color: #000!important;
+    margin: 1.75vh 4vh;
+  
+    img {
+      display: none;
+    }
+  }
+}
+
+.read-more {
+  padding-left: 10px;
+  text-align: center;
+  background-color: white;
+  margin: 15px 10px 0px;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding: 7px;
+  margin-top: 10px;
+  border: 2px solid black;
+  a {
+    font-family: "Proxima Condensed Extra Bold Alt", sans-serif !important;
+    border: none !important;
+    color: black !important;
+    font-weight: 800;
+  }
 }
 
 .preview_wrapper,
@@ -17470,6 +17551,62 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .pdp-carousel-main {
+    width: 280px;
+    
+  }
+  @media (min-width: 500px) {
+    .product-single__media-wrapper img {
+      height: 250px;
+  }
+    }
+  @media (max-width: 500px) {
+    .product_image-container {
+      width: 50%;
+      height: 32vh;
+    }
+    .pdp-carousel-main {
+      padding-left: 0px;
+      width: 100%;
+      height: 100%;
+      
+    }
+    .flickity-button {
+      display: none;
+    }
+  }
+
+}
+
+.preview_wrapper-large {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .product_image-container {
+    width: 100%;
+  }
+
+  .pdp-carousel-main {
+    width: 280px;
+    
+  }
+  @media (max-width: 500px) {
+    .product_image-container {
+      width: 100%;
+      height: 100%;
+    }
+    .pdp-carousel-main {
+      padding-left: 0px;
+      width: 100%;
+      height: 100%;
+      
+    }
+    .flickity-button {
+      display: none;
+    }
+  }
 
 }
 
@@ -17546,6 +17683,14 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 
   @media (max-width: 768px) {
     height: 25vh;
+  }
+}
+
+.variantSelector-preview-large_img {
+  height: 250px;
+
+  @media (max-width: 768px) {
+    height: 56vh;
   }
 }
 

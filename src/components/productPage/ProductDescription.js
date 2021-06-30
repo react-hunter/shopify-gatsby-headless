@@ -41,7 +41,6 @@ const ProductDescription = React.memo(function ProductDescription({
 	const [modal, setModal] = useState(false);
 	const hasWindow = typeof window !== 'undefined';
 	const [windowDimensions, setWindowDimensions] = useState(window.innerWidth);
-
 	useEffect(() => {
 		if (hasWindow) {
 			function handleResize() {

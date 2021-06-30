@@ -8,7 +8,8 @@ import '../../styles/flickity.css';
 const ProductGallery = React.memo(function ProductGallery({
 	product,
 	isVarantSelected,
-	selectedVariant
+	selectedVariant,
+	hidden
 }) {
 	let selectedImageIndex = 0;
 	const [flktyObject, setFlktyObject] = useState(null);
@@ -46,7 +47,9 @@ const ProductGallery = React.memo(function ProductGallery({
 	}, [selectedVariant, selectedImageIndex, flktyObject, flkty, isVarantSelected])
 
 	useEffect(() => {
+		if(!hidden){
 		setTimeout(addSliderScript('//foursixty.com/media/scripts/fs.slider.v2.5.js'), 200);
+		}
 	}, [])
 	const addSliderScript = url => {
 		const script = document.createElement("script")
@@ -113,7 +116,7 @@ const ProductGallery = React.memo(function ProductGallery({
 						<div className="carousel-scrollbar_bar" style={getStyle()}></div>
 					</div>
 				</div>
-				<div id="instagram-slider"></div>					
+				{!hidden &&<div id="instagram-slider"></div>	}				
 			</div>
 		</div>
 	);

@@ -202,13 +202,16 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 						(<div className="ajax-cart-drawer__button-and-subtotal">
 							<div className="cart-item-container">
 								<div className="cart-item">
-									<span>
+									{/* <span>
 										<input onClick={handleCheckboxClick} id="personalizedMessageCheckbox" 
 											type="checkbox" checked={giftLineId !== '' || messageShow} readOnly />
-									</span>
-									<span>
+									</span> */}
+									{/* <span>
 										<strong style={{ fontFamily: "'Avenir', sans-serif" }}>Personalised Gift Message:</strong> <span className="gift-message">Add a Card for $9.99</span>
-									</span>
+									</span> */}
+									<button
+										className="add-message btn--secondary-accent "
+										onClick={handleCheckboxClick}>+ Add Personalized Message for $9.99</button>
 								</div>
 
 								{ messageShow && <GiftMessage addNoteToCart={addNoteToCart} /> }
@@ -278,10 +281,6 @@ const AjaxCartCustom = React.memo(function AjaxCartCustom({giftVariant, rushVari
 												{/* <div className="ajax-cart-item-properties">
 													<p className="ajax-cart-item-property" key="rose-color"><b>Delivery Date:</b> {item.deliveryDate || ''}</p>
 												</div> */}
-												{item.messageContent && <div className="ajax-cart-item-properties">
-													<p className="ajax-cart-item-property" style={{whiteSpace: 'pre-wrap'}} key="rose-color"><b>Greeting Card Message:</b> <br/>{item.messageContent || ''}</p>
-												</div>
-												}
 												<div className="ajax-cart-item-quantity-container">
 												<div className="cart-item__qty">
 													<div className="js-qty">
