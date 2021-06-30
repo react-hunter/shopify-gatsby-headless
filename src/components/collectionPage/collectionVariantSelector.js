@@ -303,7 +303,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 										className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"}
 										effect="blur" loading="eager" alt={variant.title} />
 								}
-								{!isFullImage() && <ProductGallery product={getProduct(product)} isVarantSelected={true} selectedVariant={variant} key="product-gallery" />}
+								{!isFullImage() && <ProductGallery product={getProduct(product)} isVarantSelected={true} selectedVariant={variant} key="product-gallery" hidden={true} />}
 							</div>
 						: 
 						<div className="preview_wrapper special_ratio">
