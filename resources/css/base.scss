@@ -11403,6 +11403,18 @@ body.modal-opened {
   }
 }
 
+.closeVariantSelector-mobile_swipe-white {
+
+  @media (max-width: 768px) {
+    height: 6px;
+    background-color: white;
+    width: 25%;
+    border-radius: 8px;
+    margin-top: 10px;
+    padding: 3px;
+  }
+}
+
 .animate-bottom {
   position: relative;
   animation: animatebottom 0.4s
