@@ -287,7 +287,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 								onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0"
 								style={{ float: 'right'}}>×</span>
 						</div>
-						<div className="closeVariantSelector-mobile_swipe"></div>
+						<div className={product.productType !== 'Enchanted Rose' ? "closeVariantSelector-mobile_swipe" : "closeVariantSelector-mobile_swipe-white"}></div>
 					</div>
 					<div className={isFullImage() ?"preview-main-option_wrapper" : "preview-main-option_wrapper-full preview-main-option_wrapper"}>
 						{ 
