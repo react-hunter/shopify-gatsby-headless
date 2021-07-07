@@ -4,7 +4,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPause } from "@fortawesome/free-solid-svg-icons"
+import { faPause } from "@fortawesome/free-solid-svg-icons";
+import  _get  from 'lodash/get';
 
 const AnnoucmentBar = React.memo(function AnnoucmentBar({ announceList }) {
   let anntimer = 0;
@@ -101,9 +102,8 @@ const AnnoucmentBar = React.memo(function AnnoucmentBar({ announceList }) {
       progressElement.querySelector('.fill').setAttribute('style', 'stroke-dashoffset: ' + ((100 - (Math.round((anntimer / Number("5000")) * 100)).toFixed(2)) / 100) * max);  
     }, 830);
   }
-
   const announcementBarStyle = {
-    backgroundColor: `${announceList[0].node.announcebarsettings[0].backgroundColor}`
+    backgroundColor: `${_get(announceList[0],'node.announcebarsettings[0].backgroundColor')}`
   };
   
   function announcementMessageStyle(index) {
