@@ -103,7 +103,7 @@ const AnnoucmentBar = React.memo(function AnnoucmentBar({ announceList }) {
     }, 830);
   }
   const announcementBarStyle = {
-    backgroundColor: `${_get(announceList[0],'node.announcebarsettings[0].backgroundColor')}`
+    backgroundColor: `${_get(announceList,'[0].node.announcebarsettings[0].backgroundColor')}`
   };
   
   function announcementMessageStyle(index) {
