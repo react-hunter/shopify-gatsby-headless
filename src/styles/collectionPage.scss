@@ -74,7 +74,7 @@
        
         @media (max-width: 980px) {
           position: absolute;
-          top: 0px;
+          top: 40px;
         }
     }
       
@@ -441,6 +441,7 @@ border-radius: 50%;
           z-index: 1;
           position: absolute;
           width: 100%;
+          animation: animatebottom 0.3s;
       }
     }
 }
