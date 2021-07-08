@@ -270,7 +270,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	}
 	const isFullImage =()=>{
 		return !(mainOption.name !== 'Title' && mainOption.name !== 'Quantity' && product.productType !== 'Enchanted Rose'
-		&& product.productType !== 'Rose Bear' && product.productType !== 'Luxury Robe' && product.productType !== 'Bikini');
+		&& product.productType !== 'Rose Bear' && product.productType !== 'Luxury Robe');
 	}
   
 	return (
