@@ -278,7 +278,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		<div className="variantoverlayNew" id="variantOverlay-">
 				<div className="variantSelector_wrapper animate-bottom" data-toggle="modal">
 					<div className={!isFullImage() ? "variantSelector-section" : "variantSelector-section-full variantSelector-section"}
-						style={product.productType !== 'Bikini' ? { display: 'flex' } : { display: 'initial', overflowY: 'scroll !important' }}>
+						style={product.productType !== 'Bikini' ? { display: 'flex' } : { display: 'initial', overflowY: 'scroll' }}>
 						<div className="closeVariantSelector">
 							<div className="closeVariantSelector_content">
 								<span className="variantSelector_close_message"
