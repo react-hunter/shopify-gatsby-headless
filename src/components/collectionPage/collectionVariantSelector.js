@@ -278,7 +278,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 		<div className="variantoverlayNew" id="variantOverlay-">
 				<div className="variantSelector_wrapper animate-bottom" data-toggle="modal">
 					<div className={!isFullImage() ? "variantSelector-section" : "variantSelector-section-full variantSelector-section"}
-						style={product.productType !== 'Bikini' ? { display: 'flex' } : { display: 'initial', overflowY: 'hidden !important' }}>
+						style={product.productType !== 'Bikini' ? { display: 'flex' } : { display: 'initial', overflowY: 'scroll !important' }}>
 						<div className="closeVariantSelector">
 							<div className="closeVariantSelector_content">
 								<span className="variantSelector_close_message"
@@ -293,7 +293,8 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 						<div className={!isFullImage() ? "preview-main-option_wrapper" : "preview-main-option_wrapper-full preview-main-option_wrapper"}>
 							{
 								product.productType !== 'Lingerie' ?
-									<div className={!isFullImage() ? "preview_wrapper" : "preview_wrapper-large preview_wrapper"}>
+									<div className={!isFullImage() ? "preview_wrapper" :
+										(product.productType === 'Luxury Robe' ? "preview_image-large preview_wrapper-large preview_wrapper" : "preview_wrapper-large preview_wrapper")}>
 										{/* { variant.image &&
 									<GatsbyImage image={variant.image.imageData ? variant.image.imageData.childImageSharp.gatsbyImageData : props.placeholderImage} 
 										className="variantSelector-preview_img"

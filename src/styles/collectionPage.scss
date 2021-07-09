@@ -442,10 +442,11 @@ border-radius: 50%;
           position: absolute;
           width: 100%;
           animation: animatebottom 0.3s;
-
-          .flickity-viewport {
-            height: 375px !important;
-        }
+          .preview_image-large {
+            .flickity-viewport {
+              height: 375px !important;
+            }
+          }    
       }
     }
 }
