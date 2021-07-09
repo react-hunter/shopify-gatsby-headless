@@ -17431,11 +17431,9 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
 }
 
 .variantSelector-section {
-  display: flex;
   flex-direction: column;
   background-color: white;
   font-family: 'Big Caslon';
-  display: flex;
   justify-content: center;
   padding-top: 0;
   height: 100%;
@@ -17448,7 +17446,7 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   @media(max-width:414px) {
     overflow: scroll;
     overflow-x: hidden;
-    overflow-y: hidden !important;
+    overflow-y: scroll !important;
     padding-top: 0px;
   }
 
