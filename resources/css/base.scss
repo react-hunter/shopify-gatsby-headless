@@ -17458,7 +17458,7 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   @media(max-width:414px) {
     overflow: scroll;
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: hidden !important;
     padding-top: 0px;
     flex-direction: initial;
   }
