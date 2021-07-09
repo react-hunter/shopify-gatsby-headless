@@ -270,7 +270,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 	}
 	const isScrollmage =()=>{
 		return !(mainOption.name !== 'Title' && mainOption.name !== 'Quantity' && product.productType !== 'Enchanted Rose'
-		&& product.productType !== 'Rose Bear' && product.productType !== 'Luxury Robe');
+		&& product.productType !== 'Luxury Robe');
 	}
 
 	const isFullmage =()=>{
@@ -305,7 +305,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 										loading="lazy" alt={variant.title} />
 								} */}
 										{variant.image && !isScrollmage() &&
-											(!isScrollmage() ?
+											(!isFullmage() ?
 												<LazyLoadImage src={variant.image.originalSrc}
 													className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"}
 													effect="blur" loading="eager" alt={variant.title} />
