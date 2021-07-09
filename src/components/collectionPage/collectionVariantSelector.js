@@ -268,17 +268,21 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 			images: images
 		}
 	}
-	const isFullImage =()=>{
+	const isScrollmage =()=>{
 		return !(mainOption.name !== 'Title' && mainOption.name !== 'Quantity' && product.productType !== 'Enchanted Rose'
 		&& product.productType !== 'Rose Bear' && product.productType !== 'Luxury Robe');
+	}
+
+	const isFullmage =()=>{
+		return (product.productType === 'Rose Bear' || product.productType === 'Bikini');
 	}
   
 	return (
 		<>
 		<div className="variantoverlayNew" id="variantOverlay-">
 				<div className="variantSelector_wrapper animate-bottom" data-toggle="modal">
-					<div className={!isFullImage() ? "variantSelector-section" : "variantSelector-section-full variantSelector-section"}
-						style={product.productType !== 'Bikini' ? { display: 'flex' } : { display: 'initial', overflowY: 'scroll' }}>
+					<div className={!isScrollmage() ? "variantSelector-section" : "variantSelector-section-full variantSelector-section"}
+						style={!isFullmage() ? { display: 'flex' } : { display: 'initial', overflowY: 'scroll' }}>
 						<div className="closeVariantSelector">
 							<div className="closeVariantSelector_content">
 								<span className="variantSelector_close_message"
@@ -290,18 +294,18 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 							</div>
 							<div className={product.productType !== 'Enchanted Rose' ? "closeVariantSelector-mobile_swipe" : "closeVariantSelector-mobile_swipe-white"}></div>
 						</div>
-						<div className={!isFullImage() ? "preview-main-option_wrapper" : "preview-main-option_wrapper-full preview-main-option_wrapper"}>
+						<div className={!isScrollmage() ? "preview-main-option_wrapper" : "preview-main-option_wrapper-full preview-main-option_wrapper"}>
 							{
 								product.productType !== 'Lingerie' ?
-									<div className={!isFullImage() ? "preview_wrapper" :
+									<div className={!isScrollmage() ? "preview_wrapper" :
 										(product.productType === 'Luxury Robe' ? "preview_image-large preview_wrapper-large preview_wrapper" : "preview_wrapper-large preview_wrapper")}>
 										{/* { variant.image &&
 									<GatsbyImage image={variant.image.imageData ? variant.image.imageData.childImageSharp.gatsbyImageData : props.placeholderImage} 
 										className="variantSelector-preview_img"
 										loading="lazy" alt={variant.title} />
 								} */}
-										{variant.image && !isFullImage() &&
-											(product.productType !== 'Bikini' ?
+										{variant.image && !isScrollmage() &&
+											(!isScrollmage() ?
 												<LazyLoadImage src={variant.image.originalSrc}
 													className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"}
 													effect="blur" loading="eager" alt={variant.title} />
@@ -311,7 +315,7 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 													effect="blur" loading="eager" alt={variant.title} />
 											)
 										}
-										{isFullImage() && <ProductGallery product={getProduct(product)} isVarantSelected={true} selectedVariant={variant} key="product-gallery" hidden={true} />}
+										{isScrollmage() && <ProductGallery product={getProduct(product)} isVarantSelected={true} selectedVariant={variant} key="product-gallery" hidden={true} />}
 									</div>
 									:
 									<div className="preview_wrapper special_ratio">
