@@ -17696,6 +17696,14 @@ div#klaviyo-bis-modal .shopify-payment-button .shopify-payment-button__button--u
   }
 }
 
+.variantSelector-bikini-preview_img {
+  height: 250px;
+
+  @media (max-width: 768px) {
+    height: auto;
+  }
+}
+
 .variantSelector-preview-large_img {
   height: 250px;
 

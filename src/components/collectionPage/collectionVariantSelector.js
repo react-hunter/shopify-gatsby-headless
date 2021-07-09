@@ -300,10 +300,15 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 										loading="lazy" alt={variant.title} />
 								} */}
 										{variant.image && !isFullImage() &&
-											<LazyLoadImage src={variant.image.originalSrc}
-												className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"}
-												style={product.productType !== 'Bikini' ? { } : { height: 'auto !important'}}
-												effect="blur" loading="eager" alt={variant.title} />
+											(product.productType !== 'Bikini' ?
+												<LazyLoadImage src={variant.image.originalSrc}
+													className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"}
+													effect="blur" loading="eager" alt={variant.title} />
+												:
+												<LazyLoadImage src={variant.image.originalSrc}
+													className= "variantSelector-bikini-preview_img"
+													effect="blur" loading="eager" alt={variant.title} />
+											)
 										}
 										{isFullImage() && <ProductGallery product={getProduct(product)} isVarantSelected={true} selectedVariant={variant} key="product-gallery" hidden={true} />}
 									</div>
