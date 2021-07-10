@@ -268,52 +268,64 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 			images: images
 		}
 	}
-	const isFullImage =()=>{
-		return (mainOption.name !== 'Title' && mainOption.name !== 'Quantity' && product.productType !== 'Enchanted Rose'
-		&& product.productType !== 'Rose Bear');
+	const isScrollmage =()=>{
+		return !(mainOption.name !== 'Title' && mainOption.name !== 'Quantity' && product.productType !== 'Enchanted Rose'
+		&& product.productType !== 'Luxury Robe');
+	}
+
+	const isFullmage =()=>{
+		return (product.productType === 'Rose Bear' || product.productType === 'Bikini');
 	}
   
 	return (
 		<>
 		<div className="variantoverlayNew" id="variantOverlay-">
-			<div className="variantSelector_wrapper animate-bottom" data-toggle="modal">
-				<div className={isFullImage() ? "variantSelector-section" : "variantSelector-section-full variantSelector-section"}> 
-					<div className="closeVariantSelector">
-						<div className="closeVariantSelector_content">
-							<span className="variantSelector_close_message"
-								// onClick={changeUrl} onKeyDown={handleKeyDown} role="button" tabIndex="0"
-								style={{ float: 'left', cursor: 'pointer', marginLeft: '10px' }}>{product.title}</span>
-							<span className="variantSelector_close"  
-								onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0"
-								style={{ float: 'right'}}>×</span>
+				<div className="variantSelector_wrapper animate-bottom" data-toggle="modal">
+					<div className={!isScrollmage() ? "variantSelector-section" : "variantSelector-section-full variantSelector-section"}
+						style={!isFullmage() ? { display: 'flex' } : { display: 'initial', overflowY: 'scroll' }}>
+						<div className="closeVariantSelector">
+							<div className="closeVariantSelector_content">
+								<span className="variantSelector_close_message"
+									// onClick={changeUrl} onKeyDown={handleKeyDown} role="button" tabIndex="0"
+									style={{ float: 'left', cursor: 'pointer', marginLeft: '10px' }}>{product.title}</span>
+								<span className="variantSelector_close"
+									onClick={closeVariantSelector} onKeyDown={handleKeyDown} role="button" tabIndex="0"
+									style={{ float: 'right' }}>×</span>
+							</div>
+							<div className={product.productType !== 'Enchanted Rose' ? "closeVariantSelector-mobile_swipe" : "closeVariantSelector-mobile_swipe-white"}></div>
 						</div>
-						<div className={product.productType !== 'Enchanted Rose' ? "closeVariantSelector-mobile_swipe" : "closeVariantSelector-mobile_swipe-white"}></div>
-					</div>
-					<div className={isFullImage() ?"preview-main-option_wrapper" : "preview-main-option_wrapper-full preview-main-option_wrapper"}>
-						{ 
-						product.productType !== 'Lingerie'? 
-							<div className={isFullImage() ? "preview_wrapper": "preview_wrapper-large preview_wrapper"}>
-								{/* { variant.image &&
+						<div className={!isScrollmage() ? "preview-main-option_wrapper" : "preview-main-option_wrapper-full preview-main-option_wrapper"}>
+							{
+								product.productType !== 'Lingerie' ?
+									<div className={!isScrollmage() ? "preview_wrapper" :
+										(product.productType === 'Luxury Robe' ? "preview_image-large preview_wrapper-large preview_wrapper" : "preview_wrapper-large preview_wrapper")}>
+										{/* { variant.image &&
 									<GatsbyImage image={variant.image.imageData ? variant.image.imageData.childImageSharp.gatsbyImageData : props.placeholderImage} 
 										className="variantSelector-preview_img"
 										loading="lazy" alt={variant.title} />
 								} */}
-								{ variant.image && isFullImage() &&
-									<LazyLoadImage src={variant.image.originalSrc}
-										className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"}
-										effect="blur" loading="eager" alt={variant.title} />
-								}
-								{!isFullImage() && <ProductGallery product={getProduct(product)} isVarantSelected={true} selectedVariant={variant} key="product-gallery" hidden={true} />}
-							</div>
-						: 
-						<div className="preview_wrapper special_ratio">
-							<LazyLoadImage className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"} alt=""
-								src={product.images[0] ? product.images[0].originalSrc : ''}
-								effect="blur" loading="eager" />
-							<LazyLoadImage className={mainOption.name !== 'Title' ? "variantSelector-preview_img second_image" : "variantSelector-preview-large_img second_image"} alt=""
-								src={product.images[1] ? product.images[1].originalSrc : ''}
-								effect="blur" loading="eager" />
-							{/* { product.images[0] &&
+										{variant.image && !isScrollmage() &&
+											(!isFullmage() ?
+												<LazyLoadImage src={variant.image.originalSrc}
+													className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"}
+													effect="blur" loading="eager" alt={variant.title} />
+												:
+												<LazyLoadImage src={variant.image.originalSrc}
+													className= "variantSelector-bikini-preview_img"
+													effect="blur" loading="eager" alt={variant.title} />
+											)
+										}
+										{isScrollmage() && <ProductGallery product={getProduct(product)} isVarantSelected={true} selectedVariant={variant} key="product-gallery" hidden={true} />}
+									</div>
+									:
+									<div className="preview_wrapper special_ratio">
+										<LazyLoadImage className={mainOption.name !== 'Title' ? "variantSelector-preview_img" : "variantSelector-preview-large_img"} alt=""
+											src={product.images[0] ? product.images[0].originalSrc : ''}
+											effect="blur" loading="eager" />
+										<LazyLoadImage className={mainOption.name !== 'Title' ? "variantSelector-preview_img second_image" : "variantSelector-preview-large_img second_image"} alt=""
+											src={product.images[1] ? product.images[1].originalSrc : ''}
+											effect="blur" loading="eager" />
+										{/* { product.images[0] &&
 								<GatsbyImage image={product.images[0].imageData ? product.images[0].imageData.childImageSharp.gatsbyImageData : props.placeholderImage}
 									className="variantSelector-preview_img"
 									loading="lazy" alt={variant.title} />
@@ -323,8 +335,8 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 									className="variantSelector-preview_img second_image"
 									loading="lazy" alt={variant.title} />
 							} */}
-						</div>
-						}
+									</div>
+							}
 
 							<div className="main-option_wrapper variantSelector-option_wrapper">
 								{mainOption.name !== 'Title' ? <span className="option-header">{mainOption.name}: {getValueByName(mainOption.name)}</span> :
@@ -335,58 +347,58 @@ const CollectionVariantSelector = React.memo(function CollectionVariantSelector(
 										</button>
 									</span>}
 								<div className="option_options_wrapper">
-								{
-									product.variants.length > 1 && mainOption.values.map((mo, moIndex) => {
-										const selectEffectClass = getValueByName(mainOption.name) === mo ? 'select-effect' : ''
-										return (
-											<div className={`swatch-wrapper ${selectEffectClass}`} key={moIndex}>
-												<div className={`color-swatch ${getSaleClass(mainOption.name, mo)}`} 
-													onClick={() => selectVariantOption(mainOption.name, mo)} onKeyDown={handleKeyDown}
-													role="button" tabIndex="0" data-swatch_type={mainOption.name} 
-													data-optionname={mainOption.name} data-optionvalue={mo}>
-													{mainOption.name === 'Size' ? mo.charAt(0) : null}{mainOption.name === 'Quantity' ? mo : null}
+									{
+										product.variants.length > 1 && mainOption.values.map((mo, moIndex) => {
+											const selectEffectClass = getValueByName(mainOption.name) === mo ? 'select-effect' : ''
+											return (
+												<div className={`swatch-wrapper ${selectEffectClass}`} key={moIndex}>
+													<div className={`color-swatch ${getSaleClass(mainOption.name, mo)}`}
+														onClick={() => selectVariantOption(mainOption.name, mo)} onKeyDown={handleKeyDown}
+														role="button" tabIndex="0" data-swatch_type={mainOption.name}
+														data-optionname={mainOption.name} data-optionvalue={mo}>
+														{mainOption.name === 'Size' ? mo.charAt(0) : null}{mainOption.name === 'Quantity' ? mo : null}
+													</div>
+													<div></div>
 												</div>
-												<div></div>
-											</div>
-										)
-									})
-								}
+											)
+										})
+									}
+								</div>
 							</div>
 						</div>
-					</div>
 
-					<div className="line-break_container">
-						<div className="variantSelector_line_break"></div>
-					</div>
-	
-					{
-						otherOptions.length > 0 && otherOptions.map((otherOption, otherOptionIndex) => {
-							return (
-								<div className="sub-option_wrapper variantSelector-option_wrapper" key={otherOptionIndex}>
-									<span className="option-header">{otherOption.name}: {getValueByName(otherOption.name)}</span>
-									{product.variants.length > 1 && <div className="option_options_wrapper">
-										{
-											  otherOption.values.map((oo, ooIndex) => {
-												const selectOtherEffectClass = getValueByName(otherOption.name) === oo ? 'select-effect' : ''
-												return (
-													checkVariantExist(otherOption.name, oo) && (<div className={`swatch-wrapper ${selectOtherEffectClass}`} key={ooIndex}>
-														<div className={`color-swatch selected-swatch ${getSaleClass(otherOption.name, oo)}`} 
-															data-optionname={otherOption.name} data-optionvalue={oo} data-swatch_type={otherOption.name} role="button" tabIndex="0"
-															onClick={() => selectVariantOption(otherOption.name, oo)} onKeyDown={handleKeyDown}>
-															{otherOption.name === 'Size' ? oo.charAt(0) : null}
-														</div>
-														<div></div>
-													</div>)
-												)
-											})
+						<div className="line-break_container">
+							<div className="variantSelector_line_break"></div>
+						</div>
+
+						{
+							otherOptions.length > 0 && otherOptions.map((otherOption, otherOptionIndex) => {
+								return (
+									<div className="sub-option_wrapper variantSelector-option_wrapper" key={otherOptionIndex}>
+										<span className="option-header">{otherOption.name}: {getValueByName(otherOption.name)}</span>
+										{product.variants.length > 1 && <div className="option_options_wrapper">
+											{
+												otherOption.values.map((oo, ooIndex) => {
+													const selectOtherEffectClass = getValueByName(otherOption.name) === oo ? 'select-effect' : ''
+													return (
+														checkVariantExist(otherOption.name, oo) && (<div className={`swatch-wrapper ${selectOtherEffectClass}`} key={ooIndex}>
+															<div className={`color-swatch selected-swatch ${getSaleClass(otherOption.name, oo)}`}
+																data-optionname={otherOption.name} data-optionvalue={oo} data-swatch_type={otherOption.name} role="button" tabIndex="0"
+																onClick={() => selectVariantOption(otherOption.name, oo)} onKeyDown={handleKeyDown}>
+																{otherOption.name === 'Size' ? oo.charAt(0) : null}
+															</div>
+															<div></div>
+														</div>)
+													)
+												})
+											}
+										</div>
 										}
 									</div>
+								)
+							})
 						}
-								</div>
-							)
-						})
-					}
-				</div>
+					</div>
 
 				<div className="variant-selector_add_to_bag_wrapper">
 					{/* <div className="delivery-date">
